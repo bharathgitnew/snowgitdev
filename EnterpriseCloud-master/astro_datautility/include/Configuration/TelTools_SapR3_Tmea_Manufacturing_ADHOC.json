@@ -1,0 +1,310 @@
+{
+    "connection": {
+        "DEV": {
+            "host": "telsapqasdb.us.tel.com",
+            "user": "ORACLE-ERP-HVR-<<ENV>>-USER",
+            "secret": "ORACLE-ERP-HVR-<<ENV>>-SECRET",
+            "port": 1527,
+            "database": "erq",
+            "retry_count": 5,
+            "retry_delay": 30,
+            "tcp_connect_timeout": 180
+        },
+        "QA": {
+            "host": "172.26.95.62",
+            "user": "ORACLE-ERP-HVR-<<ENV>>-USER",
+            "secret": "ORACLE-ERP-HVR-<<ENV>>-SECRET",
+            "port": 1527,
+            "database": "erq",
+            "retry_count": 5,
+            "retry_delay": 30,
+            "tcp_connect_timeout": 180
+        },
+        "PROD": {
+            "host": "172.26.95.63",
+            "user": "ORACLE-ERP-HVR-<<ENV>>-USER",
+            "secret": "ORACLE-ERP-HVR-<<ENV>>-SECRET",
+            "port": 1521,
+            "database": "ERP",
+            "retry_count": 5,
+            "retry_delay": 30,
+            "tcp_connect_timeout": 180
+        }
+    },
+    "extraction": {
+       "AFKO": {
+           "is_active": true,
+           "table": "AFKO",
+           "schema": "SAPR3",
+           "incremental_strategy": "insert_overwrite",
+           "use_safe_string_fallback": true,
+           "snowflake_table": "AFKO",
+           "snowflake_schema": "SAP_ORACLE_LIVE",
+           "primary_key": "MANDT,AUFNR",
+           "chunk_size": 75000
+       },
+
+       "AFPO": {
+           "is_active": true,
+           "table": "AFPO",
+           "schema": "SAPR3",
+           "incremental_strategy": "insert_overwrite",
+           "use_safe_string_fallback": true,
+           "snowflake_table": "AFPO",
+           "snowflake_schema": "SAP_ORACLE_LIVE",
+           "primary_key": "MANDT,AUFNR,POSNR",
+           "chunk_size": 100000
+       },
+
+       "AFRU": {
+           "is_active": true,
+           "table": "AFRU",
+           "schema": "SAPR3",
+           "incremental_strategy": "insert_overwrite",
+           "use_safe_string_fallback": true,
+           "snowflake_table": "AFRU",
+           "snowflake_schema": "SAP_ORACLE_LIVE",
+           "primary_key": "MANDT,RUECK,RMZHL",
+           "chunk_size": 100000
+       },
+
+       "AFVC": {
+           "is_active": true,
+           "table": "AFVC",
+           "schema": "SAPR3",
+           "incremental_strategy": "insert_overwrite",
+           "use_safe_string_fallback": true,
+           "snowflake_table": "AFVC",
+           "snowflake_schema": "SAP_ORACLE_LIVE",
+           "primary_key": "MANDT,AUFPL,APLZL",
+           "chunk_size": 75000
+       },
+
+       "AFVV": {
+           "is_active": true,
+           "table": "AFVV",
+           "schema": "SAPR3",
+           "incremental_strategy": "insert_overwrite",
+           "use_safe_string_fallback": true,
+           "snowflake_table": "AFVV",
+           "snowflake_schema": "SAP_ORACLE_LIVE",
+           "primary_key": "MANDT,AUFPL,APLZL",
+           "chunk_size": 75000
+       },
+
+       "AUFK": {
+           "is_active": true,
+           "table": "AUFK",
+           "schema": "SAPR3",
+           "incremental_strategy": "insert_overwrite",
+           "use_safe_string_fallback": true,
+           "snowflake_table": "AUFK",
+           "snowflake_schema": "SAP_ORACLE_LIVE",
+           "primary_key": "MANDT,AUFNR",
+           "chunk_size": 100000
+       },
+
+       "KNA1": {
+           "is_active": true,
+           "table": "KNA1",
+           "schema": "SAPR3",
+           "incremental_strategy": "insert_overwrite",
+           "use_safe_string_fallback": true,
+           "snowflake_table": "KNA1",
+           "snowflake_schema": "SAP_ORACLE_LIVE",
+           "primary_key": "MANDT,KUNNR",
+           "chunk_size": 75000
+       },
+
+       "MAKT": {
+           "is_active": true,
+           "table": "MAKT",
+           "schema": "SAPR3",
+           "incremental_strategy": "insert_overwrite",
+           "use_safe_string_fallback": true,
+           "snowflake_table": "MAKT",
+           "snowflake_schema": "SAP_ORACLE_LIVE",
+           "primary_key": "MANDT,MATNR,SPRAS",
+           "chunk_size": 250000
+       },
+
+       "PLAF": {
+           "is_active": true,
+           "table": "PLAF",
+           "schema": "SAPR3",
+           "incremental_strategy": "insert_overwrite",
+           "use_safe_string_fallback": true,
+           "snowflake_table": "PLAF",
+           "snowflake_schema": "SAP_ORACLE_LIVE",
+           "primary_key": "MANDT,PLNUM",
+           "chunk_size": 100000
+       },
+
+       "QMEL": {
+           "is_active": true,
+           "table": "QMEL",
+           "schema": "SAPR3",
+           "incremental_strategy": "insert_overwrite",
+           "use_safe_string_fallback": true,
+           "snowflake_table": "QMEL",
+           "snowflake_schema": "SAP_ORACLE_LIVE",
+           "primary_key": "MANDT,QMNUM",
+           "chunk_size": 75000
+       },
+
+       "QMFE": {
+           "is_active": true,
+           "table": "QMFE",
+           "schema": "SAPR3",
+           "incremental_strategy": "insert_overwrite",
+           "use_safe_string_fallback": true,
+           "snowflake_table": "QMFE",
+           "snowflake_schema": "SAP_ORACLE_LIVE",
+           "primary_key": "MANDT,QMNUM,FENUM",
+           "chunk_size": 150000
+       },
+
+       "QMUR": {
+           "is_active": true,
+           "table": "QMUR",
+           "schema": "SAPR3",
+           "incremental_strategy": "insert_overwrite",
+           "use_safe_string_fallback": true,
+           "snowflake_table": "QMUR",
+           "snowflake_schema": "SAP_ORACLE_LIVE",
+           "primary_key": "MANDT,QMNUM,FENUM,URNUM",
+           "chunk_size": 250000
+       },
+
+       "QPCT": {
+           "is_active": true,
+           "table": "QPCT",
+           "schema": "SAPR3",
+           "incremental_strategy": "insert_overwrite",
+           "use_safe_string_fallback": true,
+           "snowflake_table": "QPCT",
+           "snowflake_schema": "SAP_ORACLE_LIVE",
+           "primary_key": "MANDT,KATALOGART,CODEGRUPPE,CODE,SPRACHE,VERSION",
+           "chunk_size": 10000
+       },
+
+       "QPGT": {
+           "is_active": true,
+           "table": "QPGT",
+           "schema": "SAPR3",
+           "incremental_strategy": "insert_overwrite",
+           "use_safe_string_fallback": true,
+           "snowflake_table": "QPGT",
+           "snowflake_schema": "SAP_ORACLE_LIVE",
+           "primary_key": "MANDANT,KATALOGART,CODEGRUPPE,SPRACHE",
+           "chunk_size": 10000
+       },
+
+       "T356_T": {
+           "is_active": true,
+           "table": "T356_T",
+           "schema": "SAPR3",
+           "incremental_strategy": "insert_overwrite",
+           "use_safe_string_fallback": true,
+           "snowflake_table": "T356_T",
+           "snowflake_schema": "SAP_ORACLE_LIVE",
+           "primary_key": "MANDT,SPRAS,ARTPR,PRIOK",
+           "chunk_size": 10000
+       },
+
+       "TJ02": {
+           "is_active": true,
+           "table": "TJ02",
+           "schema": "SAPR3",
+           "incremental_strategy": "insert_overwrite",
+           "use_safe_string_fallback": true,
+           "snowflake_table": "TJ02",
+           "snowflake_schema": "SAP_ORACLE_LIVE",
+           "primary_key": "ISTAT",
+           "chunk_size": 10000
+       },
+       "TJ02T": {
+           "is_active": true,
+           "table": "TJ02T",
+           "schema": "SAPR3",
+           "incremental_strategy": "insert_overwrite",
+           "use_safe_string_fallback": true,
+           "snowflake_table": "TJ02T",
+           "snowflake_schema": "SAP_ORACLE_LIVE",
+           "primary_key": "ISTAT,SPRAS",
+           "chunk_size": 10000
+       },
+
+       "TJ04": {
+           "is_active": true,
+           "table": "TJ04",
+           "schema": "SAPR3",
+           "incremental_strategy": "insert_overwrite",
+           "use_safe_string_fallback": true,
+           "snowflake_table": "TJ04",
+           "snowflake_schema": "SAP_ORACLE_LIVE",
+           "primary_key": "OBTYP,ISTAT",
+           "chunk_size": 10000
+       },
+
+       "VBAK": {
+           "is_active": true,
+           "table": "VBAK",
+           "schema": "SAPR3",
+           "incremental_strategy": "insert_overwrite",
+           "use_safe_string_fallback": true,
+           "snowflake_table": "VBAK",
+           "snowflake_schema": "SAP_ORACLE_LIVE",
+           "primary_key": "MANDT,VBELN",
+           "chunk_size": 75000
+       },
+
+       "VBAP": {
+           "is_active": true,
+           "chunk_size": 60000,
+           "table": "VBAP",
+           "schema": "SAPR3",
+           "incremental_strategy": "insert_overwrite",
+           "use_safe_string_fallback": true,
+           "snowflake_table": "VBAP",
+           "snowflake_schema": "SAP_ORACLE_LIVE",
+           "primary_key": "MANDT,VBELN,POSNR"
+       },
+
+       "VBEP": {
+           "is_active": true,
+           "table": "VBEP",
+           "schema": "SAPR3",
+           "incremental_strategy": "insert_overwrite",
+           "use_safe_string_fallback": true,
+           "snowflake_table": "VBEP",
+           "snowflake_schema": "SAP_ORACLE_LIVE",
+           "primary_key": "MANDT,VBELN,POSNR,ETENR",
+           "chunk_size": 150000
+       },
+
+       "VBKD": {
+           "is_active": true,
+           "table": "VBKD",
+           "schema": "SAPR3",
+           "incremental_strategy": "insert_overwrite",
+           "use_safe_string_fallback": true,
+           "snowflake_table": "VBKD",
+           "snowflake_schema": "SAP_ORACLE_LIVE",
+           "primary_key": "MANDT,VBELN,POSNR",
+           "chunk_size": 100000
+       },
+
+       "ZMMTFACTDAYS": {
+           "is_active": true,
+           "table": "ZMMTFACTDAYS",
+           "schema": "SAPR3",
+           "incremental_strategy": "insert_overwrite",
+           "use_safe_string_fallback": true,
+           "snowflake_table": "ZMMTFACTDAYS",
+           "snowflake_schema": "SAP_ORACLE_LIVE",
+           "primary_key": "MANDT,PERIODAT",
+           "chunk_size": 10000
+       }
+    }
+}

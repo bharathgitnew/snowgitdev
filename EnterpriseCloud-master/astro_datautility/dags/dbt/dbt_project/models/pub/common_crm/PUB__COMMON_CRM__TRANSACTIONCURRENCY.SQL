@@ -1,0 +1,57 @@
+/************
+Model file generated from dbtGeneratePubViews: 12.19.2022.19.11.44"
+*************/
+
+{{ config(
+      materialized='view',
+      alias='TRANSACTIONCURRENCY',
+      transient=false
+) }}
+
+with source_data as (
+    SELECT
+        TRANSACTION_CURRENCY_ID,
+        STATECODE,
+        STATUSCODE,
+        ORGANIZATIONID,
+        ORGANIZATIONID_ENTITYTYPE,
+        CREATEDONBEHALFBY,
+        CREATEDONBEHALFBY_ENTITYTYPE,
+        MODIFIEDBY,
+        MODIFIEDBY_ENTITYTYPE,
+        CREATEDBY,
+        CREATEDBY_ENTITYTYPE,
+        MODIFIEDONBEHALFBY,
+        MODIFIEDONBEHALFBY_ENTITYTYPE,
+        CURRENCYPRECISION,
+        MODIFIEDONBEHALFBYYOMINAME,
+        CURRENCYNAME,
+        VERSIONNUMBER,
+        ENTITYIMAGE_TIMESTAMP,
+        MODIFIEDBYYOMINAME,
+        CREATEDBYYOMINAME,
+        OVERRIDDENCREATEDON,
+        ENTITYIMAGEID,
+        CREATEDONBEHALFBYNAME,
+        UNIQUEDSCID,
+        MODIFIEDBYNAME,
+        ENTITYIMAGE_URL,
+        MODIFIEDON,
+        CREATEDBYNAME,
+        ISOCURRENCYCODE,
+        CREATEDONBEHALFBYYOMINAME,
+        TRANSACTIONCURRENCYID,
+        CREATEDON,
+        EXCHANGERATE,
+        IMPORTSEQUENCENUMBER,
+        CURRENCYSYMBOL,
+        MODIFIEDONBEHALFBYNAME
+    from {{ ref('COMMON__CRM__TRANSACTIONCURRENCY') }}
+),
+
+transform_data AS
+(
+    select * from source_data
+)
+
+    select * from transform_data

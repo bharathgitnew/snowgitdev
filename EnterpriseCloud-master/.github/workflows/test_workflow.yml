@@ -1,0 +1,102 @@
+name: test_workflow
+on:
+  push:
+    branches:
+      - abc
+
+run-name: "First Testing Workflow by ${{ github.actor }}, event: ${{ github.event_name }} ${{ github.ref_name }}"
+
+jobs:
+  checkout_test_vt:
+    runs-on: [self-hosted, linux] 
+    environment: ${{ github.ref_name == 'sit' && 'sit' || github.ref_name == 'qa' && 'qa' || 'prod' }}
+    steps:
+      - name: List files Before
+        run: ls -a
+      
+      - name: Use Checkout Action
+        uses: actions/checkout@v6
+        with:
+            fetch-depth: 0
+
+      - name: List files After
+        run: ls -a
+      
+      - name: Check Context
+        run: |
+          echo $GITHUB_SHA
+          echo 'Hey'
+          echo $GITHUB_WORKSPACE
+          BEFORE_SHA="${{ github.event.before }}"
+          AFTER_SHA="${{ github.sha }}"
+          
+          echo "Comparing commits:"
+          echo "Before: $BEFORE_SHA"
+          echo "After: $AFTER_SHA"
+      
+      - name: Run Python Testing
+        shell: python
+        run: |
+          import platform
+          print('Enter Python Shell')
+          print(platform.processor())
+
+      - name: Get changed SQL files
+        id: changed-files
+        run: |
+          BEFORE_SHA="${{ github.event.before }}"
+          AFTER_SHA="${{ github.sha }}"
+          
+          echo "Comparing commits:"
+          echo "Before: $BEFORE_SHA"
+          echo "After: $AFTER_SHA"
+
+          CHANGED_FILES=$(git diff --name-only $BEFORE_SHA $AFTER_SHA | grep -E '\.(sql|SQL)$' || true)
+          SQL_FILES=$(echo "$CHANGED_FILES" | grep '^Snow/' || true)
+          
+          # Output results
+          echo "Changed SQL files:"
+          echo "$SQL_FILES"
+
+          if [ -z "$SQL_FILES" ]; then
+            echo "files=[]" >> $GITHUB_OUTPUT
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+          else
+            # Convert newline-separated list to JSON array
+            FILESARRAY=$(echo "$SQL_FILES" | tr '\n' ' ' | xargs || true)
+            echo "files=$FILESARRAY" >> $GITHUB_OUTPUT
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+          fi
+      
+      - name: Display changed files
+        if: steps.changed-files.outputs.has_changes == 'true'
+        run: |
+          echo "The following SQL files will be deployed:"
+          echo '${{ steps.changed-files.outputs.files }}'
+      
+      - name: Set up Python
+        if: steps.changed-files.outputs.has_changes == 'true'
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      
+      - name: Install dependencies
+        if: steps.changed-files.outputs.has_changes == 'true'
+        run: pip install snowflake-connector-python
+      
+      - name: Deploy to Snowflake
+        if: steps.changed-files.outputs.has_changes == 'true'
+        env:
+          SNOWFLAKE_ACCOUNT: ${{ vars.SNOWFLAKE_ACCOUNT }}
+          SNOWFLAKE_USER: ${{ vars.SNOWFLAKE_USER }}
+          SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD }}
+          SNOWFLAKE_WAREHOUSE: ${{ vars.SNOWFLAKE_WAREHOUSE }}
+          SNOWFLAKE_ROLE: ${{ vars.SNOWFLAKE_ROLE }}
+        run: |
+          # Loop through files and deploy each one
+          for file in ${{ steps.changed-files.outputs.files }}; do
+            python Python/deploy_snowfiles.py "$file"
+          done
+
+
+          

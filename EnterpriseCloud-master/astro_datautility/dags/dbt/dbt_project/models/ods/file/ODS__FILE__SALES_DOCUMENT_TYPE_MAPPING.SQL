@@ -1,0 +1,60 @@
+{{ config(
+    materialized='incremental',
+    incremental_strategy='insert_overwrite',
+    alias='SALES_DOCUMENT_TYPE_MAPPING'
+) }}
+
+with source_data as
+(
+    SELECT
+		_FILENAME,
+		_FILEDATE,
+		_UPLOADDATE,
+	    SALES_ORG,
+	    SO_TYPE,
+	    DOCTYPEDESC,
+	    ORDER_REASON,
+	    OR_DESC,
+	    CREATE_DATE,
+	    CATEGORY
+    FROM {{ source("FILE", "SALES_DOCUMENT_TYPE_MAPPING") }}
+where _UPLOADDATE = (select max(_UPLOADDATE) from {{ source("FILE", "SALES_DOCUMENT_TYPE_MAPPING") }})
+
+)
+
+,transform_data as
+(
+    SELECT
+		_FILENAME,
+		_FILEDATE,
+		_UPLOADDATE,
+	    SALES_ORG,
+	    SO_TYPE,
+	    DOCTYPEDESC,
+	    ORDER_REASON,
+	    OR_DESC,
+	    CREATE_DATE,
+	    CATEGORY,
+        '{{ invocation_id }}' AS AUDIT_LOG_ID,
+        SHA2('hash_me') as _ROW_HASH
+        FROM source_data
+)
+
+,type_data as
+(
+    select
+        CAST(_FILENAME AS VARCHAR(16777216)) AS _FILENAME,
+        CAST(_FILEDATE AS TIMESTAMP_NTZ(9)) AS _FILEDATE,
+        CAST(_UPLOADDATE AS TIMESTAMP_NTZ(9)) AS _UPLOADDATE,
+        CAST(SALES_ORG AS VARCHAR(16777216)) AS SALES_ORG,
+        CAST(SO_TYPE AS VARCHAR(16777216)) AS SO_TYPE,
+        CAST(DOCTYPEDESC AS VARCHAR(16777216)) AS DOCTYPEDESC,
+        CAST(ORDER_REASON AS VARCHAR(16777216)) AS ORDER_REASON,
+        CAST(OR_DESC AS VARCHAR(16777216)) AS OR_DESC,
+        CAST(CREATE_DATE AS VARCHAR(16777216)) AS CREATE_DATE,
+        CAST(CATEGORY AS VARCHAR(16777216)) AS CATEGORY,
+        CAST(AUDIT_LOG_ID AS VARCHAR(128)) AS AUDIT_LOG_ID,
+        CAST(_ROW_HASH AS VARCHAR(128)) AS _ROW_HASH
+    from transform_data
+    )
+select * from type_data

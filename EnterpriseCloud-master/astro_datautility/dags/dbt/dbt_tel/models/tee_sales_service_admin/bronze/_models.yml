@@ -1,0 +1,93 @@
+models:
+- name: BRONZE__TEE_SALES_SERVICE_ADMIN__ACTIVEDIRECTORY_USERLIST
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEE_SALES_SERVICE_ADMIN__CRM_FILE_MSDYN_WORKORDER
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEE_SALES_SERVICE_ADMIN__CRM_FILE_OPPORTUNITY
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEE_SALES_SERVICE_ADMIN__CRM_FILE_SM_FAB_LINE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEE_SALES_SERVICE_ADMIN__CRM_FILE_SM_INVESTMENT_MAP
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEE_SALES_SERVICE_ADMIN__CRM_FILE_TEL_SM_CHAMBER
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEE_SALES_SERVICE_ADMIN__CRM_FILE_TEL_SM_COST_CENTER_GROUP
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEE_SALES_SERVICE_ADMIN__CRM_FILE_TEL_SM_MODEL
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEE_SALES_SERVICE_ADMIN__CRM_FILE_TEL_SM_OPPORTUNITY_GROUP
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEE_SALES_SERVICE_ADMIN__CRM_FILE_TEL_SM_SALES_DOCUMENT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEE_SALES_SERVICE_ADMIN__FILE_FST_EMPLOYEE_GROUP
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEE_SALES_SERVICE_ADMIN__MDM_COMPANY
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEE_SALES_SERVICE_ADMIN__MDM_EMPLOYEE_TYPE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEE_SALES_SERVICE_ADMIN__MDM_MANAGER_EMPLOYEE_GROUP
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEE_SALES_SERVICE_ADMIN__MYSKILLS_KSMN_TABLE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEE_SALES_SERVICE_ADMIN__MYSKILLS_WORKDAYEMPLOYEE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEE_SALES_SERVICE_ADMIN__SHAREPOINT_ORACLE_DEPARTMENT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEE_SALES_SERVICE_ADMIN__SHAREPOINT_SERVICE_BUSINESS_UNIT_MAPPING
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEE_SALES_SERVICE_ADMIN__TEACOMMON_DEPARTMENTS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEE_SALES_SERVICE_ADMIN__TEACOMMON_EMPLOYEE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEE_SALES_SERVICE_ADMIN__TEACOMMON_LOCATIONS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEE_SALES_SERVICE_ADMIN__TEACOMMON_PRODUCTLINES
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEE_SALES_SERVICE_ADMIN__WORKDAY_WORKERCOMPANYLIST
+  tests:
+  - has_data
+  - recently_run

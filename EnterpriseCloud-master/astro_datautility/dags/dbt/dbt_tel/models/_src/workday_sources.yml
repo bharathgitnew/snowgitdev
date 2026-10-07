@@ -1,0 +1,10 @@
+version: 2
+sources:
+- name: WORKDAY
+  description: Landing Zone - NOW Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: Workday
+  tables:
+  - name: WORKERCOMPANYLIST
+    identifier: WorkerCompanyList
+    description: Landing table for WorkerCompanyList file.

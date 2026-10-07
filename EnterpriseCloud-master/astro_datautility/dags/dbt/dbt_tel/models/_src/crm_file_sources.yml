@@ -1,0 +1,622 @@
+version: 2
+sources:
+- name: CRM_FILE
+  description: Landing Zone - CRM_FILE Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: CRM_FILE
+  tables:
+  - name: ACCOUNT
+    identifier: ACCOUNT
+    description: Landing table for ACCOUNT file.
+  - name: ANNOTATION
+    identifier: ANNOTATION
+    description: Landing table for ANNOTATION file.
+  - name: BOOKABLERESOURCE
+    identifier: BOOKABLERESOURCE
+    description: Landing table for BOOKABLERESOURCE file.
+  - name: BOOKABLERESOURCEBOOKING
+    identifier: BOOKABLERESOURCEBOOKING
+    description: Landing table for BOOKABLERESOURCEBOOKING file.
+  - name: BOOKABLERESOURCECATEGORY
+    identifier: BOOKABLERESOURCECATEGORY
+    description: Landing table for BOOKABLERESOURCECATEGORY file.
+  - name: BOOKABLERESOURCECHARACTERISTIC
+    identifier: BOOKABLERESOURCECHARACTERISTIC
+    description: Landing table for BOOKABLERESOURCECHARACTERISTIC file.
+  - name: BOOKINGSTATUS
+    identifier: BOOKINGSTATUS
+    description: Landing table for BOOKINGSTATUS file.
+  - name: BUSINESSUNIT
+    identifier: BUSINESSUNIT
+    description: Landing table for BUSINESSUNIT file.
+  - name: CAMPAIGN
+    identifier: CAMPAIGN
+    description: Landing table for CAMPAIGN file.
+  - name: CATEGORY
+    identifier: CATEGORY
+    description: Landing table for CATEGORY file.
+  - name: CNT_CNT_CONTRACTSUMMARY_ACCOUNT_FAB
+    identifier: CNT_CNT_CONTRACTSUMMARY_ACCOUNT_FAB
+    description: Landing table for CNT_CNT_CONTRACTSUMMARY_ACCOUNT_FAB file.
+  - name: CNT_CONTRACTPRODUCTGROUP
+    identifier: CNT_CONTRACTPRODUCTGROUP
+    description: Landing table for CNT_CONTRACTPRODUCTGROUP file.
+  - name: CNT_CONTRACTSCOPEMASTER
+    identifier: CNT_CONTRACTSCOPEMASTER
+    description: Landing table for CNT_CONTRACTSCOPEMASTER file.
+  - name: CNT_CONTRACTSUMMARY
+    identifier: CNT_CONTRACTSUMMARY
+    description: Landing table for CNT_CONTRACTSUMMARY file.
+  - name: CNT_MSDYN_AGREEMENT_MSDYN_CUSTOMERASSET
+    identifier: CNT_MSDYN_AGREEMENT_MSDYN_CUSTOMERASSET
+    description: Landing table for CNT_MSDYN_AGREEMENT_MSDYN_CUSTOMERASSET file.
+  - name: CNT_ORDERNUMBER
+    identifier: CNT_ORDERNUMBER
+    description: Landing table for CNT_ORDERNUMBER file.
+  - name: CNT_ORDERNUMBERGROUP
+    identifier: CNT_ORDERNUMBERGROUP
+    description: Landing table for CNT_ORDERNUMBERGROUP file.
+  - name: CNT_SERVICEORDERINFORMATION
+    identifier: CNT_SERVICEORDERINFORMATION
+    description: Landing table for CNT_SERVICEORDERINFORMATION file.
+  - name: COM_ALARMCODEINFO
+    identifier: COM_ALARMCODEINFO
+    description: Landing table for COM_ALARMCODEINFO file.
+  - name: COM_COUNTRYMASTER
+    identifier: COM_COUNTRYMASTER
+    description: Landing table for COM_COUNTRYMASTER file.
+  - name: COM_PRODUCTLINE
+    identifier: COM_PRODUCTLINE
+    description: Landing table for COM_PRODUCTLINE file.
+  - name: COM_PRODUCTMODEL
+    identifier: COM_PRODUCTMODEL
+    description: Landing table for COM_PRODUCTMODEL file.
+  - name: COM_PRODUCTSYSTEMTYPE
+    identifier: COM_PRODUCTSYSTEMTYPE
+    description: Landing table for COM_PRODUCTSYSTEMTYPE file.
+  - name: COM_SERVICEORDERACTIVITIES_TEA
+    identifier: COM_SERVICEORDERACTIVITIES_TEA
+    description: Landing table for COM_SERVICEORDERACTIVITIES_TEA file.
+  - name: COM_SERVICEORDERACTUALMATERIALCOSTS_TEA
+    identifier: COM_SERVICEORDERACTUALMATERIALCOSTS_TEA
+    description: Landing table for COM_SERVICEORDERACTUALMATERIALCOSTS_TEA file.
+  - name: COM_SERVICEORDERACTUALOTHERCOSTS_TEA
+    identifier: COM_SERVICEORDERACTUALOTHERCOSTS_TEA
+    description: Landing table for COM_SERVICEORDERACTUALOTHERCOSTS_TEA file.
+  - name: COM_SERVICEORDERHEADER
+    identifier: COM_SERVICEORDERHEADER
+    description: Landing table for COM_SERVICEORDERHEADER file.
+  - name: COM_SUPPLIER
+    identifier: COM_SUPPLIER
+    description: Landing table for COM_SUPPLIER file.
+  - name: COM_SUPPLIERCODEMASTER
+    identifier: COM_SUPPLIERCODEMASTER
+    description: Landing table for COM_SUPPLIERCODEMASTER file.
+  - name: COM_TROUBLESHOOTINGDETAILS
+    identifier: COM_TROUBLESHOOTINGDETAILS
+    description: Landing table for COM_TROUBLESHOOTINGDETAILS file.
+  - name: COMPETITOR
+    identifier: COMPETITOR
+    description: Landing table for COMPETITOR file.
+  - name: CONTACT
+    identifier: CONTACT
+    description: Landing table for CONTACT file.
+  - name: CONTRACT
+    identifier: CONTRACT
+    description: Landing table for CONTRACT file.
+  - name: EMAIL
+    identifier: EMAIL
+    description: Landing table for EMAIL file.
+  - name: LEAD
+    identifier: LEAD
+    description: Landing table for LEAD file.
+  - name: MSDYN_AGREEMENT
+    identifier: MSDYN_AGREEMENT
+    description: Landing table for MSDYN_AGREEMENT file.
+  - name: MSDYN_BOOKINGTIMESTAMP
+    identifier: MSDYN_BOOKINGTIMESTAMP
+    description: Landing table for MSDYN_BOOKINGTIMESTAMP file.
+  - name: MSDYN_BPF_BAA0A411A239410CB8BDED8B5FDD88E3
+    identifier: MSDYN_BPF_BAA0A411A239410CB8BDED8B5FDD88E3
+    description: Landing table for MSDYN_BPF_BAA0A411A239410CB8BDED8B5FDD88E3 file.
+  - name: MSDYN_BPF_D3D97BAC8C294105840E99E37A9D1C39
+    identifier: MSDYN_BPF_D3D97BAC8C294105840E99E37A9D1C39
+    description: Landing table for MSDYN_BPF_D3D97BAC8C294105840E99E37A9D1C39 file.
+  - name: MSDYN_CUSTOMERASSET
+    identifier: MSDYN_CUSTOMERASSET
+    description: Landing table for MSDYN_CUSTOMERASSET file.
+  - name: MSDYN_INCIDENTTYPE
+    identifier: MSDYN_INCIDENTTYPE
+    description: Landing table for MSDYN_INCIDENTTYPE file.
+  - name: MSDYN_INCIDENTTYPEPRODUCT
+    identifier: MSDYN_INCIDENTTYPEPRODUCT
+    description: Landing table for MSDYN_INCIDENTTYPEPRODUCT file.
+  - name: MSDYN_INCIDENTTYPESERVICE
+    identifier: MSDYN_INCIDENTTYPESERVICE
+    description: Landing table for MSDYN_INCIDENTTYPESERVICE file.
+  - name: MSDYN_INCIDENTTYPESSETUP
+    identifier: MSDYN_INCIDENTTYPESSETUP
+    description: Landing table for MSDYN_INCIDENTTYPESSETUP file.
+  - name: MSDYN_ORGANIZATIONALUNIT
+    identifier: MSDYN_ORGANIZATIONALUNIT
+    description: Landing table for MSDYN_ORGANIZATIONALUNIT file.
+  - name: MSDYN_PREDICTIVESCORE
+    identifier: MSDYN_PREDICTIVESCORE
+    description: Landing table for MSDYN_PREDICTIVESCORE file.
+  - name: MSDYN_PRIORITY
+    identifier: MSDYN_PRIORITY
+    description: Landing table for MSDYN_PRIORITY file.
+  - name: MSDYN_PROJECT
+    identifier: MSDYN_PROJECT
+    description: Landing table for MSDYN_PROJECT file.
+  - name: MSDYN_PROJECTTASK
+    identifier: MSDYN_PROJECTTASK
+    description: Landing table for MSDYN_PROJECTTASK file.
+  - name: MSDYN_PROJECTTEAM
+    identifier: MSDYN_PROJECTTEAM
+    description: Landing table for MSDYN_PROJECTTEAM file.
+  - name: MSDYN_PURCHASEORDER
+    identifier: MSDYN_PURCHASEORDER
+    description: Landing table for MSDYN_PURCHASEORDER file.
+  - name: MSDYN_RESOURCEASSIGNMENT
+    identifier: MSDYN_RESOURCEASSIGNMENT
+    description: Landing table for MSDYN_RESOURCEASSIGNMENT file.
+  - name: MSDYN_RMA
+    identifier: MSDYN_RMA
+    description: Landing table for MSDYN_RMA file.
+  - name: MSDYN_RMAPRODUCT
+    identifier: MSDYN_RMAPRODUCT
+    description: Landing table for MSDYN_RMAPRODUCT file.
+  - name: MSDYN_SERVICETASKTYPE
+    identifier: MSDYN_SERVICETASKTYPE
+    description: Landing table for MSDYN_SERVICETASKTYPE file.
+  - name: MSDYN_TAXCODE
+    identifier: MSDYN_TAXCODE
+    description: Landing table for MSDYN_TAXCODE file.
+  - name: MSDYN_TIMEENTRY
+    identifier: MSDYN_TIMEENTRY
+    description: Landing table for MSDYN_TIMEENTRY file.
+  - name: MSDYN_WAREHOUSE
+    identifier: MSDYN_WAREHOUSE
+    description: Landing table for MSDYN_WAREHOUSE file.
+  - name: MSDYN_WORKORDER
+    identifier: MSDYN_WORKORDER
+    description: Landing table for MSDYN_WORKORDER file.
+  - name: MSDYN_WORKORDERINCIDENT
+    identifier: MSDYN_WORKORDERINCIDENT
+    description: Landing table for MSDYN_WORKORDERINCIDENT file.
+  - name: MSDYN_WORKORDERPRODUCT
+    identifier: MSDYN_WORKORDERPRODUCT
+    description: Landing table for MSDYN_WORKORDERPRODUCT file.
+  - name: MSDYN_WORKORDERSERVICE
+    identifier: MSDYN_WORKORDERSERVICE
+    description: Landing table for MSDYN_WORKORDERSERVICE file.
+  - name: MSDYN_WORKORDERSERVICETASK
+    identifier: MSDYN_WORKORDERSERVICETASK
+    description: Landing table for MSDYN_WORKORDERSERVICETASK file.
+  - name: MSDYN_WORKORDERSUBSTATUS
+    identifier: MSDYN_WORKORDERSUBSTATUS
+    description: Landing table for MSDYN_WORKORDERSUBSTATUS file.
+  - name: MSDYN_WORKORDERTYPE
+    identifier: MSDYN_WORKORDERTYPE
+    description: Landing table for MSDYN_WORKORDERTYPE file.
+  - name: ORGANIZATION
+    identifier: ORGANIZATION
+    description: Landing table for ORGANIZATION file.
+  - name: PRICELEVEL
+    identifier: PRICELEVEL
+    description: Landing table for PRICELEVEL file.
+  - name: PRODUCT
+    identifier: PRODUCT
+    description: Landing table for PRODUCT file.
+  - name: PRODUCTPRICELEVEL
+    identifier: PRODUCTPRICELEVEL
+    description: Landing table for PRODUCTPRICELEVEL file.
+  - name: RESOURCE
+    identifier: RESOURCE
+    description: Landing table for RESOURCE file.
+  - name: ROLE
+    identifier: ROLE
+    description: Landing table for ROLE file.
+  - name: SM_BULK_INFO
+    identifier: SM_BULK_INFO
+    description: Landing table for SM_BULK_INFO file.
+  - name: SM_CALL_REPORT
+    identifier: SM_CALL_REPORT
+    description: Landing table for SM_CALL_REPORT file.
+  - name: SM_CALL_REPORT_CALL_REPORT
+    identifier: SM_CALL_REPORT_CALL_REPORT
+    description: Landing table for SM_CALL_REPORT_CALL_REPORT file.
+  - name: SM_FAB_LINE
+    identifier: SM_FAB_LINE
+    description: Landing table for SM_FAB_LINE file.
+  - name: SM_INVESTMENT_MAP
+    identifier: SM_INVESTMENT_MAP
+    description: Landing table for SM_INVESTMENT_MAP file.
+  - name: SM_WEEKLY_REPORT_STAFF
+    identifier: SM_WEEKLY_REPORT_STAFF
+    description: Landing table for SM_WEEKLY_REPORT_STAFF file.
+  - name: SYSTEMUSER
+    identifier: SYSTEMUSER
+    description: Landing table for SYSTEMUSER file.
+  - name: SYSTEMUSERMANAGERMAP
+    identifier: SYSTEMUSERMANAGERMAP
+    description: Landing table for SYSTEMUSERMANAGERMAP file.
+  - name: SYSTEMUSERROLES
+    identifier: SYSTEMUSERROLES
+    description: Landing table for SYSTEMUSERROLES file.
+  - name: TEAM
+    identifier: TEAM
+    description: Landing table for TEAM file.
+  - name: TEAMMEMBERSHIP
+    identifier: TEAMMEMBERSHIP
+    description: Landing table for TEAMMEMBERSHIP file.
+  - name: TEAMROLES
+    identifier: TEAMROLES
+    description: Landing table for TEAMROLES file.
+  - name: TEL_CNT_FIXTYPECONTRACTMONTHLYINFORMATION
+    identifier: TEL_CNT_FIXTYPECONTRACTMONTHLYINFORMATION
+    description: Landing table for TEL_CNT_FIXTYPECONTRACTMONTHLYINFORMATION file.
+  - name: TEL_CNT_SALESCATEGORYBYCONTRACTMASTER
+    identifier: TEL_CNT_SALESCATEGORYBYCONTRACTMASTER
+    description: Landing table for TEL_CNT_SALESCATEGORYBYCONTRACTMASTER file.
+  - name: TEL_CNT_MATERIALINFORMATIONBYCONTRACTSCOPE
+    identifier: TEL_CNT_MATERIALINFORMATIONBYCONTRACTSCOPE
+    description: Landing table for TEL_CNT_MATERIALINFORMATIONBYCONTRACTSCOPE file.
+  - name: TEL_COM_2DIGITSBU
+    identifier: TEL_COM_2DIGITSBU
+    description: Landing table for TEL_COM_2DIGITSBU file.
+  - name: TEL_COM_ALARMCODEMASTER
+    identifier: TEL_COM_ALARMCODEMASTER
+    description: Landing table for TEL_COM_ALARMCODEMASTER file.
+  - name: TEL_COM_BATCH
+    identifier: TEL_COM_BATCH
+    description: Landing table for TEL_COM_BATCH file.
+  - name: TEL_COM_BPFESCALATIONISSUE
+    identifier: TEL_COM_BPFESCALATIONISSUE
+    description: Landing table for TEL_COM_BPFESCALATIONISSUE file.
+  - name: TEL_COM_CONCESSION_REASON
+    identifier: TEL_COM_CONCESSION_REASON
+    description: Landing table for TEL_COM_CONCESSION_REASON file.
+  - name: TEL_COM_DECONTAMINATION
+    identifier: TEL_COM_DECONTAMINATION
+    description: Landing table for TEL_COM_DECONTAMINATION file.
+  - name: TEL_COM_ESCALATIONCATEGORY
+    identifier: TEL_COM_ESCALATIONCATEGORY
+    description: Landing table for TEL_COM_ESCALATIONCATEGORY file.
+  - name: TEL_COM_ESCALATIONISSUE
+    identifier: TEL_COM_ESCALATIONISSUE
+    description: Landing table for TEL_COM_ESCALATIONISSUE file.
+  - name: TEL_COM_ESCALATIONLEVEL
+    identifier: TEL_COM_ESCALATIONLEVEL
+    description: Landing table for TEL_COM_ESCALATIONLEVEL file.
+  - name: TEL_COM_ESCALATIONPART
+    identifier: TEL_COM_ESCALATIONPART
+    description: Landing table for TEL_COM_ESCALATIONPART file.
+  - name: TEL_COM_ESCALATIONREASON
+    identifier: TEL_COM_ESCALATIONREASON
+    description: Landing table for TEL_COM_ESCALATIONREASON file.
+  - name: TEL_COM_ESCALATIONTEAMMEMBER
+    identifier: TEL_COM_ESCALATIONTEAMMEMBER
+    description: Landing table for TEL_COM_ESCALATIONTEAMMEMBER file.
+  - name: TEL_COM_MATERIAL
+    identifier: TEL_COM_MATERIAL
+    description: Landing table for TEL_COM_MATERIAL file.
+  - name: TEL_COM_MATERIALGROUPMASTER
+    identifier: TEL_COM_MATERIALGROUPMASTER
+    description: Landing table for TEL_COM_MATERIALGROUPMASTER file.
+  - name: TEL_COM_ORDER_TYPE
+    identifier: TEL_COM_ORDER_TYPE
+    description: Landing table for TEL_COM_ORDER_TYPE file.
+  - name: TEL_COM_PARTINVENTORYTYPERULE
+    identifier: TEL_COM_PARTINVENTORYTYPERULE
+    description: Landing table for TEL_COM_PARTINVENTORYTYPERULE file.
+  - name: TEL_COM_PARTINVENTORYWAREHOUSERULE
+    identifier: TEL_COM_PARTINVENTORYWAREHOUSERULE
+    description: Landing table for TEL_COM_PARTINVENTORYWAREHOUSERULE file.
+  - name: TEL_COM_PLANT
+    identifier: TEL_COM_PLANT
+    description: Landing table for TEL_COM_PLANT file.
+  - name: TEL_COM_PROFITCENTER
+    identifier: TEL_COM_PROFITCENTER
+    description: Landing table for TEL_COM_PROFITCENTER file.
+  - name: TEL_COM_SALES_DISTRICT
+    identifier: TEL_COM_SALES_DISTRICT
+    description: Landing table for TEL_COM_SALES_DISTRICT file.
+  - name: TEL_COM_SALES_ORGANIZATION
+    identifier: TEL_COM_SALES_ORGANIZATION
+    description: Landing table for TEL_COM_SALES_ORGANIZATION file.
+  - name: TEL_COM_SALESCATEGORYMASTER
+    identifier: TEL_COM_SALESCATEGORYMASTER
+    description: Landing table for TEL_COM_SALESCATEGORYMASTER file.
+  - name: TEL_COM_SALESDOCUMENTITEMCATEGORYMASTER
+    identifier: TEL_COM_SALESDOCUMENTITEMCATEGORYMASTER
+    description: Landing table for TEL_COM_SALESDOCUMENTITEMCATEGORYMASTER file.
+  - name: TEL_COM_SALESDOCUMENTTYPESMASTER
+    identifier: TEL_COM_SALESDOCUMENTTYPESMASTER
+    description: Landing table for TEL_COM_SALESDOCUMENTTYPESMASTER file.
+  - name: TEL_COM_SALESORDERHEADER
+    identifier: TEL_COM_SALESORDERHEADER
+    description: Landing table for TEL_COM_SALESORDERHEADER file.
+  - name: TEL_COM_SALESORDERITEM
+    identifier: TEL_COM_SALESORDERITEM
+    description: Landing table for TEL_COM_SALESORDERITEM file.
+  - name: TEL_OPPORTUNITY_TEL_SM_OPPORTUNITY_GROUP
+    identifier: TEL_OPPORTUNITY_TEL_SM_OPPORTUNITY_GROUP
+    description: Landing table for TEL_OPPORTUNITY_TEL_SM_OPPORTUNITY_GROUP file.
+  - name: TEL_PO_CAPACITYDETAIL
+    identifier: TEL_PO_CAPACITYDETAIL
+    description: Landing table for TEL_PO_CAPACITYDETAIL file.
+  - name: TEL_PO_CAPACITYHEADER
+    identifier: TEL_PO_CAPACITYHEADER
+    description: Landing table for TEL_PO_CAPACITYHEADER file.
+  - name: TEL_PO_CAPACITYMODELGROUP
+    identifier: TEL_PO_CAPACITYMODELGROUP
+    description: Landing table for TEL_PO_CAPACITYMODELGROUP file.
+  - name: TEL_PSA_MILESTONE
+    identifier: TEL_PSA_MILESTONE
+    description: Landing table for TEL_PSA_MILESTONE file.
+  - name: TEL_PSA_PROJECTTASKSNAPSHOT
+    identifier: TEL_PSA_PROJECTTASKSNAPSHOT
+    description: Landing table for TEL_PSA_PROJECTTASKSNAPSHOT file.
+  - name: TEL_PSA_PSABPFPROJECT
+    identifier: TEL_PSA_PSABPFPROJECT
+    description: Landing table for TEL_PSA_PSABPFPROJECT file.
+  - name: TEL_PSA_SNAPSHOT
+    identifier: TEL_PSA_SNAPSHOT
+    description: Landing table for TEL_PSA_SNAPSHOT file.
+  - name: TEL_PSA_TASKCATEGORY
+    identifier: TEL_PSA_TASKCATEGORY
+    description: Landing table for TEL_PSA_TASKCATEGORY file.
+  - name: TEL_PSA_TASKMASTER
+    identifier: TEL_PSA_TASKMASTER
+    description: Landing table for TEL_PSA_TASKMASTER file.
+  - name: TEL_SM_ADJUST_ORDER
+    identifier: TEL_SM_ADJUST_ORDER
+    description: Landing table for TEL_SM_ADJUST_ORDER file.
+  - name: TEL_SM_BULK_APPROVAL_HISTORY
+    identifier: TEL_SM_BULK_APPROVAL_HISTORY
+    description: Landing table for TEL_SM_BULK_APPROVAL_HISTORY file.
+  - name: TEL_SM_BULK_APPROVAL_REQUEST
+    identifier: TEL_SM_BULK_APPROVAL_REQUEST
+    description: Landing table for TEL_SM_BULK_APPROVAL_REQUEST file.
+  - name: TEL_SM_BULK_HEADER
+    identifier: TEL_SM_BULK_HEADER
+    description: Landing table for TEL_SM_BULK_HEADER file.
+  - name: TEL_SM_CHAMBER
+    identifier: TEL_SM_CHAMBER
+    description: Landing table for TEL_SM_CHAMBER file.
+  - name: TEL_SM_CONSUMABLE_NON_CONSUMABLE
+    identifier: TEL_SM_CONSUMABLE_NON_CONSUMABLE
+    description: Landing table for TEL_SM_CONSUMABLE_NON_CONSUMABLE file.
+  - name: TEL_SM_CONTRACTTYPE
+    identifier: TEL_SM_CONTRACTTYPE
+    description: Landing table for TEL_SM_CONTRACTTYPE file.
+  - name: TEL_SM_COST_CENTER_GROUP
+    identifier: TEL_SM_COST_CENTER_GROUP
+    description: Landing table for TEL_SM_COST_CENTER_GROUP file.
+  - name: TEL_SM_CUSTOMER_BUSINESS_TYPE
+    identifier: TEL_SM_CUSTOMER_BUSINESS_TYPE
+    description: Landing table for TEL_SM_CUSTOMER_BUSINESS_TYPE file.
+  - name: TEL_SM_DEVICE_TYPE
+    identifier: TEL_SM_DEVICE_TYPE
+    description: Landing table for TEL_SM_DEVICE_TYPE file.
+  - name: TEL_SM_END_USER_GROSS_MARGIN
+    identifier: TEL_SM_END_USER_GROSS_MARGIN
+    description: Landing table for TEL_SM_END_USER_GROSS_MARGIN file.
+  - name: TEL_SM_EXCHANGE_RATE_MASTER
+    identifier: TEL_SM_EXCHANGE_RATE_MASTER
+    description: Landing table for TEL_SM_EXCHANGE_RATE_MASTER file.
+  - name: TEL_SM_FRONT_BACK_END
+    identifier: TEL_SM_FRONT_BACK_END
+    description: Landing table for TEL_SM_FRONT_BACK_END file.
+  - name: TEL_SM_LEAD_TIME
+    identifier: TEL_SM_LEAD_TIME
+    description: Landing table for TEL_SM_LEAD_TIME file.
+  - name: TEL_SM_MATERIAL_GROUP
+    identifier: TEL_SM_MATERIAL_GROUP
+    description: Landing table for TEL_SM_MATERIAL_GROUP file.
+  - name: TEL_SM_MODEL
+    identifier: TEL_SM_MODEL
+    description: Landing table for TEL_SM_MODEL file.
+  - name: TEL_SM_MODULE
+    identifier: TEL_SM_MODULE
+    description: Landing table for TEL_SM_MODULE file.
+  - name: TEL_SM_MODULE_TYPE
+    identifier: TEL_SM_MODULE_TYPE
+    description: Landing table for TEL_SM_MODULE_TYPE file.
+  - name: TEL_SM_NODE
+    identifier: TEL_SM_NODE
+    description: Landing table for TEL_SM_NODE file.
+  - name: TEL_SM_OPPORTUNITY_GROUP
+    identifier: TEL_SM_OPPORTUNITY_GROUP
+    description: Landing table for TEL_SM_OPPORTUNITY_GROUP file.
+  - name: TEL_SM_P_L_CATEGORY
+    identifier: TEL_SM_P_L_CATEGORY
+    description: Landing table for TEL_SM_P_L_CATEGORY file.
+  - name: TEL_SM_PROCESS
+    identifier: TEL_SM_PROCESS
+    description: Landing table for TEL_SM_PROCESS file.
+  - name: TEL_SM_PURCHASE_DOCUMENT
+    identifier: TEL_SM_PURCHASE_DOCUMENT
+    description: Landing table for TEL_SM_PURCHASE_DOCUMENT file.
+  - name: TEL_SM_REV_REC_CRITERIA_AFTER
+    identifier: TEL_SM_REV_REC_CRITERIA_AFTER
+    description: Landing table for TEL_SM_REV_REC_CRITERIA_AFTER file.
+  - name: TEL_SM_REV_REC_CRITERIA_BEFORE_EQUIP
+    identifier: TEL_SM_REV_REC_CRITERIA_BEFORE_EQUIP
+    description: Landing table for TEL_SM_REV_REC_CRITERIA_BEFORE_EQUIP file.
+  - name: TEL_SM_REV_REC_CRITERIA_BEFORE_MOD
+    identifier: TEL_SM_REV_REC_CRITERIA_BEFORE_MOD
+    description: Landing table for TEL_SM_REV_REC_CRITERIA_BEFORE_MOD file.
+  - name: TEL_SM_REVENUE_RECOGNITION_CRITERIA
+    identifier: TEL_SM_REVENUE_RECOGNITION_CRITERIA
+    description: Landing table for TEL_SM_REVENUE_RECOGNITION_CRITERIA file.
+  - name: TEL_SM_SALES_CATEGORY_MAPPING_MASTER
+    identifier: TEL_SM_SALES_CATEGORY_MAPPING_MASTER
+    description: Landing table for TEL_SM_SALES_CATEGORY_MAPPING_MASTER file.
+  - name: TEL_SM_SALES_DOCUMENT
+    identifier: TEL_SM_SALES_DOCUMENT
+    description: Landing table for TEL_SM_SALES_DOCUMENT file.
+  - name: TEL_SM_SALES_FCST_CONTRACT
+    identifier: TEL_SM_SALES_FCST_CONTRACT
+    description: Landing table for TEL_SM_SALES_FCST_CONTRACT file.
+  - name: TEL_SM_SALES_SPLIT_TARGET_BU
+    identifier: TEL_SM_SALES_SPLIT_TARGET_BU
+    description: Landing table for TEL_SM_SALES_SPLIT_TARGET_BU file.
+  - name: TEL_SM_SALES_SPLIT_TARGET_MODEL
+    identifier: TEL_SM_SALES_SPLIT_TARGET_MODEL
+    description: Landing table for TEL_SM_SALES_SPLIT_TARGET_MODEL file.
+  - name: TEL_SM_SERVICE_OFFICE
+    identifier: TEL_SM_SERVICE_OFFICE
+    description: Landing table for TEL_SM_SERVICE_OFFICE file.
+  - name: TEL_SM_SERVICE_OPPORTUNITY
+    identifier: TEL_SM_SERVICE_OPPORTUNITY
+    description: Landing table for TEL_SM_SERVICE_OPPORTUNITY file.
+  - name: TEL_SM_SPECIFICATION
+    identifier: TEL_SM_SPECIFICATION
+    description: Landing table for TEL_SM_SPECIFICATION file.
+  - name: TEL_SM_SPECIFICATION_PRODUCT
+    identifier: TEL_SM_SPECIFICATION_PRODUCT
+    description: Landing table for TEL_SM_SPECIFICATION_PRODUCT file.
+  - name: TEL_SM_SUB_CATEGORY
+    identifier: TEL_SM_SUB_CATEGORY
+    description: Landing table for TEL_SM_SUB_CATEGORY file.
+  - name: TEL_SM_TECHNICAL_ACCEPTANCE_LEAD_TIME
+    identifier: TEL_SM_TECHNICAL_ACCEPTANCE_LEAD_TIME
+    description: Landing table for TEL_SM_TECHNICAL_ACCEPTANCE_LEAD_TIME file.
+  - name: TEL_SM_WAFER_SIZE_GENERATION
+    identifier: TEL_SM_WAFER_SIZE_GENERATION
+    description: Landing table for TEL_SM_WAFER_SIZE_GENERATION file.
+  - name: TEL_SM_WARRANTY
+    identifier: TEL_SM_WARRANTY
+    description: Landing table for TEL_SM_WARRANTY file.
+  - name: TEL_SM_WBS_MANAGE
+    identifier: TEL_SM_WBS_MANAGE
+    description: Landing table for TEL_SM_WBS_MANAGE file.
+  - name: TEL_TEL_SM_SERVICE_OPPORTUNITY_TEL_SM_OPPOR
+    identifier: TEL_TEL_SM_SERVICE_OPPORTUNITY_TEL_SM_OPPOR
+    description: Landing table for TEL_TEL_SM_SERVICE_OPPORTUNITY_TEL_SM_OPPOR file.
+  - name: TEL_WO_FCNSITARGETMACHINE
+    identifier: TEL_WO_FCNSITARGETMACHINE
+    description: Landing table for TEL_WO_FCNSITARGETMACHINE file.
+  - name: TEL_WO_INSTALLATION
+    identifier: TEL_WO_INSTALLATION
+    description: Landing table for TEL_WO_INSTALLATION file.
+  - name: TEL_WO_NCDRREASON
+    identifier: TEL_WO_NCDRREASON
+    description: Landing table for TEL_WO_NCDRREASON file.
+  - name: TEL_WO_PARTCATEGORY
+    identifier: TEL_WO_PARTCATEGORY
+    description: Landing table for TEL_WO_PARTCATEGORY file.
+  - name: TEL_WO_PARTORDERPROCESS
+    identifier: TEL_WO_PARTORDERPROCESS
+    description: Landing table for TEL_WO_PARTORDERPROCESS file.
+  - name: TEL_WO_PARTSUBCATEGORY
+    identifier: TEL_WO_PARTSUBCATEGORY
+    description: Landing table for TEL_WO_PARTSUBCATEGORY file.
+  - name: TEL_WO_RELATEDSN
+    identifier: TEL_WO_RELATEDSN
+    description: Landing table for TEL_WO_RELATEDSN file.
+  - name: TERRITORY
+    identifier: TERRITORY
+    description: Landing table for TERRITORY file.
+  - name: TIMEZONEDEFINITION
+    identifier: TIMEZONEDEFINITION
+    description: Landing table for TIMEZONEDEFINITION file.
+  - name: TIMEZONERULE
+    identifier: TIMEZONERULE
+    description: Landing table for TIMEZONERULE file.
+  - name: TRANSACTIONCURRENCY
+    identifier: TRANSACTIONCURRENCY
+    description: Landing table for TRANSACTIONCURRENCY file.
+  - name: TSC_ACTIVITYHISTORY
+    identifier: TSC_ACTIVITYHISTORY
+    description: Landing table for TSC_ACTIVITYHISTORY file.
+  - name: TSC_KEYWORD
+    identifier: TSC_KEYWORD
+    description: Landing table for TSC_KEYWORD file.
+  - name: TSC_PARTSINFO
+    identifier: TSC_PARTSINFO
+    description: Landing table for TSC_PARTSINFO file.
+  - name: TSC_ROOT_CAUSE
+    identifier: TSC_ROOT_CAUSE
+    description: Landing table for TSC_ROOT_CAUSE file.
+  - name: UOM
+    identifier: UOM
+    description: Landing table for UOM file.
+  - name: USERSETTINGS
+    identifier: USERSETTINGS
+    description: Landing table for USERSETTINGS file.
+  - name: WO_APPROVAL_HISTORY
+    identifier: WO_APPROVAL_HISTORY
+    description: Landing table for WO_APPROVAL_HISTORY file.
+  - name: WO_ESCALATIONHISTORY
+    identifier: WO_ESCALATIONHISTORY
+    description: Landing table for WO_ESCALATIONHISTORY file.
+  - name: WO_TASK2
+    identifier: WO_TASK2
+    description: Landing table for WO_TASK2 file.
+  - name: WO_TYPEOFWORK
+    identifier: WO_TYPEOFWORK
+    description: Landing table for WO_TYPEOFWORK file.
+  - name: WO_WORKORDERACTIVITY
+    identifier: WO_WORKORDERACTIVITY
+    description: Landing table for WO_WORKORDERACTIVITY file.
+  - name: INCIDENT
+    identifier: INCIDENT
+    description: Landing table for INCIDENT file.
+  - name: OPPORTUNITY
+    identifier: OPPORTUNITY
+    description: Landing table for OPPORTUNITY file.
+  - name: TEL_SM_BULK_FCST
+    identifier: TEL_SM_BULK_FCST
+    description: Landing table for TEL_SM_BULK_FCST file.
+  - name: TEL_SM_SIRFISFCST
+    identifier: TEL_SM_SIRFISFCST
+    description: Landing table for TEL_SM_SIRFISFCST file.
+  - name: STATEMETADATA
+    identifier: STATEMETADATA
+    description: Landing table for STATEMETADATA file.
+  - name: STATUSMETADATA
+    identifier: STATUSMETADATA
+    description: Landing table for STATUSMETADATA file.
+  - name: GLOBALOPTIONSETMETADATA
+    identifier: GLOBALOPTIONSETMETADATA
+    description: Landing table for GLOBALOPTIONSETMETADATA file.
+  - name: OPTIONSETMETADATA
+    identifier: OPTIONSETMETADATA
+    description: Landing table for OPTIONSETMETADATA file.
+  - name: TARGETMETADATA
+    identifier: TARGETMETADATA
+    description: Landing table for TARGETMETADATA file.
+  - name: ATTRIBUTEMETADATA
+    identifier: ATTRIBUTEMETADATA
+    description: Landing table for ATTRIBUTEMETADATA file.
+  - name: CNT_ORDERNUMBERASSIGN
+    identifier: CNT_ORDERNUMBERASSIGN
+    description: Landing table for CNT_ORDERNUMBERASSIGN file.
+  - name: TEL_COM_BILLINGHEADER
+    identifier: TEL_COM_BILLINGHEADER
+    description: Landing table for TEL_COM_BILLINGHEADER file.
+  - name: TEL_COM_BILLINGITEM
+    identifier: TEL_COM_BILLINGITEM
+    description: Landing table for TEL_COM_BILLINGITEM file.
+  - name: TEL_COM_MILESTONECATEGORY
+    identifier: TEL_COM_MILESTONECATEGORY
+    description: Landing table for TEL_COM_MILESTONECATEGORY file.
+  - name: TEL_WO_PJ3CODE_MAPPING
+    identifier: TEL_WO_PJ3CODE_MAPPING
+    description: Landing table for TEL_WO_PJ3CODE_MAPPING file.
+  - name: TEL_PSA_NISWISDOMMODELMAPPING
+    identifier: TEL_PSA_NISWISDOMMODELMAPPING
+    description: Landing table for TEL_PSA_NISWISDOMMODELMAPPING file.
+  - name: TEL_COM_TASK_MYSKILLS
+    identifier: TEL_COM_TASK_MYSKILLS
+    description: Landing table for TEL_COM_TASK_MYSKILLS file.
+  - name: CHARACTERISTIC
+    identifier: CHARACTERISTIC
+    description: Landing table for CHARACTERISTIC file.
+  - name: TEL_TSC_CASEBUSINESSCATEGORY
+    identifier: TEL_TSC_CASEBUSINESSCATEGORY
+    description: Landing table for TEL_TSC_CASEBUSINESSCATEGORY file.

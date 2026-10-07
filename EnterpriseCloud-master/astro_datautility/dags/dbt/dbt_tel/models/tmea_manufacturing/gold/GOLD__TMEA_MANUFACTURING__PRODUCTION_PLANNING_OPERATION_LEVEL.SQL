@@ -1,0 +1,110 @@
+{{ config(
+    	materialized='tel_incremental',
+    	incremental_strategy='insert_overwrite',
+    	alias='PRODUCTION_PLANNING_OPERATION_LEVEL',
+    	transient=false
+) }}
+
+WITH 
+
+source_data as (
+
+select 
+polss.sales_order,
+vs.product_type_abbreviation,
+CASE
+    WHEN vs.material_number IS NULL THEN 'NULL'
+    ELSE vs.material_number
+    END AS  TOOL_NUMBER,
+polss.prd_order,
+polss.activity_nbr,
+CONCAT(polss.prd_order, ' ',polss.material , ' ', polss.material_description) AS PROD_TASK,
+CONCAT(polss.activity_nbr, ' ',polss.op_short_text) AS OP_TASK,
+polss.basic_start,
+polss.basic_end,
+polss.material,
+polss.material_description,
+polss.op_short_text,
+ORD_QTY,
+polss.std_work,
+polss.std_wrk_uom,
+polss.prev_conf_activity,
+polss.status,
+polss.item_status,
+polss.yield_to_be_conf,
+contains(ITEM_STATUS,'PCNF') AS OP_LEVEL_PCNF,
+contains(ITEM_STATUS,'CNF') AS OP_LEVEL_CNF,
+contains(ITEM_STATUS,'TECO') AS OP_LEVEL_TECO,
+(STD_WORK * ORD_QTY) AS STANDARD_HOURS_RELEASED,
+CASE
+        WHEN (OP_LEVEL_PCNF = 'TRUE' OR OP_LEVEL_CNF = 'TRUE') THEN STANDARD_HOURS_RELEASED
+        WHEN (OP_LEVEL_PCNF = 'FALSE' OR OP_LEVEL_CNF = 'FALSE') THEN 0
+        END AS TOTAL_COMPLETED_STD_WORK
+from {{ ref('GOLD__TMEA_MANUFACTURING__PRODUCTION_OPERATION_LEVEL_SYSTEM_STATUS') }}  polss
+left join {{ ref('GOLD__TMEA_MANUFACTURING__PRODUCTION_VALUE_STREAM') }}  vs on polss.sales_order = vs.sales_document
+where polss.basic_start > '2022-01-01'
+order by prd_order,activity_nbr desc
+),
+
+transform_data as (
+select 
+	'{{ invocation_id }}' AS _AUDIT_LOG_ID,
+	SHA2('hash_me') AS _ROW_HASH,
+	SALES_ORDER,
+	PRODUCT_TYPE_ABBREVIATION,
+	TOOL_NUMBER,
+	PRD_ORDER,
+	ACTIVITY_NBR,
+	PROD_TASK,
+	OP_TASK,
+	BASIC_START,
+	BASIC_END,
+	MATERIAL,
+	MATERIAL_DESCRIPTION,
+	OP_SHORT_TEXT,
+	ORD_QTY,
+	STD_WORK,
+	STD_WRK_UOM,
+	PREV_CONF_ACTIVITY,
+	STATUS,
+	ITEM_STATUS,
+	YIELD_TO_BE_CONF,
+	OP_LEVEL_PCNF,
+	OP_LEVEL_CNF,
+	OP_LEVEL_TECO,
+	STANDARD_HOURS_RELEASED,
+	TOTAL_COMPLETED_STD_WORK
+from source_data
+),
+
+type_data as (
+select
+	CAST(_AUDIT_LOG_ID as VARCHAR(128)) as _AUDIT_LOG_ID,
+	CAST(_ROW_HASH as VARCHAR(128)) as _ROW_HASH,
+	CAST(SALES_ORDER as VARCHAR(16777216)) as SALES_ORDER,
+	CAST(PRODUCT_TYPE_ABBREVIATION as VARCHAR(16777216)) as PRODUCT_TYPE_ABBREVIATION,
+	CAST(TOOL_NUMBER as VARCHAR(16777216)) as TOOL_NUMBER,
+	CAST(PRD_ORDER as VARCHAR(16777216)) as PRD_ORDER,
+	CAST(ACTIVITY_NBR as VARCHAR(16777216)) as ACTIVITY_NBR,
+	CAST(PROD_TASK as VARCHAR(16777216)) as PROD_TASK,
+	CAST(OP_TASK as VARCHAR(16777216)) as OP_TASK,
+	CAST(BASIC_START as DATE) as BASIC_START,
+	CAST(BASIC_END as DATE) as BASIC_END,
+	CAST(MATERIAL as VARCHAR(16777216)) as MATERIAL,
+	CAST(MATERIAL_DESCRIPTION as VARCHAR(16777216)) as MATERIAL_DESCRIPTION,
+	CAST(OP_SHORT_TEXT as VARCHAR(16777216)) as OP_SHORT_TEXT,
+	CAST(ORD_QTY as NUMBER(38,0)) as ORD_QTY,
+	CAST(STD_WORK as NUMBER(38,12)) as STD_WORK,
+	CAST(STD_WRK_UOM as VARCHAR(16777216)) as STD_WRK_UOM,
+	CAST(PREV_CONF_ACTIVITY as NUMBER(38,0)) as PREV_CONF_ACTIVITY,
+	CAST(STATUS as VARCHAR(16777216)) as STATUS,
+	CAST(ITEM_STATUS as VARCHAR(16777216)) as ITEM_STATUS,
+	CAST(YIELD_TO_BE_CONF as NUMBER(38,0)) as YIELD_TO_BE_CONF,
+	CAST(OP_LEVEL_PCNF as BOOLEAN) as OP_LEVEL_PCNF,
+	CAST(OP_LEVEL_CNF as BOOLEAN) as OP_LEVEL_CNF,
+	CAST(OP_LEVEL_TECO as BOOLEAN) as OP_LEVEL_TECO,
+	CAST(STANDARD_HOURS_RELEASED as NUMBER(38,0)) as STANDARD_HOURS_RELEASED,
+	CAST(TOTAL_COMPLETED_STD_WORK as NUMBER(38,0)) as TOTAL_COMPLETED_STD_WORK
+from transform_data 
+)
+select * from type_data

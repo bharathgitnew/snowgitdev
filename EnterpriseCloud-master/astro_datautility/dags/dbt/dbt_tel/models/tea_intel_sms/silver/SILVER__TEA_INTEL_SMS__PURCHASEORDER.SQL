@@ -1,0 +1,233 @@
+{{ config(
+    materialized='tel_incremental',
+    incremental_strategy='insert_overwrite',
+    alias='PURCHASEORDER'
+) }}
+
+with source_data as
+(
+    SELECT DISTINCT
+            b.PURCHASEORDER AS PO_No,
+            b.POSITIONNUMBER AS PO_Position_No,
+            b.SEQUENCENUMBER AS PO_Sequence_No,
+            b.ORDER_LINETYPEDESCRIPTION as Line_Type,
+            a.PURCHASEORDERTYPE AS Order_Type,
+            b.ITEM AS Item,
+            c.DESCRIPTION AS Item_Description,
+            b.PURCHASESTATISTICSGROUP AS PO_Statistics_Group,
+            b.ORDER_EDAMOUNT AS Ordered_Amount,
+            b.ORDER_EDQUANTITY AS Ordered_Qty,
+            b.DELIVEREDQUANTITY AS Delivered_Qty,
+            b.BACKORDERQUANTITY AS Back_Order_Qty,
+            b.INVOICEDQUANTITY AS Invoiced_Qty,
+            b.PURCHASEUNIT AS Unit_of_Measure,
+            (b.STANDARDCOSTPRICE1  + b.STANDARDCOSTPRICE2  + b.STANDARDCOSTPRICE3 ) AS Cost_Price,
+            d.PURCHASEPRICE_PRIP AS Item_Purchase_Price,
+            b.PRICE AS PO_Line_Price,
+            b.INVOICEDAMOUNT AS Invoiced_Amt,
+            b.ORDER_DATE AS Order_Date,
+            b.ORDER_DATE  AS Order_Time,
+            b.PLANNEDDELIVERYDATE AS Planned_Delivery_Date,
+            b.CONFIRMEDDELIVERYDATE AS Confirmed_Delivery_Date,
+            b.ORDER_CONFIRMATIONDATE AS Supplier_Response_Date,
+            b.CHANGEDDELIVERYDATE AS Changed_Delivery_Date,
+            b.ACTUALDELIVERYDATE AS Receipt_Date,
+            b.INVOICEDATE AS Invoice_Date,
+            b.INVOICENUMBER AS Invoice_Number,
+            c.PRODUCTCLASS AS Consumable,
+            n.PLANNER AS Planner,
+            a.BUYER AS Buyer,
+            b.PROJECT AS Project,
+            b.WAREHOUSE AS Warehouse,
+            a.WAREHOUSE AS Header_Warehouse,
+            b.STATUSPURCHASEORDERLINE AS Current_Activity_Session,
+            -- e.t$desc AS Current_Activity,
+            b.BUYFROM_percent_BUSINESSPARTNER AS BuyFrom_BPID,
+            f.NAME AS Supplier,
+            a.REFERENCEA AS ReferenceA,
+            a.REFERENCEB AS ReferenceB,
+            b.PURCHASELEDGERACCOUNTNUMBER AS Purchase_Ledger_Account,
+            h.LEDGERACCOUNTDESCRIPTION AS Purchase_Ledger_Description,
+            b.DIMENSION1 AS Dimension1,
+            b.DIMENSION2 AS Dimension2,
+            b.DIMENSION3 AS Dimension3,
+            b.DIMENSION4 AS Dimension4,
+            j.AGGREGATEDMATERIALCOSTCOMPONENT AS Cost_Component,
+            l.FinancialSupplierGroup AS Supplier_Group,
+            m.SHIPDATE AS Act_FOB_Narita_Date,
+            b.CANCELLEDDESCRIPTION AS Cancelled,
+            a.ORDER_PRIORITYDESCRIPTION AS Order_Priority,
+            a.CURRENCY AS Currency,
+            b.RATE1 AS Currency_Rate,
+            b.CURRENTPLANNEDDELIVERYDATE AS Current_Planned_Delivery_Date,
+            b.FORWARDINGAGENT AS Carrier,
+            a.SUPPLIERORDERNUMBER AS Supplier_Order_No
+       FROM {{ ref('BRONZE__TEA_INTEL_SMS__BAAN_BAANDISTRIBUTIONPURCHASECONTROL_PURCHASEORDERS') }}  a                                        -- PO Header
+            INNER JOIN {{ ref('BRONZE__TEA_INTEL_SMS__BAAN_BAANDISTRIBUTIONPURCHASECONTROL_PURCHASEORDERLINES') }}  b                              -- PO Lines
+                                     ON a.PURCHASEORDER = b.PURCHASEORDER
+            LEFT OUTER JOIN {{ ref('BRONZE__TEA_INTEL_SMS__BAAN_BAANCOMMONITEMBASEDATA_GENERALITEMDATA') }} c              -- General Item Master
+                                          ON b.ITEM = c.ITEM
+            LEFT OUTER JOIN {{ ref('BRONZE__TEA_INTEL_SMS__BAAN_BAANDISTRIBUTIONDISTRIBUTIONITEMDATA_ITEMPURCHASEDATA') }} d             -- Item Purchasing Info
+                                          ON b.ITEM = d.ITEM
+            -- LEFT OUTER JOIN TTTADV300000 e
+            --    /* Display Forms */
+            --    ON     SUBSTR (b.STATUSPURCHASEORDERLINE, 1, 2) = e.t$cpac
+            --       AND SUBSTR (b.STATUSPURCHASEORDERLINE, 3, 3) = e.t$cmod
+            --       AND SUBSTR (b.STATUSPURCHASEORDERLINE, 6, 8) = SUBSTR (e.t$cfrm, 1, 8)
+            --       AND e.t$clan = 2
+            LEFT OUTER JOIN {{ ref('BRONZE__TEA_INTEL_SMS__BAAN_BAANCOMMONCOMMONDATA_BUSINESSPARTNERS') }} f                 -- General BP Table
+                                          ON b.BUYFROM_percent_BUSINESSPARTNER = f.BUSINESSPARTNER
+            LEFT OUTER JOIN {{ ref('BRONZE__TEA_INTEL_SMS__BAAN_BAANWAREHOUSINGINVENTORYHANDLING_INBOUNDORDERLINES') }} g              -- Inbound Order Lines
+               ON     b.PURCHASEORDER = g.ORDER_
+                  AND b.POSITIONNUMBER = g.POSITIONNUMBER
+                  AND b.RECEIPTNUMBER = g.RECEIPTNUMBER
+                  AND g.ORDER_ORIGINID IN (2, 19)
+                  /* 2 indicates POs */
+                  AND g.RECEIPTQUANTITY <> 0
+            /* receipt quantity */
+            LEFT OUTER JOIN {{ ref('BRONZE__TEA_INTEL_SMS__BAAN_BAANFINANCEGENERALLEDGER_CHARTOFACCOUNTS') }} h 
+            ON b.PURCHASELEDGERACCOUNTNUMBER = h.LEDGERACCOUNT
+            LEFT OUTER JOIN {{ ref('BRONZE__TEA_INTEL_SMS__BAAN_BAANCOMMONITEMBASEDATA_ITEMCOSTINGDATA') }} j             /* Item Costing Data */
+                                          ON b.ITEM = j.ITEM
+            INNER JOIN {{ ref('BRONZE__TEA_INTEL_SMS__BAAN_BAANCOMMONCOMMONDATA_INVOICEFROMBUSINESSPARTNERS') }} l                    /* Invoice From BP */
+                                     ON a.INVOICEFROMBP = l.InvoiceFromBusinessPartner
+            LEFT OUTER JOIN
+            (SELECT DISTINCT PURCHASEORDER,
+                             PURCHASEORDERLINE,
+                             DELIVEREDQUANTITY,
+                             SHIPDATE
+               FROM {{ ref('BRONZE__TEA_INTEL_SMS__BAAN_BAANWAREHOUSINGEDILOGISTICS_USAREGN_TELSHIPPINGADVICEDATA') }}
+              WHERE MESSAGEID IN (  SELECT MAX (MESSAGEID) MESSAGEID
+                                   FROM {{ ref('BRONZE__TEA_INTEL_SMS__BAAN_BAANWAREHOUSINGEDILOGISTICS_USAREGN_TELSHIPPINGADVICEDATA') }} 
+                               GROUP BY PURCHASEORDER, PURCHASEORDERLINE, DELIVEREDQUANTITY)) m
+               /* TEL Shipping Advice */
+               ON     b.PURCHASEORDER = m.PURCHASEORDER
+                  AND b.POSITIONNUMBER = m.PURCHASEORDERLINE
+                  AND b.DELIVEREDQUANTITY = m.DELIVEREDQUANTITY
+            LEFT OUTER JOIN {{ ref('BRONZE__TEA_INTEL_SMS__BAAN_BAANCONSTRAINTPLANNINGRESOURCEPLANNINGDATA_PLANITEMS') }} n                 /*Plan Item Data */
+                                          ON b.ITEM = n.REFERENCETOTCIBD
+      WHERE b.ORDER_LINETYPEID <> 1
+   /* Order Line Status of 1 means it is a header line */
+   ORDER BY b.PURCHASEORDER, b.POSITIONNUMBER, b.SEQUENCENUMBER
+)
+
+,	transform_data as (
+    SELECT
+		'{{ invocation_id }}' AS _AUDIT_LOG_ID,
+		PO_NO,
+		PO_POSITION_NO,
+		PO_SEQUENCE_NO,
+		LINE_TYPE,
+		ORDER_TYPE,
+		ITEM,
+		ITEM_DESCRIPTION,
+		PO_STATISTICS_GROUP,
+		ORDERED_AMOUNT,
+		ORDERED_QTY,
+		DELIVERED_QTY,
+		BACK_ORDER_QTY,
+		INVOICED_QTY,
+		UNIT_OF_MEASURE,
+		COST_PRICE,
+		ITEM_PURCHASE_PRICE,
+		PO_LINE_PRICE,
+		INVOICED_AMT,
+		ORDER_DATE,
+		ORDER_TIME,
+		PLANNED_DELIVERY_DATE,
+		CONFIRMED_DELIVERY_DATE,
+		SUPPLIER_RESPONSE_DATE,
+		CHANGED_DELIVERY_DATE,
+		RECEIPT_DATE,
+		INVOICE_DATE,
+		INVOICE_NUMBER,
+		CONSUMABLE,
+		PLANNER,
+		BUYER,
+		PROJECT,
+		WAREHOUSE,
+		HEADER_WAREHOUSE,
+		CURRENT_ACTIVITY_SESSION,
+		BUYFROM_BPID,
+		SUPPLIER,
+		REFERENCEA,
+		REFERENCEB,
+		PURCHASE_LEDGER_ACCOUNT,
+		PURCHASE_LEDGER_DESCRIPTION,
+		DIMENSION1,
+		DIMENSION2,
+		DIMENSION3,
+		DIMENSION4,
+		COST_COMPONENT,
+		SUPPLIER_GROUP,
+		ACT_FOB_NARITA_DATE,
+		CANCELLED,
+		ORDER_PRIORITY,
+		CURRENCY,
+		CURRENCY_RATE,
+		CURRENT_PLANNED_DELIVERY_DATE,
+		CARRIER,
+		SUPPLIER_ORDER_NO
+    FROM source_data
+)
+,	type_data as 
+(
+    select
+		CAST(_AUDIT_LOG_ID as VARCHAR(128)) as _AUDIT_LOG_ID,
+		cast(PO_NO as VARCHAR(16777216)) as PO_NO,
+		cast(PO_POSITION_NO as NUMBER(38,0)) as PO_POSITION_NO,
+		cast(PO_SEQUENCE_NO as NUMBER(38,0)) as PO_SEQUENCE_NO,
+		cast(LINE_TYPE as VARCHAR(16777216)) as LINE_TYPE,
+		cast(ORDER_TYPE as VARCHAR(16777216)) as ORDER_TYPE,
+		cast(ITEM as VARCHAR(16777216)) as ITEM,
+		cast(ITEM_DESCRIPTION as VARCHAR(16777216)) as ITEM_DESCRIPTION,
+		cast(PO_STATISTICS_GROUP as VARCHAR(16777216)) as PO_STATISTICS_GROUP,
+		cast(ORDERED_AMOUNT as NUMBER(15,2)) as ORDERED_AMOUNT,
+		cast(ORDERED_QTY as NUMBER(15,2)) as ORDERED_QTY,
+		cast(DELIVERED_QTY as NUMBER(15,2)) as DELIVERED_QTY,
+		cast(BACK_ORDER_QTY as NUMBER(15,2)) as BACK_ORDER_QTY,
+		cast(INVOICED_QTY as NUMBER(15,2)) as INVOICED_QTY,
+		cast(UNIT_OF_MEASURE as VARCHAR(16777216)) as UNIT_OF_MEASURE,
+		cast(COST_PRICE as NUMBER(17,2)) as COST_PRICE,
+		cast(ITEM_PURCHASE_PRICE as NUMBER(15,2)) as ITEM_PURCHASE_PRICE,
+		cast(PO_LINE_PRICE as NUMBER(15,2)) as PO_LINE_PRICE,
+		cast(INVOICED_AMT as NUMBER(15,2)) as INVOICED_AMT,
+		cast(ORDER_DATE as TIMESTAMP_NTZ(9)) as ORDER_DATE,
+		cast(ORDER_TIME as TIMESTAMP_NTZ(9)) as ORDER_TIME,
+		cast(PLANNED_DELIVERY_DATE as TIMESTAMP_NTZ(9)) as PLANNED_DELIVERY_DATE,
+		cast(CONFIRMED_DELIVERY_DATE as TIMESTAMP_NTZ(9)) as CONFIRMED_DELIVERY_DATE,
+		cast(SUPPLIER_RESPONSE_DATE as TIMESTAMP_NTZ(9)) as SUPPLIER_RESPONSE_DATE,
+		cast(CHANGED_DELIVERY_DATE as TIMESTAMP_NTZ(9)) as CHANGED_DELIVERY_DATE,
+		cast(RECEIPT_DATE as TIMESTAMP_NTZ(9)) as RECEIPT_DATE,
+		cast(INVOICE_DATE as TIMESTAMP_NTZ(9)) as INVOICE_DATE,
+		cast(INVOICE_NUMBER as VARCHAR(16777216)) as INVOICE_NUMBER,
+		cast(CONSUMABLE as VARCHAR(16777216)) as CONSUMABLE,
+		cast(PLANNER as VARCHAR(16777216)) as PLANNER,
+		cast(BUYER as VARCHAR(16777216)) as BUYER,
+		cast(PROJECT as VARCHAR(16777216)) as PROJECT,
+		cast(WAREHOUSE as VARCHAR(16777216)) as WAREHOUSE,
+		cast(HEADER_WAREHOUSE as VARCHAR(16777216)) as HEADER_WAREHOUSE,
+		cast(CURRENT_ACTIVITY_SESSION as VARCHAR(16777216)) as CURRENT_ACTIVITY_SESSION,
+		cast(BUYFROM_BPID as VARCHAR(16777216)) as BUYFROM_BPID,
+		cast(SUPPLIER as VARCHAR(16777216)) as SUPPLIER,
+		cast(REFERENCEA as VARCHAR(16777216)) as REFERENCEA,
+		cast(REFERENCEB as VARCHAR(16777216)) as REFERENCEB,
+		cast(PURCHASE_LEDGER_ACCOUNT as VARCHAR(16777216)) as PURCHASE_LEDGER_ACCOUNT,
+		cast(PURCHASE_LEDGER_DESCRIPTION as VARCHAR(16777216)) as PURCHASE_LEDGER_DESCRIPTION,
+		cast(DIMENSION1 as VARCHAR(16777216)) as DIMENSION1,
+		cast(DIMENSION2 as VARCHAR(16777216)) as DIMENSION2,
+		cast(DIMENSION3 as VARCHAR(16777216)) as DIMENSION3,
+		cast(DIMENSION4 as VARCHAR(16777216)) as DIMENSION4,
+		cast(COST_COMPONENT as VARCHAR(16777216)) as COST_COMPONENT,
+		cast(SUPPLIER_GROUP as VARCHAR(16777216)) as SUPPLIER_GROUP,
+		cast(ACT_FOB_NARITA_DATE as TIMESTAMP_NTZ(9)) as ACT_FOB_NARITA_DATE,
+		cast(CANCELLED as VARCHAR(16777216)) as CANCELLED,
+		cast(ORDER_PRIORITY as VARCHAR(16777216)) as ORDER_PRIORITY,
+		cast(CURRENCY as VARCHAR(16777216)) as CURRENCY,
+		cast(CURRENCY_RATE as NUMBER(15,2)) as CURRENCY_RATE,
+		cast(CURRENT_PLANNED_DELIVERY_DATE as TIMESTAMP_NTZ(9)) as CURRENT_PLANNED_DELIVERY_DATE,
+		cast(CARRIER as VARCHAR(16777216)) as CARRIER,
+		cast(SUPPLIER_ORDER_NO as VARCHAR(16777216)) as SUPPLIER_ORDER_NO
+    from transform_data
+    )
+select * from type_data

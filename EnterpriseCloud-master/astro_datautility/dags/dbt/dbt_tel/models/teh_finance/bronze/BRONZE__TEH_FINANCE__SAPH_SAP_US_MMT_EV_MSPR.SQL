@@ -1,0 +1,119 @@
+/************
+	Model file generated from gmxDbtTemplateUtility.ipynb 
+	*************/
+
+	
+	{{ config(
+    	  materialized='tel_incremental',
+    	  incremental_strategy='merge',
+    	  alias='SAPH_SAP_US_MMT_EV_MSPR',
+    	  unique_key = ['MATNR',
+    'WERKS',
+    'LGORT',
+    'CHARG',
+    'SOBKZ',
+    'PSPNR'],
+    	  transient=false	
+) }} 
+
+	with source_data as (
+	SELECT
+		JSONFIELD:"MATNR"::STRING AS "MATNR", 
+ 	 	JSONFIELD:"WERKS"::STRING AS "WERKS", 
+ 	 	JSONFIELD:"LGORT"::STRING AS "LGORT", 
+ 	 	COALESCE(JSONFIELD:"CHARG"::STRING, 'null-val') AS "CHARG", 
+ 	 	JSONFIELD:"SOBKZ"::STRING AS "SOBKZ", 
+ 	 	JSONFIELD:"PSPNR"::STRING AS "PSPNR", 
+ 	 	JSONFIELD:"LFGJA"::STRING AS "LFGJA", 
+ 	 	JSONFIELD:"LFMON"::STRING AS "LFMON", 
+ 	 	JSONFIELD:"PRLAB"::STRING AS "PRLAB", 
+ 	 	JSONFIELD:"MEINS"::STRING AS "MEINS", 
+ 	 	JSONFIELD:"PRINS"::STRING AS "PRINS", 
+ 	 	JSONFIELD:"MEINS001"::STRING AS "MEINS001", 
+ 	 	JSONFIELD:"PRSPE"::STRING AS "PRSPE", 
+ 	 	JSONFIELD:"MEINS002"::STRING AS "MEINS002", 
+ 	 	JSONFIELD:"PREIN"::STRING AS "PREIN", 
+ 	 	JSONFIELD:"MEINS003"::STRING AS "MEINS003", 
+ 	 	JSONFIELD:"MEINS004"::STRING AS "MEINS004", 
+ 	 	JSONFIELD:"BUKRS"::STRING AS "BUKRS", 
+ 	 	JSONFIELD:"WAERS"::STRING AS "WAERS", 
+ 	 	JSONFIELD:"ZFPDT"::STRING AS "ZFPDT", 
+ 	 	JSONFIELD:"DELFLAG"::STRING AS "DELFLAG", 
+ 	 	JSONFIELD:"CDCHANGENR"::STRING AS "CDCHANGENR", 
+ 	 	JSONFIELD:"PSL_INSDATE"::STRING AS "PSL_INSDATE", 
+ 	 	JSONFIELD:"PSL_UPDDATE"::STRING AS "PSL_UPDDATE",
+		_FILEDATE,
+		_FILENAME
+	from {{ source('SAPH','SAP_US_MMT_EV_MSPR') }}
+	{% if is_tel_incremental() %}WHERE  _FILENAME > IFNULL((SELECT MAX(_FILENAME) FROM {{ this }}),'1970-01-01'){% endif %}
+        QUALIFY (ROW_NUMBER() OVER (PARTITION BY JSONFIELD:"MATNR"::STRING,JSONFIELD:"WERKS"::STRING,JSONFIELD:"LGORT"::STRING,JSONFIELD:"CHARG"::STRING,JSONFIELD:"SOBKZ"::STRING,JSONFIELD:"PSPNR"::STRING  ORDER BY _FILEDATE DESC )) = 1
+	),
+	
+	transform_data as (
+	SELECT 
+		"MATNR", 
+ 	 	"WERKS", 
+ 	 	"LGORT", 
+ 	 	"CHARG", 
+ 	 	"SOBKZ", 
+ 	 	"PSPNR", 
+ 	 	"LFGJA", 
+ 	 	"LFMON", 
+ 	 	"PRLAB", 
+ 	 	"MEINS", 
+ 	 	"PRINS", 
+ 	 	"MEINS001", 
+ 	 	"PRSPE", 
+ 	 	"MEINS002", 
+ 	 	"PREIN", 
+ 	 	"MEINS003", 
+ 	 	"MEINS004", 
+ 	 	"BUKRS", 
+ 	 	"WAERS", 
+ 	 	"ZFPDT", 
+ 	 	"DELFLAG", 
+ 	 	"CDCHANGENR", 
+ 	 	"PSL_INSDATE", 
+ 	 	"PSL_UPDDATE",
+		_FILEDATE,
+		_FILENAME,
+		'{{ invocation_id }}' AS AUDIT_LOG_ID,
+        SHA2('hash_me') as _ROW_HASH -- Adds column to table on full refresh.
+	from source_data
+	),
+	
+	type_data as (
+	SELECT
+		CAST("MATNR" AS NVARCHAR) AS "MATNR", 
+ 	 	CAST("WERKS" AS NVARCHAR) AS "WERKS", 
+ 	 	CAST("LGORT" AS NVARCHAR) AS "LGORT", 
+ 	 	CAST("CHARG" AS NVARCHAR) AS "CHARG", 
+ 	 	CAST("SOBKZ" AS NVARCHAR) AS "SOBKZ", 
+ 	 	CAST("PSPNR" AS VARCHAR) AS "PSPNR", 
+ 	 	CAST("LFGJA" AS VARCHAR) AS "LFGJA", 
+ 	 	CAST("LFMON" AS VARCHAR) AS "LFMON", 
+ 	 	CAST("PRLAB" AS FLOAT) AS "PRLAB", 
+ 	 	CAST("MEINS" AS NVARCHAR) AS "MEINS", 
+ 	 	CAST("PRINS" AS FLOAT) AS "PRINS", 
+ 	 	CAST("MEINS001" AS NVARCHAR) AS "MEINS001", 
+ 	 	CAST("PRSPE" AS FLOAT) AS "PRSPE", 
+ 	 	CAST("MEINS002" AS NVARCHAR) AS "MEINS002", 
+ 	 	CAST("PREIN" AS FLOAT) AS "PREIN", 
+ 	 	CAST("MEINS003" AS NVARCHAR) AS "MEINS003", 
+ 	 	CAST("MEINS004" AS NVARCHAR) AS "MEINS004", 
+ 	 	CAST("BUKRS" AS NVARCHAR) AS "BUKRS", 
+ 	 	CAST("WAERS" AS NVARCHAR) AS "WAERS", 
+ 	 	CAST("ZFPDT" AS TIMESTAMP) AS "ZFPDT", 
+ 	 	CAST("DELFLAG" AS BOOLEAN) AS "DELFLAG", 
+ 	 	CAST("CDCHANGENR" AS NVARCHAR) AS "CDCHANGENR", 
+ 	 	CAST("PSL_INSDATE" AS TIMESTAMP) AS "PSL_INSDATE", 
+ 	 	CAST("PSL_UPDDATE" AS TIMESTAMP) AS "PSL_UPDDATE",
+		cast(_FILEDATE AS TIMESTAMP_NTZ(9)) AS _FILEDATE,
+		cast(_FILENAME as varchar(128)) as _FILENAME,
+        cast(AUDIT_LOG_ID as varchar(128)) as AUDIT_LOG_ID,
+        cast(_ROW_HASH as varchar(128)) as _ROW_HASH
+	from transform_data
+	)
+
+	select * from type_data
+

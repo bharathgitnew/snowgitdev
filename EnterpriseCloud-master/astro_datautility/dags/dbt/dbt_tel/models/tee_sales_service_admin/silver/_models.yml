@@ -1,0 +1,13 @@
+models:
+- name: SILVER__TEE_SALES_SERVICE_ADMIN__MDM_COMPANY
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEE_SALES_SERVICE_ADMIN__MYSKILLS_COMPANY
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEE_SALES_SERVICE_ADMIN__WORKERCOMPANYLIST
+  tests:
+  - has_data
+  - recently_run

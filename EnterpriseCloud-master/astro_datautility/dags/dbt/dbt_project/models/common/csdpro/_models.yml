@@ -1,0 +1,14 @@
+version: 2
+models:
+- name: COMMON__CSDPRO__INCIDENTS
+  description: Model CSDPRO INCIDENTS file.
+- name: COMMON__CSDPRO__QUESTIONNAIRE
+  description: Model CSDPRO QUESTIONNAIRE file.
+- name: COMMON__CSDPRO__SAFETY_INCIDENTS_SECURE
+  description: Landing table for SAFETY_INCIDENTS_SECURE.
+- name: COMMON__CSDPRO__SAFETY_INVESTIGATION
+  description: Landing table for SAFETY_INVESTIGATION.
+- name: COMMON__CSDPRO__SAFETY_HFACS
+  description: Landing table for SAFETY_HFACS.
+- name: COMMON__CSDPRO__SAFETY_ACTION_ITEMS
+  description: Landing table for SAFETY_ACTION_ITEMS.

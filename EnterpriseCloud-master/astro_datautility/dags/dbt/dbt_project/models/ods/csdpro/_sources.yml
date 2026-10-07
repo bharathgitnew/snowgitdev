@@ -1,0 +1,70 @@
+version: 2
+sources:
+- name: CSDPRO
+  description: Landing Zone - CSDPRO Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: CSDPRO
+  tables:
+  - name: DW_SMBWA
+    identifier: DW_SMBWA
+    description: Landing table for DW_SMBWA file.
+  - name: INCIDENTS
+    identifier: INCIDENTS
+    description: Landing table for INCIDENTS file.
+  - name: BAAN_BP
+    identifier: BAAN_BP
+    description: Landing table for BAAN_BP file.
+  - name: BAAN_FAB
+    identifier: BAAN_FAB
+    description: Landing table for BAAN_FAB file.
+  - name: BU
+    identifier: BU
+    description: Landing table for BU file.
+  - name: INCIDENT_CLASSIFICATION
+    identifier: INCIDENT_CLASSIFICATION
+    description: Landing table for INCIDENT_CLASSIFICATION file.
+  - name: INCIDENT_STATUS
+    identifier: INCIDENT_STATUS
+    description: Landing table for INCIDENT_STATUS file.
+  - name: LOCATION_DESCRIPTION
+    identifier: LOCATION_DESCRIPTION
+    description: Landing table for LOCATION_DESCRIPTION file.
+  - name: LOCATION_TYPE
+    identifier: LOCATION_TYPE
+    description: Landing table for LOCATION_TYPE file.
+  - name: PERSON
+    identifier: PERSON
+    description: Landing table for PERSON file.
+  - name: PERSON_CLASSIFICATION
+    identifier: PERSON_CLASSIFICATION
+    description: Landing table for PERSON_CLASSIFICATION file.
+  - name: PERSON_FUNCTION
+    identifier: PERSON_FUNCTION
+    description: Landing table for PERSON_FUNCTION file.
+  - name: SMBWA_A
+    identifier: SMBWA_A
+    description: Landing table for SMBWA_A file.
+  - name: SMBWA_Q
+    identifier: SMBWA_Q
+    description: Landing table for SMBWA_Q file.
+  - name: STATUS_HISTORY
+    identifier: STATUS_HISTORY
+    description: Landing table for STATUS_HISTORY file.
+  - name: TEL_OFFICE
+    identifier: TEL_OFFICE
+    description: Landing table for TEL_OFFICE file.
+  - name: TEL_SUBSIDIARY
+    identifier: TEL_SUBSIDIARY
+    description: Landing table for TEL_SUBSIDIARY file.
+  - name: SAFETY_INCIDENTS_SECURE
+    identifier: SAFETY_INCIDENTS_SECURE
+    description: Landing table for SAFETY_INCIDENTS_SECURE.
+  - name: SAFETY_INVESTIGATION
+    identifier: SAFETY_INVESTIGATION
+    description: Landing table for SAFETY_INVESTIGATION.
+  - name: SAFETY_HFACS
+    identifier: SAFETY_HFACS
+    description: Landing table for SAFETY_HFACS.
+  - name: SAFETY_ACTION_ITEMS
+    identifier: SAFETY_ACTION_ITEMS
+    description: Landing table for SAFETY_ACTION_ITEMS.

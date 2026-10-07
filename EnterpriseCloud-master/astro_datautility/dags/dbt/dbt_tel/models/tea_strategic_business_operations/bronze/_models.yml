@@ -1,0 +1,529 @@
+models:
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__ACTIVEDIRECTORY_USERLIST
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Timestamp of ingestion job start
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 24
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__BAAN_BAANCOMMONCOMMONDATA_SOLDTOBUSINESSPARTNERS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__BAAN_BAANFINANCEGENERALLEDGER_DIMENSIONDESCRIPTIONS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__BAAN_BAANFINANCEGENERALLEDGER_DIMENSIONS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__BAAN_BAANFINANCEGENERALLEDGER_SIMPLEINTEGRATIONRELATIONSBYELEMENT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__BAAN_BAANSERVICECONFIGURATIONCONTROL_CONFIGURATIONS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__CRM_FILE_ACCOUNT
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Timestamp of ingestion job start
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 24
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__CRM_FILE_BUSINESSUNIT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__CRM_FILE_CNT_CNT_CONTRACTSUMMARY_ACCOUNT_FAB
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__CRM_FILE_CNT_CONTRACTSCOPEMASTER
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__CRM_FILE_CNT_MSDYN_AGREEMENT_MSDYN_CUSTOMERASSET
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__CRM_FILE_COM_PRODUCTLINE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__CRM_FILE_COM_PRODUCTSYSTEMTYPE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__CRM_FILE_COM_TROUBLESHOOTINGDETAILS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__CRM_FILE_GLOBALOPTIONSETMETADATA
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__CRM_FILE_MSDYN_AGREEMENT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__CRM_FILE_MSDYN_CUSTOMERASSET
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Timestamp of ingestion job start
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 24
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__CRM_FILE_MSDYN_PROJECT
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Timestamp of ingestion job start
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 24
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__CRM_FILE_MSDYN_TIMEENTRY
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Timestamp of ingestion job start
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 24
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__CRM_FILE_MSDYN_WORKORDER
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Timestamp of ingestion job start
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 24
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__CRM_FILE_MSDYN_WORKORDERSUBSTATUS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__CRM_FILE_MSDYN_WORKORDERTYPE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__CRM_FILE_OPTIONSETMETADATA
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__CRM_FILE_RESOURCE
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Timestamp of ingestion job start
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 24
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__CRM_FILE_STATUSMETADATA
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__CRM_FILE_SYSTEMUSER
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Timestamp of ingestion job start
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 24
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__CRM_FILE_TEAM
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__CRM_FILE_TEL_COM_SALESORDERHEADER
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Timestamp of ingestion job start
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 24
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__CRM_FILE_TERRITORY
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__CRM_FILE_TRANSACTIONCURRENCY
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__CRM_FILE_WO_TYPEOFWORK
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__FILE_COST_CENTER
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__FILE_CUSTOMER_GROUP_MAPPING
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__FILE_FST_EMPLOYEE_GROUP
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__FILE_PROFIT_CENTER
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__FILE_SERVICE_BUSINESS_UNIT_MAPPING
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__FILE_SERVICE_B_CODE_MAPPING
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__FILE_TASTYPEOFWORK
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__KRONOS_ACTIVITIESTOTAL
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__KRONOS_TIMECARD
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__MDM_COMPANY
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__MDM_EMPLOYEE_ADP_CODE_MAPPING
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__MDM_EMPLOYEE_TYPE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__MDM_FST_KRONOS_WRENCH_TIME_MAPPING
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__MDM_KRONOS_SHIFT_TABLE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__MDM_MANAGER_EMPLOYEE_GROUP
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__MDM_SEGMENTMAPPING
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__MDM_TASTASK
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__MDM_TIMECARDPAYCODE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__MYSKILLS_KSMN_TABLE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__MYSKILLS_WORKDAYEMPLOYEE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__ROSETTA_CONSIGNMENT_TRANSACTION
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__SAPAPI_VBAP_BLANK_PROFIT_CENTER
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__SAPAPI_ZCDV_T_CMTU009_VBAK_HIST
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Timestamp of ingestion job start
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 24
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__SAPAPI_ZCDV_T_CMTU010_VBAP_SECT
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Timestamp of ingestion job start
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 24
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__SAPAPI_ZCDV_T_CMTU011_VBEP_HIST
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__SAPAPI_ZCDV_T_CMTU014_VBRK_HIST
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Timestamp of ingestion job start
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 24
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__SAPAPI_ZCDV_T_CMTU015_VBRP_HIST
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Timestamp of ingestion job start
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 24
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__SAPAPI_ZCDV_T_CMTU017_MARA
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__SAPAPI_ZCDV_T_CMTU020_KNA1
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__SAPAPI_ZCDV_T_CMTU021_KNVV
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__SAPAPI_ZCDV_T_CMTU023_TVAKT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__SAPAPI_ZCDV_T_CMTU026_MARC
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__SAPAPI_ZCDV_T_CMTU027_EKKO
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__SAPAPI_ZCDV_T_CMTU028_EKPO
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__SAPAPI_ZCDV_T_CMTU040_PRPS
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Timestamp of ingestion job start
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 24
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__SAPAPI_ZCDV_T_CMTU046_COBK
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__SAPAPI_ZCDV_T_CMTU053_BUT000
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__SAPAPI_ZCDV_T_CMTU061_LFA1
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__SAPAPI_ZCDV_T_CMTU069_VBKD
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__SAPAPI_ZCDV_T_CMTU088_AFPO
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__SAPAPI_ZCDV_T_CMTU090_AUFK
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__SAPAPI_ZCDV_T_CMTU098_LFB1
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__SAPAPI_ZCDV_T_CMTU100_LFM1
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__SAPAPI_ZCDV_T_CMTU119_AFKO
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__SAPAPI_ZCDV_T_CMTU191_FPLA
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__SAPAPI_ZCDV_T_CMTU192_FPLT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__SAPAPI_ZCDV_T_CMTU201_BUT0ID
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Timestamp of ingestion job start
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__SAPAPI_ZCDV_T_CMTU206_LFBW
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__SAPAPI_ZCDV_T_CMTU210_CDHDR
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__SAPAPI_ZCDV_T_CMTU219_AFRU
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__SAPH_PARTS_EXPORTIMPORT_CONTROL
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__SAPH_SAP_US_SDT_EV_VBKD
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__SHAREPOINT_CUSTOMER_SITE_SERVICE_MANAGER_MAPPING
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__SHAREPOINT_ORACLE_DEPARTMENT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__SHAREPOINT_ORACLE_REGION
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__SHAREPOINT_ORACLE_SEGMENT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__TEACOMMON_DEPARTMENTS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__TEACOMMON_EMPLOYEE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__TEACOMMON_LOCATIONS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__TEACOMMON_PRODUCTLINES
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__WISDOM_MAC_MAIN
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Timestamp of ingestion job start
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 24
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__WISDOM_SAP_SURB
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__WISDOM_TEA_MAC_LIST
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__WISDOM_WISDOM_SURB_PROGRESS
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Timestamp of ingestion job start
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 24
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__WORKDAY_WORKERCOMPANYLIST
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__SAPAPI_ZCDV_T_CMTU010_VBAP_HIST
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Timestamp of ingestion job start
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 24
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__SAPAPI_ZCDV_T_CMTU012_LIKP_HIST
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Timestamp of ingestion job start
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 24
+- name: BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__SAPAPI_ZCDV_T_CMTU013_LIPS
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Timestamp of ingestion job start

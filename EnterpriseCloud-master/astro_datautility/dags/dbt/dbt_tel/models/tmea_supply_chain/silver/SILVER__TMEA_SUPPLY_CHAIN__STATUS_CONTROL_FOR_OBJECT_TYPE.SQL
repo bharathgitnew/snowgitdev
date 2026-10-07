@@ -1,0 +1,46 @@
+{{ config(
+        materialized='tel_incremental',
+        incremental_strategy='merge',
+        alias='STATUS_CONTROL_FOR_OBJECT_TYPE',
+        unique_key = ['OBJECT_CATEGORY',
+    'SYSTEM_STATUS'],
+        transient=false
+) }}
+
+with source_data as (
+    select
+        OBTYP as OBJECT_CATEGORY,
+		ISTAT as SYSTEM_STATUS,
+		INIST as INITIAL_STATUS_FLAG,
+		LINEP as POSITION_OF_THE_STATUS_IN_THE_STATUS_DISPLAY,
+		STATP as STATUS_DISPLAY_PRIORITY_AT_A_PARTICULAR_POSITION,
+		_CAPTUREDATETIME
+    from {{ ref('BRONZE__TMEA_SUPPLY_CHAIN__SAPO_STATUS_CONTROL_FOR_OBJECT_TYPE') }}
+),
+
+transform_data as (
+    select
+		'{{ invocation_id }}' AS _AUDIT_LOG_ID,
+		SHA2('hash_me') as _ROW_HASH,
+		_CAPTUREDATETIME,
+        OBJECT_CATEGORY,
+		SYSTEM_STATUS,
+		INITIAL_STATUS_FLAG,
+		POSITION_OF_THE_STATUS_IN_THE_STATUS_DISPLAY,
+		STATUS_DISPLAY_PRIORITY_AT_A_PARTICULAR_POSITION
+    from source_data
+),
+
+type_data as (
+    select
+		cast(_AUDIT_LOG_ID as varchar(128)) as _AUDIT_LOG_ID,
+		cast(_ROW_HASH as varchar(128)) as _ROW_HASH,
+		cast(_CAPTUREDATETIME as TIMESTAMP_LTZ(9)) as _CAPTUREDATETIME,
+        cast(OBJECT_CATEGORY as VARCHAR) as OBJECT_CATEGORY,
+		cast(SYSTEM_STATUS as VARCHAR) as SYSTEM_STATUS,
+		cast(INITIAL_STATUS_FLAG as VARCHAR) as INITIAL_STATUS_FLAG,
+		cast(POSITION_OF_THE_STATUS_IN_THE_STATUS_DISPLAY as VARCHAR) as POSITION_OF_THE_STATUS_IN_THE_STATUS_DISPLAY,
+		cast(STATUS_DISPLAY_PRIORITY_AT_A_PARTICULAR_POSITION as VARCHAR) as STATUS_DISPLAY_PRIORITY_AT_A_PARTICULAR_POSITION
+    from transform_data
+)
+select * from type_data

@@ -1,0 +1,448 @@
+version: 2
+sources:
+- name: SAP_ORACLE_LIVE
+  description: Landing Zone - SAP_ORACLE_LIVE Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: SAP_ORACLE_LIVE
+  tables:
+  - name: A004
+    identifier: A004
+    description: Landing table for A004 file.
+  - name: A005
+    identifier: A005
+    description: Landing table for A005 file.
+  - name: MSKA
+    identifier: MSKA
+    description: Landing table for MSKA file.
+  - name: MSKU
+    identifier: MSKU
+    description: Landing table for MSKU file.
+  - name: MSLB
+    identifier: MSLB
+    description: Landing table for MSLB file.
+  - name: EQUI
+    identifier: EQUI
+    description: Landing table for EQUI file.
+  - name: BGMKOBJ
+    identifier: BGMKOBJ
+    description: Landing table for BGMKOBJ file.
+  - name: OBJK
+    identifier: OBJK
+    description: Landing table for OBJK file.
+  - name: LAGP
+    identifier: LAGP
+    description: Landing table for LAGP file.
+  - name: EINE
+    identifier: EINE
+    description: Landing table for EINE file.
+  - name: S032
+    identifier: S032
+    description: Landing table for S032 file.
+  - name: AEOI
+    identifier: AEOI
+    description: Landing table for AEOI file.
+  - name: AFKO
+    identifier: AFKO
+    description: Landing table for AFKO file.
+  - name: AFPO
+    identifier: AFPO
+    description: Landing table for AFPO file.
+  - name: AFRU
+    identifier: AFRU
+    description: Landing table for AFRU file.
+  - name: AFVC
+    identifier: AFVC
+    description: Landing table for AFVC file.
+  - name: AFVV
+    identifier: AFVV
+    description: Landing table for AFVV file.
+  - name: CRHD
+    identifier: CRHD
+    description: Landing table for CRHD file.
+  - name: EBAN
+    identifier: EBAN
+    description: Landing table for EBAN file.
+  - name: MSSA
+    identifier: MSSA
+    description: Landing table for MSSA file.
+  - name: PA0001
+    identifier: PA0001
+    description: Landing table for PA0001 file.
+  - name: PLAF
+    identifier: PLAF
+    description: Landing table for PLAF file.
+  - name: QALS
+    identifier: QALS
+    description: Landing table for QALS file.
+  - name: TJ02
+    identifier: TJ02
+    description: Landing table for TJ02 file.
+  - name: TJ02T
+    identifier: TJ02T
+    description: Landing table for TJ02T file.
+  - name: AUFK
+    identifier: AUFK
+    description: Landing table for AUFK file.
+  - name: T320
+    identifier: T320
+    description: Landing table for T320 file.
+  - name: EKES
+    identifier: EKES
+    description: Landing table for EKES file.
+  - name: CEPC
+    identifier: CEPC
+    description: Landing table for CEPC file.
+  - name: CEPCT
+    identifier: CEPCT
+    description: Landing table for CEPCT file.
+  - name: EKET
+    identifier: EKET
+    description: Landing table for EKET file.
+  - name: EKKO
+    identifier: EKKO
+    description: Landing table for EKKO file.
+  - name: EKPO
+    identifier: EKPO
+    description: Landing table for EKPO file.
+  - name: EMBK
+    identifier: EMBK
+    description: Landing table for EMBK file.
+  - name: KNA1
+    identifier: KNA1
+    description: Landing table for KNA1 file.
+  - name: KONV
+    identifier: KONV
+    description: Landing table for KONV file.
+  - name: LFA1
+    identifier: LFA1
+    description: Landing table for LFA1 file.
+  - name: LIKP
+    identifier: LIKP
+    description: Landing table for LIKP file.
+  - name: LINV
+    identifier: LINV
+    description: Landing table for LINV file.
+  - name: LIPS
+    identifier: LIPS
+    description: Landing table for LIPS file.
+  - name: LQUA
+    identifier: LQUA
+    description: Landing table for LQUA file.
+  - name: MAEX
+    identifier: MAEX
+    description: Landing table for MAEX file.
+  - name: MAKT
+    identifier: MAKT
+    description: Landing table for MAKT file.
+  - name: MARA
+    identifier: MARA
+    description: Landing table for MARA file.
+  - name: QAVE
+    identifier: QAVE
+    description: Landing table for QAVE file.
+  - name: SKAT
+    identifier: SKAT
+    description: Landing table for SKAT file.
+  - name: T001W
+    identifier: T001W
+    description: Landing table for T001W file.
+  - name: T024
+    identifier: T024
+    description: Landing table for T024 file.
+  - name: T301T
+    identifier: T301T
+    description: Landing table for T301T file.
+  - name: TVROT
+    identifier: TVROT
+    description: Landing table for TVROT file.
+  - name: VBAK
+    identifier: VBAK
+    description: Landing table for VBAK file.
+  - name: VBAP
+    identifier: VBAP
+    description: Landing table for VBAP file.
+  - name: VBEP
+    identifier: VBEP
+    description: Landing table for VBEP file.
+  - name: VBKD
+    identifier: VBKD
+    description: Landing table for VBKD file.
+  - name: VBRK
+    identifier: VBRK
+    description: Landing table for VBRK file.
+  - name: VBRP
+    identifier: VBRP
+    description: Landing table for VBRP file.
+  - name: QPGT
+    identifier: QPGT
+    description: Landing table for QPGT file.
+  - name: QPCT
+    identifier: QPCT
+    description: Landing table for QPCT file.
+  - name: T356_T
+    identifier: T356_T
+    description: Landing table for T356_T file.
+  - name: QMEL
+    identifier: QMEL
+    description: Landing table for QMEL file.
+  - name: QMFE
+    identifier: QMFE
+    description: Landing table for QMFE file.
+  - name: EORD
+    identifier: EORD
+    description: Landing table for EORD file.
+  - name: MAPL
+    identifier: MAPL
+    description: Landing table for MAPL file.
+  - name: T024D
+    identifier: T024D
+    description: Landing table for T024D file.
+  - name: T023T
+    identifier: T023T
+    description: Landing table for T023T file.
+  - name: T024F
+    identifier: T024F
+    description: Landing table for T024F file.
+  - name: VBUK
+    identifier: VBUK
+    description: Landing table for VBUK file.
+  - name: T606X
+    identifier: T606X
+    description: Landing table for T606X file.
+  - name: T606Y
+    identifier: T606Y
+    description: Landing table for T606Y file.
+  - name: T606Z
+    identifier: T606Z
+    description: Landing table for T606Z file.
+  - name: TJ04
+    identifier: TJ04
+    description: Landing table for TJ04 file.
+  - name: ZMMTFACTDAYS
+    identifier: ZMMTFACTDAYS
+    description: Landing table for ZMMTFACTDAYS file.
+  - name: EINA
+    identifier: EINA
+    description: Landing table for EINA file.
+  - name: TVAPT
+    identifier: TVAPT
+    description: Landing table for TVAPT file.
+  - name: SETNODE
+    identifier: SETNODE
+    description: Landing table for SETNODE file.
+  - name: SETLEAF
+    identifier: SETLEAF
+    description: Landing table for SETLEAF file.
+  - name: QMUR
+    identifier: QMUR
+    description: Landing table for QMUR file.
+  - name: TVAGT
+    identifier: TVAGT
+    description: Landing table for TVAGT file.
+  - name: CSKS
+    identifier: CSKS
+    description: Landing table for CSKS file.
+  - name: CSKT
+    identifier: CSKT
+    description: Landing table for CSKT file.
+  - name: MLGN
+    identifier: MLGN
+    description: Landing table for MLGN file.
+  - name: SETHEADERT
+    identifier: SETHEADERT
+    description: Landing table for SETHEADERT file.
+  - name: QMSM
+    identifier: QMSM
+    description: Landing table for QMSM file.
+  - name: STKO
+    identifier: STKO
+    description: Landing table for STKO file.
+  - name: MAST
+    identifier: MAST
+    description: Landing table for MAST file.
+  - name: PBED
+    identifier: PBED
+    description: Landing table for PBED file.
+  - name: PBIM
+    identifier: PBIM
+    description: Landing table for PBIM file.
+  - name: T503T
+    identifier: T503T
+    description: Landing table for T503T file.
+  - name: T501T
+    identifier: T501T
+    description: Landing table for T501T file.
+  - name: T430T
+    identifier: T430T
+    description: Landing table for T430T file.
+  - name: CATSDEL
+    identifier: CATSDEL
+    description: Landing table for CATSDEL file.
+  - name: T500P
+    identifier: T500P
+    description: Landing table for T500P file.
+  - name: T528T
+    identifier: T528T
+    description: Landing table for T528T file.
+  - name: T529T
+    identifier: T529T
+    description: Landing table for T529T file.
+  - name: PLPO
+    identifier: PLPO
+    description: Landing table for PLPO file.
+  - name: ZVBEX
+    identifier: ZVBEX
+    description: Landing table for ZVBEX file.
+  - name: T457T
+    identifier: T457T
+    description: Landing table for T457T file.
+  - name: T163F
+    identifier: T163F
+    description: Landing table for T163F file.
+  - name: MVKE
+    identifier: MVKE
+    description: Landing table for MVKE file.
+  - name: EBEW
+    identifier: EBEW
+    description: Landing table for EBEW file.
+  - name: T030
+    identifier: T030
+    description: Landing table for T030 file.
+  - name: ANLA
+    identifier: ANLA
+    description: Landing table for ANLA file.
+  - name: ANLB
+    identifier: ANLB
+    description: Landing table for ANLB file.
+  - name: ANLC
+    identifier: ANLC
+    description: Landing table for ANLC file.
+  - name: ANLH
+    identifier: ANLH
+    description: Landing table for ANLH file.
+  - name: PLAS
+    identifier: PLAS
+    description: Landing table for PLAS file.
+  - name: ZPRICE_CALC
+    identifier: ZPRICE_CALC
+    description: Landing table for ZPRICE_CALC file.
+  - name: MARD
+    identifier: MARD
+    description: Landing table for MARD file.
+  - name: MDKP
+    identifier: MDKP
+    description: Landing table for MDKP file.
+  - name: MDTB
+    identifier: MDTB
+    description: Landing table for MDTB file.
+  - name: EKBE
+    identifier: EKBE
+    description: Landing table for EKBE file.
+  - name: MARC
+    identifier: MARC
+    description: Landing table for MARC file.
+  - name: MKPF
+    identifier: MKPF
+    description: Landing table for MKPF file.
+  - name: VBEX
+    identifier: VBEX
+    description: Landing table for VBEX file.
+  - name: VBFA
+    identifier: VBFA
+    description: Landing table for VBFA file.
+  - name: VBPA
+    identifier: VBPA
+    description: Landing table for VBPA file.
+  - name: LTAK
+    identifier: LTAK
+    description: Landing table for LTAK file.
+  - name: JSTO
+    identifier: JSTO
+    description: Landing table for JSTO file.
+  - name: ZSHORT6_DATAWHSE
+    identifier: ZSHORT6_DATAWHSE
+    description: Landing table for ZSHORT6_DATAWHSE file.
+  - name: BKPF
+    identifier: BKPF
+    description: Landing table for BKPF file.
+  - name: COBK
+    identifier: COBK
+    description: Landing table for COBK file.
+  - name: CE10010
+    identifier: CE10010
+    description: Landing table for CE10010 file.
+  - name: STPO
+    identifier: STPO
+    description: Landing table for STPO file.
+  - name: CATSDB
+    identifier: CATSDB
+    description: Landing table for CATSDB file.
+  - name: STAS
+    identifier: STAS
+    description: Landing table for STAS file.
+  - name: ZSHORT7_DATAWHSE
+    identifier: ZSHORT7_DATAWHSE
+    description: Landing table for ZSHORT7_DATAWHSE file.
+  - name: PA0000
+    identifier: PA0000
+    description: Landing table for PA0000 file.
+  - name: ZSTXH_READTXT
+    identifier: ZSTXH_READTXT
+    description: Landing table for ZSTXH_READTXT file.
+  - name: ZMM_MET_RESULTS
+    identifier: ZMM_MET_RESULTS
+    description: Landing table for ZMM_MET_RESULTS file.
+  - name: MSEG
+    identifier: MSEG
+    description: Landing table for MSEG file.
+  - name: JEST
+    identifier: JEST
+    description: Landing table for JEST file.
+  - name: LTAP
+    identifier: LTAP
+    description: Landing table for LTAP file.
+  - name: COEP
+    identifier: COEP
+    description: Landing table for COEP file.
+  - name: COSS
+    identifier: COSS
+    description: Landing table for COSS file.
+  - name: KEKO
+    identifier: KEKO
+    description: Landing table for KEKO file.
+  - name: KEPH
+    identifier: KEPH
+    description: Landing table for KEPH file.
+  - name: CKIS
+    identifier: CKIS
+    description: Landing table for CKIS file.
+  - name: BSEG
+    identifier: BSEG
+    description: Landing table for BSEG file.
+  - name: COSP
+    identifier: COSP
+    description: Landing table for COSP file.
+  - name: KONP
+    identifier: KONP
+    description: Landing table for KONP file.
+  - name: MBEW
+    identifier: MBEW
+    description: Landing table for MBEW file.
+  - name: T003T
+    identifier: T003T
+    description: Landing table for T003T file.
+  - name: RESB
+    identifier: RESB
+    description: Landing table for RESB file.
+  - name: SKA1
+    identifier: SKA1
+    description: Landing table for SKA1 from SAP
+  - name: GLT0
+    identifier: GLT0
+    description: Landing table for GLT0 from SAP
+  - name: CE40010
+    identifier: CE40010
+    description: Landing table for CE40010 from SAP
+  - name: COVP
+    identifier: COVP
+    description: Landing table for COVP from SAP

@@ -1,0 +1,9 @@
+models:
+- name: SILVER__TEH_PRODUCT_SUPPORT__SIRFIS_TOOL_INSTALLATION_BASE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_PRODUCT_SUPPORT__SIRFIS_TOOL_INSTALLATION_SCHEDULE_HISTORY
+  tests:
+  - has_data
+  - recently_run

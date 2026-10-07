@@ -1,0 +1,16 @@
+import os
+from snowchange.snowchange import snowchange
+
+SNOWFLAKE_ACCOUNT = 'telus'
+SNOWFLAKE_REGION = 'global.privatelink'
+SNOWFLAKE_USER = os.environ.get("snowflake_user")
+SNOWFLAKE_PWD = os.environ.get("snowflake_secret")
+SNOWFLAKE_ROLE = 'SYSADMIN_QA'
+SNOWFLAKE_WAREHOUSE = 'LOAD_WH'
+CHANGE_HISTORY_TABLE = 'ADMIN.CONTROL.CHANGE_HISTORY_QA'
+SNOWFLAKE_FOLDER = 'C:\\Source\\Repos\\EnterpriseCloud\\snow'
+CONFIG_DATABASE = 'C:\\Source\\Repos\\EnterpriseCloud\\Configuration\\database.json'
+SNOWFLAKE_ENVIRONMENT = 'QA'
+BUILD_NUMBER = '9999'
+
+snowchange( SNOWFLAKE_FOLDER, SNOWFLAKE_ACCOUNT , SNOWFLAKE_REGION , SNOWFLAKE_USER, SNOWFLAKE_ROLE , SNOWFLAKE_WAREHOUSE, CHANGE_HISTORY_TABLE, CONFIG_DATABASE, SNOWFLAKE_ENVIRONMENT, BUILD_NUMBER, True, True)

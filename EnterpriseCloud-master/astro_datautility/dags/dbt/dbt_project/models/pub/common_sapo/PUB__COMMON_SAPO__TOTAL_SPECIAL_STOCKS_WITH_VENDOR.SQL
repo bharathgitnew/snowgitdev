@@ -1,0 +1,32 @@
+{{ config(
+        materialized='view',
+         alias='TOTAL_SPECIAL_STOCKS_WITH_VENDOR',
+         transient=false
+) }}
+
+with source_data as (
+    select
+        CLIENT,
+		MATERIAL_NUMBER,
+		PLANT,
+		SPECIAL_STOCK_INDICATOR,
+		ACCOUNT_NUMBER_OF_VENDOR_OR_CREDITOR,
+		FISCAL_YEAR_OF_CURRENT_PERIOD,
+		CURRENT_PERIOD_POSTING_PERIOD,
+		VALUATED_UNRESTRICTED_USE_STOCK,
+		STOCK_IN_QUALITY_INSPECTION,
+		TOTAL_STOCK_OF_ALL_RESTRICTED_BATCHES,
+		CREATED_ON,
+		VENDOR_STOCK_VALUATION_INDICATOR,
+		STOCK_IN_TRANSFER_FOR_SUBCONTRACTING_PLANT_TO_PLANT,
+		_CAPTUREDATETIME
+    from {{ ref('COMMON__SAPO__TOTAL_SPECIAL_STOCKS_WITH_VENDOR') }}
+),
+
+transform_data as (
+    select
+        *
+    from source_data
+)
+    
+select * from transform_data

@@ -1,0 +1,118 @@
+{{ config(
+    	materialized='incremental',
+    	incremental_strategy='insert_overwrite',
+    	alias='DW_SMBWA',
+    	transient=false
+) }}
+
+with source_data as (
+SELECT
+        JSONFIELD:"Answer"::STRING AS "ANSWER",
+        JSONFIELD:"BU Code"::STRING AS "BU_CODE",
+        JSONFIELD:"Comment"::STRING AS "COMMENT",
+        JSONFIELD:"Customer"::STRING AS "CUSTOMER",
+        JSONFIELD:"Customer ID"::STRING AS "CUSTOMER_ID",
+        JSONFIELD:"FAB"::STRING AS "FAB",
+        JSONFIELD:"FAB ID"::STRING AS "FAB_ID",
+        JSONFIELD:"Good Catch"::STRING AS "GOOD_CATCH",
+        JSONFIELD:"Incident Address"::STRING AS "INCIDENT_ADDRESS",
+        JSONFIELD:"Incident Classification"::STRING AS "INCIDENT_CLASSIFICATION",
+        JSONFIELD:"Incident Report Datetime"::STRING AS "INCIDENT_REPORT_DATETIME",
+        JSONFIELD:"Incident Status"::STRING AS "INCIDENT_STATUS",
+        JSONFIELD:"Location Description"::STRING AS "LOCATION_DESCRIPTION",
+        JSONFIELD:"Location Type"::STRING AS "LOCATION_TYPE",
+        JSONFIELD:"Other Location Type"::STRING AS "OTHER_LOCATION_TYPE",
+        JSONFIELD:"Person Classification"::STRING AS "PERSON_CLASSIFICATION",
+        JSONFIELD:"Person Function"::STRING AS "PERSON_FUNCTION",
+        JSONFIELD:"Person Subsidiary"::STRING AS "PERSON_SUBSIDIARY",
+        JSONFIELD:"QMBWW Audited"::STRING AS "QMBWW_AUDITED",
+        JSONFIELD:"QMBWW Title"::STRING AS "QMBWW_TITLE",
+        JSONFIELD:"Question"::STRING AS "QUESTION",
+        JSONFIELD:"Question Number"::STRING AS "QUESTION_NUMBER",
+        JSONFIELD:"Regional Office"::STRING AS "REGIONAL_OFFICE",
+        JSONFIELD:"Report Number"::STRING AS "REPORT_NUMBER",
+        JSONFIELD:"Submitter"::STRING AS "SUBMITTER",
+        JSONFIELD:"Submitter Email"::STRING AS "SUBMITTER_EMAIL",
+        JSONFIELD:"Submitter EmployeeID"::STRING AS "SUBMITTER_EMPLOYEEID",
+        JSONFIELD:"Supervisor EmailAddress"::STRING AS "SUPERVISOR_EMAILADDRESS",
+        JSONFIELD:"Supervisor Name"::STRING AS "SUPERVISOR_NAME",
+        JSONFIELD:"TEL Subsidiary"::STRING AS "TEL_SUBSIDIARY"
+	FROM {{ source('CSDPRO','DW_SMBWA') }}
+	WHERE _FILEDATE = (SELECT MAX(_FILEDATE) FROM {{ source('CSDPRO','DW_SMBWA') }})
+),
+
+transform_data as (
+SELECT
+        '{{ invocation_id }}' AS _AUDIT_LOG_ID,
+        SHA2('hash_me') AS _ROW_HASH,
+        "ANSWER",
+        "BU_CODE",
+        "COMMENT",
+        "CUSTOMER",
+        "CUSTOMER_ID",
+        "FAB",
+        "FAB_ID",
+        "GOOD_CATCH",
+        "INCIDENT_ADDRESS",
+        "INCIDENT_CLASSIFICATION",
+        "INCIDENT_REPORT_DATETIME",
+        "INCIDENT_STATUS",
+        "LOCATION_DESCRIPTION",
+        "LOCATION_TYPE",
+        "OTHER_LOCATION_TYPE",
+        "PERSON_CLASSIFICATION",
+        "PERSON_FUNCTION",
+        "PERSON_SUBSIDIARY",
+        "QMBWW_AUDITED",
+        "QMBWW_TITLE",
+        "QUESTION",
+        "QUESTION_NUMBER",
+        "REGIONAL_OFFICE",
+        "REPORT_NUMBER",
+        "SUBMITTER",
+        "SUBMITTER_EMAIL",
+        "SUBMITTER_EMPLOYEEID",
+        "SUPERVISOR_EMAILADDRESS",
+        "SUPERVISOR_NAME",
+        "TEL_SUBSIDIARY"
+	FROM source_data
+),
+
+type_data as (
+	SELECT
+        CAST(_AUDIT_LOG_ID AS VARCHAR(128)) AS _AUDIT_LOG_ID,
+        CAST(_ROW_HASH AS VARCHAR(128)) AS _ROW_HASH,
+        ANSWER,
+        BU_CODE,
+        COMMENT,
+        CUSTOMER,
+        CUSTOMER_ID,
+        FAB,
+        FAB_ID,
+        GOOD_CATCH,
+        INCIDENT_ADDRESS,
+        INCIDENT_CLASSIFICATION,
+        CAST(INCIDENT_REPORT_DATETIME AS DATE) AS INCIDENT_REPORT_DATETIME,
+        INCIDENT_STATUS,
+        LOCATION_DESCRIPTION,
+        LOCATION_TYPE,
+        OTHER_LOCATION_TYPE,
+        PERSON_CLASSIFICATION,
+        PERSON_FUNCTION,
+        PERSON_SUBSIDIARY,
+        QMBWW_AUDITED,
+        QMBWW_TITLE,
+        QUESTION,
+        QUESTION_NUMBER,
+        REGIONAL_OFFICE,
+        REPORT_NUMBER,
+        SUBMITTER,
+        SUBMITTER_EMAIL,
+        SUBMITTER_EMPLOYEEID,
+        SUPERVISOR_EMAILADDRESS,
+        SUPERVISOR_NAME,
+        TEL_SUBSIDIARY
+	FROM transform_data
+)
+
+SELECT * FROM type_data

@@ -1,0 +1,73 @@
+use role <<SYSADMIN>>;
+
+use schema <<LZ>>.SAP_ORACLE_LIVE;
+
+create or replace table A004 (
+    MANDT VARCHAR(6),
+    KAPPL VARCHAR(4),
+    KSCHL VARCHAR(8),
+    VKORG VARCHAR(8),
+    VTWEG VARCHAR(4),
+    KUNNR VARCHAR(20),
+    MATNR VARCHAR(36),
+    DATBI VARCHAR(16),
+    DATAB VARCHAR(16),
+    KNUMH VARCHAR(20),
+    _CAPTUREDATETIME TIMESTAMP_LTZ(9),
+    _FILENAME VARCHAR(16777216),
+    _FILEDATE VARCHAR(16777216),
+    _UPLOADDATE VARCHAR(16777216)
+);
+
+create or replace table A005 (
+    MANDT VARCHAR(6),
+    KAPPL VARCHAR(4),
+    KSCHL VARCHAR(8),
+    VKORG VARCHAR(8),
+    VTWEG VARCHAR(4),
+    KUNNR VARCHAR(20),
+    MATNR VARCHAR(36),
+    DATBI VARCHAR(16),
+    DATAB VARCHAR(16),
+    KNUMH VARCHAR(20),
+    _CAPTUREDATETIME TIMESTAMP_LTZ(9),
+    _FILENAME VARCHAR(16777216),
+    _FILEDATE VARCHAR(16777216),
+    _UPLOADDATE VARCHAR(16777216)
+);
+
+
+use role <<PLATFORM_TEAM>>;
+
+use schema <<BRONZE>>.TEH_INTERNATIONAL_TRADE;
+
+create or replace TABLE SAPO_CONDITIONS_FOR_CUSTOMER_MATERIAL (
+    _AUDIT_LOG_ID VARCHAR(128),
+    _ROW_HASH VARCHAR(128),
+    _CAPTUREDATETIME TIMESTAMP_LTZ(9),
+    MANDT VARCHAR(6) COMMENT 'Client',
+    KAPPL VARCHAR(4) COMMENT 'Application',
+    KSCHL VARCHAR(8) COMMENT 'Condition Type',
+    VKORG VARCHAR(8) COMMENT 'Sales Organization',
+    VTWEG VARCHAR(4) COMMENT 'Distribution Channel',
+    KUNNR VARCHAR(20) COMMENT 'Customer Number',
+    MATNR VARCHAR(36) COMMENT 'Material Number',
+    DATBI VARCHAR(16) COMMENT 'Validity end date of the condition record',
+    DATAB VARCHAR(16) COMMENT 'Validity start date of the condition record',
+    KNUMH VARCHAR(20) COMMENT 'Condition record number'
+);
+
+create or replace TABLE SAPO_CONDITIONS_FOR_MATERIAL (
+    _AUDIT_LOG_ID VARCHAR(128),
+    _ROW_HASH VARCHAR(128),
+    _CAPTUREDATETIME TIMESTAMP_LTZ(9),
+    MANDT VARCHAR(6) COMMENT 'Client',
+    KAPPL VARCHAR(4) COMMENT 'Application',
+    KSCHL VARCHAR(8) COMMENT 'Condition Type',
+    VKORG VARCHAR(8) COMMENT 'Sales Organization',
+    VTWEG VARCHAR(4) COMMENT 'Distribution Channel',
+    MATNR VARCHAR(36) COMMENT 'Material Number',
+    DATBI VARCHAR(16) COMMENT 'Validity end date of the condition record',
+    DATAB VARCHAR(16) COMMENT 'Validity start date of the condition record',
+    KNUMH VARCHAR(20) COMMENT 'Condition record number'
+);

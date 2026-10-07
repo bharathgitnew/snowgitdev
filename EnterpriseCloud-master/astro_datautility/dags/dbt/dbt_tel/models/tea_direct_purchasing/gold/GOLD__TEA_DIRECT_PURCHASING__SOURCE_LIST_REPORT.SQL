@@ -1,0 +1,119 @@
+{{ config(
+        alias = 'SOURCE_LIST_REPORT',
+        materialized='tel_incremental',
+        incremental_strategy = 'insert_overwrite',
+        transient = false
+) }}
+
+with vendor_details as(
+    select distinct
+        LFA1_ACCOUNT_NUMBER_OF_VENDOR_OR_CREDITOR,
+        LFA1_NAME_1_NAME1
+    from {{ ref('SILVER__TEA_DIRECT_PURCHASING__BUSINESS_PARTNERS_GENERAL_DATA') }}
+)
+
+,source_data as (
+    select
+        purchase_source.MATERIAL_NUMBER,
+        purchase_source.VENDORS_ACCOUNT_NUMBER ,
+        vendor_details.LFA1_NAME_1_NAME1 AS VENDOR_NAME,
+        purchase_source.INDICATOR_FIXED_SUPPLIER,
+        purchase_source.PLANT,
+        purchase_source.NUMBER_OF_SOURCE_LIST_RECORD,
+        purchase_source.DATE_ON_WHICH_THE_RECORD_WAS_CREATED,
+        purchase_source.NAME_OF_PERSON_WHO_CREATED_THE_OBJECT,
+        purchase_source.SOURCE_LIST_RECORD_VALID_FROM,
+        purchase_source.SOURCE_LIST_RECORD_VALID_TO,
+        purchase_source.AGREEMENT_NUMBER,
+        purchase_source.AGREEMENT_ITEM,
+        purchase_source.FIXED_OUTLINE_PURCHASE_AGREEMENT_ITEM,
+        purchase_source.PLANT_FROM_WHICH_MATERIAL_IS_PROCURED,
+        purchase_source.FIXED_ISSUING_PLANT_IN_CASE_OF_STOCK_TRANSPORT_ORDER,
+        purchase_source.MATERIAL_NUMBER_CORRESPONDING_TO_MANUFACTURER_PART_NUMBER,
+        purchase_source.BLOCKED_SOURCE_OF_SUPPLY,
+        purchase_source.PURCHASING_ORGANIZATION,
+        purchase_source.PURCHASING_DOCUMENT_CATEGORY,
+        purchase_source.CATEGORY_OF_SOURCE_LIST_RECORD,
+        purchase_source.SOURCE_LIST_USAGE_IN_MATERIALS_PLANNING,
+        purchase_source.PURCHASE_ORDER_UNIT_OF_MEASURE,
+        purchase_source.LOGICAL_SYSTEM,
+        purchase_source.SPECIAL_STOCK_INDICATOR,
+        purchase_source.CENTRAL_CONTRACT,
+        purchase_source.CENTRAL_CONTRACT_ITEM_NUMBER,
+        purchase_source.DATA_ELEMENT_FOR_SOURCE_LIST_EXTENSIBILITY,
+        purchase_source.UTC_TIME_STAMP
+    from {{ ref('SILVER__TEA_DIRECT_PURCHASING__PURCHASING_SOURCE_LIST') }} purchase_source 
+    left join vendor_details on vendor_details.LFA1_ACCOUNT_NUMBER_OF_VENDOR_OR_CREDITOR = purchase_source.VENDORS_ACCOUNT_NUMBER 
+),
+
+transform_data as (
+    select 
+        '{{ invocation_id }}' AS _AUDIT_LOG_ID,
+        SHA2('hash_me') AS _ROW_HASH, -- Adds column to table on full refresh.
+        MATERIAL_NUMBER,
+        VENDORS_ACCOUNT_NUMBER,
+        VENDOR_NAME,
+        INDICATOR_FIXED_SUPPLIER,
+        PLANT,
+        NUMBER_OF_SOURCE_LIST_RECORD,
+        DATE_ON_WHICH_THE_RECORD_WAS_CREATED,
+        NAME_OF_PERSON_WHO_CREATED_THE_OBJECT,
+        SOURCE_LIST_RECORD_VALID_FROM,
+        SOURCE_LIST_RECORD_VALID_TO,
+        AGREEMENT_NUMBER,
+        AGREEMENT_ITEM,
+        FIXED_OUTLINE_PURCHASE_AGREEMENT_ITEM,
+        PLANT_FROM_WHICH_MATERIAL_IS_PROCURED,
+        FIXED_ISSUING_PLANT_IN_CASE_OF_STOCK_TRANSPORT_ORDER,
+        MATERIAL_NUMBER_CORRESPONDING_TO_MANUFACTURER_PART_NUMBER,
+        BLOCKED_SOURCE_OF_SUPPLY,
+        PURCHASING_ORGANIZATION,
+        PURCHASING_DOCUMENT_CATEGORY,
+        CATEGORY_OF_SOURCE_LIST_RECORD,
+        SOURCE_LIST_USAGE_IN_MATERIALS_PLANNING,
+        PURCHASE_ORDER_UNIT_OF_MEASURE,
+        LOGICAL_SYSTEM,
+        SPECIAL_STOCK_INDICATOR,
+        CENTRAL_CONTRACT,
+        CENTRAL_CONTRACT_ITEM_NUMBER,
+        DATA_ELEMENT_FOR_SOURCE_LIST_EXTENSIBILITY,
+        UTC_TIME_STAMP
+    from source_data
+),
+
+type_data as (
+    select 
+        cast(_AUDIT_LOG_ID as VARCHAR(128)) as _AUDIT_LOG_ID,
+        cast(_ROW_HASH as VARCHAR(128)) as _ROW_HASH,
+        MATERIAL_NUMBER,
+        VENDORS_ACCOUNT_NUMBER,
+        VENDOR_NAME,
+        INDICATOR_FIXED_SUPPLIER,
+        PLANT,
+        NUMBER_OF_SOURCE_LIST_RECORD,
+        DATE_ON_WHICH_THE_RECORD_WAS_CREATED,
+        NAME_OF_PERSON_WHO_CREATED_THE_OBJECT,
+        SOURCE_LIST_RECORD_VALID_FROM,
+        SOURCE_LIST_RECORD_VALID_TO,
+        AGREEMENT_NUMBER,
+        AGREEMENT_ITEM,
+        FIXED_OUTLINE_PURCHASE_AGREEMENT_ITEM,
+        PLANT_FROM_WHICH_MATERIAL_IS_PROCURED,
+        FIXED_ISSUING_PLANT_IN_CASE_OF_STOCK_TRANSPORT_ORDER,
+        MATERIAL_NUMBER_CORRESPONDING_TO_MANUFACTURER_PART_NUMBER,
+        BLOCKED_SOURCE_OF_SUPPLY,
+        PURCHASING_ORGANIZATION,
+        PURCHASING_DOCUMENT_CATEGORY,
+        CATEGORY_OF_SOURCE_LIST_RECORD,
+        SOURCE_LIST_USAGE_IN_MATERIALS_PLANNING,
+        PURCHASE_ORDER_UNIT_OF_MEASURE,
+        LOGICAL_SYSTEM,
+        SPECIAL_STOCK_INDICATOR,
+        CENTRAL_CONTRACT,
+        CENTRAL_CONTRACT_ITEM_NUMBER,
+        DATA_ELEMENT_FOR_SOURCE_LIST_EXTENSIBILITY,
+        cast(UTC_TIME_STAMP as TIMESTAMP(9)) as UTC_TIME_STAMP
+    from transform_data
+)
+
+select * from type_data

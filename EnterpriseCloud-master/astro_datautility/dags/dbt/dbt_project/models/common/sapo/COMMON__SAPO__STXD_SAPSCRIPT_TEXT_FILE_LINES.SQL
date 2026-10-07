@@ -1,0 +1,63 @@
+{{ config(
+        materialized='incremental',
+        incremental_strategy='merge',
+        alias='STXD_SAPSCRIPT_TEXT_FILE_LINES',
+        unique_key = ['CLIENT',
+    'CHAR02_DATA_ELEMENT_FOR_SYST',
+    'TEXTS_APPLICATION_OBJECT',
+    'NAME',
+    'TEXT_ID',
+    'LANGUAGE_KEY',
+    'BIN1_DATA_ELEMENT_FOR_SYST'],
+        transient=false
+) }}
+
+with source_data as (
+    select
+        MANDT as CLIENT,
+		RELID as CHAR02_DATA_ELEMENT_FOR_SYST,
+		TDOBJECT as TEXTS_APPLICATION_OBJECT,
+		TDNAME as NAME,
+		TDID as TEXT_ID,
+		TDSPRAS as LANGUAGE_KEY,
+		SRTF2 as BIN1_DATA_ELEMENT_FOR_SYST,
+		CLUSTR as BIN2_DATA_ELEMENT_FOR_SYST,
+		CLUSTD as SAPSCRIPT_LONG_RAW_FIELD_FOR_TABLE_STXL,
+		_CAPTUREDATETIME
+    from {{ ref('ODS__SAPO__STXD_SAPSCRIPT_TEXT_FILE_LINES') }}
+),
+
+transform_data as (
+    select
+        CLIENT,
+		CHAR02_DATA_ELEMENT_FOR_SYST,
+		TEXTS_APPLICATION_OBJECT,
+		NAME,
+		TEXT_ID,
+		LANGUAGE_KEY,
+		BIN1_DATA_ELEMENT_FOR_SYST,
+		BIN2_DATA_ELEMENT_FOR_SYST,
+		SAPSCRIPT_LONG_RAW_FIELD_FOR_TABLE_STXL,
+		_CAPTUREDATETIME,
+		'{{ invocation_id }}' AS AUDIT_LOG_ID,
+		SHA2('hash_me') as _ROW_HASH
+    from source_data
+),
+
+type_data as (
+    select
+        cast(CLIENT as VARCHAR) as CLIENT,
+		cast(CHAR02_DATA_ELEMENT_FOR_SYST as VARCHAR) as CHAR02_DATA_ELEMENT_FOR_SYST,
+		cast(TEXTS_APPLICATION_OBJECT as VARCHAR) as TEXTS_APPLICATION_OBJECT,
+		cast(NAME as VARCHAR) as NAME,
+		cast(TEXT_ID as VARCHAR) as TEXT_ID,
+		cast(LANGUAGE_KEY as VARCHAR) as LANGUAGE_KEY,
+		cast(BIN1_DATA_ELEMENT_FOR_SYST as NUMBER(38,10)) as BIN1_DATA_ELEMENT_FOR_SYST,
+		cast(BIN2_DATA_ELEMENT_FOR_SYST as NUMBER(38,10)) as BIN2_DATA_ELEMENT_FOR_SYST,
+		cast(SAPSCRIPT_LONG_RAW_FIELD_FOR_TABLE_STXL as VARCHAR) as SAPSCRIPT_LONG_RAW_FIELD_FOR_TABLE_STXL,
+		cast(_CAPTUREDATETIME as TIMESTAMP_LTZ(9)) as _CAPTUREDATETIME,
+		cast(AUDIT_LOG_ID as varchar(128)) as AUDIT_LOG_ID,
+		cast(_ROW_HASH as varchar(128)) as _ROW_HASH
+    from transform_data
+)
+select * from type_data

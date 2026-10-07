@@ -1,0 +1,116 @@
+{
+    "CARMA": {
+        "DataSet1": {
+            "schema": "dbo",
+            "table": "post_consume_part_return",
+            "Incremental": "NULL",
+            "sftablename": "POST_CONSUME_PART_RETURN",
+            "filter": ""
+        },
+        "DataSet2": {
+            "schema": "dbo",
+            "table": "core_return_reason_type",
+            "Incremental": "NULL",
+            "sftablename": "CORE_RETURN_REASON_TYPE",
+            "filter": ""
+        },
+        "DataSet3": {
+            "schema": "dbo",
+            "table": "return_reason_type",
+            "Incremental": "NULL",
+            "sftablename": "RETURN_REASON_TYPE",
+            "filter": ""
+        },
+        "DataSet4": {
+            "schema": "dbo",
+            "table": "rma",
+            "Incremental": "NULL",
+            "sftablename": "RMA",
+            "filter": ""
+        },
+        "DataSet5": {
+            "schema": "dbo",
+            "table": "ncdr_type",
+            "Incremental": "NULL",
+            "sftablename": "NCDR_TYPE",
+            "filter": ""
+        },
+        "DataSet6": {
+            "schema": "dbo",
+            "table": "order_type",
+            "Incremental": "NULL",
+            "sftablename": "ORDER_TYPE",
+            "filter": ""
+        },
+        "DataSet7": {
+            "schema": "dbo",
+            "table": "part_scrap_disp_type",
+            "Incremental": "NULL",
+            "sftablename": "PART_SCRAP_DISP_TYPE",
+            "filter": ""
+        },
+        "DataSet8": {
+            "schema": "dbo",
+            "table": "disposition_type",
+            "Incremental": "NULL",
+            "sftablename": "DISPOSITION_TYPE",
+            "filter": ""
+        },
+        "DataSet9": {
+            "schema": "dbo",
+            "table": "dmg_liability_disp_type",
+            "Incremental": "NULL",
+            "sftablename": "DMG_LIABILITY_DISP_TYPE",
+            "filter": ""
+        },
+        "DataSet10": {
+            "schema": "dbo",
+            "table": "process_sales",
+            "Incremental": "NULL",
+            "sftablename": "PROCESS_SALES",
+            "filter": ""
+        },
+        "DataSet11": {
+            "schema": "dbo",
+            "table": "receive_request",
+            "Incremental": "NULL",
+            "sftablename": "RECEIVE_REQUEST",
+            "filter": ""
+        },
+        "DataSet12": {
+            "schema": "dbo",
+            "table": "request_sales",
+            "Incremental": "NULL",
+            "sftablename": "REQUEST_SALES",
+            "filter": ""
+        },
+        "DataSet13": {
+            "schema": "dbo",
+            "table": "rma_contact",
+            "Incremental": "NULL",
+            "sftablename": "RMA_CONTACT",
+            "filter": ""
+        },
+        "DataSet14": {
+            "schema": "dbo",
+            "table": "request_service",
+            "Incremental": "NULL",
+            "sftablename": "REQUEST_SERVICE",
+            "filter": ""
+        },
+        "DataSet15": {
+            "schema": "dbo",
+            "table": "cso",
+            "Incremental": "NULL",
+            "sftablename": "CSO",
+            "filter": ""
+        },
+        "DataSet16": {
+            "schema": "dbo",
+            "table": "cso_line_item",
+            "Incremental": "NULL",
+            "sftablename": "CSO_LINE_ITEM",
+            "filter": ""
+        }
+    }
+}

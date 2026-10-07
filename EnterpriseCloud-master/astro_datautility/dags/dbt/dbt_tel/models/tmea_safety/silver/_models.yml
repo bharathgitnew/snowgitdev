@@ -1,0 +1,21 @@
+models:
+- name: SILVER__TMEA_SAFETY__ACCIDENTREPORTSFORUS_NOLOCK
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SAFETY__ACCIDENTWORKFLOWPROGRESSFORUS_NOLOCK
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SAFETY__TIRSACCIDENT
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SAFETY__ENVIRONMENTAL_KPI
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SAFETY__MANAGEMENT_KPI_GOALS
+  tests:
+  - has_data
+  - recently_run

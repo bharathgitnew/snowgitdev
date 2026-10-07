@@ -1,0 +1,13 @@
+{{ config(
+        materialized='view',
+         alias='UNIVERSAL_INTERCOMPANY_PARTS',
+         transient=false
+) }}
+
+with SOURCE_DATA AS (
+    SELECT 
+        * EXCLUDE (_AUDIT_LOG_ID,_ROW_HASH)
+    FROM {{ ref('COMMON__SAPH__UNIVERSAL_INTERCOMPANY_PARTS_FIN01') }}
+)
+
+SELECT * FROM SOURCE_DATA

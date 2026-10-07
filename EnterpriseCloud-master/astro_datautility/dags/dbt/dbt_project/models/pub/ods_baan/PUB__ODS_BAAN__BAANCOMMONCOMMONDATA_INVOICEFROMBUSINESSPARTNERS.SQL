@@ -1,0 +1,58 @@
+/************
+Model file generated from dbtGeneratePubViews: 03.10.2022.08.13.56"
+*************/
+
+{{ config(
+      materialized='view',
+      alias='BAANCOMMONCOMMONDATA_INVOICEFROMBUSINESSPARTNERS',
+      transient=false
+) }}
+
+with source_data as (
+    SELECT
+        _CAPTUREDATETIME,
+        _COMPANYID,
+        ADDRESSCODE,
+        BLOCKINGCODEFORPURCHASEINVOICES,
+        BPREPORTGROUP,
+        BUSINESSPARTNERSIGNAL,
+        BUSINESSPARTNERSTATUSDESCRIPTION,
+        BUSINESSPARTNERSTATUSID,
+        BUSINESSPARTNERTYPE,
+        CALENDARCODE,
+        CONTACTCODE,
+        CREDITLIMIT,
+        CURRENCY,
+        DATELASTCREDITREVIEW,
+        DEPARTMENT,
+        ENDDATE,
+        EXCHANGERATETYPE,
+        FINANCIALSUPPLIERGROUP,
+        INVOICEFROMBUSINESSPARTNER,
+        LANGUAGE,
+        LATEPAYMENTSURCHARGE,
+        PAYMENTMETHOD,
+        PAYTOBUSINESSPARTNER,
+        RETURNLATEPAYMENTSURCHARGE,
+        RETURNPAYMENTMETHOD,
+        RETURNTERMSOFPAYMENT,
+        SEARCHKEY,
+        STARTDATE,
+        STATEMENTMETHOD,
+        SUBCONTRACTINGDESCRIPTION,
+        SUBCONTRACTINGID,
+        TAXDESCRIPTION,
+        TAXID,
+        TERMSOFPAYMENT,
+        TEXT,
+        VENDORRATINGDESCRIPTION,
+        VENDORRATINGID
+    from {{ ref('ODS__BAAN__BAANCOMMONCOMMONDATA_INVOICEFROMBUSINESSPARTNERS') }}
+),
+
+transform_data AS
+(
+    select * from source_data
+)
+
+    select * from transform_data

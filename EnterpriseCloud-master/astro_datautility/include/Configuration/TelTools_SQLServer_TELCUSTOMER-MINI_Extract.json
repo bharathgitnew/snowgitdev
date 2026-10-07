@@ -1,0 +1,25 @@
+{
+    "TELCUSTOMER-MINI": {
+        "DataSet1": {
+            "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+            "table": "cdi_visit",
+            "Incremental": "CreatedOn",
+            "sftablename": "CDI_VISIT",
+            "filter": ""
+        },
+        "DataSet2": {
+            "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+            "table": "cdi_pageview",
+            "Incremental": "CreatedOn",
+            "sftablename": "CDI_PAGEVIEW",
+            "filter": ""
+        },
+        "DataSet3": {
+            "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+            "table": "SHIPPING_ADVICE",
+            "Incremental": "NULL",
+            "sftablename": "SHIPPING_ADVICE",
+            "filter": ""
+        }
+    }
+}

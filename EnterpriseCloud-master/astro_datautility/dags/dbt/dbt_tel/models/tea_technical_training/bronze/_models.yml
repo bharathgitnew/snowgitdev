@@ -1,0 +1,73 @@
+models:
+- name: BRONZE__TEA_TECHNICAL_TRAINING__ACTIVEDIRECTORY_USERLIST
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Check the _FILEDATE column in the BRONZE_DEV.TEA_TECHNICAL_TRAINING.ACTIVEDIRECTORY_USERLIST
+      table to ensure it falls within the last 24-hour interval.
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 24
+- name: BRONZE__TEA_TECHNICAL_TRAINING__FILE_FST_EMPLOYEE_GROUP
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_TECHNICAL_TRAINING__FILE_SERVICE_BUSINESS_UNIT_MAPPING
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_TECHNICAL_TRAINING__MDM_COMPANY
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_TECHNICAL_TRAINING__MDM_EMPLOYEE_TYPE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_TECHNICAL_TRAINING__MDM_MANAGER_EMPLOYEE_GROUP
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_TECHNICAL_TRAINING__MYSKILLS_KSMN_TABLE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_TECHNICAL_TRAINING__MYSKILLS_WORKDAYEMPLOYEE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_TECHNICAL_TRAINING__SHAREPOINT_ORACLE_DEPARTMENT
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Check the _FILEDATE column in the BRONZE_DEV.TEA_TECHNICAL_TRAINING.SHAREPOINT_ORACLE_DEPARTMENT
+      table to ensure it falls within the last 24-hour interval.
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 24
+- name: BRONZE__TEA_TECHNICAL_TRAINING__TEACOMMON_DEPARTMENTS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_TECHNICAL_TRAINING__TEACOMMON_EMPLOYEE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_TECHNICAL_TRAINING__TEACOMMON_LOCATIONS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_TECHNICAL_TRAINING__TEACOMMON_PRODUCTLINES
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_TECHNICAL_TRAINING__WORKDAY_WORKERCOMPANYLIST
+  tests:
+  - has_data
+  - recently_run

@@ -1,0 +1,65 @@
+models:
+  - name: GOLD__TEH_INTERNATIONAL_TRADE__SHIPMENT_HISTORY_REPORT
+    description:
+      Shipment History Report. Unique by DATA_SOURCE, DELIVERY_NUMBER and DELIVERY_ITEM. Modeled to closely match the SAP t-code ZSHIPHIST.
+      Pulls from two different sources, one being SAP, and the other being SharePoint. SharePoint is used for orders that have not yet been generated
+      in SAP but still need to be reported on. SharePoint source file https://corp4.sharepoint.com/sites/TEH-ITC-Private/TMEA_Export_Shipment_History/Snowflake%20connected%20report/TMEA_Export_Shipment_History_Snowflake_update.xlsx
+    tests:
+      - dbt_expectations.expect_table_row_count_to_be_between:
+          min_value: 1
+    columns:
+      - name: _REFRESHDATE
+        description: Last sql run of the dbt model.
+        tests:
+          - dbt_expectations.expect_row_values_to_have_recent_data:
+              datepart: hours
+              interval: 36
+      - name: DATA_SOURCE
+        description: The source of the data. Either "SAP" or "SharePoint". (Composite key).
+      - name: DELIVERY_NUMBER
+        description: Delivery number. (Composite key).
+      - name: DELIVERY_ITEM
+        description: Delivery item. (Composite key).
+      - name: PRICE_EACH
+        description:
+          Unit price per part. There were issues locating this value in SAP, so a separate SharePoint file (https://corp4.sharepoint.com/sites/TEH-ITC-Private/TMEA_Export_Shipment_History/Snowflake%20connected%20report/TMEA%20Machine%20Export%20Pricing.xlsx)
+          was used as first point of reference. If not found in the SharePoint file, it will then try to use the delivery order amount, then lastly the
+          sales doc condition amount as a last resort.
+      - name: EXT_PRICE
+        description: Extended price. Calculated as PRICE_EACH * DELIVERY_QTY.
+  - name: GOLD__TEH_INTERNATIONAL_TRADE__SHIPPERS_INSTRUCTION_REPORT
+    tests:
+      - has_data
+      - recently_run
+  - name: GOLD__TEH_INTERNATIONAL_TRADE__SHIPPERS_INSTRUCTION_REPORT_HISTORY
+    tests:
+      - has_data
+      - recently_run
+  - name: GOLD__TEH_INTERNATIONAL_TRADE__TMEA_KIT_EXPLOSION_REPORT
+    description:
+      TMEA Kit Explosion Report. Built by joining SHIPMENT_HISTORY_REPORT with BOM_HEIRARCHY by PLANT and ROOT_PART_NUMBER. Unique by DELIVERY_NUMBER, DELIVERY_ITEM, BOM_LINEAGE.
+      Starts with all of the column from SHIPMENT_HISTORY_REPORT on the left side of the report followed by all of the columns from BOM_HEIRARCHY on the right.
+    tests:
+      - dbt_expectations.expect_table_row_count_to_be_between:
+          min_value: 1
+    columns:
+      - name: _REFRESHDATE
+        description: Last sql run of the dbt model.
+        tests:
+          - dbt_expectations.expect_row_values_to_have_recent_data:
+              datepart: hours
+              interval: 36
+  - name: GOLD__TEH_INTERNATIONAL_TRADE__TMEA_LICENSE_USAGE
+    description:
+      TMEA License Usage. Built by joining LEGAL_CONTROL_LICENSE_MASTER_HEADER_DATA with TMEA_KIT_EXPLOSION_REPORT by INTERNAL_LICENSE_NUMBER. Unique by INTERNAL_LICENSE_NUMBER, DELIVERY_NUMBER, DELIVERY_ITEM, BOM_LINEAGE.
+      Starts with all of the column from LEGAL_CONTROL_LICENSE_MASTER_HEADER_DATA on the left side of the report followed by all of the columns from LEGAL_CONTROL_LICENSE_MASTER_HEADER_DATA on the right.
+    tests:
+      - dbt_expectations.expect_table_row_count_to_be_between:
+          min_value: 1
+    columns:
+      - name: _REFRESHDATE
+        description: Last sql run of the dbt model.
+        tests:
+          - dbt_expectations.expect_row_values_to_have_recent_data:
+              datepart: hours
+              interval: 36

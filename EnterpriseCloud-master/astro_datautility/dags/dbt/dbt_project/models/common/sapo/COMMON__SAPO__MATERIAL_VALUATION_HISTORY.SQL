@@ -1,0 +1,80 @@
+{{ config(
+        materialized='incremental',
+        incremental_strategy='merge',
+        alias='MATERIAL_VALUATION_HISTORY',
+        unique_key = ['Client',
+    'Material_Number',
+    'Valuation_Area',
+    'Valuation_Type',
+    'Fiscal_Year_of_Current_Period',
+    'Current_period'],
+        transient=false
+) }} 
+
+with source_data as (
+    select
+        MANDT as CLIENT,
+        MATNR as MATERIAL_NUMBER,
+        BWKEY as VALUATION_AREA,
+        BWTAR as VALUATION_TYPE,
+        LFGJA as FISCAL_YEAR_OF_CURRENT_PERIOD,
+        LFMON as CURRENT_PERIOD,
+        LBKUM as TOTAL_VALUATED_STOCK,
+        SALK3 as VALUE_OF_TOTAL_VALUATED_STOCK,
+        VPRSV as PRICE_CONTROL_INDICATOR,
+        VERPR as MOVING_AVERAGE_PRICE_PERIODIC_UNIT_PRICE,
+        STPRS as STANDARD_PRICE,
+        PEINH as PRICE_UNIT,
+        BKLAS as VALUATION_CLASS,
+        SALKV as VALUE_BASED_ON_MOVING_AVERAGE_PRICE,
+        VKSAL as VALUE_OF_TOTAL_VALUATED_STOCK_AT_SALES_PRICE,
+        _CAPTUREDATETIME
+    FROM {{ ref('ODS__SAPO__MATERIAL_VALUATION_HISTORY') }}
+),
+
+transform_data as (
+    select
+        CLIENT,
+        MATERIAL_NUMBER,
+        VALUATION_AREA,
+        VALUATION_TYPE,
+        FISCAL_YEAR_OF_CURRENT_PERIOD,
+        CURRENT_PERIOD,
+        TOTAL_VALUATED_STOCK,
+        VALUE_OF_TOTAL_VALUATED_STOCK,
+        PRICE_CONTROL_INDICATOR,
+        MOVING_AVERAGE_PRICE_PERIODIC_UNIT_PRICE,
+        STANDARD_PRICE,
+        PRICE_UNIT,
+        VALUATION_CLASS,
+        VALUE_BASED_ON_MOVING_AVERAGE_PRICE,
+        VALUE_OF_TOTAL_VALUATED_STOCK_AT_SALES_PRICE,
+        _CAPTUREDATETIME,
+        '{{ invocation_id }}' AS AUDIT_LOG_ID,
+        SHA2('hash_me') as _ROW_HASH
+    from source_data
+),
+
+type_data as (
+    select
+        cast(CLIENT as VARCHAR) as CLIENT,
+        cast(MATERIAL_NUMBER as VARCHAR) as MATERIAL_NUMBER,
+        cast(VALUATION_AREA as VARCHAR) as VALUATION_AREA,
+        cast(VALUATION_TYPE as VARCHAR) as VALUATION_TYPE,
+        cast(FISCAL_YEAR_OF_CURRENT_PERIOD as VARCHAR) as FISCAL_YEAR_OF_CURRENT_PERIOD,
+        cast(CURRENT_PERIOD as VARCHAR) as CURRENT_PERIOD,
+        cast(TOTAL_VALUATED_STOCK as NUMBER(38,10)) as TOTAL_VALUATED_STOCK,
+        cast(VALUE_OF_TOTAL_VALUATED_STOCK as NUMBER(38,10)) as VALUE_OF_TOTAL_VALUATED_STOCK,
+        cast(PRICE_CONTROL_INDICATOR as VARCHAR) as PRICE_CONTROL_INDICATOR,
+        cast(MOVING_AVERAGE_PRICE_PERIODIC_UNIT_PRICE as NUMBER(38,10)) as MOVING_AVERAGE_PRICE_PERIODIC_UNIT_PRICE,
+        cast(STANDARD_PRICE as NUMBER(38,10)) as STANDARD_PRICE,
+        cast(PRICE_UNIT as NUMBER(38,10)) as PRICE_UNIT,
+        cast(VALUATION_CLASS as VARCHAR) as VALUATION_CLASS,
+        cast(VALUE_BASED_ON_MOVING_AVERAGE_PRICE as NUMBER(38,10)) as VALUE_BASED_ON_MOVING_AVERAGE_PRICE,
+        cast(VALUE_OF_TOTAL_VALUATED_STOCK_AT_SALES_PRICE as NUMBER(38,10)) as VALUE_OF_TOTAL_VALUATED_STOCK_AT_SALES_PRICE,
+        cast(_CAPTUREDATETIME as TIMESTAMP_LTZ(9)) as _CAPTUREDATETIME,
+        cast(AUDIT_LOG_ID as varchar(128)) as AUDIT_LOG_ID,
+        cast(_ROW_HASH as varchar(128)) as _ROW_HASH
+    from transform_data
+)
+select * from type_data

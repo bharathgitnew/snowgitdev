@@ -1,0 +1,137 @@
+{
+    "SUPPLIER": {
+        "DataSet1": {
+            "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+            "table": "SUPPL_FACTORY",
+            "Incremental": "NULL",
+            "sftablename": "SUPPL_FACTORY",
+            "filter": ""
+        },
+        "DataSet2": {
+            "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+            "table": "SUPPL_ACTION_DESCR",
+            "Incremental": "NULL",
+            "sftablename": "SUPPL_ACTION_DESCR",
+            "filter": ""
+        },
+        "DataSet3": {
+            "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+            "table": "SUPPL_REASON",
+            "Incremental": "NULL",
+            "sftablename": "SUPPL_REASON",
+            "filter": ""
+        },
+        "DataSet4": {
+            "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+            "table": "SUPPL_CHG_REQUEST_APPROVAL",
+            "Incremental": "NULL",
+            "sftablename": "SUPPL_CHG_REQUEST_APPROVAL",
+            "filter": ""
+        },
+        "DataSet5": {
+            "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+            "table": "SUPPL_USER_INFO",
+            "Incremental": "NULL",
+            "sftablename": "SUPPL_USER_INFO",
+            "filter": ""
+        },
+        "DataSet6": {
+            "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+            "table": "SUPPL_BUSINESS_PARTNER",
+            "Incremental": "NULL",
+            "sftablename": "SUPPL_BUSINESS_PARTNER",
+            "filter": ""
+        },
+        "DataSet7": {
+            "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+            "table": "SUPPL_APPLICABLE_CATEGORY_DESCR",
+            "Incremental": "NULL",
+            "sftablename": "SUPPL_APPLICABLE_CATEGORY_DESCR",
+            "filter": ""
+        },
+        "DataSet8": {
+            "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+            "table": "SUPPL_REASON_DESCR",
+            "Incremental": "NULL",
+            "sftablename": "SUPPL_REASON_DESCR",
+            "filter": ""
+        },
+        "DataSet9": {
+            "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+            "table": "SUPPL_CHG_REQUEST_FACTORY",
+            "Incremental": "NULL",
+            "sftablename": "SUPPL_CHG_REQUEST_FACTORY",
+            "filter": ""
+        },
+        "DataSet10": {
+            "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+            "table": "SUPPL_CHG_REQUEST_PART_INFO",
+            "Incremental": "NULL",
+            "sftablename": "SUPPL_CHG_REQUEST_PART_INFO",
+            "filter": ""
+        },
+        "DataSet11": {
+            "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+            "table": "SUPPL_STATUS_DESCR",
+            "Incremental": "NULL",
+            "sftablename": "SUPPL_STATUS_DESCR",
+            "filter": ""
+        },
+        "DataSet12": {
+            "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+            "table": "SUPPL_CHG_REQUEST_TRACKER",
+            "Incremental": "NULL",
+            "sftablename": "SUPPL_CHG_REQUEST_TRACKER",
+            "filter": ""
+        },
+        "DataSet13": {
+            "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+            "table": "SUPPL_APPLICABLE_CATEGORY",
+            "Incremental": "NULL",
+            "sftablename": "SUPPL_APPLICABLE_CATEGORY",
+            "filter": ""
+        },
+        "DataSet14": {
+            "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+            "table": "SUPPL_CHG_REQUEST_COMMENT",
+            "Incremental": "NULL",
+            "sftablename": "SUPPL_CHG_REQUEST_COMMENT",
+            "filter": ""
+        },
+        "DataSet15": {
+            "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+            "table": "SUPPL_ROLE_DESCR",
+            "Incremental": "NULL",
+            "sftablename": "SUPPL_ROLE_DESCR",
+            "filter": ""
+        },
+        "DataSet16": {
+            "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+            "table": "SUPPL_USER_ROLE",
+            "Incremental": "NULL",
+            "sftablename": "SUPPL_USER_ROLE",
+            "filter": ""
+        },
+        "DataSet17": {
+            "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+            "table": "SUPPL_CHG_REQUEST_ATTACH",
+            "Incremental": "NULL",
+            "sftablename": "SUPPL_CHG_REQUEST_ATTACH",
+            "filter": ""
+        },
+        "DataSet18": {
+            "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+            "table": "SUPPL_CHG_REQUEST_APPROVER",
+            "Incremental": "NULL",
+            "sftablename": "SUPPL_CHG_REQUEST_APPROVER",
+            "filter": ""
+        },
+        "DataSet19": {
+            "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+            "table": "SUPPL_CHANGE_REQUEST",
+            "Incremental": "NULL",
+            "sftablename": "SUPPL_CHANGE_REQUEST",
+            "filter": ""
+        }
+    }
+}

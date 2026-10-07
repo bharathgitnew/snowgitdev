@@ -1,0 +1,102 @@
+{{ config(
+    alias = 'SERVICENOW_CMN_LOCATION',
+    materialized = 'tel_incremental',
+    incremental_strategy = 'merge',
+    unique_key = ['SYS_ID'],
+) }}
+
+with source_data as (
+    select
+        _FILEDATE,
+        JSONFIELD:"sys_id"::VARCHAR(16777216) as SYS_ID,
+        JSONFIELD:"sys_created_on"::string as SYS_CREATED_ON,
+        JSONFIELD:"sys_created_by"::string as SYS_CREATED_BY,
+        JSONFIELD:"sys_updated_on"::string as SYS_UPDATED_ON,
+        JSONFIELD:"sys_updated_by"::string as SYS_UPDATED_BY,
+        JSONFIELD:"sys_mod_count"::string as SYS_MOD_COUNT,        
+        JSONFIELD:"country"::string as COUNTRY,
+        JSONFIELD:"parent"::string as PARENT,
+        JSONFIELD:"cmn_location_type"::string as CMN_LOCATION_TYPE,
+        JSONFIELD:"city"::string as CITY,
+        JSONFIELD:"latitude"::string as LATITUDE,
+        JSONFIELD:"primary_location"::string as PRIMARY_LOCATION,
+        JSONFIELD:"managed_by_group"::string as MANAGED_BY_GROUP,
+        JSONFIELD:"life_cycle_stage_status"::string as LIFE_CYCLE_STAGE_STATUS,
+        JSONFIELD:"stock_room"::string as STOCK_ROOM,
+        JSONFIELD:"street"::string as STREET,
+        JSONFIELD:"contact"::string as CONTACT,
+        JSONFIELD:"phone_territory"::string as PHONE_TERRITORY,
+        JSONFIELD:"company"::string as COMPANY,
+        JSONFIELD:"lat_long_error"::string as LAT_LONG_ERROR,
+        JSONFIELD:"state"::string as STATE,
+        JSONFIELD:"longitude"::string as LONGITUDE,
+        JSONFIELD:"zip"::string as ZIP,
+        JSONFIELD:"duplicate"::string as DUPLICATE,
+        JSONFIELD:"sys_tags"::string as SYS_TAGS,
+        JSONFIELD:"time_zone"::string as TIME_ZONE,
+        JSONFIELD:"cmn_location_source"::string as CMN_LOCATION_SOURCE,
+        JSONFIELD:"full_name"::string as FULL_NAME,
+        JSONFIELD:"fax_phone"::string as FAX_PHONE,
+        JSONFIELD:"phone"::string as PHONE,
+        JSONFIELD:"name"::string as NAME,
+        JSONFIELD:"parent_hp1"::string as PARENT_HP1,
+        JSONFIELD:"life_cycle_stage"::string as LIFE_CYCLE_STAGE,
+        JSONFIELD:"coordinates_retrieved_on"::string as COORDINATES_RETRIEVED_ON,
+    from {{ source('SERVICENOW', 'CMN_LOCATION') }} 
+    where _FILEDATE > ifnull((select max(_FILEDATE) from {{ this }}), '1970-01-01')
+    qualify row_number() over (partition by SYS_ID order by _FILEDATE desc, _UPLOADDATE desc) = 1
+),
+
+transform_data as (
+    select 
+        '{{ invocation_id }}' AS _AUDIT_LOG_ID,
+        SHA2('hash_me') AS _ROW_HASH,
+        current_timestamp()::timestamp_ntz as _REFRESHDATE,
+        *,
+    from source_data
+),
+
+type_data as (
+    select 
+        _AUDIT_LOG_ID,
+        _ROW_HASH,
+        _FILEDATE,
+        _REFRESHDATE,
+        SYS_ID::VARCHAR(16777216) as SYS_ID,
+        convert_timezone('UTC', 'America/Chicago', SYS_CREATED_ON) as SYS_CREATED_ON,
+        SYS_CREATED_BY::VARCHAR(16777216) as SYS_CREATED_BY,
+        convert_timezone('UTC', 'America/Chicago', SYS_UPDATED_ON) as SYS_UPDATED_ON,
+        SYS_UPDATED_BY::VARCHAR(16777216) as SYS_UPDATED_BY,
+        SYS_MOD_COUNT::NUMBER(38,0) as SYS_MOD_COUNT,
+        COUNTRY::VARCHAR(16777216) as COUNTRY,
+        PARENT::VARCHAR(16777216) as PARENT,
+        CMN_LOCATION_TYPE::VARCHAR(16777216) as CMN_LOCATION_TYPE,
+        CITY::VARCHAR(16777216) as CITY,
+        LATITUDE::NUMBER(38,10) as LATITUDE,
+        PRIMARY_LOCATION::VARCHAR(16777216) as PRIMARY_LOCATION,
+        MANAGED_BY_GROUP::VARCHAR(16777216) as MANAGED_BY_GROUP,
+        LIFE_CYCLE_STAGE_STATUS::VARCHAR(16777216) as LIFE_CYCLE_STAGE_STATUS,
+        STOCK_ROOM::BOOLEAN as STOCK_ROOM,
+        STREET::VARCHAR(16777216) as STREET,
+        CONTACT::VARCHAR(16777216) as CONTACT,
+        PHONE_TERRITORY::VARCHAR(16777216) as PHONE_TERRITORY,
+        COMPANY::VARCHAR(16777216) as COMPANY,
+        LAT_LONG_ERROR::VARCHAR(16777216) as LAT_LONG_ERROR,
+        STATE::VARCHAR(16777216) as STATE,
+        LONGITUDE::NUMBER(38,10) as LONGITUDE,
+        ZIP::VARCHAR(16777216) as ZIP,
+        DUPLICATE::BOOLEAN as DUPLICATE,
+        SYS_TAGS::VARCHAR(16777216) as SYS_TAGS,
+        TIME_ZONE::VARCHAR(16777216) as TIME_ZONE,
+        CMN_LOCATION_SOURCE::VARCHAR(16777216) as CMN_LOCATION_SOURCE,
+        FULL_NAME::VARCHAR(16777216) as FULL_NAME,
+        FAX_PHONE::VARCHAR(16777216) as FAX_PHONE,
+        PHONE::VARCHAR(16777216) as PHONE,
+        NAME::VARCHAR(16777216) as NAME,
+        PARENT_HP1::VARCHAR(16777216) as PARENT_HP1,
+        LIFE_CYCLE_STAGE::VARCHAR(16777216) as LIFE_CYCLE_STAGE,
+        convert_timezone('UTC', 'America/Chicago', COORDINATES_RETRIEVED_ON) as COORDINATES_RETRIEVED_ON,
+    from transform_data
+)
+
+select * from type_data

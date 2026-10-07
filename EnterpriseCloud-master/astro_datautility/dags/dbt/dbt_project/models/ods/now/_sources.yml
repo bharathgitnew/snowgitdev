@@ -1,0 +1,34 @@
+version: 2
+sources:
+- name: NOW
+  description: Landing Zone - NOW Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: NOW
+  tables:
+  - name: NCDR_REASON_TYPES
+    identifier: NCDR_REASON_TYPES
+    description: Landing table for NCDR_REASON_TYPES file.
+  - name: NCDR
+    identifier: NCDR
+    description: Landing table for NCDR file.
+  - name: NOW_USER
+    identifier: NOW_USER
+    description: Landing table for NOW_USER file.
+  - name: DEFECTIVE_PORTION_TYPES
+    identifier: DEFECTIVE_PORTION_TYPES
+    description: Landing table for DEFECTIVE_PORTION_TYPES file.
+  - name: NCDR_PARTS
+    identifier: NCDR_PARTS
+    description: Landing table for NCDR_PARTS file.
+  - name: NCDR_PARTS_HISTORY
+    identifier: NCDR_PARTS_HISTORY
+    description: Event log of NCDR parts
+  - name: NOWDATA
+    identifier: NOWDATA
+    description: Landing table for NOWDATA file.
+  - name: SERIAL_NUMBERS
+    identifier: SERIAL_NUMBERS
+    description: Landing table for SERIAL_NUMBERS file.
+  - name: CONTROLTABLE
+    identifier: CONTROLTABLE
+    description: Landing table for CONTROLTABLE.

@@ -1,0 +1,12 @@
+SELECT Set_Default_SQL FROM 
+(SELECT DISTINCT 1, 'ALTER EXTERNAL TABLE IF EXISTS <<LZ_EXT>>.GMX.'||
+REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(TRIM(REGEXP_REPLACE(split_part(split_part(metadata$filename,'/',2),'.',0), '[^a-zA-Z, _]+', ''),'_'),'SAP_US_','SAP_'),'SAP_EU','SAP_'),'__','_'),'SAP_US_','SAP_'),
+        'SAP_EU','SAP_') || ' REFRESH;' AS Set_Default_SQL
+        FROM @<<LZ_EXT>>.GMX.GMX_STG_STG  t 
+UNION
+SELECT 2,'INSERT INTO ADMIN.AUDIT.CONTROLTOTALS' || ' ' || rtrim(LISTAGG(QRY),'UNION ALL ') as Set_Default_SQL
+FROM
+(select 'SELECT ''ENV'' AS ENVRIONMENT,''<<LZ_EXT>>'' AS DATABASENAME , ''GMX'' AS SCHEMANAME,  ''' || TABLE_NAME || ''''|| ' as TableName, ''LZ-GMX'',
+ COUNT(*) AS CNT ' || ', GETDATE() FROM <<LZ_EXT>>.GMX.' || TABLE_NAME || 
+' UNION ALL ' AS QRY from <<LZ_EXT>>.INFORMATION_SCHEMA.EXTERNAL_TABLES where TABLE_SCHEMA = 'GMX')) 
+ORDER BY 1;

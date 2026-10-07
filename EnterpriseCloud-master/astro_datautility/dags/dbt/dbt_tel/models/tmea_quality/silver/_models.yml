@@ -1,0 +1,189 @@
+models:
+- name: SILVER__TMEA_QUALITY__ASSIGNMENT_TASK_LISTS_MATERIALS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_QUALITY__CALCULATION_NEXT_REQUIRMENT_DATE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_QUALITY__CODE_GROUP_TEXTS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_QUALITY__CODE_TEXTS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_QUALITY__DOCUMENT_SEGMENT_MATERIAL
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_QUALITY__ENGINEERING_ACTION_REQUEST
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_QUALITY__GENERAL_MATERIAL_DATA
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_QUALITY__HEADER_DATA_FOR_MRP_DOCUMENT
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_QUALITY__HEADER_MATERIAL_DOCUMENT
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_QUALITY__INDIVIDUAL_OBJECT_STATUS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_QUALITY__INSPECTION_LOT_RECORD
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_QUALITY__INSPECTION_PROCESSING_USAGE_DECISION
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_QUALITY__MATERIAL_DESCRIPTIONS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_QUALITY__MATERIAL_GROUP_DESCRIPTIONS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_QUALITY__MATERIAL_VALUATION
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_QUALITY__MRP_CONTROLLERS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_QUALITY__MRP_TABLE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_QUALITY__PLANT_DATA_FOR_MATERIAL
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_QUALITY__PRIORITY_TEXT
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_QUALITY__PURCHASING_GROUPS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_QUALITY__QUALITY_NOTIFICATION
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_QUALITY__QUALITY_NOTIFICATION_CAUSES
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_QUALITY__QUALITY_NOTIFICATION_ITEMS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_QUALITY__QUALITY_NOTIFICATION_TASKS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_QUALITY__QUANTS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_QUALITY__SCORECARD_SUPPLIER_GOAL_MAPPING
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_QUALITY__SHAREPOINT_SUPPLIER_CORRECTIVE_ACTION_REQUEST
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_QUALITY__STORAGE_LOCATION_DATA_FOR_MATERIAL
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_QUALITY__SUPPLIER_DETAILS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_QUALITY__SUPPL_ACTION_DESCR
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_QUALITY__SUPPL_BUSINESS_PARTNER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_QUALITY__SUPPL_CHANGE_REQUEST
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_QUALITY__SUPPL_CHG_REQUEST_APPROVAL
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_QUALITY__SUPPL_CHG_REQUEST_APPROVER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_QUALITY__SUPPL_CHG_REQUEST_FACTORY
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_QUALITY__SUPPL_CHG_REQUEST_TRACKER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_QUALITY__SUPPL_FACTORY
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_QUALITY__SUPPL_ROLE_DESCR
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_QUALITY__SUPPL_STATUS_DESCR
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_QUALITY__SUPPL_USER_INFO
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_QUALITY__SYSTEM_STATUS_TEXTS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_QUALITY__TRANSFER_ORDER_ITEM
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_QUALITY__VENDOR_MASTER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_QUALITY__WISDOM_MACHINE_DETAILS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_QUALITY__SALES_DOCUMENT_FLOW
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_QUALITY__READTXT
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_QUALITY__SHORTAGE_REPORT_DATA_WAREHOUSE
+  tests:
+  - has_data
+  - recently_run

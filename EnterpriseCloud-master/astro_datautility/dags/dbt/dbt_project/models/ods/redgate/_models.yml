@@ -1,0 +1,12 @@
+version: 2
+models:
+- name: ODS__REDGATE__ALERTCOMMENT
+  description: Model REDGATE AlertComment file.
+- name: ODS__REDGATE__ALERTSEVERITY
+  description: Model REDGATE AlertSeverity file.
+- name: ODS__REDGATE__ALERTTYPE
+  description: Model REDGATE AlertType file.
+- name: ODS__REDGATE__ALERT
+  description: Model REDGATE Alert file.
+- name: ODS__REDGATE__LASTBACKUP
+  description: Model REDGATE LastBackup file.

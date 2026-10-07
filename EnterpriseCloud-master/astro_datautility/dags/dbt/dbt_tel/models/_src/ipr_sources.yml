@@ -1,0 +1,107 @@
+sources:
+- name: IPR
+  description: Landing Zone - For IPR Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: IPR
+  tables:
+  - name: ADDRESS_BAAN
+    identifier: ADDRESS_BAAN
+    description: Landing table for ADDRESS_BAAN from SQLServer [IPR].[dbo].[ADDRESS_BAAN]
+  - name: CATEGORY
+    identifier: CATEGORY
+    description: Landing table for CATEGORY from SQLServer [IPR].[dbo].[CATEGORY]
+  - name: CATEGORY_X_COMPANY
+    identifier: CATEGORY_X_COMPANY
+    description: Landing table for CATEGORY_X_COMPANY from SQLServer [IPR].[dbo].[CATEGORY_X_COMPANY]
+  - name: COMPANY_CODE
+    identifier: COMPANY_CODE
+    description: Landing table for COMPANY_CODE from SQLServer [IPR].[dbo].[COMPANY_CODE]
+  - name: CONTACT
+    identifier: CONTACT
+    description: Landing table for CONTACT from SQLServer [IPR].[dbo].[CONTACT]
+  - name: COST_CENTER_BAAN
+    identifier: COST_CENTER_BAAN
+    description: Landing table for COST_CENTER_BAAN from SQLServer [IPR].[dbo].[COST_CENTER_BAAN]
+  - name: COST_CENTER_TYPE
+    identifier: COST_CENTER_TYPE
+    description: Landing table for COST_CENTER_TYPE from SQLServer [IPR].[dbo].[COST_CENTER_TYPE]
+  - name: COUNTRY
+    identifier: COUNTRY
+    description: Landing table for COUNTRY from SQLServer [IPR].[dbo].[country]
+  - name: DEPT_X_SEGMENT
+    identifier: DEPT_X_SEGMENT
+    description: Landing table for DEPT_X_SEGMENT from SQLServer [IPR].[dbo].[DEPT_X_SEGMENT]
+  - name: DIMENSION
+    identifier: DIMENSION
+    description: Landing table for DIMENSION from SQLServer [IPR].[dbo].[DIMENSION]
+  - name: EMPLOYEES
+    identifier: EMPLOYEES
+    description: Landing table for EMPLOYEES from SQLServer [IPR].[dbo].[EMPLOYEES]
+  - name: IPR_PENDING_APPROVAL
+    identifier: IPR_PENDING_APPROVAL
+    description: Landing table for IPR_PENDING_APPROVAL from SQLServer [IPR].[dbo].[IPR_PENDING_APPROVAL]
+  - name: IPR_STATUS
+    identifier: IPR_STATUS
+    description: Landing table for IPR_STATUS from SQLServer [IPR].[dbo].[IPR_STATUS]
+  - name: MACHINE_STATUS
+    identifier: MACHINE_STATUS
+    description: Landing table for MACHINE_STATUS from SQLServer [IPR].[dbo].[MACHINE_STATUS]
+  - name: NON_US_EMPLOYEE
+    identifier: NON_US_EMPLOYEE
+    description: Landing table for NON_US_EMPLOYEE from SQLServer [IPR].[dbo].[NON_US_EMPLOYEE]
+  - name: ORDER_HEADER
+    identifier: ORDER_HEADER
+    description: Landing table for ORDER_HEADER from SQLServer [IPR].[dbo].[ORDER_HEADER]
+  - name: ORDER_LINES
+    identifier: ORDER_LINES
+    description: Landing table for ORDER_LINES from SQLServer [IPR].[dbo].[ORDER_LINES]
+  - name: REASON
+    identifier: REASON
+    description: Landing table for REASON from SQLServer [IPR].[dbo].[REASON]
+  - name: REASON_X_COMPANY
+    identifier: REASON_X_COMPANY
+    description: Landing table for REASON_X_COMPANY from SQLServer [IPR].[dbo].[REASON_X_COMPANY]
+  - name: ROLE_TYPE
+    identifier: ROLE_TYPE
+    description: Landing table for ROLE_TYPE from SQLServer [IPR].[dbo].[ROLE_TYPE]
+  - name: SHIP_ROUTE_BAAN
+    identifier: SHIP_ROUTE_BAAN
+    description: Landing table for SHIP_ROUTE_BAAN from SQLServer [IPR].[dbo].[SHIP_ROUTE_BAAN]
+  - name: SHIPPING_ROUTE
+    identifier: SHIPPING_ROUTE
+    description: Landing table for SHIPPING_ROUTE from SQLServer [IPR].[dbo].[SHIPPING_ROUTE]
+  - name: SOLD_TO_COMPANY
+    identifier: SOLD_TO_COMPANY
+    description: Landing table for SOLD_TO_COMPANY from SQLServer [IPR].[dbo].[SOLD_TO_COMPANY]
+  - name: STATE
+    identifier: STATE
+    description: Landing table for STATE from SQLServer [IPR].[dbo].[state]
+  - name: URGENCY
+    identifier: URGENCY
+    description: Landing table for URGENCY from SQLServer [IPR].[dbo].[URGENCY]
+  - name: USER_INFO
+    identifier: USER_INFO
+    description: Landing table for USER_INFO from SQLServer [IPR].[dbo].[USER_INFO]
+  - name: USER_ROLE
+    identifier: USER_ROLE
+    description: Landing table for USER_ROLE from SQLServer [IPR].[dbo].[USER_ROLE]
+  - name: WEB_SERVICE_LOG
+    identifier: WEB_SERVICE_LOG
+    description: Landing table for WEB_SERVICE_LOG from SQLServer [IPR].[dbo].[WEB_SERVICE_LOG]
+  - name: WF_APPROVER_GROUP
+    identifier: WF_APPROVER_GROUP
+    description: Landing table for WF_APPROVER_GROUP from SQLServer [IPR].[dbo].[WF_APPROVER_GROUP]
+  - name: WF_GROUP_USERS
+    identifier: WF_GROUP_USERS
+    description: Landing table for WF_GROUP_USERS from SQLServer [IPR].[dbo].[WF_GROUP_USERS]
+  - name: WF_SETTINGS
+    identifier: WF_SETTINGS
+    description: Landing table for WF_SETTINGS from SQLServer [IPR].[dbo].[WF_SETTINGS]
+  - name: WF_STATUS
+    identifier: WF_STATUS
+    description: Landing table for WF_STATUS from SQLServer [IPR].[dbo].[WF_STATUS]
+  - name: WF_STATUS_TYPE
+    identifier: WF_STATUS_TYPE
+    description: Landing table for WF_STATUS_TYPE from SQLServer [IPR].[dbo].[WF_STATUS_TYPE]
+  - name: CONTROLTABLE
+    identifier: CONTROLTABLE

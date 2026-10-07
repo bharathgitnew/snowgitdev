@@ -1,0 +1,82 @@
+{
+    "Kronos-TimecardPunches": {
+        "SNOWFLAKE_SCHEMA_NAME": "KRONOS",
+        "SNOWFLAKE_TABLE_NAME": "TIMECARDPUNCH",
+        "FILE": "172.26.95.44\\F:\\Shares\\Files\\Kronos\\DET_Timecard_Punches_*.csv",
+        "DELIMETER": "|"
+    },
+    "Kronos-Timecard1": {
+        "SNOWFLAKE_SCHEMA_NAME": "KRONOS",
+        "SNOWFLAKE_TABLE_NAME": "TIMECARD",
+        "FILE": "172.26.95.44\\F:\\Shares\\Files\\Kronos\\DET_Timecard_202*.csv",
+        "DELIMETER": "|"
+    },
+    "Kronos-Timecard2": {
+        "SNOWFLAKE_SCHEMA_NAME": "KRONOS",
+        "SNOWFLAKE_TABLE_NAME": "TIMECARD",
+        "FILE": "172.26.95.44\\F:\\Shares\\Files\\Kronos\\DET_Timecard_previous*.csv",
+        "DELIMETER": "|"
+    },
+    "Kronos-Timecard3": {
+        "SNOWFLAKE_SCHEMA_NAME": "KRONOS",
+        "SNOWFLAKE_TABLE_NAME": "TIMECARD",
+        "FILE": "172.26.95.44\\F:\\Shares\\Files\\Kronos\\TEE_TC_Current_DET_Export*.csv",
+        "DELIMETER": "|"
+    },
+    "Kronos-Timecard4": {
+        "SNOWFLAKE_SCHEMA_NAME": "KRONOS",
+        "SNOWFLAKE_TABLE_NAME": "TIMECARD",
+        "FILE": "172.26.95.44\\F:\\Shares\\Files\\Kronos\\TEE_TC_Previous_DET_Export*.csv",
+        "DELIMETER": "|"
+    },
+    "Kronos-TimecardAudit": {
+        "SNOWFLAKE_SCHEMA_NAME": "KRONOS",
+        "SNOWFLAKE_TABLE_NAME": "TIMECARDAUDIT",
+        "FILE": "172.26.95.44\\F:\\Shares\\Files\\Kronos\\DET_timecard_audit_*.csv",
+        "IGNORE_HEADER": true
+    },
+    "Kronos-TimecardTransactions": {
+        "SNOWFLAKE_SCHEMA_NAME": "KRONOS",
+        "SNOWFLAKE_TABLE_NAME": "TIMECARDTRANSACTION",
+        "FILE": "172.26.95.44\\F:\\Shares\\Files\\Kronos\\DET_timecard_Transactions_*.csv"
+    },
+    "Kronos-ActivitiesTotal": {
+        "SNOWFLAKE_SCHEMA_NAME": "KRONOS",
+        "SNOWFLAKE_TABLE_NAME": "ACTIVITIESTOTAL",
+        "FILE": "172.26.95.44\\F:\\Shares\\Files\\Kronos\\*activities_totals_*.csv",
+        "DELIMETER": "|",
+        "IGNORE_HEADER": true
+    },
+    "Kronos-ActualTotal": {
+        "SNOWFLAKE_SCHEMA_NAME": "KRONOS",
+        "SNOWFLAKE_TABLE_NAME": "ACTUALTOTAL",
+        "FILE": "172.26.95.44\\F:\\Shares\\Files\\Kronos\\DET_actual_totals_*.csv"
+
+    },
+    "Kronos-TEA_Recent_Timesheet": {
+        "SNOWFLAKE_SCHEMA_NAME": "KRONOS",
+        "SNOWFLAKE_TABLE_NAME": "TEA_RECENT_TIMESHEET",
+        "FILE": "172.26.95.44\\F:\\Shares\\Files\\Kronos\\TEA_Recent_Timesheet*.csv"
+
+    },
+    "Kronos-COMNTNOTEDTL": {
+        "SNOWFLAKE_SCHEMA_NAME": "KRONOS",
+        "SNOWFLAKE_TABLE_NAME": "COMNTNOTEDTL",
+        "FILE": "172.26.95.44\\F:\\Shares\\Files\\Kronos\\COMNTNOTEDTL*.csv"
+    },
+    "Kronos-TSCOMMENTMM": {
+        "SNOWFLAKE_SCHEMA_NAME": "KRONOS", 
+        "SNOWFLAKE_TABLE_NAME": "TSCOMMENTMM",
+        "FILE": "172.26.95.44\\F:\\Shares\\Files\\Kronos\\TSCOMMENTMM*.csv"
+    },
+    "Kronos-COMMENTS": {
+        "SNOWFLAKE_SCHEMA_NAME": "KRONOS",
+        "SNOWFLAKE_TABLE_NAME": "COMMENTS",
+        "FILE": "172.26.95.44\\F:\\Shares\\Files\\Kronos\\COMMENTS*.csv"
+    },
+    "Kronos-PUNCHCOMMENTMM": {
+        "SNOWFLAKE_SCHEMA_NAME": "KRONOS",
+        "SNOWFLAKE_TABLE_NAME": "PUNCHCOMMENTMM",
+        "FILE": "172.26.95.44\\F:\\Shares\\Files\\Kronos\\PUNCHCOMMENTMM*.csv"
+    }
+}

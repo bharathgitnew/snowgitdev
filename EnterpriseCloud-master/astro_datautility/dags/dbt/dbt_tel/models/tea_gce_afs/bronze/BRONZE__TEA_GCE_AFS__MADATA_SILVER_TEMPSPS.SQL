@@ -1,0 +1,66 @@
+/************
+Model file generated from Python utility
+*************/
+
+{{ config(
+	materialized='tel_incremental',
+	incremental_strategy='insert_overwrite',
+	alias='MADATA_SILVER_TEMPSPS',
+	transient=false
+) }}
+
+with source_data as (
+	SELECT
+		_FILEDATE,
+		_FILENAME,
+		_UPLOADDATE,
+		JSONFIELD:"FAB"::VARCHAR AS FAB,
+		JSONFIELD:"WW"::VARCHAR AS WW,
+		JSONFIELD:"DAY_SHIFT"::VARCHAR AS DAY_SHIFT,
+		JSONFIELD:"ENTITY_STATE"::VARCHAR AS ENTITY_STATE,
+		JSONFIELD:"ENTITY"::VARCHAR AS ENTITY,
+		JSONFIELD:"HOURS_IN_STATE"::FLOAT AS HOURS_IN_STATE,
+		JSONFIELD:"Total_Hours"::FLOAT AS TOTAL_HOURS,
+		JSONFIELD:"% in State"::FLOAT AS IN_STATE
+	FROM {{ source("ADS", "MADATA_SILVER_TEMPSPS") }}
+WHERE
+	_FILEDATE = (SELECT MAX(_FILEDATE) FROM {{ source('ADS', 'MADATA_SILVER_TEMPSPS') }} ) 
+),
+
+transform_data as (
+	SELECT
+		_FILEDATE AS _FILEDATE,
+		_FILENAME AS _FILENAME,
+		_UPLOADDATE AS _UPLOADDATE,
+		'{{ invocation_id }}' AS _AUDIT_LOG_ID,
+		SHA2('hash_me') AS _ROW_HASH,
+		FAB,
+		WW,
+		DAY_SHIFT,
+		ENTITY_STATE,
+		ENTITY,
+		HOURS_IN_STATE,
+		TOTAL_HOURS,
+		IN_STATE
+	FROM source_data
+),
+
+type_data as (
+	SELECT
+		CAST(_FILEDATE AS TIMESTAMP_NTZ(9)) AS _FILEDATE,
+		_FILENAME,
+		_UPLOADDATE,
+		CAST(_AUDIT_LOG_ID AS VARCHAR(128)) AS _AUDIT_LOG_ID,
+		CAST(_ROW_HASH AS VARCHAR(128)) AS _ROW_HASH,
+		FAB,
+		WW,
+		DAY_SHIFT,
+		ENTITY_STATE,
+		ENTITY,
+		CAST(HOURS_IN_STATE AS FLOAT) AS HOURS_IN_STATE,
+		CAST(TOTAL_HOURS AS FLOAT) AS TOTAL_HOURS,
+		CAST(IN_STATE AS FLOAT) AS IN_STATE
+	FROM transform_data
+)
+
+SELECT * FROM type_data

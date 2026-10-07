@@ -1,0 +1,25 @@
+models:
+- name: SILVER__TEH_EHS__ACCIDENTREPORTSFORUS_NOLOCK
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_EHS__ACCIDENTWORKFLOWPROGRESSFORUS_NOLOCK
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_EHS__TRAFFICREPORTSFORUS_NOLOCK
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_EHS__TRAFFICWORKFLOWPROGRESSFORUS_NOLOCK
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_EHS__FAB21_EHS_AUDIT_USER_DETAILS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_EHS__FAB21_EHS_AUDIT_FORM_DETAILS
+  tests:
+  - has_data
+  - recently_run

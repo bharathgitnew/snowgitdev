@@ -1,0 +1,22 @@
+version: 2
+sources:
+- name: PREFECT
+  description: Landing Zone - PREFECT Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: PREFECT
+  tables:
+  - name: FLOW
+    identifier: FLOW
+    description: Landing table for PREFECT FLOW file.
+  - name: FLOW_RUN
+    identifier: FLOW_RUN
+    description: Landing table for PREFECT_FLOW_RUN file.
+  - name: PREFECT_FLOW
+    identifier: PREFECT_FLOW
+    description: Landing table for PREFECT FLOW file.
+  - name: PREFECT_FLOW_RUN
+    identifier: PREFECT_FLOW_RUN
+    description: Landing table for PREFECT_FLOW_RUN file.
+  - name: LOGS
+    identifier: LOGS
+    description: Landing table for PREFECT_FLOW_RUN file.

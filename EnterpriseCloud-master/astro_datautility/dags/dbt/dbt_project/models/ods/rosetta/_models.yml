@@ -1,0 +1,6 @@
+version: 2
+models:
+- name: ODS__ROSETTA__CONSIGNMENT_TRANSACTION
+  description: Landing table for CONSIGNMENT_TRANSACTION file.
+- name: ODS__ROSETTA__CONSIGNMENT_SHIPMENT_RECEIPT
+  description: Landing table for CONSIGNMENT_SHIPMENT_RECEIPT file.

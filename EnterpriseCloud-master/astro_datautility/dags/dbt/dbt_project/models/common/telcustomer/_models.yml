@@ -1,0 +1,8 @@
+version: 2
+models:
+- name: COMMON__TELCUSTOMER__PURCHASE_ORDER_CHANGE_ORDER
+  description: Purchase Order data
+- name: COMMON__TELCUSTOMER__ACTION_REQUEST_FORM_HISTORY
+  description: Action Request Form Data
+- name: COMMON__TELCUSTOMER__QUOTE_REQUEST_FORM_HISTORY
+  description: QUOTE_REQUEST_FORM_HISTORY

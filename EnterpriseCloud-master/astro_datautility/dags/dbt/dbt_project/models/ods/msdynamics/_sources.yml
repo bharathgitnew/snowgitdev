@@ -1,0 +1,43 @@
+version: 2
+sources:
+- name: MSDYNAMICS
+  description: Landing Zone - MSDYNAMICS Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: MSDYNAMICS
+  tables:
+  - name: EMAIL_BLOCKED
+    identifier: EMAIL_BLOCKED
+    description: Landing table for EMAIL_BLOCKED file.
+  - name: EMAIL_CLICKED
+    identifier: EMAIL_CLICKED
+    description: Landing table for EMAIL_CLICKED file.
+  - name: EMAIL_DELIVERED
+    identifier: EMAIL_DELIVERED
+    description: Landing table for EMAIL_DELIVERED file.
+  - name: EMAIL_OPENED
+    identifier: EMAIL_OPENED
+    description: Landing table for EMAIL_OPENED file.
+  - name: EMAIL_SENT
+    identifier: EMAIL_SENT
+    description: Landing table for EMAIL_SENT file.
+  - name: EVENT_CHECKIN
+    identifier: EVENT_CHECKIN
+    description: Landing table for EVENT_CHECKIN file.
+  - name: EVENT_REGISTRATION
+    identifier: EVENT_REGISTRATION
+    description: Landing table for EVENT_REGISTRATION file.
+  - name: EVENT_REGISTRATION_CANCELLED
+    identifier: EVENT_REGISTRATION_CANCELLED
+    description: Landing table for EVENT_REGISTRATION_CANCELLED file.
+  - name: FORM_SUBMITTED
+    identifier: FORM_SUBMITTED
+    description: Landing table for FORM_SUBMITTED file.
+  - name: FORM_VISITED
+    identifier: FORM_VISITED
+    description: Landing table for FORM_VISITED file.
+  - name: WEBSITE_CLICKED
+    identifier: WEBSITE_CLICKED
+    description: Landing table for WEBSITE_CLICKED file.
+  - name: WEBSITE_VISITED
+    identifier: WEBSITE_VISITED
+    description: Landing table for WEBSITE_VISITED file.

@@ -1,0 +1,118 @@
+version: 2
+models:
+- name: PUB__ODS_BAAN_TEE__TTCCOM010200
+  description: Landing table for TTCCOM010200 file.
+- name: PUB__ODS_BAAN_TEE__TTCCOM020200
+  description: Landing table for TTCCOM020200 file.
+- name: PUB__ODS_BAAN_TEE__TTCMCS008200
+  description: Landing table for TTCMCS008200 file.
+- name: PUB__ODS_BAAN_TEE__TTCMCS030200
+  description: Landing table for TTCMCS030200 file.
+- name: PUB__ODS_BAAN_TEE__TTCMCS032200
+  description: Landing table for TTCMCS032200 file.
+- name: PUB__ODS_BAAN_TEE__TTDINV001200
+  description: Landing table for TTDINV001200 file.
+- name: PUB__ODS_BAAN_TEE__TTDPUR040200
+  description: Landing table for TTDPUR040200 file.
+- name: PUB__ODS_BAAN_TEE__TTDPUR041200
+  description: Landing table for TTDPUR041200 file.
+- name: PUB__ODS_BAAN_TEE__TTDPUR045200
+  description: Landing table for TTDPUR045200 file.
+- name: PUB__ODS_BAAN_TEE__TTDRPL100200
+  description: Landing table for TTDRPL100200 file.
+- name: PUB__ODS_BAAN_TEE__TTDSLS040200
+  description: Landing table for TTDSLS040200 file.
+- name: PUB__ODS_BAAN_TEE__TTDSLS041200
+  description: Landing table for TTDSLS041200 file.
+- name: PUB__ODS_BAAN_TEE__TTDSLS045200
+  description: Landing table for TTDSLS045200 file.
+- name: PUB__ODS_BAAN_TEE__TTFACP200200
+  description: Landing table for TTFACP200200 file.
+- name: PUB__ODS_BAAN_TEE__TTFACR200200
+  description: Landing table for TTFACR200200 file.
+- name: PUB__ODS_BAAN_TEE__TTFACR200201
+  description: Landing table for TTFACR200201 file.
+- name: PUB__ODS_BAAN_TEE__TTFACR200202
+  description: Landing table for TTFACR200202 file.
+- name: PUB__ODS_BAAN_TEE__TTFACR200203
+  description: Landing table for TTFACR200203 file.
+- name: PUB__ODS_BAAN_TEE__TTFACR200204
+  description: Landing table for TTFACR200204 file.
+- name: PUB__ODS_BAAN_TEE__TTFACR200205
+  description: Landing table for TTFACR200205 file.
+- name: PUB__ODS_BAAN_TEE__TTFACR200206
+  description: Landing table for TTFACR200206 file.
+- name: PUB__ODS_BAAN_TEE__TTFACR200207
+  description: Landing table for TTFACR200207 file.
+- name: PUB__ODS_BAAN_TEE__TTFACR200208
+  description: Landing table for TTFACR200208 file.
+- name: PUB__ODS_BAAN_TEE__TTFACR200209
+  description: Landing table for TTFACR200209 file.
+- name: PUB__ODS_BAAN_TEE__TTFACR400200
+  description: Landing table for TTFACR400200 file.
+- name: PUB__ODS_BAAN_TEE__TTFACR400201
+  description: Landing table for TTFACR400201 file.
+- name: PUB__ODS_BAAN_TEE__TTFACR400202
+  description: Landing table for TTFACR400202 file.
+- name: PUB__ODS_BAAN_TEE__TTFACR400203
+  description: Landing table for TTFACR400203 file.
+- name: PUB__ODS_BAAN_TEE__TTFACR400204
+  description: Landing table for TTFACR400204 file.
+- name: PUB__ODS_BAAN_TEE__TTFACR400205
+  description: Landing table for TTFACR400205 file.
+- name: PUB__ODS_BAAN_TEE__TTFACR400207
+  description: Landing table for TTFACR400207 file.
+- name: PUB__ODS_BAAN_TEE__TTFACR400208
+  description: Landing table for TTFACR400208 file.
+- name: PUB__ODS_BAAN_TEE__TTFACR400209
+  description: Landing table for TTFACR400209 file.
+- name: PUB__ODS_BAAN_TEE__TTFACR401200
+  description: Landing table for TTFACR401200 file.
+- name: PUB__ODS_BAAN_TEE__TTFACR401201
+  description: Landing table for TTFACR401201 file.
+- name: PUB__ODS_BAAN_TEE__TTFACR401202
+  description: Landing table for TTFACR401202 file.
+- name: PUB__ODS_BAAN_TEE__TTFACR401203
+  description: Landing table for TTFACR401203 file.
+- name: PUB__ODS_BAAN_TEE__TTFACR401204
+  description: Landing table for TTFACR401204 file.
+- name: PUB__ODS_BAAN_TEE__TTFACR401205
+  description: Landing table for TTFACR401205 file.
+- name: PUB__ODS_BAAN_TEE__TTFACR401207
+  description: Landing table for TTFACR401207 file.
+- name: PUB__ODS_BAAN_TEE__TTFACR401208
+  description: Landing table for TTFACR401208 file.
+- name: PUB__ODS_BAAN_TEE__TTFACR401209
+  description: Landing table for TTFACR401209 file.
+- name: PUB__ODS_BAAN_TEE__TTFGLD106200
+  description: Landing table for TTFGLD106200 file.
+- name: PUB__ODS_BAAN_TEE__TTFGLD106201
+  description: Landing table for TTFGLD106201 file.
+- name: PUB__ODS_BAAN_TEE__TTFGLD106202
+  description: Landing table for TTFGLD106202 file.
+- name: PUB__ODS_BAAN_TEE__TTFGLD106203
+  description: Landing table for TTFGLD106203 file.
+- name: PUB__ODS_BAAN_TEE__TTFGLD106204
+  description: Landing table for TTFGLD106204 file.
+- name: PUB__ODS_BAAN_TEE__TTFGLD106205
+  description: Landing table for TTFGLD106205 file.
+- name: PUB__ODS_BAAN_TEE__TTFGLD106206
+  description: Landing table for TTFGLD106206 file.
+- name: PUB__ODS_BAAN_TEE__TTFGLD106207
+  description: Landing table for TTFGLD106207 file.
+- name: PUB__ODS_BAAN_TEE__TTFGLD106208
+  description: Landing table for TTFGLD106208 file.
+- name: PUB__ODS_BAAN_TEE__TTFGLD106209
+  description: Landing table for TTFGLD106209 file.
+- name: PUB__ODS_BAAN_TEE__TTFGLD410200
+  description: Landing table for TTFGLD410200 file.
+- name: PUB__ODS_BAAN_TEE__TTFGLD410208
+  description: Landing table for TTFGLD410208 file.
+- name: PUB__ODS_BAAN_TEE__TTFGLD410209
+  description: Landing table for TTFGLD410209 file.
+- name: PUB__ODS_BAAN_TEE__TTIITM001200
+  description: Landing table for TTIITM001200 file.
+- name: PUB__ODS_BAAN_TEE__TTIPCS020200
+  description: Landing table for TTIPCS020200 file.
+- name: PUB__ODS_BAAN_TEE__TTSSMA102200
+  description: Landing table for TTSSMA102200 file.

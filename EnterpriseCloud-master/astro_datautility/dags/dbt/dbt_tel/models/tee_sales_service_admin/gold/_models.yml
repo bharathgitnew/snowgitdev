@@ -1,0 +1,13 @@
+models:
+- name: GOLD__TEE_SALES_SERVICE_ADMIN__COMPANY
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEE_SALES_SERVICE_ADMIN__EMPLOYEE
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEE_SALES_SERVICE_ADMIN__GLOBAL_EMPLOYEE
+  tests:
+  - has_data
+  - recently_run

@@ -1,0 +1,179 @@
+{
+    "connectors": {
+        "base_url": "https://telsnus.service-now.com",
+        "instance": "telsnus",
+        "user_key": "SERVICE-NOW-API-USER",
+        "password_key": "SERVICE-NOW-API-PASSWORD",
+        "sf_schema": "SERVICENOW"
+    },
+    "resources": {
+        "alm_asset": {
+            "table_name": "alm_asset",
+            "query": "",
+            "fields": "",
+            "sf_table": "ALM_ASSET"
+        },
+        "cab_meeting": {
+            "table_name": "cab_meeting",
+            "query": "",
+            "fields": "",
+            "sf_table": "CAB_MEETING"
+        },
+        "change_request": {
+            "table_name": "change_request",
+            "query": "",
+            "fields": "",
+            "sf_table": "CHANGE_REQUEST"
+        },
+        "cmdb_ci": {
+            "table_name": "cmdb_ci",
+            "query": "",
+            "fields": "",
+            "sf_table": "CMDB_CI"
+        },
+        "cmn_department": {
+            "table_name": "cmn_department",
+            "query": "",
+            "fields": "",
+            "sf_table": "CMN_DEPARTMENT"
+        },
+        "cmn_location": {
+            "table_name": "cmn_location",
+            "query": "",
+            "fields": "",
+            "sf_table": "CMN_LOCATION"
+        },
+        "contract_sla": {
+            "table_name": "contract_sla",
+            "query": "",
+            "fields": "",
+            "sf_table": "CONTRACT_SLA"
+        },
+        "core_company": {
+            "table_name": "core_company",
+            "query": "",
+            "fields": "",
+            "sf_table": "CORE_COMPANY"
+        },
+        "incident": {
+            "table_name": "incident",
+            "query": "",
+            "fields": "",
+            "sf_table": "INCIDENT"
+        },
+        "interaction": {
+            "table_name": "interaction",
+            "query": "",
+            "fields": "",
+            "sf_table": "INTERACTION"
+        },
+        "label": {
+            "table_name": "label",
+            "query": "",
+            "fields": "",
+            "sf_table": "LABEL"
+        },
+        "label_entry": {
+            "table_name": "label_entry",
+            "query": "",
+            "fields": "",
+            "sf_table": "LABEL_ENTRY"
+        },
+        "metric_definition": {
+            "table_name": "metric_definition",
+            "query": "",
+            "fields": "",
+            "sf_table": "METRIC_DEFINITION"
+        },
+        "metric_instance": {
+            "table_name": "metric_instance",
+            "query": "",
+            "fields": "",
+            "sf_table": "METRIC_INSTANCE"
+        },
+        "sc_cat_item": {
+            "table_name": "sc_cat_item",
+            "query": "",
+            "fields": "",
+            "sf_table": "SC_CAT_ITEM"
+        },
+        "sc_req_item": {
+            "table_name": "sc_req_item",
+            "query": "",
+            "fields": "",
+            "sf_table": "SC_REQ_ITEM"
+        },
+        "sc_request": {
+            "table_name": "sc_request",
+            "query": "",
+            "fields": "",
+            "sf_table": "SC_REQUEST"
+        },
+        "sc_task": {
+            "table_name": "sc_task",
+            "query": "",
+            "fields": "",
+            "sf_table": "SC_TASK"
+        },
+        "std_change_record_producer": {
+            "table_name": "std_change_record_producer",
+            "query": "",
+            "fields": "",
+            "sf_table": "STD_CHANGE_RECORD_PRODUCER"
+        },
+        "sys_choice": {
+            "table_name": "sys_choice",
+            "query": "",
+            "fields": "",
+            "sf_table": "SYS_CHOICE"
+        },
+        "sys_db_object": {
+            "table_name": "sys_db_object",
+            "query": "",
+            "fields": "",
+            "sf_table": "SYS_DB_OBJECT"
+        },
+        "sys_dictionary": {
+            "table_name": "sys_dictionary",
+            "query": "",
+            "fields": "",
+            "sf_table": "SYS_DICTIONARY"
+        },
+        "sys_documentation": {
+            "table_name": "sys_documentation",
+            "query": "",
+            "fields": "",
+            "sf_table": "SYS_DOCUMENTATION"
+        },
+        "sys_ui_form": {
+            "table_name": "sys_ui_form",
+            "query": "",
+            "fields": "",
+            "sf_table": "SYS_UI_FORM"
+        },
+        "sys_ui_section": {
+            "table_name": "sys_ui_section",
+            "query": "",
+            "fields": "",
+            "sf_table": "SYS_UI_SECTION"
+        },
+        "sys_user": {
+            "table_name": "sys_user",
+            "query": "",
+            "fields": "",
+            "sf_table": "SYS_USER"
+        },
+        "sys_user_group": {
+            "table_name": "sys_user_group",
+            "query": "",
+            "fields": "",
+            "sf_table": "SYS_USER_GROUP"
+        },
+        "task_sla": {
+            "table_name": "task_sla",
+            "query": "",
+            "fields": "",
+            "sf_table": "TASK_SLA"
+        }
+    }
+}

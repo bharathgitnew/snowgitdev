@@ -1,0 +1,132 @@
+{{ config(
+        materialized='incremental',
+        incremental_strategy = 'insert_overwrite',
+        alias = 'RN_CONSIGNMENT_TRANSACTION',
+        transient = false
+) }}
+
+with source_data as
+(
+    SELECT
+        _FILENAME,
+        _FILEDATE,
+        DISPOSITION,
+        MESSAGE_ID,
+        ROSETTANET_LINE_NUMBER,
+        TEL_PART_NUMBER,
+        CUSTOMER_PART_NUMBER,
+        CUSTOMER_PART_DESCRIPTION,
+        QUANTITY,
+        CONSUMABLE_FLAG,
+        TRANSFERRED_FLAG,
+        RECONCILED_FLAG,
+        STOCK_ROOM,
+        WAREHOUSE,
+        TRANSACTION_TYPE,
+        TRANSACTION_REASON,
+        ORDER_ORIGIN,
+        SERVICE_ORDER_NUMBER,
+        POSITION_NUMBER,
+        DATE_CONSUMED,
+        DATE_RECEIVED,
+        CONTACT_NAME,
+        CONTACT_PHONE,
+        CONTACT_EMAIL,
+        ERROR_MESSAGE,
+        FACTORY_NAME,
+        ERROR_FLAG,
+        SERIAL_NUMBER,
+        TRANSFERRED_DATE,
+        CUSTOMER_TRANSACTION_ID,
+        CUSTOMER_TRANSACTION_LINE_ID,
+        NCDR_NUMBER,
+        ROSETTANET_PIP,
+        WIINGS_ISSUE_ID
+        FROM {{ ref('ODS__ROSETTA__RN_CONSIGNMENT_TRANSACTION') }}
+)
+
+,transform_data as
+(
+    SELECT
+        _FILENAME,
+        _FILEDATE,
+        '{{ invocation_id }}' AS _AUDIT_LOG_ID,
+        SHA2('hash_me') AS _ROW_HASH,
+        DISPOSITION,
+        MESSAGE_ID,
+        ROSETTANET_LINE_NUMBER,
+        TEL_PART_NUMBER,
+        CUSTOMER_PART_NUMBER,
+        CUSTOMER_PART_DESCRIPTION,
+        QUANTITY,
+        CONSUMABLE_FLAG,
+        TRANSFERRED_FLAG,
+        RECONCILED_FLAG,
+        STOCK_ROOM,
+        WAREHOUSE,
+        TRANSACTION_TYPE,
+        TRANSACTION_REASON,
+        ORDER_ORIGIN,
+        SERVICE_ORDER_NUMBER,
+        POSITION_NUMBER,
+        DATE_CONSUMED,
+        DATE_RECEIVED,
+        CONTACT_NAME,
+        CONTACT_PHONE,
+        CONTACT_EMAIL,
+        ERROR_MESSAGE,
+        FACTORY_NAME,
+        ERROR_FLAG,
+        SERIAL_NUMBER,
+        TRANSFERRED_DATE,
+        CUSTOMER_TRANSACTION_ID,
+        CUSTOMER_TRANSACTION_LINE_ID,
+        NCDR_NUMBER,
+        ROSETTANET_PIP,
+        WIINGS_ISSUE_ID
+    FROM source_data
+),
+
+type_data as
+(
+    SELECT
+        CAST(_FILENAME AS VARCHAR(16777216)) AS _FILENAME,
+        CAST(_FILEDATE AS TIMESTAMP_NTZ(9)) AS _FILEDATE,
+        CAST(_AUDIT_LOG_ID AS VARCHAR(128)) AS _AUDIT_LOG_ID,
+        CAST(_ROW_HASH AS VARCHAR(128)) AS _ROW_HASH,
+        DISPOSITION,
+        MESSAGE_ID,
+        ROSETTANET_LINE_NUMBER,
+        TEL_PART_NUMBER,
+        CUSTOMER_PART_NUMBER,
+        CUSTOMER_PART_DESCRIPTION,
+        QUANTITY,
+        CONSUMABLE_FLAG,
+        TRANSFERRED_FLAG,
+        RECONCILED_FLAG,
+        STOCK_ROOM,
+        WAREHOUSE,
+        TRANSACTION_TYPE,
+        TRANSACTION_REASON,
+        ORDER_ORIGIN,
+        SERVICE_ORDER_NUMBER,
+        POSITION_NUMBER,
+        DATE_CONSUMED,
+        DATE_RECEIVED,
+        CONTACT_NAME,
+        CONTACT_PHONE,
+        CONTACT_EMAIL,
+        ERROR_MESSAGE,
+        FACTORY_NAME,
+        ERROR_FLAG,
+        SERIAL_NUMBER,
+        TRANSFERRED_DATE,
+        CUSTOMER_TRANSACTION_ID,
+        CUSTOMER_TRANSACTION_LINE_ID,
+        NCDR_NUMBER,
+        ROSETTANET_PIP,
+        WIINGS_ISSUE_ID
+    FROM transform_data
+)
+
+SELECT * FROM type_data

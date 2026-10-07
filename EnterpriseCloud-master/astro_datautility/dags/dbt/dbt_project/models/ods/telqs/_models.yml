@@ -1,0 +1,6 @@
+version: 2
+models:
+- name: ODS__TELQS__PROCESS_ORDER_DETAILS
+  description: Model TELQS PROCESS_ORDER_DETAILS file.
+- name: ODS__TELQS__PAID_SERVICE_QUOTE_MASTER
+  description: Model TELQS PAID_SERVICE_QUOTE_MASTER file.

@@ -1,0 +1,84 @@
+{{ config(
+        materialized='incremental',
+        incremental_strategy='merge',
+        alias='MATERIAL_VALUATION_HISTORY',
+        unique_key = ['MANDT',
+    'MATNR',
+    'BWKEY',
+    'BWTAR',
+    'LFGJA',
+    'LFMON'],
+        transient=false
+) }} 
+
+with source_data as (
+	SELECT 
+	_CAPTUREDATETIME,
+	MANDT,
+	MATNR,
+	BWKEY,
+	BWTAR,
+	LFGJA,
+	LFMON,
+	LBKUM,
+	SALK3,
+	VPRSV,
+	VERPR,
+	STPRS,
+	PEINH,
+	BKLAS,
+	SALKV,
+	VKSAL
+	FROM {{ source("SAP_ORACLE_LIVE", "MBEWH") }}
+),
+
+
+transform_data as 
+(
+    SELECT
+    _CAPTUREDATETIME,
+    '{{ invocation_id }}' AS _AUDIT_LOG_ID,
+    SHA2('hash_me') as _ROW_HASH,
+	MANDT as MANDT,
+	MATNR as MATNR,
+	BWKEY as BWKEY,
+	BWTAR as BWTAR,
+	LFGJA as LFGJA,
+	LFMON as LFMON,
+	LBKUM as LBKUM,
+	SALK3 as SALK3,
+	VPRSV as VPRSV,
+	VERPR as VERPR,
+	STPRS as STPRS,
+	PEINH as PEINH,
+	BKLAS as BKLAS,
+	SALKV as SALKV,
+	VKSAL as VKSAL
+	FROM SOURCE_DATA
+), 
+
+type_data as 
+(
+    SELECT 
+    CAST(_CAPTUREDATETIME AS TIMESTAMP_LTZ(9)) AS _CAPTUREDATETIME,
+    CAST(_AUDIT_LOG_ID AS VARCHAR(128)) AS _AUDIT_LOG_ID,
+    CAST(_ROW_HASH AS VARCHAR(128)) AS _ROW_HASH,
+	MANDT,
+	MATNR,
+	BWKEY,
+	BWTAR,
+	LFGJA,
+	LFMON,
+	CAST(LBKUM AS NUMBER(38,10)) AS LBKUM,
+	CAST(SALK3 AS NUMBER(38,10)) AS SALK3,
+	VPRSV,
+	CAST(VERPR AS NUMBER(38,10)) AS VERPR,
+	CAST(STPRS AS NUMBER(38,10)) AS STPRS,
+	CAST(PEINH AS NUMBER(38,10)) AS PEINH,
+	BKLAS,
+	CAST(SALKV AS NUMBER(38,10)) AS SALKV,
+	CAST(VKSAL AS NUMBER(38,10)) AS VKSAL
+FROM TRANSFORM_DATA
+)
+ 
+SELECT * FROM TYPE_DATA

@@ -1,0 +1,84 @@
+models:
+  - name: SILVER__TEH_INTERNATIONAL_TRADE__TARIFF_REPORT
+    description: TARIFF REPORT
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEH_INTERNATIONAL_TRADE__LEGAL_CONTROL_LICENSE_MASTER_HEADER_DATA
+    description: Legal Control License Master Header Data (EMBK base table). Unique by INTERNAL_LICENSE_NUMBER. Joined with T606X, T606Y, T606Z to aggregate related license info.
+    columns:
+      - name: CLIENT
+        description: SAP client. 300 for US operations.
+      - name: INTERNAL_LICENSE_NUMBER
+        description: Internal License Number (Primary key).
+      - name: COUNTRIES_OF_DESTINATION
+        description: Related countries of destinations (pulled from T606X).
+      - name: ECCNS
+        description: Related ECCNs (pulled from T606Y).
+      - name: CUSTOMER_NUMBERS
+        description: Related customers (pulled from T606Z).
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEH_INTERNATIONAL_TRADE__BOM_HEIRARCHY
+    description:
+      BOM/KIT Heirarchy. Unique by CLIENT, PLANT, BOM_LINEAGE. Recursive list that expands BOMs/Kits into their child components
+      all the way down to the individual parts. Modeled to closely match the SAP t-code ZSHIPHIST. Logic primarily provided/helped
+      by Eric Carlson and Pavan Gorthy from the ERP team.
+    tests:
+      - dbt_expectations.expect_table_row_count_to_be_between:
+          min_value: 1
+    columns:
+      - name: _REFRESHDATE
+        description: Last sql run of the dbt model.
+        tests:
+          - dbt_expectations.expect_row_values_to_have_recent_data:
+              datepart: hours
+              interval: 36
+      - name: CLIENT
+        description: SAP client. 300 for US operations.
+      - name: PLANT
+        description: Organization unit (Composite key)
+      - name: BOM_LINEAGE
+        description:
+          Shows the heirarchial relationship from the BOM of the initial child component down to the BOM of the current component.
+          Formatted with arrows pointing towards the child component ie grandparent > parent > child. BOM ids are used here instead of part
+          numbers to help differentiate relationships that might share the same part but different parentage.
+      - name: EXPL_LEVEL
+        description:
+          The heirarchial level of the component in the BOM hierarchy. 1 is the first child component, 2 are the components of
+          the first children, etc. Because this model only contains parts with components, everything will start at level 1.
+      - name: ROOT_PART_NUMBER
+        description: The part number of the root component in the BOM hierarchy.
+      - name: PARENT_PART_NUMBER
+        description: The part number of the current component's parent.
+      - name: BOM_NUMBER
+        description: ID of the PARENT_PART_NUMBER's BOM
+      - name: BOM_ITEM_NUMBER
+        description: Line item ID of the parent's BOM that points to the current component.
+      - name: COMPONENT
+        description:
+          The part number of the current component. This isn't necesarily the final child component. This is just one of the
+          components found along the way.
+      - name: QTY
+        description: How many of the COMPONENT are needed to make one of the PARENT_PART_NUMBER.
+      - name: COMMODITY_CODE
+        description: If this shows "SEE TARIFF SHEET", look for further info in child components of the current parent.
+      - name: STANDARD_COST
+        description: Standard material price. Not order/customer specific necessarily.
+      - name: EXT_COST
+        description: Extended cost (QTY * STANDARD_COST).
+      - name: STS_FLAG
+        description:
+          TRUE/FALSE depending on if the current component along with all of it's parents COMMODITY_CODE equals "SEE TARIFF SHEET".
+          This differentiaties between using COMMODITY_CODE by itself because child components might show "SEE TARIFF SHEET" even if their
+          parents don't and we might not want to see that branch in the heirarchy.
+  - name: SILVER__TEH_INTERNATIONAL_TRADE__PARTS_EXPORTIMPORT_CONTROL
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEH_INTERNATIONAL_TRADE__FREIGHT_COST_TRACKING
+    description: Freight Cost Tracking. This is a fact table that tracks freight costs for international shipments. It includes dimensions such as shipment ID, date, origin, destination, carrier, and cost. This data can be used to analyze freight expenses and identify opportunities for cost savings.
+    tests:
+      - has_data
+      - recently_run

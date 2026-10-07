@@ -1,0 +1,12 @@
+version: 2
+models:
+- name: ODS__POWERBI__ACTIVITY
+  description: Model PowerBI Activity file.
+- name: ODS__POWERBI__DATASETS
+  description: Model PowerBI Datasets file.
+- name: ODS__POWERBI__GATEWAYS
+  description: Model PowerBI Gateways file.
+- name: ODS__POWERBI__DATASOURCES
+  description: Model PowerBI DataSources file.
+- name: ODS__POWERBI__GROUPS
+  description: Model PowerBI Groups file.

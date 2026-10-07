@@ -1,0 +1,175 @@
+models:
+- name: SILVER__TEH_SALES_TO_INSTALLATION__ACCOUNT
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_SALES_TO_INSTALLATION__ACTION_REQUEST_FORM_HISTORY
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_SALES_TO_INSTALLATION__BUSINESS_PARTNERS_GENERAL_DATA
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_SALES_TO_INSTALLATION__CONTRACTS_MASTER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_SALES_TO_INSTALLATION__CONTRACT_SUMMARY_DETAILS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_SALES_TO_INSTALLATION__CONTRACT_SUMMARY_PURCHASE_ORDER_DETAILS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_SALES_TO_INSTALLATION__COST_CENTER_GROUP
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_SALES_TO_INSTALLATION__FAB_LINE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_SALES_TO_INSTALLATION__GS_INTEL_BOOKING
+  tests:
+  - recently_run
+- name: SILVER__TEH_SALES_TO_INSTALLATION__GS_INTEL_SALES
+  tests:
+  - recently_run
+- name: SILVER__TEH_SALES_TO_INSTALLATION__LATEST_QUOTE_PRICE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_SALES_TO_INSTALLATION__MAC_MAIN
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_SALES_TO_INSTALLATION__MATERIAL_PLANT_MASTER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_SALES_TO_INSTALLATION__MODEL
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_SALES_TO_INSTALLATION__OPPORTUNITY
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_SALES_TO_INSTALLATION__OPPORTUNITY_LEGACY
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_SALES_TO_INSTALLATION__OPPORTUNITY_ONPRE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_SALES_TO_INSTALLATION__OPPORTUNITY_SNAPSHOT
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_SALES_TO_INSTALLATION__OPTIONSET_METADATA
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_SALES_TO_INSTALLATION__ORDER_TYPE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_SALES_TO_INSTALLATION__PURCHASE_ORDER_DELIVERY_LINE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_SALES_TO_INSTALLATION__QUOTE_CONFIG_CHURN_HISTORY
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_SALES_TO_INSTALLATION__QUOTE_REQUEST_FORM_HISTORY
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_SALES_TO_INSTALLATION__SALES_CRM_ACCOUNT
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_SALES_TO_INSTALLATION__SALES_CRM_BUSINESS_UNIT
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_SALES_TO_INSTALLATION__SALES_CRM_FAB
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_SALES_TO_INSTALLATION__SALES_CRM_MODEL
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_SALES_TO_INSTALLATION__SALES_CRM_OPPORTUNITY
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_SALES_TO_INSTALLATION__SALES_CRM_ORDER_TYPE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_SALES_TO_INSTALLATION__SALES_CRM_SALES_REGION
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_SALES_TO_INSTALLATION__SALES_DISTRICT
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_SALES_TO_INSTALLATION__SALES_DOCUMENT
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_SALES_TO_INSTALLATION__SALES_GLOBALOPTIONSETMETADATA
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_SALES_TO_INSTALLATION__SALES_ORDER_BILLING_LINE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_SALES_TO_INSTALLATION__SALES_ORDER_BILLING_PLAN
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_SALES_TO_INSTALLATION__SALES_ORDER_DELIVERY_LINE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_SALES_TO_INSTALLATION__SALES_ORDER_MASTER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_SALES_TO_INSTALLATION__SALES_ORDER_SCHEDULE_LINE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_SALES_TO_INSTALLATION__SAP_SURB
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_SALES_TO_INSTALLATION__SERVICE_B_CODE_MAPPING
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_SALES_TO_INSTALLATION__SIRFIS_FORECAST_BASE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_SALES_TO_INSTALLATION__SIRFIS_PRICE_ESTIMATE_INLINE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_SALES_TO_INSTALLATION__TEA_MAC_LIST
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_SALES_TO_INSTALLATION__WISDOM_SURB_PROGRESS
+  tests:
+  - has_data
+  - recently_run

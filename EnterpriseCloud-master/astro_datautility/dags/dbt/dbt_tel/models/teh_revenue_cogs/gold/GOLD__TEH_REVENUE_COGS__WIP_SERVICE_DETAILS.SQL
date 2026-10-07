@@ -1,0 +1,293 @@
+{{ config(
+    materialized = 'tel_incremental',
+    incremental_strategy = 'insert_overwrite',
+    alias='WIP_SERVICE_DETAILS',
+    tags = ["finance"],
+    transient = false
+) }}
+
+WITH WIP AS (
+    SELECT
+        PROFIT_CENTER,
+        SOLD_TO_PARTY,
+        CUSTOMER_NAME,
+        SALES_CATEGORY,
+        SALES_CATEGORY_NAME,
+        SALES_DOCUMENT,
+        SALES_DOCUMENT_LINE,
+CASE
+            WHEN LEN(SALES_DOCUMENT_LINE) < 6 THEN SALES_DOCUMENT || LPAD(SALES_DOCUMENT_LINE, 6, '0')
+            ELSE SALES_DOCUMENT || SALES_DOCUMENT_LINE
+        END AS SOID,
+        CUSTOMER_PO,
+        ITEM_DESCRIPTION,
+        WBS_ELEMENT,
+        LEFT(WBS_ELEMENT, 1) || '-' || SUBSTR(WBS_ELEMENT, 13, 1) AS WBS_CATEGORY,
+        SUM(AMOUNT) AS AMOUNT
+    FROM
+        {{ ref('GOLD__TEH_REVENUE_COGS__WIP_SERVICE_NCDR_REPAIR') }}
+    WHERE
+        LEN(SALES_CATEGORY) > 1
+        OR SALES_CATEGORY IS NOT NULL --REMOVE Blank Lines
+    GROUP BY
+        PROFIT_CENTER,
+        SOLD_TO_PARTY,
+        CUSTOMER_NAME,
+        SALES_CATEGORY,
+        SALES_CATEGORY_NAME,
+        SALES_DOCUMENT,
+        SALES_DOCUMENT_LINE,
+CASE
+            WHEN LEN(SALES_DOCUMENT_LINE) < 6 THEN SALES_DOCUMENT || LPAD(SALES_DOCUMENT_LINE, 6, '0')
+            ELSE SALES_DOCUMENT || SALES_DOCUMENT_LINE
+        END,
+        CUSTOMER_PO,
+        ITEM_DESCRIPTION,
+        WBS_ELEMENT,
+        LEFT(WBS_ELEMENT, 1) || '-' || SUBSTR(WBS_ELEMENT, 13, 1)
+    HAVING
+        SUM(AMOUNT) <> 0
+),
+SO AS (
+    SELECT
+        SALES_ORDER_HEADER_NUMBER,
+        LISTAGG(DISTINCT RMA_NUMBER, ', ') AS RELATED_RMA_NUMBER
+    FROM
+        {{ ref('GOLD__TEH_REVENUE_COGS__SALES_ORDER_MASTER') }}
+    WHERE
+        LEN(RMA_NUMBER) > 1
+        AND LEN(SALES_ORDER_HEADER_NUMBER) > 1
+    GROUP BY
+        SALES_ORDER_HEADER_NUMBER
+),
+SOLINE AS (
+    SELECT
+        SO_ID,
+        SERVICE_CRM_WO_NO AS WORK_ORDER,
+        SERVICE_ORDER,
+        ORDER_REASON_CODE,
+        ORDER_REASON,
+CASE
+            WHEN LEFT(CONTRACT_NUMBER, 1) = 'T' THEN CONTRACT_NUMBER
+            ELSE NULL
+        END AS CONTRACT_NUMBER,
+        SALES_DOC_TYPE,
+        TOOL_SERIAL_NO,
+        SEGMENT
+    FROM
+        {{ ref('GOLD__TEH_REVENUE_COGS__SALES_ORDER_LINE_MASTER') }} QUALIFY (
+            ROW_NUMBER() OVER (
+                PARTITION BY SO_ID
+                ORDER BY
+                    ORDER_REASON_CODE
+            )
+        ) = 1
+) --Safeguard to avoide dups
+,
+CUSTOMER AS (
+    SELECT
+        BUSINESS_PARTNER_NUMBER,
+        CUSTOMER_GROUP,
+        SEARCH_TERM_2 AS CUSTOMER_SEARCH_NAME
+    FROM
+        {{ ref('GOLD__TEH_REVENUE_COGS__SAP_CUSTOMER') }} QUALIFY (
+            ROW_NUMBER() OVER (
+                PARTITION BY BUSINESS_PARTNER_NUMBER
+                ORDER BY
+                    SEARCH_TERM_2
+            ) = 1
+        )
+) --Safeguard to avoide dups
+,
+CONTRACT AS (
+    SELECT
+        CONTRACT_NUMBER AS CONTRACT,
+        CONTRACT_TYPE,
+        CONTRACT_TITLE,
+        CONTRACT_START_DATE,
+        CONTRACT_END_DATE,
+        CONTRACT_STATUS,
+        CONTRACT_OWNER
+    FROM
+        {{ ref('GOLD__TEH_REVENUE_COGS__CONTRACTS_MASTER') }} QUALIFY (
+            ROW_NUMBER() OVER (
+                PARTITION BY CONTRACT_NUMBER
+                ORDER BY
+                    CONTRACT_START_DATE
+            ) = 1
+        )
+) --Safeguard to avoide dups
+,
+WO AS (
+    SELECT
+        WORK_ORDER,
+        WO_TITLE,
+        WO_PRODUCT_LINE,
+        WO_SUBSTATUS,
+        WO_STATUS,
+        BU_GROUP AS WO_BU_GROUP,
+        CLOSED_DATE AS WO_CLOSED_DATE,
+        LAST_TIME_ENTRY AS WO_LAST_TIME_ENTRY
+    FROM
+        {{ ref('GOLD__TEH_REVENUE_COGS__CRM_WORK_ORDER_RECENT_SUMMARY') }}
+),
+OPEN_BILLABLE AS (
+    SELECT
+        ZS10_SALES_ORDER
+    FROM
+        {{ ref('GOLD__TEH_REVENUE_COGS__SERVICE_OPEN_BILLABLE') }}
+)
+,
+SERVICE_WIP_FINAL AS (
+    SELECT
+        CASE
+            WHEN WIP.WBS_CATEGORY = 'P-S' THEN 'Contract/Paid Service'
+            WHEN WIP.WBS_ELEMENT IS NULL
+            AND ORDER_REASON_CODE = 'PSO' THEN 'Contract/Paid Service'
+            WHEN WIP.WBS_CATEGORY = 'P-Q' THEN 'Repair'
+            WHEN WIP.WBS_CATEGORY = 'A-A' THEN 'Equip/Mods Sales'
+            WHEN WIP.WBS_CATEGORY = 'Z-P' THEN 'Parts Sales'
+            WHEN WIP.WBS_CATEGORY = 'Z-Z' THEN 'Others'
+            WHEN WIP.WBS_ELEMENT IS NULL THEN '*No WBS Assigned'
+            ELSE WIP.WBS_CATEGORY
+        END AS WIP_CATEGORY,
+        CUSTOMER.CUSTOMER_GROUP,
+        WIP.CUSTOMER_NAME,
+        WIP.SOLD_TO_PARTY,
+        WIP.SALES_CATEGORY,
+        WIP.SALES_CATEGORY_NAME,
+        WIP.SALES_DOCUMENT,
+        WIP.SALES_DOCUMENT || '_' || LPAD(WIP.SALES_DOCUMENT_LINE, 6, '0') AS SO_LINE,
+        WIP.PROFIT_CENTER,
+        WIP.WBS_ELEMENT,
+        WIP.WBS_CATEGORY,
+        WIP.CUSTOMER_PO,
+        WIP.ITEM_DESCRIPTION,
+        WIP.AMOUNT AS WIP_AMOUNT,
+        SOLINE.SEGMENT,
+        SOLINE.SERVICE_ORDER,
+        SOLINE.ORDER_REASON_CODE,
+        SOLINE.ORDER_REASON,
+        SOLINE.CONTRACT_NUMBER,
+        CONTRACT.CONTRACT_TYPE,
+        CONTRACT.CONTRACT_END_DATE,
+        CONTRACT.CONTRACT_STATUS,
+        SOLINE.WORK_ORDER,
+        WO.WO_BU_GROUP,
+        WO.WO_TITLE,
+        WO.WO_STATUS,
+        WO.WO_SUBSTATUS,
+        WO_CLOSED_DATE,
+        WO.WO_LAST_TIME_ENTRY,
+        SOLINE.TOOL_SERIAL_NO,
+        SO.RELATED_RMA_NUMBER,
+CASE
+            WHEN LEFT(SOLINE.CONTRACT_NUMBER, 1) = 'T' THEN 'Contract'
+            WHEN ORDER_REASON_CODE = 'PSO' THEN 'Paid Service'
+            WHEN WIP.WBS_CATEGORY = 'P-S' THEN 'Unknown - *No Order'
+            WHEN ORDER_REASON_CODE = 'CPR' THEN 'Customer Paid Repair'
+            ELSE NULL
+        END AS SERVICE_CATEGORY,
+CASE
+            WHEN OPEN_BILLABLE.ZS10_SALES_ORDER IS NOT NULL THEN 'Y'
+            ELSE 'N'
+        END AS ON_PDS_OPEN_BILLABLE
+    FROM
+        WIP
+        LEFT OUTER JOIN SO ON WIP.SALES_DOCUMENT = SO.SALES_ORDER_HEADER_NUMBER
+        LEFT OUTER JOIN SOLINE ON WIP.SOID = SOLINE.SO_ID
+        LEFT OUTER JOIN CONTRACT ON SOLINE.CONTRACT_NUMBER = CONTRACT.CONTRACT
+        LEFT OUTER JOIN CUSTOMER ON WIP.SOLD_TO_PARTY = CUSTOMER.BUSINESS_PARTNER_NUMBER
+        LEFT OUTER JOIN WO ON SOLINE.WORK_ORDER = WO.WORK_ORDER
+        LEFT OUTER JOIN OPEN_BILLABLE
+        ON OPEN_BILLABLE.ZS10_SALES_ORDER = WIP.SALES_DOCUMENT
+)
+,
+transform_data AS (
+    SELECT
+        '{{ invocation_id }}' AS _AUDIT_LOG_ID,
+        SHA2('hash_me') AS _ROW_HASH,
+        WIP_CATEGORY,
+        CUSTOMER_GROUP,
+        CUSTOMER_NAME,
+        SOLD_TO_PARTY,
+        SALES_CATEGORY,
+        SALES_CATEGORY_NAME,
+        SALES_DOCUMENT,
+        SO_LINE,
+        SEGMENT,
+        PROFIT_CENTER,
+        WBS_ELEMENT,
+        WBS_CATEGORY,
+        CUSTOMER_PO,
+        ITEM_DESCRIPTION,
+        CAST(WIP_AMOUNT as NUMBER(38, 2)) AS WIP_AMOUNT,
+        SERVICE_ORDER,
+        ORDER_REASON_CODE,
+        ORDER_REASON,
+        CONTRACT_NUMBER,
+        CONTRACT_TYPE,
+        CAST(CONTRACT_END_DATE as Date) AS CONTRACT_END_DATE,
+        CONTRACT_STATUS,
+        WORK_ORDER,
+        WO_BU_GROUP,
+        WO_TITLE,
+        WO_STATUS,
+        WO_SUBSTATUS,
+        CAST(WO_CLOSED_DATE as DATE) AS WO_CLOSED_DATE,
+        CAST(WO_LAST_TIME_ENTRY as DATE) AS WO_LAST_TIME_ENTRY,
+        TOOL_SERIAL_NO,
+        RELATED_RMA_NUMBER,
+        SERVICE_CATEGORY,
+        ON_PDS_OPEN_BILLABLE
+    FROM
+        SERVICE_WIP_FINAL
+    ORDER BY
+        WIP_CATEGORY,
+        SERVICE_CATEGORY
+)
+,
+type_data as (
+    select
+        cast(_AUDIT_LOG_ID as VARCHAR(128)) as _AUDIT_LOG_ID,
+        cast(_ROW_HASH as VARCHAR(128)) as _ROW_HASH,
+        WIP_CATEGORY,
+        CUSTOMER_GROUP,
+        CUSTOMER_NAME,
+        SOLD_TO_PARTY,
+        SALES_CATEGORY,
+        SALES_CATEGORY_NAME,
+        SALES_DOCUMENT,
+        SO_LINE,
+        SEGMENT,
+        PROFIT_CENTER,
+        WBS_ELEMENT,
+        WBS_CATEGORY,
+        CUSTOMER_PO,
+        ITEM_DESCRIPTION,
+        CAST(WIP_AMOUNT as NUMBER(38, 2)) AS WIP_AMOUNT,
+        SERVICE_ORDER,
+        ORDER_REASON_CODE,
+        ORDER_REASON,
+        CONTRACT_NUMBER,
+        CONTRACT_TYPE,
+        CAST(CONTRACT_END_DATE as Date) AS CONTRACT_END_DATE,
+        CONTRACT_STATUS,
+        WORK_ORDER,
+        WO_BU_GROUP,
+        WO_TITLE,
+        WO_STATUS,
+        WO_SUBSTATUS,
+        CAST(WO_CLOSED_DATE as DATE) AS WO_CLOSED_DATE,
+        CAST(WO_LAST_TIME_ENTRY as DATE) AS WO_LAST_TIME_ENTRY,
+        TOOL_SERIAL_NO,
+        RELATED_RMA_NUMBER,
+        SERVICE_CATEGORY,
+        ON_PDS_OPEN_BILLABLE
+    from transform_data
+)
+
+SELECT
+    *
+FROM
+    type_data

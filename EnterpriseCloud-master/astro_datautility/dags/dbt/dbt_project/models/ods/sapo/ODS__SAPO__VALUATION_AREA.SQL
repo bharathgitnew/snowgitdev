@@ -1,0 +1,104 @@
+{{ config(
+        materialized='incremental',
+        incremental_strategy='merge',
+        alias='VALUATION_AREA',
+        unique_key = ['MANDT',
+    'BWKEY'],
+        transient=false
+) }}
+
+with source_data as (
+	SELECT 
+	_CAPTUREDATETIME,
+	MANDT,
+	BWKEY,
+	BUKRS,
+	BWMOD,
+	XBKNG,
+	MLBWA,
+	MLBWV,
+	XVKBW,
+	ERKLAERKOM,
+	UPROF,
+	WBPRO,
+	MLAST,
+	MLASV,
+	BDIFP,
+	XLBPD,
+	XEWRX,
+	X2FDO,
+	PRSFR,
+	MLCCS,
+	XEFRE,
+	EFREJ,
+	"/FMP/PRSFR",
+	"/FMP/PRFRGR"
+	FROM {{source('SAP_ORACLE_LIVE', 'T001K')}}
+),
+
+
+transform_data as 
+(
+SELECT
+    _CAPTUREDATETIME,
+    '{{ invocation_id }}' AS _AUDIT_LOG_ID,
+    SHA2('hash_me') as _ROW_HASH,
+	MANDT as MANDT,
+	BWKEY as BWKEY,
+	BUKRS as BUKRS,
+	BWMOD as BWMOD,
+	XBKNG as XBKNG,
+	MLBWA as MLBWA,
+	MLBWV as MLBWV,
+	XVKBW as XVKBW,
+	ERKLAERKOM as ERKLAERKOM,
+	UPROF as UPROF,
+	WBPRO as WBPRO,
+	MLAST as MLAST,
+	MLASV as MLASV,
+	BDIFP as BDIFP,
+	XLBPD as XLBPD,
+	XEWRX as XEWRX,
+	X2FDO as X2FDO,
+	PRSFR as PRSFR,
+	MLCCS as MLCCS,
+	XEFRE as XEFRE,
+	EFREJ as EFREJ,
+	"/FMP/PRSFR" as FMP_PRSFR,
+	"/FMP/PRFRGR" as FMP_PRFRGR
+	FROM SOURCE_DATA
+), 
+
+type_data as 
+(
+SELECT 
+	CAST(_CAPTUREDATETIME AS TIMESTAMP_LTZ(9)) AS _CAPTUREDATETIME,
+	CAST(_AUDIT_LOG_ID AS VARCHAR(128)) AS _AUDIT_LOG_ID,
+	CAST(_ROW_HASH AS VARCHAR(128)) AS _ROW_HASH,
+	MANDT,
+	BWKEY,
+	BUKRS,
+	BWMOD,
+	XBKNG,
+	MLBWA,
+	MLBWV,
+	XVKBW,
+	ERKLAERKOM,
+	UPROF,
+	WBPRO,
+	MLAST,
+	MLASV,
+	CAST(BDIFP AS NUMBER(38,10)) AS BDIFP,
+	XLBPD,
+	XEWRX,
+	X2FDO,
+	PRSFR,
+	MLCCS,
+	XEFRE,
+	EFREJ,
+	FMP_PRSFR,
+	FMP_PRFRGR
+FROM TRANSFORM_DATA
+)
+ 
+SELECT * FROM TYPE_DATA

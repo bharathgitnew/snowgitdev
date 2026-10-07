@@ -1,0 +1,141 @@
+/**********************************
+File built from dbtConvert.ps1
+parameters: 
+-filename C:\Sources\Repos\EnterpriseCloud\Snowflake\LZ_HVR-BAAN_2_ODS-BAAN\BAANFINANCEFINANCIALSTATEMENTS_STATEMENTACCOUNTS.SQL 
+-newFile C:\Sources\Repos\EnterpriseCloud\dbt\lz_to_ods\models\baan\BAANFINANCEFINANCIALSTATEMENTS_STATEMENTACCOUNTS.SQL 
+-materialized incremental
+-alias BAANFINANCEFINANCIALSTATEMENTS_STATEMENTACCOUNTS 
+-incremental_strategy merge
+-envVariable <<LZ>> 
+-sourceSchema BAAN_ORACLE_LIVE
+-sourceDatabase LZ_DEV
+-useDistinct no 
+model file generated on: 1/17/2022 12:52:52 PM
+***********************************/
+{{ config(
+    materialized='incremental',
+    incremental_strategy='merge',
+    alias='BAANFINANCEFINANCIALSTATEMENTS_STATEMENTACCOUNTS',
+    unique_key = ['_COMPANYID',
+    'FINANCIALSTATEMENT',
+    'STATEMENTACCOUNT']
+) }}
+
+
+with source_data as 
+(
+    SELECT 
+             SOURCETABLE._CAPTUREDATETIME                    AS _CAPTUREDATETIME 
+            ,200                                               AS _COMPANYID 
+            ,NULLIF(RTRIM(LTRIM(SOURCETABLE.T$DESC)),'')     AS ACCOUNTDESCRIPTION 
+            ,"T$ATYP$U".CONSTANTDESCRIPTION                    AS ACCOUNTTYPEDESCRIPTION 
+            ,CAST("T$ATYP$U" AS INT)                           AS ACCOUNTTYPEID 
+            ,T$DCSW.CONSTANTDESCRIPTION                      AS APPLYDEBITCREDITSIGNSWITCHDESCRIPTION 
+            ,CAST(T$DCSW AS INT)                             AS APPLYDEBITCREDITSIGNSWITCHID 
+            ,NULLIF(RTRIM(LTRIM(SOURCETABLE.T$FSTM)),'')     AS FINANCIALSTATEMENT 
+            ,NULLIF(RTRIM(LTRIM(SOURCETABLE."T$RFAC$A$U")),'') AS FORMULAREFACCOUNTA 
+            ,NULLIF(RTRIM(LTRIM(SOURCETABLE."T$RFAC$B$U")),'') AS FORMULAREFACCOUNTB 
+            ,NULLIF(RTRIM(LTRIM(SOURCETABLE.T$PACC)),'')     AS PARENTSTATEMENTACCOUNT 
+            ,"T$PLMN$U".CONSTANTDESCRIPTION                    AS PLUSMINUSDESCRIPTION 
+            ,CAST("T$PLMN$U" AS INT)                           AS PLUSMINUSID 
+            ,NULLIF(RTRIM(LTRIM(SOURCETABLE.T$ACCN)),'')     AS STATEMENTACCOUNT 
+            ,CAST(T$SUBL AS TINYINT)                         AS SUBLEVEL 
+         
+        FROM {{ source("BAAN_ORACLE_LIVE", "TTFFST120200") }} AS SOURCETABLE  
+            /*ACCOUNTTYPEU*/ 
+            LEFT OUTER JOIN {{ source("BAAN", "ENUMERATIONS") }} AS "T$ATYP$U" 
+             ON   "T$ATYP$U".TABLENAME  = 'TFFST120' 
+              AND "T$ATYP$U".COLUMNNAME = 'T$ATYP.U' 
+              AND "T$ATYP$U".CONSTANT   = SOURCETABLE."T$ATYP$U" 
+            /*APPLYDEBITCREDITSIGNSWITCH*/ 
+            LEFT OUTER JOIN {{ source("BAAN", "ENUMERATIONS") }} AS T$DCSW 
+             ON   T$DCSW.TABLENAME  = 'TFFST120' 
+              AND T$DCSW.COLUMNNAME = 'T$DCSW' 
+              AND T$DCSW.CONSTANT   = SOURCETABLE.T$DCSW 
+            /*PLUSMINUSU*/ 
+            LEFT OUTER JOIN {{ source("BAAN", "ENUMERATIONS") }} AS "T$PLMN$U" 
+             ON   "T$PLMN$U".TABLENAME  = 'TFFST120' 
+              AND "T$PLMN$U".COLUMNNAME = 'T$PLMN.U' 
+              AND "T$PLMN$U".CONSTANT   = SOURCETABLE."T$PLMN$U" 
+        {% if is_incremental() %} WHERE FALSE AND SOURCETABLE._CAPTUREDATETIME >= (SELECT MAX(_CAPTUREDATETIME) FROM {{ this }}) {% endif %}
+        UNION ALL 
+        SELECT 
+             SOURCETABLE._CAPTUREDATETIME                    AS _CAPTUREDATETIME 
+            ,201                                               AS _COMPANYID 
+            ,NULLIF(RTRIM(LTRIM(SOURCETABLE.T$DESC)),'')     AS ACCOUNTDESCRIPTION 
+            ,"T$ATYP$U".CONSTANTDESCRIPTION                    AS ACCOUNTTYPEDESCRIPTION 
+            ,CAST("T$ATYP$U" AS INT)                           AS ACCOUNTTYPEID 
+            ,T$DCSW.CONSTANTDESCRIPTION                      AS APPLYDEBITCREDITSIGNSWITCHDESCRIPTION 
+            ,CAST(T$DCSW AS INT)                             AS APPLYDEBITCREDITSIGNSWITCHID 
+            ,NULLIF(RTRIM(LTRIM(SOURCETABLE.T$FSTM)),'')     AS FINANCIALSTATEMENT 
+            ,NULLIF(RTRIM(LTRIM(SOURCETABLE."T$RFAC$A$U")),'') AS FORMULAREFACCOUNTA 
+            ,NULLIF(RTRIM(LTRIM(SOURCETABLE."T$RFAC$B$U")),'') AS FORMULAREFACCOUNTB 
+            ,NULLIF(RTRIM(LTRIM(SOURCETABLE.T$PACC)),'')     AS PARENTSTATEMENTACCOUNT 
+            ,"T$PLMN$U".CONSTANTDESCRIPTION                    AS PLUSMINUSDESCRIPTION 
+            ,CAST("T$PLMN$U" AS INT)                           AS PLUSMINUSID 
+            ,NULLIF(RTRIM(LTRIM(SOURCETABLE.T$ACCN)),'')     AS STATEMENTACCOUNT 
+            ,CAST(T$SUBL AS TINYINT)                         AS SUBLEVEL 
+         
+        FROM {{ source("BAAN_ORACLE_LIVE", "TTFFST120201") }} AS SOURCETABLE  
+            /*ACCOUNTTYPEU*/ 
+            LEFT OUTER JOIN {{ source("BAAN", "ENUMERATIONS") }} AS "T$ATYP$U" 
+             ON   "T$ATYP$U".TABLENAME  = 'TFFST120' 
+              AND "T$ATYP$U".COLUMNNAME = 'T$ATYP.U' 
+              AND "T$ATYP$U".CONSTANT   = SOURCETABLE."T$ATYP$U" 
+            /*APPLYDEBITCREDITSIGNSWITCH*/ 
+            LEFT OUTER JOIN {{ source("BAAN", "ENUMERATIONS") }} AS T$DCSW 
+             ON   T$DCSW.TABLENAME  = 'TFFST120' 
+              AND T$DCSW.COLUMNNAME = 'T$DCSW' 
+              AND T$DCSW.CONSTANT   = SOURCETABLE.T$DCSW 
+            /*PLUSMINUSU*/ 
+            LEFT OUTER JOIN {{ source("BAAN", "ENUMERATIONS") }} AS "T$PLMN$U" 
+             ON   "T$PLMN$U".TABLENAME  = 'TFFST120' 
+              AND "T$PLMN$U".COLUMNNAME = 'T$PLMN.U' 
+              AND "T$PLMN$U".CONSTANT   = SOURCETABLE."T$PLMN$U" 
+        {% if is_incremental() %} WHERE FALSE AND SOURCETABLE._CAPTUREDATETIME >= (SELECT MAX(_CAPTUREDATETIME) FROM {{ this }}) {% endif %} 
+        )
+,transform_data as
+(
+    SELECT 
+        source_data._CAPTUREDATETIME AS _CAPTUREDATETIME, 
+        source_data._COMPANYID AS _COMPANYID, 
+        source_data.ACCOUNTDESCRIPTION AS ACCOUNTDESCRIPTION, 
+        source_data.ACCOUNTTYPEDESCRIPTION AS ACCOUNTTYPEDESCRIPTION, 
+        source_data.ACCOUNTTYPEID AS ACCOUNTTYPEID, 
+        source_data.APPLYDEBITCREDITSIGNSWITCHDESCRIPTION AS APPLYDEBITCREDITSIGNSWITCHDESCRIPTION, 
+        source_data.APPLYDEBITCREDITSIGNSWITCHID AS APPLYDEBITCREDITSIGNSWITCHID, 
+        source_data.FINANCIALSTATEMENT AS FINANCIALSTATEMENT, 
+        source_data.FORMULAREFACCOUNTA AS FORMULAREFACCOUNTA, 
+        source_data.FORMULAREFACCOUNTB AS FORMULAREFACCOUNTB, 
+        source_data.PARENTSTATEMENTACCOUNT AS PARENTSTATEMENTACCOUNT, 
+        source_data.PLUSMINUSDESCRIPTION AS PLUSMINUSDESCRIPTION, 
+        source_data.PLUSMINUSID AS PLUSMINUSID, 
+        source_data.STATEMENTACCOUNT AS STATEMENTACCOUNT, 
+        source_data.SUBLEVEL AS SUBLEVEL
+        ,'{{ invocation_id }}' AS AUDIT_LOG_ID
+        ,SHA2('hash_me') as _ROW_HASH -- Adds column to table on full refresh.  
+        FROM source_data
+        )
+,type_data as 
+(
+    select
+        cast(_CAPTUREDATETIME as TIMESTAMP_LTZ(9)) as _CAPTUREDATETIME,
+        cast(_COMPANYID as NUMBER(3,0)) as _COMPANYID,
+        cast(ACCOUNTDESCRIPTION as VARCHAR(35)) as ACCOUNTDESCRIPTION,
+        cast(ACCOUNTTYPEDESCRIPTION as VARCHAR(16777216)) as ACCOUNTTYPEDESCRIPTION,
+        cast(ACCOUNTTYPEID as NUMBER(38,0)) as ACCOUNTTYPEID,
+        cast(APPLYDEBITCREDITSIGNSWITCHDESCRIPTION as VARCHAR(16777216)) as APPLYDEBITCREDITSIGNSWITCHDESCRIPTION,
+        cast(APPLYDEBITCREDITSIGNSWITCHID as NUMBER(38,0)) as APPLYDEBITCREDITSIGNSWITCHID,
+        cast(FINANCIALSTATEMENT as VARCHAR(8)) as FINANCIALSTATEMENT,
+        cast(FORMULAREFACCOUNTA as VARCHAR(12)) as FORMULAREFACCOUNTA,
+        cast(FORMULAREFACCOUNTB as VARCHAR(12)) as FORMULAREFACCOUNTB,
+        cast(PARENTSTATEMENTACCOUNT as VARCHAR(12)) as PARENTSTATEMENTACCOUNT,
+        cast(PLUSMINUSDESCRIPTION as VARCHAR(16777216)) as PLUSMINUSDESCRIPTION,
+        cast(PLUSMINUSID as NUMBER(38,0)) as PLUSMINUSID,
+        cast(STATEMENTACCOUNT as VARCHAR(12)) as STATEMENTACCOUNT,
+        cast(SUBLEVEL as NUMBER(38,0)) as SUBLEVEL,
+        cast(AUDIT_LOG_ID as varchar(128)) as AUDIT_LOG_ID,
+        cast(_ROW_HASH as varchar(128)) as _ROW_HASH
+    from transform_data
+    )
+select * from type_data

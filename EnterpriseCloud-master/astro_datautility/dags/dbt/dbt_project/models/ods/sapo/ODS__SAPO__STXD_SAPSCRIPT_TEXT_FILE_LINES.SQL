@@ -1,0 +1,67 @@
+{{ config(
+        materialized='incremental',
+        incremental_strategy='merge',
+        alias='STXD_SAPSCRIPT_TEXT_FILE_LINES',
+        unique_key = ['MANDT',
+    'RELID',
+    'TDOBJECT',
+    'TDNAME',
+    'TDID',
+    'TDSPRAS',
+    'SRTF2'],
+        transient=false
+) }}
+
+with source_data as (
+	SELECT 
+	_CAPTUREDATETIME,
+	MANDT,
+	RELID,
+	TDOBJECT,
+	TDNAME,
+	TDID,
+	TDSPRAS,
+	SRTF2,
+	CLUSTR,
+	CLUSTD
+	FROM {{source('SAP_ORACLE_LIVE', 'STXL')}}
+),
+
+
+transform_data as 
+(
+SELECT
+    _CAPTUREDATETIME,
+    '{{ invocation_id }}' AS _AUDIT_LOG_ID,
+    SHA2('hash_me') as _ROW_HASH,
+	MANDT as MANDT,
+	RELID as RELID,
+	TDOBJECT as TDOBJECT,
+	TDNAME as TDNAME,
+	TDID as TDID,
+	TDSPRAS as TDSPRAS,
+	SRTF2 as SRTF2,
+	CLUSTR as CLUSTR,
+	CLUSTD as CLUSTD
+	FROM SOURCE_DATA
+), 
+
+type_data as 
+(
+SELECT 
+	CAST(_CAPTUREDATETIME AS TIMESTAMP_LTZ(9)) AS _CAPTUREDATETIME,
+	CAST(_AUDIT_LOG_ID AS VARCHAR(128)) AS _AUDIT_LOG_ID,
+	CAST(_ROW_HASH AS VARCHAR(128)) AS _ROW_HASH,
+	MANDT,
+	RELID,
+	TDOBJECT,
+	TDNAME,
+	TDID,
+	TDSPRAS,
+	CAST(SRTF2 AS NUMBER(38,10)) AS SRTF2,
+	CAST(CLUSTR AS NUMBER(38,10)) AS CLUSTR,
+	CAST(CLUSTD as VARCHAR) as CLUSTD
+FROM TRANSFORM_DATA
+)
+ 
+SELECT * FROM TYPE_DATA

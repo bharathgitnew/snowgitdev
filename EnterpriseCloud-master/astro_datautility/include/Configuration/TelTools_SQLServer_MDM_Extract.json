@@ -1,0 +1,158 @@
+{
+    "MDM": {
+        "DataSet1": {
+            "schema": "mdm",
+            "table": "BaanOrderSeries",
+            "Incremental": "NULL",
+            "sftablename": "BAANORDERSERIES",
+            "filter": ""
+        },
+        "DataSet2": {
+            "schema": "mdm",
+            "table": "Company",
+            "Incremental": "NULL",
+            "sftablename": "COMPANY",
+            "filter": "Code <> '-1' AND ValidationStatus = 'Validation Succeeded'"
+        },
+        "DataSet3": {
+            "schema": "mdm",
+            "table": "Customer",
+            "Incremental": "NULL",
+            "sftablename": "CUSTOMER",
+            "filter": " ValidationStatus = 'Validation Succeeded'"
+        },
+        "DataSet4": {
+            "schema": "mdm",
+            "table": "EmployeeType",
+            "Incremental": "NULL",
+            "sftablename": "EMPLOYEE_TYPE",
+            "filter": ""
+        },
+        "DataSet5": {
+            "schema": "mdm",
+            "table": "FinancialAccount",
+            "Incremental": "NULL",
+            "sftablename": "FINANCIALACCOUNT",
+            "filter": "Code <> '-1' AND ValidationStatus = 'Validation Succeeded'"
+        },
+        "DataSet6": {
+            "schema": "mdm",
+            "table": "FinancialCostCenter",
+            "Incremental": "NULL",
+            "sftablename": "FINANCIALCOSTCENTER",
+            "filter": "ValidationStatus = 'Validation Succeeded'"
+        },
+        "DataSet7": {
+            "schema": "mdm",
+            "table": "FinancialDepartment",
+            "Incremental": "NULL",
+            "sftablename": "FINANCIALDEPARTMENT",
+            "filter": "Code <> '-1' AND ValidationStatus = 'Validation Succeeded'"
+        },
+        "DataSet8": {
+            "schema": "mdm",
+            "table": "FinancialProductType",
+            "Incremental": "NULL",
+            "sftablename": "FINANCIALPRODUCTTYPE",
+            "filter": "Code <> '-1' AND ValidationStatus = 'Validation Succeeded'"
+        },
+        "DataSet9": {
+            "schema": "mdm",
+            "table": "FinancialSegment",
+            "Incremental": "NULL",
+            "sftablename": "FINANCIALSEGMENT",
+            "filter": "Code <> '-1' AND ValidationStatus = 'Validation Succeeded'"
+        },
+        "DataSet10": {
+            "schema": "mdm",
+            "table": "Office",
+            "Incremental": "NULL",
+            "sftablename": "OFFICE",
+            "filter": "Code <> '-1' AND ValidationStatus = 'Validation Succeeded'"
+        },
+        "DataSet11": {
+            "schema": "mdm",
+            "table": "ManagerEmployeeGroup",
+            "Incremental": "NULL",
+            "sftablename": "MANAGER_EMPLOYEE_GROUP",
+            "filter": ""
+        },
+        "DataSet12": {
+            "schema": "mdm",
+            "table": "MachineBU",
+            "Incremental": "NULL",
+            "sftablename": "MACHINEBU",
+            "filter": ""
+        },
+        "DataSet13": {
+            "schema": "mdm",
+            "table": "OracleEPBCSAccount",
+            "Incremental": "NULL",
+            "sftablename": "ORACLEEPBCSACCOUNT",
+            "filter": "ValidationStatus = 'Validation Succeeded'"
+        },
+        "DataSet14": {
+            "schema": "mdm",
+            "table": "TEACPPParts",
+            "Incremental": "NULL",
+            "sftablename": "TEACPPPARTS",
+            "filter": "Code <> '-1' AND ValidationStatus = 'Validation Succeeded'"
+        },
+        "DataSet15": {
+            "schema": "mdm",
+            "table": "SalesAccountRegion",
+            "Incremental": "NULL",
+            "sftablename": "SALESACCOUNTREGION",
+            "filter": ""
+        },
+        "DataSet16": {
+            "schema": "mdm",
+            "table": "TEAItems",
+            "Incremental": "NULL",
+            "sftablename": "TEAITEMS",
+            "filter": "Code <> '-1' AND ValidationStatus = 'Validation Succeeded'"
+        },
+        "DataSet17": {
+            "schema": "mdm",
+            "table": "TimecardPaycode",
+            "Incremental": "NULL",
+            "sftablename": "TIMECARDPAYCODE",
+            "filter": ""
+        },
+        "DataSet18": {
+            "schema": "mdm",
+            "table": "Warehouse",
+            "Incremental": "NULL",
+            "sftablename": "WAREHOUSE",
+            "filter": "Code <> '-1' AND ValidationStatus = 'Validation Succeeded'"
+        },
+        "DataSet19": {
+            "schema": "mdm",
+            "table": "CostCenterwithBudgetCoordinator",
+            "Incremental": "NULL",
+            "sftablename": "COSTCENTERWITHBUDGETCOORDINATOR",
+            "filter": ""
+        },
+        "DataSet20": {
+            "schema": "mdm",
+            "table": "TASTask",
+            "Incremental": "NULL",
+            "sftablename": "TASTASK",
+            "filter": ""
+        },
+        "DataSet21": {
+            "schema": "mdm",
+            "table": "TASTypeOfWork",
+            "Incremental": "NULL",
+            "sftablename": "TASTYPEOFWORK",
+            "filter": ""
+        },
+        "DataSet22": {
+            "schema": "mdm",
+            "table": "AribaSecurity",
+            "Incremental": "NULL",
+            "sftablename": "ARIBASECURITY",
+            "filter": ""
+        }
+    }
+}

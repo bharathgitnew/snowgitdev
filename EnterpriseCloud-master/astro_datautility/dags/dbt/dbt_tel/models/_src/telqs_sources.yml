@@ -1,0 +1,66 @@
+version: 2
+sources:
+- name: LZ_TELQS
+  description: Landing Zone - TELQS Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: TELQS
+  tables:
+  - name: PROCESS_ORDER_DETAILS
+    identifier: PROCESS_ORDER_DETAILS
+    description: Landing table for PROCESS_ORDER_DETAILS file.
+  - name: PAID_SERVICE_QUOTE_MASTER
+    identifier: PAID_SERVICE_QUOTE_MASTER
+    description: Landing table for PAID_SERVICE_QUOTE_MASTER file.
+  - name: OSUSR_CZN_CONTRACTTYPEDETAILS
+    identifier: OSUSR_CZN_CONTRACTTYPEDETAILS
+    description: Landing table for OSUSR_CZN_CONTRACTTYPEDETAILS file.
+  - name: OSUSR_bn7_ServiceContractQuoteMaster
+    identifier: OSUSR_bn7_ServiceContractQuoteMaster
+    description: Landing table for OSUSR_bn7_ServiceContractQuoteMaster file.
+  - name: OSUSR_BN7_CONTRACTSERIALNUMBER
+    identifier: OSUSR_BN7_CONTRACTSERIALNUMBER
+    description: Landing table for OSUSR_BN7_CONTRACTSERIALNUMBER file.
+  - name: OSUSR_BN7_QUOTESTATUS
+    identifier: OSUSR_BN7_QUOTESTATUS
+    description: Landing table for OSUSR_BN7_QUOTESTATUS file.
+  - name: OSUSR_69G_CONTRACTS
+    identifier: OSUSR_69G_CONTRACTS
+    description: Landing table for OSUSR_69G_CONTRACTS file.
+  - name: OSUSR_bn7_ServiceQuoteWithContract
+    identifier: OSUSR_bn7_ServiceQuoteWithContract
+    description: Landing table for OSUSR_bn7_ServiceQuoteWithContract file.
+  - name: OSUSR_BN7_ADDTIONALDETAILS
+    identifier: OSUSR_BN7_ADDTIONALDETAILS
+    description: Landing table for OSUSR_BN7_ADDTIONALDETAILS file.
+  - name: OSUSR_69G_FLEX
+    identifier: OSUSR_69G_FLEX
+    description: Landing table for OSUSR_69G_FLEX file. 
+  - name: OSUSR_PR4_TYPEOFWORK
+    identifier: OSUSR_PR4_TYPEOFWORK
+    description: Landing table for OSUSR_PR4_TYPEOFWORK file.
+  - name: OSUSR_69G_FLEX_TYPEOFWORK
+    identifier: OSUSR_69G_FLEX_TYPEOFWORK
+    description: Landing table for OSUSR_69G_FLEX_TYPEOFWORK file.
+  - name: OSUSR_69G_CONTRACTLENGTH
+    identifier: OSUSR_69G_CONTRACTLENGTH
+    description: Landing table for OSUSR_69G_CONTRACTLENGTH file.  
+  - name: OS_USER_PROFILE
+    identifier: OS_USER_PROFILE
+    description: Landing table for OS_USER_PROFILE file.
+  - name: OSUSR_BN7_VERSIONHISTORY
+    identifier: OSUSR_BN7_VERSIONHISTORY
+    description: Landing table for OSUSR_BN7_VERSIONHISTORY file.  
+  - name: OSUSR_69G_ENGINEERONSITE
+    identifier: OSUSR_69G_ENGINEERONSITE
+    description: Landing table for OSUSR_69G_ENGINEERONSITE file.
+  - name: OSUSR_CZN_CONTRACTTYPE
+    identifier: OSUSR_CZN_CONTRACTTYPE
+    description: Landing table for OSUSR_CZN_CONTRACTTYPE file.  
+  - name: OSUSR_BN7_SQCPROCESSORDERPRICING
+    identifier: OSUSR_BN7_SQCPROCESSORDERPRICING
+    description: Landing table for OSUSR_BN7_SQCPROCESSORDERPRICING file.  
+  - name: OSUSR_BN7_ADVANCEFILTERDATACONTRACTTYPE
+    identifier: OSUSR_BN7_ADVANCEFILTERDATACONTRACTTYPE
+    description: Landing table for OSUSR_BN7_ADVANCEFILTERDATACONTRACTTYPE file.      
+    
+    

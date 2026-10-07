@@ -1,0 +1,34 @@
+{
+    "UPS-TEA_SEC_232": {
+        "SNOWFLAKE_SCHEMA_NAME": "UPS",
+        "SNOWFLAKE_TABLE_NAME": "TEA_SEC_232",
+        "FILE": "F:\\Shares\\Files\\UPS_Data\\TEA SEC 232 Daily Report*.txt",
+        "DELIMETER": "\t",
+        "HEADER_ROW": 1,
+        "IGNORE_HEADER":"True"
+    },
+    "UPS-INVOICE_EXPORT_HISTORY_BY_INVOICE": {
+        "SNOWFLAKE_SCHEMA_NAME": "UPS",
+        "SNOWFLAKE_TABLE_NAME": "INVOICE_EXPORT_HISTORY_BY_INVOICE",
+        "FILE": "F:\\Shares\\Files\\UPS_Data\\InvoiceExportHistory_Invoice_*.xlsx",
+        "DELIMETER": "\t",
+        "HEADER_ROW": 1,
+        "IGNORE_HEADER":"True"
+    },
+    "UPS-INVOICE_EXPORT_HISTORY_BY_BILLING_DATE": {
+        "SNOWFLAKE_SCHEMA_NAME": "UPS",
+        "SNOWFLAKE_TABLE_NAME": "INVOICE_EXPORT_HISTORY_BY_BILLING_DATE",
+        "FILE": "F:\\Shares\\Files\\UPS_Data\\InvoiceExportHistory_Billing_Date_*.xlsx",
+        "DELIMETER": "\t",
+        "HEADER_ROW": 1,
+        "IGNORE_HEADER":"True"
+    },
+    "UPS-TEA_ORDERS": {
+        "SNOWFLAKE_SCHEMA_NAME": "UPS",
+        "SNOWFLAKE_TABLE_NAME": "TEA_ORDERS",
+        "FILE": "F:\\Shares\\Files\\UPS_Data\\TEA Orders*.xlsx",
+        "DELIMETER": "\t",
+        "HEADER_ROW": 1,
+        "IGNORE_HEADER":"True"
+    }
+}

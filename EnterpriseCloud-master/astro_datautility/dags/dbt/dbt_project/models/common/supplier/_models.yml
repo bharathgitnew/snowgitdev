@@ -1,0 +1,18 @@
+version: 2
+models:
+- name: COMMON__SUPPLIER__SUPPL_REASON
+  description: Landing table for SUPPL_REASON.
+- name: COMMON__SUPPLIER__SUPPL_CHG_REQUEST_PART_INFO
+  description: Landing table for SUPPL_CHG_REQUEST_PART_INFO.
+- name: COMMON__SUPPLIER__SUPPL_CHG_REQUEST_ATTACH
+  description: Landing table for SUPPL_CHG_REQUEST_ATTACH.
+- name: COMMON__SUPPLIER__SUPPL_APPLICABLE_CATEGORY
+  description: Landing table for SUPPL_APPLICABLE_CATEGORY.
+- name: COMMON__SUPPLIER__SUPPL_APPLICABLE_CATEGORY_DESCR
+  description: Landing table for SUPPL_APPLICABLE_CATEGORY_DESCR.
+- name: COMMON__SUPPLIER__SUPPL_REASON_DESCR
+  description: Landing table for SUPPL_REASON_DESCR.
+- name: COMMON__SUPPLIER__SUPPL_CHG_REQUEST_COMMENT
+  description: Landing table for SUPPL_CHG_REQUEST_COMMENT.
+- name: COMMON__SUPPLIER__SUPPL_USER_ROLE
+  description: Landing table for SUPPL_USER_ROLE.

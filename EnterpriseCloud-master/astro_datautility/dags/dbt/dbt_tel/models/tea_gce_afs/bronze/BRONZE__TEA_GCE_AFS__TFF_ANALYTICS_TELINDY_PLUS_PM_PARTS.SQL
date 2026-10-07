@@ -1,0 +1,69 @@
+/************
+Model file generated from Python utility
+*************/
+
+{{ config(
+	materialized='tel_incremental',
+	incremental_strategy='insert_overwrite',
+	alias='TFF_ANALYTICS_TELINDY_PLUS_PM_PARTS',
+	transient=false
+) }}
+
+with source_data as (
+	SELECT
+		_FILEDATE,
+		_FILENAME,
+		_UPLOADDATE,
+		JSONFIELD:"pm_name"::VARCHAR AS PM_NAME,
+		JSONFIELD:"part_number"::VARCHAR AS PART_NUMBER,
+		JSONFIELD:"part_description"::VARCHAR AS PART_DESCRIPTION,
+		JSONFIELD:"quantity"::FLOAT AS QUANTITY,
+		JSONFIELD:"CEID"::VARCHAR AS CEID,
+		JSONFIELD:"process_node"::VARCHAR AS PROCESS_NODE,
+		JSONFIELD:"pm_criteria"::VARCHAR AS PM_CRITERIA,
+		JSONFIELD:"pm_frequency"::VARCHAR AS PM_FREQUENCY,
+		JSONFIELD:"notes"::VARCHAR AS NOTES
+	FROM {{ source("ADS", "TFF_ANALYTICS_TELINDY_PLUS_PM_PARTS") }}
+WHERE
+	_FILEDATE = (SELECT MAX(_FILEDATE) FROM {{ source('ADS', 'TFF_ANALYTICS_TELINDY_PLUS_PM_PARTS') }} ) 
+),
+
+transform_data as (
+	SELECT
+		_FILEDATE AS _FILEDATE,
+		_FILENAME AS _FILENAME,
+		_UPLOADDATE AS _UPLOADDATE,
+		'{{ invocation_id }}' AS _AUDIT_LOG_ID,
+		SHA2('hash_me') AS _ROW_HASH,
+		PM_NAME,
+		PART_NUMBER,
+		PART_DESCRIPTION,
+		QUANTITY,
+		CEID,
+		PROCESS_NODE,
+		PM_CRITERIA,
+		PM_FREQUENCY,
+		NOTES
+	FROM source_data
+),
+
+type_data as (
+	SELECT
+		CAST(_FILEDATE AS TIMESTAMP_NTZ(9)) AS _FILEDATE,
+		_FILENAME,
+		_UPLOADDATE,
+		CAST(_AUDIT_LOG_ID AS VARCHAR(128)) AS _AUDIT_LOG_ID,
+		CAST(_ROW_HASH AS VARCHAR(128)) AS _ROW_HASH,
+		PM_NAME,
+		PART_NUMBER,
+		PART_DESCRIPTION,
+		CAST(QUANTITY AS FLOAT) AS QUANTITY,
+		CEID,
+		PROCESS_NODE,
+		PM_CRITERIA,
+		PM_FREQUENCY,
+		NOTES
+	FROM transform_data
+)
+
+SELECT * FROM type_data

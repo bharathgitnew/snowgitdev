@@ -1,0 +1,1106 @@
+version: 2
+models:
+- name: BRONZE__TEA_GCE_AFS__CRM_FILE_ACCOUNT
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Timestamp of ingestion job start
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 24
+- name: BRONZE__TEA_GCE_AFS__CRM_FILE_BUSINESSUNIT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__CRM_FILE_CNT_CNT_CONTRACTSUMMARY_ACCOUNT_FAB
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__CRM_FILE_CNT_CONTRACTSCOPEMASTER
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__CRM_FILE_CNT_CONTRACTSUMMARY
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__CRM_FILE_CNT_MSDYN_AGREEMENT_MSDYN_CUSTOMERASSET
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__CRM_FILE_CNT_ORDERNUMBER
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__CRM_FILE_CNT_ORDERNUMBERGROUP
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__CRM_FILE_COM_TROUBLESHOOTINGDETAILS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__CRM_FILE_GLOBALOPTIONSETMETADATA
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Timestamp of ingestion job start
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 24
+- name: BRONZE__TEA_GCE_AFS__CRM_FILE_INCIDENT
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Timestamp of ingestion job start
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 24
+- name: BRONZE__TEA_GCE_AFS__CRM_FILE_MSDYN_AGREEMENT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__CRM_FILE_MSDYN_CUSTOMERASSET
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Timestamp of ingestion job start
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 24
+- name: BRONZE__TEA_GCE_AFS__CRM_FILE_MSDYN_INCIDENTTYPE
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Timestamp of ingestion job start
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 24
+- name: BRONZE__TEA_GCE_AFS__CRM_FILE_MSDYN_PRIORITY
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__CRM_FILE_MSDYN_PROJECT
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Timestamp of ingestion job start
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 24
+- name: BRONZE__TEA_GCE_AFS__CRM_FILE_MSDYN_TIMEENTRY
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Timestamp of ingestion job start
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 24
+- name: BRONZE__TEA_GCE_AFS__CRM_FILE_MSDYN_WORKORDER
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Timestamp of ingestion job start
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 24
+- name: BRONZE__TEA_GCE_AFS__CRM_FILE_MSDYN_WORKORDERSUBSTATUS
+  tests:
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__CRM_FILE_MSDYN_WORKORDERTYPE
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Timestamp of ingestion job start
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 24
+- name: BRONZE__TEA_GCE_AFS__CRM_FILE_OPTIONSETMETADATA
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Timestamp of ingestion job start
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 24
+- name: BRONZE__TEA_GCE_AFS__CRM_FILE_RESOURCE
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Timestamp of ingestion job start
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 24
+- name: BRONZE__TEA_GCE_AFS__CRM_FILE_STATUSMETADATA
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Timestamp of ingestion job start
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 24
+- name: BRONZE__TEA_GCE_AFS__CRM_FILE_SYSTEMUSER
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Timestamp of ingestion job start
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 24
+- name: BRONZE__TEA_GCE_AFS__CRM_FILE_TEAM
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__CRM_FILE_TERRITORY
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__CRM_FILE_TRANSACTIONCURRENCY
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__CRM_FILE_WO_TYPEOFWORK
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__FILE_COST_CENTER
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__FILE_PROFIT_CENTER
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__GBOMREPORTS_CP
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__GBOMREPORTS_MISC
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__GBOMREPORTS_PARTS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__GBOMREPORTS_STATUS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__GBOMREPORTS_USABLE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_ALARM_DATA_ES
+  tests:
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_ALARM_DATA_SPS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_ALARM_EXCLUSION_ES
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_ALARM_INCLUSION_SPS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_ALARM_INCLUSION_TFF
+  tests:
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_ALARM_LIST_ES
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_ALARM_LIST_SPS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_ALARM_LIST_TFF
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_ATTEMPT_DATA_ES
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_ATTEMPT_DATA_SPS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_ATTEMPT_GROUP_ES
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_ATTEMPT_GROUP_SPS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_CEID_CT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_CEID_ES
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_CEID_SPS
+  tests:
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_CEID_TFF
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_COMMENTS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_COMMENTSCT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_COMMENTSSPS
+  tests:
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_COMMENTSTFF
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_CONTROL
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_CONTROLCT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_CONTROLERRORS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_CONTROLES
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_CONTROLSPS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_CONTROLTFF
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_DATE_MODULEDATAES
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_DATE_MODULEDATASPS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_DOWNCHANGES
+  tests:
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_DOWNCHANGESCT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_DOWNCHANGESETCH
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_DOWNCHANGESSPS
+  tests:
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_DOWNCHANGESTFF
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_DOWNCOMMENTSCT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_DOWNCOMMENTSETCH
+  tests:
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_DOWNCOMMENTSSPS
+  tests:
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_DOWNCOMMENTSTFF
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_DOWNTODOWN_TOOLS_SPS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_DOWN_LP_CAB_SPS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_DOWN_LP_ES
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_ENTITYSTATESCT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_ENTITYSTATESSPS
+  tests:
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_ENTITYSTATESTFF
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_ENTITY_ES
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_ENTITY_SPS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_ERRORSCT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_ERRORSES3
+  tests:
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_ERRORSETCH
+  tests:
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_ERRORSSPS
+  tests:
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_ERRORSTFF
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_LONG_DOWN_ES
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_LONG_DOWN_SPS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_MA
+  tests:
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_MACT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_MASPS
+  tests:
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_MATFF
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_MAWW31
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_MA_OUTPUTES
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_MA_OUTPUTSPS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_MODULEDATAES
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_MTBI_ES
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_MTBI_SPS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_NEW_CATEGORIESCT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_NEW_CATEGORIESES
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_NEW_CATEGORIESTFF
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_NEW_DOWN_TOTAL_ES
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_NEW_DOWN_TOTAL_SPS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_OUTSES
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_OUTSSPS
+  tests:
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_PM2
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_PM2_2
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_PM3
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_PM3_2
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_PMA_COUNTSES
+  tests:
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_PMA_LIMITSES
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_PREFERREDPAIRLISTES
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_PROD_WIIINGS_OUTPUT_ES
+  tests:
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_PROD_WIIINGS_SITE_OUTPUT_ES
+  tests:
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_STAGE_AUTO_TOOL_LIST
+  tests:
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_STAGING_WIIINGS_OUTPUT_ES
+  tests:
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_STAGING_WIIINGS_SITE_OUTPUT_ES
+  tests:
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_STATES
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_STATESSPS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_SUBENT_MODULE_SPS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_SYSTEM_E
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_TALLI_ETCH
+  tests:
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_TELDEFINITIONS2023WW07
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_TEMPSPS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_TOOL_LIST_WW_ES
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_TOOL_LIST_WW_SPS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_TOTAL_ALARM_OUT_COUNT_ES
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_UE_DEFINITIONS_ES
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_UE_DEFINITIONS_SPS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_UPTIME_ES
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_UPTIME_SPS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_UP_ERRORS_SPS
+  tests:
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_UP_ERRORS_STAGING_ES
+  tests:
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_UP_ERRORS_STAGING_SPS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_UP_HOURS_ES
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_UP_HOURS_SPS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_WORK_ORDERS_ES
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_WW_ES
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_WW_MTB_ES
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_WW_MTB_SPS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__MADATA_SILVER_WW_SPS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__ROSETTA_CONSIGNMENT_TRANSACTION
+  tests:
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__SAPAPI_VBAP_BLANK_PROFIT_CENTER
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__SAPAPI_ZCDV_T_CMTU009_VBAK
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__SAPAPI_ZCDV_T_CMTU009_VBAK_HIST
+  tests:
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__SAPAPI_ZCDV_T_CMTU010_VBAP
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__SAPAPI_ZCDV_T_CMTU010_VBAP_HIST
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__SAPAPI_ZCDV_T_CMTU010_VBAP_SECT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__SAPAPI_ZCDV_T_CMTU011_VBEP
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__SAPAPI_ZCDV_T_CMTU011_VBEP_HIST
+  tests:
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__SAPAPI_ZCDV_T_CMTU012_LIKP
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__SAPAPI_ZCDV_T_CMTU012_LIKP_HIST
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__SAPAPI_ZCDV_T_CMTU013_LIPS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__SAPAPI_ZCDV_T_CMTU014_VBRK
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__SAPAPI_ZCDV_T_CMTU014_VBRK_HIST
+  tests:
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__SAPAPI_ZCDV_T_CMTU015_VBRP
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__SAPAPI_ZCDV_T_CMTU015_VBRP_HIST
+  tests:
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__SAPAPI_ZCDV_T_CMTU017_MARA
+  tests:
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__SAPAPI_ZCDV_T_CMTU019_MVKE
+  tests:
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__SAPAPI_ZCDV_T_CMTU020_KNA1
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Timestamp of ingestion job start
+- name: BRONZE__TEA_GCE_AFS__SAPAPI_ZCDV_T_CMTU021_KNVV
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Timestamp of ingestion job start
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 24
+- name: BRONZE__TEA_GCE_AFS__SAPAPI_ZCDV_T_CMTU023_TVAKT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__SAPAPI_ZCDV_T_CMTU026_MARC
+  tests:
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__SAPAPI_ZCDV_T_CMTU027_EKKO
+  tests:
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__SAPAPI_ZCDV_T_CMTU028_EKPO
+  tests:
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__SAPAPI_ZCDV_T_CMTU030_KONP
+  tests:
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__SAPAPI_ZCDV_T_CMTU031_A904
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__SAPAPI_ZCDV_T_CMTU032_A901
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__SAPAPI_ZCDV_T_CMTU033_A902
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__SAPAPI_ZCDV_T_CMTU040_PRPS
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Timestamp of ingestion job start
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 24
+- name: BRONZE__TEA_GCE_AFS__SAPAPI_ZCDV_T_CMTU053_BUT000
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__SAPAPI_ZCDV_T_CMTU061_LFA1
+  tests:
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__SAPAPI_ZCDV_T_CMTU069_VBKD
+  tests:
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__SAPAPI_ZCDV_T_CMTU082_A032
+  tests:
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__SAPAPI_ZCDV_T_CMTU083_A114
+  tests:
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__SAPAPI_ZCDV_T_CMTU084_A350
+  tests:
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__SAPAPI_ZCDV_T_CMTU085_A910
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__SAPAPI_ZCDV_T_CMTU086_A919
+  tests:
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__SAPAPI_ZCDV_T_CMTU098_LFB1
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__SAPAPI_ZCDV_T_CMTU100_LFM1
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Timestamp of ingestion job start
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 24
+- name: BRONZE__TEA_GCE_AFS__SAPAPI_ZCDV_T_CMTU191_FPLA
+  tests:
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__SAPAPI_ZCDV_T_CMTU192_FPLT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__SAPAPI_ZCDV_T_CMTU201_BUT0ID
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__SAPAPI_ZCDV_T_CMTU206_LFBW
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__SAPAPI_ZCDV_T_CMTU210_CDHDR
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Timestamp of ingestion job start
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 24
+- name: BRONZE__TEA_GCE_AFS__SAPAPI_ZCDV_T_CMTU229_A916
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__SAPAPI_ZCDV_T_CMTU241_A017
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__SAPH_PARTS_EXPORTIMPORT_CONTROL
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__SAPH_SAP_US_MMT_EV_MBEW
+  tests:
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__SAPH_SAP_US_SDT_EV_VBKD
+  tests:
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__SAPH_SAP_ZZM_EV_KONP
+  tests:
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__SHAREPOINT_CUSTOMER_GROUP_MAPPING
+  tests:
+  - has_data
+
+- name: BRONZE__TEA_GCE_AFS__SHAREPOINT_CUSTOMER_SITE_SERVICE_MANAGER_MAPPING
+  tests:
+  - has_data
+
+- name: BRONZE__TEA_GCE_AFS__SHAREPOINT_SERVICE_BUSINESS_UNIT_MAPPING
+  tests:
+  - has_data
+
+- name: BRONZE__TEA_GCE_AFS__SHAREPOINT_SERVICE_B_CODE_MAPPING
+  tests:
+  - has_data
+
+- name: BRONZE__TEA_GCE_AFS__TEACOMMON_EMPLOYEE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__TFF_ANALYTICS_ALARM
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__TFF_ANALYTICS_ALARMS_COMPLETE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__TFF_ANALYTICS_BUCKET
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__TFF_ANALYTICS_BUCKET_MAP
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__TFF_ANALYTICS_CEID
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__TFF_ANALYTICS_COMMENTS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__TFF_ANALYTICS_COMMENT_BUCKET
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__TFF_ANALYTICS_DATE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__TFF_ANALYTICS_DB_STATS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__TFF_ANALYTICS_DOWNTIME
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__TFF_ANALYTICS_DOWN_STATES
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__TFF_ANALYTICS_DOWN_STATES_OUTPUT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__TFF_ANALYTICS_DOWN_WINDOW
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__TFF_ANALYTICS_ECN_KEY
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__TFF_ANALYTICS_ENTITY
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__TFF_ANALYTICS_ENTITY_ALARMS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__TFF_ANALYTICS_ENTITY_CONFIG
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__TFF_ANALYTICS_ENTITY_FUTURE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__TFF_ANALYTICS_ENTITY_NON_INTEL
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__TFF_ANALYTICS_ENTITY_PROCESS_NODES
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__TFF_ANALYTICS_ENTITY_SOFTWARE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__TFF_ANALYTICS_ENTITY_WW
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__TFF_ANALYTICS_IMPACT_MAP
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__TFF_ANALYTICS_MA
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__TFF_ANALYTICS_MATERIAL_MASTER
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__TFF_ANALYTICS_MA_OUTPUT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__TFF_ANALYTICS_NCDR
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__TFF_ANALYTICS_NT333_ECN_TRACKER
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__TFF_ANALYTICS_NT333_GBOM
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__TFF_ANALYTICS_NT333_PM_PARTS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__TFF_ANALYTICS_OPPORTUNITY
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__TFF_ANALYTICS_PARTS_ORDER_HISTORY
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__TFF_ANALYTICS_PART_STOCK_OVERVIEW
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__TFF_ANALYTICS_PROCESS_NODES
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__TFF_ANALYTICS_RAW_CEID_DEFINITIONS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__TFF_ANALYTICS_RAW_COMMENTS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__TFF_ANALYTICS_RAW_DOWNCHANGES
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__TFF_ANALYTICS_RAW_DOWNCOMMENTS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__TFF_ANALYTICS_RAW_DOWNWINDOWS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__TFF_ANALYTICS_RAW_ENTITYSTATES
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__TFF_ANALYTICS_RAW_ERRORS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__TFF_ANALYTICS_RAW_MA
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__TFF_ANALYTICS_RAW_THICKNESS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__TFF_ANALYTICS_RHO_ECN_TRACKER
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__TFF_ANALYTICS_ROX_DEFECT_DATA
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__TFF_ANALYTICS_ROX_DEFECT_HEADER
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__TFF_ANALYTICS_ROX_ECN_TRACKER
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__TFF_ANALYTICS_SIRFIS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__TFF_ANALYTICS_SIRFIS_OPPORTUNITY
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__TFF_ANALYTICS_SIRFIS_OPPORTUNITY_GANTT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__TFF_ANALYTICS_TELINDY_PLUS_ECN_TOOL_TRACKER
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__TFF_ANALYTICS_TELINDY_PLUS_ECN_TRACKER
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__TFF_ANALYTICS_TELINDY_PLUS_GBOM
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__TFF_ANALYTICS_TELINDY_PLUS_PM_PARTS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__TFF_ANALYTICS_VFMFGID
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__TFF_ANALYTICS_WARRANTY_TRACKER_CEID
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__TFF_ANALYTICS_WARRANTY_TRACKER_CUST
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__TFF_ANALYTICS_WW
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__WISDOM_MAC_MAIN
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__WISDOM_SAP_SURB
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__WISDOM_TEA_MAC_LIST
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_GCE_AFS__WISDOM_WISDOM_SURB_PROGRESS
+  tests:
+  - has_data
+  - recently_run

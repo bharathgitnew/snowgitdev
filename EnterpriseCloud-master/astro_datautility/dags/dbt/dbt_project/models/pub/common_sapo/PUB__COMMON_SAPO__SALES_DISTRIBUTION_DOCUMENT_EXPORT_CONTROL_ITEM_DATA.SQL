@@ -1,0 +1,33 @@
+{{ config(
+        materialized='view',
+         alias='SALES_DISTRIBUTION_DOCUMENT_EXPORT_CONTROL_ITEM_DATA',
+         transient=false
+) }}
+
+with source_data as (
+    select
+        CLIENT,
+        SALES_AND_DISTRIBUTION_DOCUMENT_NUMBER,
+        ITEM_NUMBER,
+        LEGAL_REGULATION_FOR_LEGAL_CONTROL,
+        EXPORT_CONTROL_CLASS,
+        GROUPING_FOR_LEGAL_CONTROL,
+        LICENSE_TYPE,
+        INTERNAL_LICENSE_NUMBER,
+        EXCHANGE_RATE_FOR_EXPORT_LICENSE,
+        CURRENCY_OF_EXPORT_LICENSE,
+        CHANGE_INDICATOR_FOR_EXPORT_CONTROL,
+        BASIS_DOCUMENT_CATEGORY_FOR_FOREIGN_TRADE_PROCESSING,
+        SPECIAL_CHARACTERISTICS_CODE_FOR_GOODS,
+        DATA_FILTER_VALUE_FOR_DATA_AGING,
+		_CAPTUREDATETIME
+    from {{ ref('COMMON__SAPO__SALES_DISTRIBUTION_DOCUMENT_EXPORT_CONTROL_ITEM_DATA') }}
+),
+
+transform_data as (
+    select
+        *
+    from source_data
+)
+    
+select * from transform_data

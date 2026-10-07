@@ -1,0 +1,26 @@
+version: 2
+models:
+- name: ODS__LANSWEEPER__TBL_AD_COMPUTERS
+  description: Model LANSWEEPER TBL_AD_COMPUTERS file.
+- name: ODS__LANSWEEPER__TBL_AD_GROUPS
+  description: Model LANSWEEPER TBL_AD_GROUPS file.
+- name: ODS__LANSWEEPER__TBL_AD_MEMBERSHIP
+  description: Model LANSWEEPER TBL_AD_MEMBERSHIP file.
+- name: ODS__LANSWEEPER__TBL_AD_USERS
+  description: Model LANSWEEPER TBL_AD_USERS file.
+- name: ODS__LANSWEEPER__TBL_ASSETS
+  description: Model LANSWEEPER TBL_ASSETS file.
+- name: ODS__LANSWEEPER__TBL_ASSET_CUSTOM
+  description: Model LANSWEEPER TBL_ASSET_CUSTOM file.
+- name: ODS__LANSWEEPER__TBL_COMPUTER_SYSTEM
+  description: Model LANSWEEPER TBL_COMPUTER_SYSTEM file.
+- name: ODS__LANSWEEPER__TBL_PROCESSOR
+  description: Model LANSWEEPER TBL_PROCESSOR file.
+- name: ODS__LANSWEEPER__TBL_STATE
+  description: Model LANSWEEPER TBL_STATE file.
+- name: ODS__LANSWEEPER__TSYS_ASSET_TYPES
+  description: Model LANSWEEPER TSYS_ASSET_TYPES file.
+- name: ODS__LANSWEEPER__TSYS_IP_LOCATIONS
+  description: Model LANSWEEPER TSYS_IP_LOCATIONS file.
+- name: ODS__LANSWEEPER__TSYS_OS
+  description: Model LANSWEEPER TSYS_OS file.

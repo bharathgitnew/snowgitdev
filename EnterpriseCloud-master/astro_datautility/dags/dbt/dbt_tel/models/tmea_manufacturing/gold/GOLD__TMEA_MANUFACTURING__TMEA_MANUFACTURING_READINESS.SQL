@@ -1,0 +1,439 @@
+{{ config(
+    materialized='tel_incremental',
+	incremental_strategy='insert_overwrite',
+    alias='TMEA_MANUFACTURING_READINESS',
+    transient=false
+) }}
+
+
+with shortage as (
+    select
+        CLIENT,
+        SALES_ORDER_NUMBER_SORT_SEQUENCE,
+        REPORT_DATE,
+        HIERARCHY_LEVEL,
+        MATERIAL_LEVEL,
+        MATERIAL_NUMBER,
+        MATERIAL_DESCRIPTION,
+        PARENT_MAT_MATERIAL_NUMBER,
+        PARENT_MAKTX_MATERIAL_DESCRIPTION,
+        PLANT,
+        RECEIPT_REQUIREMENTS_DATE,
+        MRP_ELEMENT_NUMBER,
+        MRP_ELEMENT_ITEM,
+        SALES_AND_DISTRIBUTION_DOCUMENT_NUMBER,
+        QUANTITY_RECEIVED_OR_QUANTITY_REQUIRED,
+        BASE_UNIT_OF_MEASURE,
+        DELNR_MRP_ELEMENT_NUMBER,
+        DELPS_MRP_ELEMENT_ITEM,
+        DAT00_RECEIPT_REQUIREMENTS_DATE,
+        MRP_ELEMENT_DATA,
+        ACCOUNT_NUMBER_OF_VENDOR_OR_CREDITOR,
+        VENDOR_NAME,
+        ABBREVIATION_FOR_MRP_ELEMENT,
+        ITEM_DELIVERY_DATE,
+        DELIVERY_DATE_OF_VENDOR_CONFIRMATION,
+        EINDT_LAST_DELIVERY_DATE_OF_VENDOR_CONFIRMATION,
+        TEXT_LINE,
+        PRTXT_TEXT_LINE,
+        EXCEPTION_MESSAGE_PRIORITY,
+        EXCEPTION_MESSAGE_KEY,
+        EXCEPTION_MESSAGE_TEXT,
+        AUSSL_EXCEPTION_MESSAGE_KEY,
+        AUSLTSTK_EXCEPTION_MESSAGE_TEXT,
+        CROSS_PLANT_MATERIAL_STATUS,
+        PLANT_SPECIFIC_MATERIAL_STATUS,
+        MRP_CONTROLLER,
+        NAME_OF_MRP_CONTROLLER,
+        PROCUREMENT_TYPE,
+        SAFETY_STOCK,
+        TOTAL_REPLENISHMENT_LEAD_TIME_IN_WORKDAYS,
+        PLANNED_DELIVERY_TIME_IN_DAYS,
+        VALUATED_UNRESTRICTED_USE_STOCK,
+        STOCK_IN_QUALITY_INSPECTION,
+        TOTAL_OF_PLANNED_ISSUES,
+        PURCHASE_REQUISITIONS,
+        PURCHASE_ORDERS,
+        PRSHORT_TOTAL_OF_PLANNED_ISSUES,
+        POSHORT_TOTAL_OF_PLANNED_ISSUES,
+        _CAPTUREDATETIME
+    from
+        {{ ref('GOLD__TMEA_MANUFACTURING__TMEA_SHORTAGE_REPORT_DATA_WAREHOUSE') }} dw
+),
+VALUE_STREAM as (
+    select
+        PLANNED_ORDER_NUMBER,
+        PRODUCTION_ORDER_NUMBER,
+        SALES_DOCUMENT,
+        SALES_DOCUMENT_ITEM,
+        SALES_DOCUMENT_TYPE,
+        MATERIAL_NUMBER,
+        PRODUCT_TYPE_ABBREVIATION,
+        PRODUCT_TYPE,
+        CUSTOMER_NAME,
+        DOCUMENT_DATE,
+        SUPPLIER_PO_CREATION_DATE,
+        CUSTOMER_REQUESTED_DELIVERY_DATE,
+        PRODUCTION_SHIP_DATE,
+        PLANNED_ORDER_BASIC_START,
+        CHECKOUT_BASIC_START,
+        PLANNED_ORDER_FINISH,
+        CHECKOUT_BASIC_FINISH,
+        ORIGINAL_COMMIT_DATE,
+        CURRENT_COMMIT_DATE,
+        PLANNED_ORDER_MMR_BUILD_START,
+        SALES_ORDER_MMR_BUILD_START,
+        ACTUAL_SHIP_DATE
+    from
+        {{ ref('SILVER__TMEA_MANUFACTURING__PRODUCTION_VALUE_STREAM') }} vs
+),
+Quality as (
+    select
+        MATERIAL_NUMBER,
+        MATERIAL_DESCRIPTION,
+        PLANT,
+        STORAGE_LOCATION,
+        MOVEMENT_TYPE_INVENTORY_MANAGEMENT,
+        POSTING_DATE_IN_THE_DOCUMENT,
+        GOODS_RECEIPT_QUANTITY,
+        SUPPLIER_NUMBER,
+        SUPPLIER_NAME,
+        INSPECTION_LOT_NUMBER,
+        NUMBER_OF_MATERIAL_DOCUMENT,
+        ITEM_IN_MATERIAL_DOCUMENT,
+        MATERIAL_DOCUMENT_YEAR,
+        dateadd(day, - day(current_date), current_date) AS LastMonth,
+        LAST_DAY(
+            DATE_TRUNC('month', CURRENT_DATE) + INTERVAL '-6 month' - INTERVAL '1 day'
+        ) AS FirstMonth,
+    from
+        {{ ref('SILVER__TMEA_MANUFACTURING__GOOD_RECEIPT_RECEIVABLES') }} rr
+    where
+        rr.POSTING_DATE_IN_THE_DOCUMENT between FirstMonth
+        and LastMonth
+),
+agg_quality as (
+    select
+        quality.material_number as material_number,
+        sum(quality.GOODS_RECEIPT_QUANTITY) as Quality_qty_Reveived
+    from
+        quality as quality
+    group by
+        quality.material_number
+),
+Final_agg_quality as (
+    select
+        Distinct agg_quality.MATERIAL_NUMBER,
+        sum(agg_quality.Quality_qty_Reveived) as TOTAL_Quality_qty_Reveived
+    FROM
+        agg_quality AS agg_quality
+    GROUP BY
+        agg_quality.MATERIAL_NUMBER
+),
+QN as (
+    select
+        PHASE,
+        QUALITY_NOTIFICATIONS,
+        NOTIFICATION_TYPE,
+        CODE_GROUP_CODING,
+        REJECT_QTY,
+        DEFECTIVE_QUANTITY_INTERNAL,
+        COMPLAINT_QUANTITY,
+        MATERIAL_NUMBER,
+        MATERIAL_DESCRIPTION,
+        SUPPLIER_NUMBER,
+        SUPPLIER,
+        DATE_ON_WHICH_RECORD_WAS_CREATED,
+        NUMBER_OF_MATERIAL_DOCUMENT,
+        PURCHASING_DOCUMENT_NUMBER,
+        ITEM_NUMBER_OF_PURCHASING_DOCUMENT,
+        dateadd(day, - day(current_date), current_date) AS LastMonth,
+        LAST_DAY(
+            DATE_TRUNC('month', CURRENT_DATE) + INTERVAL '-6 month' - INTERVAL '1 day'
+        ) AS FirstMonth,
+    from
+        {{ ref('SILVER__TMEA_MANUFACTURING__SUPPLIER_QUALITY_NOTIFICATIONS') }} qns
+    where
+        qns.DATE_ON_WHICH_RECORD_WAS_CREATED between FirstMonth
+        and LastMonth
+),
+agg_qn as (
+    select
+        qn.material_number as material_number,
+        sum(qn.REJECT_QTY) as QN_qty_rejected
+    from
+        qn as qn
+    group by
+        qn.material_number
+),
+Final_agg_qn as (
+    select
+        Distinct agg_qn.MATERIAL_NUMBER,
+        sum(agg_qn.QN_qty_rejected) as TOTAL_QN_qty_rejected
+    FROM
+        agg_qn AS agg_qn
+    GROUP BY
+        agg_qn.MATERIAL_NUMBER
+),
+DATA_SOURCE as (
+    select
+        shortage.MATERIAL_NUMBER,
+        shortage.MATERIAL_DESCRIPTION,
+        shortage.PARENT_MAT_MATERIAL_NUMBER AS Higher_Level_Mat,
+        shortage.PARENT_MAKTX_MATERIAL_DESCRIPTION AS Higher_Level_Mat_Desc,
+        shortage.PLANT,
+        shortage.RECEIPT_REQUIREMENTS_DATE,
+        shortage.MRP_ELEMENT_NUMBER,
+        shortage.MRP_ELEMENT_ITEM,
+        shortage.SALES_AND_DISTRIBUTION_DOCUMENT_NUMBER AS SALES_ORDER,
+        shortage.QUANTITY_RECEIVED_OR_QUANTITY_REQUIRED AS Rec_reqd_quantity,
+        shortage.BASE_UNIT_OF_MEASURE,
+        shortage.DELNR_MRP_ELEMENT_NUMBER,
+        shortage.DELPS_MRP_ELEMENT_ITEM,
+        shortage.DAT00_RECEIPT_REQUIREMENTS_DATE AS Latest_Receipt_Date,
+        shortage.MRP_ELEMENT_DATA,
+        shortage.ACCOUNT_NUMBER_OF_VENDOR_OR_CREDITOR AS SUPLLIER,
+        shortage.VENDOR_NAME AS SUPPLIER_NAME,
+        shortage.ABBREVIATION_FOR_MRP_ELEMENT AS MRP_ELEMENT,
+        shortage.ITEM_DELIVERY_DATE,
+        shortage.TEXT_LINE AS PO_PReq_Line_Item_Planning_Text,
+        shortage.CROSS_PLANT_MATERIAL_STATUS,
+        shortage.PLANT_SPECIFIC_MATERIAL_STATUS,
+        shortage.MRP_CONTROLLER,
+        shortage.NAME_OF_MRP_CONTROLLER,
+        shortage.PROCUREMENT_TYPE,
+        shortage.TOTAL_REPLENISHMENT_LEAD_TIME_IN_WORKDAYS,
+        shortage.PLANNED_DELIVERY_TIME_IN_DAYS,
+        VALUE_STREAM.PRODUCT_TYPE_ABBREVIATION,
+        VALUE_STREAM.PRODUCT_TYPE,
+        VALUE_STREAM.CUSTOMER_NAME,
+        VALUE_STREAM.SALES_DOCUMENT,
+        VALUE_STREAM.MATERIAL_NUMBER as TOOL_ID,
+        VALUE_STREAM.PLANNED_ORDER_MMR_BUILD_START AS PLANNED_MMR_DATE,
+        VALUE_STREAM.SALES_ORDER_MMR_BUILD_START AS PROD_MMR_DATE,
+        VALUE_STREAM.CHECKOUT_BASIC_START AS PROD_SOC_DATE,
+        VALUE_STREAM.PLANNED_ORDER_BASIC_START AS PLANNED_SOC_DATE,
+        CASE
+            WHEN PROD_MMR_DATE is null then PLANNED_MMR_DATE
+            else PROD_MMR_DATE
+        end AS MMR_DATE,
+        CASE
+            WHEN PROD_SOC_DATE is null then PLANNED_SOC_DATE
+            else PROD_SOC_DATE
+        end AS SOC_DATE,
+        zeroifnull(TOTAL_Quality_qty_Reveived) as TOTAL_Quality_qty_Reveived,
+        zeroifnull(TOTAL_QN_qty_rejected) as TOTAL_QN_qty_rejected,
+        case
+            when TOTAL_Quality_qty_Reveived - TOTAL_QN_qty_rejected < 0 then 0
+            else cast(
+                (
+                    TOTAL_Quality_qty_Reveived - TOTAL_QN_qty_rejected
+                ) / TOTAL_Quality_qty_Reveived as decimal (10, 2)
+            )
+        end as YIELD_RATE,
+        case
+            when YIELD_RATE <= 0.8 then 'Quality Risk'
+            else ''
+        end as Quality_risk
+    from
+        shortage as shortage
+        join VALUE_STREAM as VALUE_STREAM on VALUE_STREAM.SALES_DOCUMENT = shortage.SALES_AND_DISTRIBUTION_DOCUMENT_NUMBER
+        left join Final_agg_quality as Final_agg_quality on Final_agg_quality.material_number = shortage.material_number
+        left join Final_agg_qn as Final_agg_qn on Final_agg_qn.material_number = shortage.material_number
+),
+DATA_FORMAT AS (
+    SELECT
+        DATA_SOURCE.TOOL_ID,
+        DATA_SOURCE.MATERIAL_NUMBER,
+        DATA_SOURCE.MATERIAL_DESCRIPTION,
+        DATA_SOURCE.Higher_Level_Mat,
+        DATA_SOURCE.Higher_Level_Mat_Desc,
+        DATA_SOURCE.PLANT,
+        DATA_SOURCE.RECEIPT_REQUIREMENTS_DATE,
+        DATA_SOURCE.MRP_ELEMENT_NUMBER,
+        DATA_SOURCE.MRP_ELEMENT_ITEM,
+        DATA_SOURCE.SALES_ORDER,
+        DATA_SOURCE.Rec_reqd_quantity,
+        DATA_SOURCE.BASE_UNIT_OF_MEASURE,
+        DATA_SOURCE.DELNR_MRP_ELEMENT_NUMBER,
+        DATA_SOURCE.DELPS_MRP_ELEMENT_ITEM,
+        DATA_SOURCE.Latest_Receipt_Date,
+        DATA_SOURCE.MRP_ELEMENT_DATA,
+        DATA_SOURCE.SUPLLIER,
+        DATA_SOURCE.SUPPLIER_NAME,
+        DATA_SOURCE.MRP_ELEMENT,
+        DATA_SOURCE.ITEM_DELIVERY_DATE,
+        DATA_SOURCE.PO_PReq_Line_Item_Planning_Text,
+        DATA_SOURCE.CROSS_PLANT_MATERIAL_STATUS,
+        DATA_SOURCE.PLANT_SPECIFIC_MATERIAL_STATUS,
+        DATA_SOURCE.MRP_CONTROLLER,
+        DATA_SOURCE.NAME_OF_MRP_CONTROLLER,
+        DATA_SOURCE.PROCUREMENT_TYPE,
+        DATA_SOURCE.TOTAL_REPLENISHMENT_LEAD_TIME_IN_WORKDAYS,
+        DATA_SOURCE.PLANNED_DELIVERY_TIME_IN_DAYS,
+        DATA_SOURCE.PRODUCT_TYPE_ABBREVIATION,
+        DATA_SOURCE.PRODUCT_TYPE,
+        DATA_SOURCE.CUSTOMER_NAME,
+        DATA_SOURCE.SALES_DOCUMENT,
+        DATA_SOURCE.PLANNED_MMR_DATE,
+        DATA_SOURCE.PROD_MMR_DATE,
+        DATA_SOURCE.PROD_SOC_DATE,
+        DATA_SOURCE.PLANNED_SOC_DATE,
+        DATA_SOURCE.TOTAL_Quality_qty_Reveived,
+        DATA_SOURCE.TOTAL_QN_qty_rejected,
+        DATA_SOURCE.YIELD_RATE,
+        DATA_SOURCE.Quality_risk,
+        MMR_DATE,
+        SOC_DATE,
+        case
+            when LATEST_RECEIPT_DATE > MMR_DATE then 'Risk to Plan' -- when
+            when LATEST_RECEIPT_DATE < current_date
+            and MRP_element = 'QM lot' then 'On Track'
+            when LATEST_RECEIPT_DATE > RECEIPT_REQUIREMENTS_DATE then 'Off Plan'
+            when LATEST_RECEIPT_DATE < current_date then 'Off Plan'
+            else 'On Track'
+        end as Line_Status,
+        CASE
+            WHEN PRODUCT_TYPE_ABBREVIATION = 'Z2' THEN 'ZETA'
+            WHEN PRODUCT_TYPE_ABBREVIATION = 'Z3' THEN 'ZETA'
+            WHEN PRODUCT_TYPE_ABBREVIATION = 'AV' THEN 'ACREVIA'
+            WHEN PRODUCT_TYPE_ABBREVIATION = 'UT' THEN 'UT PLUS'
+            WHEN PRODUCT_TYPE_ABBREVIATION = 'FN' THEN 'FINESTA'
+            WHEN PRODUCT_TYPE_ABBREVIATION = 'AN' THEN 'ANTARES'
+            WHEN PRODUCT_TYPE_ABBREVIATION = 'P2' THEN 'POSEIDON'
+        END AS SYSTEM_TYPE,
+        CASE
+            WHEN MRP_CONTROLLER IN (
+                '002',
+                '003',
+                '007',
+                '008',
+                '013',
+                '025',
+                '026',
+                '027',
+                '028',
+                '029',
+                '082'
+            ) THEN 'PURCHASING'
+            WHEN MRP_CONTROLLER IN ('19S', '209', '20P') THEN 'MANUALS'
+            ELSE 'PLANNING'
+        END AS MRP_CONTROLLER_TYPE
+    FROM
+        DATA_SOURCE
+),
+SOURCE_DATA as(
+ SELECT DISTINCT *
+from
+    DATA_FORMAT
+where
+    MRP_element != 'Stock'
+    and mrp_controller_type in ('MANUALS', 'PURCHASING')
+    AND NOT (MRP_ELEMENT) IN ('MatSub', 'OrdRes')
+),
+TRANSFORM_DATA AS (
+SELECT
+	'{{ invocation_id }}' AS _AUDIT_LOG_ID,
+	SHA2('hash_me') AS _ROW_HASH,
+	TOOL_ID,
+	MATERIAL_NUMBER,
+	MATERIAL_DESCRIPTION,
+	HIGHER_LEVEL_MAT,
+	HIGHER_LEVEL_MAT_DESC,
+	PLANT,
+	RECEIPT_REQUIREMENTS_DATE,
+	MRP_ELEMENT_NUMBER,
+	MRP_ELEMENT_ITEM,
+	SALES_ORDER,
+	REC_REQD_QUANTITY,
+	BASE_UNIT_OF_MEASURE,
+	DELNR_MRP_ELEMENT_NUMBER,
+	DELPS_MRP_ELEMENT_ITEM,
+	LATEST_RECEIPT_DATE,
+	MRP_ELEMENT_DATA,
+	SUPLLIER,
+	SUPPLIER_NAME,
+	MRP_ELEMENT,
+	ITEM_DELIVERY_DATE,
+	PO_PREQ_LINE_ITEM_PLANNING_TEXT,
+	CROSS_PLANT_MATERIAL_STATUS,
+	PLANT_SPECIFIC_MATERIAL_STATUS,
+	MRP_CONTROLLER,
+	NAME_OF_MRP_CONTROLLER,
+	PROCUREMENT_TYPE,
+	TOTAL_REPLENISHMENT_LEAD_TIME_IN_WORKDAYS,
+	PLANNED_DELIVERY_TIME_IN_DAYS,
+	PRODUCT_TYPE_ABBREVIATION,
+	PRODUCT_TYPE,
+	CUSTOMER_NAME,
+	SALES_DOCUMENT,
+	PLANNED_MMR_DATE,
+	PROD_MMR_DATE,
+	PROD_SOC_DATE,
+	PLANNED_SOC_DATE,
+	TOTAL_QUALITY_QTY_REVEIVED,
+	TOTAL_QN_QTY_REJECTED,
+	YIELD_RATE,
+	QUALITY_RISK,
+	MMR_DATE,
+	SOC_DATE,
+	LINE_STATUS,
+	SYSTEM_TYPE,
+	MRP_CONTROLLER_TYPE
+
+FROM SOURCE_DATA
+)
+
+,
+TYPE_DATA AS (
+select
+	CAST(_AUDIT_LOG_ID as VARCHAR(128)) as _AUDIT_LOG_ID,
+	CAST(_ROW_HASH as VARCHAR(128)) as _ROW_HASH,
+	TOOL_ID,
+	MATERIAL_NUMBER,
+	MATERIAL_DESCRIPTION,
+	HIGHER_LEVEL_MAT,
+	HIGHER_LEVEL_MAT_DESC,
+	PLANT,
+	CAST(RECEIPT_REQUIREMENTS_DATE as DATE) as RECEIPT_REQUIREMENTS_DATE,
+	MRP_ELEMENT_NUMBER,
+	MRP_ELEMENT_ITEM,
+	SALES_ORDER,
+	CAST(REC_REQD_QUANTITY as NUMBER(38,10)) as REC_REQD_QUANTITY,
+	BASE_UNIT_OF_MEASURE,
+	DELNR_MRP_ELEMENT_NUMBER,
+	DELPS_MRP_ELEMENT_ITEM,
+	CAST(LATEST_RECEIPT_DATE as DATE) as LATEST_RECEIPT_DATE,
+	MRP_ELEMENT_DATA,
+	SUPLLIER,
+	SUPPLIER_NAME,
+	MRP_ELEMENT,
+	CAST(ITEM_DELIVERY_DATE as DATE) as ITEM_DELIVERY_DATE,
+	PO_PREQ_LINE_ITEM_PLANNING_TEXT,
+	CROSS_PLANT_MATERIAL_STATUS,
+	PLANT_SPECIFIC_MATERIAL_STATUS,
+	MRP_CONTROLLER,
+	NAME_OF_MRP_CONTROLLER,
+	PROCUREMENT_TYPE,
+	CAST(TOTAL_REPLENISHMENT_LEAD_TIME_IN_WORKDAYS as NUMBER(38,0)) as TOTAL_REPLENISHMENT_LEAD_TIME_IN_WORKDAYS,
+	CAST(PLANNED_DELIVERY_TIME_IN_DAYS as NUMBER(38,0)) as PLANNED_DELIVERY_TIME_IN_DAYS,
+	PRODUCT_TYPE_ABBREVIATION,
+	PRODUCT_TYPE,
+	CUSTOMER_NAME,
+	SALES_DOCUMENT,
+	CAST(PLANNED_MMR_DATE as DATE) as PLANNED_MMR_DATE,
+	CAST(PROD_MMR_DATE as DATE) as PROD_MMR_DATE,
+	CAST(PROD_SOC_DATE as DATE) as PROD_SOC_DATE,
+	CAST(PLANNED_SOC_DATE as DATE) as PLANNED_SOC_DATE,
+	CAST(TOTAL_QUALITY_QTY_REVEIVED as NUMBER(38,10)) as TOTAL_QUALITY_QTY_REVEIVED,
+	CAST(TOTAL_QN_QTY_REJECTED as NUMBER(38,10)) as TOTAL_QN_QTY_REJECTED,
+	CAST(YIELD_RATE as NUMBER(38,10)) as YIELD_RATE,
+	QUALITY_RISK,
+	CAST(MMR_DATE as DATE) as MMR_DATE,
+	CAST(SOC_DATE as DATE) as SOC_DATE,
+	LINE_STATUS,
+	SYSTEM_TYPE,
+	CAST(MRP_CONTROLLER_TYPE as VARCHAR(10)) as MRP_CONTROLLER_TYPE
+from transform_data
+)
+SELECT * FROM TYPE_DATA

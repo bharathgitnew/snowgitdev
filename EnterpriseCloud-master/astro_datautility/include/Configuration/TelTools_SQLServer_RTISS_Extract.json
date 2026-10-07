@@ -1,0 +1,11 @@
+{
+    "RTISS": {
+        "DataSet1": {
+            "schema": "dbo",
+            "table": "v_RTISS_TPS_ForCoveo",
+            "Incremental": "NULL",
+            "sftablename": "TPS",
+            "filter": ""
+        }
+    }
+}

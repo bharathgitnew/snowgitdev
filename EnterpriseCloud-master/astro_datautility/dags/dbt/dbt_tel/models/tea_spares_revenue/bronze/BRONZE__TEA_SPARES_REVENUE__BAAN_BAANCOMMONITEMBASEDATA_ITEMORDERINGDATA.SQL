@@ -1,0 +1,232 @@
+/**********************************
+File built from dbtConvert.ps1
+parameters: 
+-filename C:\Sources\Repos\EnterpriseCloud\Snowflake\LZ_HVR-BAAN_2_ODS-BAAN\BAANCOMMONITEMBASEDATA_ITEMORDERINGDATA.SQL 
+-newFile C:\Sources\Repos\EnterpriseCloud\dbt\lz_to_ods\models\baan\BAANCOMMONITEMBASEDATA_ITEMORDERINGDATA.SQL 
+-materialized incremental
+-alias BAANCOMMONITEMBASEDATA_ITEMORDERINGDATA 
+-incremental_strategy merge
+-envVariable <<LZ>> 
+-sourceSchema BAAN_ORACLE_LIVE
+-sourceDatabase LZ_DEV
+-useDistinct no 
+model file generated on: 1/17/2022 12:52:48 PM
+***********************************/
+{{ config(
+    materialized='tel_incremental',
+    incremental_strategy='merge',
+    alias='BAAN_BAANCOMMONITEMBASEDATA_ITEMORDERINGDATA',
+    unique_key = ['ITEM']
+) }}
+
+
+with source_data as 
+(
+    SELECT 
+             SOURCETABLE._CAPTUREDATETIME                                                                                                        AS _CAPTUREDATETIME 
+            ,201                                                                                                                                   AS _COMPANYID 
+            ,"T$CRTC$U".CONSTANTDESCRIPTION                                                                                                        AS CRITICALDESCRIPTION 
+            ,CAST("T$CRTC$U" AS INT)                                                                                                               AS CRITICALID 
+            ,CAST(T$ECOQ AS NUMERIC(15,2))                                                                                                       AS ECONOMICORDERQUANTITY 
+            ,CAST(CASE WHEN T$FODT<= '1/1/1970' THEN NULL ELSE T$FODT  END AS DATETIME) AS FIRSTALLOWEDORDERDATE 
+            ,CAST(T$FIOQ AS NUMERIC(15,2))                                                                                                       AS FIXEDORDERQUANTITY 
+            ,NULLIF(RTRIM(LTRIM(SOURCETABLE.T$ITEM)),'')                                                                                         AS ITEM 
+            ,T$JITM.CONSTANTDESCRIPTION                                                                                                          AS JITITEMDESCRIPTION 
+            ,CAST(T$JITM AS INT)                                                                                                                 AS JITITEMID 
+            ,CAST(T$MAXS AS NUMERIC(15,2))                                                                                                       AS MAXIMUMINVENTORY 
+            ,CAST(T$MAOQ AS NUMERIC(15,2))                                                                                                       AS MAXIMUMORDERQUANTITY 
+            ,CAST(T$MIOQ AS NUMERIC(15,2))                                                                                                       AS MINIMUMORDERQUANTITY 
+            ,CAST(T$NOPR AS INT)                                                                                                                 AS NUMBEROFPERIODS 
+            ,CAST(T$OCST AS NUMERIC(15,2))                                                                                                       AS ORDER_COSTS 
+            ,CAST(T$OINT AS INT)                                                                                                                 AS ORDER_INTERVAL 
+            ,T$OMTH.CONSTANTDESCRIPTION                                                                                                          AS ORDER_METHODDESCRIPTION 
+            ,CAST(T$OMTH AS INT)                                                                                                                 AS ORDER_METHODID 
+            ,T$OPOL.CONSTANTDESCRIPTION                                                                                                          AS ORDER_POLICYDESCRIPTION 
+            ,CAST(T$OPOL AS INT)                                                                                                                 AS ORDER_POLICYID 
+            ,CAST(T$OQMF AS NUMERIC(15,2))                                                                                                       AS ORDER_QUANTITYMULTIPLEOF 
+            ,CAST(T$POQA AS NUMERIC(15,2))                                                                                                       AS ORDER_QUANTITYPROJECT 
+            ,T$OSYS.CONSTANTDESCRIPTION                                                                                                          AS ORDER_SYSTEMDESCRIPTION 
+            ,CAST(T$OSYS AS INT)                                                                                                                 AS ORDER_SYSTEMID 
+            ,T$PTYP.CONSTANTDESCRIPTION                                                                                                          AS PERIODTYPEDESCRIPTION 
+            ,CAST(T$PTYP AS INT)                                                                                                                 AS PERIODTYPEID 
+            ,T$PLPL.CONSTANTDESCRIPTION                                                                                                          AS PLANNEDBYSCSPLANNERDESCRIPTION 
+            ,CAST(T$PLPL AS INT)                                                                                                                 AS PLANNEDBYSCSPLANNERID 
+            ,NULLIF(RTRIM(LTRIM(SOURCETABLE.T$CPLB)),'')                                                                                         AS PLANNER 
+            ,CAST(T$RPOQ AS NUMERIC(15,2))                                                                                                       AS RECOMMENDEDORDERQUANTITYPROJECT 
+            ,CAST(T$REOP AS NUMERIC(15,2))                                                                                                       AS RE_ORDERPOINT 
+            ,CAST(T$SFST AS NUMERIC(15,2))                                                                                                       AS SAFETYSTOCK 
+            ,CAST(T$SFTM AS INT)                                                                                                                 AS SAFETYTIME 
+            ,NULLIF(RTRIM(LTRIM(SOURCETABLE.T$CSPD)),'')                                                                                         AS SEASONPATTERNFORDEMAND 
+            ,NULLIF(RTRIM(LTRIM(SOURCETABLE.T$CSPS)),'')                                                                                         AS SEASONPATTERNFORSAFETYSTOCK 
+            ,T$SSSC.CONSTANTDESCRIPTION                                                                                                          AS SEQUENCEDSHIPPINGSCHEDULESDESCRIPTION 
+            ,CAST(T$SSSC AS INT)                                                                                                                 AS SEQUENCEDSHIPPINGSCHEDULESID 
+            ,CAST(T$SERV AS TINYINT)                                                                                                             AS SERVICELEVEL 
+            ,T$SSCH.CONSTANTDESCRIPTION                                                                                                          AS SHIPPINGSCHEDULESDESCRIPTION 
+            ,CAST(T$SSCH AS INT)                                                                                                                 AS SHIPPINGSCHEDULESID 
+            ,T$AUSO.CONSTANTDESCRIPTION                                                                                                          AS UPDATEINVENTORYORDERDATADESCRIPTION 
+            ,CAST(T$AUSO AS INT)                                                                                                                 AS UPDATEINVENTORYORDERDATAID 
+            ,T$UAOQ.CONSTANTDESCRIPTION                                                                                                          AS UPDATEORDERQUANTITYPROJECTDESCRIPTION 
+            ,CAST(T$UAOQ AS INT)                                                                                                                 AS UPDATEORDERQUANTITYPROJECTID 
+             
+        FROM {{ source("BAAN_ORACLE_LIVE", "TTCIBD200201") }} AS SOURCETABLE  
+            /*CRITICALU*/ 
+            LEFT OUTER JOIN {{ source("BAAN", "ENUMERATIONS") }} AS "T$CRTC$U" 
+             ON   "T$CRTC$U".TABLENAME  = 'TCIBD200' 
+              AND "T$CRTC$U".COLUMNNAME = 'T$CRTC.U' 
+              AND "T$CRTC$U".CONSTANT   = SOURCETABLE."T$CRTC$U" 
+            /*JITITEM*/ 
+            LEFT OUTER JOIN {{ source("BAAN", "ENUMERATIONS") }} AS T$JITM 
+             ON   T$JITM.TABLENAME  = 'TCIBD200' 
+              AND T$JITM.COLUMNNAME = 'T$JITM' 
+              AND T$JITM.CONSTANT   = SOURCETABLE.T$JITM 
+            /*ORDERMETHOD*/ 
+            LEFT OUTER JOIN {{ source("BAAN", "ENUMERATIONS") }} AS T$OMTH 
+             ON   T$OMTH.TABLENAME  = 'TCIBD200' 
+              AND T$OMTH.COLUMNNAME = 'T$OMTH' 
+              AND T$OMTH.CONSTANT   = SOURCETABLE.T$OMTH 
+            /*ORDERPOLICY*/ 
+            LEFT OUTER JOIN {{ source("BAAN", "ENUMERATIONS") }} AS T$OPOL 
+             ON   T$OPOL.TABLENAME  = 'TCIBD200' 
+              AND T$OPOL.COLUMNNAME = 'T$OPOL' 
+              AND T$OPOL.CONSTANT   = SOURCETABLE.T$OPOL 
+            /*ORDERSYSTEM*/ 
+            LEFT OUTER JOIN {{ source("BAAN", "ENUMERATIONS") }} AS T$OSYS 
+             ON   T$OSYS.TABLENAME  = 'TCIBD200' 
+              AND T$OSYS.COLUMNNAME = 'T$OSYS' 
+              AND T$OSYS.CONSTANT   = SOURCETABLE.T$OSYS 
+            /*PERIODTYPE*/ 
+            LEFT OUTER JOIN {{ source("BAAN", "ENUMERATIONS") }} AS T$PTYP 
+             ON   T$PTYP.TABLENAME  = 'TCIBD200' 
+              AND T$PTYP.COLUMNNAME = 'T$PTYP' 
+              AND T$PTYP.CONSTANT   = SOURCETABLE.T$PTYP 
+            /*PLANNEDBYSCSPLANNER*/ 
+            LEFT OUTER JOIN {{ source("BAAN", "ENUMERATIONS") }} AS T$PLPL 
+             ON   T$PLPL.TABLENAME  = 'TCIBD200' 
+              AND T$PLPL.COLUMNNAME = 'T$PLPL' 
+              AND T$PLPL.CONSTANT   = SOURCETABLE.T$PLPL 
+            /*SEQUENCEDSHIPPINGSCHEDULES*/ 
+            LEFT OUTER JOIN {{ source("BAAN", "ENUMERATIONS") }} AS T$SSSC 
+             ON   T$SSSC.TABLENAME  = 'TCIBD200' 
+              AND T$SSSC.COLUMNNAME = 'T$SSSC' 
+              AND T$SSSC.CONSTANT   = SOURCETABLE.T$SSSC 
+            /*SHIPPINGSCHEDULES*/ 
+            LEFT OUTER JOIN {{ source("BAAN", "ENUMERATIONS") }} AS T$SSCH 
+             ON   T$SSCH.TABLENAME  = 'TCIBD200' 
+              AND T$SSCH.COLUMNNAME = 'T$SSCH' 
+              AND T$SSCH.CONSTANT   = SOURCETABLE.T$SSCH 
+            /*UPDATEINVENTORYORDERDATA*/ 
+            LEFT OUTER JOIN {{ source("BAAN", "ENUMERATIONS") }} AS T$AUSO 
+             ON   T$AUSO.TABLENAME  = 'TCIBD200' 
+              AND T$AUSO.COLUMNNAME = 'T$AUSO' 
+              AND T$AUSO.CONSTANT   = SOURCETABLE.T$AUSO 
+            /*UPDATEORDERQUANTITYPROJECT*/ 
+            LEFT OUTER JOIN {{ source("BAAN", "ENUMERATIONS") }} AS T$UAOQ 
+             ON   T$UAOQ.TABLENAME  = 'TCIBD200' 
+              AND T$UAOQ.COLUMNNAME = 'T$UAOQ' 
+              AND T$UAOQ.CONSTANT   = SOURCETABLE.T$UAOQ 
+        {% if is_tel_incremental() %} WHERE FALSE AND SOURCETABLE._CAPTUREDATETIME >= (SELECT COALESCE(MAX(_CAPTUREDATETIME),'1900-01-01') FROM {{ this }}) {% endif %} 
+        )
+,transform_data as
+(
+    SELECT 
+        '{{ invocation_id }}' AS _AUDIT_LOG_ID,
+        SHA2('hash_me') as _ROW_HASH, -- Adds column to table on full refresh.  
+        source_data._CAPTUREDATETIME AS _CAPTUREDATETIME, 
+        source_data._COMPANYID AS _COMPANYID, 
+        source_data.CRITICALDESCRIPTION AS CRITICALDESCRIPTION, 
+        source_data.CRITICALID AS CRITICALID, 
+        source_data.ECONOMICORDERQUANTITY AS ECONOMICORDERQUANTITY, 
+        source_data.FIRSTALLOWEDORDERDATE AS FIRSTALLOWEDORDERDATE, 
+        source_data.FIXEDORDERQUANTITY AS FIXEDORDERQUANTITY, 
+        source_data.ITEM AS ITEM, 
+        source_data.JITITEMDESCRIPTION AS JITITEMDESCRIPTION, 
+        source_data.JITITEMID AS JITITEMID, 
+        source_data.MAXIMUMINVENTORY AS MAXIMUMINVENTORY, 
+        source_data.MAXIMUMORDERQUANTITY AS MAXIMUMORDERQUANTITY, 
+        source_data.MINIMUMORDERQUANTITY AS MINIMUMORDERQUANTITY, 
+        source_data.NUMBEROFPERIODS AS NUMBEROFPERIODS, 
+        source_data.ORDER_COSTS AS ORDER_COSTS, 
+        source_data.ORDER_INTERVAL AS ORDER_INTERVAL, 
+        source_data.ORDER_METHODDESCRIPTION AS ORDER_METHODDESCRIPTION, 
+        source_data.ORDER_METHODID AS ORDER_METHODID, 
+        source_data.ORDER_POLICYDESCRIPTION AS ORDER_POLICYDESCRIPTION, 
+        source_data.ORDER_POLICYID AS ORDER_POLICYID, 
+        source_data.ORDER_QUANTITYMULTIPLEOF AS ORDER_QUANTITYMULTIPLEOF, 
+        source_data.ORDER_QUANTITYPROJECT AS ORDER_QUANTITYPROJECT, 
+        source_data.ORDER_SYSTEMDESCRIPTION AS ORDER_SYSTEMDESCRIPTION, 
+        source_data.ORDER_SYSTEMID AS ORDER_SYSTEMID, 
+        source_data.PERIODTYPEDESCRIPTION AS PERIODTYPEDESCRIPTION, 
+        source_data.PERIODTYPEID AS PERIODTYPEID, 
+        source_data.PLANNEDBYSCSPLANNERDESCRIPTION AS PLANNEDBYSCSPLANNERDESCRIPTION, 
+        source_data.PLANNEDBYSCSPLANNERID AS PLANNEDBYSCSPLANNERID, 
+        source_data.PLANNER AS PLANNER, 
+        source_data.RECOMMENDEDORDERQUANTITYPROJECT AS RECOMMENDEDORDERQUANTITYPROJECT, 
+        source_data.RE_ORDERPOINT AS RE_ORDERPOINT, 
+        source_data.SAFETYSTOCK AS SAFETYSTOCK, 
+        source_data.SAFETYTIME AS SAFETYTIME, 
+        source_data.SEASONPATTERNFORDEMAND AS SEASONPATTERNFORDEMAND, 
+        source_data.SEASONPATTERNFORSAFETYSTOCK AS SEASONPATTERNFORSAFETYSTOCK, 
+        source_data.SEQUENCEDSHIPPINGSCHEDULESDESCRIPTION AS SEQUENCEDSHIPPINGSCHEDULESDESCRIPTION, 
+        source_data.SEQUENCEDSHIPPINGSCHEDULESID AS SEQUENCEDSHIPPINGSCHEDULESID, 
+        source_data.SERVICELEVEL AS SERVICELEVEL, 
+        source_data.SHIPPINGSCHEDULESDESCRIPTION AS SHIPPINGSCHEDULESDESCRIPTION, 
+        source_data.SHIPPINGSCHEDULESID AS SHIPPINGSCHEDULESID, 
+        source_data.UPDATEINVENTORYORDERDATADESCRIPTION AS UPDATEINVENTORYORDERDATADESCRIPTION, 
+        source_data.UPDATEINVENTORYORDERDATAID AS UPDATEINVENTORYORDERDATAID, 
+        source_data.UPDATEORDERQUANTITYPROJECTDESCRIPTION AS UPDATEORDERQUANTITYPROJECTDESCRIPTION, 
+        source_data.UPDATEORDERQUANTITYPROJECTID AS UPDATEORDERQUANTITYPROJECTID
+        FROM source_data
+        )
+,type_data as 
+(
+    select
+        cast(_CAPTUREDATETIME as TIMESTAMP_LTZ(9)) as _FILEDATE,
+        _AUDIT_LOG_ID,
+        _ROW_HASH,
+        cast(_CAPTUREDATETIME as TIMESTAMP_LTZ(9)) as _CAPTUREDATETIME,
+        cast(_COMPANYID as NUMBER(3,0)) as _COMPANYID,
+        CRITICALDESCRIPTION,
+        cast(CRITICALID as NUMBER(38,0)) as CRITICALID,
+        cast(ECONOMICORDERQUANTITY as NUMBER(15,2)) as ECONOMICORDERQUANTITY,
+        cast(FIRSTALLOWEDORDERDATE as TIMESTAMP_NTZ(9)) as FIRSTALLOWEDORDERDATE,
+        cast(FIXEDORDERQUANTITY as NUMBER(15,2)) as FIXEDORDERQUANTITY,
+        ITEM,
+        JITITEMDESCRIPTION,
+        cast(JITITEMID as NUMBER(38,0)) as JITITEMID,
+        cast(MAXIMUMINVENTORY as NUMBER(15,2)) as MAXIMUMINVENTORY,
+        cast(MAXIMUMORDERQUANTITY as NUMBER(15,2)) as MAXIMUMORDERQUANTITY,
+        cast(MINIMUMORDERQUANTITY as NUMBER(15,2)) as MINIMUMORDERQUANTITY,
+        cast(NUMBEROFPERIODS as NUMBER(38,0)) as NUMBEROFPERIODS,
+        cast(ORDER_COSTS as NUMBER(15,2)) as ORDER_COSTS,
+        cast(ORDER_INTERVAL as NUMBER(38,0)) as ORDER_INTERVAL,
+        ORDER_METHODDESCRIPTION,
+        cast(ORDER_METHODID as NUMBER(38,0)) as ORDER_METHODID,
+        ORDER_POLICYDESCRIPTION,
+        cast(ORDER_POLICYID as NUMBER(38,0)) as ORDER_POLICYID,
+        cast(ORDER_QUANTITYMULTIPLEOF as NUMBER(15,2)) as ORDER_QUANTITYMULTIPLEOF,
+        cast(ORDER_QUANTITYPROJECT as NUMBER(15,2)) as ORDER_QUANTITYPROJECT,
+        ORDER_SYSTEMDESCRIPTION,
+        cast(ORDER_SYSTEMID as NUMBER(38,0)) as ORDER_SYSTEMID,
+        PERIODTYPEDESCRIPTION,
+        cast(PERIODTYPEID as NUMBER(38,0)) as PERIODTYPEID,
+        PLANNEDBYSCSPLANNERDESCRIPTION,
+        cast(PLANNEDBYSCSPLANNERID as NUMBER(38,0)) as PLANNEDBYSCSPLANNERID,
+        PLANNER,
+        cast(RECOMMENDEDORDERQUANTITYPROJECT as NUMBER(15,2)) as RECOMMENDEDORDERQUANTITYPROJECT,
+        cast(RE_ORDERPOINT as NUMBER(15,2)) as RE_ORDERPOINT,
+        cast(SAFETYSTOCK as NUMBER(15,2)) as SAFETYSTOCK,
+        cast(SAFETYTIME as NUMBER(38,0)) as SAFETYTIME,
+        SEASONPATTERNFORDEMAND,
+        SEASONPATTERNFORSAFETYSTOCK,
+        SEQUENCEDSHIPPINGSCHEDULESDESCRIPTION,
+        cast(SEQUENCEDSHIPPINGSCHEDULESID as NUMBER(38,0)) as SEQUENCEDSHIPPINGSCHEDULESID,
+        cast(SERVICELEVEL as NUMBER(38,0)) as SERVICELEVEL,
+        SHIPPINGSCHEDULESDESCRIPTION,
+        cast(SHIPPINGSCHEDULESID as NUMBER(38,0)) as SHIPPINGSCHEDULESID,
+        UPDATEINVENTORYORDERDATADESCRIPTION,
+        cast(UPDATEINVENTORYORDERDATAID as NUMBER(38,0)) as UPDATEINVENTORYORDERDATAID,
+        UPDATEORDERQUANTITYPROJECTDESCRIPTION,
+        cast(UPDATEORDERQUANTITYPROJECTID as NUMBER(38,0)) as UPDATEORDERQUANTITYPROJECTID
+    from transform_data
+    )
+select * from type_data

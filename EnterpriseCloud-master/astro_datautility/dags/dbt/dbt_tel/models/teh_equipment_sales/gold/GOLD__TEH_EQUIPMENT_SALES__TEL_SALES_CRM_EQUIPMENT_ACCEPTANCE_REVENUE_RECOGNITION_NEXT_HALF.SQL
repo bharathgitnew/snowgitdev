@@ -1,0 +1,127 @@
+{{ config(
+      materialized='tel_incremental',
+       incremental_strategy='insert_overwrite',
+      alias='TEL_SALES_CRM_EQUIPMENT_ACCEPTANCE_REVENUE_RECOGNITION_NEXT_HALF',
+      transient=false
+) }}
+ 
+with equi_acceptance_base_reve_recognition as 
+(
+    SELECT * FROM {{ ref('GOLD__TEH_EQUIPMENT_SALES__SALES_CRM_EQUIPMENT_ACCEPTANCE_BASE_REVENUE_RECOGNITION') }}
+)
+
+,source_data as 
+(
+    SELECT *
+    FROM equi_acceptance_base_reve_recognition
+    WHERE Sign_Off_FK_Date >= Beginning_of_Next_FY_Half
+    AND Sign_Off_FK_Date <= DATEADD(month, 1, End_of_Next_FY_Half)
+)
+
+,transform_data as 
+(
+    SELECT
+        '{{ invocation_id }}' AS _AUDIT_LOG_ID,
+        SHA2('hash_me') AS _ROW_HASH,
+        SALES_DOCUMENT_GUID,
+        OPPORTUNITY_ID_DISTINCT,
+        SALES_DOCUMENT_ITEM_NO_ALL,
+        PROJECT_NO_DISTINCT,
+        SALES_ORDER_NO_DISTINCT,
+        SALES_ACCOUNT,
+        SALES_REGION,
+        SOLD_TO_PARTY,
+        END_USER,
+        FAB,
+        BU,
+        BU_GROUP,
+        SUB_BU,
+        SALES_CATEGORY_GROUP_DISTINCT,
+        SALES_CATEGORY_DISTINCT,
+        PRIMARY_SALES_CATEGORY,
+        MATERIAL_TYPE_DISTINCT,
+        ORDER_ITEM_OPPORTUNITY,
+        ORDER_ITEM_SALES_DOCUMENT_ALL,
+        OPPORTUNITY_TITLE_FREE_TEXT,
+        MODEL,
+        ADJUSTED_SERIAL_NO_DISTINCT,
+        SERIAL_NO,
+        PM_SERIAL_NO,
+        FIRST_SERIAL_NO,
+        FIRST_PM_SERIAL_NO,
+        CUSTOMER_TOOL_ID,
+        SALES_REPORTING_FLAG,
+        IS_PLACEHOLDER,
+        END_USER_BOOKING_DATE_BU,
+        IS_BOOKING_ACTUAL,
+        QUOTE_NO,
+        PURCHASE_ORDER_NO,
+        IS_LOANER,
+        LOAN_EXPIRATION_DATE,
+        VPA,
+        QUANTITY,
+        SHIP_DATE_MAX,
+        SHIP_DATE_PLUS_120_MAX,
+        SCH_SIGN_OFF_DATE_BU_MAX,
+        SCH_SIGN_OFF_DATE_BU_ALL,
+        SCH_SIGN_OFF_DATE_ACCOUNT_MAX,
+        SCH_SIGN_OFF_DATE_ACCOUNT_ALL,
+        SCHEDULED_ACCEPTANCE_TSR_SIGN_OFF_DATE_FE,
+        ACTUAL_ACCEPTANCE_TSR_SIGN_OFF_DATE,
+        IS_SIGN_OFF_ACTUAL,
+        IS_SIGN_OFF_WAVED,
+        EST_FLAG,
+        END_USER_SALES_DATE_BU_MAX,
+        END_USER_SALES_DATE_BU_ALL,
+        END_USER_SALES_DATE_ACCOUNT_MAX,
+        END_USER_SALES_DATE_ACCOUNT_ALL,
+        ACTUAL_SALES_DATE_MAX,
+        ACTUAL_SALES_DATE_ALL,
+        REVENUE_RECOGNITION_STATUS_DISTINCT,
+        REVENUE_RECOGNITION_STATUS_ALL,
+        BOOKING_SALES_STATUS,
+        SALES_AMOUNT_JPY_ADJUSTED_SUMMED,
+        END_USER_SALES_AMOUNT_JPY_SUMMED,
+        REVENUE_RECOGNITION_CRITERIA_SHORT,
+        ACCOUNT_SALES_PERSON,
+        BU_SALES_PERSON,
+        BU_COMMENTS,
+        ACCOUNT_COMMENTS,
+        SALES_COMMENTS_TO_SAP,
+        ASSISTANTS_COMMENTS_FROM_SAP,
+        SIGN_OFF_FK_DATE,
+        SIGN_OFF_FY,
+        SIGN_OFF_FY_HALF,
+        SIGN_OFF_FY_Q,
+        BEGINNING_OF_SIGN_OFF_FY_Q,
+        END_OF_SIGN_OFF_FY_Q,
+        BEGINNING_OF_CURRENT_FY,
+        END_OF_CURRENT_FY,
+        BEGINNING_OF_CURRENT_FY_HALF,
+        END_OF_CURRENT_FY_HALF,
+        BEGINNING_OF_CURRENT_FY_Q,
+        END_OF_CURRENT_FY_Q,
+        BEGINNING_OF_NEXT_FY,
+        END_OF_NEXT_FY,
+        BEGINNING_OF_NEXT_FY_HALF,
+        END_OF_NEXT_FY_HALF,
+        BEGINNING_OF_NEXT_FY_Q,
+        END_OF_NEXT_FY_Q,
+        END_USER_CODE,
+        _5_DIGITS_OLD_END_USER_CODE,
+        DATA_SNAPSHOT,
+        DATA_SNAPSHOT_TIMESTAMP,
+        BOOKING_CONFIDENCE_ACCOUNT,
+        BOOKING_CONFIDENCE_BU,
+        ACCOUNT_REVENUE_FY,
+        ACCOUNT_REVENUE_FY_HALF,
+        ACCOUNT_REVENUE_FY_Q,
+        CORPORATE_BU_REVENUE_FY,
+        CORPORATE_BU_REVENUE_FY_HALF,
+        CORPORATE_BU_REVENUE_FY_Q,
+        OPPORTUNITY_TITLE,
+        CRM_URL
+FROM source_data
+)
+
+SELECT * from transform_data

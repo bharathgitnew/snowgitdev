@@ -1,0 +1,59 @@
+{{ config(
+            alias = 'BAAN_TEE_SALES',
+            materialized='tel_incremental',
+            incremental_strategy = 'insert_overwrite',
+            transient = false,
+            enabled=true    
+) }}
+
+WITH 
+SOURCE_DATA AS (
+    SELECT
+        ORDER_NUMBER,
+        LINE_NUMBER,
+        MATERIAL_NUMBER,
+        ORDER_AMT,
+        ORDER_QUANTITY,
+        DELIVERY_QUANTITY,
+        ORDER_DATE,
+        DELIVERY_DATE,
+        CANCELLED,
+        PRIORITY,
+        PERIOD
+    FROM {{ ref('BRONZE__TEA_PLANNING__FILE_BAAN_TEE_SALES') }}
+),
+TRANSFORM_DATA AS (
+    SELECT
+        ORDER_NUMBER,
+        LINE_NUMBER,
+        MATERIAL_NUMBER,
+        ORDER_AMT,
+        ORDER_QUANTITY,
+        DELIVERY_QUANTITY,
+        ORDER_DATE,
+        DELIVERY_DATE,
+        CANCELLED,
+        PRIORITY,
+        PERIOD,
+        '{{ invocation_id }}' AS AUDIT_LOG_ID,
+        SHA2('hash_me') as _ROW_HASH -- Adds column to table on full refresh. 
+    FROM SOURCE_DATA
+),
+TYPE_DATA AS (
+    SELECT
+        CAST(AUDIT_LOG_ID AS VARCHAR(16777216)) AS _AUDIT_LOG_ID,
+        CAST(_ROW_HASH AS VARCHAR(16777216)) AS _ROW_HASH,
+        CAST(ORDER_NUMBER AS VARCHAR(16777216)) AS ORDER_NUMBER,
+        CAST(LINE_NUMBER AS VARCHAR(16777216)) AS LINE_NUMBER,
+        CAST(MATERIAL_NUMBER AS VARCHAR(16777216)) AS MATERIAL_NUMBER,
+        CAST(ORDER_AMT AS FLOAT) AS ORDER_AMT,
+        CAST(ORDER_QUANTITY AS INT) AS ORDER_QUANTITY,
+        CAST(DELIVERY_QUANTITY AS INT) AS DELIVERY_QUANTITY,
+        CAST(ORDER_DATE AS DATE) AS ORDER_DATE,
+        CAST(DELIVERY_DATE AS DATE) AS DELIVERY_DATE,
+        CAST(CANCELLED AS VARCHAR(16777216)) AS CANCELLED,
+        CAST(PRIORITY AS VARCHAR(16777216)) AS PRIORITY,
+        CAST(PERIOD AS VARCHAR(16777216)) AS PERIOD
+    FROM TRANSFORM_DATA
+)
+SELECT * FROM TYPE_DATA

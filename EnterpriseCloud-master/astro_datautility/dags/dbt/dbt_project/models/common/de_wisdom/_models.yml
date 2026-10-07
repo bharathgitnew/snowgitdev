@@ -1,0 +1,4 @@
+version: 2
+models:
+- name: COMMON__DE_WISDOM__GLOBAL_MACHINES
+  description: Model Legacy GLOBAL_MACHINES file.

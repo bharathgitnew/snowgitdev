@@ -1,0 +1,10 @@
+version: 2
+sources:
+- name: TMEA_AZURE_DEVOPS
+  description: Landing Zone - Work Item Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: TMEA_AZURE_DEVOPS
+  tables:
+  - name: WORK_ITEM_DETAILS
+    identifier: WORK_ITEM_DETAILS
+    description: Landing table for WORK_ITEM_DETAILS file.

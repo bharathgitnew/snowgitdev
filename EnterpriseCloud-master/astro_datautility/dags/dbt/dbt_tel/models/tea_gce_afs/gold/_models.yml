@@ -1,0 +1,10 @@
+version: 2
+models:
+- name: GOLD__TEA_GCE_AFS__GLOBAL_MACHINES
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_GCE_AFS__PRICE_MATRIX
+  tests:
+  - has_data
+  - recently_run

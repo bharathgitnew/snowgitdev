@@ -1,0 +1,4 @@
+version: 2
+models:
+- name: COMMON__RTISS__TPS
+  description: Landing table for TPS.

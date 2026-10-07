@@ -1,0 +1,25 @@
+models:
+- name: GOLD__TEH_APPLICATIONS__COMPANY
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_APPLICATIONS__EMPLOYEE
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_APPLICATIONS__GLOBAL_EMPLOYEE
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_APPLICATIONS__INTEL_PRICE_MATRIX
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_APPLICATIONS__MATERIAL_MASTER_3PL_UPS_REPORT
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_APPLICATIONS__PRICE_MATRIX
+  tests:
+  - has_data
+  - recently_run

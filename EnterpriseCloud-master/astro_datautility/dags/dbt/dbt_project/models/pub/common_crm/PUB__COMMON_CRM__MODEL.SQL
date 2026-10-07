@@ -1,0 +1,68 @@
+/************
+Model file generated from dbtGeneratePubViews: 12.19.2022.19.11.44"
+*************/
+
+{{ config(
+      materialized='view',
+      alias='MODEL',
+      transient=false
+) }}
+
+with source_data as (
+    SELECT
+        MODEL_ID,
+        STATECODE,
+        STATUSCODE,
+        TEL_SM_NEW_MODEL_TYPE_FLAG,
+        OWNINGTEAM,
+        OWNINGTEAM_ENTITYTYPE,
+        MODIFIEDBY,
+        MODIFIEDBY_ENTITYTYPE,
+        TEL_SM_WAFER_SIZE,
+        TEL_SM_WAFER_SIZE_ENTITYTYPE,
+        CREATEDBY,
+        CREATEDBY_ENTITYTYPE,
+        OWNINGUSER,
+        OWNINGUSER_ENTITYTYPE,
+        OWNINGBUSINESSUNIT,
+        OWNINGBUSINESSUNIT_ENTITYTYPE,
+        MODIFIEDONBEHALFBY,
+        MODIFIEDONBEHALFBY_ENTITYTYPE,
+        CREATEDONBEHALFBY,
+        CREATEDONBEHALFBY_ENTITYTYPE,
+        OWNERID,
+        OWNERID_ENTITYTYPE,
+        TEL_SM_WAFER_SIZENAME,
+        MODIFIEDONBEHALFBYYOMINAME,
+        TEL_SM_PRODUCT_CODE,
+        VERSIONNUMBER,
+        OWNINGBUSINESSUNITNAME,
+        MODIFIEDONBEHALFBYNAME,
+        OWNERIDNAME,
+        OVERRIDDENCREATEDON,
+        TEL_SM_MODEL_J,
+        CREATEDONBEHALFBYNAME,
+        MODIFIEDBYNAME,
+        MODIFIEDON,
+        TEL_SM_MODEL,
+        CREATEDBYNAME,
+        UTCCONVERSIONTIMEZONECODE,
+        MODIFIEDBYYOMINAME,
+        CREATEDONBEHALFBYYOMINAME,
+        CREATEDON,
+        TIMEZONERULEVERSIONNUMBER,
+        OWNERIDTYPE,
+        IMPORTSEQUENCENUMBER,
+        TEL_SM_MODELID,
+        TEL_SM_MODEL_TYPE_CODE,
+        CREATEDBYYOMINAME,
+        OWNERIDYOMINAME
+    from {{ ref('COMMON__CRM__MODEL') }}
+),
+
+transform_data AS
+(
+    select * from source_data
+)
+
+    select * from transform_data

@@ -1,0 +1,13 @@
+version: 2
+sources:
+- name: DATA2LOGISTICS
+  description: Landing Zone - DATA2LOGISTICS Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: DATA2LOGISTICS
+  tables:
+  - name: NINE_BOX_REPORT_TOKELC
+    identifier: NINE_BOX_REPORT_TOKELC
+    description: Landing table for NINE_BOX_REPORT_TOKELC.
+  - name: NINE_BOX_REPORT_100962
+    identifier: NINE_BOX_REPORT_100962
+    description: Landing table for NINE_BOX_REPORT_100962.

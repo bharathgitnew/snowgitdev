@@ -1,0 +1,11 @@
+version: 2
+sources:
+- name: WINDCHILL
+  description: Landing Zone - WINDCHILL Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: WINDCHILL
+  tables:
+  - name: CHANGE_MANAGEMENT_DASHBOARD
+    identifier: CHANGE_MANAGEMENT_DASHBOARD
+  - name: CONTROLTABLE
+    identifier: CONTROLTABLE

@@ -1,0 +1,32 @@
+{
+    "TEACOMMON": {
+        "DataSet1": {
+            "schema": "dbo",
+            "table": "Employees",
+            "Incremental": "NULL",
+            "sftablename": "EMPLOYEE",
+            "filter": ""
+        },
+        "DataSet2": {
+            "schema": "dbo",
+            "table": "Departments",
+            "Incremental": "NULL",
+            "sftablename": "DEPARTMENTS",
+            "filter": ""
+        },
+        "DataSet3": {
+            "schema": "dbo",
+            "table": "Locations",
+            "Incremental": "NULL",
+            "sftablename": "LOCATIONS",
+            "filter": ""
+        },
+        "DataSet4": {
+            "schema": "dbo",
+            "table": "ProductLines",
+            "Incremental": "NULL",
+            "sftablename": "PRODUCTLINES",
+            "filter": ""
+        }
+    }
+}

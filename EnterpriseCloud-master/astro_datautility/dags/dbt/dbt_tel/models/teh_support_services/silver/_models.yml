@@ -1,0 +1,868 @@
+models:
+- name: SILVER__TEH_SUPPORT_SERVICES__EMPLOYEE
+  description: >-
+    Provides a cleansed view of employee master data from the TEL HR system, supporting org-chart, contact, and workforce analytics.
+    One row per employee identified by EMPLOYEEID within a COMPANYID.
+    Sourced from ADP and Kronos integrations with fields normalized for downstream joins to helpdesk and support models.
+    Some employees may have NULL termination dates despite ACTIVE=false if the termination was processed outside ADP.
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _AUDIT_LOG_ID
+  - name: _ROW_HASH
+  - name: COMPANYID
+    description: >-
+      Short code identifying the TEL subsidiary or legal entity the employee belongs to.
+      Used to partition employee records across multi-company reporting.
+      Values such as TEA represent specific operating companies within the TEL group.
+  - name: EMPLOYEEID
+    description: >-
+      Unique numeric identifier assigned to each employee by the HR system.
+      Serves as the primary key for joining employee data to helpdesk and support tables.
+      Remains constant across rehires and organizational transfers.
+  - name: ADPCOMPANY
+    description: >-
+      Payroll company code from ADP indicating the pay group the employee is processed under.
+      Determines payroll schedule and tax jurisdiction for the employee.
+      Values include Biweekly and other frequency-based codes.
+  - name: ADP_PERSON_ID
+    description: >-
+      Unique person identifier assigned by the ADP payroll system.
+      Used for integration and reconciliation between ADP and internal HR records.
+      Populated when the employee has an active ADP record.
+  - name: ACTIVE
+    description: >-
+      Boolean flag indicating whether the employee is currently active in the organization.
+      True means the employee is actively employed; false indicates termination or leave.
+      Used to filter current headcount from historical records.
+  - name: EMPLOYEETYPE
+    description: >-
+      Numeric code classifying the employment category such as regular, contractor, or temporary.
+      Value 1 represents regular full-time employees and 3 represents temporary workers.
+      Drives eligibility logic for benefits and system access provisioning.
+  - name: FIRSTNAME
+    description: >-
+      Legal first name of the employee as recorded in the HR system.
+      Used in identity matching and display name construction.
+      Sourced from the official employment record at time of hire.
+  - name: LASTNAME
+    description: >-
+      Legal last name or family name of the employee.
+      Combined with FIRSTNAME for formal identification and directory lookups.
+      Updated when legal name changes are processed through HR.
+  - name: NAMEUSED
+    description: >-
+      Preferred or commonly used first name chosen by the employee.
+      Displayed in internal directories and communication tools instead of the legal first name.
+      Defaults to FIRSTNAME when no preferred name is specified.
+  - name: ADP_POSN_ID
+    description: >-
+      Position identifier from ADP linking the employee to a specific role slot.
+      Used for headcount planning and position management reporting.
+      Populated when the employee is assigned to a formal position in ADP.
+  - name: JOBCODE
+    description: >-
+      Numeric code representing the job classification within the company's job architecture.
+      Maps to a specific job family, level, and compensation band.
+      Used for workforce analytics and role-based access provisioning.
+  - name: JOBTITLE
+    description: >-
+      Human-readable title describing the employee's current role and level.
+      Reflects the official title assigned in the HR system such as Field Service Engineer IV.
+      Updated when promotions or role changes are processed.
+  - name: EMAIL
+    description: >-
+      Corporate email address assigned to the employee.
+      Serves as the primary electronic communication identifier and login credential.
+      Follows the standard naming convention of firstname.lastname@region.tel.com.
+  - name: SUPERVISORID
+    description: >-
+      EMPLOYEEID of the employee's direct manager in the organizational hierarchy.
+      Used to construct reporting chains and approval workflows.
+      References another record in this same table for self-join org-chart traversal.
+  - name: DEPTCODE
+    description: >-
+      Numeric code identifying the department the employee is assigned to.
+      Used to aggregate headcount, costs, and metrics at the departmental level.
+      Maps to DEPARTMENT_NAME for human-readable reporting.
+  - name: PRODLINECODE
+    description: >-
+      Code representing the product line or business segment the employee supports.
+      Enables cost allocation and revenue attribution by product area.
+      Used in conjunction with DEPTCODE for matrix organization reporting.
+  - name: LOCATIONCODE
+    description: >-
+      Numeric code identifying the physical office or site location of the employee.
+      Maps to OFFICE_NAME for human-readable location reporting.
+      Used for facilities planning and regional workforce distribution analysis.
+  - name: STATE
+    description: >-
+      US state or regional code where the employee is physically located.
+      Drives tax jurisdiction determination and regional compliance reporting.
+      Populated for domestic employees; may be blank for international staff.
+  - name: MAILSTOP
+    description: >-
+      Internal mail routing code for physical document delivery to the employee's desk.
+      Used by facilities and mail room operations for internal correspondence.
+      Specific to the employee's building and floor location.
+  - name: OFFCPHONE
+    description: >-
+      Office landline telephone number assigned to the employee.
+      Used as secondary contact method for internal directory listings.
+      Formatted as a standard phone number string.
+  - name: OFFCEXT
+    description: >-
+      Extension number for the employee's office phone line.
+      Appended to the main office number for direct dial routing.
+      Used in conjunction with OFFCPHONE for complete contact information.
+  - name: OFFCPAGERMODEL
+    description: >-
+      Model identifier of the pager device assigned to the employee.
+      Relevant for on-call field service engineers who carry hardware pagers.
+      Legacy field retained for employees still using pager-based alerting.
+  - name: OFFCPAGER
+    description: >-
+      Pager number assigned to the employee for urgent notifications.
+      Used by dispatch systems to reach field personnel during on-call rotations.
+      Legacy contact method retained for backwards compatibility with alerting systems.
+  - name: OFFCPIN
+    description: >-
+      PIN code required to send messages to the employee's pager device.
+      Used by automated dispatch systems when sending alphanumeric pages.
+      Paired with OFFCPAGER for complete pager contact information.
+  - name: OFFCPAGECOVAREA
+    description: >-
+      Coverage area code defining the geographic reach of the employee's pager service.
+      Determines whether the pager can receive messages in the employee's working region.
+      Used for dispatch routing decisions in field service operations.
+  - name: OFFCDISPATCH
+    description: >-
+      Dispatch number or code used to route service calls to the employee.
+      Referenced by field service scheduling systems for technician assignment.
+      Specific to the employee's assigned service territory.
+  - name: OFFCFAX
+    description: >-
+      Office fax number assigned to the employee or their department.
+      Used for document transmission in workflows that require faxed signatures.
+      Legacy field retained for regulatory and compliance processes.
+  - name: OFFCPAGEREMAIL
+    description: >-
+      Email-to-pager gateway address for sending text messages to the employee's pager.
+      Allows email-based systems to trigger pager alerts without direct pager protocol.
+      Format combines the pager number with the carrier's email gateway domain.
+  - name: CUSTLOCALPAGER
+    description: >-
+      Customer-site local pager number assigned during on-site engagements.
+      Used when the employee is stationed at a customer facility with local paging infrastructure.
+      Temporary assignment that changes with each customer deployment.
+  - name: CUSTLOCALPIN
+    description: >-
+      PIN code for the customer-site local pager device.
+      Required to authenticate messages sent to the CUSTLOCALPAGER number.
+      Issued by the customer facility's communication system.
+  - name: MOBILEPHONE
+    description: >-
+      Mobile phone number assigned to or registered for the employee.
+      Primary contact method for remote and field workers outside office hours.
+      Used by dispatch and escalation systems for urgent communications.
+  - name: SENIORITY_DATE
+    description: >-
+      Date establishing the employee's seniority within the organization.
+      Used to calculate tenure for benefits eligibility and service awards.
+      Typically aligns with the original hire date but may differ for rehires.
+  - name: FTE
+    description: >-
+      Full-time equivalent classification indicating the employee's work schedule commitment.
+      Value of Full Time indicates a standard 40-hour work week arrangement.
+      Used for headcount normalization in workforce capacity planning.
+  - name: DATEHIRE
+    description: >-
+      Date the employee was hired or started employment with the company.
+      Serves as the basis for tenure calculations and probation period tracking.
+      For rehired employees, reflects the most recent hire date.
+  - name: DATETERM
+    description: >-
+      Date the employee's employment was terminated or ended.
+      Populated only for separated employees; NULL for currently active staff.
+      Used to calculate employment duration and analyze turnover patterns.
+  - name: SALARYEXEMPT
+    description: >-
+      Code indicating the employee's overtime exemption status under labor regulations.
+      H indicates hourly non-exempt; S indicates salaried exempt from overtime.
+      Drives payroll calculation rules and time-tracking requirements.
+  - name: PREFERREDLANGUAGE
+    description: >-
+      Language preference code indicating the employee's chosen communication language.
+      Used to route localized content and determine UI language for internal systems.
+      Relevant for multi-language support in the global TEL organization.
+  - name: FLEETAUTO
+    description: >-
+      Identifier for the fleet vehicle assigned to the employee.
+      Populated for field service engineers and other roles requiring company vehicles.
+      Used for fleet management, maintenance scheduling, and expense allocation.
+  - name: KRONOS_ACCRUAL_CODE
+    description: >-
+      Accrual profile code in the Kronos timekeeping system governing PTO accumulation.
+      Determines the rate and caps for vacation and sick time accrual.
+      Assigned based on employment type and tenure level.
+  - name: KRONOS_PAY_RULE
+    description: >-
+      Pay rule identifier in Kronos defining overtime calculations and shift differentials.
+      Controls how worked hours translate into compensation based on labor agreements.
+      Varies by employee classification and work location.
+  - name: KRONOS_WORK_RULE
+    description: >-
+      Work rule code in Kronos defining the employee's standard schedule and break policies.
+      Governs what constitutes a regular shift versus overtime for the employee.
+      Set according to the employee's role and regional labor requirements.
+  - name: KRONOS_ACCESS_CODE
+    description: >-
+      Access control code determining which Kronos functions the employee can use.
+      Restricts visibility and actions within the time and attendance system.
+      Assigned based on the employee's role and managerial level.
+  - name: KRONOS_LABOR_LEVEL
+    description: >-
+      Labor level assignment in Kronos used for cost allocation of worked hours.
+      Maps time entries to specific cost centers and project codes for accounting.
+      Configured to align with the employee's department and function.
+  - name: KRONOS_PAY_CODE_DATA_ACCESS
+    description: >-
+      Data access profile controlling which pay codes the employee can view or edit in Kronos.
+      Restricts sensitive payroll information based on role-based access rules.
+      Set according to HR and payroll administrative responsibilities.
+  - name: KRONOS_DISPLAY_PROFILE
+    description: >-
+      Display profile in Kronos controlling the user interface layout for the employee.
+      Determines which screens, widgets, and data views are shown in the timekeeping application.
+      Customized by role to show relevant scheduling and time entry features.
+  - name: NTDOMAIN
+    description: >-
+      Windows NT domain the employee's network account belongs to.
+      Used for authentication and access control across corporate IT systems.
+      Values such as US indicate the regional Active Directory domain.
+  - name: NTLOGIN
+    description: >-
+      Network login username used for Windows domain authentication.
+      Typically matches the EMPLOYEEID and serves as the primary system login credential.
+      Used to correlate helpdesk tickets and system access logs to employees.
+  - name: PROJECT
+    description: >-
+      Project code or identifier the employee is currently assigned to.
+      Used for time and cost allocation to specific initiatives or programs.
+      Populated when the employee is dedicated to a tracked project.
+  - name: LASTUPDATED
+    description: >-
+      Timestamp of the most recent modification to the employee record.
+      Indicates when any field in the row was last changed by HR or system processes.
+      Used for incremental data loading and change detection.
+  - name: LASTUPDATEDBY
+    description: >-
+      Identifier of the user or system process that last modified the employee record.
+      Provides audit trail for HR data changes and integration updates.
+      Values include user IDs and system names such as ADP Integration Update.
+  - name: MIDDLE_INITIAL
+    description: >-
+      Middle initial of the employee's legal name.
+      Used to distinguish employees with identical first and last names.
+      Optional field that may be blank for employees without a middle name.
+  - name: SUFFIX
+    description: >-
+      Name suffix such as Jr, Sr, or III appended to the employee's legal name.
+      Included in formal name displays and legal documentation.
+      Optional field populated only when the employee has a generational or honorary suffix.
+  - name: REHIREDATE
+    description: >-
+      Date the employee was most recently rehired after a previous termination.
+      Populated only for employees who have returned after separation.
+      Used to distinguish original hires from returning employees in tenure calculations.
+  - name: ISMANAGER
+    description: >-
+      Boolean flag indicating whether the employee holds a managerial position.
+      True means the employee has direct reports in the organizational hierarchy.
+      Used to filter managers for leadership reporting and approval workflow routing.
+  - name: STATUS_CODE
+    description: >-
+      Single-character code representing the employee's current employment status.
+      A indicates active, T indicates terminated, and L indicates on leave.
+      Used for quick filtering and status-based business logic.
+  - name: HRREP
+    description: >-
+      Identifier of the HR representative assigned to support the employee.
+      Used to route HR inquiries and manage case assignments for employee relations.
+      References another employee who serves as the HR business partner.
+  - name: WORKGROUP
+    description: >-
+      Code identifying the functional work group the employee belongs to within their department.
+      Provides finer-grained organizational grouping below the department level.
+      Used for team-level capacity planning and workload distribution.
+  - name: BUMGR
+    description: >-
+      Identifier of the business unit manager responsible for the employee's cost center.
+      Represents the executive-level owner for budget and headcount decisions.
+      Used in approval chains and financial reporting hierarchies.
+  - name: EETYPE
+    description: >-
+      Employee entity type code further classifying the employment arrangement.
+      Complements EMPLOYEETYPE with additional categorization for payroll processing.
+      Values vary by company and regional HR configuration.
+  - name: WFH
+    description: >-
+      Flag indicating whether the employee is approved for work-from-home arrangements.
+      Used for facilities planning and IT equipment provisioning decisions.
+      Reflects the employee's current remote work authorization status.
+  - name: INACTIVE
+    description: >-
+      Flag indicating the employee record has been marked inactive in the source system.
+      Differs from ACTIVE in that it may reflect system-level deactivation independent of employment status.
+      Used for data quality filtering and identifying stale records.
+  - name: VENDORNAME
+    description: >-
+      Name of the staffing vendor or agency providing the employee as a contractor.
+      Populated only for contingent workers sourced through external agencies.
+      Used for vendor management reporting and contract tracking.
+  - name: JOB_FAMILY
+    description: >-
+      Broad job family classification grouping related roles across the organization.
+      Examples include Field Engineer, Engineering Management, and Trainer.
+      Used for workforce analytics and career path mapping.
+  - name: SUPERVISORY_ORG
+    description: >-
+      Name or code of the supervisory organization the employee reports into.
+      Represents the management chain structure independent of cost center hierarchy.
+      Used for span-of-control analysis and organizational design.
+  - name: FUNCTION1
+    description: >-
+      Functional area code mapping the employee to a high-level business function.
+      Values like Func_FieldEngineer group employees by their operational specialty.
+      Used for cross-departmental functional reporting and resource allocation.
+  - name: COSTCENTER
+    description: >-
+      Numeric cost center code the employee's expenses are charged against.
+      Drives financial reporting and budget allocation at the operational level.
+      Linked to the employee's department and business unit.
+  - name: COCODE
+    description: >-
+      Company code identifying the legal entity for financial reporting purposes.
+      Used in ERP integrations to determine the accounting ledger for cost postings.
+      Aligns with the organizational structure of TEL subsidiaries.
+  - name: STDHIER
+    description: >-
+      Standard hierarchy code positioning the employee within the corporate reporting structure.
+      Used for roll-up reporting and multi-level aggregation in BI tools.
+      Numeric value that maps to a specific node in the organizational tree.
+  - name: OLDDEPTCODE
+    description: >-
+      Previous department code before the employee's most recent organizational transfer.
+      Retained for historical tracking and migration auditing during restructures.
+      Compared with DEPTCODE to identify department changes over time.
+  - name: OLDPRODLINECODE
+    description: >-
+      Previous product line code before the employee's most recent reassignment.
+      Used to track product line mobility and organizational change history.
+      Compared with PRODLINECODE to detect business segment transfers.
+  - name: FULLNAME
+    description: >-
+      Concatenated display name in Last, First format for the employee.
+      Used as the standard display format in reports and user interfaces.
+      Constructed from LASTNAME and NAMEUSED or FIRSTNAME fields.
+  - name: ISFSTEMPLOYEE
+    description: >-
+      Flag indicating whether the employee belongs to the Field Service Technology organization.
+      Values of Yes or No determine inclusion in FST-specific reporting and metrics.
+      Used to segment workforce analytics for the field service division.
+  - name: FSTEMPLOYEEGROUP
+    description: >-
+      Sub-group classification within the FST organization identifying the employee's team.
+      Values such as FST and Other provide grouping for field service workforce reporting.
+      Populated only when ISFSTEMPLOYEE is Yes.
+  - name: EMPLOYEE_TYPE_NAME
+    description: >-
+      Human-readable label for the employee's employment type classification.
+      Values include Regular Full-Time, Temp Worker, and other descriptive categories.
+      Provides a friendly display alternative to the numeric EMPLOYEETYPE code.
+  - name: SUPERVISOR_NAME
+    description: >-
+      Full display name of the employee's direct supervisor.
+      Denormalized from the supervisor's own employee record for reporting convenience.
+      Formatted as Last, First to match the FULLNAME convention.
+  - name: DEPARTMENT_NAME
+    description: >-
+      Human-readable name of the department the employee belongs to.
+      Decoded from DEPTCODE for use in reports and dashboards without requiring joins.
+      Examples include FST-CT, Technical Training, and Purchasing.
+  - name: BUSINESS_UNIT_NAME
+    description: >-
+      Name of the business unit the employee is assigned to at the division level.
+      Provides a higher-level grouping than department for executive-level reporting.
+      Values such as FST and Admin represent major organizational divisions.
+  - name: OFFICE_NAME
+    description: >-
+      Human-readable name of the office location where the employee is based.
+      Decoded from LOCATIONCODE for direct use in reports and location-based filtering.
+      Examples include Austin, Austin Met 15, and regional office names.
+  - name: EXPAT_FLAG
+    description: >-
+      Flag indicating whether the employee is on an international expatriate assignment.
+      Used to identify employees working outside their home country on temporary relocation.
+      Drives eligibility for expatriate benefits and tax equalization programs.
+  - name: BU_GROUP
+    description: >-
+      Business unit group code providing a mid-level organizational grouping.
+      Groups multiple departments or teams under a shared functional leader.
+      Used for aggregated reporting between department and division levels.
+  - name: BU_GROUP_LEADER
+    description: >-
+      Name of the leader responsible for the business unit group.
+      Formatted as Last, First matching the standard FULLNAME convention.
+      Used in executive dashboards to identify accountability for each BU group.
+  - name: LEGALFULLNAME
+    description: >-
+      Full legal name of the employee as it appears on official documentation.
+      Formatted as Last, First using the legal name rather than preferred name.
+      Used for compliance reporting and formal HR processes requiring legal identity.
+
+- name: SILVER__TEH_SUPPORT_SERVICES__INCIDENT_DETAILS
+  description: >-
+    Stores the chronological history entries for each incident ticket in the TGIS helpdesk system.
+    One row per history entry identified by the combination of ID and HISTORY_NM within an INCIDENT_MNG_NM.
+    Contains bilingual (Japanese/English) status updates, urgency changes, and response content for each interaction.
+    Some English translations are machine-generated and may lack nuance compared to the original Japanese content.
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: ID
+    description: >-
+      Surrogate integer key uniquely identifying each incident detail record in the table.
+      Auto-incrementing value assigned during data load.
+      Used for row-level deduplication and audit tracking.
+  - name: INCIDENT_MNG_NM
+    description: >-
+      Management number of the parent incident ticket in ICD-NNNNNNNNNN format.
+      Links this detail record back to the corresponding INCIDENT_SUMMARY entry.
+      Serves as the foreign key for reconstructing the full incident timeline.
+  - name: HISTORY_NM
+    description: >-
+      Sequence number identifying the position of this entry within the incident's history.
+      Starts at 1 and increments with each new update or status change on the incident.
+      Used to order entries chronologically and identify the latest update.
+  - name: STATUS_ID
+    description: >-
+      Numeric code representing the incident status at the time of this history entry.
+      Values map to predefined statuses such as 4 for Closed and other workflow states.
+      Used for status transition analysis and SLA compliance tracking.
+  - name: STATUS_JA
+    description: >-
+      Japanese language label for the incident status at this history point.
+      Provides the native-language status display for Japanese-speaking support staff.
+      Values include 完了 (Closed) and other workflow state names.
+  - name: STATUS_EN
+    description: >-
+      English language label for the incident status at this history point.
+      Used in English-language reports and dashboards for global stakeholders.
+      Values include Closed, In Progress, and other standard workflow states.
+  - name: STATUS_CONDITION_ID
+    description: >-
+      Numeric code representing the sub-condition or resolution type within the status.
+      Provides additional granularity beyond the main status for resolution categorization.
+      Value 10 indicates Resolved as a specific completion condition.
+  - name: STATUS_CONDITION_JA
+    description: >-
+      Japanese language label for the status condition at this history point.
+      Describes the specific resolution or hold reason in the native language.
+      Values include 解決 (Resolved) and other condition descriptors.
+  - name: STATUS_CONDITION_EN
+    description: >-
+      English language label for the status condition at this history point.
+      Provides the translated condition description for English-language reporting.
+      Values include Resolved, Pending Customer, and other condition states.
+  - name: INPUT_LANG
+    description: >-
+      Two-character code indicating the language in which the original content was authored.
+      Value ja indicates Japanese-authored content; en indicates English-authored content.
+      Used to determine which language field contains the original versus translated text.
+  - name: CONTENT_JA
+    description: >-
+      Japanese language text of the update, response, or communication logged in this history entry.
+      Contains the original authored content when INPUT_LANG is ja.
+      May include multi-line correspondence between support staff and requestors.
+  - name: CONTENT_EN
+    description: >-
+      English language text of the update, response, or communication logged in this history entry.
+      Contains the original authored content when INPUT_LANG is en, or a translation otherwise.
+      Used for cross-language reporting and global incident review.
+  - name: URGENCY_ID
+    description: >-
+      Numeric code representing the urgency level assigned at this point in the incident lifecycle.
+      Values range from 1 (critical) to 4 (low) indicating the severity assessment.
+      May change between history entries as the incident is re-evaluated.
+  - name: LAST_URGENCY_JA
+    description: >-
+      Japanese language label for the urgency level at this history entry.
+      Values include 高 (High), 中 (Middle), and 低 (Low) priority designations.
+      Reflects the urgency as assessed by the responding support team member.
+  - name: LAST_URGENCY_EN
+    description: >-
+      English language label for the urgency level at this history entry.
+      Values include High, Middle, and Low as standard priority designations.
+      Used in English-language SLA reporting and escalation dashboards.
+  - name: URGENCY_REASON_JA
+    description: >-
+      Japanese text explaining the justification for the assigned urgency level.
+      Provides context for why a particular priority was chosen by the analyst.
+      Contains a dash (-) when no specific reason was documented.
+  - name: URGENCY_REASON_EN
+    description: >-
+      English text explaining the justification for the assigned urgency level.
+      Translated from the Japanese reason or authored directly in English.
+      Contains a dash (-) when no specific reason was documented.
+  - name: REGISTERED_TELNM
+    description: >-
+      Employee number of the TEL staff member who registered this history entry.
+      Links to the EMPLOYEE table for identifying the responding support agent.
+      Numeric identifier matching the EMPLOYEEID in employee master data.
+  - name: REGISTERED_TELNAME
+    description: >-
+      Display name of the TEL employee who created this history entry.
+      Formatted with company prefix and name for identification in audit trails.
+      Examples include TEL IS Fushimi, Toyoko indicating department and name.
+  - name: REGISTERED_DATE
+    description: >-
+      Timestamp recording when this history entry was created in the incident system.
+      Used to calculate response times and SLA compliance metrics.
+      Stored in UTC with millisecond precision.
+  - name: _FILEDATE
+  - name: _FILENAME
+  - name: AUDIT_LOG_ID
+    description: >-
+      UUID linking this record to the data pipeline audit log for load traceability.
+      Identifies which pipeline execution ingested or updated this row.
+      Used for debugging data quality issues and tracking data freshness.
+  - name: _ROW_HASH
+
+- name: SILVER__TEH_SUPPORT_SERVICES__INCIDENT_SUMMARY
+  description: >-
+    Provides the header-level summary for each incident ticket in the TGIS helpdesk system including categorization, ownership, and current status.
+    One row per incident identified by INCIDENT_MNG_NM with the latest status and assignment information.
+    Combines matter category, system classification, urgency, and responsible group assignments with bilingual Japanese/English labels.
+    The ETA field is sparsely populated and should not be relied upon for SLA calculations without cross-referencing detail records.
+  columns:
+  - name: ID
+    description: >-
+      Surrogate integer key uniquely identifying each incident summary record.
+      Auto-incrementing value assigned during data load for row-level referencing.
+      Used in joins to detail records and relationship tables.
+  - name: INCIDENT_MNG_NM
+    description: >-
+      Management number of the incident ticket in ICD-NNNNNNNNNN format.
+      Serves as the business key uniquely identifying each incident in the TGIS system.
+      Used as the primary join key to INCIDENT_DETAILS and RELATIONSHIP_INFO tables.
+  - name: LAST_HISTORY_NM
+    description: >-
+      Sequence number of the most recent history entry for this incident.
+      Indicates how many updates have been recorded on the ticket.
+      Used to join directly to the latest INCIDENT_DETAILS record.
+  - name: MATTER_CATEGORY_ID
+    description: >-
+      Numeric code classifying the type of matter reported in the incident.
+      Value 2 represents Failure Report; other values represent inquiries or requests.
+      Primary categorization used for incident type analysis and routing.
+  - name: MATTER_CATEGORY_JA
+    description: >-
+      Japanese language label for the matter category classification.
+      Values include 障害報告 (Failure Report) and other incident type names.
+      Used in Japanese-language dashboards and reporting.
+  - name: MATTER_CATEGORY_EN
+    description: >-
+      English language label for the matter category classification.
+      Values include Failure Report, Inquiry, and Request as standard types.
+      Used in global reporting and cross-regional analytics.
+  - name: LAST_STATUS_ID
+    description: >-
+      Numeric code representing the current status of the incident.
+      Reflects the most recent status update; value 4 indicates Closed.
+      Used for filtering open versus closed tickets in operational dashboards.
+  - name: LAST_STATUS_JA
+    description: >-
+      Japanese language label for the current incident status.
+      Values include 完了 (Closed) and other workflow state names.
+      Represents the latest status as of the most recent INCIDENT_DETAILS entry.
+  - name: LAST_STATUS_EN
+    description: >-
+      English language label for the current incident status.
+      Values include Closed, In Progress, and Open as standard states.
+      Used for status-based filtering in English-language reports.
+  - name: LAST_STATUS_CONDITION_ID
+    description: >-
+      Numeric code for the sub-condition within the current status.
+      Value 10 indicates Resolved; other values represent different resolution types.
+      Provides additional resolution detail beyond the parent status.
+  - name: LAST_STATUS_CONDITION_JA
+    description: >-
+      Japanese language label for the current status condition.
+      Values include 解決 (Resolved) and other resolution descriptors.
+      Used alongside LAST_STATUS_JA for detailed state reporting.
+  - name: LAST_STATUS_CONDITION_EN
+    description: >-
+      English language label for the current status condition.
+      Values include Resolved, Pending, and other condition states.
+      Paired with LAST_STATUS_EN for complete status display in English.
+  - name: INPUT_LANG
+    description: >-
+      Two-character code indicating the language in which the incident was originally authored.
+      Value ja indicates Japanese submission; en indicates English submission.
+      Determines which subject and notes fields contain the primary authored content.
+  - name: SUBJECT_JA
+    description: >-
+      Japanese language subject line summarizing the incident.
+      Contains the original subject when INPUT_LANG is ja, or a translation otherwise.
+      Used as the primary display title in Japanese-language incident lists.
+  - name: SUBJECT_EN
+    description: >-
+      English language subject line summarizing the incident.
+      Contains the original subject when INPUT_LANG is en, or a translation otherwise.
+      Used as the display title in English-language dashboards and reports.
+  - name: SYSTEM_CATEGORY_ID
+    description: >-
+      Numeric code identifying the broad system category affected by the incident.
+      Value 1 represents SAP; other values represent different technology platforms.
+      Used for system-level incident volume analysis and trending.
+  - name: SYSTEM_CATEGORY_JA
+    description: >-
+      Japanese language label for the system category.
+      Values include SAP and other technology platform names in Japanese.
+      Used in Japanese-facing system health dashboards.
+  - name: SYSTEM_CATEGORY_EN
+    description: >-
+      English language label for the system category.
+      Values include SAP, CRM, and other technology platform identifiers.
+      Used for English-language system reliability reporting.
+  - name: SYSTEM_ID
+    description: >-
+      Numeric code identifying the specific system or module within the broader category.
+      Provides granular system identification below the SYSTEM_CATEGORY level.
+      Used for routing incidents to the correct L2 support team.
+  - name: SYSTEM_JA
+    description: >-
+      Japanese language name of the specific system or module affected.
+      Values include detailed system names like G1Pインフラ（TEL ISのみ使用）.
+      Used in Japanese-language incident routing and system health reports.
+  - name: SYSTEM_EN
+    description: >-
+      English language name of the specific system or module affected.
+      Values include G1P Infrastructure, SAP ERP FI/AA, and other system names.
+      Used for English-language system ownership and incident routing.
+  - name: REPEAT_CATEGORY_ID
+    description: >-
+      Numeric code indicating whether this incident is classified as a repeat occurrence.
+      Value 1 indicates a one-time issue; other values indicate recurring problems.
+      Used to identify systemic issues requiring root cause analysis.
+  - name: REPEAT_CATEGORY_JA
+    description: >-
+      Japanese language label for the repeat classification.
+      Values include なし (No/One time) indicating the recurrence assessment.
+      Used in Japanese problem management reporting.
+  - name: REPEAT_CATEGORY_EN
+    description: >-
+      English language label for the repeat classification.
+      Values include No, One time and Recurring as standard categories.
+      Used to flag chronic issues in English-language problem management dashboards.
+  - name: CAUSE_CATEGORY_ID
+    description: >-
+      Numeric code classifying the root cause of the incident.
+      Value 16 represents Other Error; additional values cover specific cause types.
+      Used for root cause trending and preventive action planning.
+  - name: CAUSE_CATEGORY_JA
+    description: >-
+      Japanese language label for the root cause category.
+      Values include その他 (Other) and other cause type descriptors.
+      Used in Japanese root cause analysis reporting.
+  - name: CAUSE_CATEGORY_EN
+    description: >-
+      English language label for the root cause category.
+      Values include Other Error, User Error, and System Defect as standard types.
+      Used for cause-based trending in English-language quality reports.
+  - name: LAST_URGENCY_ID
+    description: >-
+      Numeric code representing the current urgency level of the incident.
+      Values range from 1 (critical) to 4 (low) indicating business impact severity.
+      Reflects the most recently assessed urgency, which may have changed from initial submission.
+  - name: LAST_URGENCY_JA
+    description: >-
+      Japanese language label for the current urgency level.
+      Values include 高 (High), 中 (Middle), and 低 (Low) designations.
+      Used in Japanese-language SLA and priority dashboards.
+  - name: LAST_URGENCY_EN
+    description: >-
+      English language label for the current urgency level.
+      Values include High, Middle, and Low as standard priority levels.
+      Used for priority-based filtering and SLA compliance reporting.
+  - name: LAST_URGENCY_REASON_JA
+    description: >-
+      Japanese text explaining the justification for the current urgency level.
+      Provides business context such as 業務停止状態のため (due to business suspension).
+      Contains a dash when no specific reason was documented.
+  - name: LAST_URGENCY_REASON_EN
+    description: >-
+      English text explaining the justification for the current urgency level.
+      Provides translated business context such as Suspension of Business.
+      Contains a dash when no specific reason was documented.
+  - name: NOTES_JA
+    description: >-
+      Japanese language free-text notes field for additional incident context.
+      Contains supplementary information not captured in structured fields.
+      May include resolution details, workarounds, or cross-references.
+  - name: NOTES_EN
+    description: >-
+      English language free-text notes field for additional incident context.
+      Contains translated or originally authored supplementary information.
+      Used for global incident review and knowledge base articles.
+  - name: REGISTERED_TELNM
+    description: >-
+      Employee number of the TEL staff member who originally registered the incident.
+      Links to the EMPLOYEE table for requestor identification and reporting.
+      Value GSD001 indicates automatic registration by a monitoring system.
+  - name: REGISTERED_TELNAME
+    description: >-
+      Display name of the person or system that registered the incident.
+      Values include employee names and system identifiers like Automatic Registration.
+      Used in reports to identify the incident source and requestor.
+  - name: PROXY_REGISTERED_TELNM
+    description: >-
+      Employee number of the person who submitted the incident on behalf of someone else.
+      Populated when a support agent creates a ticket for another employee.
+      NULL when the incident was self-registered or system-generated.
+  - name: PROXY_REGISTERED_TELNAME
+    description: >-
+      Display name of the proxy registrant who submitted the incident on behalf of another.
+      Populated only for tickets created by proxy; NULL for direct submissions.
+      Used to track delegation patterns in incident registration.
+  - name: REGISTERED_DATE
+    description: >-
+      Timestamp when the incident was originally registered in the TGIS system.
+      Serves as the incident creation date for age and SLA calculations.
+      Stored in UTC with millisecond precision.
+  - name: UPDATED_DATE
+    description: >-
+      Timestamp of the most recent modification to the incident summary record.
+      Used to identify recently changed incidents and calculate staleness.
+      Updated whenever status, assignment, or categorization changes occur.
+  - name: INCHARGE_GROUPID
+    description: >-
+      Numeric identifier of the support group currently responsible for the incident.
+      Used to route and track assignment across L2 functional teams.
+      References the group taxonomy maintained in the TGIS system.
+  - name: INCHARGE_GROUP_JA
+    description: >-
+      Japanese language name of the group currently assigned to the incident.
+      Values include detailed team names like G1Pインフラ 運用（HPE）.
+      Used in Japanese operational dashboards for workload distribution.
+  - name: INCHARGE_GROUP_EN
+    description: >-
+      English language name of the group currently assigned to the incident.
+      Values include G1P Infrastructure Operation(HPE) and other team names.
+      Used for English-language assignment tracking and capacity reporting.
+  - name: ETA
+    description: >-
+      Estimated time of arrival or target resolution date for the incident.
+      Sparsely populated field set by the assigned team when a timeline is committed.
+      Used for deadline tracking when available but should not be treated as mandatory.
+  - name: _FILEDATE
+  - name: _FILENAME
+  - name: AUDIT_LOG_ID
+    description: >-
+      UUID linking this record to the data pipeline audit log for load traceability.
+      Identifies which pipeline execution ingested or updated this row.
+      Used for debugging data quality issues and tracking data freshness.
+  - name: _ROW_HASH
+
+- name: SILVER__TEH_SUPPORT_SERVICES__RELATIONSHIP_INFO
+  description: >-
+    Maps parent-child and peer relationships between TGIS tickets including incidents, changes, problems, and releases.
+    One row per directional relationship between two ticket management numbers.
+    Uses numeric function IDs to classify ticket types (1=Incident, 3=Problem, 4=Change, 5=Release) with corresponding management numbers.
+    Relationships are stored unidirectionally; reverse lookups require querying both MAIN and SUB columns.
+  columns:
+  - name: ID
+    description: >-
+      Surrogate integer key uniquely identifying each relationship record.
+      Auto-incrementing value assigned during data load.
+      Used for row-level referencing and deduplication.
+  - name: MAIN_FUNCTION_ID
+    description: >-
+      Numeric code identifying the ticket type of the main (parent) record in the relationship.
+      Values include 1 for Incident, 3 for Problem, 4 for Change, and 5 for Release.
+      Determines how to interpret the MAIN_MNG_NM format.
+  - name: MAIN_MNG_NM
+    description: >-
+      Management number of the main (parent) ticket in the relationship.
+      Format varies by type: ICD- for incidents, CHG- for changes, PRB- for problems, RLS- for releases.
+      Used to join back to the corresponding summary table for the parent ticket.
+  - name: SUB_FUNCTION_ID
+    description: >-
+      Numeric code identifying the ticket type of the sub (child) record in the relationship.
+      Uses the same value set as MAIN_FUNCTION_ID for consistent type classification.
+      Determines how to interpret the SUB_MNG_NM format.
+  - name: SUB_MNG_NM
+    description: >-
+      Management number of the sub (child) ticket in the relationship.
+      Format matches the ticket type prefix convention (ICD-, CHG-, PRB-, RLS-).
+      Used to join to the corresponding summary table for the related child ticket.
+  - name: _FILEDATE
+  - name: _FILENAME
+  - name: AUDIT_LOG_ID
+    description: >-
+      UUID linking this record to the data pipeline audit log for load traceability.
+      Identifies which pipeline execution ingested or updated this row.
+      Used for debugging data quality issues and tracking data freshness.
+  - name: _ROW_HASH
+
+- name: SILVER__TEH_SUPPORT_SERVICES__SN_CHOICE_LABELS
+  description: >-
+    This model is the pre filtered list of choice labels for the ServiceNow fields.
+    It is used to join to other models to get the human readable label for choice fields.
+    Some fields are dependent on others, so make sure you check the DEPENDENT_COLUMN and DEPENDENT_VALUE columns to ensure you are getting the correct label.
+    Example, subcategory is dependent on category, so you need to filter on the category value to get the correct subcategory label.
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _AUDIT_LOG_ID
+  - name: _ROW_HASH
+  - name: _REFRESHDATE
+  - name: SYS_ID
+    description: >-
+      Unique ServiceNow system identifier for each choice list entry.
+      Globally unique 32-character hexadecimal string assigned by the ServiceNow platform.
+      Used as the primary key for deduplication and referential integrity.
+  - name: NAME
+    description: >-
+      ServiceNow table name that the choice list entry belongs to.
+      Identifies which ServiceNow object definition the choice applies to.
+      Examples include incident, change_request, and custom table names.
+  - name: ELEMENT
+    description: >-
+      Field name within the ServiceNow table that this choice value applies to.
+      Identifies the specific column whose dropdown options are being defined.
+      Examples include priority, state, category, and subcategory.
+  - name: VALUE
+    description: >-
+      Internal stored value for the choice option as saved in the ServiceNow database.
+      Typically a short code, number, or abbreviation used in programmatic references.
+      Mapped to the human-readable LABEL for display purposes.
+  - name: DEPENDENT_COLUMN
+    description: >-
+      Name of the parent field that this choice depends on for conditional filtering.
+      When populated, the choice is only valid when the parent field matches DEPENDENT_VALUE.
+      NULL indicates an independent choice with no conditional dependency.
+  - name: DEPENDENT_VALUE
+    description: >-
+      Value that the DEPENDENT_COLUMN must contain for this choice to be applicable.
+      Used to implement cascading dropdown logic where child options depend on parent selection.
+      NULL when the choice is not conditionally dependent on another field.
+  - name: LABEL
+    description: >-
+      Human-readable display text shown to users in the ServiceNow interface for this choice.
+      The friendly name corresponding to the stored VALUE code.
+      Used in joins to translate coded values into meaningful descriptions for reporting.

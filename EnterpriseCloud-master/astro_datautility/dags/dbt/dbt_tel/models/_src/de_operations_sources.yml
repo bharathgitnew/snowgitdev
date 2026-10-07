@@ -1,0 +1,28 @@
+version: 2
+sources:
+- name: DE_OPERATIONS
+  description: PUB - DE_OPERATIONS Schema
+  database: '{{ env_var(''SNOWFLAKE_PUB'') }}'
+  schema: DE_OPERATIONS
+  tables:
+  - name: D_EMPLOYEE
+    identifier: D_EMPLOYEE
+    description: Pub view for D_EMPLOYEE.
+  - name: SALES_ORDER_WITH_REF_DATA
+    identifier: SALES_ORDER_WITH_REF_DATA
+    description: Pub view for PUB__DE_OPERATIONS__SALES_ORDER_WITH_REF_DATA.
+  - name: SAP_LINK_SO_PO
+    identifier: SAP_LINK_SO_PO
+    description: Pub view for PUB__DE_OPERATIONS__SAP_LINK_SO_PO.
+  - name: SALES_ORDER_LINE_MASTER
+    identifier: SALES_ORDER_LINE_MASTER 
+    description: Pub view for PUB__DE_OPERATIONS__SALES_ORDER_LINE_MASTER.
+  - name: TIMESHEET
+    identifier: TIMESHEET
+    description: Pub view for PUB__DE_OPERATIONS__TIMESHEET.
+  - name: US_MACHINES
+    identifier: US_MACHINES
+    description: Pub view for PUB__DE_OPERATIONS__US_MACHINES. 
+  - name: MATERIAL_MASTER
+    identifier: MATERIAL_MASTER
+    description: Pub view for PUB__DE_OPERATIONS__MATERIAL_MASTER.   

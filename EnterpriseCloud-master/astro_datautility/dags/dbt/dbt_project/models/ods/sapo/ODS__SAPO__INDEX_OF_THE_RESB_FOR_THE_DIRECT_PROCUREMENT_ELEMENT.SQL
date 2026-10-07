@@ -1,0 +1,83 @@
+{{ config(
+        materialized='incremental',
+        incremental_strategy='merge',
+        alias='INDEX_OF_THE_RESB_FOR_THE_DIRECT_PROCUREMENT_ELEMENT',
+        unique_key = ['MANDT',
+    'RSNUM',
+    'RSPOS',
+    'RSART',
+    'RSINZ'],
+        transient=false
+) }}
+
+with source_data as (
+	SELECT 
+	_CAPTUREDATETIME,
+	MANDT,
+	RSNUM,
+	RSPOS,
+	RSART,
+	RSINZ,
+	PLNUM,
+	BANFN,
+	BNFPO,
+	EBELN,
+	EBELP,
+	AUFNR,
+	AUFPO,
+	AOBAR,
+	ZEINH,
+	DAUER
+	FROM {{source('SAP_ORACLE_LIVE', 'RSDB')}}
+),
+
+
+transform_data as 
+(
+SELECT
+    _CAPTUREDATETIME,
+    '{{ invocation_id }}' AS _AUDIT_LOG_ID,
+    SHA2('hash_me') as _ROW_HASH,
+	MANDT as MANDT,
+	RSNUM as RSNUM,
+	RSPOS as RSPOS,
+	RSART as RSART,
+	RSINZ as RSINZ,
+	PLNUM as PLNUM,
+	BANFN as BANFN,
+	BNFPO as BNFPO,
+	EBELN as EBELN,
+	EBELP as EBELP,
+	AUFNR as AUFNR,
+	AUFPO as AUFPO,
+	AOBAR as AOBAR,
+	ZEINH as ZEINH,
+	DAUER as DAUER
+	FROM SOURCE_DATA
+), 
+
+type_data as 
+(
+SELECT 
+	CAST(_CAPTUREDATETIME AS TIMESTAMP_LTZ(9)) AS _CAPTUREDATETIME,
+	CAST(_AUDIT_LOG_ID AS VARCHAR(128)) AS _AUDIT_LOG_ID,
+	CAST(_ROW_HASH AS VARCHAR(128)) AS _ROW_HASH,
+	MANDT,
+	RSNUM,
+	RSPOS,
+	RSART,
+	RSINZ,
+	PLNUM,
+	BANFN,
+	BNFPO,
+	EBELN,
+	EBELP,
+	AUFNR,
+	AUFPO,
+	AOBAR,
+	ZEINH,
+	CAST(DAUER AS NUMBER(38,10)) AS DAUER
+FROM TRANSFORM_DATA
+)
+ 
+SELECT * FROM TYPE_DATA

@@ -1,0 +1,135 @@
+{{ config(
+    materialized='incremental',
+    incremental_strategy='insert_overwrite',
+    alias='REPORTING_PHISHING_SECURITY_TESTS'
+) }}
+
+with source_data as
+(
+    SELECT
+        _FILENAME,
+        _FILEDATE,
+        jsonfield:attachment_open_count::string as ATTACHMENT_OPEN_COUNT,
+        jsonfield:bounced_count::string as BOUNCED_COUNT,
+        jsonfield:campaign_id::string as CAMPAIGN_ID,
+        categories_data.value:category_id::string as CATEGORY_ID,
+        categories_data.value:name::string as CATEGORY_NAME,
+        jsonfield:clicked_count::string as CLICKED_COUNT,
+        jsonfield:data_entered_count::string as DATA_ENTERED_COUNT,
+        jsonfield:delivered_count::string as DELIVERED_COUNT,
+        jsonfield:duration::string as DURATION,
+        groups_data.value:group_id::string as GROUP_ID,
+        groups_data.value:name::string as GROUP_NAME,        
+        jsonfield:"landing_page.id"::string as LANDING_PAGE_ID,
+        jsonfield:"landing_page.name"::string as LANDING_PAGE_NAME,
+        jsonfield:macro_enabled_count::string as MACRO_ENABLED_COUNT,
+        jsonfield:name::string as NAME,
+        jsonfield:opened_count::string as OPENED_COUNT,
+        jsonfield:phish_prone_percentage::string as PHISH_PRONE_PERCENTAGE,
+        jsonfield:pst_id::string as PST_ID,      
+        jsonfield:qr_code_scanned_count::string as QR_CODE_SCANNED_COUNT, 
+        jsonfield:replied_count::string as REPLIED_COUNT,
+        jsonfield:reported_count::string as REPORTED_COUNT,
+        jsonfield:scheduled_count::string as SCHEDULED_COUNT,
+        jsonfield:started_at::string as STARTED_AT,
+        jsonfield:status::string as STATUS,
+        jsonfield:"template.difficulty"::string as TEMPLATE_DIFFICULTY,
+        jsonfield:"template.id"::string as TEMPLATE_ID,
+        jsonfield:"template.name"::string as TEMPLATE_NAME,
+        jsonfield:"template.type"::string as TEMPLATE_TYPE
+    FROM {{ source("KNOWBE4", "REPORTING_PHISHING_SECURITY_TESTS") }} Security_Tests,
+        LATERAL FLATTEN (input => Security_Tests.jsonfield:categories) categories_data,
+        LATERAL FLATTEN (input => Security_Tests.jsonfield:groups) groups_data
+    QUALIFY (ROW_NUMBER() OVER (PARTITION BY JSONFIELD:campaign_id,
+                                    JSONFIELD:name,
+                                    JSONFIELD:landing_page.id,
+                                    JSONFIELD:landing_page.name,
+                                    JSONFIELD:phish_prone_percentage,
+                                    JSONFIELD:pst_id,
+                                    JSONFIELD:started_at,
+                                    JSONFIELD:status,
+                                    JSONFIELD:template.id,
+                                    JSONFIELD:template.name,
+                                    JSONFIELD:template.type,
+                                    categories_data.value:category_id,
+                                    categories_data.value:name,
+                                    groups_data.value:group_id,
+                                    groups_data.value:name
+                                ORDER BY _filedate DESC) = 1)
+)
+
+,transform_data as
+(
+    SELECT
+        '{{ invocation_id }}' AS _AUDIT_LOG_ID,
+        SHA2('hash_me') as _Row_Hash,
+        _FILENAME,
+        _FILEDATE,
+        CAMPAIGN_ID,
+        NAME,
+        STARTED_AT,
+        STATUS,
+        TEMPLATE_DIFFICULTY,
+        TEMPLATE_ID,
+        TEMPLATE_NAME,
+        TEMPLATE_TYPE,
+        LANDING_PAGE_ID,
+        LANDING_PAGE_NAME,
+        CATEGORY_ID,
+        CATEGORY_NAME,
+        GROUP_ID,
+        GROUP_NAME,  
+        PST_ID,    
+        PHISH_PRONE_PERCENTAGE,    
+        ATTACHMENT_OPEN_COUNT,
+        BOUNCED_COUNT,
+        CLICKED_COUNT,
+        DATA_ENTERED_COUNT,
+        DELIVERED_COUNT,
+        DURATION,    
+        MACRO_ENABLED_COUNT,
+        OPENED_COUNT,
+        QR_CODE_SCANNED_COUNT, 
+        REPLIED_COUNT,
+        REPORTED_COUNT,
+        SCHEDULED_COUNT
+    FROM source_data
+)
+,type_data as 
+(
+    select
+        cast(_AUDIT_LOG_ID as varchar(128)) as _AUDIT_LOG_ID,
+        cast(_ROW_HASH as varchar(128)) as _ROW_HASH,
+        _FILENAME,
+        _FILEDATE,
+        CAMPAIGN_ID,
+        NAME,
+        STARTED_AT,
+        STATUS,
+        TEMPLATE_DIFFICULTY,
+        TEMPLATE_ID,
+        TEMPLATE_NAME,
+        TEMPLATE_TYPE,
+        LANDING_PAGE_ID,
+        LANDING_PAGE_NAME,
+        CATEGORY_ID,
+        CATEGORY_NAME,
+        GROUP_ID,
+        GROUP_NAME,  
+        PST_ID,    
+        PHISH_PRONE_PERCENTAGE,    
+        ATTACHMENT_OPEN_COUNT,
+        BOUNCED_COUNT,
+        CLICKED_COUNT,
+        DATA_ENTERED_COUNT,
+        DELIVERED_COUNT,
+        DURATION,    
+        MACRO_ENABLED_COUNT,
+        OPENED_COUNT,
+        QR_CODE_SCANNED_COUNT, 
+        REPLIED_COUNT,
+        REPORTED_COUNT,
+        SCHEDULED_COUNT
+    from transform_data
+    )
+select * from type_data

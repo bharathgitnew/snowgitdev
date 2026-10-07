@@ -1,0 +1,10 @@
+version: 2
+sources:
+- name: OPT
+  description: Landing Zone - OPT Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: OPT
+  tables:
+  - name: ORDER_PROCESS_TRACKING
+    identifier: ORDER_PROCESS_TRACKING
+    description: Landing table for ORDER_PROCESS_TRACKING.

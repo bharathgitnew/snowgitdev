@@ -1,0 +1,144 @@
+{
+    "TELCUSTOMER": {
+        "DataSet1": {
+            "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+            "table": "PRODUCT",
+            "Incremental": "NULL",
+            "sftablename": "PRODUCT",
+            "filter": ""
+        },
+        "DataSet2": {
+            "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+            "table": "CAPITAL_PO_CHANGE_TYPE",
+            "Incremental": "NULL",
+            "sftablename": "CAPITAL_PO_CHANGE_TYPE",
+            "filter": ""
+        },
+        "DataSet3": {
+            "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+            "table": "CAPITAL_PO_COMMENTS",
+            "Incremental": "NULL",
+            "sftablename": "CAPITAL_PO_COMMENTS",
+            "filter": ""
+        },
+        "DataSet4": {
+            "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+            "table": "CAPITAL_PO_EVENT_TRACKING",
+            "Incremental": "NULL",
+            "sftablename": "CAPITAL_PO_EVENT_TRACKING",
+            "filter": ""
+        },
+        "DataSet5": {
+            "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+            "table": "CAPITAL_PO_HEADER",
+            "Incremental": "NULL",
+            "sftablename": "CAPITAL_PO_HEADER",
+            "filter": ""
+        },
+        "DataSet6": {
+            "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+            "table": "CAPITAL_PO_LINE",
+            "Incremental": "NULL",
+            "sftablename": "CAPITAL_PO_LINE",
+            "filter": ""
+        },
+        "DataSet7": {
+            "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+            "table": "CAPITAL_PO_QUOTE_MAP",
+            "Incremental": "NULL",
+            "sftablename": "CAPITAL_PO_QUOTE_MAP",
+            "filter": ""
+        },
+        "DataSet8": {
+            "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+            "table": "CAPITAL_PO_REASON_CODE",
+            "Incremental": "NULL",
+            "sftablename": "CAPITAL_PO_REASON_CODE",
+            "filter": ""
+        },
+        "DataSet9": {
+            "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+            "table": "CAPITAL_PO_SHIP_TO_DESCR",
+            "Incremental": "NULL",
+            "sftablename": "CAPITAL_PO_SHIP_TO_DESCR",
+            "filter": ""
+        },
+        "DataSet10": {
+            "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+            "table": "CAPITAL_PO_SHIP_TO_LOCATION",
+            "Incremental": "NULL",
+            "sftablename": "CAPITAL_PO_SHIP_TO_LOCATION",
+            "filter": ""
+        },
+        "DataSet11": {
+            "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+            "table": "CAPITAL_PO_VALIDATION_LOG",
+            "Incremental": "NULL",
+            "sftablename": "CAPITAL_PO_VALIDATION_LOG",
+            "filter": ""
+        },
+        "DataSet12": {
+            "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+            "table": "EQUIPMENT_QUOTE_TQ_AUDIT",
+            "Incremental": "NULL",
+            "sftablename": "EQUIPMENT_QUOTE_TQ_AUDIT",
+            "filter": ""
+        },
+        "DataSet13": {
+            "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+            "table": "TELCUST_ARF_NEW_QUOTE",
+            "Incremental": "NULL",
+            "sftablename": "TELCUST_ARF_NEW_QUOTE",
+            "filter": ""
+        },
+        "DataSet14": {
+            "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+            "table": "TELCUST_ARF_QRF_DATA",
+            "Incremental": "NULL",
+            "sftablename": "TELCUST_ARF_QRF_DATA",
+            "filter": ""
+        },
+        "DataSet15": {
+            "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+            "table": "USER_INFO",
+            "Incremental": "NULL",
+            "sftablename": "USER_INFO",
+            "filter": ""
+        },
+        "DataSet16": {
+            "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+            "table": "Contact",
+            "Incremental": "NULL",
+            "sftablename": "CONTACT",
+            "filter": ""
+        },
+        "DataSet17": {
+            "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+            "table": "BUSINESS_PARTNER",
+            "Incremental": "NULL",
+            "sftablename": "BUSINESS_PARTNER",
+            "filter": ""
+        },
+        "DataSet18": {
+            "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+            "table": "UGK",
+            "Incremental": "NULL",
+            "sftablename": "UGK",
+            "filter": ""
+        },
+        "DataSet19": {
+            "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+            "table": "CAPITAL_PO_CHANGE_LOG",
+            "Incremental": "NULL",
+            "sftablename": "CAPITAL_PO_CHANGE_LOG",
+            "filter": ""
+        },
+        "DataSet20": {
+            "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+            "table": "EQUIPMENT_QUOTE_TRACKING",
+            "Incremental": "NULL",
+            "sftablename": "EQUIPMENT_QUOTE_TRACKING",
+            "filter": ""
+        }
+    }
+}

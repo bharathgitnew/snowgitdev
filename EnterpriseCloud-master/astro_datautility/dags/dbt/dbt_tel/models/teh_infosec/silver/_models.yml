@@ -1,0 +1,175 @@
+models:
+- name: SILVER__TEH_INFOSEC__EMPLOYEE
+  description: |
+    PURPOSE: Provides a conformed employee master dataset for InfoSec reporting, workforce governance, and organizational lookup use cases across TEA entities.
+    GRAIN: One row = one employee (EMPLOYEEID) record from the TEA common employee source after enrichment.
+    KEY LOGIC: Enriches source employee attributes with supervisor, department, product line, location, BU mappings, and derived status/name flags; normalizes key fields such as STATUS_CODE and FULLNAME.
+    CAVEAT: Several descriptive fields are mapping-dependent and can be null or differ from raw source values when reference tables are incomplete or stale.
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: COMPANYID
+    description: TEA company identifier for the employee record. Used to partition workforce data by legal entity. Can be null if source company mapping is missing.
+  - name: EMPLOYEEID
+    description: Primary employee identifier from the common employee source. Used as the business key for employee-level joins. Can be null for incomplete upstream records.
+  - name: ADPCOMPANY
+    description: ADP company code tied to the employee in the payroll/HR source. Used in downstream flags such as EXPAT classification. Can be null when ADP attributes are unavailable.
+  - name: ADP_PERSON_ID
+    description: ADP person identifier associated to the worker profile. Supports cross-system reconciliation between TEA and ADP records. Can be null if ADP linkage is not established.
+  - name: ACTIVE
+    description: Raw active indicator from source employee data. Represents current source-system status prior to derived STATUS_CODE normalization. Can be null for legacy or partially loaded records.
+  - name: EMPLOYEETYPE
+    description: Source employee type code used to derive EMPLOYEE_TYPE_NAME. Preserves upstream classification for audit and troubleshooting. Can be null when source type is not provided.
+  - name: FIRSTNAME
+    description: Employee legal first name from source. Used in name presentation fields and identity checks. Can be null for incomplete personal-profile records.
+  - name: LASTNAME
+    description: Employee legal last name from source. Used in FULLNAME and LEGALFULLNAME derivations. Can be null for incomplete personal-profile records.
+  - name: NAMEUSED
+    description: Preferred/used first-name value from source HR data. Prioritized in FULLNAME derivation when populated. Can be null for employees without preferred-name entry.
+  - name: ADP_POSN_ID
+    description: ADP position identifier assigned to the employee. Supports position-level reporting and ADP reconciliation. Can be null when position linkage is unavailable.
+  - name: JOBCODE
+    description: Job code from the employee profile. Used for role categorization and workforce analytics. Can be null when source job assignment is missing.
+  - name: JOBTITLE
+    description: Job title text from source HR data. Human-readable role label for reporting and reviews. Can be null if not maintained upstream.
+  - name: EMAIL
+    description: Corporate email address for the employee record. Used for notifications and identity matching across systems. Can be null for contingent users or incomplete provisioning.
+  - name: SUPERVISORID
+    description: Employee identifier of the direct supervisor from source hierarchy. Used to resolve SUPERVISOR_NAME via self-join. Can be null for top-level roles or missing hierarchy data.
+  - name: DEPTCODE
+    description: Department code from source HR assignment. Used in department mapping and OLDDEPTCODE derivation logic. Can be null when department assignment is absent.
+  - name: PRODLINECODE
+    description: Product-line/business-unit code from source assignment. Used in BU mapping and OLDPRODLINECODE/FST logic. Can be null when product-line mapping is unavailable.
+  - name: LOCATIONCODE
+    description: Location/office code from source employee attributes. Used to resolve OFFICE_NAME from location reference data. Can be null for unmapped or remote-only records.
+  - name: STATE
+    description: State or region code captured on the employee profile. Used for regional slicing in reporting workflows. Can be null if geographic details are not provided.
+  - name: MAILSTOP
+    description: Internal mail-stop value for office delivery routing. Operational contact attribute maintained in source HR systems. Can be null for locations that do not use mail-stop codes.
+  - name: OFFCPHONE
+    description: Primary office phone number associated with the employee. Contact attribute used for internal directory views. Can be null when office telephony data is not maintained.
+  - name: OFFCEXT
+    description: Office phone extension linked to OFFCPHONE. Supports internal dialing in directory-based use cases. Can be null when extensions are not assigned.
+  - name: OFFCPAGERMODEL
+    description: Office pager model/type captured in source profile fields. Legacy contact equipment attribute retained for completeness. Can be null where pager data is deprecated.
+  - name: OFFCPAGER
+    description: Office pager number from source employee contact attributes. Retained for legacy communication workflows. Can be null for users without pager assignment.
+  - name: OFFCPIN
+    description: Office paging PIN or related paging credential field. Legacy telecommunication attribute from source HR profile. Can be null where paging controls are not used.
+  - name: OFFCPAGECOVAREA
+    description: Office paging coverage area designation. Legacy communications attribute used in paging operations. Can be null when not populated upstream.
+  - name: OFFCDISPATCH
+    description: Office dispatch contact detail from employee profile data. Supports legacy dispatch communication workflows. Can be null if dispatch fields are unused.
+  - name: OFFCFAX
+    description: Office fax number captured on the employee profile. Retained for systems that still reference fax communication. Can be null where fax data is not maintained.
+  - name: OFFCPAGEREMAIL
+    description: Pager email gateway value associated with the employee. Legacy contact channel for paging integrations. Can be null for non-pager users.
+  - name: CUSTLOCALPAGER
+    description: Custom/local pager identifier from source profile extensions. Organization-specific contact attribute preserved as-is. Can be null if local pager tracking is not used.
+  - name: CUSTLOCALPIN
+    description: Custom/local pager PIN from source profile extensions. Organization-specific paging credential field. Can be null when local paging controls are not configured.
+  - name: MOBILEPHONE
+    description: Employee mobile phone number from source HR/contact data. Used for directory and communication-oriented downstream uses. Can be null for employees without mobile data.
+  - name: SENIORITY_DATE
+    description: Employee seniority date from HR records. Used for tenure and service-duration analytics. Can be null for records lacking seniority history.
+  - name: FTE
+    description: Full-time-equivalent value representing expected workload ratio. Supports capacity and workforce planning calculations. Can be null for records without FTE assignment.
+  - name: DATEHIRE
+    description: Original hire date from source HR lifecycle data. Used for onboarding cohort and tenure reporting. Can be null for legacy records with incomplete history.
+  - name: DATETERM
+    description: Termination date from source HR lifecycle data. Indicates separation timing for inactive workers. Can be null for active employees or missing term history.
+  - name: SALARYEXEMPT
+    description: Salary exemption classification from source HR attributes. Supports labor-policy and compensation segmentation. Can be null when exemption status is not tracked.
+  - name: PREFERREDLANGUAGE
+    description: Preferred language code for employee communications. Used for localized messaging and support workflows. Can be null when language preference is not captured.
+  - name: FLEETAUTO
+    description: Fleet/auto eligibility or assignment indicator from source profile data. Operational attribute for transportation-related programs. Can be null when fleet participation is not applicable.
+  - name: KRONOS_ACCRUAL_CODE
+    description: Kronos accrual code used by timekeeping/payroll integration rules. Drives leave and accrual processing behavior in Kronos-aligned workflows. Can be null when Kronos setup is incomplete.
+  - name: KRONOS_PAY_RULE
+    description: Kronos pay rule assigned to the worker profile. Governs pay-calculation behavior in Kronos processes. Can be null if pay-rule mapping is not configured.
+  - name: KRONOS_WORK_RULE
+    description: Kronos work rule associated with scheduling/time evaluation. Used by workforce management logic in Kronos integrations. Can be null where work rules are not mapped.
+  - name: KRONOS_ACCESS_CODE
+    description: Kronos access code controlling profile/transaction permissions. Integration-facing setup attribute from HR/timekeeping mapping. Can be null when access-code assignment is absent.
+  - name: KRONOS_LABOR_LEVEL
+    description: Kronos labor-level assignment for organizational/time tracking rollups. Supports labor-cost and hierarchy reporting in Kronos-linked outputs. Can be null when labor levels are not maintained.
+  - name: KRONOS_PAY_CODE_DATA_ACCESS
+    description: Kronos pay-code data access configuration for the employee profile. Controls available pay-code visibility in timekeeping contexts. Can be null when this control is not configured.
+  - name: KRONOS_DISPLAY_PROFILE
+    description: Kronos display profile used for UI/visibility behavior in workforce tools. Retained for Kronos-integrated operational use. Can be null when display profile is unassigned.
+  - name: NTDOMAIN
+    description: Network domain associated with employee account identity. Supports identity correlation with enterprise authentication systems. Can be null for non-domain or unmapped users.
+  - name: NTLOGIN
+    description: Network login/user ID for the employee account. Used for identity joins with security and access-control data. Can be null where account provisioning is incomplete.
+  - name: PROJECT
+    description: Project assignment attribute from source workforce data. Enables project-based staffing and reporting slices. Can be null when project tagging is not used.
+  - name: LASTUPDATED
+    description: Timestamp/date of the most recent source update to the employee record. Useful for change recency and incremental monitoring. Can be null for records without update metadata.
+  - name: LASTUPDATEDBY
+    description: Source user or process that last updated the employee record. Useful for data stewardship audit trails and troubleshooting. Can be null when updater metadata is not captured.
+  - name: MIDDLE_INITIAL
+    description: Employee middle-initial value from personal profile fields. Supplemental identity attribute for legal/name matching. Can be null where middle initial is not provided.
+  - name: SUFFIX
+    description: Name suffix (for example Jr/Sr/III) from source profile data. Supplemental legal-name attribute for identity display. Can be null for employees without suffix values.
+  - name: REHIREDATE
+    description: Rehire date from HR lifecycle history for returning workers. Supports rehire analytics and service timeline interpretation. Can be null for never-rehired employees.
+  - name: ISMANAGER
+    description: Source manager indicator for the employee profile. Flags manager status for org-chart and approval workflows. Can be null when manager tagging is not maintained.
+  - name: STATUS_CODE
+    description: Normalized employment status code derived from the raw employee status fields. Standardizes workforce status across downstream reporting. Can differ from source ACTIVE values when transformation rules resolve conflicting inputs.
+  - name: HRREP
+    description: HR representative assignment value tied to the employee. Used for support ownership and HR operational reporting. Can be null when HR rep mapping is unavailable.
+  - name: WORKGROUP
+    description: Workgroup classification from source workforce setup. Used for scheduling and operational segmentation. Can be null if workgroup data is not assigned.
+  - name: BUMGR
+    description: Business-unit manager reference from source organizational attributes. Supports BU management reporting. Can be null when BU manager fields are not populated.
+  - name: EETYPE
+    description: Employment classification type code retained from source. Supports segmentation by employment arrangement. Can be null where source employment type detail is missing.
+  - name: WFH
+    description: Work-from-home indicator or classification from source profile data. Used for remote-work reporting slices. Can be null when WFH status is not tracked.
+  - name: INACTIVE
+    description: Inactive indicator from source employee status attributes. Complements ACTIVE/STATUS fields for status interpretation. Can be null when source inactive flag is not set.
+  - name: VENDORNAME
+    description: Vendor name associated with contingent or vendor-linked records. Enables contractor/vendor reporting use cases. Can be null for direct employees.
+  - name: JOB_FAMILY
+    description: Job family grouping for the employee role. Used for broad role taxonomy and workforce analytics. Can be null if family mapping is not maintained.
+  - name: SUPERVISORY_ORG
+    description: Supervisory organization value from source hierarchy structures. Used for rollup and org-level reporting. Can be null when supervisory organization is not assigned.
+  - name: FUNCTION1
+    description: Functional classification attribute retained from source workforce data. Supports organization-specific reporting dimensions. Can be null when function tagging is absent.
+  - name: COSTCENTER
+    description: Cost center assigned to the employee for financial/organizational attribution. Used in finance-aligned workforce analysis. Can be null when cost-center mapping is missing.
+  - name: COCODE
+    description: Company code used for financial or organizational mapping. Supports joins to company-level reference structures. Can be null if source company-code assignment is missing.
+  - name: STDHIER
+    description: Standard hierarchy path/code from source organizational data. Used for hierarchy-based reporting rollups. Can be null for records without hierarchy assignment.
+  - name: OLDDEPTCODE
+    description: Legacy department code produced from the current department mapping logic. Preserves backward-compatible department references for downstream consumers. Can differ from the raw department field when legacy mapping rules apply.
+  - name: OLDPRODLINECODE
+    description: Legacy product-line code produced from the current product-line mapping logic. Preserves backward-compatible BU references for downstream consumers. Can differ from the raw product-line field when legacy mapping rules apply.
+  - name: FULLNAME
+    description: Display name assembled from last name and preferred or first name logic. Used in directory-style and user-facing reporting. Can differ from the raw legal-name fields when a preferred name is available.
+  - name: ISFSTEMPLOYEE
+    description: Indicator showing whether the employee falls into the FST population under current business rules. Used in FST-specific reporting and routing. Can differ from source tags because it is assigned from transformation logic.
+  - name: FSTEMPLOYEEGROUP
+    description: FST grouping label assigned from department and product-line business rules. Used for specialized FST workforce segmentation. Can differ from source labels because it is standardized during transformation.
+  - name: EMPLOYEE_TYPE_NAME
+    description: Human-readable employee type label mapped from the EMPLOYEETYPE code. Standardizes type naming for analytics and reporting. Can differ from the raw source code because it uses curated label logic.
+  - name: SUPERVISOR_NAME
+    description: Supervisor name resolved through the employee self-join on SUPERVISORID. Provides readable hierarchy context for each employee row. Can be blank or differ from source text when the supervisor record is missing or outdated.
+  - name: DEPARTMENT_NAME
+    description: Readable department name resolved from department code and reference mappings. Used to present business-friendly organization labels. Can differ from raw source text when reference mappings override source naming.
+  - name: BUSINESS_UNIT_NAME
+    description: Readable business-unit name resolved from product-line and BU mapping logic. Used for downstream organization and ownership reporting. Can differ from raw source text when mapping tables standardize names.
+  - name: OFFICE_NAME
+    description: Human-readable office name resolved from the employee location code. Used to present clearer site information in workforce reporting. Can differ from raw source text when the location reference applies standardized labels.
+  - name: EXPAT_FLAG
+    description: Expatriate indicator assigned from configured ADP company-code rules. Standardizes expatriate classification across consumers. Can differ from source tags because the value is set through model logic.
+  - name: BU_GROUP
+    description: Business-unit group value from BU mapping reference data. Used for BU-level aggregation and governance reporting. Can be null when BU mapping coverage is incomplete.
+  - name: BU_GROUP_LEADER
+    description: Leader assigned to the mapped business-unit group. Supports ownership visibility in BU reporting outputs. Can be null when group-leader mapping is not maintained.
+  - name: LEGALFULLNAME
+    description: Legal full name assembled from the legal first-name and last-name fields. Used where formal identity formatting is required. Can differ from display-name fields when preferred names are present elsewhere in the profile.

@@ -1,0 +1,57 @@
+/************
+Model file generated from dbtGeneratePubViews: 03.10.2022.08.14.07"
+*************/
+
+{{ config(
+      materialized='view',
+      alias='BAANDISTRIBUTIONSALESCONTROL_LINKEDORDERLINEDATA',
+      transient=false
+) }}
+
+with source_data as (
+    SELECT
+        _CAPTUREDATETIME,
+        _COMPANYID,
+        CONFIGURATION,
+        CONTRACT,
+        INTERFACERECORDCREATIONDATE,
+        ORDER_EDATWAREHOUSE,
+        ORDER_EDITEM,
+        ORIGINALDOCUMENTNUMBER,
+        ORIGINALDOCUMENTTYPEDESCRIPTION,
+        ORIGINALDOCUMENTTYPEID,
+        ORIGINALSEQUENCE,
+        PLANDELIVERY,
+        PLANNEDPURCHASEADVICENUMBER,
+        POSITIONNUMBER_PONO,
+        POSITIONNUMBER_POSI,
+        POSITIONNUMBER_PPON,
+        POSITIONNUMBER_RETP,
+        PURCHASEORDER,
+        QUOTATIONNUMBER,
+        QUOTATIONPOSITION,
+        READYFORPROCESSINGDESCRIPTION,
+        READYFORPROCESSINGID,
+        RECEIPTPRIORITY,
+        RECEIPTQUANTITY,
+        RETURNINVOICECOMPANY,
+        RETURNORDER,
+        RETURNTRANSACTIONTYPE,
+        SALESOFFICE,
+        SALESORDER,
+        SCHEDULE,
+        SCHEDULEPOSITION,
+        SCHEDULEREVISION,
+        SEQUENCENUMBER_PSEQ,
+        SEQUENCENUMBER_RETS,
+        SEQUENCENUMBER_SQNB,
+        SHIPMENT
+    from {{ ref('ODS__BAAN__BAANDISTRIBUTIONSALESCONTROL_LINKEDORDERLINEDATA') }}
+),
+
+transform_data AS
+(
+    select * from source_data
+)
+
+    select * from transform_data

@@ -1,0 +1,119 @@
+{{ config(
+    materialized='tel_incremental',
+    incremental_strategy='insert_overwrite',
+    alias='TMEA_FY23_GL_TRANSACTIONS',
+    transient=false
+) }}
+
+with source_data as (
+    select
+        h.COMPANY_CODE,
+        h.ACCOUNTING_DOCUMENT_NUMBER as DOCUMENT_NUMBER,
+        h.FISCAL_YEAR,
+        h.DOCUMENT_TYPE,
+        h.DOCUMENT_DATE_IN_DOCUMENT as TRANSACTION_DATE,
+        h.POSTING_DATE_IN_THE_DOCUMENT as POSTING_DATE,
+        h.DAY_ON_WHICH_ACCOUNTING_DOCUMENT_WAS_ENTERED as ENTRY_DATE,
+        h.FISCAL_PERIOD,
+        h.REFERENCE_DOCUMENT_NUMBER as REFERENCE_NUMBER,
+        h.DOCUMENT_HEADER_TEXT,
+        s.GENERAL_LEDGER_ACCOUNT,
+        skat.GL_ACCOUNT_LONG_TEXT,
+        skat.GL_ACCOUNT_NUMBER,
+        s.COST_CENTER,
+        s.ACCOUNT_NUMBER_OF_VENDOR_OR_CREDITOR as VENDOR_NUMBER,
+        lfa1.NAME_1 as VENDOR_NAME,
+        s.CUSTOMER_NUMBER,
+        kna1.NAME_1 as CUSTOMER_NAME,
+        s.DEBIT_CREDIT_INDICATOR,
+        s.COMPANY_ID_OF_TRADING_PARTNER as TRADING_PARTNER,
+        s.SALES_DOCUMENT,
+        s.PURCHASING_DOCUMENT_NUMBER,
+        case
+            when s.DEBIT_CREDIT_INDICATOR = 'S' then (s.AMOUNT_IN_LOCAL_CURRENCY * 1)
+            when s.DEBIT_CREDIT_INDICATOR = 'H' then (s.AMOUNT_IN_LOCAL_CURRENCY * -1)
+        end as AMOUNT,
+        s.TARGET_SPECIAL_G_L_INDICATOR
+    from {{ ref('SILVER__TMEA_FINANCE__ACCOUNTING_DOCUMENT_SEGMENT') }} s
+    left join {{ ref('SILVER__TMEA_FINANCE__ACCOUNTING_DOCUMENT_HEADER') }} h
+        on s.COMPANY_CODE = h.COMPANY_CODE
+        and s.FISCAL_YEAR = h.FISCAL_YEAR
+        and s.ACCOUNTING_DOCUMENT_NUMBER = h.ACCOUNTING_DOCUMENT_NUMBER
+    left join {{ ref('SILVER__TMEA_FINANCE__GL_ACCOUNT_MASTER_RECORD') }} skat
+        on s.GENERAL_LEDGER_ACCOUNT = skat.GL_ACCOUNT_NUMBER
+        and skat.LANGUAGE_KEY = 'E'
+        and skat.CHART_OF_ACCOUNTS = '0010'
+    left join {{ ref('SILVER__TMEA_FINANCE__GENERAL_DATA_IN_CUSTOMER_MASTER') }} kna1
+        on s.CUSTOMER_NUMBER = kna1.CUSTOMER_NUMBER
+        and s.COMPANY_CODE = '0010'
+    left join {{ ref('SILVER__TMEA_MANUFACTURING__VENDOR_MASTER') }} lfa1
+        on s.ACCOUNT_NUMBER_OF_VENDOR_OR_CREDITOR = lfa1.ACCOUNT_NUMBER_OF_VENDOR_OR_CREDITOR
+    where s.FISCAL_YEAR = '2023'
+        and s.TARGET_SPECIAL_G_L_INDICATOR <> 'A' -- special gl posting
+        and s.TRANSACTION_TYPE_FOR_GENERAL_LEDGER <> 'RFIG'--manual GL posting being exluded
+        and H.COMPANY_CODE = '0010' -- TMEA company code
+),
+
+transform_data as (
+    select
+        '{{ invocation_id }}' as _AUDIT_LOG_ID,
+        SHA2('hash_me') as _ROW_HASH,
+        COMPANY_CODE,
+        DOCUMENT_NUMBER,
+        FISCAL_YEAR,
+        DOCUMENT_TYPE,
+        TRANSACTION_DATE,
+        POSTING_DATE,
+        ENTRY_DATE,
+        FISCAL_PERIOD,
+        REFERENCE_NUMBER,
+        DOCUMENT_HEADER_TEXT,
+        GENERAL_LEDGER_ACCOUNT,
+        GL_ACCOUNT_LONG_TEXT,
+        GL_ACCOUNT_NUMBER,
+        COST_CENTER,
+        VENDOR_NUMBER,
+        VENDOR_NAME,
+        CUSTOMER_NUMBER,
+        CUSTOMER_NAME,
+        DEBIT_CREDIT_INDICATOR,
+        TRADING_PARTNER,
+        SALES_DOCUMENT,
+        PURCHASING_DOCUMENT_NUMBER,
+        AMOUNT,
+        TARGET_SPECIAL_G_L_INDICATOR
+    from source_data
+),
+
+type_data as (
+    select
+        cast(_AUDIT_LOG_ID as VARCHAR(128)) as _AUDIT_LOG_ID,
+        cast(_ROW_HASH as VARCHAR(128)) as _ROW_HASH,
+        cast(COMPANY_CODE as VARCHAR) as COMPANY_CODE,
+        cast(DOCUMENT_NUMBER as VARCHAR) as DOCUMENT_NUMBER,
+        cast(FISCAL_YEAR as VARCHAR) as FISCAL_YEAR,
+        cast(DOCUMENT_TYPE as VARCHAR) as DOCUMENT_TYPE,
+        cast(TRANSACTION_DATE as DATE) as TRANSACTION_DATE,
+        cast(POSTING_DATE as DATE) as POSTING_DATE,
+        cast(ENTRY_DATE as DATE) as ENTRY_DATE,
+        cast(FISCAL_PERIOD as VARCHAR) as FISCAL_PERIOD,
+        cast(REFERENCE_NUMBER as VARCHAR) as REFERENCE_NUMBER,
+        cast(DOCUMENT_HEADER_TEXT as VARCHAR) as DOCUMENT_HEADER_TEXT,
+        cast(GENERAL_LEDGER_ACCOUNT as VARCHAR) as GENERAL_LEDGER_ACCOUNT,
+        cast(GL_ACCOUNT_LONG_TEXT as VARCHAR) as GL_ACCOUNT_LONG_TEXT,
+        cast(GL_ACCOUNT_NUMBER as VARCHAR) as GL_ACCOUNT_NUMBER,
+        cast(COST_CENTER as VARCHAR) as COST_CENTER,
+        cast(VENDOR_NUMBER as VARCHAR) as VENDOR_NUMBER,
+        cast(VENDOR_NAME as VARCHAR) as VENDOR_NAME,
+        cast(CUSTOMER_NUMBER as VARCHAR) as CUSTOMER_NUMBER,
+        cast(CUSTOMER_NAME as VARCHAR) as CUSTOMER_NAME,
+        cast(DEBIT_CREDIT_INDICATOR as VARCHAR) as DEBIT_CREDIT_INDICATOR,
+        cast(TRADING_PARTNER as VARCHAR) as TRADING_PARTNER,
+        cast(SALES_DOCUMENT as VARCHAR) as SALES_DOCUMENT,
+        cast(PURCHASING_DOCUMENT_NUMBER as VARCHAR) as PURCHASING_DOCUMENT_NUMBER,
+        cast(AMOUNT as NUMBER(38,10)) as AMOUNT,
+        cast(TARGET_SPECIAL_G_L_INDICATOR as VARCHAR) as TARGET_SPECIAL_G_L_INDICATOR
+    from transform_data
+)
+
+select * from type_data

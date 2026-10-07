@@ -1,0 +1,58 @@
+version: 2
+sources:
+- name: TGIS
+  description: Landing Zone - TGIS Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: TGIS
+  tables:
+  - name: CONTROLTABLE
+    identifier: CONTROLTABLE
+    description: Landing table for CONTROLTABLE file.
+  - name: INCIDENT_DETAILS
+    identifier: INCIDENT_DETAILS
+    description: Landing table for INCIDENT_DETAILS file.
+  - name: INCIDENT_SUMMARY
+    identifier: INCIDENT_SUMMARY
+    description: Landing table for INCIDENT_SUMMARY file.
+  - name: SERVICEREQUEST_DETAILS
+    identifier: SERVICEREQUEST_DETAILS
+    description: Landing table for SERVICEREQUEST_DETAILS file.
+  - name: SERVICEREQUEST_SUMMARY
+    identifier: SERVICEREQUEST_SUMMARY
+    description: Landing table for SERVICEREQUEST_SUMMARY file.
+  - name: SERVICEREQUEST_TIMELINE
+    identifier: SERVICEREQUEST_TIMELINE
+    description: Landing table for SERVICEREQUEST_TIMELINE file.
+  - name: SERVICEREQUEST_WORKINCHARGE
+    identifier: SERVICEREQUEST_WORKINCHARGE
+    description: Landing table for SERVICEREQUEST_WORKINCHARGE file.
+  - name: RELATIONSHIP_INFO
+    identifier: RELATIONSHIP_INFO
+    description: Landing table for RELATIONSHIP_INFO file.
+  - name: RELEASE_DETAILS
+    identifier: RELEASE_DETAILS
+    description: Landing table for RELEASE_DETAILS file.
+  - name: RELEASE_SUMMARY
+    identifier: RELEASE_SUMMARY
+    description: Landing table for RELEASE_SUMMARY file.
+  - name: RELEASE_WORKINCHARGE
+    identifier: RELEASE_WORKINCHARGE
+    description: Landing table for RELEASE_WORKINCHARGE file.
+  - name: CHANGE_DETAILS
+    identifier: CHANGE_DETAILS
+    description: Landing table for CHANGE_DETAILS file.
+  - name: CHANGE_SUMMARY
+    identifier: CHANGE_SUMMARY
+    description: Landing table for CHANGE_SUMMARY file.
+  - name: CHANGE_WORKINCHARGE
+    identifier: CHANGE_WORKINCHARGE
+    description: Landing table for CHANGE_WORKINCHARGE file.
+  - name: PROBLEM_DETAILS
+    identifier: PROBLEM_DETAILS
+    description: Landing table for PROBLEM_DETAILS file.
+  - name: PROBLEM_SUMMARY
+    identifier: PROBLEM_SUMMARY
+    description: Landing table for PROBLEM_SUMMARY file.
+  - name: PROBLEM_WORKINCHARGE
+    identifier: PROBLEM_WORKINCHARGE
+    description: Landing table for PROBLEM_WORKINCHARGE file.

@@ -1,0 +1,4 @@
+version: 2
+models:
+- name: COMMON__MYSKILLS__COMPANY
+  description: Model myskills Company_KSMNTable file.

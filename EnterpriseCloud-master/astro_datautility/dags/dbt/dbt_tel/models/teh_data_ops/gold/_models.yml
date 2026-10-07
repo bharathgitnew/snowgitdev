@@ -1,0 +1,158 @@
+models:
+  - name: GOLD__TEH_DATA_OPS__ATLAN_DQ_AUDIT
+    description: |
+      PURPOSE: Compares dbt test outcomes with Atlan certification status for active cataloged Snowflake assets. Highlights assets where technical quality signals and governance certification are out of sync.
+      GRAIN: One row = one dbt model run (DBT_NODE_ID + DBT_RUN_DT) matched to one Atlan asset (ATLAN_GUID).
+      KEY LOGIC: Flattens dbt TEST_RESULTS and aggregates statuses per run, then inner joins to Atlan on derived qualified_name using replace(NAME, '__', '/'). Normalizes dbt results to Atlan-style status values (pass -> VERIFIED, fail/warn -> DRAFT).
+      CAVEAT: Records are excluded when Atlan qualified_name does not exactly match the dbt name-derived path or when the asset is not present in Atlan.
+    tests:
+      - recently_run
+      - dbt_expectations.expect_table_row_count_to_be_between:
+          min_value: 1
+      - dbt_expectations.expect_column_pair_values_to_be_equal:
+          column_A: ATLAN_TEST_STATUS
+          column_B: DBT_TEST_STATUS
+          severity: warn
+    columns:
+      - name: ATLAN_GUID
+        description: Atlan asset GUID for the matched Snowflake object. String identifier used to build the direct Atlan asset URL.
+      - name: ATLAN_QUALIFIED_NAME
+        description: Atlan qualified_name for the asset. Format follows Atlan connector path conventions and must match the dbt-derived path for join success.
+      - name: ATLAN_URL
+        description: Direct hyperlink to the Atlan asset page. Format is https://tel.atlan.com/assets/<ATLAN_GUID>.
+      - name: ATLAN_TEST_STATUS
+        description: Certification status currently stored in Atlan for the asset. Value is catalog metadata and can lag recent dbt test execution.
+      - name: ATLAN_EXTRACT_DT
+        description: Extraction timestamp/date from the Atlan source snapshot. Reflects metadata pull timing rather than dbt run timing.
+      - name: DBT_NODE_ID
+        description: dbt node identifier for the tested model. Stable technical key from dbt artifacts.
+      - name: DBT_RUN_DT
+        description: dbt run start timestamp for the audited test results. Timestamp corresponds to RUN_STARTED_AT from the dbt log source.
+      - name: DBT_TEST_RESULTS
+        description: Comma-separated distinct test statuses captured for the dbt run. Multiple statuses can appear when a run contains mixed outcomes.
+      - name: DBT_TEST_STATUS
+        description: Normalized dbt status mapped to Atlan vocabulary. pass maps to VERIFIED and any fail/warn pattern maps to DRAFT.
+  - name: GOLD__TEH_DATA_OPS__COMPANY
+    description: |
+      PURPOSE: Creates a unified company reference used to align Workday/MySkills entities with BAAN/MDM entities for TEL reporting and legal-entity analysis. Answers which operational companies can be reconciled across both systems.
+      GRAIN: One row = one WORKDAY_COMPANY_ID + BAAN_COMPANY_ID + COMPANY_NAME + COMPANY_SHORT_NAME record.
+      KEY LOGIC: Starts from MySkills company rows, applies the embedded Workday-to-BAAN intersection map, and left joins MDM for BAAN attributes. Derives standardized Yes/No flags and uses MDM short name with MySkills fallback.
+      CAVEAT: BAAN linkage exists only for IDs present in the hardcoded intersection map, so unmapped Workday companies have null BAAN fields.
+    tests:
+      - dbt_expectations.expect_table_row_count_to_be_between:
+          min_value: 1
+    columns:
+      - name: _REFRESHDATE
+        description: Last sql run of the dbt model.
+        tests:
+          - dbt_expectations.expect_row_values_to_have_recent_data:
+              datepart: hours
+              interval: 12
+      - name: WORKDAY_COMPANY_ID
+        description: Company ID from MySkills/Workday. Numeric identifier from source extracts. May not have a BAAN mapping.
+      - name: BAAN_COMPANY_ID
+        description: Company ID from MDM/BAAN after intersection mapping. Numeric identifier. Null when the Workday company is not in the map.
+      - name: COMPANY_NAME
+        description: Full company name from MySkills. Free-text name. Can differ from BAAN naming conventions.
+      - name: COMPANY_SHORT_NAME
+        description: Abbreviated company name from MySkills. Free-text short label. Not guaranteed to be unique across all companies.
+      - name: COMPANY_SHORT_NAME_BAAN
+        description: Preferred short name for reporting. Uses MDM short name when available, otherwise MySkills short name. Value source can vary row by row due to fallback.
+      - name: BAAN_ACTIVE_INDICATOR
+        description: BAAN active status flag. Values are Yes/No mapped from MDM ActiveIndicator Y/N. Null when MDM ActiveIndicator is missing or non-standard.
+      - name: IS_TUFA_COMPANY
+        description: TUFA mapping indicator. Values are Yes/No. Yes means a BAAN_COMPANY_ID was found through the intersection mapping.
+      - name: IS_USA_COMPANY
+        description: USA company indicator from MySkills CountryCode. Values are Yes/No. Only exact USA code maps to Yes.
+      - name: DW_CURRENT_INDICATOR
+        description: Reserved SCD current-row indicator. String placeholder field. Currently null for all rows.
+      - name: DW_EFFECTIVE_DATETIME
+        description: Reserved SCD effective datetime. Stored as varchar in this output. Currently null for all rows.
+      - name: DW_EXPIRATION_DATETIME
+        description: Reserved SCD expiration datetime. Stored as varchar in this output. Currently null for all rows.
+      - name: DW_HASHVALUE_SCDTYPE1
+        description: Reserved SCD Type 1 hash value. String placeholder field. Currently null for all rows.
+      - name: DW_HASHVALUE_SCDTYPE2
+        description: Reserved SCD Type 2 hash value. String placeholder field. Currently null for all rows.
+      - name: DW_INSERT_DATETIME
+        description: Reserved warehouse insert timestamp. Stored as varchar in this output. Currently null for all rows.
+      - name: DW_UPDATE_DATETIME
+        description: Reserved warehouse update timestamp. Stored as varchar in this output. Currently null for all rows.
+      - name: ERROR_FLAG
+        description: ETL error flag. Stored as varchar in this output. Set to 0 by current logic for all rows.
+      - name: ERROR_REASON
+        description: ETL error reason text. Free-text field. Empty string by default.
+      - name: ERROR_CODE
+        description: ETL error code. Free-text code field. Empty string by default.
+      - name: RECORD_INSERT_TIMESTAMP
+        description: Row insert timestamp captured from LOCALTIMESTAMP. Stored as varchar in this output. Represents transform runtime, not source-system create time.
+      - name: OPERATION_TYPE
+        description: Load operation marker. String value. Constant INSERT in current implementation.
+      - name: SRC_ROW_NUMBER
+        description: Generated source row sequence number. Stored as varchar in this output. Non-deterministic across runs because ORDER BY 1 uses a constant.
+      - name: SNAPSHOT_DATE
+        description: Snapshot date assigned at runtime. DATE from CURRENT_DATE. Reflects execution date, not business-effective date.
+  - name: GOLD__TEH_DATA_OPS__SPRINT_METRICS
+    description: |
+      PURPOSE: Produces sprint-level team metrics for commitment, delivered scope, and capacity utilization. Answers whether aggregate sprint commitments are aligned with historical delivery velocity.
+      GRAIN: One row = one SPRINT.
+      KEY LOGIC: Aggregates assignee-level metrics from the sprint user metrics output using sums, then computes commitment-over-capacity and committed-delivered ratios with null-safe denominators.
+      CAVEAT: Team-level ratios depend on completeness of assignee-level snapshots; missing assignee records can skew summed capacity and delivery metrics.
+    tests:
+      - recently_run
+      - dbt_expectations.expect_table_row_count_to_be_between:
+          min_value: 1
+    columns:
+      - name: SPRINT
+        description: Sprint identifier in YYYYMMDD-style value used across TEL sprint datasets. Represents the sprint start anchor used by upstream logic.
+      - name: AVG_SPRINT_VELOCITY
+        description: Sum of assignee rolling average delivered points from prior sprints. Unit is story points.
+      - name: POINTS_START
+        description: Total committed points at sprint start across assignees. Unit is story points excluding Product Backlog items.
+      - name: POINTS_END
+        description: Total points remaining at sprint end snapshot across assignees. Unit is story points excluding Product Backlog items.
+      - name: POINTS_DELTA
+        description: Net change in points during sprint computed as POINTS_END minus POINTS_START. Positive values indicate scope growth.
+      - name: COMMIT_OVER_CAPACITY_START
+        description: Start-of-sprint commitment divided by average sprint velocity. Ratio can be null when velocity denominator is zero.
+      - name: COMMIT_OVER_CAPACITY_END
+        description: End-of-sprint commitment divided by average sprint velocity. Ratio can be null when velocity denominator is zero.
+      - name: POINTS_DELIVERED
+        description: Total delivered points summed from assignee end-snapshot Done values. Unit is story points.
+      - name: POINTS_MISSED
+        description: Total missed points summed from assignee end-snapshot residual points. Unit is story points.
+      - name: COMMITTED_DELIVERED
+        description: Delivered-to-committed ratio computed as POINTS_DELIVERED divided by POINTS_END after aggregation. Ratio can be null when POINTS_END is zero.
+  - name: GOLD__TEH_DATA_OPS__SPRINT_USER_METRICS
+    description: |
+      PURPOSE: Computes assignee-level sprint commitment, delivered work, and capacity ratios for performance and planning analysis. Answers how each assignee committed versus delivered relative to recent velocity.
+      GRAIN: One row = one SPRINT + ASSIGNEE.
+      KEY LOGIC: Uses sprint-start snapshots where SNAPSHOT_DATE equals sprint date, uses sprint-end snapshots aligned to next sprint start, and joins a rolling 3-sprint historical velocity average per assignee.
+      CAVEAT: Early sprints or new assignees with little history can produce low/zero velocity baselines, which can inflate or nullify capacity ratios.
+    tests:
+      - recently_run
+      - dbt_expectations.expect_table_row_count_to_be_between:
+          min_value: 1
+    columns:
+      - name: SPRINT
+        description: Sprint identifier used to anchor start and end snapshot calculations. Expected format aligns with YYYYMMDD parsing in upstream logic.
+      - name: ASSIGNEE
+        description: User or owner assigned to sprint work items in snapshot data. Text key used with SPRINT as model uniqueness.
+      - name: AVG_SPRINT_VELOCITY
+        description: Average delivered points for the assignee across up to three previous sprints. Unit is story points and defaults to 0 when prior history is absent.
+      - name: POINTS_START
+        description: Assignee points at sprint start snapshot excluding Product Backlog column. Unit is story points.
+      - name: POINTS_END
+        description: Assignee points at sprint end snapshot excluding Product Backlog column. Unit is story points.
+      - name: POINTS_DELTA
+        description: Net scope change for assignee computed as POINTS_END minus POINTS_START. Positive values indicate added scope.
+      - name: COMMIT_OVER_CAPACITY_START
+        description: Start commitment divided by assignee average velocity. Ratio can be null when AVG_SPRINT_VELOCITY is zero.
+      - name: COMMIT_OVER_CAPACITY_END
+        description: End commitment divided by assignee average velocity. Ratio can be null when AVG_SPRINT_VELOCITY is zero.
+      - name: POINTS_DELIVERED
+        description: Delivered points for assignee at sprint end based on Done column totals. Unit is story points.
+      - name: POINTS_MISSED
+        description: Undelivered points computed as POINTS_END minus POINTS_DELIVERED. Unit is story points.
+      - name: COMMITTED_DELIVERED
+        description: Delivered ratio for assignee computed as POINTS_DELIVERED divided by POINTS_END. Ratio can be null when POINTS_END is zero.

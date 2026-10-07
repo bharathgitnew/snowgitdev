@@ -1,0 +1,557 @@
+{
+  "ADS-MADataSilver": {
+    "DataSet1": {
+      "schema": "dbo",
+      "table": "Comments",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_COMMENTS",
+      "filter": ""
+    },
+    "DataSet2": {
+      "schema": "dbo",
+      "table": "CommentsSPS",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_COMMENTSSPS",
+      "filter": ""
+    },
+    "DataSet3": {
+      "schema": "dbo",
+      "table": "Control",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_CONTROL",
+      "filter": ""
+    },
+    "DataSet4": {
+      "schema": "dbo",
+      "table": "ControlCT",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_CONTROLCT",
+      "filter": ""
+    },
+    "DataSet5": {
+      "schema": "dbo",
+      "table": "ControlES",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_CONTROLES",
+      "filter": ""
+    },
+    "DataSet6": {
+      "schema": "dbo",
+      "table": "ControlSPS",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_CONTROLSPS",
+      "filter": ""
+    },
+    "DataSet7": {
+      "schema": "dbo",
+      "table": "Date_ModuleDataES",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_DATE_MODULEDATAES",
+      "filter": ""
+    },
+    "DataSet8": {
+      "schema": "dbo",
+      "table": "Date_ModuleDataSPS",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_DATE_MODULEDATASPS",
+      "filter": ""
+    },
+    "DataSet9": {
+      "schema": "dbo",
+      "table": "Down_LP_CAB_SPS",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_DOWN_LP_CAB_SPS",
+      "filter": ""
+    },
+    "DataSet10": {
+      "schema": "dbo",
+      "table": "Down_LP_ES",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_DOWN_LP_ES",
+      "filter": ""
+    },
+    "DataSet11": {
+      "schema": "dbo",
+      "table": "DownChanges",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_DOWNCHANGES",
+      "filter": ""
+    },
+    "DataSet12": {
+      "schema": "dbo",
+      "table": "DownChangesCT",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_DOWNCHANGESCT",
+      "filter": ""
+    },
+    "DataSet13": {
+      "schema": "dbo",
+      "table": "DownChangesEtch",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_DOWNCHANGESETCH",
+      "filter": ""
+    },
+    "DataSet14": {
+      "schema": "dbo",
+      "table": "CEID_CT",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_CEID_CT",
+      "filter": ""
+    },
+    "DataSet16": {
+      "schema": "dbo",
+      "table": "DownCommentsCT",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_DOWNCOMMENTSCT",
+      "filter": ""
+    },
+    "DataSet17": {
+      "schema": "dbo",
+      "table": "DownCommentsEtch",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_DOWNCOMMENTSETCH",
+      "filter": ""
+    },
+    "DataSet18": {
+      "schema": "dbo",
+      "table": "DownCommentsSPS",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_DOWNCOMMENTSSPS",
+      "filter": ""
+    },
+    "DataSet19": {
+      "schema": "dbo",
+      "table": "downtodown_tools_SPS",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_DOWNTODOWN_TOOLS_SPS",
+      "filter": ""
+    },
+    "DataSet20": {
+      "schema": "dbo",
+      "table": "ENTITY_ES",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_ENTITY_ES",
+      "filter": ""
+    },
+    "DataSet21": {
+      "schema": "dbo",
+      "table": "ENTITY_SPS",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_ENTITY_SPS",
+      "filter": ""
+    },
+    "DataSet22": {
+      "schema": "dbo",
+      "table": "EntityStatesCT",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_ENTITYSTATESCT",
+      "filter": ""
+    },
+    "DataSet23": {
+      "schema": "dbo",
+      "table": "EntityStatesSPS",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_ENTITYSTATESSPS",
+      "filter": ""
+    },
+    "DataSet24": {
+      "schema": "dbo",
+      "table": "errorsEtch",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_ERRORSETCH",
+      "filter": ""
+    },
+    "DataSet25": {
+      "schema": "dbo",
+      "table": "long_down_ES",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_LONG_DOWN_ES",
+      "filter": ""
+    },
+    "DataSet26": {
+      "schema": "dbo",
+      "table": "long_down_SPS",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_LONG_DOWN_SPS",
+      "filter": ""
+    },
+    "DataSet28": {
+      "schema": "dbo",
+      "table": "MA_OutputES",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_MA_OUTPUTES",
+      "filter": ""
+    },
+    "DataSet29": {
+      "schema": "dbo",
+      "table": "MA_OutputSPS",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_MA_OUTPUTSPS",
+      "filter": ""
+    },
+    "DataSet30": {
+      "schema": "dbo",
+      "table": "MACT",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_MACT",
+      "filter": ""
+    },
+    "DataSet31": {
+      "schema": "dbo",
+      "table": "MASPS",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_MASPS",
+      "filter": ""
+    },
+    "DataSet32": {
+      "schema": "dbo",
+      "table": "Alarm_List_ES",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_ALARM_LIST_ES",
+      "filter": ""
+    },
+    "DataSet33": {
+      "schema": "dbo",
+      "table": "Prod_Wiiings_Site_Output_ES",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_PROD_WIIINGS_SITE_OUTPUT_ES",
+      "filter": ""
+    },
+    "DataSet34": {
+      "schema": "dbo",
+      "table": "MAWW31",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_MAWW31",
+      "filter": ""
+    },
+    "DataSet35": {
+      "schema": "dbo",
+      "table": "Prod_Wiiings_Output_ES",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_PROD_WIIINGS_OUTPUT_ES",
+      "filter": ""
+    },
+    "DataSet36": {
+      "schema": "dbo",
+      "table": "ModuleDataES",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_MODULEDATAES",
+      "filter": ""
+    },
+    "DataSet37": {
+      "schema": "dbo",
+      "table": "Staging_Wiiings_Output_ES",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_STAGING_WIIINGS_OUTPUT_ES",
+      "filter": ""
+    },
+    "DataSet38": {
+      "schema": "dbo",
+      "table": "MTBI_ES",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_MTBI_ES",
+      "filter": ""
+    },
+    "DataSet39": {
+      "schema": "dbo",
+      "table": "MTBI_SPS",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_MTBI_SPS",
+      "filter": ""
+    },
+    "DataSet40": {
+      "schema": "dbo",
+      "table": "Staging_Wiiings_Site_Output_ES",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_STAGING_WIIINGS_SITE_OUTPUT_ES",
+      "filter": ""
+    },
+    "DataSet41": {
+      "schema": "dbo",
+      "table": "New_CategoriesES",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_NEW_CATEGORIESES",
+      "filter": ""
+    },
+    "DataSet42": {
+      "schema": "dbo",
+      "table": "New_down_total_ES",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_NEW_DOWN_TOTAL_ES",
+      "filter": ""
+    },
+    "DataSet43": {
+      "schema": "dbo",
+      "table": "New_down_total_SPS",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_NEW_DOWN_TOTAL_SPS",
+      "filter": ""
+    },
+    "DataSet44": {
+      "schema": "dbo",
+      "table": "outsES",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_OUTSES",
+      "filter": ""
+    },
+    "DataSet45": {
+      "schema": "dbo",
+      "table": "outsSPS",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_OUTSSPS",
+      "filter": ""
+    },
+    "DataSet46": {
+      "schema": "dbo",
+      "table": "PM2",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_PM2",
+      "filter": ""
+    },
+    "DataSet47": {
+      "schema": "dbo",
+      "table": "PM2_2",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_PM2_2",
+      "filter": ""
+    },
+    "DataSet48": {
+      "schema": "dbo",
+      "table": "PM3",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_PM3",
+      "filter": ""
+    },
+    "DataSet49": {
+      "schema": "dbo",
+      "table": "PM3_2",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_PM3_2",
+      "filter": ""
+    },
+    "DataSet50": {
+      "schema": "dbo",
+      "table": "PMA_CountsES",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_PMA_COUNTSES",
+      "filter": ""
+    },
+    "DataSet51": {
+      "schema": "dbo",
+      "table": "PreferredPairListES",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_PREFERREDPAIRLISTES",
+      "filter": ""
+    },
+    "DataSet52": {
+      "schema": "dbo",
+      "table": "StatesSPS",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_STATESSPS",
+      "filter": ""
+    },
+    "DataSet53": {
+      "schema": "dbo",
+      "table": "TELDefinitions2023WW07",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_TELDEFINITIONS2023WW07",
+      "filter": ""
+    },
+    "DataSet54": {
+      "schema": "dbo",
+      "table": "TEMPSPS",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_TEMPSPS",
+      "filter": ""
+    },
+    "DataSet55": {
+      "schema": "dbo",
+      "table": "tool_list_ww_ES",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_TOOL_LIST_WW_ES",
+      "filter": ""
+    },
+    "DataSet56": {
+      "schema": "dbo",
+      "table": "tool_list_ww_SPS",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_TOOL_LIST_WW_SPS",
+      "filter": ""
+    },
+    "DataSet57": {
+      "schema": "dbo",
+      "table": "total_alarm_out_count_ES",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_TOTAL_ALARM_OUT_COUNT_ES",
+      "filter": ""
+    },
+    "DataSet58": {
+      "schema": "dbo",
+      "table": "UE_Definitions_ES",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_UE_DEFINITIONS_ES",
+      "filter": ""
+    },
+    "DataSet59": {
+      "schema": "dbo",
+      "table": "UE_Definitions_SPS",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_UE_DEFINITIONS_SPS",
+      "filter": ""
+    },
+    "DataSet60": {
+      "schema": "dbo",
+      "table": "up_errors_SPS",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_UP_ERRORS_SPS",
+      "filter": ""
+    },
+    "DataSet61": {
+      "schema": "dbo",
+      "table": "New_CategoriesCT",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_NEW_CATEGORIESCT",
+      "filter": ""
+    },
+    "DataSet62": {
+      "schema": "dbo",
+      "table": "up_errors_staging_ES",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_UP_ERRORS_STAGING_ES",
+      "filter": ""
+    },
+    "DataSet63": {
+      "schema": "dbo",
+      "table": "PMA_LimitsES",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_PMA_LIMITSES",
+      "filter": ""
+    },
+    "DataSet64": {
+      "schema": "dbo",
+      "table": "up_errors_staging_SPS",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_UP_ERRORS_STAGING_SPS",
+      "filter": ""
+    },
+    "DataSet65": {
+      "schema": "dbo",
+      "table": "Up_Hours_ES",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_UP_HOURS_ES",
+      "filter": ""
+    },
+    "DataSet66": {
+      "schema": "dbo",
+      "table": "Up_Hours_SPS",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_UP_HOURS_SPS",
+      "filter": ""
+    },
+    "DataSet67": {
+      "schema": "dbo",
+      "table": "uptime_ES",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_UPTIME_ES",
+      "filter": ""
+    },
+    "DataSet68": {
+      "schema": "dbo",
+      "table": "uptime_SPS",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_UPTIME_SPS",
+      "filter": ""
+    },
+    "DataSet69": {
+      "schema": "dbo",
+      "table": "work_orders_ES",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_WORK_ORDERS_ES",
+      "filter": ""
+    },
+    "DataSet70": {
+      "schema": "dbo",
+      "table": "WW_ES",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_WW_ES",
+      "filter": ""
+    },
+    "DataSet71": {
+      "schema": "dbo",
+      "table": "WW_MTB_ES",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_WW_MTB_ES",
+      "filter": ""
+    },
+    "DataSet72": {
+      "schema": "dbo",
+      "table": "alarm_data_ES",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_ALARM_DATA_ES",
+      "filter": ""
+    },
+    "DataSet73": {
+      "schema": "dbo",
+      "table": "errorsSPS",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_ERRORSSPS",
+      "filter": ""
+    },
+    "DataSet74": {
+      "schema": "dbo",
+      "table": "Alarm_Exclusion_ES",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_ALARM_EXCLUSION_ES",
+      "filter": ""
+    },
+    "DataSet75": {
+      "schema": "dbo",
+      "table": "ControlErrors",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_CONTROLERRORS",
+      "filter": ""
+    },
+    "DataSet76": {
+      "schema": "dbo",
+      "table": "Alarm_List_SPS",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_ALARM_LIST_SPS",
+      "filter": ""
+    },
+    "DataSet77": {
+      "schema": "dbo",
+      "table": "errorsES3",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_ERRORSES3",
+      "filter": ""
+    },
+    "DataSet78": {
+      "schema": "dbo",
+      "table": "Attempt_data_ES",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_ATTEMPT_DATA_ES",
+      "filter": ""
+    },
+    "DataSet79": {
+      "schema": "dbo",
+      "table": "Attempt_group_ES",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_ATTEMPT_GROUP_ES",
+      "filter": ""
+    },
+    "DataSet80": {
+      "schema": "dbo",
+      "table": "Attempt_group_SPS",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_ATTEMPT_GROUP_SPS",
+      "filter": ""
+    },
+    "DataSet81": {
+      "schema": "dbo",
+      "table": "CEID_ES",
+      "Incremental": "NULL",
+      "sftablename": "MADATA_SILVER_CEID_ES",
+      "filter": ""
+    }
+  }
+}

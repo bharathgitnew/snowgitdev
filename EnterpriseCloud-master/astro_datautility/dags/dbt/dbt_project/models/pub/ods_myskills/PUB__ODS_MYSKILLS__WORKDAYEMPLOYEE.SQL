@@ -1,0 +1,68 @@
+/************
+Model file generated from dbtGeneratePubViews: 03.17.2022.09.11.32"
+*************/
+
+{{ config(
+      materialized='view',
+      alias='WORKDAYEMPLOYEE',
+      transient=false
+) }}
+
+with source_data as (
+    SELECT
+        EMPLOYEEID,
+        LASTNAMEKANA,
+        FIRSTNAMEKANA,
+        LASTNAMEJA,
+        FIRSTNAMEJA,
+        LASTNAMEEN,
+        FIRSTNAMEEN,
+        COMPANYCODE,
+        DEPARTMENTGROUPCODE,
+        WORKLOCATIONCODE,
+        EMPLOYEESTATUSCODE,
+        USERJOBPOSTNAMEJA,
+        USERJOBPOSTNAMEEN,
+        ANNOUNCEDONSTRING,
+        USERJOBEXPIREDONSTRING,
+        EMPLOYEETYPECODE,
+        USERJOBPOSTCODE,
+        USERJOBPRIMARY,
+        ADDITIONALJOBCODE,
+        JOBFAMILYGROUPCODE,
+        JOBFAMILYGROUPNAMEJA,
+        JOBFAMILYGROUPNAMEEN,
+        JOBFAMILYCODE,
+        JOBFAMILYNAMEJA,
+        JOBFAMILYNAMEEN,
+        MANAGEMENTLEVEL,
+        CAREERBAND,
+        BPINITIATOREMPLOYEENUMBER,
+        BPAPPROVEREMPLOYEENUMBER,
+        BPAPPROVEDONSTRING,
+        TRAINEREMPLOYEENUMBER,
+        LOCALTERMINATIONREASON,
+        JOBCLASSIFICATIONFULLID,
+        GTCTITLE,
+        TEAPRODUCTLINE,
+        EMPLOYEETYPE,
+        ORIGINALHIREDATE,
+        SENIORITYDATE,
+        ASSIGNMENTSTARTDATE,
+        SUPERVISORYORGANIZATION,
+        BUSINESSTITLE,
+        REGION,
+        EXPATINFO,
+        SUPERVISOREMPLOYEENUMBER,
+        EMPLOYEENAME,
+        LASTFIRSTNAME,
+        FIRSTLASTNAME
+    from {{ ref('ODS__MYSKILLS__WORKDAYEMPLOYEE') }}
+),
+
+transform_data AS
+(
+    select * from source_data
+)
+
+    select * from transform_data

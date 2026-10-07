@@ -1,0 +1,13 @@
+version: 2
+sources:
+- name: CRMHELPDESK
+  description: Landing Zone - CRMHELPDESK Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: CRMHELPDESK
+  tables:
+  - name: HELPDESK_CASE_DETAILS
+    identifier: HELPDESK_CASE_DETAILS
+    description: Landing table for HELPDESK_CASE_DETAILS file.
+  - name: FT_BY_NAME
+    identifier: FT_BY_NAME
+    description: Landing table for FT_BY_NAME file.

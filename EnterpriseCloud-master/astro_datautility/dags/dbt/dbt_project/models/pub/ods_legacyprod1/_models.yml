@@ -1,0 +1,10 @@
+version: 2
+models:
+- name: PUB__ODS_LEGACYPROD1__FACTFINANCIALSUMMARY
+  description: Landing table for FACTFINANCIALSUMMARY file.
+- name: PUB__ODS_LEGACYPROD1__FACTFINANCIALTRANSACTIONS
+  description: Landing table for FACTFINANCIALTRANSACTIONS file.
+- name: PUB__ODS_LEGACYPROD1__FINANCIALTRANSACTIONS
+  description: Landing table for REVENUEANDCOGSDETAILS file.
+- name: PUB__ODS_LEGACYPROD1__REVENUEANDCOGSDETAILS
+  description: Landing table for FINANCIALTRANSACTIONS file.

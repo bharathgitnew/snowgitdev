@@ -1,0 +1,53 @@
+{
+  "IPR-VIEWS": {
+    "DataSet1": {
+      "schema": "dbo",
+      "table": "v_address",
+      "Incremental": "NULL",
+      "sftablename": "V_ADDRESS",
+      "filter": ""
+    },
+    "DataSet2": {
+      "schema": "dbo",
+      "table": "v_cost_center",
+      "Incremental": "NULL",
+      "sftablename": "V_COST_CENTER",
+      "filter": ""
+    },
+    "DataSet3": {
+      "schema": "dbo",
+      "table": "v_employees",
+      "Incremental": "NULL",
+      "sftablename": "V_EMPLOYEES",
+      "filter": ""
+    },
+    "DataSet4": {
+      "schema": "dbo",
+      "table": "v_ipr_crm",
+      "Incremental": "NULL",
+      "sftablename": "V_IPR_CRM",
+      "filter": ""
+    },
+    "DataSet5": {
+      "schema": "dbo",
+      "table": "v_IPR_DATA",
+      "Incremental": "NULL",
+      "sftablename": "V_IPR_DATA",
+      "filter": ""
+    },
+    "DataSet6": {
+      "schema": "dbo",
+      "table": "V_PENDING_APPROVAL",
+      "Incremental": "NULL",
+      "sftablename": "V_PENDING_APPROVAL",
+      "filter": ""
+    },
+    "DataSet7": {
+      "schema": "dbo",
+      "table": "v_reason",
+      "Incremental": "NULL",
+      "sftablename": "V_REASON",
+      "filter": ""
+    }
+  }
+}

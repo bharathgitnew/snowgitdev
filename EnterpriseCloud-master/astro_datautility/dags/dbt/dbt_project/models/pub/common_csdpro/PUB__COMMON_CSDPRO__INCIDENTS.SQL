@@ -1,0 +1,43 @@
+{{ config(
+      materialized='view',
+      alias='INCIDENTS',
+      transient=false
+) }}
+
+with source_data as (
+SELECT
+    INCIDENT_ID,
+    REPORT_NUMBER,
+    INCIDENT_REPORT_DATE_KEY,
+    SUBMITTER_EMPLOYEE_ID,  
+    PERSON_CLASSIFICATION, 
+    PERSON_FUNCTION, 
+    GOOD_CATCH, 
+    BU_CODE, 
+    LOCATION_TYPE, 
+    OTHER_LOCATION_TYPE, 
+    LOCATION_DESCRIPTION, 
+    OTHER_LOCATION_DESCRIPTION, 
+    TEL_SUBSIDIARY,
+    PERSON_SUBSIDIARY, 
+    REGIONAL_OFFICE, 
+    CUSTOMER, 
+    FAB,
+    INCIDENT_CLASSIFICATION,
+    INCIDENT_STATUS,
+    QMBWW_AUDITED, 
+    QMBWW_TITLE,
+    INCIDENT_ADDRESS, 
+    RESPONSIBLE_SUPERVISOR_NAME, 
+    RESPONSIBLE_SUPERVISOR_EMAIL,
+    INCIDENT_REPORT_DATETIME, 
+    REPORT_URL
+from {{ ref('COMMON__CSDPRO__INCIDENTS') }}
+),
+
+transform_data AS
+(
+    select * from source_data
+)
+
+    select * from transform_data

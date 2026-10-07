@@ -1,0 +1,151 @@
+version: 2
+sources:
+- name: MDM
+  description: Landing Zone - MDM Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: MDM
+  tables:
+  - name: ARIBASECURITY
+    identifier: AribaSecurity
+    description: Landing table for AribaSecurity file.
+  - name: BAANORDERSERIES
+    identifier: BaanOrderSeries
+    description: Landing table for BaanOrderSeries file.
+  - name: COMPANY
+    identifier: Company
+    description: Landing table for Company file.
+  - name: CONTRACTBUNDLETERMS
+    identifier: ContractBundleTerms
+    description: Landing table for ContractBundleTerms file.
+  - name: CONTRACT_FLXTSR
+    identifier: Contract_FLXTSR
+    description: Landing table for Contract_FLXTSR file.
+  - name: CONTRACT_FLX_TRANSITIONHRS
+    identifier: Contract_FLX_TransitionHrs
+    description: Landing table for Contract_FLX_TransitionHrs file.
+  - name: COSTCENTERWITHBUDGETCOORDINATOR
+    identifier: CostCenterwithBudgetCoordinator
+    description: Landing table for CostCenterwithBudgetCoordinator file.
+  - name: CUSTOMER
+    identifier: Customer
+    description: Landing table for Customer file.
+  - name: CUSTOMER_GROUP_MAPPING
+    identifier: Customer_Group_Mapping
+    description: Landing table for Customer_Group_Mapping file.
+  - name: EMPLOYEES_JOB_TITLE_MAPPING
+    identifier: Employees_Job_Title_Mapping
+    description: Landing table for Employees_Job_Title_Mapping file.
+  - name: EMPLOYEE_ADP_CODE_MAPPING
+    identifier: Employee_ADP_Code_Mapping
+    description: Landing table for Employee_ADP_Code_Mapping file.
+  - name: EMPLOYEE_GROUP_MAPPING
+    identifier: Employee_Group_Mapping
+    description: Landing table for Employee_Group_Mapping file.
+  - name: EMPLOYEE_TYPE
+    identifier: Employee_Type
+    description: Landing table for Employee_Type file.
+  - name: FINANCIALACCOUNT
+    identifier: FinancialAccount
+    description: Landing table for FinancialAccount file.
+  - name: FINANCIALCOSTCENTER
+    identifier: FinancialCostCenter
+    description: Landing table for FinancialCostCenter file.
+  - name: FINANCIALDEPARTMENT
+    identifier: FinancialDepartment
+    description: Landing table for FinancialDepartment file.
+  - name: FINANCIALPRODUCTTYPE
+    identifier: FinancialProductType
+    description: Landing table for FinancialProductType file.
+  - name: FINANCIALSEGMENT
+    identifier: FinancialSegment
+    description: Landing table for FinancialSegment file.
+  - name: FST_STARTUP_SUPERVISORS
+    identifier: FST_Startup_Supervisors
+    description: Landing table for FST_Startup_Supervisors file.
+  - name: KRONOS_SHIFT_TABLE
+    identifier: Kronos_Shift_Table
+    description: Landing table for Kronos_Shift_Table file.
+  - name: KRONOS_TYPE_OF_WORK_GROUP
+    identifier: Kronos_Type_Of_Work_Group
+    description: Landing table for Kronos_Type_Of_Work_Group file.
+  - name: KRONOS_TYPE_OF_WORK_GROUP_ADDITIONAL
+    identifier: Kronos_Type_Of_Work_Group_Additional
+    description: Landing table for Kronos_Type_Of_Work_Group_Additional file.
+  - name: MACHINEBU
+    identifier: MachineBU
+    description: Landing table for MachineBU file.
+  - name: MACHINESS2BINTEGRATIONLATESTRECORD
+    identifier: MachinesS2BIntegrationLatestRecord
+    description: Landing table for MachinesS2BIntegrationLatestRecord file.
+  - name: MACHINE_CHAMBER_EXCEPTION_LIST
+    identifier: Machine_Chamber_Exception_List
+    description: Landing table for Machine_Chamber_Exception_List file.
+  - name: MACHINE_MODEL_GROUP
+    identifier: Machine_Model_Group
+    description: Landing table for Machine_Model_Group file.
+  - name: MACHINE_STATUS_MAPPING
+    identifier: Machine_Status_Mapping
+    description: Landing table for Machine_Status_Mapping file.
+  - name: MACHINE_WAFER_SIZE
+    identifier: Machine_Wafer_Size
+    description: Landing table for Machine_Wafer_Size file.
+  - name: MANAGERSERVICEGROUP
+    identifier: ManagerServiceGroup
+    description: Landing table for ManagerServiceGroup file.
+  - name: MANAGER_EMPLOYEE_GROUP
+    identifier: Manager_Employee_Group
+    description: Landing table for Manager_Employee_Group file.
+  - name: OFFICE
+    identifier: Office
+    description: Landing table for Office file.
+  - name: ORACLEEPBCSACCOUNT
+    identifier: OracleEPBCSAccount
+    description: Landing table for OracleEPBCSAccount file.
+  - name: PAID_SERVICE_CUSTOMER_PO
+    identifier: Paid_Service_Customer_PO
+    description: Landing table for Paid_Service_Customer_PO file.
+  - name: PAID_SERVICE_EXCEPTION_PRICING
+    identifier: Paid_Service_Exception_Pricing
+    description: Landing table for Paid_Service_Exception_Pricing file.
+  - name: PAID_SERVICE_SO_REQUEST
+    identifier: Paid_Service_SO_Request
+    description: Landing table for Paid_Service_SO_Request file.
+  - name: PDS_HOURLY_RATE
+    identifier: PDS_Hourly_Rate
+    description: Landing table for PDS_Hourly_Rate file.
+  - name: PDS_QUOTE_REQUEST
+    identifier: PDS_Quote_Request
+    description: Landing table for PDS_Quote_Request file.
+  - name: SALESACCOUNTREGION
+    identifier: SalesAccountRegion
+    description: Landing table for SalesAccountRegion file.
+  - name: SEGMENTBRIDGE
+    identifier: SegmentBridge
+    description: Landing table for SegmentBridge file.
+  - name: SEGMENTMAPPING
+    identifier: SegmentMapping
+    description: Landing table for SegmentMapping file.
+  - name: TASTASK
+    identifier: TASTask
+    description: Landing table for TASTask file.
+  - name: TASTYPEOFWORK
+    identifier: TASTypeOfWork
+    description: Landing table for TASTypeOfWork file.
+  - name: TEACPPPARTS
+    identifier: TEACPPParts
+    description: Landing table for TEACPPParts file.
+  - name: TEAITEMS
+    identifier: TEAItems
+    description: Landing table for TEAItems file.
+  - name: TIMECARDPAYCODE
+    identifier: TimecardPaycode
+    description: Landing table for TimecardPaycode file.
+  - name: TYPEOFWORKBRIDGE
+    identifier: TypeOfWorkBridge
+    description: Landing table for TypeOfWorkBridge file.
+  - name: WAREHOUSE
+    identifier: Warehouse
+    description: Landing table for Warehouse file.
+  - name: FST_KRONOS_WRENCH_TIME_MAPPING
+    identifier: FST_Kronos_Wrench_Time_Mapping
+    description: Landing table for FST_Kronos_Wrench_Time_Mapping file.

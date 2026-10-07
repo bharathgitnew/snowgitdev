@@ -1,0 +1,96 @@
+{  
+    
+    "connection" :{
+        "auth": "JWT",
+        "client_id": "TEL-BOX-CLIENT-ID", 
+        "client_secret": "TEL-BOX-CLIENT-SECRET", 
+        "enterprise_id": "TEL-BOX-ENTERPRISE-ID",
+        "jwt_key_id": "TEL-BOX-JWT-KEY",
+        "rsa_private_key_passphrase":"TEL-BOX-PASSPHASE",
+        "rsa_private_key_data":"TEL-BOX-PK-DATA"
+    },
+    "extraction" : {
+        "All-Parts-TCD-Checked-1": {
+            "is_active": true,
+            "destination":{
+                "table":"UPS_ALL_PARTS_ALL",
+                "schema":"UPS"
+            },
+            "parameters":{
+                "file_id" : "1833460343335",
+                "type_of_file" : "xlsx",
+                "sheet_name":"ALL",
+                "is_incremental": false,
+                "drop_unnamed_columns":true,
+                "pandas_engine":{
+                    "skip_header": true,
+                    "ignore_header": false,
+                    "delimiter" : ",",
+                    "convert_to_json" : true
+                }
+            }
+        },
+        "All-Parts-TCD-Checked-2": {
+            "is_active": true,
+            "destination":{
+                "table":"UPS_ALL_PARTS_HTS",
+                "schema":"UPS"
+            },
+            "parameters":{
+                "file_id" : "1833460343335",
+                "type_of_file" : "xlsx",
+                "sheet_name":"HTS",
+                "is_incremental": false,
+                "drop_unnamed_columns":true,
+                "pandas_engine":{
+                    "skip_header": true,
+                    "ignore_header": false,
+                    "delimiter" : ",",
+                    "convert_to_json" : true,
+                    "convert_headers_to_number" : true
+                }
+            }
+        },
+        "All-Parts-TCD-Checked-3": {
+            "is_active": true,
+            "destination":{
+                "table":"UPS_ALL_PARTS_MATERIAL",
+                "schema":"UPS"
+            },
+            "parameters":{
+                "file_id" : "1833460343335",
+                "type_of_file" : "xlsx",
+                "sheet_name":"Material",
+                "is_incremental": false,
+                "drop_unnamed_columns":true,
+                "pandas_engine":{
+                    "skip_header": false,
+                    "ignore_header": false,
+                    "delimiter" : ",",
+                    "convert_to_json" : true,
+                    "convert_headers_to_number" : true
+                }
+            }
+        },
+        "All-Parts-TCD-Checked-4": {
+            "is_active": false,
+            "destination":{
+                "table":"UPS_ALL_PARTS_OUT_OF_SCOPE",
+                "schema":"UPS"
+            },
+            "parameters":{
+                "file_id" : "1833460343335",
+                "type_of_file" : "xlsx",
+                "sheet_name":"Out of scoop",
+                "is_incremental": false,
+                "drop_unnamed_columns":true,
+                "pandas_engine":{
+                    "skip_header": true,
+                    "ignore_header": false,
+                    "delimiter" : ",",
+                    "convert_to_json" : true
+                }
+            }
+        }
+    }
+}

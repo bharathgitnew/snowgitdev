@@ -1,0 +1,312 @@
+{
+  "TIRS": {
+    "connections": "tirs",
+    "servername": "172.26.95.5",
+    "database": "SafetyVics",
+    "username": "TIRS-USERNAME",
+    "password": "TIRS-PASSWORD",
+    "outputfolder": "Tirs"
+  },
+  "TIRS-TMEA": {
+    "connections": "tirs-tmea",
+    "servername": "172.26.95.5",
+    "database": "SafetyVics",
+    "username": "TIRS-TMEA-USERNAME",
+    "password": "TIRS-TMEA-PASSWORD",
+    "outputfolder": "Tirs"
+  },
+  "TELQS": {
+    "connections": "telqs",
+    "servername": "172.26.95.6",
+    "database": "outsystems",
+    "username": "TELQuoteSystem-Username",
+    "password": "TELQuoteSystem-Password",
+    "outputfolder": "TELQS"
+  },
+  "MDM": {
+    "connections": "mdm",
+    "servername": "TELUSDW",
+    "database": "MDS",
+    "outputfolder": "MDM"
+  },
+  "REDGATE": {
+    "connections": "Redgate",
+    "servername": "TELUSDWBuild1",
+    "database": "RedGateMonitor2",
+    "outputfolder": "Redgate"
+  },
+  "LEGACY93": {
+    "connections": "LEGACY93",
+    "servername": "teaaus0093",
+    "database": "TELReporting",
+    "outputfolder": "LEGACY93"
+  },
+  "GEM": {
+    "connections": "gem",
+    "servername": "172.26.95.10",
+    "database": "GEM",
+    "username": "GEMReference_Snowflake",
+    "password": "GEMSNOWFLAKE",
+    "outputfolder": "GEM"
+  },
+  "CARMA": {
+    "connections": "Carma",
+    "servername": "172.26.95.14",
+    "database": "Carma",
+    "username": "carma_user",
+    "password": "CARMAUSER",
+    "outputfolder": "Carma"
+  },
+  "CSDPRO": {
+    "connections": "csdpro",
+    "servername": "172.26.95.12\\SQL2017,31433",
+    "database": "CSDPro2",
+    "username": "TELUSDW",
+    "password": "CSDPro-Password",
+    "outputfolder": "CSDPRO"
+  },
+  "ROSETTA": {
+    "connections": "rosetta",
+    "servername": "172.26.95.13",
+    "database": "RosettaNet",
+    "username": "rosetta_rpt",
+    "password": "Rosetta-Password",
+    "outputfolder": "Rosetta"
+  },
+  "TEACOMMON": {
+    "connections": "teacommon",
+    "servername": "172.26.95.14",
+    "database": "TEACommon",
+    "username": "bietl",
+    "password": "TEACommon-bietl",
+    "outputfolder": "TEACommon"
+  },
+  "MYSKILLS": {
+    "connections": "myskills",
+    "servername": "TELUSDW",
+    "database": "MySkills",
+    "outputfolder": "MySkills"
+  },
+  "LANSWEEPER": {
+    "connections": "lansweeper",
+    "servername": "172.26.95.15",
+    "database": "lansweeperdb",
+    "username": "dataxlansweeper",
+    "password": "USDATAXLANSWEEPER",
+    "outputfolder": "Lansweeper"
+  },
+  "TELCUSTOMER": {
+    "connections": "telcustomer",
+    "servername": "172.26.95.12\\SQL2017,31433",
+    "database": "master",
+    "username": "TELUSDW",
+    "password": "CSDPro-Password",
+    "outputfolder": "telcustomer"
+  },
+  "TGIS": {
+    "connections": "tgis",
+    "servername": "172.26.95.6",
+    "database": "GSD",
+    "username": "TGIS-USERNAME",
+    "password": "TGIS-PASSWORD",
+    "outputfolder": "tgis"
+  },
+  "TELCUSTOMER-GSINTEL": {
+    "connections": "gsintel",
+    "servername": "TELUSDW",
+    "database": "ENTERPRISE_REPORTING",
+    "outputfolder": "gsintel"
+  },
+  "SUPPLIER": {
+    "connections": "supplier",
+    "servername": "172.26.95.12\\SQL2017,31433",
+    "database": "master",
+    "username": "TELUSDW",
+    "password": "CSDPro-Password",
+    "outputfolder": "supplier"
+  },
+  "CRMHELPDESK": {
+    "connections": "crmhelpdesk",
+    "servername": "tehhelpdeskdb.database.windows.net",
+    "database": "HELPDESK01",
+    "username": "CRMHELPDESK-USERNAME",
+    "password": "CRMHELPDESK-PASSWORD",
+    "outputfolder": "CRMHelpdesk"
+  },
+  "RTISS": {
+    "connections": "rtiss",
+    "servername": "172.26.95.25",
+    "database": "RTISS_TPS",
+    "username": "RTISS-USERNAME",
+    "password": "RTISS-PASSWORD",
+    "outputfolder": "rtiss"
+  },
+  "LEGACY93-TEALogistics": {
+    "connections": "LEGACY93",
+    "servername": "172.26.95.14",
+    "database": "TEA_Logistics",
+    "username": "TEALogistics-USERNAME",
+    "password": "TEALogistics-PASSWORD",
+    "outputfolder": "LEGACY93"
+  },
+  "LEGACY93-FSTDEPARTMENTAL": {
+    "connections": "FST_DEPARTMENTAL",
+    "servername": "teaaus0093",
+    "database": "FST_DEPARTMENTAL",
+    "outputfolder": "FST_DEPARTMENTAL"
+  },
+  "LEGACY93-TELReporting": {
+    "connections": "TELReporting",
+    "servername": "teaaus0093",
+    "database": "TELReporting",
+    "outputfolder": "TELReporting"
+  },
+  "BAAN-PROD1": {
+    "connections": "shiptoday",
+    "servername": "TELUSDWPROD1",
+    "database": "File_Extract",
+    "outputfolder": "shiptoday"
+  },
+  "LEGACY93-ODSArchive": {
+    "connections": "ODS_Archive",
+    "servername": "teaaus0093",
+    "database": "ODS_Archive",
+    "outputfolder": "ODS_Archive"
+  },
+  "QVICS": {
+    "connections": "QVICS",
+    "servername": "172.26.95.26",
+    "database": "QVICS_c_Portal",
+    "username": "QVICKS-USERNAME",
+    "password": "QVICKS-PASSWORD",
+    "outputfolder": "QVICS"
+  },
+  "QVICS-TMEA": {
+    "connections": "QVICS",
+    "servername": "172.26.95.26",
+    "database": "QVICS_c_TMEA",
+    "username": "QVICKS-USERNAME",
+    "password": "QVICKS-PASSWORD",
+    "outputfolder": "QVICS"
+  },
+  "ThreePL": {
+    "connections": "ThreePL",
+    "servername": "172.26.95.13",
+    "database": "RosettaNet",
+    "username": "tpl_report",
+    "password": "TPLREPORT",
+    "outputfolder": "ThreePL"
+  },
+  "OPT-SALES": {
+    "connections": "OPT",
+    "servername": "172.26.95.30",
+    "database": "us_opt",
+    "username": "OPT-USERNAME",
+    "password": "OPT-PASSWORD",
+    "outputfolder": "OPT"
+  },
+  "ADS-MADataSilver": {
+    "connections": "ads-madatasilver",
+    "servername": "172.26.95.31,65132",
+    "database": "MAData_Silver",
+    "username": "ADS-USER",
+    "password": "ADS-PASSWORD",
+    "outputfolder": "ads-madatasilver"
+  },
+  "ADS-TFFanalytics": {
+    "connections": "ads-tffanalytics",
+    "servername": "172.26.95.31,65132",
+    "database": "TFF_analytics_prod",
+    "username": "ADS-USER",
+    "password": "ADS-PASSWORD",
+    "outputfolder": "ads-tffanalytics"
+  },
+  "ADS-MADataOutputProduction": {
+    "connections": "ads-madataoutputproduction",
+    "servername": "172.26.95.31,65132",
+    "database": "MAData_Output_Production",
+    "username": "ADS-USER",
+    "password": "ADS-PASSWORD",
+    "outputfolder": "ads-madataoutputproduction"
+  },
+  "ADS-Parts_Counter_Production": {
+    "connections": "ads-parts_counter_production",
+    "servername": "172.26.95.31,65132",
+    "database": "Parts_Counter_Production",
+    "username": "ADS-USER",
+    "password": "ADS-PASSWORD",
+    "outputfolder": "ads-parts_counter_production"
+  },
+  "OUTSYSTEMS-ISID": {
+    "connections": "outsystems-isid",
+    "servername": "172.26.95.6",
+    "database": "tel_sap_order_workflow",
+    "username": "sap_order_workflow_bulkblist",
+    "password": "OUTSYSTEMS-TEL-SAP-ORDER-WORKFLOW-PASSWORD",
+    "outputfolder": "outsystems-isid"
+  },
+  "TELCUSTOMER-DIVERSESYSTEMS": {
+    "connections": "telcustomer-diversesystems",
+    "servername": "172.26.95.12\\SQL2017,31433",
+    "database": "master",
+    "username": "TELUSDW",
+    "password": "CSDPro-Password",
+    "outputfolder": "telcustomer-diversesystems"
+  },
+  "IPR": {
+    "connections": "ipr",
+    "servername": "172.26.95.12\\SQL2017,31433",
+    "database": "IPR",
+    "username": "TELUSDW",
+    "password": "CSDPro-Password",
+    "outputfolder": "ipr"
+  },
+  "IPR-VIEWS": {
+    "connections": "ipr-views",
+    "servername": "172.26.95.12\\SQL2017,31433",
+    "database": "IPR",
+    "username": "TELUSDW",
+    "password": "CSDPro-Password",
+    "outputfolder": "ipr-views"
+  },
+  "QVICS-NEW": {
+    "connections": "qvics-new",
+    "servername": "172.26.95.64",
+    "database": "QVICS_c",
+    "username": "TEHUser",
+    "password": "QVICKS-PASSWORD",
+    "outputfolder": "qvics-new"
+  },
+  "GWS": {
+    "connections": "gws",
+    "servername": "172.26.95.30",
+    "database": "TEL_GWS",
+    "username": "DevOpsUser-TEH-Sel-DB2",
+    "password": "GWS-DATABASE-PASSWORD",
+    "outputfolder": "gws"
+  },
+  "TELCUSTOMER-MINI": {
+    "connections": "telcustomer-mini",
+    "servername": "172.26.95.12\\SQL2017,31433",
+    "database": "master",
+    "username": "TELUSDW",
+    "password": "CSDPro-Password",
+    "outputfolder": "telcustomer-mini"
+  },
+  "QVICS-Trouble": {
+    "connections": "qvics-trouble",
+    "servername": "telissftvicsprdpvsql01sv.database.windows.net",
+    "database": "QVICS",
+    "username": "TEHUser",
+    "password": "QVICS-AZURE-SQL-PROD-PASSWORD",
+    "outputfolder": "qvics-trouble"
+  },
+  "TELCUSTOMER-Adhoc": {
+    "connections": "telcustomer-adhoc",
+    "servername": "172.26.95.12\\SQL2017,31433",
+    "database": "master",
+    "username": "TELUSDW",
+    "password": "CSDPro-Password",
+    "outputfolder": "telcustomer-adhoc"
+  }
+}

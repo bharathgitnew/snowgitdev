@@ -1,0 +1,291 @@
+{{ config(
+    materialized='tel_incremental',
+    incremental_strategy='insert_overwrite',
+    alias='SR_SERVICEORDER'
+) }}
+
+with ref_item as (
+  Select 
+        ABC_GLOBAL,
+        ABC_INTEL,
+        ABC_LOCAL,
+        ALLOCATED_QTY,
+        ALLOCATION,
+        AVERAGE_PURCHASE_PRICE,
+        BOXCODE,
+        BUYER_CODE,
+        COMMODITY_CODE,
+        CONSUMABLE,
+        COST_PRICE,
+        COUNTRY_OF_ORIGIN,
+        CRITICALITY_SCORE,
+        CUMULATIVE_ISSUE,
+        DPAL_FLAG,
+        EBIZ_DISCLOSURE_FLAG,
+        ECCN,
+        ECONOMIC_QTY,
+        EOL_FLAG,
+        EXPORT_REGULATION_DESC,
+        EXPORT_REGULATION_FLAG,
+        FS_FLAG,
+        HARMONIZED_TARIFF_CODE,
+        INSPECTION,
+        INTEL_FLAG,
+        INVENTORY_UNIT,
+        ITEM,
+        ITEM_DESCRIPTION,
+        ITEM_GROUP,
+        ITEM_SIZE,
+        ITEM_TYPE,
+        JAPAN_PRODUCT_LINE,
+        LAST_CP_DATE,
+        LAST_INV_TRANS_DATE,
+        LAST_PP_DATE,
+        LAST_SP_DATE,
+        LATEST_PURCHASE_PRICE,
+        LEAD_TIME,
+        MANUFACTURER,
+        MANUFACTURER_NAME,
+        MAT_COST,
+        MAT_SURCHARGE,
+        MIN_ORDER_QTY,
+        OBJECT_GROUP,
+        ON_HAND_QTY,
+        ON_ORDER_QTY,
+        ORDER_QTY_MULTIPLE_OF,
+        PACKING_SIZE_H,
+        PACKING_SIZE_L,
+        PACKING_SIZE_W,
+        PHYSICS_MATERIAL,
+        PLANNER,
+        PRODUCT_TYPE,
+        PROJECT,
+        PROJECT_ITEM,
+        PURCHASE_PRICE,
+        PURCHASE_PRICE_UNIT,
+        PURCHASE_UNIT,
+        REMARKS,
+        REPAIR_FLAG,
+        RETURN_FLAG,
+        SAFETY_TIME,
+        SALES_MIN_QTY,
+        SALES_PRICE,
+        SALES_PRICE_UNIT,
+        SALES_UNIT,
+        SCHEDULEB,
+        SELECTION_CODE,
+        SIGNAL_CODE,
+        STAT_GROUP,
+        SUPPLIER_GROUP,
+        UN_NUMBER,
+        WAREHOUSE,
+        WEIGHT,
+        WEIGHT_UNIT,
+        WEIGHT_WITH_PACKAGE
+   from 
+  {{ ref('SILVER__TEA_SPARES_REVENUE__ITEM') }}
+)
+
+,ref_serviceorder as (
+  Select 
+        SERVICE_ORDER_NO,
+        ACTIVITY_LINE,
+        ORDER_DT,
+        SERVICE_TYPE,
+        DESCRIPTION,
+        CONFIGURATION,
+        ACTIVITY_CONFIGURATION,
+        SERIAL_NUMBER,
+        TEL_BU,
+        TEA_BU,
+        ORDER_STATUS,
+        ORDER_STATUS_DESC,
+        ACTIVITY_STATUS,
+        ACTIVITY_STATUS_DESC,
+        PAID_SERVICE_TYPE,
+        INVOICE_TO_BPID,
+        INVOICE_TO_BP,
+        SOLD_TO_BPID,
+        SOLD_TO_BP,
+        CUSTOMER_PO,
+        CUSTOMER_PO_LINE,
+        CUSTOMER_PO_AMT,
+        SALES_REP,
+        CONTRACT_NO,
+        CONTRACT_EFFECTIVE_DATE,
+        CONTRACT_EXPIRATION_DATE,
+        EMPLOYEE,
+        EMPLOYEE_NAME,
+        BLANK_ORDER_SHEET,
+        SERVICE_CENTER,
+        PLANNED_START_DT,
+        SOURCE,
+        LINE_NUMBER,
+        COST_COMPONENT,
+        COST_COMPONENT_DESC,
+        COST_TYPE,
+        DELIVERY_TYPE,
+        WAREHOUSE,
+        TSM_TRANS_ID,
+        TSM_LINE,
+        MATERIAL_ORDER_DATE,
+        COMMIT_DATE,
+        CUSTOMER_REQ_DATE,
+        PLANNED_SHIP_DATE,
+        SHIP_TO_ADDRESS_CODE,
+        ITEM,
+        COST_PRICE,
+        ORDERED_QTY,
+        DELIVERED_QTY,
+        TO_BE_DEL_QTY,
+        DELIVERY_DATE,
+        SALES_PRICE,
+        TOTAL_SALES_AMT,
+        COVERED_BY_WARRANTY,
+        AMT_COVERED_BY_CONTRACT,
+        AMT_COVERED_BY_WARRANTY,
+        AMT_COVERED_BY_OTHER,
+        AMT_TO_BE_INVOICED,
+        INVOICE_AMOUNT,
+        TRANSACTION_TYPE,
+        INVOICE_NUMBER,
+        INVOICE_DATE,
+        EMPLOYEE_NUMBER,
+        HOURLY_LABOR_TYPE,
+        TASK,
+        COST_LINE_STATUS,
+        INVOICE_STATUS,
+        WAREHOUSE_STATUS,
+        CARRIER,
+        ROUTE,
+        TAX_CODE,
+        TRANSACTION_DATE,
+        POSTING_DATE,
+        CANCELLED,
+        CANCELLED_DATE,
+        FINAL_SHIP_DATE,
+        NCDR_FLAG,
+        ORDER_PRIORITY,
+        TEL_PO_NO,
+        INVOICE_TEXT,
+        REASON_CODE,
+        REASON_CODE_DESC,
+        ESTIMATED_LABOR,
+        CURRENCY,
+        PLANNED_END_TIME,
+        PLANNED_ORDER_DURATION,
+        ACTUALS_DISPATCH_TIME,
+        ORDER_TEXT,
+        COST_PO_LINE,
+        DISCOUNT_RATE,
+        EXCLUDE_FROM_KRONOS,
+        PLAN_START_TIME,
+        PLAN_FINISH_TIME,
+        ISREPORTINGHEADER,
+        EXPECTEDHOURLYRATE,
+        QUOTE,
+        SO_SERIES
+  from 
+  {{ ref('SILVER__TEA_SPARES_REVENUE__SERVICEORDER') }}
+)
+
+
+,source_data as (
+    SELECT 
+      SERVICEORDER.SERVICE_ORDER_NO||'_'||SERVICEORDER.LINE_NUMBER AS SRVLINE, 
+      SERVICEORDER.ITEM, 
+      ITEM.ITEM_DESCRIPTION, 
+      SERVICEORDER.SOLD_TO_BPID, 
+      SERVICEORDER.SOLD_TO_BP, 
+      CASE WHEN
+      (LEFT(SERVICEORDER.DELIVERY_TYPE,2)) ILIKE'To'
+      THEN -1*to_number(SERVICEORDER.DELIVERED_QTY)
+      ELSE SERVICEORDER.DELIVERED_QTY 
+      END AS FDQTY, 
+      SERVICEORDER.DELIVERY_TYPE, 
+      SERVICEORDER.CONFIGURATION, 
+      SERVICEORDER.SERIAL_NUMBER, 
+      SERVICEORDER.MATERIAL_ORDER_DATE, 
+      SERVICEORDER.COST_PRICE, 
+      SERVICEORDER.INVOICE_NUMBER, 
+      SERVICEORDER.CUSTOMER_PO, 
+      SERVICEORDER.WAREHOUSE,
+      SERVICEORDER.ORDERED_QTY,
+      SERVICEORDER.DELIVERY_DATE,
+      SERVICEORDER.INVOICE_DATE,
+      SERVICEORDER.ORDER_PRIORITY 
+    FROM ref_item AS ITEM
+    INNER JOIN ref_serviceorder AS SERVICEORDER ON 
+    ITEM.ITEM = SERVICEORDER.ITEM
+    WHERE (((SERVICEORDER.ITEM) ilike 'c%' 
+    Or (SERVICEORDER.ITEM) ilike 'e%' 
+    Or (SERVICEORDER.ITEM) ilike 'ds%' 
+    Or (SERVICEORDER.ITEM) ilike 't%' 
+    Or (SERVICEORDER.ITEM) ilike 'h%' 
+    Or (SERVICEORDER.ITEM) ilike 'l1%' 
+    Or (SERVICEORDER.ITEM) ilike 'mb%' 
+    Or (SERVICEORDER.ITEM) ilike 'S%' 
+    Or (SERVICEORDER.ITEM) ilike 'r%' 
+    Or (SERVICEORDER.ITEM) ilike 'p%' 
+    Or (SERVICEORDER.ITEM) ilike 'ss%' 
+    Or (SERVICEORDER.ITEM) ilike 'g%' 
+    Or (SERVICEORDER.ITEM) ilike 'v%' 
+    Or (SERVICEORDER.ITEM) ilike 'm%' 
+    Or (SERVICEORDER.ITEM) ilike 'n%' 
+    Or (SERVICEORDER.ITEM) ilike 'j%')
+    And ((SERVICEORDER.MATERIAL_ORDER_DATE)>'2013-01-01'))
+    ORDER BY SERVICEORDER.SERVICE_ORDER_NO||'_'||SERVICEORDER.LINE_NUMBER, 
+    SERVICEORDER.MATERIAL_ORDER_DATE 
+)
+
+,transform_data as (
+  select 
+    '{{ invocation_id }}' AS _AUDIT_LOG_ID,
+    SHA2('hash_me') as _ROW_HASH,
+    SRVLINE,
+    ITEM,
+    ITEM_DESCRIPTION,
+    SOLD_TO_BPID,
+    SOLD_TO_BP,
+    FDQTY,
+    DELIVERY_TYPE,
+    CONFIGURATION,
+    SERIAL_NUMBER,
+    MATERIAL_ORDER_DATE,
+    COST_PRICE,
+    INVOICE_NUMBER,
+    CUSTOMER_PO,
+    WAREHOUSE,
+    ORDERED_QTY,
+    DELIVERY_DATE,
+    INVOICE_DATE,
+    ORDER_PRIORITY
+  from source_data
+)
+
+,type_data as 
+(
+    select
+        _AUDIT_LOG_ID,
+        _ROW_HASH,
+        cast(SRVLINE as VARCHAR(16777216)) as SRVLINE,
+        cast(ITEM as VARCHAR(16777216)) as ITEM,
+        cast(ITEM_DESCRIPTION as VARCHAR(16777216)) as ITEM_DESCRIPTION,
+        cast(SOLD_TO_BPID as VARCHAR(16777216)) as SOLD_TO_BPID,
+        cast(SOLD_TO_BP as VARCHAR(16777216)) as SOLD_TO_BP,
+        cast(FDQTY as NUMBER(38,5)) as FDQTY,
+        cast(DELIVERY_TYPE as VARCHAR(16777216)) as DELIVERY_TYPE,
+        cast(CONFIGURATION as VARCHAR(16777216)) as CONFIGURATION,
+        cast(SERIAL_NUMBER as VARCHAR(16777216)) as SERIAL_NUMBER,
+        cast(MATERIAL_ORDER_DATE as DATE) as MATERIAL_ORDER_DATE,
+        cast(COST_PRICE as VARCHAR(16777216)) as COST_PRICE,
+        cast(INVOICE_NUMBER as VARCHAR(16777216)) as INVOICE_NUMBER,
+        cast(CUSTOMER_PO as VARCHAR(16777216)) as CUSTOMER_PO,
+        cast(WAREHOUSE as VARCHAR(16777216)) as WAREHOUSE,
+        cast(ORDERED_QTY as NUMBER(15,2)) as ORDERED_QTY,
+        cast(DELIVERY_DATE as DATE) as DELIVERY_DATE,
+        cast(INVOICE_DATE as DATE) as INVOICE_DATE,
+        cast(ORDER_PRIORITY as VARCHAR(16777216)) as ORDER_PRIORITY
+    from transform_data
+    )
+select * from type_data

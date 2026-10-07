@@ -1,0 +1,25 @@
+{
+    "ROSETTA": {
+        "DataSet1": {
+            "schema": "dbo",
+            "table": "RN_Consignment_Transaction",
+            "Incremental": "NULL",
+            "sftablename": "CONSIGNMENT_TRANSACTION",
+            "filter": ""
+        },
+        "DataSet2": {
+            "schema": "dbo",
+            "table": "Consignment_Shipment_Receipt",
+            "Incremental": "NULL",
+            "sftablename": "CONSIGNMENT_SHIPMENT_RECEIPT",
+            "filter": ""
+        },
+        "DataSet3": {
+            "schema": "dbo",
+            "table": "Consignment_Transaction",
+            "Incremental": "NULL",
+            "sftablename": "RN_CONSIGNMENT_TRANSACTION",
+            "filter": ""
+        }
+    }
+}

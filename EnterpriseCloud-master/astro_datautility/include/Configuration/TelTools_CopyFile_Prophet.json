@@ -1,0 +1,60 @@
+{
+    "CopyFile": {
+        "ProphetInventory": {
+            "fileshare": "\\\\172.26.95.20\\FS在庫計画\\Prophet Feeds\\Inventory\\Out",
+            "table": "INVENTORY",
+            "schema": "PROPHET",
+            "securables": {
+                "username": "us\\DWIntegration",
+                "password-name": "USDWIntegration"
+            },
+            "file_pattern": "*.feed",
+            "is_incremental": true,
+            "delimiter": "|",
+            "skip_header": true,
+            "is_active": true
+        },
+        "ProphetDemand": {
+            "fileshare": "\\\\172.26.95.20\\FS在庫計画\\Prophet Feeds\\Demand\\Out",
+            "table": "DEMAND",
+            "schema": "PROPHET",
+            "securables": {
+                "username": "us\\DWIntegration",
+                "password-name": "USDWIntegration"
+            },
+            "file_pattern": "*.feed",
+            "is_incremental": true,
+            "delimiter": "|",
+            "skip_header": true,
+            "is_active": true
+        },
+        "ProphetOrders": {
+            "fileshare": "\\\\172.26.95.20\\FS在庫計画\\Prophet Feeds\\Orders\\Out",
+            "table": "ORDERS",
+            "schema": "PROPHET",
+            "securables": {
+                "username": "us\\DWIntegration",
+                "password-name": "USDWIntegration"
+            },
+            "file_pattern": "*.feed",
+            "is_incremental": true,
+            "delimiter": "|",
+            "skip_header": true,
+            "is_active": true
+        },
+        "ProphetDemandReturn": {
+            "fileshare": "\\\\172.26.95.20\\FS在庫計画\\Prophet Feeds\\SITETRANRTN\\Out",
+            "table": "DEMANDRETURN",
+            "schema": "PROPHET",
+            "securables": {
+                "username": "us\\DWIntegration",
+                "password-name": "USDWIntegration"
+            },
+            "file_pattern": "*.feed",
+            "is_incremental": true,
+            "delimiter": "|",
+            "skip_header": true,
+            "is_active": true
+        }
+    }
+}

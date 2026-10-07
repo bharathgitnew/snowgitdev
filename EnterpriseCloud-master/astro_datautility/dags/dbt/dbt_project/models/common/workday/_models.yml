@@ -1,0 +1,4 @@
+version: 2
+models:
+- name: COMMON__WORKDAY__WORKERCOMPANYLIST
+  description: Model WORKDAY WORKERCOMPANYLIST file.

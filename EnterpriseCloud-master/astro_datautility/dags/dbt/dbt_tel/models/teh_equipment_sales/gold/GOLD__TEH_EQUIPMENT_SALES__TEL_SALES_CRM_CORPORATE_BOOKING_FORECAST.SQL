@@ -1,0 +1,348 @@
+{{ config(
+    	materialized='tel_incremental',
+    	incremental_strategy='insert_overwrite',
+    	alias='TEL_SALES_CRM_CORPORATE_BOOKING_FORECAST',
+    	transient=false
+) }}
+
+WITH ref_cte_SALES_CRM_OPPORTUNITIES as (
+    select * from {{ ref('GOLD__TEH_EQUIPMENT_SALES__SALES_CRM_OPPORTUNITIES') }}
+),
+
+source_data as (
+select
+
+	Sales_Account,
+
+    Sales_Region,
+
+    TEL_Sold_to_Party,
+
+    End_User,
+
+    FAB,
+
+    BU, 
+
+    BU_Group,
+
+    BU_Type,
+
+    Sub_BU, 
+
+    Opportunity_ID,
+
+    -- Sales_Document_Item_No,
+
+    Project_No,
+
+    Sales_Order_No,
+
+    Sales_Category_Group,
+
+    Sales_Category,
+
+    -- Material_Type,
+
+    Model, 
+
+    Order_Item,
+
+    -- Order_Item_Sales_Document,
+
+    Opportunity_Title_Free_Text,
+
+    Sales_Reporting_Flag,
+
+    Is_Placeholder,
+
+    Confidence_BU_Short,
+
+	-- Adjusted_Confidence_Account_Short,
+
+    Adjusted_Serial_No, 
+
+    First_Serial_No,
+
+    First_PM_Serial_No,
+
+    Customer_Tool_ID,
+
+    Quote_No,
+
+    Purchase_Order_No,
+
+    Quantity,
+
+    Is_Loaner,
+
+    Loan_Expiration_Date,
+
+    VPA,
+
+    End_User_Booking_Date_BU,
+
+    -- Adjusted_Booking_Date_Account, 
+
+    Actual_Booking_Date,    
+
+    Is_Booking_Actual,
+
+    BOOKING_SALES_STATUS,
+
+    Ship_Date,
+
+    -- Confirmed_Customs_Clearance_Date, 
+
+    -- Is_Customs_Clearance_Date_Confirmed,
+
+    -- Adjusted_Ship_Date, 
+
+    Scheduled_On_Dock_Date,
+
+    -- Actual_On_Dock_Date,
+
+    BOOKING_AMOUNT,
+
+    END_USER_BOOKING_AMOUNT_JPY,
+
+    BU_Sales_Person,
+
+    Account_Sales_Person,
+
+    BU_Comments,
+
+	Account_Comments,
+
+	Sales_Comments_to_SAP,
+
+	Assistants_Comments_from_SAP,
+
+    BU_Account_Difference_Reason,
+
+    Corporate_BU_Booking_FY, 
+
+    Corporate_BU_Booking_FY_Half,
+
+    Corporate_BU_Booking_FY_Q,
+
+	Corporate_BU_Booking_Beginning_of_FY,
+
+    Corporate_BU_Booking_End_of_FY,
+
+    Corporate_BU_Booking_Beginning_of_FY_Half,
+
+    Corporate_BU_Booking_End_of_FY_Half,
+
+    Corporate_BU_Booking_Beginning_of_FY_Q,
+
+    Corporate_BU_Booking_End_of_FY_Q, 
+
+    Beginning_of_Current_FY,
+
+	End_of_Current_FY,
+
+	Beginning_of_Current_FY_Half,
+
+	End_of_Current_FY_Half,
+
+	Beginning_of_Current_FY_Q,
+
+	End_of_Current_FY_Q,
+
+    Beginning_of_Next_FY,
+
+	End_of_Next_FY,
+
+	Beginning_of_Next_FY_Half,
+
+	End_of_Next_FY_Half,
+
+    Beginning_of_Next_FY_Q,
+
+    End_of_Next_FY_Q,
+
+    Corporate_BU_Booking_Forecast_FK_Date,    
+
+    Corporate_Booking_Forecast_Flag,
+
+    Corporate_Booking_Actuals_Flag,  --LABOpp.Is_Sign_Off_Actual ='Yes' not included for Ship+120 RevRec 
+
+    End_User_Code,
+
+    _5_Digits_Old_End_User_Code,
+
+    Data_Snapshot,
+
+    Data_Snapshot_Timestamp
+
+from ref_cte_SALES_CRM_OPPORTUNITIES
+
+where CORPORATE_BU_BOOKING_FORECAST_FK_DATE >= BEGINNING_OF_2_FY_AGO
+
+   and CORPORATE_BU_BOOKING_FORECAST_FK_DATE <= END_OF_2_FY_AHEAD
+
+   and CORPORATE_BOOKING_FORECAST_FLAG = 'Yes'
+
+),
+
+transform_data as (
+select
+        '{{ invocation_id }}' AS _AUDIT_LOG_ID,
+        SHA2('hash_me') AS _ROW_HASH,
+        SALES_ACCOUNT,
+        SALES_REGION,
+        TEL_SOLD_TO_PARTY,
+        END_USER,
+        FAB,
+        BU,
+        BU_GROUP,
+        BU_TYPE,
+        SUB_BU,
+        OPPORTUNITY_ID,
+        PROJECT_NO,
+        SALES_ORDER_NO,
+        SALES_CATEGORY_GROUP,
+        SALES_CATEGORY,
+        MODEL,
+        ORDER_ITEM,
+        OPPORTUNITY_TITLE_FREE_TEXT,
+        SALES_REPORTING_FLAG,
+        IS_PLACEHOLDER,
+        CONFIDENCE_BU_SHORT,
+        ADJUSTED_SERIAL_NO,
+        FIRST_SERIAL_NO,
+        FIRST_PM_SERIAL_NO,
+        CUSTOMER_TOOL_ID,
+        QUOTE_NO,
+        PURCHASE_ORDER_NO,
+        QUANTITY,
+        IS_LOANER,
+        LOAN_EXPIRATION_DATE,
+        VPA,
+        END_USER_BOOKING_DATE_BU,
+        ACTUAL_BOOKING_DATE,
+        IS_BOOKING_ACTUAL,
+        BOOKING_SALES_STATUS,
+        SHIP_DATE,
+        SCHEDULED_ON_DOCK_DATE,
+        BOOKING_AMOUNT,
+        END_USER_BOOKING_AMOUNT_JPY,
+        BU_SALES_PERSON,
+        ACCOUNT_SALES_PERSON,
+        BU_COMMENTS,
+        ACCOUNT_COMMENTS,
+        SALES_COMMENTS_TO_SAP,
+        ASSISTANTS_COMMENTS_FROM_SAP,
+        BU_ACCOUNT_DIFFERENCE_REASON,
+        CORPORATE_BU_BOOKING_FY,
+        CORPORATE_BU_BOOKING_FY_HALF,
+        CORPORATE_BU_BOOKING_FY_Q,
+        CORPORATE_BU_BOOKING_BEGINNING_OF_FY,
+        CORPORATE_BU_BOOKING_END_OF_FY,
+        CORPORATE_BU_BOOKING_BEGINNING_OF_FY_HALF,
+        CORPORATE_BU_BOOKING_END_OF_FY_HALF,
+        CORPORATE_BU_BOOKING_BEGINNING_OF_FY_Q,
+        CORPORATE_BU_BOOKING_END_OF_FY_Q,
+        BEGINNING_OF_CURRENT_FY,
+        END_OF_CURRENT_FY,
+        BEGINNING_OF_CURRENT_FY_HALF,
+        END_OF_CURRENT_FY_HALF,
+        BEGINNING_OF_CURRENT_FY_Q,
+        END_OF_CURRENT_FY_Q,
+        BEGINNING_OF_NEXT_FY,
+        END_OF_NEXT_FY,
+        BEGINNING_OF_NEXT_FY_HALF,
+        END_OF_NEXT_FY_HALF,
+        BEGINNING_OF_NEXT_FY_Q,
+        END_OF_NEXT_FY_Q,
+        CORPORATE_BU_BOOKING_FORECAST_FK_DATE,
+        CORPORATE_BOOKING_FORECAST_FLAG,
+        CORPORATE_BOOKING_ACTUALS_FLAG,
+        END_USER_CODE,
+        _5_DIGITS_OLD_END_USER_CODE,
+        DATA_SNAPSHOT,
+        DATA_SNAPSHOT_TIMESTAMP
+from source_data
+),
+
+type_data as (
+select
+        cast(_AUDIT_LOG_ID as varchar(128)) as _AUDIT_LOG_ID,
+        cast(_ROW_HASH as varchar(128)) as _ROW_HASH,
+        CAST(SALES_ACCOUNT as VARCHAR(16777216)) as SALES_ACCOUNT,
+        CAST(SALES_REGION as VARCHAR(16777216)) as SALES_REGION,
+        CAST(TEL_SOLD_TO_PARTY as VARCHAR(16777216)) as TEL_SOLD_TO_PARTY,
+        CAST(END_USER as VARCHAR(16777216)) as END_USER,
+        CAST(FAB as VARCHAR(16777216)) as FAB,
+        CAST(BU as VARCHAR(16777216)) as BU,
+        CAST(BU_GROUP as VARCHAR(16777216)) as BU_GROUP,
+        CAST(BU_TYPE as VARCHAR(16777216)) as BU_TYPE,
+        CAST(SUB_BU as VARCHAR(16777216)) as SUB_BU,
+        CAST(OPPORTUNITY_ID as VARCHAR(16777216)) as OPPORTUNITY_ID,
+        CAST(PROJECT_NO as VARCHAR(16777216)) as PROJECT_NO,
+        CAST(SALES_ORDER_NO as VARCHAR(16777216)) as SALES_ORDER_NO,
+        CAST(SALES_CATEGORY_GROUP as VARCHAR(16777216)) as SALES_CATEGORY_GROUP,
+        CAST(SALES_CATEGORY as VARCHAR(16777216)) as SALES_CATEGORY,
+        CAST(MODEL as VARCHAR(16777216)) as MODEL,
+        CAST(ORDER_ITEM as VARCHAR(16777216)) as ORDER_ITEM,
+        CAST(OPPORTUNITY_TITLE_FREE_TEXT as VARCHAR(16777216)) as OPPORTUNITY_TITLE_FREE_TEXT,
+        CAST(SALES_REPORTING_FLAG as VARCHAR(16777216)) as SALES_REPORTING_FLAG,
+        CAST(IS_PLACEHOLDER as VARCHAR(16777216)) as IS_PLACEHOLDER,
+        CAST(CONFIDENCE_BU_SHORT as VARCHAR(16777216)) as CONFIDENCE_BU_SHORT,
+        CAST(ADJUSTED_SERIAL_NO as VARCHAR(16777216)) as ADJUSTED_SERIAL_NO,
+        CAST(FIRST_SERIAL_NO as VARCHAR(16777216)) as FIRST_SERIAL_NO,
+        CAST(FIRST_PM_SERIAL_NO as VARCHAR(16777216)) as FIRST_PM_SERIAL_NO,
+        CAST(CUSTOMER_TOOL_ID as VARCHAR(16777216)) as CUSTOMER_TOOL_ID,
+        CAST(QUOTE_NO as VARCHAR(16777216)) as QUOTE_NO,
+        CAST(PURCHASE_ORDER_NO as VARCHAR(16777216)) as PURCHASE_ORDER_NO,
+        CAST(QUANTITY as NUMBER(38,0)) as QUANTITY,
+        CAST(IS_LOANER as VARCHAR(16777216)) as IS_LOANER,
+        CAST(LOAN_EXPIRATION_DATE as DATE) as LOAN_EXPIRATION_DATE,
+        CAST(VPA as VARCHAR(16777216)) as VPA,
+        CAST(END_USER_BOOKING_DATE_BU as DATE) as END_USER_BOOKING_DATE_BU,
+        CAST(ACTUAL_BOOKING_DATE as DATE) as ACTUAL_BOOKING_DATE,
+        CAST(IS_BOOKING_ACTUAL as VARCHAR(16777216)) as IS_BOOKING_ACTUAL,
+        CAST(BOOKING_SALES_STATUS as VARCHAR(16777216)) as BOOKING_SALES_STATUS,
+        CAST(SHIP_DATE as DATE) as SHIP_DATE,
+        CAST(SCHEDULED_ON_DOCK_DATE as DATE) as SCHEDULED_ON_DOCK_DATE,
+        CAST(BOOKING_AMOUNT as NUMBER(38,10)) as BOOKING_AMOUNT,
+        CAST(END_USER_BOOKING_AMOUNT_JPY as NUMBER(38,0)) as END_USER_BOOKING_AMOUNT_JPY,
+        CAST(BU_SALES_PERSON as VARCHAR(16777216)) as BU_SALES_PERSON,
+        CAST(ACCOUNT_SALES_PERSON as VARCHAR(16777216)) as ACCOUNT_SALES_PERSON,
+        CAST(BU_COMMENTS as VARCHAR(16777216)) as BU_COMMENTS,
+        CAST(ACCOUNT_COMMENTS as VARCHAR(16777216)) as ACCOUNT_COMMENTS,
+        CAST(SALES_COMMENTS_TO_SAP as VARCHAR(16777216)) as SALES_COMMENTS_TO_SAP,
+        CAST(ASSISTANTS_COMMENTS_FROM_SAP as VARCHAR(16777216)) as ASSISTANTS_COMMENTS_FROM_SAP,
+        CAST(BU_ACCOUNT_DIFFERENCE_REASON as VARCHAR(16777216)) as BU_ACCOUNT_DIFFERENCE_REASON,
+        CAST(CORPORATE_BU_BOOKING_FY as VARCHAR(16777216)) as CORPORATE_BU_BOOKING_FY,
+        CAST(CORPORATE_BU_BOOKING_FY_HALF as VARCHAR(16777216)) as CORPORATE_BU_BOOKING_FY_HALF,
+        CAST(CORPORATE_BU_BOOKING_FY_Q as VARCHAR(16777216)) as CORPORATE_BU_BOOKING_FY_Q,
+        CAST(CORPORATE_BU_BOOKING_BEGINNING_OF_FY as DATE) as CORPORATE_BU_BOOKING_BEGINNING_OF_FY,
+        CAST(CORPORATE_BU_BOOKING_END_OF_FY as DATE) as CORPORATE_BU_BOOKING_END_OF_FY,
+        CAST(CORPORATE_BU_BOOKING_BEGINNING_OF_FY_HALF as DATE) as CORPORATE_BU_BOOKING_BEGINNING_OF_FY_HALF,
+        CAST(CORPORATE_BU_BOOKING_END_OF_FY_HALF as DATE) as CORPORATE_BU_BOOKING_END_OF_FY_HALF,
+        CAST(CORPORATE_BU_BOOKING_BEGINNING_OF_FY_Q as DATE) as CORPORATE_BU_BOOKING_BEGINNING_OF_FY_Q,
+        CAST(CORPORATE_BU_BOOKING_END_OF_FY_Q as DATE) as CORPORATE_BU_BOOKING_END_OF_FY_Q,
+        CAST(BEGINNING_OF_CURRENT_FY as DATE) as BEGINNING_OF_CURRENT_FY,
+        CAST(END_OF_CURRENT_FY as DATE) as END_OF_CURRENT_FY,
+        CAST(BEGINNING_OF_CURRENT_FY_HALF as DATE) as BEGINNING_OF_CURRENT_FY_HALF,
+        CAST(END_OF_CURRENT_FY_HALF as DATE) as END_OF_CURRENT_FY_HALF,
+        CAST(BEGINNING_OF_CURRENT_FY_Q as DATE) as BEGINNING_OF_CURRENT_FY_Q,
+        CAST(END_OF_CURRENT_FY_Q as DATE) as END_OF_CURRENT_FY_Q,
+        CAST(BEGINNING_OF_NEXT_FY as DATE) as BEGINNING_OF_NEXT_FY,
+        CAST(END_OF_NEXT_FY as DATE) as END_OF_NEXT_FY,
+        CAST(BEGINNING_OF_NEXT_FY_HALF as DATE) as BEGINNING_OF_NEXT_FY_HALF,
+        CAST(END_OF_NEXT_FY_HALF as DATE) as END_OF_NEXT_FY_HALF,
+        CAST(BEGINNING_OF_NEXT_FY_Q as DATE) as BEGINNING_OF_NEXT_FY_Q,
+        CAST(END_OF_NEXT_FY_Q as DATE) as END_OF_NEXT_FY_Q,
+        CAST(CORPORATE_BU_BOOKING_FORECAST_FK_DATE as DATE) as CORPORATE_BU_BOOKING_FORECAST_FK_DATE,
+        CAST(CORPORATE_BOOKING_FORECAST_FLAG as VARCHAR(16777216)) as CORPORATE_BOOKING_FORECAST_FLAG,
+        CAST(CORPORATE_BOOKING_ACTUALS_FLAG as VARCHAR(16777216)) as CORPORATE_BOOKING_ACTUALS_FLAG,
+        CAST(END_USER_CODE as VARCHAR(16777216)) as END_USER_CODE,
+        CAST(_5_DIGITS_OLD_END_USER_CODE as VARCHAR(16777216)) as _5_DIGITS_OLD_END_USER_CODE,
+        CAST(DATA_SNAPSHOT as DATE) as DATA_SNAPSHOT,
+        CAST(DATA_SNAPSHOT_TIMESTAMP as TIMESTAMP_NTZ(9)) as DATA_SNAPSHOT_TIMESTAMP
+from transform_data 
+)
+select * from type_data

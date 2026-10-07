@@ -1,0 +1,33 @@
+models:
+- name: GOLD__TEA_SALES_REVENUE__NCDR_PART_SUMMARY
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_SALES_REVENUE__OTD_SALES_SERV_ORDERS
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_SALES_REVENUE__PRICE_MATRIX
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_SALES_REVENUE__PURCHASE_ORDER_OTD_KPI_REPORT
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_SALES_REVENUE__RECONCILIATION_REPORT_1270
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_SALES_REVENUE__SALES_ORDER_MASTER_REPORT
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_SALES_REVENUE__PARTS_FINANCIAL_RECOGNITION
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_SALES_REVENUE__PARTS_REVENUE_FORECAST_HISTORY
+  tests:
+  - has_data
+  - recently_run

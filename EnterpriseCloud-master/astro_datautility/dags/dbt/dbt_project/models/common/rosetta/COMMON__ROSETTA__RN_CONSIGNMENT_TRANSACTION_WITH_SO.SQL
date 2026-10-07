@@ -1,0 +1,170 @@
+{{ config(
+        materialized='incremental',
+        incremental_strategy = 'insert_overwrite',
+        alias = 'RN_CONSIGNMENT_TRANSACTION_WITH_SO',
+        transient = false
+) }}
+
+with source_data as
+(
+    SELECT
+        _FILENAME,
+        _FILEDATE,
+        MESSAGE_ID,
+        MESSAGE_LINE_NBR,
+        ITEM_CODE,
+        CUSTOMER_ITEM_CODE,
+        CUSTOMER_ITEM_DESC,
+        QTY,
+        CUSTOMER_CONSUMABLE,
+        
+        CUSTOMER_STOCKROOM,
+        
+        CUSTOMER_TRANS_TYPE,
+        CUSTOMER_TRANS_REASON,
+        
+        GMT_CONSUMPTION_DT,
+        MESSAGE_DT,
+        
+        ERROR_MESSAGE,
+        CUSTOMER_FACTORY,
+        ERROR,
+        SERIAL_NBR,
+        CUSTOMER_SERIAL_NBR,
+        PROCESS_DT,
+        CUSTOMER_TRANS_ID,
+        CUSTOMER_TRANS_LINE_NBR,
+        NCDR_NBR,
+        PIP,
+        CUSTOMER_REF_1,
+        DISPOSITION,
+        DOCUMENT_IDENTIFIER,
+        CONSIGNMENT_PERIOD_DT,
+        CUSTOMER_REF_2,
+        CUSTOMER_AMT,
+        
+        PROCESS_ID,
+        RETRY,
+        SALES_ORG,
+        SALES_UNIT,
+        CURRENCY
+        FROM {{ ref('ODS__ROSETTA__CONSIGNMENT_TRANSACTION') }}
+),
+SALES_ORDER_WITH_REF_DATA as 
+(
+    select distinct SO_NUMBER,SO_LINE,TRANSACTION_ID,
+    TRANSACTION_ID_ITEM,NCDR_NUMBER,
+    REF_TRANSACTION_ID
+    from 
+    {{ ref('COMMON__REPORTS__SALES_ORDER_WITH_REF_DATA') }}
+    where LENGTH( TRANSACTION_ID) >0 and
+    LENGTH( TRANSACTION_ID_ITEM) >0 and   LENGTH( REF_TRANSACTION_ID) >0 
+    qualify ROW_NUMBER() OVER (PARTITION BY TRANSACTION_ID,TRANSACTION_ID_ITEM,REF_TRANSACTION_ID ORDER BY SO_CREATE_DT ) = 1
+)
+
+,transform_data as
+(
+    SELECT
+        _FILENAME,
+        _FILEDATE,
+        '{{ invocation_id }}' AS _AUDIT_LOG_ID,
+        SHA2('hash_me') AS _ROW_HASH,
+        MESSAGE_ID,
+        MESSAGE_LINE_NBR,
+        ITEM_CODE,
+        CUSTOMER_ITEM_CODE,
+        CUSTOMER_ITEM_DESC,
+        QTY,
+        CUSTOMER_CONSUMABLE,
+       
+        CUSTOMER_STOCKROOM,
+       
+        CUSTOMER_TRANS_TYPE,
+        CUSTOMER_TRANS_REASON,
+        
+        GMT_CONSUMPTION_DT,
+        MESSAGE_DT,
+        
+        ERROR_MESSAGE,
+        CUSTOMER_FACTORY,
+        ERROR,
+        SERIAL_NBR,
+        CUSTOMER_SERIAL_NBR,
+        PROCESS_DT,
+        CUSTOMER_TRANS_ID,
+        CUSTOMER_TRANS_LINE_NBR,
+        ref_data.NCDR_NUMBER as NCDR_NBR,
+        PIP,
+        CUSTOMER_REF_1,
+        DISPOSITION,
+        DOCUMENT_IDENTIFIER,
+        CONSIGNMENT_PERIOD_DT,
+        CUSTOMER_REF_2,
+        CUSTOMER_AMT,
+       
+        PROCESS_ID,
+        RETRY,
+        SALES_ORG,
+        SALES_UNIT,
+        CURRENCY,
+        ref_data.SO_NUMBER,
+        ref_data.SO_LINE
+    FROM source_data sd
+    left join SALES_ORDER_WITH_REF_DATA ref_data
+    on sd.CUSTOMER_TRANS_ID = ref_data.TRANSACTION_ID
+    and sd.CUSTOMER_TRANS_LINE_NBR = ref_data.TRANSACTION_ID_ITEM
+    and sd.CUSTOMER_REF_1 = ref_data.REF_TRANSACTION_ID
+),
+type_data as
+(
+    SELECT
+        CAST(_FILENAME AS VARCHAR(16777216)) AS _FILENAME,
+        CAST(_FILEDATE AS TIMESTAMP_NTZ(9)) AS _FILEDATE,
+        CAST(_AUDIT_LOG_ID AS VARCHAR(128)) AS _AUDIT_LOG_ID,
+        CAST(_ROW_HASH AS VARCHAR(128)) AS _ROW_HASH,
+
+
+        MESSAGE_ID,
+        CAST(MESSAGE_LINE_NBR AS NUMBER(38,0)) AS MESSAGE_LINE_NBR,
+        ITEM_CODE,
+        CUSTOMER_ITEM_CODE,
+        CUSTOMER_ITEM_DESC,
+        CAST(QTY AS NUMBER(38,0)) AS QTY,
+         CAST(CUSTOMER_CONSUMABLE AS NUMBER(38,0)) AS CUSTOMER_CONSUMABLE,
+       
+        CUSTOMER_STOCKROOM,
+      
+        CUSTOMER_TRANS_TYPE,
+        CUSTOMER_TRANS_REASON,
+       
+        CAST(GMT_CONSUMPTION_DT AS TIMESTAMP_NTZ(9)) AS GMT_CONSUMPTION_DT,
+        CAST(MESSAGE_DT AS TIMESTAMP_NTZ(9)) AS MESSAGE_DT,
+      
+        ERROR_MESSAGE,
+        CUSTOMER_FACTORY,
+       CAST(ERROR AS NUMBER(38,0)) AS ERROR,
+        SERIAL_NBR,
+        CUSTOMER_SERIAL_NBR,
+        CAST(PROCESS_DT AS TIMESTAMP_NTZ(9)) AS PROCESS_DT,
+        CUSTOMER_TRANS_ID,
+         CAST(CUSTOMER_TRANS_LINE_NBR AS NUMBER(38,0)) AS CUSTOMER_TRANS_LINE_NBR,
+        NCDR_NBR,
+        PIP,
+        CUSTOMER_REF_1,
+       CAST(DISPOSITION AS NUMBER(38,0)) AS DISPOSITION,
+        DOCUMENT_IDENTIFIER,
+         CAST(CONSIGNMENT_PERIOD_DT AS TIMESTAMP_NTZ(9)) AS CONSIGNMENT_PERIOD_DT,
+        CUSTOMER_REF_2,
+        CAST(CUSTOMER_AMT AS NUMBER(38,10)) AS CUSTOMER_AMT,
+       
+        CAST(PROCESS_ID AS NUMBER(38,0)) AS PROCESS_ID,
+        CAST(RETRY AS NUMBER(38,0)) AS RETRY,
+        SALES_ORG,
+        SALES_UNIT,
+        CURRENCY,
+        SO_NUMBER,
+        SO_LINE
+    FROM transform_data
+)
+
+SELECT * FROM type_data

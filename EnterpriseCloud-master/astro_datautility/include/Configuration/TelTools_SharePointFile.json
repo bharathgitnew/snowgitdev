@@ -1,0 +1,211 @@
+{
+  
+  "sharepoint_file_jobs": [
+    {
+      "job_name": "Intel_Booking_Latest_Actual_Details",
+      "file_pattern": "Intel_Booking_Latest_Actual_Details.csv",
+      "resource_type": "drives",
+      "resource_id": "b!TpYRQzDjzka_upTty_rS4sy-Yfbeda5Dm0ndHSC7i8DLY_ANvN0bQIbtBx69wQe7",
+      "subresource": "root:/GLOBAL_SALES_DATA:/children",
+      "destination_table": "GS_INTEL_BOOKING_ACTUAL_DETAILS",
+      "destination_schema": "SHAREPOINT"
+    },
+    {
+      "job_name": "Intel_Booking_Latest_FCST_Details",
+      "file_pattern": "Intel_Booking_Latest_FCST_Details.csv",
+      "resource_type": "drives",
+      "resource_id": "b!TpYRQzDjzka_upTty_rS4sy-Yfbeda5Dm0ndHSC7i8DLY_ANvN0bQIbtBx69wQe7",
+      "subresource": "root:/GLOBAL_SALES_DATA:/children",
+      "destination_table": "GS_INTEL_BOOKING_FCST_DETAILS",
+      "destination_schema": "SHAREPOINT"
+    },
+    {
+      "job_name": "Intel_Booking_Latest_Budget_Details",
+      "file_pattern": "Intel_Booking_Latest_Budget_Details.csv",
+      "resource_type": "drives",
+      "resource_id": "b!TpYRQzDjzka_upTty_rS4sy-Yfbeda5Dm0ndHSC7i8DLY_ANvN0bQIbtBx69wQe7",
+      "subresource": "root:/GLOBAL_SALES_DATA:/children",
+      "destination_table": "GS_INTEL_BOOKING_BUDGET_DETAILS",
+      "destination_schema": "SHAREPOINT"
+    },
+    {
+      "job_name": "Intel_Sales_Latest_FCST_Details",
+      "file_pattern": "Intel_Sales_Latest_FCST_Details.csv",
+      "resource_type": "drives",
+      "resource_id": "b!TpYRQzDjzka_upTty_rS4sy-Yfbeda5Dm0ndHSC7i8DLY_ANvN0bQIbtBx69wQe7",
+      "subresource": "root:/GLOBAL_SALES_DATA:/children",
+      "destination_table": "GS_INTEL_SALES_FCST_DETAILS",
+      "destination_schema": "SHAREPOINT"
+    },
+    {
+      "job_name": "Intel_Sales_Latest_Budget_Details",
+      "file_pattern": "Intel_Sales_Latest_Budget_Details.csv",
+      "resource_type": "drives",
+      "resource_id": "b!TpYRQzDjzka_upTty_rS4sy-Yfbeda5Dm0ndHSC7i8DLY_ANvN0bQIbtBx69wQe7",
+      "subresource": "root:/GLOBAL_SALES_DATA:/children",
+      "destination_table": "GS_INTEL_SALES_BUDGET_DETAILS",
+      "destination_schema": "SHAREPOINT"
+    },
+    {
+      "job_name": "Intel_Sales_Latest_Actual_Details",
+      "file_pattern": "Intel_Sales_Latest_Actual_Details.csv",
+      "resource_type": "drives",
+      "resource_id": "b!TpYRQzDjzka_upTty_rS4sy-Yfbeda5Dm0ndHSC7i8DLY_ANvN0bQIbtBx69wQe7",
+      "subresource": "root:/GLOBAL_SALES_DATA:/children",
+      "destination_table": "GS_INTEL_SALES_ACTUAL_DETAILS",
+      "destination_schema": "SHAREPOINT"
+    },
+    {
+      "job_name": "UPS_ALL_PARTS_ALL",
+      "file_pattern": "000-All-Parts-TCD-Checked.xlsx",
+      "sheet_no": 0,
+      "resource_type": "drives",
+      "resource_id": "b!ngOrJgbcGU-H2sDNbLDEHKMrv4iIU8RAvComFP5mf6g9Vz3Na0aQRJorXnL0F1gK",
+      "subresource": "root/children",
+      "destination_table": "UPS_ALL_PARTS_ALL",
+      "destination_schema": "UPS"
+    },
+    {
+      "job_name": "UPS_ALL_PARTS_HTS",
+      "file_pattern": "000-All-Parts-TCD-Checked.xlsx",
+      "sheet_no": 1,
+      "has_header": false,
+      "resource_type": "drives",
+      "resource_id": "b!ngOrJgbcGU-H2sDNbLDEHKMrv4iIU8RAvComFP5mf6g9Vz3Na0aQRJorXnL0F1gK",
+      "subresource": "root/children",
+      "destination_table": "UPS_ALL_PARTS_HTS",
+      "destination_schema": "UPS"
+    },
+    {
+      "job_name": "UPS_ALL_PARTS_MATERIAL",
+      "file_pattern": "000-All-Parts-TCD-Checked.xlsx",
+      "sheet_no": 2,
+      "resource_type": "drives",
+      "resource_id": "b!ngOrJgbcGU-H2sDNbLDEHKMrv4iIU8RAvComFP5mf6g9Vz3Na0aQRJorXnL0F1gK",
+      "subresource": "root/children",
+      "destination_table": "UPS_ALL_PARTS_MATERIAL",
+      "destination_schema": "UPS"
+    },
+    {
+      "job_name": "UPS_ALL_PARTS_OUT_OF_SCOPE",
+      "file_pattern": "000-All-Parts-TCD-Checked.xlsx",
+      "sheet_no": 3,
+      "resource_type": "drives",
+      "resource_id": "b!ngOrJgbcGU-H2sDNbLDEHKMrv4iIU8RAvComFP5mf6g9Vz3Na0aQRJorXnL0F1gK",
+      "subresource": "root/children",
+      "destination_table": "UPS_ALL_PARTS_OUT_OF_SCOPE",
+      "destination_schema": "UPS"
+    },
+    {
+      "job_name": "TEA Orders",
+      "file_pattern": "TEA Orders.xlsx",
+      "sheet_no": 0,
+      "resource_type": "drives",
+      "resource_id": "b!ngOrJgbcGU-H2sDNbLDEHKMrv4iIU8RAvComFP5mf6g9Vz3Na0aQRJorXnL0F1gK",
+      "subresource": "root/children",
+      "destination_table": "TEA_ORDERS",
+      "destination_schema": "UPS"
+    },
+    {
+      "job_name": "TMEA_Export_Shipment_History_Snowflake_update",
+      "file_pattern": "TMEA_Export_Shipment_History_Snowflake_update.xlsx",
+      "resource_type": "drives",
+      "resource_id": "b!ngOrJgbcGU-H2sDNbLDEHKMrv4iIU8RAvComFP5mf6jQlIfwvxXOT72Dta-Ie3FD",
+      "subresource": "root:/Snowflake connected report:/children",
+      "destination_table": "TMEA_EXPORT_SHIPMENT_HISTORY_SNOWFLAKE_UPDATE",
+      "destination_schema": "SHAREPOINT"
+    },
+    {
+      "job_name": "TMEA_Machine_Export_Pricing",
+      "file_pattern": "TMEA Machine Export Pricing.xlsx",
+      "resource_type": "drives",
+      "resource_id": "b!ngOrJgbcGU-H2sDNbLDEHKMrv4iIU8RAvComFP5mf6jQlIfwvxXOT72Dta-Ie3FD",
+      "subresource": "root:/Snowflake connected report:/children",
+      "destination_table": "TMEA_MACHINE_EXPORT_PRICING",
+      "destination_schema": "SHAREPOINT"
+    },
+    {
+      "job_name": "Weekly_Allocations",
+      "file_pattern": "Weekly_Allocations_????_Week*.xlsx",
+      "sheet_no": 0,
+      "resource_type": "drives",
+      "resource_id": "b!d5FtwCrsKkKayDpVnSzzqlEyIFKoljxFqUPkP5OsM1FnMcLWquNRT5LE2boCpXj5",
+      "subresource": "root:/TEA Weekly Freight Data:/children",
+      "destination_table": "DATA2_ALLOCATION_DATA",
+      "destination_schema": "SHAREPOINT"
+    },
+    {
+      "job_name": "Date_2_Code_sheets",
+      "file_pattern": "Date 2 Code sheets.xlsx",
+      "sheet_no": 0,
+      "resource_type": "drives",
+      "resource_id": "b!d5FtwCrsKkKayDpVnSzzqlEyIFKoljxFqUPkP5OsM1FnMcLWquNRT5LE2boCpXj5",
+      "subresource": "root:/TEA Weekly Freight Data:/children",
+      "destination_table": "DATA2_CODE_SHEET",
+      "destination_schema": "SHAREPOINT"
+    },
+    {
+      "job_name": "TMEA_ORDER_ACTUAL",
+      "file_pattern": "????-???? TMEA Order Actual.csv",
+      "resource_type": "drives",
+      "resource_id": "b!P3V4WvCfq0C_jXBctOUkcpfx4tPuHJVBlPQF3Bwt2om4-GfB7DsNQoBSTK2og3oe",
+      "subresource": "root/children",
+      "destination_table": "TMEA_ORDER_ACTUAL",
+      "destination_schema": "SHAREPOINT"
+    },
+    {
+      "job_name": "TMEA_ORDER_BUDGET",
+      "file_pattern": "????-???? TMEA Order Budget.csv",
+      "resource_type": "drives",
+      "resource_id": "b!P3V4WvCfq0C_jXBctOUkcpfx4tPuHJVBlPQF3Bwt2om4-GfB7DsNQoBSTK2og3oe",
+      "subresource": "root/children",
+      "destination_table": "TMEA_ORDER_BUDGET",
+      "destination_schema": "SHAREPOINT"
+    },
+    {
+      "job_name": "TMEA_ORDER_FORECAST",
+      "file_pattern": "????-???? TMEA Order Forecast.csv",
+      "resource_type": "drives",
+      "resource_id": "b!P3V4WvCfq0C_jXBctOUkcpfx4tPuHJVBlPQF3Bwt2om4-GfB7DsNQoBSTK2og3oe",
+      "subresource": "root/children",
+      "destination_table": "TMEA_ORDER_FORECAST",
+      "destination_schema": "SHAREPOINT"
+    },
+    {
+      "job_name": "TMEA_SALES_ACTUAL",
+      "file_pattern": "????-???? TMEA Sales Actual.csv",
+      "resource_type": "drives",
+      "resource_id": "b!P3V4WvCfq0C_jXBctOUkcpfx4tPuHJVBlPQF3Bwt2om4-GfB7DsNQoBSTK2og3oe",
+      "subresource": "root/children",
+      "destination_table": "TMEA_SALES_ACTUAL",
+      "destination_schema": "SHAREPOINT"
+    },
+    {
+      "job_name": "TMEA_SALES_FORECAST",
+      "file_pattern": "????-???? TMEA Sales Forecast.csv",
+      "resource_type": "drives",
+      "resource_id": "b!P3V4WvCfq0C_jXBctOUkcpfx4tPuHJVBlPQF3Bwt2om4-GfB7DsNQoBSTK2og3oe",
+      "subresource": "root/children",
+      "destination_table": "TMEA_SALES_FORECAST",
+      "destination_schema": "SHAREPOINT"
+    },
+    {
+      "job_name": "TMEA_SALES_BUDGET",
+      "file_pattern": "????-???? TMEA Sales Budget.csv",
+      "resource_type": "drives",
+      "resource_id": "b!P3V4WvCfq0C_jXBctOUkcpfx4tPuHJVBlPQF3Bwt2om4-GfB7DsNQoBSTK2og3oe",
+      "subresource": "root/children",
+      "destination_table": "TMEA_SALES_BUDGET",
+      "destination_schema": "SHAREPOINT"
+    },
+    {
+      "job_name": "MAP_ORACLE_ACCOUNT",
+      "file_pattern": "MAP_ORACLE_ACCOUNT.xlsx",
+      "resource_type": "drives",
+      "resource_id": "b!HNeYCBa_X0Ktczt4kIfcCagT5UWE31BNvzBsfOlGOgtpr9-PLhpfSbFLFGulH41N",
+      "subresource": "root:/ORACLE_MASTER_DATA:/children",
+      "destination_table": "MAP_ORACLE_ACCOUNT",
+      "destination_schema": "SHAREPOINT"
+    }
+  ]
+}

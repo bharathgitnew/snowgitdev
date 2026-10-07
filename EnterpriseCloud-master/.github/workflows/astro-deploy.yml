@@ -1,0 +1,113 @@
+name: Deploy Astro Datautility
+
+on:
+  push:
+    branches:
+      - qa
+      - sit
+      - master
+    paths:
+      - "astro_datautility/**"
+
+run-name: "${{ github.workflow }} | ${{ github.event_name }} | ${{ github.ref_name }} | ${{ github.run_id }}-${{ github.run_attempt }}"
+
+jobs:
+  deploy_image:
+    runs-on: [self-hosted , linux]
+    environment: ${{ github.ref_name == 'sit' && 'sit' || github.ref_name == 'qa' && 'qa' || github.ref_name == 'master' && 'master' }}
+    env:
+      ASTRO_API_TOKEN: ${{ secrets.ASTRO_API_TOKEN }}
+
+    steps:
+      - name: Checkout Action
+        uses: actions/checkout@v6
+        with:
+            fetch-depth: 0
+            
+      - name: Install Astro CLI 
+        shell: bash
+        run: |
+          set -euo pipefail
+          CLI_VERSION=""
+
+          if command -v astro &> /dev/null; then
+            echo "Astro CLI is already installed"
+            exit 0
+          fi
+
+          echo "Astro CLI not found. Installing..."
+          if [[ -z "${CLI_VERSION}" ]]; then
+            curl -sSL https://install.astronomer.io | sudo bash -s
+          else
+            [[ "${CLI_VERSION}" != v* ]] && CLI_VERSION="v${CLI_VERSION}"
+            curl -sSL https://install.astronomer.io | sudo bash -s -- "${CLI_VERSION}"
+          fi
+
+      - name: Run PR File Extractor
+        id: pr-extractor
+        shell: python
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          INPUT_BASE_REF: ${{ github.event.before }}
+          INPUT_HEAD_REF:  ${{ github.sha }}
+        run: |
+            import subprocess
+
+            subprocess.check_call([
+                "python",
+                ".github/scripts/get_diff_files.py"
+            ])
+
+      - name: Decide Astro deploy command
+        id: decide-deploy
+        shell: python
+        env:
+          FILTERED_FILES: ${{ steps.pr-extractor.outputs.changed_files }}
+          ASTRO_ROOT: astro_datautility
+          DEPLOYMENT_ID: ${{ vars.ASTRO_DEPLOYMENT_ID }}
+        run: |
+          import os
+          import sys
+          from pathlib import Path
+
+          filtered = (os.environ.get("FILTERED_FILES") or "").strip()
+          astro_root = os.environ.get("ASTRO_ROOT", "astro_datautility")
+          deployment_id = os.environ.get("DEPLOYMENT_ID", "").strip()
+          
+          if not filtered:
+            print("Decision: NO-OP (no changed files)")
+            print("has_deploy=false", file=open(os.environ["GITHUB_OUTPUT"], "a"))
+            sys.exit(0)
+
+          files = [f.strip() for f in filtered.split("||") if f.strip()]
+
+          relevant = []
+          for f in files:
+            p = f.replace("\\", "/").lstrip("/")
+            if p.startswith(".github/") or p.startswith("Snow/"):
+              continue
+            relevant.append(p)
+
+          if not relevant:
+            print("Decision: NO-OP (only Snow/ or .github/ changes)")
+            print("has_deploy=false", file=open(os.environ["GITHUB_OUTPUT"], "a"))
+            sys.exit(0)
+
+          cmd = f"cd {astro_root} && astro deploy {deployment_id} -f"
+
+          print("Decision: DEPLOY")
+          print("Command:", cmd)
+
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as out:
+            out.write("has_deploy=true\n")
+            out.write(f"deploy_cmd={cmd}\n")
+
+      - name: Run Astro deploy
+        if: ${{ steps.decide-deploy.outputs.has_deploy == 'true' }}
+        run: |
+          set -euo pipefail
+          echo "Executing deploy command:"
+          echo "${{ steps.decide-deploy.outputs.deploy_cmd }}"
+          eval "${{ steps.decide-deploy.outputs.deploy_cmd }}"
+                      

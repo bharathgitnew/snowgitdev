@@ -1,0 +1,53 @@
+{
+    "graph_api": {
+        "base_url": "https://graph.microsoft.com/v1.0",
+        "tenant_id": "8c433003-a081-4dfb-a631-100526250b1a",
+        "client_id": "32608bf0-6733-421a-adc9-d981b24cc5f6",
+        "client_secret": "MSGRAPH-MAIL-SECRET",
+        "oauth_url": "https://login.microsoftonline.com"
+    },
+    "snowflake": {
+        "NINE_BOX_REPORT_TOKELC": {
+            "schema": "DATA2LOGISTICS",
+            "user_email": "DWEXTERNALFILE@us.tel.com",
+            "sender_email": ["AutoProc@Data2Logistics.com"],
+            "subject_starts_with": "AutoProc Exports Delivery",
+            "has_attachments": true,
+            "files": [
+                {
+                    "file_pattern": "eUTC_uni-cdh-TOKELC-*",
+                    "allowed_attachment_types": ["zip"],
+                    "supported_file_types": ["csv"],
+                    "delimiter": ",",
+                    "skip_header": false,
+                    "ignore_header": false,
+                    "convert_to_json": true
+                }
+            ]
+        },
+        "NINE_BOX_REPORT_100962": {
+            "schema": "DATA2LOGISTICS",
+            "user_email": "DWEXTERNALFILE@us.tel.com",
+            "sender_email": ["AutoProc@Data2Logistics.com"],
+            "subject_starts_with": "AutoProc Exports Delivery",
+            "has_attachments": true,
+            "files": [
+                {
+                    "file_pattern": "eUTC_uni-cdh-100962-*",
+                    "allowed_attachment_types": ["zip"],
+                    "supported_file_types": ["csv"],
+                    "delimiter": ",",
+                    "skip_header": false,
+                    "ignore_header": false,
+                    "convert_to_json": true
+                }
+            ]
+        }
+    },
+    "debug": {
+        "save_failed_attachments": {
+            "enabled": false,
+            "path": "C:/temp/email_attachments"
+        }
+    }
+}

@@ -1,0 +1,1395 @@
+models:
+- name: GOLD__TEH_SUPPORT_SERVICES__DETAILED_HD_TGIS_MERGED_REPORT
+  description: |
+    PURPOSE: Merged view of IT helpdesk cases and TGIS service requests providing unified case tracking with status, assignment, and resolution details.
+    GRAIN: One row per helpdesk case or TGIS service request.
+    KEY LOGIC: Joins ITHD cases with TGIS records on case number; combines status, urgency, and timeline fields from both systems.
+    CAVEAT: Cases without a TGIS counterpart show None in TGIS fields.
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _AUDIT_LOG_ID
+  - name: _ROW_HASH
+  - name: CASE_NUMBER
+    description: "Business attribute for case number in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: TGIS_ID
+    description: "Case or service request identifier linking to the source ticketing system. Alphanumeric key. Null when no linked case exists."
+  - name: TITLE_EN
+    description: "Free-text title en field from the ticketing system. May contain multi-line text. Null when not entered by the user."
+  - name: DESCRIPTION_EN
+    description: "Free-text description en field from the ticketing system. May contain multi-line text. Null when not entered by the user."
+  - name: ITHD_URGENCY
+    description: "Priority classification for the case (e.g. 1-Critical, 2-High, 3-Normal). Text or numeric code. Null for cases created without priority."
+  - name: ITHD_STATUS
+    description: "Current status label for the record. Text value (e.g. Active, Resolved, Closed). Null for records not yet processed."
+  - name: TGIS_STATUS
+    description: "Current status label for the record. Text value (e.g. Active, Resolved, Closed). Null for records not yet processed."
+  - name: ISSUER
+    description: "Boolean indicator for issuer. Y/N or True/False. Defaults to N/False when not explicitly set."
+  - name: FUNCTIONAL_TEAM
+    description: "Assignment group or queue for functional team. Text label. Null when not assigned to a group."
+  - name: ITHD_ISSUE_DATE
+    description: "Timestamp recording when the ithd issue date event occurred. ISO datetime or date value. Null when the event has not taken place."
+  - name: WORKED_BY_ITHD
+    description: "Person who performed the action for worked by ithd. Employee name or login. Null when action was system-initiated."
+  - name: L2_GROUP_TGIS
+    description: "Assignment group or queue for l2 group tgis. Text label. Null when not assigned to a group."
+  - name: PROGRESS_UPDATE
+    description: "Business attribute for progress update in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: TGIS_ISSUE_DATE
+    description: "Timestamp recording when the tgis issue date event occurred. ISO datetime or date value. Null when the event has not taken place."
+  - name: QUEUE
+    description: "Assignment group or queue for queue. Text label. Null when not assigned to a group."
+  - name: REQUESTOR_CASE_TYPE
+    description: "Business attribute for requestor case type in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: REQUESTOR_CASE_SUB_TYPE
+    description: "Business attribute for requestor case sub type in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: SYSTEM_NAME
+    description: "Descriptive name or label for system name. Free-text string. Null when the name has not been maintained."
+  - name: RESOLVED_ON
+    description: "Timestamp recording when the resolved on event occurred. ISO datetime or date value. Null when the event has not taken place."
+  - name: ITHD_ETA
+    description: "Estimated completion date for ithd eta. Date or datetime value. Null when no estimate has been provided."
+  - name: TGIS_ETA
+    description: "Estimated completion date for tgis eta. Date or datetime value. Null when no estimate has been provided."
+  - name: ETA_MATCH_FLAG
+    description: "Boolean indicator for eta match flag. Y/N or True/False. Defaults to N/False when not explicitly set."
+  - name: LATEST_TIMELINE_EN
+    description: "Business attribute for latest timeline en in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: UPDATED_ON
+    description: "Business attribute for updated on in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: UPDATED_BY
+    description: "Person who performed the action for updated by. Employee name or login. Null when action was system-initiated."
+  - name: AGE_IN_ITHD
+    description: "Number of days measuring age in ithd. Integer. Null when the start event has not occurred."
+  - name: RELATED_CASE
+    description: "Business attribute for related case in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: COUNT_OF_RELATED_CASES
+    description: "Numeric count of count of related cases. Integer. Zero when no items exist."
+  - name: COUNT_OF_RELATED_ICD_CASES
+    description: "Numeric count of count of related icd cases. Integer. Zero when no items exist."
+  - name: PMO_UPDATE
+    description: "Business attribute for pmo update in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: PROJECT
+    description: "Business attribute for project in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: CONTENT_EN
+    description: "Free-text content en field from the ticketing system. May contain multi-line text. Null when not entered by the user."
+  - name: REGISTERED_TELNAME
+    description: "Business attribute for registered telname in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: ICD_UPDATED_DATE
+    description: "Timestamp recording when the icd updated date event occurred. ISO datetime or date value. Null when the event has not taken place."
+  - name: SYSTEM
+    description: "Business attribute for system in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: ICD_CASE_SUB_TYPE
+    description: "Business attribute for icd case sub type in the support services domain. Text or coded value. Null when not populated in the source system."
+- name: GOLD__TEH_SUPPORT_SERVICES__EMPLOYEE_MONTHLY_SNAPSHOT
+  description: |
+    PURPOSE: Monthly point-in-time snapshot of employee master data capturing organizational assignment, contact details, and HR attributes.
+    GRAIN: One row per employee per snapshot month.
+    KEY LOGIC: Captures employee state at month-end including department, supervisor, location, and employment status.
+    CAVEAT: Terminated employees appear in their final month only; historical snapshots are not backfilled.
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _AUDIT_LOG_ID
+  - name: _ROW_HASH
+  - name: COMPANYID
+    description: "System identifier for companyid. Alphanumeric key. Null when not assigned."
+  - name: EMPLOYEEID
+    description: "Employee identifier linking to the HR master. Numeric string. Null when no employee is assigned."
+  - name: ADPCOMPANY
+    description: "Business attribute for adpcompany in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: ADP_PERSON_ID
+    description: "System identifier for adp person id. Alphanumeric key. Null when not assigned."
+  - name: ACTIVE
+    description: "Boolean indicator for active. Y/N or True/False. Defaults to N/False when not explicitly set."
+  - name: EMPLOYEETYPE
+    description: "Business attribute for employeetype in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: FIRSTNAME
+    description: "Person name field from the employee or contact record. Free-text string. Always populated for active person records."
+  - name: LASTNAME
+    description: "Person name field from the employee or contact record. Free-text string. Always populated for active person records."
+  - name: NAMEUSED
+    description: "Descriptive name or label for nameused. Free-text string. Null when the name has not been maintained."
+  - name: ADP_POSN_ID
+    description: "System identifier for adp posn id. Alphanumeric key. Null when not assigned."
+  - name: JOBCODE
+    description: "Classification code for jobcode. Short alphanumeric value. Null when not categorized."
+  - name: JOBTITLE
+    description: "Free-text jobtitle field from the ticketing system. May contain multi-line text. Null when not entered by the user."
+  - name: EMAIL
+    description: "Employee email address from the directory. Standard email format. Always populated for active accounts."
+  - name: SUPERVISORID
+    description: "Supervisor employee identifier from the HR system. Numeric string. Null when supervisor is not assigned."
+  - name: DEPTCODE
+    description: "Classification code for deptcode. Short alphanumeric value. Null when not categorized."
+  - name: PRODLINECODE
+    description: "Classification code for prodlinecode. Short alphanumeric value. Null when not categorized."
+  - name: LOCATIONCODE
+    description: "Classification code for locationcode. Short alphanumeric value. Null when not categorized."
+  - name: STATE
+    description: "Business attribute for state in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: MAILSTOP
+    description: "Business attribute for mailstop in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: OFFCPHONE
+    description: "Contact offcphone from the employee record. Free-text format. Null when not provided."
+  - name: OFFCEXT
+    description: "Business attribute for offcext in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: OFFCPAGERMODEL
+    description: "Number of days measuring offcpagermodel. Integer. Null when the start event has not occurred."
+  - name: OFFCPAGER
+    description: "Number of days measuring offcpager. Integer. Null when the start event has not occurred."
+  - name: OFFCPIN
+    description: "Business attribute for offcpin in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: OFFCPAGECOVAREA
+    description: "Number of days measuring offcpagecovarea. Integer. Null when the start event has not occurred."
+  - name: OFFCDISPATCH
+    description: "Business attribute for offcdispatch in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: OFFCFAX
+    description: "Contact offcfax from the employee record. Free-text format. Null when not provided."
+  - name: OFFCPAGEREMAIL
+    description: "Number of days measuring offcpageremail. Integer. Null when the start event has not occurred."
+  - name: CUSTLOCALPAGER
+    description: "Number of days measuring custlocalpager. Integer. Null when the start event has not occurred."
+  - name: CUSTLOCALPIN
+    description: "Business attribute for custlocalpin in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: MOBILEPHONE
+    description: "Contact mobilephone from the employee record. Free-text format. Null when not provided."
+  - name: SENIORITY_DATE
+    description: "Timestamp recording when the seniority date event occurred. ISO datetime or date value. Null when the event has not taken place."
+  - name: FTE
+    description: "Business attribute for fte in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: DATEHIRE
+    description: "Timestamp recording when the datehire event occurred. ISO datetime or date value. Null when the event has not taken place."
+  - name: DATETERM
+    description: "Timestamp recording when the dateterm event occurred. ISO datetime or date value. Null when the event has not taken place."
+  - name: SALARYEXEMPT
+    description: "Business attribute for salaryexempt in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: PREFERREDLANGUAGE
+    description: "Number of days measuring preferredlanguage. Integer. Null when the start event has not occurred."
+  - name: FLEETAUTO
+    description: "Estimated completion date for fleetauto. Date or datetime value. Null when no estimate has been provided."
+  - name: KRONOS_ACCRUAL_CODE
+    description: "Classification code for kronos accrual code. Short alphanumeric value. Null when not categorized."
+  - name: KRONOS_PAY_RULE
+    description: "Business attribute for kronos pay rule in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: KRONOS_WORK_RULE
+    description: "Business attribute for kronos work rule in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: KRONOS_ACCESS_CODE
+    description: "Classification code for kronos access code. Short alphanumeric value. Null when not categorized."
+  - name: KRONOS_LABOR_LEVEL
+    description: "Business attribute for kronos labor level in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: KRONOS_PAY_CODE_DATA_ACCESS
+    description: "Business attribute for kronos pay code data access in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: KRONOS_DISPLAY_PROFILE
+    description: "Business attribute for kronos display profile in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: NTDOMAIN
+    description: "Business attribute for ntdomain in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: NTLOGIN
+    description: "Business attribute for ntlogin in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: PROJECT
+    description: "Business attribute for project in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: LASTUPDATED
+    description: "Timestamp recording when the lastupdated event occurred. ISO datetime or date value. Null when the event has not taken place."
+  - name: LASTUPDATEDBY
+    description: "Person who performed the action for lastupdatedby. Employee name or login. Null when action was system-initiated."
+  - name: MIDDLE_INITIAL
+    description: "Business attribute for middle initial in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: SUFFIX
+    description: "Business attribute for suffix in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: REHIREDATE
+    description: "Timestamp recording when the rehiredate event occurred. ISO datetime or date value. Null when the event has not taken place."
+  - name: ISMANAGER
+    description: "Boolean indicator for ismanager. Y/N or True/False. Defaults to N/False when not explicitly set."
+  - name: STATUS_CODE
+    description: "Current status label for the record. Text value (e.g. Active, Resolved, Closed). Null for records not yet processed."
+  - name: HRREP
+    description: "Business attribute for hrrep in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: WORKGROUP
+    description: "Assignment group or queue for workgroup. Text label. Null when not assigned to a group."
+  - name: BUMGR
+    description: "Business attribute for bumgr in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: EETYPE
+    description: "Business attribute for eetype in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: WFH
+    description: "Business attribute for wfh in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: INACTIVE
+    description: "Boolean indicator for inactive. Y/N or True/False. Defaults to N/False when not explicitly set."
+  - name: VENDORNAME
+    description: "Business attribute for vendorname in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: JOB_FAMILY
+    description: "Business attribute for job family in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: SUPERVISORY_ORG
+    description: "Business attribute for supervisory org in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: FUNCTION1
+    description: "Business attribute for function1 in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: COSTCENTER
+    description: "Business attribute for costcenter in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: COCODE
+    description: "Classification code for cocode. Short alphanumeric value. Null when not categorized."
+  - name: STDHIER
+    description: "Business attribute for stdhier in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: OLDDEPTCODE
+    description: "Classification code for olddeptcode. Short alphanumeric value. Null when not categorized."
+  - name: OLDPRODLINECODE
+    description: "Classification code for oldprodlinecode. Short alphanumeric value. Null when not categorized."
+  - name: FULLNAME
+    description: "Person name field from the employee or contact record. Free-text string. Always populated for active person records."
+  - name: ISFSTEMPLOYEE
+    description: "Boolean indicator for isfstemployee. Y/N or True/False. Defaults to N/False when not explicitly set."
+  - name: FSTEMPLOYEEGROUP
+    description: "Assignment group or queue for fstemployeegroup. Text label. Null when not assigned to a group."
+  - name: EMPLOYEE_TYPE_NAME
+    description: "Descriptive name or label for employee type name. Free-text string. Null when the name has not been maintained."
+  - name: SUPERVISOR_NAME
+    description: "Descriptive name or label for supervisor name. Free-text string. Null when the name has not been maintained."
+  - name: DEPARTMENT_NAME
+    description: "Descriptive name or label for department name. Free-text string. Null when the name has not been maintained."
+  - name: BUSINESS_UNIT_NAME
+    description: "Descriptive name or label for business unit name. Free-text string. Null when the name has not been maintained."
+  - name: OFFICE_NAME
+    description: "Descriptive name or label for office name. Free-text string. Null when the name has not been maintained."
+  - name: EXPAT_FLAG
+    description: "Boolean indicator for expat flag. Y/N or True/False. Defaults to N/False when not explicitly set."
+  - name: SNAPSHOT_DATE
+    description: "Timestamp recording when the snapshot date event occurred. ISO datetime or date value. Null when the event has not taken place."
+  - name: BU_GROUP
+    description: "Assignment group or queue for bu group. Text label. Null when not assigned to a group."
+  - name: BU_GROUP_LEADER
+    description: "Assignment group or queue for bu group leader. Text label. Null when not assigned to a group."
+- name: GOLD__TEH_SUPPORT_SERVICES__HELPDESK_CASE_DETAILS_HIST
+  description: |
+    PURPOSE: Historical detail view of IT helpdesk cases enriched with SLA tracking, resolution timestamps, and case categorization.
+    GRAIN: One row per helpdesk case with full lifecycle attributes.
+    KEY LOGIC: Combines case header, SLA KPI instances, queue assignments, and resolution details into a single analytical record.
+    CAVEAT: SLA fields are null for cases created before SLA tracking was enabled.
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+  - name: SNAPSHOT_DATE
+    description: "Timestamp recording when the snapshot date event occurred. ISO datetime or date value. Null when the event has not taken place."
+  - name: _AUDIT_LOG_ID
+  - name: _ROW_HASH
+  - name: CASE_NUMBER
+    description: "Business attribute for case number in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: CASE_TITLE
+    description: "Free-text case title field from the ticketing system. May contain multi-line text. Null when not entered by the user."
+  - name: ORIGIN
+    description: "Business attribute for origin in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: URGENCY
+    description: "Priority classification for the case (e.g. 1-Critical, 2-High, 3-Normal). Text or numeric code. Null for cases created without priority."
+  - name: URGENCY_REASON
+    description: "Priority classification for the case (e.g. 1-Critical, 2-High, 3-Normal). Text or numeric code. Null for cases created without priority."
+  - name: IMPACT_ON
+    description: "Timestamp recording when the impact on event occurred. ISO datetime or date value. Null when the event has not taken place."
+  - name: PRIMARY_CONTACT
+    description: "Business attribute for primary contact in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: PRIMARY_CONTACT_EMPLOYEE_ID
+    description: "Employee identifier linking to the HR master. Numeric string. Null when no employee is assigned."
+  - name: PRIMARY_CONTACT_EMAIL_ADDRESS
+    description: "Business attribute for primary contact email address in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: PRIMARY_CONTACT_LOCATION
+    description: "Business attribute for primary contact location in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: PREFERRED_CONTACT
+    description: "Business attribute for preferred contact in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: PREFERRED_CONTACT_DETAIL
+    description: "Estimated completion date for preferred contact detail. Date or datetime value. Null when no estimate has been provided."
+  - name: EMAIL_NOTIFICATION
+    description: "Business attribute for email notification in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: ADDITIONAL_CONTACT
+    description: "Business attribute for additional contact in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: DUPLICATE
+    description: "Business attribute for duplicate in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: PARENT_CASE
+    description: "Business attribute for parent case in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: STATUS
+    description: "Current status label for the record. Text value (e.g. Active, Resolved, Closed). Null for records not yet processed."
+  - name: ON_HOLD_REASON
+    description: "Business attribute for on hold reason in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: CONFIRM_RESOLUTION
+    description: "Business attribute for confirm resolution in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: TRIAGE_COMPLETED
+    description: "Number of days measuring triage completed. Integer. Null when the start event has not occurred."
+  - name: AGE_DAYS
+    description: "Number of days measuring age days. Integer. Null when the start event has not occurred."
+  - name: CREATED_BY_USER
+    description: "Business attribute for created by user in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: CREATED_BY_USER_EMAIL_ADDRESS
+    description: "Business attribute for created by user email address in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: CREATED_BY_CONTACT
+    description: "Business attribute for created by contact in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: CREATED_BY_CONTACT_EMPLOYEE_ID
+    description: "Employee identifier linking to the HR master. Numeric string. Null when no employee is assigned."
+  - name: CREATED_BY_CONTACT_EMAIL_ADDRESS
+    description: "Business attribute for created by contact email address in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: CREATED_ON
+    description: "Timestamp recording when the created on event occurred. ISO datetime or date value. Null when the event has not taken place."
+  - name: MODIFIED_BY
+    description: "Business attribute for modified by in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: MODIFIED_BY_USER_EMAIL_ADDRESS
+    description: "Business attribute for modified by user email address in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: MODIFIED_ON
+    description: "Business attribute for modified on in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: RESOLVED_BY
+    description: "Business attribute for resolved by in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: RESOLVED_BY_USER_EMAIL_ADDRESS
+    description: "Business attribute for resolved by user email address in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: RESOLVED_ON
+    description: "Timestamp recording when the resolved on event occurred. ISO datetime or date value. Null when the event has not taken place."
+  - name: STATE
+    description: "Business attribute for state in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: OWNER
+    description: "Business attribute for owner in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: OWNER_USER_EMAIL_ADDRESS
+    description: "Business attribute for owner user email address in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: SYSTEM_CUSTOMER
+    description: "Business attribute for system customer in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: MANAGER
+    description: "Number of days measuring manager. Integer. Null when the start event has not occurred."
+  - name: MANAGER_CONTACT_EMPLOYEE_ID
+    description: "Employee identifier linking to the HR master. Numeric string. Null when no employee is assigned."
+  - name: MANAGER_CONTACT_EMAIL_ADDRESS
+    description: "Number of days measuring manager contact email address. Integer. Null when the start event has not occurred."
+  - name: CLOSE_ME
+    description: "Business attribute for close me in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: SYSTEM_PARENT_CASE
+    description: "Business attribute for system parent case in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: DESCRIPTION
+    description: "Free-text description field from the ticketing system. May contain multi-line text. Null when not entered by the user."
+  - name: REGION
+    description: "Business attribute for region in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: CASE_TYPE
+    description: "Business attribute for case type in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: CASE_SUB_TYPE
+    description: "Business attribute for case sub type in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: SYSTEM_CATEGORY
+    description: "Business attribute for system category in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: SYSTEM
+    description: "Business attribute for system in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: SYSTEM_MODULE
+    description: "Business attribute for system module in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: REQUESTOR_CASE_TYPE
+    description: "Business attribute for requestor case type in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: REQUESTOR_CASE_SUB_TYPE
+    description: "Business attribute for requestor case sub type in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: QUALITY
+    description: "Business attribute for quality in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: RESOLUTION
+    description: "Business attribute for resolution in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: ROUTE_CASE
+    description: "Business attribute for route case in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: QUEUE
+    description: "Assignment group or queue for queue. Text label. Null when not assigned to a group."
+  - name: WORKED_BY
+    description: "Person who performed the action for worked by. Employee name or login. Null when action was system-initiated."
+  - name: WORKED_BY_USER_EMAIL_ADDRESS
+    description: "Person who performed the action for worked by user email address. Employee name or login. Null when action was system-initiated."
+  - name: ENHANCEMENT_STATUS
+    description: "Current status label for the record. Text value (e.g. Active, Resolved, Closed). Null for records not yet processed."
+  - name: BUSINESS_REASON
+    description: "Business attribute for business reason in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: APPROVAL
+    description: "Business attribute for approval in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: APPROVAL_COMMENTS
+    description: "Free-text approval comments field from the ticketing system. May contain multi-line text. Null when not entered by the user."
+  - name: APPROVED_BY
+    description: "Business attribute for approved by in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: APPROVED_BY_USER_EMAIL_ADDRESS
+    description: "Business attribute for approved by user email address in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: APPROVED_ON
+    description: "Business attribute for approved on in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: NEXT_STEP_CASE
+    description: "Workflow step indicator for next step case. Integer or text. Null when workflow has not started."
+  - name: NEXT_CASE_DESCRIPTION
+    description: "Free-text next case description field from the ticketing system. May contain multi-line text. Null when not entered by the user."
+  - name: NEXT_CASE_ASSIGNED_TO
+    description: "Business attribute for next case assigned to in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: OB_CONTACT
+    description: "Business attribute for ob contact in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: OB_CONTACT_TYPE
+    description: "Business attribute for ob contact type in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: OBIS_CONVERSION
+    description: "Business attribute for obis conversion in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: OB_EFFECTIVE_DATE
+    description: "Timestamp recording when the ob effective date event occurred. ISO datetime or date value. Null when the event has not taken place."
+  - name: OB_MANAGER
+    description: "Number of days measuring ob manager. Integer. Null when the start event has not occurred."
+  - name: OB_CONTACT_ID
+    description: "System identifier for ob contact id. Alphanumeric key. Null when not assigned."
+  - name: OB_FIRST_NAME
+    description: "Person name field from the employee or contact record. Free-text string. Always populated for active person records."
+  - name: OB_LAST_NAME
+    description: "Person name field from the employee or contact record. Free-text string. Always populated for active person records."
+  - name: OB_JOB_TITLE
+    description: "Free-text ob job title field from the ticketing system. May contain multi-line text. Null when not entered by the user."
+  - name: OB_VENDOR
+    description: "Business attribute for ob vendor in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: OB_SUBSIDIARY
+    description: "Business attribute for ob subsidiary in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: OB_SEGMENT
+    description: "Business attribute for ob segment in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: OB_DEPARTMENT
+    description: "Business attribute for ob department in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: OB_LOCATION
+    description: "Business attribute for ob location in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: OB_DESK_LOCATION
+    description: "Business attribute for ob desk location in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: OB_LOCATION_DETAIL
+    description: "Estimated completion date for ob location detail. Date or datetime value. Null when no estimate has been provided."
+  - name: OB_LAPTOP
+    description: "Business attribute for ob laptop in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: OB_EMAIL_OPTIONS
+    description: "Business attribute for ob email options in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: OB_EMAIL_ADDRESS
+    description: "Business attribute for ob email address in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: OB_DISTRIBUTION_GROUPS
+    description: "Assignment group or queue for ob distribution groups. Text label. Null when not assigned to a group."
+  - name: OB_RSA_TOKEN
+    description: "Business attribute for ob rsa token in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: OB_TEL_PARTNERS_ACCESS
+    description: "Business attribute for ob tel partners access in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: OB_APPLICATION_ACCESS_DETAIL
+    description: "Estimated completion date for ob application access detail. Date or datetime value. Null when no estimate has been provided."
+  - name: OB_SOFTWARE
+    description: "Business attribute for ob software in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: OB_SHARED_FOLDER_ACCESS
+    description: "Business attribute for ob shared folder access in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: FOLLOW_UP_BY
+    description: "Business attribute for follow up by in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: ESCALATED
+    description: "Business attribute for escalated in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: ESCALATED_ON
+    description: "Business attribute for escalated on in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: ESCALATED_TO
+    description: "Business attribute for escalated to in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: ESCALATED_TO_USER_EMAIL_ADDRESS
+    description: "Business attribute for escalated to user email address in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: LAST_ON_HOLD_TIME
+    description: "Business attribute for last on hold time in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: ON_HOLD_TIME_MINUTES
+    description: "Business attribute for on hold time minutes in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: MERGED
+    description: "Business attribute for merged in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: MERGED_MASTER_CASE_NUMBER
+    description: "Business attribute for merged master case number in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: NUMBER_OF_CHILD_CASES
+    description: "Business attribute for number of child cases in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: TRIAGE_WARNING_TIME
+    description: "Number of days measuring triage warning time. Integer. Null when the start event has not occurred."
+  - name: TRIAGE_WARNING_TIME_REACHED
+    description: "Number of days measuring triage warning time reached. Integer. Null when the start event has not occurred."
+  - name: TRIAGE_BY_DUE
+    description: "Number of days measuring triage by due. Integer. Null when the start event has not occurred."
+  - name: TRIAGE_STATUS
+    description: "Current status label for the record. Text value (e.g. Active, Resolved, Closed). Null for records not yet processed."
+  - name: TRIAGE_SUCCEEDED_ON
+    description: "Number of days measuring triage succeeded on. Integer. Null when the start event has not occurred."
+  - name: RESOLVE_WARNING_TIME
+    description: "Business attribute for resolve warning time in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: RESOLVE_WARNING_TIME_REACHED
+    description: "Business attribute for resolve warning time reached in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: RESOLVE_BY_DUE
+    description: "Business attribute for resolve by due in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: RESOLVE_STATUS
+    description: "Current status label for the record. Text value (e.g. Active, Resolved, Closed). Null for records not yet processed."
+  - name: RESOLVE_SUCCEEDED_ON
+    description: "Business attribute for resolve succeeded on in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: SENDTOTGIS
+    description: "Business attribute for sendtotgis in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: SENDTOTGISPROCESSED
+    description: "Business attribute for sendtotgisprocessed in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: TGISNUMBER
+    description: "Business attribute for tgisnumber in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: ETA
+    description: "Estimated completion date for eta. Date or datetime value. Null when no estimate has been provided."
+  - name: PMO_UPDATE
+    description: "Business attribute for pmo update in the support services domain. Text or coded value. Null when not populated in the source system."
+- name: GOLD__TEH_SUPPORT_SERVICES__HELPDESK_METRICS_DYN
+  description: |
+    PURPOSE: Monthly aggregated helpdesk KPI metrics showing ticket volume trends for opened, resolved, and backlog counts.
+    GRAIN: One row per year-month period.
+    KEY LOGIC: Aggregates case counts by month from the helpdesk case detail tables.
+    CAVEAT: Current month may show null for resolved/backlog until month-end processing completes.
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _AUDIT_LOG_ID
+  - name: _ROW_HASH
+  - name: YEAR_MONTH
+    description: "Reporting period in YYYY-MM format. Text string. Always populated as the aggregation key."
+  - name: TICKETS_OPENED
+    description: "Monthly count of tickets opened. Integer. Null for the current month if not yet calculated."
+  - name: TICKETS_RESOLVED
+    description: "Monthly count of tickets resolved. Integer. Null for the current month if not yet calculated."
+  - name: TICKETS_BACKLOG
+    description: "Monthly count of tickets backlog. Integer. Null for the current month if not yet calculated."
+- name: GOLD__TEH_SUPPORT_SERVICES__HELPDESK_TGIS_MASTER
+  description: |
+    PURPOSE: Comprehensive master record combining IT helpdesk and TGIS case attributes for cross-system reporting and SLA analysis.
+    GRAIN: One row per case combining ITHD and TGIS dimensions.
+    KEY LOGIC: Wide denormalized join of helpdesk case details, TGIS workflow steps, employee assignments, and SLA metrics.
+    CAVEAT: 192 columns; many TGIS fields are null when the case has no TGIS counterpart.
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _AUDIT_LOG_ID
+  - name: _ROW_HASH
+  - name: CASE_NUMBER
+    description: "Business attribute for case number in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: CASE_TITLE
+    description: "Free-text case title field from the ticketing system. May contain multi-line text. Null when not entered by the user."
+  - name: ORIGIN
+    description: "Business attribute for origin in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: URGENCY
+    description: "Priority classification for the case (e.g. 1-Critical, 2-High, 3-Normal). Text or numeric code. Null for cases created without priority."
+  - name: URGENCY_REASON
+    description: "Priority classification for the case (e.g. 1-Critical, 2-High, 3-Normal). Text or numeric code. Null for cases created without priority."
+  - name: IMPACT_ON
+    description: "Timestamp recording when the impact on event occurred. ISO datetime or date value. Null when the event has not taken place."
+  - name: PRIMARY_CONTACT
+    description: "Business attribute for primary contact in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: PRIMARY_CONTACT_EMPLOYEE_ID
+    description: "Employee identifier linking to the HR master. Numeric string. Null when no employee is assigned."
+  - name: PRIMARY_CONTACT_EMAIL_ADDRESS
+    description: "Business attribute for primary contact email address in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: PRIMARY_CONTACT_LOCATION
+    description: "Business attribute for primary contact location in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: PREFERRED_CONTACT
+    description: "Business attribute for preferred contact in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: PREFERRED_CONTACT_DETAIL
+    description: "Estimated completion date for preferred contact detail. Date or datetime value. Null when no estimate has been provided."
+  - name: EMAIL_NOTIFICATION
+    description: "Business attribute for email notification in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: ADDITIONAL_CONTACT
+    description: "Business attribute for additional contact in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: DUPLICATE
+    description: "Business attribute for duplicate in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: PARENT_CASE
+    description: "Business attribute for parent case in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: STATUS
+    description: "Current status label for the record. Text value (e.g. Active, Resolved, Closed). Null for records not yet processed."
+  - name: ON_HOLD_REASON
+    description: "Business attribute for on hold reason in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: CONFIRM_RESOLUTION
+    description: "Business attribute for confirm resolution in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: TRIAGE_COMPLETED
+    description: "Number of days measuring triage completed. Integer. Null when the start event has not occurred."
+  - name: AGE_DAYS
+    description: "Number of days measuring age days. Integer. Null when the start event has not occurred."
+  - name: CREATED_BY_USER
+    description: "Business attribute for created by user in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: CREATED_BY_USER_EMAIL_ADDRESS
+    description: "Business attribute for created by user email address in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: CREATED_BY_CONTACT
+    description: "Business attribute for created by contact in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: CREATED_BY_CONTACT_EMPLOYEE_ID
+    description: "Employee identifier linking to the HR master. Numeric string. Null when no employee is assigned."
+  - name: CREATED_BY_CONTACT_EMAIL_ADDRESS
+    description: "Business attribute for created by contact email address in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: CREATED_ON
+    description: "Timestamp recording when the created on event occurred. ISO datetime or date value. Null when the event has not taken place."
+  - name: CREATED_DT
+    description: "Business attribute for created dt in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: MODIFIED_BY
+    description: "Business attribute for modified by in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: MODIFIED_BY_USER_EMAIL_ADDRESS
+    description: "Business attribute for modified by user email address in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: MODIFIED_ON
+    description: "Business attribute for modified on in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: RESOLVED_BY
+    description: "Business attribute for resolved by in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: RESOLVED_BY_USER_EMAIL_ADDRESS
+    description: "Business attribute for resolved by user email address in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: RESOLVED_ON
+    description: "Timestamp recording when the resolved on event occurred. ISO datetime or date value. Null when the event has not taken place."
+  - name: STATE
+    description: "Business attribute for state in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: OWNER
+    description: "Business attribute for owner in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: OWNER_USER_EMAIL_ADDRESS
+    description: "Business attribute for owner user email address in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: SYSTEM_CUSTOMER
+    description: "Business attribute for system customer in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: MANAGER
+    description: "Number of days measuring manager. Integer. Null when the start event has not occurred."
+  - name: MANAGER_CONTACT_EMPLOYEE_ID
+    description: "Employee identifier linking to the HR master. Numeric string. Null when no employee is assigned."
+  - name: MANAGER_CONTACT_EMAIL_ADDRESS
+    description: "Number of days measuring manager contact email address. Integer. Null when the start event has not occurred."
+  - name: CLOSE_ME
+    description: "Business attribute for close me in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: SYSTEM_PARENT_CASE
+    description: "Business attribute for system parent case in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: DESCRIPTION
+    description: "Free-text description field from the ticketing system. May contain multi-line text. Null when not entered by the user."
+  - name: REGION
+    description: "Business attribute for region in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: CASE_TYPE
+    description: "Business attribute for case type in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: CASE_SUB_TYPE
+    description: "Business attribute for case sub type in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: SYSTEM_CATEGORY
+    description: "Business attribute for system category in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: SYSTEM
+    description: "Business attribute for system in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: SYSTEM_MODULE
+    description: "Business attribute for system module in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: REQUESTOR_CASE_TYPE
+    description: "Business attribute for requestor case type in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: REQUESTOR_CASE_SUB_TYPE
+    description: "Business attribute for requestor case sub type in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: QUALITY
+    description: "Business attribute for quality in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: RESOLUTION
+    description: "Business attribute for resolution in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: ROUTE_CASE
+    description: "Business attribute for route case in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: QUEUE
+    description: "Assignment group or queue for queue. Text label. Null when not assigned to a group."
+  - name: WORKED_BY
+    description: "Person who performed the action for worked by. Employee name or login. Null when action was system-initiated."
+  - name: WORKED_BY_USER_EMAIL_ADDRESS
+    description: "Person who performed the action for worked by user email address. Employee name or login. Null when action was system-initiated."
+  - name: ENHANCEMENT_STATUS
+    description: "Current status label for the record. Text value (e.g. Active, Resolved, Closed). Null for records not yet processed."
+  - name: BUSINESS_REASON
+    description: "Business attribute for business reason in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: APPROVAL
+    description: "Business attribute for approval in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: APPROVAL_COMMENTS
+    description: "Free-text approval comments field from the ticketing system. May contain multi-line text. Null when not entered by the user."
+  - name: APPROVED_BY
+    description: "Business attribute for approved by in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: APPROVED_BY_USER_EMAIL_ADDRESS
+    description: "Business attribute for approved by user email address in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: APPROVED_ON
+    description: "Business attribute for approved on in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: NEXT_STEP_CASE
+    description: "Workflow step indicator for next step case. Integer or text. Null when workflow has not started."
+  - name: NEXT_CASE_DESCRIPTION
+    description: "Free-text next case description field from the ticketing system. May contain multi-line text. Null when not entered by the user."
+  - name: NEXT_CASE_ASSIGNED_TO
+    description: "Business attribute for next case assigned to in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: OB_CONTACT
+    description: "Business attribute for ob contact in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: OB_CONTACT_TYPE
+    description: "Business attribute for ob contact type in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: OBIS_CONVERSION
+    description: "Business attribute for obis conversion in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: OB_EFFECTIVE_DATE
+    description: "Timestamp recording when the ob effective date event occurred. ISO datetime or date value. Null when the event has not taken place."
+  - name: OB_MANAGER
+    description: "Number of days measuring ob manager. Integer. Null when the start event has not occurred."
+  - name: OB_CONTACT_ID
+    description: "System identifier for ob contact id. Alphanumeric key. Null when not assigned."
+  - name: OB_FIRST_NAME
+    description: "Person name field from the employee or contact record. Free-text string. Always populated for active person records."
+  - name: OB_LAST_NAME
+    description: "Person name field from the employee or contact record. Free-text string. Always populated for active person records."
+  - name: OB_JOB_TITLE
+    description: "Free-text ob job title field from the ticketing system. May contain multi-line text. Null when not entered by the user."
+  - name: OB_VENDOR
+    description: "Business attribute for ob vendor in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: OB_SUBSIDIARY
+    description: "Business attribute for ob subsidiary in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: OB_SEGMENT
+    description: "Business attribute for ob segment in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: OB_DEPARTMENT
+    description: "Business attribute for ob department in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: OB_LOCATION
+    description: "Business attribute for ob location in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: OB_DESK_LOCATION
+    description: "Business attribute for ob desk location in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: OB_LOCATION_DETAIL
+    description: "Estimated completion date for ob location detail. Date or datetime value. Null when no estimate has been provided."
+  - name: OB_LAPTOP
+    description: "Business attribute for ob laptop in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: OB_EMAIL_OPTIONS
+    description: "Business attribute for ob email options in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: OB_EMAIL_ADDRESS
+    description: "Business attribute for ob email address in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: OB_DISTRIBUTION_GROUPS
+    description: "Assignment group or queue for ob distribution groups. Text label. Null when not assigned to a group."
+  - name: OB_RSA_TOKEN
+    description: "Business attribute for ob rsa token in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: OB_TEL_PARTNERS_ACCESS
+    description: "Business attribute for ob tel partners access in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: OB_APPLICATION_ACCESS_DETAIL
+    description: "Estimated completion date for ob application access detail. Date or datetime value. Null when no estimate has been provided."
+  - name: OB_SOFTWARE
+    description: "Business attribute for ob software in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: OB_SHARED_FOLDER_ACCESS
+    description: "Business attribute for ob shared folder access in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: FOLLOW_UP_BY
+    description: "Business attribute for follow up by in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: ESCALATED
+    description: "Business attribute for escalated in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: ESCALATED_ON
+    description: "Business attribute for escalated on in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: ESCALATED_TO
+    description: "Business attribute for escalated to in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: ESCALATED_TO_USER_EMAIL_ADDRESS
+    description: "Business attribute for escalated to user email address in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: LAST_ON_HOLD_TIME
+    description: "Business attribute for last on hold time in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: ON_HOLD_TIME_MINUTES
+    description: "Business attribute for on hold time minutes in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: MERGED
+    description: "Business attribute for merged in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: MERGED_MASTER_CASE_NUMBER
+    description: "Business attribute for merged master case number in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: NUMBER_OF_CHILD_CASES
+    description: "Business attribute for number of child cases in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: TRIAGE_WARNING_TIME
+    description: "Number of days measuring triage warning time. Integer. Null when the start event has not occurred."
+  - name: TRIAGE_WARNING_TIME_REACHED
+    description: "Number of days measuring triage warning time reached. Integer. Null when the start event has not occurred."
+  - name: TRIAGE_BY_DUE
+    description: "Number of days measuring triage by due. Integer. Null when the start event has not occurred."
+  - name: TRIAGE_STATUS
+    description: "Current status label for the record. Text value (e.g. Active, Resolved, Closed). Null for records not yet processed."
+  - name: TRIAGE_SUCCEEDED_ON
+    description: "Number of days measuring triage succeeded on. Integer. Null when the start event has not occurred."
+  - name: RESOLVE_WARNING_TIME
+    description: "Business attribute for resolve warning time in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: RESOLVE_WARNING_TIME_REACHED
+    description: "Business attribute for resolve warning time reached in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: RESOLVE_BY_DUE
+    description: "Business attribute for resolve by due in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: RESOLVE_STATUS
+    description: "Current status label for the record. Text value (e.g. Active, Resolved, Closed). Null for records not yet processed."
+  - name: RESOLVE_SUCCEEDED_ON
+    description: "Business attribute for resolve succeeded on in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: SENDTOTGIS
+    description: "Business attribute for sendtotgis in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: SENDTOTGISPROCESSED
+    description: "Business attribute for sendtotgisprocessed in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: TGISNUMBER
+    description: "Business attribute for tgisnumber in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: ITHD_ETA
+    description: "Estimated completion date for ithd eta. Date or datetime value. Null when no estimate has been provided."
+  - name: INCIDENT_SUMMARY_ID
+    description: "System identifier for incident summary id. Alphanumeric key. Null when not assigned."
+  - name: INCIDENT_SUMMARY_INCIDENT_MNG_NM
+    description: "Business attribute for incident summary incident mng nm in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: INCIDENT_SUMMARY_LAST_HISTORY_NM
+    description: "Business attribute for incident summary last history nm in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: INCIDENT_SUMMARY_MATTER_CATEGORY_ID
+    description: "System identifier for incident summary matter category id. Alphanumeric key. Null when not assigned."
+  - name: INCIDENT_SUMMARY_MATTER_CATEGORY_JA
+    description: "Business attribute for incident summary matter category ja in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: INCIDENT_SUMMARY_MATTER_CATEGORY_EN
+    description: "Business attribute for incident summary matter category en in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: INCIDENT_SUMMARY_LAST_STATUS_ID
+    description: "System identifier for incident summary last status id. Alphanumeric key. Null when not assigned."
+  - name: INCIDENT_SUMMARY_LAST_STATUS_JA
+    description: "Current status label for the record. Text value (e.g. Active, Resolved, Closed). Null for records not yet processed."
+  - name: INCIDENT_SUMMARY_LAST_STATUS_EN
+    description: "Current status label for the record. Text value (e.g. Active, Resolved, Closed). Null for records not yet processed."
+  - name: INCIDENT_SUMMARY_LAST_STATUS_CONDITION_ID
+    description: "System identifier for incident summary last status condition id. Alphanumeric key. Null when not assigned."
+  - name: INCIDENT_SUMMARY_LAST_STATUS_CONDITION_JA
+    description: "Current status label for the record. Text value (e.g. Active, Resolved, Closed). Null for records not yet processed."
+  - name: INCIDENT_SUMMARY_LAST_STATUS_CONDITION_EN
+    description: "Current status label for the record. Text value (e.g. Active, Resolved, Closed). Null for records not yet processed."
+  - name: INCIDENT_SUMMARY_INPUT_LANG
+    description: "Business attribute for incident summary input lang in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: INCIDENT_SUMMARY_SUBJECT_JA
+    description: "Free-text incident summary subject ja field from the ticketing system. May contain multi-line text. Null when not entered by the user."
+  - name: INCIDENT_SUMMARY_SUBJECT_EN
+    description: "Free-text incident summary subject en field from the ticketing system. May contain multi-line text. Null when not entered by the user."
+  - name: INCIDENT_SUMMARY_SYSTEM_CATEGORY_ID
+    description: "System identifier for incident summary system category id. Alphanumeric key. Null when not assigned."
+  - name: INCIDENT_SUMMARY_SYSTEM_CATEGORY_JA
+    description: "Business attribute for incident summary system category ja in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: INCIDENT_SUMMARY_SYSTEM_CATEGORY_EN
+    description: "Business attribute for incident summary system category en in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: INCIDENT_SUMMARY_SYSTEM_ID
+    description: "System identifier for incident summary system id. Alphanumeric key. Null when not assigned."
+  - name: INCIDENT_SUMMARY_SYSTEM_JA
+    description: "Business attribute for incident summary system ja in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: INCIDENT_SUMMARY_SYSTEM_EN
+    description: "Business attribute for incident summary system en in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: INCIDENT_SUMMARY_REPEAT_CATEGORY_ID
+    description: "System identifier for incident summary repeat category id. Alphanumeric key. Null when not assigned."
+  - name: INCIDENT_SUMMARY_REPEAT_CATEGORY_JA
+    description: "Business attribute for incident summary repeat category ja in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: INCIDENT_SUMMARY_REPEAT_CATEGORY_EN
+    description: "Business attribute for incident summary repeat category en in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: INCIDENT_SUMMARY_CAUSE_CATEGORY_ID
+    description: "System identifier for incident summary cause category id. Alphanumeric key. Null when not assigned."
+  - name: INCIDENT_SUMMARY_CAUSE_CATEGORY_JA
+    description: "Business attribute for incident summary cause category ja in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: INCIDENT_SUMMARY_CAUSE_CATEGORY_EN
+    description: "Business attribute for incident summary cause category en in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: INCIDENT_SUMMARY_LAST_URGENCY_ID
+    description: "System identifier for incident summary last urgency id. Alphanumeric key. Null when not assigned."
+  - name: INCIDENT_SUMMARY_LAST_URGENCY_JA
+    description: "Priority classification for the case (e.g. 1-Critical, 2-High, 3-Normal). Text or numeric code. Null for cases created without priority."
+  - name: INCIDENT_SUMMARY_LAST_URGENCY_EN
+    description: "Priority classification for the case (e.g. 1-Critical, 2-High, 3-Normal). Text or numeric code. Null for cases created without priority."
+  - name: INCIDENT_SUMMARY_LAST_URGENCY_REASON_JA
+    description: "Priority classification for the case (e.g. 1-Critical, 2-High, 3-Normal). Text or numeric code. Null for cases created without priority."
+  - name: INCIDENT_SUMMARY_LAST_URGENCY_REASON_EN
+    description: "Priority classification for the case (e.g. 1-Critical, 2-High, 3-Normal). Text or numeric code. Null for cases created without priority."
+  - name: INCIDENT_SUMMARY_NOTES_JA
+    description: "Free-text incident summary notes ja field from the ticketing system. May contain multi-line text. Null when not entered by the user."
+  - name: INCIDENT_SUMMARY_NOTES_EN
+    description: "Free-text incident summary notes en field from the ticketing system. May contain multi-line text. Null when not entered by the user."
+  - name: INCIDENT_SUMMARY_REGISTERED_TELNM
+    description: "Business attribute for incident summary registered telnm in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: INCIDENT_SUMMARY_REGISTERED_TELNAME
+    description: "Business attribute for incident summary registered telname in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: INCIDENT_SUMMARY_PROXY_REGISTERED_TELNM
+    description: "Business attribute for incident summary proxy registered telnm in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: INCIDENT_SUMMARY_PROXY_REGISTERED_TELNAME
+    description: "Business attribute for incident summary proxy registered telname in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: INCIDENT_SUMMARY_REGISTERED_DATE
+    description: "Timestamp recording when the incident summary registered date event occurred. ISO datetime or date value. Null when the event has not taken place."
+  - name: INCIDENT_SUMMARY_UPDATED_DATE
+    description: "Timestamp recording when the incident summary updated date event occurred. ISO datetime or date value. Null when the event has not taken place."
+  - name: INCIDENT_SUMMARY_INCHARGE_GROUPID
+    description: "System identifier for incident summary incharge groupid. Alphanumeric key. Null when not assigned."
+  - name: INCIDENT_SUMMARY_INCHARGE_GROUP_JA
+    description: "Assignment group or queue for incident summary incharge group ja. Text label. Null when not assigned to a group."
+  - name: INCIDENT_SUMMARY_INCHARGE_GROUP_EN
+    description: "Assignment group or queue for incident summary incharge group en. Text label. Null when not assigned to a group."
+  - name: TGIS_ETA
+    description: "Estimated completion date for tgis eta. Date or datetime value. Null when no estimate has been provided."
+  - name: INCIDENT_DETAILS_ID
+    description: "System identifier for incident details id. Alphanumeric key. Null when not assigned."
+  - name: INCIDENT_DETAILS_INCIDENT_MNG_NM
+    description: "Estimated completion date for incident details incident mng nm. Date or datetime value. Null when no estimate has been provided."
+  - name: INCIDENT_DETAILS_HISTORY_NM
+    description: "Estimated completion date for incident details history nm. Date or datetime value. Null when no estimate has been provided."
+  - name: INCIDENT_DETAILS_STATUS_ID
+    description: "System identifier for incident details status id. Alphanumeric key. Null when not assigned."
+  - name: INCIDENT_DETAILS_STATUS_JA
+    description: "Current status label for the record. Text value (e.g. Active, Resolved, Closed). Null for records not yet processed."
+  - name: INCIDENT_DETAILS_STATUS_EN
+    description: "Current status label for the record. Text value (e.g. Active, Resolved, Closed). Null for records not yet processed."
+  - name: INCIDENT_DETAILS_STATUS_CONDITION_ID
+    description: "System identifier for incident details status condition id. Alphanumeric key. Null when not assigned."
+  - name: INCIDENT_DETAILS_STATUS_CONDITION_JA
+    description: "Current status label for the record. Text value (e.g. Active, Resolved, Closed). Null for records not yet processed."
+  - name: INCIDENT_DETAILS_STATUS_CONDITION_EN
+    description: "Current status label for the record. Text value (e.g. Active, Resolved, Closed). Null for records not yet processed."
+  - name: INCIDENT_DETAILS_INPUT_LANG
+    description: "Estimated completion date for incident details input lang. Date or datetime value. Null when no estimate has been provided."
+  - name: INCIDENT_DETAILS_CONTENT_JA
+    description: "Estimated completion date for incident details content ja. Date or datetime value. Null when no estimate has been provided."
+  - name: INCIDENT_DETAILS_CONTENT_EN
+    description: "Estimated completion date for incident details content en. Date or datetime value. Null when no estimate has been provided."
+  - name: INCIDENT_DETAILS_URGENCY_ID
+    description: "System identifier for incident details urgency id. Alphanumeric key. Null when not assigned."
+  - name: INCIDENT_DETAILS_LAST_URGENCY_JA
+    description: "Estimated completion date for incident details last urgency ja. Date or datetime value. Null when no estimate has been provided."
+  - name: INCIDENT_DETAILS_LAST_URGENCY_EN
+    description: "Estimated completion date for incident details last urgency en. Date or datetime value. Null when no estimate has been provided."
+  - name: INCIDENT_DETAILS_URGENCY_REASON_JA
+    description: "Estimated completion date for incident details urgency reason ja. Date or datetime value. Null when no estimate has been provided."
+  - name: INCIDENT_DETAILS_URGENCY_REASON_EN
+    description: "Estimated completion date for incident details urgency reason en. Date or datetime value. Null when no estimate has been provided."
+  - name: INCIDENT_DETAILS_REGISTERED_TELNM
+    description: "Estimated completion date for incident details registered telnm. Date or datetime value. Null when no estimate has been provided."
+  - name: INCIDENT_DETAILS_REGISTERED_TELNAME
+    description: "Estimated completion date for incident details registered telname. Date or datetime value. Null when no estimate has been provided."
+  - name: INCIDENT_DETAILS_REGISTERED_DATE
+    description: "Timestamp recording when the incident details registered date event occurred. ISO datetime or date value. Null when the event has not taken place."
+  - name: RELATED_CASE
+    description: "Business attribute for related case in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: COUNT_OF_RELATED_CASES
+    description: "Numeric count of count of related cases. Integer. Zero when no items exist."
+  - name: COUNT_OF_RELATED_ICD_CASES
+    description: "Numeric count of count of related icd cases. Integer. Zero when no items exist."
+  - name: MAX_RECORD_COUNTER
+    description: "Business attribute for max record counter in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: LAST_REFRESH_DATETIME
+    description: "Timestamp recording when the last refresh datetime event occurred. ISO datetime or date value. Null when the event has not taken place."
+  - name: PMO_UPDATE
+    description: "Business attribute for pmo update in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: FUNCTION_AREA
+    description: "Business attribute for function area in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: PROJECT
+    description: "Business attribute for project in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: ICD_CASE_SUB_TYPE
+    description: "Business attribute for icd case sub type in the support services domain. Text or coded value. Null when not populated in the source system."
+- name: GOLD__TEH_SUPPORT_SERVICES__HELPDESK_TGIS_REPORT
+  description: |
+    PURPOSE: Reporting view of helpdesk-to-TGIS case relationships with status alignment and timeline comparison.
+    GRAIN: One row per helpdesk case with TGIS linkage fields.
+    KEY LOGIC: Joins case master with TGIS status and compares ETAs between systems.
+    CAVEAT: STATUS_MATCH flag indicates whether ITHD and TGIS statuses are synchronized.
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: CASE_NUMBER
+    description: "Business attribute for case number in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: TGISNUMBER
+    description: "Business attribute for tgisnumber in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: CASE_TITLE
+    description: "Free-text case title field from the ticketing system. May contain multi-line text. Null when not entered by the user."
+  - name: PRIMARY_CONTACT
+    description: "Business attribute for primary contact in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: CREATED_ON
+    description: "Timestamp recording when the created on event occurred. ISO datetime or date value. Null when the event has not taken place."
+  - name: URGENCY
+    description: "Priority classification for the case (e.g. 1-Critical, 2-High, 3-Normal). Text or numeric code. Null for cases created without priority."
+  - name: STATUS
+    description: "Current status label for the record. Text value (e.g. Active, Resolved, Closed). Null for records not yet processed."
+  - name: SYSTEM
+    description: "Business attribute for system in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: DESCRIPTION
+    description: "Free-text description field from the ticketing system. May contain multi-line text. Null when not entered by the user."
+  - name: WORKED_BY
+    description: "Person who performed the action for worked by. Employee name or login. Null when action was system-initiated."
+  - name: IMPACT_ON
+    description: "Timestamp recording when the impact on event occurred. ISO datetime or date value. Null when the event has not taken place."
+  - name: CASE_TYPE
+    description: "Business attribute for case type in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: CASE_SUB_TYPE
+    description: "Business attribute for case sub type in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: PRIMARY_CONTACT_LOCATION
+    description: "Business attribute for primary contact location in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: SYSTEM_CATEGORY
+    description: "Business attribute for system category in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: QUEUE
+    description: "Assignment group or queue for queue. Text label. Null when not assigned to a group."
+  - name: AGE_DAYS
+    description: "Number of days measuring age days. Integer. Null when the start event has not occurred."
+  - name: TGIS_ID
+    description: "Case or service request identifier linking to the source ticketing system. Alphanumeric key. Null when no linked case exists."
+  - name: RELATED_CASE_ID
+    description: "Case or service request identifier linking to the source ticketing system. Alphanumeric key. Null when no linked case exists."
+  - name: MATTER_CATEGORY_NAME
+    description: "Descriptive name or label for matter category name. Free-text string. Null when the name has not been maintained."
+  - name: SUBJECT
+    description: "Free-text subject field from the ticketing system. May contain multi-line text. Null when not entered by the user."
+  - name: URGENCY_TYPE_NAME
+    description: "Descriptive name or label for urgency type name. Free-text string. Null when the name has not been maintained."
+  - name: URGENCY_REASON
+    description: "Priority classification for the case (e.g. 1-Critical, 2-High, 3-Normal). Text or numeric code. Null for cases created without priority."
+  - name: SYSTEM_NAME
+    description: "Descriptive name or label for system name. Free-text string. Null when the name has not been maintained."
+  - name: L2_GROUP_NAME
+    description: "Descriptive name or label for l2 group name. Free-text string. Null when the name has not been maintained."
+  - name: REGISTERED_TELNAME
+    description: "Business attribute for registered telname in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: CASE_PRIMARY_CONTACT
+    description: "Business attribute for case primary contact in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: CONDITION_NAME
+    description: "Descriptive name or label for condition name. Free-text string. Null when the name has not been maintained."
+  - name: REGISTERED_DATE
+    description: "Timestamp recording when the registered date event occurred. ISO datetime or date value. Null when the event has not taken place."
+  - name: CAUSE_CATEGORY_NAME
+    description: "Descriptive name or label for cause category name. Free-text string. Null when the name has not been maintained."
+  - name: STATUS_NAME
+    description: "Current status label for the record. Text value (e.g. Active, Resolved, Closed). Null for records not yet processed."
+  - name: INCIDENT_DETAILS_CONTENT_EN
+    description: "Estimated completion date for incident details content en. Date or datetime value. Null when no estimate has been provided."
+  - name: DAYS
+    description: "Number of days measuring days. Integer. Null when the start event has not occurred."
+  - name: INCIDENT_SUMMARY_NOTES_EN
+    description: "Free-text incident summary notes en field from the ticketing system. May contain multi-line text. Null when not entered by the user."
+  - name: INCIDENT_DETAILS_HISTORY_NM
+    description: "Estimated completion date for incident details history nm. Date or datetime value. Null when no estimate has been provided."
+  - name: INCIDENT_SUMMARY_UPDATED_DATE
+    description: "Timestamp recording when the incident summary updated date event occurred. ISO datetime or date value. Null when the event has not taken place."
+  - name: STATUS_MATCH
+    description: "Current status label for the record. Text value (e.g. Active, Resolved, Closed). Null for records not yet processed."
+  - name: ITHD_ETA
+    description: "Estimated completion date for ithd eta. Date or datetime value. Null when no estimate has been provided."
+  - name: TGIS_ETA
+    description: "Estimated completion date for tgis eta. Date or datetime value. Null when no estimate has been provided."
+  - name: RELATED_CASE
+    description: "Business attribute for related case in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: COUNT_OF_RELATED_ICD_CASES
+    description: "Numeric count of count of related icd cases. Integer. Zero when no items exist."
+- name: GOLD__TEH_SUPPORT_SERVICES__HELPDESK_TGIS_REPORT_DETAILED
+  description: |
+    PURPOSE: Detailed reporting view adding incident content, resolution notes, and full case history to the TGIS report.
+    GRAIN: One row per helpdesk case with detailed content fields.
+    KEY LOGIC: Extends HELPDESK_TGIS_REPORT with free-text incident details and summary notes.
+    CAVEAT: Content fields may contain HTML or special characters from the ticketing system.
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: CASE_NUMBER
+    description: "Business attribute for case number in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: TGIS_ID
+    description: "Case or service request identifier linking to the source ticketing system. Alphanumeric key. Null when no linked case exists."
+  - name: TITLE_EN
+    description: "Free-text title en field from the ticketing system. May contain multi-line text. Null when not entered by the user."
+  - name: TITLE_JA
+    description: "Free-text title ja field from the ticketing system. May contain multi-line text. Null when not entered by the user."
+  - name: TGIS_URGENCY
+    description: "Priority classification for the case (e.g. 1-Critical, 2-High, 3-Normal). Text or numeric code. Null for cases created without priority."
+  - name: ITHD_URGENCY
+    description: "Priority classification for the case (e.g. 1-Critical, 2-High, 3-Normal). Text or numeric code. Null for cases created without priority."
+  - name: URGENCY
+    description: "Priority classification for the case (e.g. 1-Critical, 2-High, 3-Normal). Text or numeric code. Null for cases created without priority."
+  - name: ISSUER
+    description: "Boolean indicator for issuer. Y/N or True/False. Defaults to N/False when not explicitly set."
+  - name: ITHD_ISSUE_DATE
+    description: "Timestamp recording when the ithd issue date event occurred. ISO datetime or date value. Null when the event has not taken place."
+  - name: TGIS_ISSUE_DATE
+    description: "Timestamp recording when the tgis issue date event occurred. ISO datetime or date value. Null when the event has not taken place."
+  - name: ISSUE_DATE
+    description: "Timestamp recording when the issue date event occurred. ISO datetime or date value. Null when the event has not taken place."
+  - name: SYSTEM_NAME
+    description: "Descriptive name or label for system name. Free-text string. Null when the name has not been maintained."
+  - name: CASE_TYPE
+    description: "Business attribute for case type in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: CASE_SUB_TYPE
+    description: "Business attribute for case sub type in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: PIC
+    description: "Business attribute for pic in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: STATUS
+    description: "Current status label for the record. Text value (e.g. Active, Resolved, Closed). Null for records not yet processed."
+  - name: DESCRIPTION_EN
+    description: "Free-text description en field from the ticketing system. May contain multi-line text. Null when not entered by the user."
+  - name: DESCRIPTION_JA
+    description: "Free-text description ja field from the ticketing system. May contain multi-line text. Null when not entered by the user."
+  - name: LATEST_TIMELINE_EN
+    description: "Business attribute for latest timeline en in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: LATEST_TIMELINE_JA
+    description: "Business attribute for latest timeline ja in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: UPDATED_ON
+    description: "Business attribute for updated on in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: UPDATED_BY
+    description: "Person who performed the action for updated by. Employee name or login. Null when action was system-initiated."
+  - name: AGE_IN_ITHD
+    description: "Number of days measuring age in ithd. Integer. Null when the start event has not occurred."
+  - name: AGE_IN_TGIS
+    description: "Number of days measuring age in tgis. Integer. Null when the start event has not occurred."
+  - name: MAX_AGE
+    description: "Number of days measuring max age. Integer. Null when the start event has not occurred."
+  - name: ITHD_STATUS
+    description: "Current status label for the record. Text value (e.g. Active, Resolved, Closed). Null for records not yet processed."
+  - name: TGIS_STATUS
+    description: "Current status label for the record. Text value (e.g. Active, Resolved, Closed). Null for records not yet processed."
+  - name: STATUS_MATCH
+    description: "Current status label for the record. Text value (e.g. Active, Resolved, Closed). Null for records not yet processed."
+  - name: STATUS_INDICATOR
+    description: "Current status label for the record. Text value (e.g. Active, Resolved, Closed). Null for records not yet processed."
+  - name: ITHD_ETA
+    description: "Estimated completion date for ithd eta. Date or datetime value. Null when no estimate has been provided."
+  - name: TGIS_ETA
+    description: "Estimated completion date for tgis eta. Date or datetime value. Null when no estimate has been provided."
+  - name: RELATED_CASE
+    description: "Business attribute for related case in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: COUNT_OF_RELATED_CASES
+    description: "Numeric count of count of related cases. Integer. Zero when no items exist."
+  - name: COUNT_OF_RELATED_ICD_CASES
+    description: "Numeric count of count of related icd cases. Integer. Zero when no items exist."
+  - name: LAST_REFRESH_DATETIME
+    description: "Timestamp recording when the last refresh datetime event occurred. ISO datetime or date value. Null when the event has not taken place."
+- name: GOLD__TEH_SUPPORT_SERVICES__ITHD_HELPDESK_CASES
+  description: |
+    PURPOSE: IT helpdesk case records from Dynamics 365 with full case lifecycle, SLA tracking, and assignment details.
+    GRAIN: One row per IT helpdesk case.
+    KEY LOGIC: Sourced from CRM incident entity with SLA KPI, queue, and resolution fields joined.
+    CAVEAT: Cases migrated from legacy systems may lack SLA or queue assignment data.
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+  - name: SNAPSHOT_DATE
+    description: "Timestamp recording when the snapshot date event occurred. ISO datetime or date value. Null when the event has not taken place."
+  - name: _AUDIT_LOG_ID
+  - name: _ROW_HASH
+  - name: CASE_NUMBER
+    description: "Business attribute for case number in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: CASE_TITLE
+    description: "Free-text case title field from the ticketing system. May contain multi-line text. Null when not entered by the user."
+  - name: ORIGIN
+    description: "Business attribute for origin in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: URGENCY
+    description: "Priority classification for the case (e.g. 1-Critical, 2-High, 3-Normal). Text or numeric code. Null for cases created without priority."
+  - name: URGENCY_REASON
+    description: "Priority classification for the case (e.g. 1-Critical, 2-High, 3-Normal). Text or numeric code. Null for cases created without priority."
+  - name: IMPACT_ON
+    description: "Timestamp recording when the impact on event occurred. ISO datetime or date value. Null when the event has not taken place."
+  - name: PRIMARY_CONTACT
+    description: "Business attribute for primary contact in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: PRIMARY_CONTACT_EMPLOYEE_ID
+    description: "Employee identifier linking to the HR master. Numeric string. Null when no employee is assigned."
+  - name: PRIMARY_CONTACT_EMAIL_ADDRESS
+    description: "Business attribute for primary contact email address in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: PRIMARY_CONTACT_LOCATION
+    description: "Business attribute for primary contact location in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: PREFERRED_CONTACT
+    description: "Business attribute for preferred contact in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: PREFERRED_CONTACT_DETAIL
+    description: "Estimated completion date for preferred contact detail. Date or datetime value. Null when no estimate has been provided."
+  - name: EMAIL_NOTIFICATION
+    description: "Business attribute for email notification in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: ADDITIONAL_CONTACT
+    description: "Business attribute for additional contact in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: DUPLICATE
+    description: "Business attribute for duplicate in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: PARENT_CASE
+    description: "Business attribute for parent case in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: STATUS
+    description: "Current status label for the record. Text value (e.g. Active, Resolved, Closed). Null for records not yet processed."
+  - name: ON_HOLD_REASON
+    description: "Business attribute for on hold reason in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: CONFIRM_RESOLUTION
+    description: "Business attribute for confirm resolution in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: TRIAGE_COMPLETED
+    description: "Number of days measuring triage completed. Integer. Null when the start event has not occurred."
+  - name: AGE_DAYS
+    description: "Number of days measuring age days. Integer. Null when the start event has not occurred."
+  - name: CREATED_BY_USER
+    description: "Business attribute for created by user in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: CREATED_BY_USER_EMAIL_ADDRESS
+    description: "Business attribute for created by user email address in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: CREATED_BY_CONTACT
+    description: "Business attribute for created by contact in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: CREATED_BY_CONTACT_EMPLOYEE_ID
+    description: "Employee identifier linking to the HR master. Numeric string. Null when no employee is assigned."
+  - name: CREATED_BY_CONTACT_EMAIL_ADDRESS
+    description: "Business attribute for created by contact email address in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: CREATED_ON
+    description: "Timestamp recording when the created on event occurred. ISO datetime or date value. Null when the event has not taken place."
+  - name: MODIFIED_BY
+    description: "Business attribute for modified by in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: MODIFIED_BY_USER_EMAIL_ADDRESS
+    description: "Business attribute for modified by user email address in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: MODIFIED_ON
+    description: "Business attribute for modified on in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: RESOLVED_BY
+    description: "Business attribute for resolved by in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: RESOLVED_BY_USER_EMAIL_ADDRESS
+    description: "Business attribute for resolved by user email address in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: RESOLVED_ON
+    description: "Timestamp recording when the resolved on event occurred. ISO datetime or date value. Null when the event has not taken place."
+  - name: STATE
+    description: "Business attribute for state in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: OWNER
+    description: "Business attribute for owner in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: OWNER_USER_EMAIL_ADDRESS
+    description: "Business attribute for owner user email address in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: SYSTEM_CUSTOMER
+    description: "Business attribute for system customer in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: MANAGER
+    description: "Number of days measuring manager. Integer. Null when the start event has not occurred."
+  - name: MANAGER_CONTACT_EMPLOYEE_ID
+    description: "Employee identifier linking to the HR master. Numeric string. Null when no employee is assigned."
+  - name: MANAGER_CONTACT_EMAIL_ADDRESS
+    description: "Number of days measuring manager contact email address. Integer. Null when the start event has not occurred."
+  - name: CLOSE_ME
+    description: "Business attribute for close me in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: SYSTEM_PARENT_CASE
+    description: "Business attribute for system parent case in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: DESCRIPTION
+    description: "Free-text description field from the ticketing system. May contain multi-line text. Null when not entered by the user."
+  - name: REGION
+    description: "Business attribute for region in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: CASE_TYPE
+    description: "Business attribute for case type in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: CASE_SUB_TYPE
+    description: "Business attribute for case sub type in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: SYSTEM_CATEGORY
+    description: "Business attribute for system category in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: SYSTEM
+    description: "Business attribute for system in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: SYSTEM_MODULE
+    description: "Business attribute for system module in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: REQUESTOR_CASE_TYPE
+    description: "Business attribute for requestor case type in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: REQUESTOR_CASE_SUB_TYPE
+    description: "Business attribute for requestor case sub type in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: QUALITY
+    description: "Business attribute for quality in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: RESOLUTION
+    description: "Business attribute for resolution in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: ROUTE_CASE
+    description: "Business attribute for route case in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: QUEUE
+    description: "Assignment group or queue for queue. Text label. Null when not assigned to a group."
+  - name: WORKED_BY
+    description: "Person who performed the action for worked by. Employee name or login. Null when action was system-initiated."
+  - name: WORKED_BY_USER_EMAIL_ADDRESS
+    description: "Person who performed the action for worked by user email address. Employee name or login. Null when action was system-initiated."
+  - name: ENHANCEMENT_STATUS
+    description: "Current status label for the record. Text value (e.g. Active, Resolved, Closed). Null for records not yet processed."
+  - name: BUSINESS_REASON
+    description: "Business attribute for business reason in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: APPROVAL
+    description: "Business attribute for approval in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: APPROVAL_COMMENTS
+    description: "Free-text approval comments field from the ticketing system. May contain multi-line text. Null when not entered by the user."
+  - name: APPROVED_BY
+    description: "Business attribute for approved by in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: APPROVED_BY_USER_EMAIL_ADDRESS
+    description: "Business attribute for approved by user email address in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: APPROVED_ON
+    description: "Business attribute for approved on in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: NEXT_STEP_CASE
+    description: "Workflow step indicator for next step case. Integer or text. Null when workflow has not started."
+  - name: NEXT_CASE_DESCRIPTION
+    description: "Free-text next case description field from the ticketing system. May contain multi-line text. Null when not entered by the user."
+  - name: NEXT_CASE_ASSIGNED_TO
+    description: "Business attribute for next case assigned to in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: OB_CONTACT
+    description: "Business attribute for ob contact in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: OB_CONTACT_TYPE
+    description: "Business attribute for ob contact type in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: OBIS_CONVERSION
+    description: "Business attribute for obis conversion in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: OB_EFFECTIVE_DATE
+    description: "Timestamp recording when the ob effective date event occurred. ISO datetime or date value. Null when the event has not taken place."
+  - name: OB_MANAGER
+    description: "Number of days measuring ob manager. Integer. Null when the start event has not occurred."
+  - name: OB_CONTACT_ID
+    description: "System identifier for ob contact id. Alphanumeric key. Null when not assigned."
+  - name: OB_FIRST_NAME
+    description: "Person name field from the employee or contact record. Free-text string. Always populated for active person records."
+  - name: OB_LAST_NAME
+    description: "Person name field from the employee or contact record. Free-text string. Always populated for active person records."
+  - name: OB_JOB_TITLE
+    description: "Free-text ob job title field from the ticketing system. May contain multi-line text. Null when not entered by the user."
+  - name: OB_VENDOR
+    description: "Business attribute for ob vendor in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: OB_SUBSIDIARY
+    description: "Business attribute for ob subsidiary in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: OB_SEGMENT
+    description: "Business attribute for ob segment in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: OB_DEPARTMENT
+    description: "Business attribute for ob department in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: OB_LOCATION
+    description: "Business attribute for ob location in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: OB_DESK_LOCATION
+    description: "Business attribute for ob desk location in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: OB_LOCATION_DETAIL
+    description: "Estimated completion date for ob location detail. Date or datetime value. Null when no estimate has been provided."
+  - name: OB_LAPTOP
+    description: "Business attribute for ob laptop in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: OB_EMAIL_OPTIONS
+    description: "Business attribute for ob email options in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: OB_EMAIL_ADDRESS
+    description: "Business attribute for ob email address in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: OB_DISTRIBUTION_GROUPS
+    description: "Assignment group or queue for ob distribution groups. Text label. Null when not assigned to a group."
+  - name: OB_RSA_TOKEN
+    description: "Business attribute for ob rsa token in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: OB_TEL_PARTNERS_ACCESS
+    description: "Business attribute for ob tel partners access in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: OB_APPLICATION_ACCESS_DETAIL
+    description: "Estimated completion date for ob application access detail. Date or datetime value. Null when no estimate has been provided."
+  - name: OB_SOFTWARE
+    description: "Business attribute for ob software in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: OB_SHARED_FOLDER_ACCESS
+    description: "Business attribute for ob shared folder access in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: FOLLOW_UP_BY
+    description: "Business attribute for follow up by in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: ESCALATED
+    description: "Business attribute for escalated in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: ESCALATED_ON
+    description: "Business attribute for escalated on in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: ESCALATED_TO
+    description: "Business attribute for escalated to in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: ESCALATED_TO_USER_EMAIL_ADDRESS
+    description: "Business attribute for escalated to user email address in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: LAST_ON_HOLD_TIME
+    description: "Business attribute for last on hold time in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: ON_HOLD_TIME_MINUTES
+    description: "Business attribute for on hold time minutes in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: MERGED
+    description: "Business attribute for merged in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: MERGED_MASTER_CASE_NUMBER
+    description: "Business attribute for merged master case number in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: NUMBER_OF_CHILD_CASES
+    description: "Business attribute for number of child cases in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: TRIAGE_WARNING_TIME
+    description: "Number of days measuring triage warning time. Integer. Null when the start event has not occurred."
+  - name: TRIAGE_WARNING_TIME_REACHED
+    description: "Number of days measuring triage warning time reached. Integer. Null when the start event has not occurred."
+  - name: TRIAGE_BY_DUE
+    description: "Number of days measuring triage by due. Integer. Null when the start event has not occurred."
+  - name: TRIAGE_STATUS
+    description: "Current status label for the record. Text value (e.g. Active, Resolved, Closed). Null for records not yet processed."
+  - name: TRIAGE_SUCCEEDED_ON
+    description: "Number of days measuring triage succeeded on. Integer. Null when the start event has not occurred."
+  - name: RESOLVE_WARNING_TIME
+    description: "Business attribute for resolve warning time in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: RESOLVE_WARNING_TIME_REACHED
+    description: "Business attribute for resolve warning time reached in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: RESOLVE_BY_DUE
+    description: "Business attribute for resolve by due in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: RESOLVE_STATUS
+    description: "Current status label for the record. Text value (e.g. Active, Resolved, Closed). Null for records not yet processed."
+  - name: RESOLVE_SUCCEEDED_ON
+    description: "Business attribute for resolve succeeded on in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: SENDTOTGIS
+    description: "Business attribute for sendtotgis in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: SENDTOTGISPROCESSED
+    description: "Business attribute for sendtotgisprocessed in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: TGISNUMBER
+    description: "Business attribute for tgisnumber in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: ETA
+    description: "Estimated completion date for eta. Date or datetime value. Null when no estimate has been provided."
+  - name: PMO_UPDATE
+    description: "Business attribute for pmo update in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: PROJECT
+    description: "Business attribute for project in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: ICD_CASE_SUB_TYPE
+    description: "Business attribute for icd case sub type in the support services domain. Text or coded value. Null when not populated in the source system."
+- name: GOLD__TEH_SUPPORT_SERVICES__TGIS_STATUS
+  description: |
+    PURPOSE: TGIS (TEL Global IT Services) workflow status tracker showing step-by-step progress for service requests.
+    GRAIN: One row per TGIS service request.
+    KEY LOGIC: Tracks current step, total steps, completion progress, and latest comment for each TGIS case.
+    CAVEAT: Completed cases show progress as total/total (e.g. 10/10); in-progress cases show partial completion.
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _AUDIT_LOG_ID
+  - name: _ROW_HASH
+  - name: ID
+    description: "Business attribute for id in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: IT_HELPDESK_ID
+    description: "Case or service request identifier linking to the source ticketing system. Alphanumeric key. Null when no linked case exists."
+  - name: CURRENT_STEP
+    description: "Workflow step indicator for current step. Integer or text. Null when workflow has not started."
+  - name: COMPLETED_STEP_NUMBER
+    description: "Workflow step indicator for completed step number. Integer or text. Null when workflow has not started."
+  - name: TOTAL_STEPS
+    description: "Numeric count of total steps. Integer. Zero when no items exist."
+  - name: TITLE
+    description: "Free-text title field from the ticketing system. May contain multi-line text. Null when not entered by the user."
+  - name: COMPLETED_STEP_NAME
+    description: "Descriptive name or label for completed step name. Free-text string. Null when the name has not been maintained."
+  - name: CURRENT_STEP_NAME
+    description: "Descriptive name or label for current step name. Free-text string. Null when the name has not been maintained."
+  - name: NEXT_STEP_NAME
+    description: "Descriptive name or label for next step name. Free-text string. Null when the name has not been maintained."
+  - name: STATUS
+    description: "Current status label for the record. Text value (e.g. Active, Resolved, Closed). Null for records not yet processed."
+  - name: RELATED_CASES
+    description: "Business attribute for related cases in the support services domain. Text or coded value. Null when not populated in the source system."
+  - name: LAST_UPDATED_DATETIME
+    description: "Timestamp recording when the last updated datetime event occurred. ISO datetime or date value. Null when the event has not taken place."
+  - name: PROGRESS
+    description: "Step completion ratio displayed as completed/total (e.g. 7/10). Text fraction. Shows total/total when fully complete."
+  - name: WORKINCHARGE
+    description: "Person who performed the action for workincharge. Employee name or login. Null when action was system-initiated."
+  - name: LATEST_COMMENT
+    description: "Free-text latest comment field from the ticketing system. May contain multi-line text. Null when not entered by the user."
+  - name: LATEST_COMMENT_UPDATE_BY
+    description: "Free-text latest comment update by field from the ticketing system. May contain multi-line text. Null when not entered by the user."
+  - name: LATEST_COMMENT_UPDATE_DATETIME
+    description: "Timestamp recording when the latest comment update datetime event occurred. ISO datetime or date value. Null when the event has not taken place."
+  - name: ISSUE_DATE
+    description: "Timestamp recording when the issue date event occurred. ISO datetime or date value. Null when the event has not taken place."

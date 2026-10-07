@@ -1,0 +1,109 @@
+models:
+- name: SILVER__TEA_STRATEGIC_BUSINESS_OPERATIONS__BUSINESS_PARTNERS_GENERAL_DATA
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_STRATEGIC_BUSINESS_OPERATIONS__CONSIGNMENT_TRANSACTION
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_STRATEGIC_BUSINESS_OPERATIONS__CONTRACT_SUMMARY_DETAILS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_STRATEGIC_BUSINESS_OPERATIONS__EMPLOYEE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_STRATEGIC_BUSINESS_OPERATIONS__EMPLOYEE_HOURS_BOOKED_IN_PRODORDER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_STRATEGIC_BUSINESS_OPERATIONS__FAB
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_STRATEGIC_BUSINESS_OPERATIONS__MAC_MAIN
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_STRATEGIC_BUSINESS_OPERATIONS__MATERIAL_PLANT_MASTER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_STRATEGIC_BUSINESS_OPERATIONS__MDM_COMPANY
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_STRATEGIC_BUSINESS_OPERATIONS__MYSKILLS_COMPANY
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_STRATEGIC_BUSINESS_OPERATIONS__OFFICE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_STRATEGIC_BUSINESS_OPERATIONS__OPTIONSET_METADATA
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_STRATEGIC_BUSINESS_OPERATIONS__SAP_REGION
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_STRATEGIC_BUSINESS_OPERATIONS__SAP_SEGMENT
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_STRATEGIC_BUSINESS_OPERATIONS__SAP_SURB
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_STRATEGIC_BUSINESS_OPERATIONS__SERVICE_B_CODE_MAPPING
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_STRATEGIC_BUSINESS_OPERATIONS__TEA_MAC_LIST
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_STRATEGIC_BUSINESS_OPERATIONS__WISDOM_SURB_PROGRESS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_STRATEGIC_BUSINESS_OPERATIONS__WORKERCOMPANYLIST
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_STRATEGIC_BUSINESS_OPERATIONS__WORKORDER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_STRATEGIC_BUSINESS_OPERATIONS__WO_SUMMARY_DETAILS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_STRATEGIC_BUSINESS_OPERATIONS__ZCDV_T_CMTU009_VBAK
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_STRATEGIC_BUSINESS_OPERATIONS__ZCDV_T_CMTU010_VBAP
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_STRATEGIC_BUSINESS_OPERATIONS__ZCDV_T_CMTU011_VBEP
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_STRATEGIC_BUSINESS_OPERATIONS__ZCDV_T_CMTU012_LIKP
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_STRATEGIC_BUSINESS_OPERATIONS__ZCDV_T_CMTU014_VBRK
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_STRATEGIC_BUSINESS_OPERATIONS__ZCDV_T_CMTU015_VBRP
+  tests:
+  - has_data
+  - recently_run

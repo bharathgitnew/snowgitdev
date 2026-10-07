@@ -1,0 +1,175 @@
+{{ config(
+    materialized='tel_incremental',
+	incremental_strategy='insert_overwrite',
+    alias='US_EQUIPMENT_SHIP_REVENUE_RECOGNITION_RISK',
+    transient=false
+) }}
+
+with
+AllRisk
+as
+(
+select *
+from {{ ref('GOLD__TEH_EQUIPMENT_SALES__US_EQUIPMENT_SHIP_REVENUE_RECOGNITION_ROLLUP_TOOL_W_SERIAL_NO') }}
+
+union all
+select *
+from {{ ref('GOLD__TEH_EQUIPMENT_SALES__US_EQUIPMENT_SHIP_REVENUE_RECOGNITION_ROLLUP_ALL_WO_SERIAL_NO') }}
+
+union all
+select *
+from {{ ref('GOLD__TEH_EQUIPMENT_SALES__US_EQUIPMENT_SHIP_REVENUE_RECOGNITION_ROLLUP_CHAMBER_W_SERIAL_NO') }}
+
+-- union all
+-- select *
+-- from LAB_SALES.US_EQUIPMENT_SHIP_REVENUE_RECOGNITION_ROLLUP_PREKIT_ONLY
+),
+SOURCE_DATA AS (
+select *
+from AllRisk
+where Adjusted_Serial_No is not null
+    and Adjusted_Serial_No <> ''
+    and Adjusted_Serial_No not ilike 'TBD'
+    and Adjusted_Serial_No not ilike 'NONE'
+    and Adjusted_Serial_No <> '0'
+	and SALES_ACCOUNT <> 'N/A'
+),
+TRANSFORM_DATA AS (
+SELECT
+        '{{ invocation_id }}' AS _AUDIT_LOG_ID,
+        SHA2('hash_me') AS _ROW_HASH,
+        GS_FY_Q,
+        ACCOUNT_FY_Q,
+        RISK_UPSIDE,
+        SALES_ACCOUNT,
+        SALES_REGION,
+        SOLD_TO_PARTY,
+        END_USER,
+        FAB,
+        BU,
+        BU_GROUP,
+        SUB_BU,
+        SALES_CATEGORY_GROUP,
+        SALES_CATEGORY_ALL,
+        PRIMARY_SALES_CATEGORY,
+        PRODUCT_NAME_ALL,
+        PRODUCT_DETAILS,
+        OPPORTUNITY_ID_DISTINCT,
+        SALES_DOCUMENT_ITEM_NO_ALL,
+        OPPORTUNITY_TITLE_FREE_TEXT,
+        PROJECT_NO_DISTINCT,
+        SALES_ORDER_NO_ALL,
+        MODEL,
+        ADJUSTED_SERIAL_NO,
+        CUSTOMER_TOOL_ID,
+        MACHINE_STATUS,
+        ADJUSTED_SHIP_DATE,
+        SALES_MONTH_MAX,
+        END_USER_SALES_DATE_BU_MAX,
+        END_USER_SALES_DATE_ACCOUNT_MAX,
+        ACTUAL_SALES_DATE_MAX,
+        IS_LOANER,
+        LOAN_EXPIRATION_DATE,
+        VPA,
+        REVENUE_RECOGNITION_STATUS_DISTINCT,
+        BOOKING_SALES_STATUS,
+        SALES_AMOUNT_SUMMED,
+        REVENUE_RECOGNITION_CRITERIA_SHORT,
+        SALES_REPORTING_FLAG,
+        IS_PLACEHOLDER,
+        END_USER_BOOKING_DATE_BU_MAX,
+        IS_BOOKING_ACTUAL,
+        CONFIDENCE_BU_SHORT,
+        QUOTE_NO,
+        PURCHASE_ORDER_NO,
+        ACCOUNT_SALES_PERSON,
+        BU_SALES_PERSON,
+        ACCOUNT_COMMENTS,
+        BU_COMMENTS,
+        SALES_COMMENTS_TO_SAP,
+        ASSISTANTS_COMMENTS_FROM_SAP,
+        DATA_TYPE,
+        BUDGET_TYPE,
+        END_USER_CODE,
+        GS_DATA_SNAPSHOT,
+        CRM_DATA_SNAPSHOT,
+        ACC_DATA_SNAPSHOT,
+        QUANTITY_SUMMED,
+        GS_FK_DATE,
+        GS_FY,
+        GS_FY_HALF,
+        ACCOUNT_FY,
+        ACCOUNT_FY_HALF
+FROM SOURCE_DATA
+)
+
+,
+TYPE_DATA AS (
+select
+        cast(_AUDIT_LOG_ID as varchar(128)) as _AUDIT_LOG_ID,
+        cast(_ROW_HASH as varchar(128)) as _ROW_HASH,
+        GS_FY_Q,
+        ACCOUNT_FY_Q,
+        RISK_UPSIDE,
+        SALES_ACCOUNT,
+        SALES_REGION,
+        SOLD_TO_PARTY,
+        END_USER,
+        FAB,
+        BU,
+        BU_GROUP,
+        SUB_BU,
+        SALES_CATEGORY_GROUP,
+        SALES_CATEGORY_ALL,
+        PRIMARY_SALES_CATEGORY,
+        PRODUCT_NAME_ALL,
+        PRODUCT_DETAILS,
+        OPPORTUNITY_ID_DISTINCT,
+        SALES_DOCUMENT_ITEM_NO_ALL,
+        OPPORTUNITY_TITLE_FREE_TEXT,
+        PROJECT_NO_DISTINCT,
+        SALES_ORDER_NO_ALL,
+        MODEL,
+        ADJUSTED_SERIAL_NO,
+        CUSTOMER_TOOL_ID,
+        MACHINE_STATUS,
+        CAST(ADJUSTED_SHIP_DATE as DATE) as ADJUSTED_SHIP_DATE,
+        CAST(SALES_MONTH_MAX as DATE) as SALES_MONTH_MAX,
+        CAST(END_USER_SALES_DATE_BU_MAX as DATE) as END_USER_SALES_DATE_BU_MAX,
+        CAST(END_USER_SALES_DATE_ACCOUNT_MAX as DATE) as END_USER_SALES_DATE_ACCOUNT_MAX,
+        CAST(ACTUAL_SALES_DATE_MAX as DATE) as ACTUAL_SALES_DATE_MAX,
+        IS_LOANER,
+        CAST(LOAN_EXPIRATION_DATE as DATE) as LOAN_EXPIRATION_DATE,
+        VPA,
+        REVENUE_RECOGNITION_STATUS_DISTINCT,
+        BOOKING_SALES_STATUS,
+        CAST(SALES_AMOUNT_SUMMED as NUMBER(38,10)) as SALES_AMOUNT_SUMMED,
+        REVENUE_RECOGNITION_CRITERIA_SHORT,
+        SALES_REPORTING_FLAG,
+        IS_PLACEHOLDER,
+        CAST(END_USER_BOOKING_DATE_BU_MAX as DATE) as END_USER_BOOKING_DATE_BU_MAX,
+        IS_BOOKING_ACTUAL,
+        CONFIDENCE_BU_SHORT,
+        QUOTE_NO,
+        PURCHASE_ORDER_NO,
+        ACCOUNT_SALES_PERSON,
+        BU_SALES_PERSON,
+        ACCOUNT_COMMENTS,
+        BU_COMMENTS,
+        SALES_COMMENTS_TO_SAP,
+        ASSISTANTS_COMMENTS_FROM_SAP,
+        DATA_TYPE,
+        BUDGET_TYPE,
+        END_USER_CODE,
+        CAST(GS_DATA_SNAPSHOT as DATE) as GS_DATA_SNAPSHOT,
+        CAST(CRM_DATA_SNAPSHOT as DATE) as CRM_DATA_SNAPSHOT,
+        ACC_DATA_SNAPSHOT,
+        CAST(QUANTITY_SUMMED as NUMBER(38,0)) as QUANTITY_SUMMED,
+        CAST(GS_FK_DATE as DATE) as GS_FK_DATE,
+        GS_FY,
+        GS_FY_HALF,
+        ACCOUNT_FY,
+        ACCOUNT_FY_HALF
+from transform_data
+)
+SELECT * FROM TYPE_DATA

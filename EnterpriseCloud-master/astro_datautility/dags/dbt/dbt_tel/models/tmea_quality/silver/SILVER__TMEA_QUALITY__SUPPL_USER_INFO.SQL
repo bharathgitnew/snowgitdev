@@ -1,0 +1,94 @@
+/************
+    Model file generated from TelTool SQL SERVER Ingestion Utility 
+    *************/
+    
+
+    {{ config(
+            materialized='tel_incremental',
+            incremental_strategy='insert_overwrite',
+            alias='SUPPL_USER_INFO',
+            unique_key=[],
+            transient=false    
+) }} 
+    
+    with source_data as (
+        SELECT
+        USERID, 
+ 	 	USERNAME, 
+ 	 	EMPLOYEEID, 
+ 	 	FIRST_NAME, 
+ 	 	LAST_NAME, 
+ 	 	JOB_TITLE, 
+ 	 	FAB, 
+ 	 	LOCATION, 
+ 	 	COUNTRY, 
+ 	 	PHONE, 
+ 	 	TOUCHED, 
+ 	 	ACTIVE, 
+ 	 	EMAIL, 
+ 	 	BUSINESS_PARTNER_ID, 
+ 	 	TEL_REGION, 
+ 	 	CREATED_BY, 
+ 	 	CREATE_DATE, 
+ 	 	UPDATED_BY, 
+ 	 	UPDATE_DATE,
+        _FILEDATE,
+		_FILENAME
+        FROM {{ ref('BRONZE__TMEA_QUALITY__SUPPLIER_SUPPL_USER_INFO') }} AS SUPPL_USER_INFO
+        
+    ),
+    transform_data as (
+        SELECT
+		'{{ invocation_id }}' AS _AUDIT_LOG_ID,
+        SHA2('hash_me') as _ROW_HASH,
+        _FILEDATE,
+		_FILENAME,
+        USERID, 
+ 	 	USERNAME, 
+ 	 	EMPLOYEEID, 
+ 	 	FIRST_NAME, 
+ 	 	LAST_NAME, 
+ 	 	JOB_TITLE, 
+ 	 	FAB, 
+ 	 	LOCATION, 
+ 	 	COUNTRY, 
+ 	 	PHONE, 
+ 	 	TOUCHED, 
+ 	 	ACTIVE, 
+ 	 	EMAIL, 
+ 	 	BUSINESS_PARTNER_ID, 
+ 	 	TEL_REGION, 
+ 	 	CREATED_BY, 
+ 	 	CREATE_DATE, 
+ 	 	UPDATED_BY, 
+ 	 	UPDATE_DATE
+        FROM source_data
+    ),
+    type_data as (
+        SELECT
+        CAST(_AUDIT_LOG_ID AS VARCHAR(128)) AS _AUDIT_LOG_ID,
+        CAST(_ROW_HASH AS VARCHAR(128)) AS _ROW_HASH,
+        CAST(_FILEDATE AS TIMESTAMP_NTZ(9)) AS _FILEDATE,
+		CAST(_FILENAME AS VARCHAR(128)) AS _FILENAME,
+        CAST(USERID AS NUMBER(38,0)) AS USERID, 
+ 	 	CAST(USERNAME AS VARCHAR(16777216)) AS USERNAME, 
+ 	 	CAST(EMPLOYEEID AS VARCHAR(16777216)) AS EMPLOYEEID, 
+ 	 	CAST(FIRST_NAME AS VARCHAR(16777216)) AS FIRST_NAME, 
+ 	 	CAST(LAST_NAME AS VARCHAR(16777216)) AS LAST_NAME, 
+ 	 	CAST(JOB_TITLE AS VARCHAR(16777216)) AS JOB_TITLE, 
+ 	 	CAST(FAB AS VARCHAR(16777216)) AS FAB, 
+ 	 	CAST(LOCATION AS VARCHAR(16777216)) AS LOCATION, 
+ 	 	CAST(COUNTRY AS VARCHAR(16777216)) AS COUNTRY, 
+ 	 	CAST(PHONE AS VARCHAR(16777216)) AS PHONE, 
+ 	 	CAST(TOUCHED AS TIMESTAMP_NTZ(9)) AS TOUCHED, 
+ 	 	CAST(ACTIVE AS NUMBER(38,0)) AS ACTIVE, 
+ 	 	CAST(EMAIL AS VARCHAR(16777216)) AS EMAIL, 
+ 	 	CAST(BUSINESS_PARTNER_ID AS NUMBER(38,0)) AS BUSINESS_PARTNER_ID, 
+ 	 	CAST(TEL_REGION AS VARCHAR(16777216)) AS TEL_REGION, 
+ 	 	CAST(CREATED_BY AS VARCHAR(16777216)) AS CREATED_BY, 
+ 	 	CAST(CREATE_DATE AS TIMESTAMP_NTZ(9)) AS CREATE_DATE, 
+ 	 	CAST(UPDATED_BY AS VARCHAR(16777216)) AS UPDATED_BY, 
+ 	 	CAST(UPDATE_DATE AS TIMESTAMP_NTZ(9)) AS UPDATE_DATE
+        FROM transform_data
+    )
+    SELECT * FROM type_data

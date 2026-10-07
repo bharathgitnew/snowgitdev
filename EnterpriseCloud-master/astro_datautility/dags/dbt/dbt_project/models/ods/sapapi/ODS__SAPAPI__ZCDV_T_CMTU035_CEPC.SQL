@@ -1,0 +1,194 @@
+/************
+Model file generated from SAPAPIUtility
+*************/
+
+
+{{ config(
+    	  materialized='incremental',
+    	  incremental_strategy='insert_overwrite',
+    	  alias='ZCDV_T_CMTU035_CEPC',
+    	  transient=false	
+) }} 
+
+with source_data as ( 
+    SELECT
+        _FILEDATE,
+        _FILENAME,
+		JSONFIELD:Mandt::STRING AS MANDT, -- No Mapping in GMX
+		JSONFIELD:PRCTR::STRING AS PRCTR,
+		JSONFIELD:DATBI::STRING AS DATBI,
+		JSONFIELD:KOKRS::STRING AS KOKRS,
+		JSONFIELD:DATAB::STRING AS DATAB,
+		JSONFIELD:ERSDA::STRING AS ERSDA,
+		JSONFIELD:USNAM::STRING AS USNAM,
+		JSONFIELD:MERKMAL::STRING AS MERKMAL,
+		JSONFIELD:ABTEI::STRING AS ABTEI,
+		JSONFIELD:VERAK::STRING AS VERAK,
+		JSONFIELD:Verak_User::STRING AS VERAK_USER, -- No Mapping in GMX
+		JSONFIELD:WAERS::STRING AS WAERS,
+		JSONFIELD:Nprctr::STRING AS NPRCTR, -- No Mapping in GMX
+		JSONFIELD:Land1::STRING AS LAND1, -- No Mapping in GMX
+		JSONFIELD:Anred::STRING AS ANRED, -- No Mapping in GMX
+		JSONFIELD:Name1::STRING AS NAME1, -- No Mapping in GMX
+		JSONFIELD:Name2::STRING AS NAME2, -- No Mapping in GMX
+		JSONFIELD:Name3::STRING AS NAME3, -- No Mapping in GMX
+		JSONFIELD:Name4::STRING AS NAME4, -- No Mapping in GMX
+		JSONFIELD:Ort01::STRING AS ORT01, -- No Mapping in GMX
+		JSONFIELD:Ort02::STRING AS ORT02, -- No Mapping in GMX
+		JSONFIELD:Stras::STRING AS STRAS, -- No Mapping in GMX
+		JSONFIELD:Pfach::STRING AS PFACH, -- No Mapping in GMX
+		JSONFIELD:Pstlz::STRING AS PSTLZ, -- No Mapping in GMX
+		JSONFIELD:Pstl2::STRING AS PSTL2, -- No Mapping in GMX
+		JSONFIELD:Spras::STRING AS SPRAS, -- No Mapping in GMX
+		JSONFIELD:Telbx::STRING AS TELBX, -- No Mapping in GMX
+		JSONFIELD:Telf1::STRING AS TELF1, -- No Mapping in GMX
+		JSONFIELD:Telf2::STRING AS TELF2, -- No Mapping in GMX
+		JSONFIELD:Telfx::STRING AS TELFX, -- No Mapping in GMX
+		JSONFIELD:Teltx::STRING AS TELTX, -- No Mapping in GMX
+		JSONFIELD:Telx1::STRING AS TELX1, -- No Mapping in GMX
+		JSONFIELD:Datlt::STRING AS DATLT, -- No Mapping in GMX
+		JSONFIELD:Drnam::STRING AS DRNAM, -- No Mapping in GMX
+		JSONFIELD:KHINR::STRING AS KHINR,
+		JSONFIELD:BUKRS::STRING AS BUKRS,
+		JSONFIELD:Vname::STRING AS VNAME, -- No Mapping in GMX
+		JSONFIELD:Recid::STRING AS RECID, -- No Mapping in GMX
+		JSONFIELD:Etype::STRING AS ETYPE, -- No Mapping in GMX
+		JSONFIELD:Txjcd::STRING AS TXJCD, -- No Mapping in GMX
+		JSONFIELD:Regio::STRING AS REGIO, -- No Mapping in GMX
+		JSONFIELD:Kvewe::STRING AS KVEWE, -- No Mapping in GMX
+		JSONFIELD:Kappl::STRING AS KAPPL, -- No Mapping in GMX
+		JSONFIELD:Kalsm::STRING AS KALSM, -- No Mapping in GMX
+		JSONFIELD:Logsystem::STRING AS LOGSYSTEM, -- No Mapping in GMX
+		JSONFIELD:LOCK_IND::STRING AS LOCK_IND,
+		JSONFIELD:Pca_Template::STRING AS PCA_TEMPLATE, -- No Mapping in GMX
+		JSONFIELD:Segment::STRING AS SEGMENT, -- No Mapping in GMX
+		JSONFIELD:Eew_Cepc_Ps_Dummy::STRING AS EEW_CEPC_PS_DUMMY, -- No Mapping in GMX
+		JSONFIELD:update_date::STRING AS UPDATE_DATE -- No Mapping in GMX
+    from {{ source('SAPH','SAP_COM_EV_CEPC') }}
+	WHERE _FILEDATE::STRING = (
+        SELECT MAX(RUN_TIME)::STRING
+        FROM {{ source('SAPH', 'CONTROLTABLE') }}
+        WHERE TABLE_NAME = 'SAP_COM_EV_CEPC'
+        )
+	QUALIFY ROW_NUMBER() OVER ( PARTITION BY DATBI, KOKRS, PRCTR ORDER BY _FILEDATE DESC, _UPLOADDATE DESC) = 1	
+),
+
+transform_data as (
+    SELECT
+        _FILEDATE AS _FILEDATE,
+        _FILENAME AS _FILENAME,
+        '{{ invocation_id }}' AS AUDIT_LOG_ID,
+        SHA2('hash_me') AS _ROW_HASH,
+		MANDT as MANDT,
+		PRCTR as PRCTR,
+		TO_CHAR(TO_DATE(DATBI), 'YYYYMMDD') AS DATBI,		
+		KOKRS as KOKRS,
+		TO_CHAR(TO_DATE(DATAB), 'YYYYMMDD') AS DATAB,
+		TO_CHAR(TO_DATE(ERSDA), 'YYYYMMDD') AS ERSDA,
+		USNAM as USNAM,
+		MERKMAL as MERKMAL,
+		ABTEI as ABTEI,
+		VERAK as VERAK,
+		VERAK_USER as VERAK_USER,
+		WAERS as WAERS,
+		NPRCTR as NPRCTR,
+		LAND1 as LAND1,
+		ANRED as ANRED,
+		NAME1 as NAME1,
+		NAME2 as NAME2,
+		NAME3 as NAME3,
+		NAME4 as NAME4,
+		ORT01 as ORT01,
+		ORT02 as ORT02,
+		STRAS as STRAS,
+		PFACH as PFACH,
+		PSTLZ as PSTLZ,
+		PSTL2 as PSTL2,
+		SPRAS as SPRAS,
+		TELBX as TELBX,
+		TELF1 as TELF1,
+		TELF2 as TELF2,
+		TELFX as TELFX,
+		TELTX as TELTX,
+		TELX1 as TELX1,
+		DATLT as DATLT,
+		DRNAM as DRNAM,
+		KHINR as KHINR,
+		BUKRS as BUKRS,
+		VNAME as VNAME,
+		RECID as RECID,
+		ETYPE as ETYPE,
+		TXJCD as TXJCD,
+		REGIO as REGIO,
+		KVEWE as KVEWE,
+		KAPPL as KAPPL,
+		KALSM as KALSM,
+		LOGSYSTEM as LOGSYSTEM,
+		LOCK_IND as LOCK_IND,
+		PCA_TEMPLATE as PCA_TEMPLATE,
+		SEGMENT as SEGMENT,
+		EEW_CEPC_PS_DUMMY as EEW_CEPC_PS_DUMMY,
+		UPDATE_DATE as UPDATE_DATE
+    FROM source_data 
+),
+
+type_data as (
+    SELECT
+        _FILEDATE,
+        _FILENAME,
+        AUDIT_LOG_ID,
+        _ROW_HASH,
+		MANDT,
+		PRCTR,
+		DATBI,
+		KOKRS,
+		DATAB,
+		ERSDA,
+		USNAM,
+		MERKMAL,
+		ABTEI,
+		VERAK,
+		VERAK_USER,
+		WAERS,
+		NPRCTR,
+		LAND1,
+		ANRED,
+		NAME1,
+		NAME2,
+		NAME3,
+		NAME4,
+		ORT01,
+		ORT02,
+		STRAS,
+		PFACH,
+		PSTLZ,
+		PSTL2,
+		SPRAS,
+		TELBX,
+		TELF1,
+		TELF2,
+		TELFX,
+		TELTX,
+		TELX1,
+		DATLT,
+		DRNAM,
+		KHINR,
+		BUKRS,
+		VNAME,
+		RECID,
+		ETYPE,
+		TXJCD,
+		REGIO,
+		KVEWE,
+		KAPPL,
+		KALSM,
+		LOGSYSTEM,
+		LOCK_IND,
+		PCA_TEMPLATE,
+		SEGMENT,
+		EEW_CEPC_PS_DUMMY,
+		UPDATE_DATE
+    FROM transform_data 
+)
+
+	select * from type_data

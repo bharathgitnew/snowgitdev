@@ -1,0 +1,10 @@
+version: 2
+models:
+- name: ODS__MONDAY__WORKSPACE
+  description: Model MONDAY WORKSPACE file.
+- name: ODS__MONDAY__ITEMS
+  description: Model MONDAY ITEMS file.
+- name: ODS__MONDAY__SUBITEMSID
+  description: Model MONDAY SUBITEMSID file.
+- name: ODS__MONDAY__SUBITEMS
+  description: Model MONDAY SUBITEMS file.

@@ -1,0 +1,26 @@
+models:
+- name: BRONZE__TEH_PRODUCT_SUPPORT__FILE_SIRFIS_AREA
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_PRODUCT_SUPPORT__FILE_SIRFIS_TOOL_INSTALLATION_SCHEDULE_BASE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_PRODUCT_SUPPORT__SIRFIS_BUSINESS_UNIT_LOOKUP
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_PRODUCT_SUPPORT__SIRFIS_SIRFIS_TOOL_INSTALLATION_BASE_HIST
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_PRODUCT_SUPPORT__STATIC_OBJECTS_CALENDAR_DATE
+  tests:
+  - has_data
+- name: BRONZE__TEH_PRODUCT_SUPPORT__SIRFIS_SIRFIS_TOOL_INSTALLATION_DAILY_SNAPSHOT
+  tests:
+  - has_data
+- name: BRONZE__TEH_PRODUCT_SUPPORT__SIRFIS_SIRFIS_TOOL_INSTALLATION
+  tests:
+  - has_data

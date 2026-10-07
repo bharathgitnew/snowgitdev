@@ -1,0 +1,107 @@
+{{ config(
+    	  materialized='tel_incremental',
+    	  incremental_strategy='merge',
+    	  alias='SAPO_STATISTICS_CURRENT_STOCK_AND_GROUPING_TERMS',
+    	  unique_key = ['LGORT',
+    'MANDT',
+    'MATNR',
+    'SSOUR',
+    'VRSIO',
+    'WERKS'],
+    	  transient=false
+) }} 
+
+with source_data as (
+SELECT
+	BASME, 
+ 	BKLAS, 
+ 	DISMM, 
+ 	DISPO, 
+ 	EISBE, 
+ 	GSBER, 
+ 	HWAER, 
+ 	LETZTABG, 
+ 	LETZTBEW, 
+ 	LETZTVER, 
+ 	LETZTZUG, 
+ 	LGORT, 
+ 	MANDT, 
+ 	MATKL, 
+ 	MATNR, 
+ 	MBWBEST, 
+ 	MKOBEST, 
+ 	MTART, 
+ 	SPART, 
+ 	SSOUR, 
+ 	VRSIO, 
+ 	VWDAT, 
+ 	WBWBEST, 
+ 	WERKS,
+	_CAPTUREDATETIME
+from {{ source('SAP_ORACLE_LIVE','S032') }}
+),
+
+transform_data as (
+SELECT 
+	'{{ invocation_id }}' AS _AUDIT_LOG_ID,
+    SHA2('hash_me') as _ROW_HASH,
+	BASME, 
+ 	BKLAS, 
+ 	DISMM, 
+ 	DISPO, 
+ 	EISBE, 
+ 	GSBER, 
+ 	HWAER, 
+ 	LETZTABG, 
+ 	LETZTBEW, 
+ 	LETZTVER, 
+ 	LETZTZUG, 
+ 	LGORT, 
+ 	MANDT, 
+ 	MATKL, 
+ 	MATNR, 
+ 	MBWBEST, 
+ 	MKOBEST, 
+ 	MTART, 
+ 	SPART, 
+ 	SSOUR, 
+ 	VRSIO, 
+ 	VWDAT, 
+ 	WBWBEST, 
+ 	WERKS,
+	_CAPTUREDATETIME
+from source_data
+),
+
+type_data as (
+SELECT
+    CAST(_AUDIT_LOG_ID as VARCHAR(128)) as _AUDIT_LOG_ID,
+    CAST(_ROW_HASH as VARCHAR(128)) as _ROW_HASH,
+	BASME, 
+ 	BKLAS, 
+ 	DISMM, 
+ 	DISPO, 
+ 	EISBE, 
+ 	GSBER, 
+ 	HWAER, 
+ 	LETZTABG, 
+ 	LETZTBEW, 
+ 	LETZTVER, 
+ 	LETZTZUG, 
+ 	LGORT, 
+ 	MANDT, 
+ 	MATKL, 
+ 	MATNR, 
+ 	MBWBEST, 
+ 	MKOBEST, 
+ 	MTART, 
+ 	SPART, 
+ 	SSOUR, 
+ 	VRSIO, 
+ 	VWDAT, 
+ 	WBWBEST, 
+ 	WERKS,
+	CAST(_CAPTUREDATETIME AS TIMESTAMP_NTZ(9)) AS _CAPTUREDATETIME
+from transform_data
+)
+select * from type_data

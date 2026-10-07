@@ -1,0 +1,22 @@
+{
+    "Datasets": [
+        {
+            "SF_TABLE_NAME": "TABLES",
+            "ASSET_TYPE": "Table",
+            "INCLUDE_ON_RESULTS": [
+                "OWNER_USERS",
+                "OWNER_GROUPS",
+                "CERTIFICATE_STATUS",
+                "CERTIFICATE_UPDATED_BY",
+                "CERTIFICATE_UPDATED_AT",
+                "LAST_SYNC_WORKFLOW_NAME",
+                "LAST_SYNC_RUN_AT",
+                "LAST_SYNC_RUN",
+                "ASSET_DBT_JOB_NAME",
+                "ASSET_DBT_JOB_STATUS",
+                "ASSET_DBT_TEST_STATUS",
+                "ASSET_DBT_JOB_LAST_RUN"
+            ]
+        }
+    ]
+}

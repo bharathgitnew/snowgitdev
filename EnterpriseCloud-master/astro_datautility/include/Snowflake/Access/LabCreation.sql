@@ -1,0 +1,3 @@
+SELECT Set_Default_SQL
+FROM Admin.AccessControl.LabExecutionStatements
+ORDER BY Ordering;

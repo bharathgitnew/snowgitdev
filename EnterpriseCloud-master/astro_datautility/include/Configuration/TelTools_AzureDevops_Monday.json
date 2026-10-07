@@ -1,0 +1,151 @@
+{
+    "WorkItems": [
+        {
+            "id": "MONITOR",
+            "enabled": true,
+            "WorkItemDetails": {
+                "SiteConfig": {
+                    "org_url": "https://tmeatfs1/DefaultCollection/Monitor",
+                    "work_item_site": "_apis/wit/wiql?api-version=7.1&{$top}=1",
+                    "pat": "AZURE-TMEATFS1-PAT",
+                    "project_filter": "Monitor"
+                },
+                "SnowflakeConn": {
+                    "SNOWFLAKE_SCHEMA_NAME": "TMEA_AZURE_DEVOPS",
+                    "SNOWFLAKE_DATABASE_NAME": "<<LZ>>",
+                    "SNOWFLAKE_TABLE_NAME": "MONITOR"
+                },
+                "MondayConn": {
+                    "BOARD_ID": "18400360113",
+                    "api_key": "MONDAY-API-KEY-Y"
+                }
+            }
+        },
+        {
+            "id": "ZETA_INCONTROL",
+            "enabled": true,
+            "WorkItemDetails": {
+                "SiteConfig": {
+                    "org_url": "https://tmeatfs1/DefaultCollection/ZetaInControl",
+                    "work_item_site": "_apis/wit/wiql?api-version=7.1&{$top}=1",
+                    "pat": "AZURE-TMEATFS1-PAT",
+                    "project_filter": "ZetaInControl"
+                },
+                "SnowflakeConn": {
+                    "SNOWFLAKE_SCHEMA_NAME": "TMEA_AZURE_DEVOPS",
+                    "SNOWFLAKE_DATABASE_NAME": "<<LZ>>",
+                    "SNOWFLAKE_TABLE_NAME": "ZETA_INCONTROL"
+                },
+                "MondayConn": {
+                    "BOARD_ID": "18400360164",
+                    "api_key": "MONDAY-API-KEY-Y"
+                }
+            }
+        },
+        {
+            "id": "ZETA_PLUS",
+            "enabled": true,
+            "WorkItemDetails": {
+                "SiteConfig": {
+                    "org_url": "https://tmeatfs1/DefaultCollection/ZETA",
+                    "work_item_site": "_apis/wit/wiql?api-version=7.1&{$top}=1",
+                    "pat": "AZURE-TMEATFS1-PAT",
+                    "project_filter": "ZETA"
+                },
+                "SnowflakeConn": {
+                    "SNOWFLAKE_SCHEMA_NAME": "TMEA_AZURE_DEVOPS",
+                    "SNOWFLAKE_DATABASE_NAME": "<<LZ>>",
+                    "SNOWFLAKE_TABLE_NAME": "ZETA_PLUS"
+                },
+                "MondayConn": {
+                    "BOARD_ID": "18400360271",
+                    "api_key": "MONDAY-API-KEY-Y"
+                }
+            }
+        },
+        {
+            "id": "UTPLUS",
+            "enabled": true,
+            "WorkItemDetails": {
+                "SiteConfig": {
+                    "org_url": "https://tmeatfs1/DefaultCollection/UT%20Plus",
+                    "work_item_site": "_apis/wit/wiql?api-version=7.1&{$top}=1",
+                    "pat": "AZURE-TMEATFS1-PAT",
+                    "project_filter": "UT Plus"
+                },
+                "SnowflakeConn": {
+                    "SNOWFLAKE_SCHEMA_NAME": "TMEA_AZURE_DEVOPS",
+                    "SNOWFLAKE_DATABASE_NAME": "<<LZ>>",
+                    "SNOWFLAKE_TABLE_NAME": "UTPLUS"
+                },
+                "MondayConn": {
+                    "BOARD_ID": "18400360352",
+                    "api_key": "MONDAY-API-KEY-Y"
+                }
+            }
+        },
+        {
+            "id": "ACREVIA",
+            "enabled": true,
+            "WorkItemDetails": {
+                "SiteConfig": {
+                    "org_url": "https://tmeatfs1/DefaultCollection/GCIB300",
+                    "work_item_site": "_apis/wit/wiql?api-version=7.1&{$top}=1",
+                    "pat": "AZURE-TMEATFS1-PAT",
+                    "project_filter": "GCIB300"
+                },
+                "SnowflakeConn": {
+                    "SNOWFLAKE_SCHEMA_NAME": "TMEA_AZURE_DEVOPS",
+                    "SNOWFLAKE_DATABASE_NAME": "<<LZ>>",
+                    "SNOWFLAKE_TABLE_NAME": "ACREVIA"
+                },
+                "MondayConn": {
+                    "BOARD_ID": "18400360487",
+                    "api_key": "MONDAY-API-KEY-Y"
+                }
+            }
+        },
+        {
+            "id": "FINESTA",
+            "enabled": true,
+            "WorkItemDetails": {
+                "SiteConfig": {
+                    "org_url": "https://tmeatfs1/DefaultCollection/TacTrasPPE",
+                    "work_item_site": "_apis/wit/wiql?api-version=7.1&{$top}=1",
+                    "pat": "AZURE-TMEATFS1-PAT",
+                    "project_filter": "TacTrasPPE"
+                },
+                "SnowflakeConn": {
+                    "SNOWFLAKE_SCHEMA_NAME": "TMEA_AZURE_DEVOPS",
+                    "SNOWFLAKE_DATABASE_NAME": "<<LZ>>",
+                    "SNOWFLAKE_TABLE_NAME": "FINESTA"
+                },
+                "MondayConn": {
+                    "BOARD_ID": "18402110813",
+                    "api_key": "MONDAY-API-KEY-Y"
+                }
+            }
+        },
+        {
+            "id": "ANTARES_G3",
+            "enabled": true,
+            "WorkItemDetails": {
+                "SiteConfig": {
+                    "org_url": "https://tmeatfs1/DefaultCollection/Antares%20G3",
+                    "work_item_site": "_apis/wit/wiql?api-version=7.1&{$top}=1",
+                    "pat": "AZURE-TMEATFS1-PAT",
+                    "project_filter": "Antares G3"
+                },
+                "SnowflakeConn": {
+                    "SNOWFLAKE_SCHEMA_NAME": "TMEA_AZURE_DEVOPS",
+                    "SNOWFLAKE_DATABASE_NAME": "<<LZ>>",
+                    "SNOWFLAKE_TABLE_NAME": "ANTARES_G3"
+                },
+                "MondayConn": {
+                    "BOARD_ID": "18400360643",
+                    "api_key": "MONDAY-API-KEY-Y"
+                }
+            }
+        }
+    ]
+}

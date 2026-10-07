@@ -1,0 +1,172 @@
+{
+  "TELCUSTOMER-DIVERSESYSTEMS": {
+    "DataSet1": {
+      "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+      "table": "DELIVERY_DATE",
+      "Incremental": "NULL",
+      "sftablename": "DELIVERY_DATE",
+      "filter": ""
+    },
+    "DataSet2": {
+      "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+      "table": "DELIVERY_RECIPIENT",
+      "Incremental": "NULL",
+      "sftablename": "DELIVERY_RECIPIENT",
+      "filter": ""
+    },
+    "DataSet3": {
+      "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+      "table": "DISTRIBUTION_LIST",
+      "Incremental": "NULL",
+      "sftablename": "DISTRIBUTION_LIST",
+      "filter": ""
+    },
+    "DataSet4": {
+      "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+      "table": "DISTRIBUTION_LIST_MODEL",
+      "Incremental": "NULL",
+      "sftablename": "DISTRIBUTION_LIST_MODEL",
+      "filter": ""
+    },
+    "DataSet5": {
+      "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+      "table": "DISTRIBUTION_LIST_CONTACT",
+      "Incremental": "NULL",
+      "sftablename": "DISTRIBUTION_LIST_CONTACT",
+      "filter": ""
+    },
+    "DataSet6": {
+      "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+      "table": "DOCUMENT",
+      "Incremental": "NULL",
+      "sftablename": "DOCUMENT",
+      "filter": ""
+    },
+    "DataSet7": {
+      "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+      "table": "DOCUMENT_MODEL",
+      "Incremental": "NULL",
+      "sftablename": "DOCUMENT_MODEL",
+      "filter": ""
+    },
+    "DataSet8": {
+      "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+      "table": "DOCUMENT_VIEWS",
+      "Incremental": "NULL",
+      "sftablename": "DOCUMENT_VIEWS",
+      "filter": ""
+    },
+    "DataSet9": {
+      "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+      "table": "UGK_ASK_TEL",
+      "Incremental": "NULL",
+      "sftablename": "UGK_ASK_TEL",
+      "filter": ""
+    },
+    "DataSet10": {
+      "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+      "table": "UGK_BENEFIT",
+      "Incremental": "NULL",
+      "sftablename": "UGK_BENEFIT",
+      "filter": ""
+    },
+    "DataSet11": {
+      "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+      "table": "UGK_MODEL",
+      "Incremental": "NULL",
+      "sftablename": "UGK_MODEL",
+      "filter": ""
+    },
+    "DataSet12": {
+      "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+      "table": "UGK_REGION",
+      "Incremental": "NULL",
+      "sftablename": "UGK_REGION",
+      "filter": ""
+    },
+    "DataSet13": {
+      "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+      "table": "UGK_VIEWS",
+      "Incremental": "NULL",
+      "sftablename": "UGK_VIEWS",
+      "filter": ""
+    },
+    "DataSet14": {
+      "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+      "table": "VW_UGK_INFO",
+      "Incremental": "NULL",
+      "sftablename": "VW_UGK_INFO",
+      "filter": ""
+    },
+    "DataSet15": {
+      "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+      "table": "USER_NOTIFICATIONS",
+      "Incremental": "NULL",
+      "sftablename": "USER_NOTIFICATIONS",
+      "filter": ""
+    },
+    "DataSet16": {
+      "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+      "table": "USER_NOTIFICATIONS_HIST",
+      "Incremental": "NULL",
+      "sftablename": "USER_NOTIFICATIONS_HIST",
+      "filter": ""
+    },
+    "DataSet17": {
+      "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+      "table": "USER_ROLE",
+      "Incremental": "NULL",
+      "sftablename": "USER_ROLE",
+      "filter": ""
+    },
+    "DataSet18": {
+      "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+      "table": "REGION_MODEL",
+      "Incremental": "NULL",
+      "sftablename": "REGION_MODEL",
+      "filter": ""
+    },
+    "DataSet19": {
+      "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+      "table": "PERSONALIZATION",
+      "Incremental": "NULL",
+      "sftablename": "PERSONALIZATION",
+      "filter": ""
+    },
+    "DataSet20": {
+      "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+      "table": "PRODUCT_H",
+      "Incremental": "NULL",
+      "sftablename": "PRODUCT_H",
+      "filter": ""
+    },
+    "DataSet21": {
+      "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+      "table": "PORTAL_ROLE",
+      "Incremental": "NULL",
+      "sftablename": "PORTAL_ROLE",
+      "filter": ""
+    },
+    "DataSet22": {
+      "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+      "table": "PRODUCT_INQUIRY",
+      "Incremental": "NULL",
+      "sftablename": "PRODUCT_INQUIRY",
+      "filter": ""
+    },
+    "DataSet23": {
+      "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+      "table": "PRODUCT_NOTICE_RESPONSE",
+      "Incremental": "NULL",
+      "sftablename": "PRODUCT_NOTICE_RESPONSE",
+      "filter": ""
+    },
+    "DataSet24": {
+      "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+      "table": "TEAMROOM_SUMMARY",
+      "Incremental": "NULL",
+      "sftablename": "TEAMROOM_SUMMARY",
+      "filter": ""
+    }
+  }
+}

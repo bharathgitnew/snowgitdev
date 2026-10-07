@@ -1,0 +1,393 @@
+version: 2
+models:
+- name: ODS__CRM_FILE__ACCOUNT
+  description: Landing table for ACCOUNT file.
+  columns:
+  - name: ID
+    tests:
+    - dbt_expectations.expect_column_values_to_be_unique:
+        config:
+          alias: CRM_FILE__ACCOUNT__ID__UNIQUE
+    - dbt_expectations.expect_column_values_to_not_be_null:
+        config:
+          alias: CRM_FILE__ACCOUNT__ID__NOTNULL
+- name: ODS__CRM_FILE__ANNOTATION
+  description: Landing table for ANNOTATION file.
+- name: ODS__CRM_FILE__BOOKABLERESOURCE
+  description: Landing table for BOOKABLERESOURCE file.
+- name: ODS__CRM_FILE__BOOKABLERESOURCEBOOKING
+  description: Landing table for BOOKABLERESOURCEBOOKING file.
+- name: ODS__CRM_FILE__BOOKABLERESOURCECATEGORY
+  description: Landing table for BOOKABLERESOURCECATEGORY file.
+- name: ODS__CRM_FILE__BOOKABLERESOURCECHARACTERISTIC
+  description: Landing table for BOOKABLERESOURCECHARACTERISTIC file.
+- name: ODS__CRM_FILE__BOOKINGSTATUS
+  description: Landing table for BOOKINGSTATUS file.
+- name: ODS__CRM_FILE__BUSINESSUNIT
+  description: Landing table for BUSINESSUNIT file.
+- name: ODS__CRM_FILE__CAMPAIGN
+  description: Landing table for CAMPAIGN file.
+- name: ODS__CRM_FILE__CATEGORY
+  description: Landing table for CATEGORY file.
+- name: ODS__CRM_FILE__CNT_CNT_CONTRACTSUMMARY_ACCOUNT_FAB
+  description: Landing table for CNT_CNT_CONTRACTSUMMARY_ACCOUNT_FAB file.
+- name: ODS__CRM_FILE__CNT_CONTRACTPRODUCTGROUP
+  description: Landing table for CNT_CONTRACTPRODUCTGROUP file.
+- name: ODS__CRM_FILE__CNT_CONTRACTSCOPEMASTER
+  description: Landing table for CNT_CONTRACTSCOPEMASTER file.
+- name: ODS__CRM_FILE__CNT_CONTRACTSUMMARY
+  description: Landing table for CNT_CONTRACTSUMMARY file.
+- name: ODS__CRM_FILE__CNT_MSDYN_AGREEMENT_MSDYN_CUSTOMERASSET
+  description: Landing table for CNT_MSDYN_AGREEMENT_MSDYN_CUSTOMERASSET file.
+- name: ODS__CRM_FILE__CNT_ORDERNUMBER
+  description: Landing table for CNT_ORDERNUMBER file.
+- name: ODS__CRM_FILE__CNT_ORDERNUMBERGROUP
+  description: Landing table for CNT_ORDERNUMBERGROUP file.
+- name: ODS__CRM_FILE__CNT_SERVICEORDERINFORMATION
+  description: Landing table for CNT_SERVICEORDERINFORMATION file.
+- name: ODS__CRM_FILE__COM_ALARMCODEINFO
+  description: Landing table for COM_ALARMCODEINFO file.
+- name: ODS__CRM_FILE__COM_COUNTRYMASTER
+  description: Landing table for COM_COUNTRYMASTER file.
+- name: ODS__CRM_FILE__COM_PRODUCTLINE
+  description: Landing table for COM_PRODUCTLINE file.
+- name: ODS__CRM_FILE__COM_PRODUCTMODEL
+  description: Landing table for COM_PRODUCTMODEL file.
+- name: ODS__CRM_FILE__COM_PRODUCTSYSTEMTYPE
+  description: Landing table for COM_PRODUCTSYSTEMTYPE file.
+- name: ODS__CRM_FILE__COM_SERVICEORDERACTIVITIES_TEA
+  description: Landing table for COM_SERVICEORDERACTIVITIES_TEA file.
+- name: ODS__CRM_FILE__COM_SERVICEORDERACTUALMATERIALCOSTS_TEA
+  description: Landing table for COM_SERVICEORDERACTUALMATERIALCOSTS_TEA file.
+- name: ODS__CRM_FILE__COM_SERVICEORDERACTUALOTHERCOSTS_TEA
+  description: Landing table for COM_SERVICEORDERACTUALOTHERCOSTS_TEA file.
+- name: ODS__CRM_FILE__COM_SERVICEORDERHEADER
+  description: Landing table for COM_SERVICEORDERHEADER file.
+- name: ODS__CRM_FILE__COM_SUPPLIER
+  description: Landing table for COM_SUPPLIER file.
+- name: ODS__CRM_FILE__COM_SUPPLIERCODEMASTER
+  description: Landing table for COM_SUPPLIERCODEMASTER file.
+- name: ODS__CRM_FILE__COM_TROUBLESHOOTINGDETAILS
+  description: Landing table for COM_TROUBLESHOOTINGDETAILS file.
+- name: ODS__CRM_FILE__COMPETITOR
+  description: Landing table for COMPETITOR file.
+- name: ODS__CRM_FILE__CONTACT
+  description: Landing table for CONTACT file.
+- name: ODS__CRM_FILE__CONTRACT
+  description: Landing table for CONTRACT file.
+- name: ODS__CRM_FILE__LEAD
+  description: Landing table for LEAD file.
+- name: ODS__CRM_FILE__MSDYN_AGREEMENT
+  description: Landing table for MSDYN_AGREEMENT file.
+- name: ODS__CRM_FILE__MSDYN_BOOKINGTIMESTAMP
+  description: Landing table for MSDYN_BOOKINGTIMESTAMP file.
+- name: ODS__CRM_FILE__MSDYN_BPF_BAA0A411A239410CB8BDED8B5FDD88E3
+  description: Landing table for MSDYN_BPF_BAA0A411A239410CB8BDED8B5FDD88E3 file.
+- name: ODS__CRM_FILE__MSDYN_CUSTOMERASSET
+  description: Landing table for MSDYN_CUSTOMERASSET file.
+- name: ODS__CRM_FILE__MSDYN_INCIDENTTYPE
+  description: Landing table for MSDYN_INCIDENTTYPE file.
+- name: ODS__CRM_FILE__MSDYN_INCIDENTTYPEPRODUCT
+  description: Landing table for MSDYN_INCIDENTTYPEPRODUCT file.
+- name: ODS__CRM_FILE__MSDYN_INCIDENTTYPESERVICE
+  description: Landing table for MSDYN_INCIDENTTYPESERVICE file.
+- name: ODS__CRM_FILE__MSDYN_INCIDENTTYPESSETUP
+  description: Landing table for MSDYN_INCIDENTTYPESSETUP file.
+- name: ODS__CRM_FILE__MSDYN_ORGANIZATIONALUNIT
+  description: Landing table for MSDYN_ORGANIZATIONALUNIT file.
+- name: ODS__CRM_FILE__MSDYN_PREDICTIVESCORE
+  description: Landing table for MSDYN_PREDICTIVESCORE file.
+- name: ODS__CRM_FILE__MSDYN_PRIORITY
+  description: Landing table for MSDYN_PRIORITY file.
+- name: ODS__CRM_FILE__MSDYN_PROJECT
+  description: Landing table for MSDYN_PROJECT file.
+- name: ODS__CRM_FILE__MSDYN_PROJECTTASK
+  description: Landing table for MSDYN_PROJECTTASK file.
+- name: ODS__CRM_FILE__MSDYN_PROJECTTEAM
+  description: Landing table for MSDYN_PROJECTTEAM file.
+- name: ODS__CRM_FILE__MSDYN_PURCHASEORDER
+  description: Landing table for MSDYN_PURCHASEORDER file.
+- name: ODS__CRM_FILE__MSDYN_RESOURCEASSIGNMENT
+  description: Landing table for MSDYN_RESOURCEASSIGNMENT file.
+- name: ODS__CRM_FILE__MSDYN_RMA
+  description: Landing table for MSDYN_RMA file.
+- name: ODS__CRM_FILE__MSDYN_RMAPRODUCT
+  description: Landing table for MSDYN_RMAPRODUCT file.
+- name: ODS__CRM_FILE__MSDYN_SERVICETASKTYPE
+  description: Landing table for MSDYN_SERVICETASKTYPE file.
+- name: ODS__CRM_FILE__MSDYN_TAXCODE
+  description: Landing table for MSDYN_TAXCODE file.
+- name: ODS__CRM_FILE__MSDYN_TIMEENTRY
+  description: Landing table for MSDYN_TIMEENTRY file.
+- name: ODS__CRM_FILE__MSDYN_WAREHOUSE
+  description: Landing table for MSDYN_WAREHOUSE file.
+- name: ODS__CRM_FILE__MSDYN_WORKORDER
+  description: Landing table for MSDYN_WORKORDER file.
+- name: ODS__CRM_FILE__MSDYN_WORKORDERINCIDENT
+  description: Landing table for MSDYN_WORKORDERINCIDENT file.
+- name: ODS__CRM_FILE__MSDYN_WORKORDERPRODUCT
+  description: Landing table for MSDYN_WORKORDERPRODUCT file.
+- name: ODS__CRM_FILE__MSDYN_WORKORDERSERVICE
+  description: Landing table for MSDYN_WORKORDERSERVICE file.
+- name: ODS__CRM_FILE__MSDYN_WORKORDERSERVICETASK
+  description: Landing table for MSDYN_WORKORDERSERVICETASK file.
+- name: ODS__CRM_FILE__MSDYN_WORKORDERSUBSTATUS
+  description: Landing table for MSDYN_WORKORDERSUBSTATUS file.
+- name: ODS__CRM_FILE__MSDYN_WORKORDERTYPE
+  description: Landing table for MSDYN_WORKORDERTYPE file.
+- name: ODS__CRM_FILE__ORGANIZATION
+  description: Landing table for ORGANIZATION file.
+- name: ODS__CRM_FILE__PRICELEVEL
+  description: Landing table for PRICELEVEL file.
+- name: ODS__CRM_FILE__PRODUCT
+  description: Landing table for PRODUCT file.
+- name: ODS__CRM_FILE__PRODUCTPRICELEVEL
+  description: Landing table for PRODUCTPRICELEVEL file.
+- name: ODS__CRM_FILE__RESOURCE
+  description: Landing table for RESOURCE file.
+- name: ODS__CRM_FILE__ROLE
+  description: Landing table for ROLE file.
+- name: ODS__CRM_FILE__SM_BULK_INFO
+  description: Landing table for SM_BULK_INFO file.
+- name: ODS__CRM_FILE__SM_CALL_REPORT
+  description: Landing table for SM_CALL_REPORT file.
+- name: ODS__CRM_FILE__SM_CALL_REPORT_CALL_REPORT
+  description: Landing table for SM_CALL_REPORT_CALL_REPORT file.
+- name: ODS__CRM_FILE__SM_FAB_LINE
+  description: Landing table for SM_FAB_LINE file.
+- name: ODS__CRM_FILE__SM_INVESTMENT_MAP
+  description: Landing table for SM_INVESTMENT_MAP file.
+- name: ODS__CRM_FILE__SM_WEEKLY_REPORT_STAFF
+  description: Landing table for SM_WEEKLY_REPORT_STAFF file.
+- name: ODS__CRM_FILE__SYSTEMUSER
+  description: Landing table for SYSTEMUSER file.
+- name: ODS__CRM_FILE__SYSTEMUSERMANAGERMAP
+  description: Landing table for SYSTEMUSERMANAGERMAP file.
+- name: ODS__CRM_FILE__SYSTEMUSERROLES
+  description: Landing table for SYSTEMUSERROLES file.
+- name: ODS__CRM_FILE__TEAM
+  description: Landing table for TEAM file.
+- name: ODS__CRM_FILE__TEAMMEMBERSHIP
+  description: Landing table for TEAMMEMBERSHIP file.
+- name: ODS__CRM_FILE__TEAMROLES
+  description: Landing table for TEAMROLES file.
+- name: ODS__CRM_FILE__TEL_CNT_SALESCATEGORYBYCONTRACTMASTER
+  description: Landing table for TEL_CNT_SALESCATEGORYBYCONTRACTMASTER file.
+- name: ODS__CRM_FILE__TEL_COM_2DIGITSBU
+  description: Landing table for TEL_COM_2DIGITSBU file.
+- name: ODS__CRM_FILE__TEL_COM_ALARMCODEMASTER
+  description: Landing table for TEL_COM_ALARMCODEMASTER file.
+- name: ODS__CRM_FILE__TEL_COM_BPFESCALATIONISSUE
+  description: Landing table for TEL_COM_BPFESCALATIONISSUE file.
+- name: ODS__CRM_FILE__TEL_COM_CONCESSION_REASON
+  description: Landing table for TEL_COM_CONCESSION_REASON file.
+- name: ODS__CRM_FILE__TEL_COM_DECONTAMINATION
+  description: Landing table for TEL_COM_DECONTAMINATION file.
+- name: ODS__CRM_FILE__TEL_COM_ESCALATIONCATEGORY
+  description: Landing table for TEL_COM_ESCALATIONCATEGORY file.
+- name: ODS__CRM_FILE__TEL_COM_ESCALATIONISSUE
+  description: Landing table for TEL_COM_ESCALATIONISSUE file.
+- name: ODS__CRM_FILE__TEL_COM_ESCALATIONLEVEL
+  description: Landing table for TEL_COM_ESCALATIONLEVEL file.
+- name: ODS__CRM_FILE__TEL_COM_ESCALATIONPART
+  description: Landing table for TEL_COM_ESCALATIONPART file.
+- name: ODS__CRM_FILE__TEL_COM_ESCALATIONREASON
+  description: Landing table for TEL_COM_ESCALATIONREASON file.
+- name: ODS__CRM_FILE__TEL_COM_ESCALATIONTEAMMEMBER
+  description: Landing table for TEL_COM_ESCALATIONTEAMMEMBER file.
+- name: ODS__CRM_FILE__TEL_COM_MATERIAL
+  description: Landing table for TEL_COM_MATERIAL file.
+- name: ODS__CRM_FILE__TEL_COM_MATERIALGROUPMASTER
+  description: Landing table for TEL_COM_MATERIALGROUPMASTER file.
+- name: ODS__CRM_FILE__TEL_COM_ORDER_TYPE
+  description: Landing table for TEL_COM_ORDER_TYPE file.
+- name: ODS__CRM_FILE__TEL_COM_PARTINVENTORYTYPERULE
+  description: Landing table for TEL_COM_PARTINVENTORYTYPERULE file.
+- name: ODS__CRM_FILE__TEL_COM_PARTINVENTORYWAREHOUSERULE
+  description: Landing table for TEL_COM_PARTINVENTORYWAREHOUSERULE file.
+- name: ODS__CRM_FILE__TEL_COM_PLANT
+  description: Landing table for TEL_COM_PLANT file.
+- name: ODS__CRM_FILE__TEL_COM_PROFITCENTER
+  description: Landing table for TEL_COM_PROFITCENTER file.
+- name: ODS__CRM_FILE__TEL_COM_SALES_DISTRICT
+  description: Landing table for TEL_COM_SALES_DISTRICT file.
+- name: ODS__CRM_FILE__TEL_COM_SALES_ORGANIZATION
+  description: Landing table for TEL_COM_SALES_ORGANIZATION file.
+- name: ODS__CRM_FILE__TEL_COM_SALESCATEGORYMASTER
+  description: Landing table for TEL_COM_SALESCATEGORYMASTER file.
+- name: ODS__CRM_FILE__TEL_COM_SALESDOCUMENTITEMCATEGORYMASTER
+  description: Landing table for TEL_COM_SALESDOCUMENTITEMCATEGORYMASTER file.
+- name: ODS__CRM_FILE__TEL_COM_SALESDOCUMENTTYPESMASTER
+  description: Landing table for TEL_COM_SALESDOCUMENTTYPESMASTER file.
+- name: ODS__CRM_FILE__TEL_COM_SALESORDERHEADER
+  description: Landing table for TEL_COM_SALESORDERHEADER file.
+- name: ODS__CRM_FILE__TEL_COM_SALESORDERITEM
+  description: Landing table for TEL_COM_SALESORDERITEM file.
+- name: ODS__CRM_FILE__TEL_OPPORTUNITY_TEL_SM_OPPORTUNITY_GROUP
+  description: Landing table for TEL_OPPORTUNITY_TEL_SM_OPPORTUNITY_GROUP file.
+- name: ODS__CRM_FILE__TEL_PO_CAPACITYDETAIL
+  description: Landing table for TEL_PO_CAPACITYDETAIL file.
+- name: ODS__CRM_FILE__TEL_PO_CAPACITYHEADER
+  description: Landing table for TEL_PO_CAPACITYHEADER file.
+- name: ODS__CRM_FILE__TEL_PO_CAPACITYMODELGROUP
+  description: Landing table for TEL_PO_CAPACITYMODELGROUP file.
+- name: ODS__CRM_FILE__TEL_PSA_MILESTONE
+  description: Landing table for TEL_PSA_MILESTONE file.
+- name: ODS__CRM_FILE__TEL_PSA_PROJECTTASKSNAPSHOT
+  description: Landing table for TEL_PSA_PROJECTTASKSNAPSHOT file.
+- name: ODS__CRM_FILE__TEL_PSA_PSABPFPROJECT
+  description: Landing table for TEL_PSA_PSABPFPROJECT file.
+- name: ODS__CRM_FILE__TEL_PSA_SNAPSHOT
+  description: Landing table for TEL_PSA_SNAPSHOT file.
+- name: ODS__CRM_FILE__TEL_PSA_TASKCATEGORY
+  description: Landing table for TEL_PSA_TASKCATEGORY file.
+- name: ODS__CRM_FILE__TEL_PSA_TASKMASTER
+  description: Landing table for TEL_PSA_TASKMASTER file.
+- name: ODS__CRM_FILE__TEL_SM_ADJUST_ORDER
+  description: Landing table for TEL_SM_ADJUST_ORDER file.
+- name: ODS__CRM_FILE__TEL_SM_BULK_APPROVAL_HISTORY
+  description: Landing table for TEL_SM_BULK_APPROVAL_HISTORY file.
+- name: ODS__CRM_FILE__TEL_SM_BULK_APPROVAL_REQUEST
+  description: Landing table for TEL_SM_BULK_APPROVAL_REQUEST file.
+- name: ODS__CRM_FILE__TEL_SM_BULK_HEADER
+  description: Landing table for TEL_SM_BULK_HEADER file.
+- name: ODS__CRM_FILE__TEL_SM_CHAMBER
+  description: Landing table for TEL_SM_CHAMBER file.
+- name: ODS__CRM_FILE__TEL_SM_CONSUMABLE_NON_CONSUMABLE
+  description: Landing table for TEL_SM_CONSUMABLE_NON_CONSUMABLE file.
+- name: ODS__CRM_FILE__TEL_SM_CONTRACTTYPE
+  description: Landing table for TEL_SM_CONTRACTTYPE file.
+- name: ODS__CRM_FILE__TEL_SM_COST_CENTER_GROUP
+  description: Landing table for TEL_SM_COST_CENTER_GROUP file.
+- name: ODS__CRM_FILE__TEL_SM_CUSTOMER_BUSINESS_TYPE
+  description: Landing table for TEL_SM_CUSTOMER_BUSINESS_TYPE file.
+- name: ODS__CRM_FILE__TEL_SM_DEVICE_TYPE
+  description: Landing table for TEL_SM_DEVICE_TYPE file.
+- name: ODS__CRM_FILE__TEL_SM_END_USER_GROSS_MARGIN
+  description: Landing table for TEL_SM_END_USER_GROSS_MARGIN file.
+- name: ODS__CRM_FILE__TEL_SM_EXCHANGE_RATE_MASTER
+  description: Landing table for TEL_SM_EXCHANGE_RATE_MASTER file.
+- name: ODS__CRM_FILE__TEL_SM_FRONT_BACK_END
+  description: Landing table for TEL_SM_FRONT_BACK_END file.
+- name: ODS__CRM_FILE__TEL_SM_LEAD_TIME
+  description: Landing table for TEL_SM_LEAD_TIME file.
+- name: ODS__CRM_FILE__TEL_SM_MATERIAL_GROUP
+  description: Landing table for TEL_SM_MATERIAL_GROUP file.
+- name: ODS__CRM_FILE__TEL_SM_MODEL
+  description: Landing table for TEL_SM_MODEL file.
+- name: ODS__CRM_FILE__TEL_SM_MODULE
+  description: Landing table for TEL_SM_MODULE file.
+- name: ODS__CRM_FILE__TEL_SM_MODULE_TYPE
+  description: Landing table for TEL_SM_MODULE_TYPE file.
+- name: ODS__CRM_FILE__TEL_SM_NODE
+  description: Landing table for TEL_SM_NODE file.
+- name: ODS__CRM_FILE__TEL_SM_OPPORTUNITY_GROUP
+  description: Landing table for TEL_SM_OPPORTUNITY_GROUP file.
+- name: ODS__CRM_FILE__TEL_SM_P_L_CATEGORY
+  description: Landing table for TEL_SM_P_L_CATEGORY file.
+- name: ODS__CRM_FILE__TEL_SM_PROCESS
+  description: Landing table for TEL_SM_PROCESS file.
+- name: ODS__CRM_FILE__TEL_SM_PURCHASE_DOCUMENT
+  description: Landing table for TEL_SM_PURCHASE_DOCUMENT file.
+- name: ODS__CRM_FILE__TEL_SM_REV_REC_CRITERIA_AFTER
+  description: Landing table for TEL_SM_REV_REC_CRITERIA_AFTER file.
+- name: ODS__CRM_FILE__TEL_SM_REV_REC_CRITERIA_BEFORE_EQUIP
+  description: Landing table for TEL_SM_REV_REC_CRITERIA_BEFORE_EQUIP file.
+- name: ODS__CRM_FILE__TEL_SM_REV_REC_CRITERIA_BEFORE_MOD
+  description: Landing table for TEL_SM_REV_REC_CRITERIA_BEFORE_MOD file.
+- name: ODS__CRM_FILE__TEL_SM_REVENUE_RECOGNITION_CRITERIA
+  description: Landing table for TEL_SM_REVENUE_RECOGNITION_CRITERIA file.
+- name: ODS__CRM_FILE__TEL_SM_SALES_CATEGORY_MAPPING_MASTER
+  description: Landing table for TEL_SM_SALES_CATEGORY_MAPPING_MASTER file.
+- name: ODS__CRM_FILE__TEL_SM_SALES_DOCUMENT
+  description: Landing table for TEL_SM_SALES_DOCUMENT file.
+- name: ODS__CRM_FILE__TEL_SM_SALES_FCST_CONTRACT
+  description: Landing table for TEL_SM_SALES_FCST_CONTRACT file.
+- name: ODS__CRM_FILE__TEL_SM_SALES_SPLIT_TARGET_BU
+  description: Landing table for TEL_SM_SALES_SPLIT_TARGET_BU file.
+- name: ODS__CRM_FILE__TEL_SM_SALES_SPLIT_TARGET_MODEL
+  description: Landing table for TEL_SM_SALES_SPLIT_TARGET_MODEL file.
+- name: ODS__CRM_FILE__TEL_SM_SERVICE_OFFICE
+  description: Landing table for TEL_SM_SERVICE_OFFICE file.
+- name: ODS__CRM_FILE__TEL_SM_SERVICE_OPPORTUNITY
+  description: Landing table for TEL_SM_SERVICE_OPPORTUNITY file.
+- name: ODS__CRM_FILE__TEL_SM_SPECIFICATION
+  description: Landing table for TEL_SM_SPECIFICATION file.
+- name: ODS__CRM_FILE__TEL_SM_SPECIFICATION_PRODUCT
+  description: Landing table for TEL_SM_SPECIFICATION_PRODUCT file.
+- name: ODS__CRM_FILE__TEL_SM_SUB_CATEGORY
+  description: Landing table for TEL_SM_SUB_CATEGORY file.
+- name: ODS__CRM_FILE__TEL_SM_TECHNICAL_ACCEPTANCE_LEAD_TIME
+  description: Landing table for TEL_SM_TECHNICAL_ACCEPTANCE_LEAD_TIME file.
+- name: ODS__CRM_FILE__TEL_SM_WAFER_SIZE_GENERATION
+  description: Landing table for TEL_SM_WAFER_SIZE_GENERATION file.
+- name: ODS__CRM_FILE__TEL_SM_WARRANTY
+  description: Landing table for TEL_SM_WARRANTY file.
+- name: ODS__CRM_FILE__TEL_SM_WBS_MANAGE
+  description: Landing table for TEL_SM_WBS_MANAGE file.
+- name: ODS__CRM_FILE__TEL_TEL_SM_SERVICE_OPPORTUNITY_TEL_SM_OPPOR
+  description: Landing table for TEL_TEL_SM_SERVICE_OPPORTUNITY_TEL_SM_OPPOR file.
+- name: ODS__CRM_FILE__TEL_WO_FCNSITARGETMACHINE
+  description: Landing table for TEL_WO_FCNSITARGETMACHINE file.
+- name: ODS__CRM_FILE__TEL_WO_INSTALLATION
+  description: Landing table for TEL_WO_INSTALLATION file.
+- name: ODS__CRM_FILE__TEL_WO_NCDRREASON
+  description: Landing table for TEL_WO_NCDRREASON file.
+- name: ODS__CRM_FILE__TEL_WO_PARTCATEGORY
+  description: Landing table for TEL_WO_PARTCATEGORY file.
+- name: ODS__CRM_FILE__TEL_WO_PARTORDERPROCESS
+  description: Landing table for TEL_WO_PARTORDERPROCESS file.
+- name: ODS__CRM_FILE__TEL_WO_PARTSUBCATEGORY
+  description: Landing table for TEL_WO_PARTSUBCATEGORY file.
+- name: ODS__CRM_FILE__TEL_WO_RELATEDSN
+  description: Landing table for TEL_WO_RELATEDSN file.
+- name: ODS__CRM_FILE__TERRITORY
+  description: Landing table for TERRITORY file.
+- name: ODS__CRM_FILE__TIMEZONEDEFINITION
+  description: Landing table for TIMEZONEDEFINITION file.
+- name: ODS__CRM_FILE__TIMEZONERULE
+  description: Landing table for TIMEZONERULE file.
+- name: ODS__CRM_FILE__TRANSACTIONCURRENCY
+  description: Landing table for TRANSACTIONCURRENCY file.
+- name: ODS__CRM_FILE__TSC_ACTIVITYHISTORY
+  description: Landing table for TSC_ACTIVITYHISTORY file.
+- name: ODS__CRM_FILE__TSC_KEYWORD
+  description: Landing table for TSC_KEYWORD file.
+- name: ODS__CRM_FILE__TSC_PARTSINFO
+  description: Landing table for TSC_PARTSINFO file.
+- name: ODS__CRM_FILE__TSC_ROOT_CAUSE
+  description: Landing table for TSC_ROOT_CAUSE file.
+- name: ODS__CRM_FILE__UOM
+  description: Landing table for UOM file.
+- name: ODS__CRM_FILE__USERSETTINGS
+  description: Landing table for USERSETTINGS file.
+- name: ODS__CRM_FILE__WO_APPROVAL_HISTORY
+  description: Landing table for WO_APPROVAL_HISTORY file.
+- name: ODS__CRM_FILE__WO_ESCALATIONHISTORY
+  description: Landing table for WO_ESCALATIONHISTORY file.
+- name: ODS__CRM_FILE__WO_TASK2
+  description: Landing table for WO_TASK2 file.
+- name: ODS__CRM_FILE__WO_TYPEOFWORK
+  description: Landing table for WO_TYPEOFWORK file.
+- name: ODS__CRM_FILE__WO_WORKORDERACTIVITY
+  description: Landing table for WO_WORKORDERACTIVITY file.
+- name: ODS__CRM_FILE__INCIDENT
+  description: Landing table for INCIDENT file.
+- name: ODS__CRM_FILE__OPPORTUNITY
+  description: Landing table for OPPORTUNITY file.
+- name: ODS__CRM_FILE__TEL_SM_BULK_FCST
+  description: Landing table for TEL_SM_BULK_FCST file.
+- name: ODS__CRM_FILE__TEL_SM_SIRFISFCST
+  description: Landing table for TEL_SM_SIRFISFCST file.
+- name: ODS__CRM_FILE__STATEMETADATA
+  description: Landing table for STATEMETADATA file.
+- name: ODS__CRM_FILE__STATUSMETADATA
+  description: Landing table for STATUSMETADATA file.
+- name: ODS__CRM_FILE__GLOBALOPTIONSETMETADATA
+  description: Landing table for GLOBALOPTIONSETMETADATA file.
+- name: ODS__CRM_FILE__OPTIONSETMETADATA
+  description: Landing table for OPTIONSETMETADATA file.
+- name: ODS__CRM_FILE__TARGETMETADATA
+  description: Landing table for TARGETMETADATA file.
+- name: ODS__CRM_FILE__ATTRIBUTEMETADATA
+  description: Landing table for ATTRIBUTEMETADATA file.

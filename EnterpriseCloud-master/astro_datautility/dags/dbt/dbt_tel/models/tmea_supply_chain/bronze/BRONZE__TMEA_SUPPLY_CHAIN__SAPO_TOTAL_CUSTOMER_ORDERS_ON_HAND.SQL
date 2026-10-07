@@ -1,0 +1,90 @@
+{{ config(
+        materialized='tel_incremental',
+        incremental_strategy='merge',
+        alias='SAPO_TOTAL_CUSTOMER_ORDERS_ON_HAND',
+        unique_key = ['MANDT',
+    'MATNR',
+    'WERKS',
+    'SOBKZ',
+    'VBELN',
+    'POSNR'],
+        transient=false
+) }}
+
+with source_data as (
+	SELECT 
+	_CAPTUREDATETIME,
+	MANDT,
+	MATNR,
+	WERKS,
+	SOBKZ,
+	VBELN,
+	POSNR,
+	LFGJA,
+	LFMON,
+	SALAB,
+	SAINS,
+	SASPE,
+	SAEIN,
+	ERSDA,
+	KZBWS,
+	SATRA,
+	SARUE,
+	SABWE
+	FROM {{source('SAP_ORACLE_LIVE', 'MSSA')}}
+),
+
+
+transform_data as 
+(
+SELECT
+    '{{ invocation_id }}' AS _AUDIT_LOG_ID,
+    SHA2('hash_me') as _ROW_HASH,
+    _CAPTUREDATETIME,
+	MANDT as MANDT,
+	MATNR as MATNR,
+	WERKS as WERKS,
+	SOBKZ as SOBKZ,
+	VBELN as VBELN,
+	POSNR as POSNR,
+	LFGJA as LFGJA,
+	LFMON as LFMON,
+	SALAB as SALAB,
+	SAINS as SAINS,
+	SASPE as SASPE,
+	SAEIN as SAEIN,
+	ERSDA as ERSDA,
+	KZBWS as KZBWS,
+	SATRA as SATRA,
+	SARUE as SARUE,
+	SABWE as SABWE
+	FROM SOURCE_DATA
+), 
+
+type_data as 
+(
+SELECT 
+	CAST(_AUDIT_LOG_ID AS VARCHAR(128)) AS _AUDIT_LOG_ID,
+	CAST(_ROW_HASH AS VARCHAR(128)) AS _ROW_HASH,
+	CAST(_CAPTUREDATETIME AS TIMESTAMP_LTZ(9)) AS _CAPTUREDATETIME,
+	MANDT,
+	MATNR,
+	WERKS,
+	SOBKZ,
+	VBELN,
+	POSNR,
+	LFGJA,
+	LFMON,
+	CAST(SALAB AS NUMBER(38,10)) AS SALAB,
+	CAST(SAINS AS NUMBER(38,10)) AS SAINS,
+	CAST(SASPE AS NUMBER(38,10)) AS SASPE,
+	CAST(SAEIN AS NUMBER(38,10)) AS SAEIN,
+	ERSDA,
+	KZBWS,
+	CAST(SATRA AS NUMBER(38,10)) AS SATRA,
+	SARUE,
+	CAST(SABWE AS NUMBER(38,10)) AS SABWE
+FROM TRANSFORM_DATA
+)
+ 
+SELECT * FROM TYPE_DATA

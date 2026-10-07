@@ -1,0 +1,25 @@
+models:
+- name: GOLD__TMEA_FINANCE__ACTUAL_LINE_ITEMS_PROFITABILITY_ANALYSIS
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_FINANCE__COST_CENTER_ACCOUNT_VARIANCE
+  tests:
+  - recently_run
+- name: GOLD__TMEA_FINANCE__COST_CENTER_ACCOUNT_VARIANCE_2
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_FINANCE__COST_CENTRE_ANALYSIS
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_FINANCE__COST_CENTRE_DRILL_DOWN
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_FINANCE__DIM_INTERNAL_ORDERS_WITH_PLAN
+  tests:
+  - has_data
+  - recently_run
+

@@ -1,0 +1,74 @@
+{
+    "ThreePL": {
+        "DataSet1": {
+            "schema": "dbo",
+            "table": "TPL_Shipment_Line_Detail",
+            "Incremental": "NULL",
+            "sftablename": "TPL_Shipment_Line_Detail",
+            "filter": ""
+        },
+        "DataSet2": {
+            "schema": "dbo",
+            "table": "TPL_Shipment_Status",
+            "Incremental": "NULL",
+            "sftablename": "TPL_Shipment_Status",
+            "filter": ""
+        },
+        "DataSet3": {
+            "schema": "dbo",
+            "table": "TPL_Ship_Request",
+            "Incremental": "NULL",
+            "sftablename": "TPL_Ship_Request",
+            "filter": ""
+        },
+        "DataSet4": {
+            "schema": "dbo",
+            "table": "TPL_Shipment_Confirmation",
+            "Incremental": "NULL",
+            "sftablename": "TPL_Shipment_Confirmation",
+            "filter": ""
+        },
+        "DataSet5": {
+            "schema": "dbo",
+            "table": "TPL_Storage_Location",
+            "Incremental": "NULL",
+            "sftablename": "TPL_Storage_Location",
+            "filter": ""
+        },
+        "DataSet6": {
+            "schema": "dbo",
+            "table": "TPL_ASN_Supplier",
+            "Incremental": "NULL",
+            "sftablename": "TPL_ASN_Supplier",
+            "filter": ""
+        },
+        "DataSet7": {
+            "schema": "dbo",
+            "table": "TPL_ASN",
+            "Incremental": "NULL",
+            "sftablename": "TPL_ASN",
+            "filter": ""
+        },
+        "DataSet8": {
+            "schema": "dbo",
+            "table": "TPL_Receiving_Advice",
+            "Incremental": "NULL",
+            "sftablename": "TPL_Receiving_Advice",
+            "filter": ""
+        },
+        "DataSet9": {
+            "schema": "dbo",
+            "table": "TPL_Delivery_Type",
+            "Incremental": "NULL",
+            "sftablename": "TPL_Delivery_Type",
+            "filter": ""
+        },
+        "DataSet10": {
+            "schema": "dbo",
+            "table": "TPL_Shipping_Information",
+            "Incremental": "NULL",
+            "sftablename": "TPL_Shipping_Information",
+            "filter": ""
+        }
+    }
+}

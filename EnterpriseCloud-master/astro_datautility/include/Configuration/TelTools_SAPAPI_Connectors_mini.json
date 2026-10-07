@@ -1,0 +1,52 @@
+{ 
+    "SAPAPI": {
+        "PROD": {
+            "APP_ID": "0b9a4baf",
+            "URL": "http://cdsv-odata-3scale-apicast-production.usr.ocp.tel.com/v1/odata/",
+            "CLIENT": "client100",
+            "METHOD": "/sap/opu/odata/sap/",
+            "CONFIG_FILE_PATH": "F:\\Shares\\astro_datautility\\include\\Configuration",
+            "INCREMENTAL_FILE_PATH": "F:\\Shares\\Files\\TokyoElectron\\Python\\RuntimeConfig",
+            "FILE_OUT": "/usr/local/airflow/include/",
+            "USER_NAME": "IF_API_SNOWF",
+            "SAP_API_KEY": "SAP-API-KEY",
+            "THREADS": "20"
+        },
+        "DEV": {
+            "APP_ID": "f507a79b",
+            "URL": "http://stg-cdsv-odata-3scale-apicast-production.apps.west.cl.ocp.tel.com/v1/odata/",
+            "CLIENT": "client210",
+            "METHOD": "/sap/opu/odata/sap/",
+            "CONFIG_FILE_PATH": "F:\\Shares\\astro_datautility\\include\\Configuration",
+            "INCREMENTAL_FILE_PATH": "F:\\Shares\\Files\\TokyoElectron\\Python\\RuntimeConfig",
+            "FILE_OUT": "/usr/local/airflow/include/",
+            "USER_NAME": "IF_API_SNOWF",
+            "SAP_API_KEY": "SAP-API-KEY-QA",
+            "THREADS": "8"
+        },
+        "SIT": {
+            "APP_ID": "f507a79b",
+            "URL": "http://stg-cdsv-odata-3scale-apicast-production.apps.west.cl.ocp.tel.com/v1/odata/",
+            "CLIENT": "client210",
+            "METHOD": "/sap/opu/odata/sap/",
+            "CONFIG_FILE_PATH": "F:\\Shares\\astro_datautility\\include\\Configuration",
+            "INCREMENTAL_FILE_PATH": "F:\\Shares\\Files\\TokyoElectron\\Python\\RuntimeConfig",
+            "FILE_OUT": "/usr/local/airflow/include/",
+            "USER_NAME": "IF_API_SNOWF",
+            "SAP_API_KEY": "SAP-API-KEY-QA",
+            "THREADS": "8"
+        },
+        "QA": {
+            "APP_ID": "f507a79b",
+            "URL": "http://stg-cdsv-odata-3scale-apicast-production.apps.west.cl.ocp.tel.com/v1/odata/",
+            "CLIENT": "client210",
+            "METHOD": "/sap/opu/odata/sap/",
+            "CONFIG_FILE_PATH": "F:\\Shares\\astro_datautility\\include\\Configuration",
+            "INCREMENTAL_FILE_PATH": "F:\\Shares\\Files\\TokyoElectron\\Python\\RuntimeConfig",
+            "FILE_OUT": "/usr/local/airflow/include/",
+            "USER_NAME": "IF_API_SNOWF",
+            "SAP_API_KEY": "SAP-API-KEY-QA",
+            "THREADS": "8"
+        }
+    }
+}

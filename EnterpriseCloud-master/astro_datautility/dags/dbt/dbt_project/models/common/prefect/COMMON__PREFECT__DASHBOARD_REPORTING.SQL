@@ -1,0 +1,62 @@
+{{ config(
+    materialized='incremental',
+    incremental_strategy='insert_overwrite',
+    alias='DASHBOARD_REPORTING'
+) }}
+
+with common_flow as
+(
+  SELECT *
+  FROM {{ ref('COMMON__PREFECT__FLOW') }}
+)
+,common_flow_run as
+(
+  SELECT *
+  FROM {{ ref('COMMON__PREFECT__FLOW_RUN') }}
+)
+,source_data as
+(
+    SELECT
+        FLOW.NAME AS FLOW_NAME
+        ,FLOW_RUN.PARAMETERS AS PARAMETERS
+        ,FLOW_RUN.LABELS AS RUN_ENVIRONMENT
+        ,FLOW_RUN.NAME AS FLOW_RUN_NAME
+        ,FLOW_RUN.START_TIME AS START_TIME
+        ,FLOW_RUN.END_TIME AS END_TIME
+        ,FLOW_RUN.STATE AS RUN_STATE
+        ,datediff('seconds',FLOW_RUN.start_time,FLOW_RUN.end_time) as RUN_TIME_IN_SECONDS
+    FROM 
+        common_flow as FLOW
+        ,common_flow_run as FLOW_RUN
+    where 
+        FLOW.ID=FLOW_RUN.FLOW_ID
+        AND FLOW_RUN.LABELS like ('%TELUSDWAPPPROD%')
+    ORDER BY FLOW_RUN.START_TIME
+)
+,transform_data as
+(
+    SELECT
+         FLOW_NAME as FLOW_NAME
+        ,FLOW_RUN_NAME AS FLOW_RUN_NAME
+        ,RUN_ENVIRONMENT AS RUN_ENVIRONMENT
+        ,PARAMETERS AS PARAMETERS
+        ,START_TIME AS START_TIME
+        ,END_TIME AS END_TIME
+        ,RUN_STATE AS RUN_STATE
+        ,RUN_TIME_IN_SECONDS AS RUN_TIME_IN_SECONDS
+    FROM source_data
+)
+, type_data AS
+(
+    SELECT
+         CAST(FLOW_NAME AS VARCHAR(16777216))  AS FLOW_NAME
+        ,CAST(FLOW_RUN_NAME AS VARCHAR(16777216))  AS FLOW_RUN_NAME
+        ,CAST(RUN_ENVIRONMENT AS VARCHAR(16777216))  AS RUN_ENVIRONMENT
+        ,CAST(PARAMETERS AS VARCHAR(16777216))  AS PARAMETERS
+        ,CAST(START_TIME AS VARCHAR(16777216))  AS START_TIME
+        ,CAST(END_TIME AS VARCHAR(16777216))  AS END_TIME
+        ,CAST(RUN_STATE AS VARCHAR(16777216))  AS RUN_STATE
+        ,CAST(RUN_TIME_IN_SECONDS AS VARCHAR(16777216))  AS RUN_TIME_IN_SECONDS
+    FROM transform_data
+)
+select * from type_data

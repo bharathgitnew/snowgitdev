@@ -1,0 +1,244 @@
+version: 2
+sources:
+- name: SHAREPOINT
+  description: Landing Zone - SHAREPOINT Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: SHAREPOINT
+  tables:
+  - name: CUSTOMER_GROUP_MAPPING
+    identifier: CUSTOMER_GROUP_MAPPING
+    description: Landing table for CUSTOMER_GROUP_MAPPING file.
+  - name: SERVICE_B_CODE_MAPPING
+    identifier: SERVICE_B_CODE_MAPPING
+    description: Landing table for SERVICE_B_CODE_MAPPING file.
+  - name: CUSTOMER_MAPPING_SERVICE
+    identifier: CUSTOMER_MAPPING_SERVICE
+    description: Landing table for CUSTOMER_MAPPING_SERVICE file.
+  - name: SERVICE_BUSINESS_UNIT_MAPPING
+    identifier: SERVICE_BUSINESS_UNIT_MAPPING
+    description: Landing table for SERVICE_BUSINESS_UNIT_MAPPING file.
+  - name: SERVICE_SEGMENT_MAPPING
+    identifier: SERVICE_SEGMENT_MAPPING
+    description: Landing table for SERVICE_SEGMENT_MAPPING file.
+  - name: SERVICE_PRODUCT_TYPE_MAPPING
+    identifier: SERVICE_PRODUCT_TYPE_MAPPING
+    description: Landing table for SERVICE_PRODUCT_TYPE_MAPPING file.
+  - name: TAS_TYPE_OF_WORK_MAPPING
+    identifier: TAS_TYPE_OF_WORK_MAPPING
+    description: Landing table for TAS_TYPE_OF_WORK_MAPPING file.
+  - name: SERVICE_OFFICE_MAPPING
+    identifier: SERVICE_OFFICE_MAPPING
+    description: Landing table for SERVICE_OFFICE_MAPPING file.
+  - name: MACHINE_MODEL_MAPPING
+    identifier: MACHINE_MODEL_MAPPING
+    description: Landing table for MACHINE_MODEL_MAPPING file.
+  - name: ENGINEERING_ACTION_REQUEST
+    identifier: ENGINEERING_ACTION_REQUEST
+    description: Landing table for ENGINEERING_ACTION_REQUEST file.
+  - name: REQUEST_FOR_QUOTE
+    identifier: REQUEST_FOR_QUOTE
+    description: Landing table for REQUEST_FOR_QUOTE file.
+  - name: SERVICE_CONTRACTS_FLEX_TSRS
+    identifier: SERVICE_CONTRACTS_FLEX_TSRS
+    description: Landing table for SERVICE_CONTRACTS_FLEX_TSRS file.
+  - name: LISTS
+    identifier: Lists
+    description: Landing table for Lists file.
+  - name: SHIPPING_ADVICE_LIST
+    identifier: Shipping_Advice_List
+    description: Landing table for Shipping_Advice_List file.
+  - name: OPT_PURCHASE_ORDER
+    identifier: OPT_PURCHASE_ORDER
+    description: Landing table for OPT_PURCHASE_ORDER file.
+  - name: PAID_SERVICE_QUOTE
+    identifier: Paid_Service_Quote
+    description: Landing table for Paid_Service_Quote file.
+  - name: PAID_SERVICE_SO_REQUEST
+    identifier: PAID_SERVICE_SO_REQUEST
+    description: Landing table for PAID_SERVICE_SO_REQUEST file.
+  - name: PAID_SERVICE_CUSTOMER_PO
+    identifier: PAID_SERVICE_CUSTOMER_PO
+    description: Landing table for PAID_SERVICE_CUSTOMER_PO file.
+  - name: CUSTOMER_DEMO
+    identifier: CUSTOMER_DEMO
+    description: Landing table for CUSTOMER_DEMO file.
+  - name: DESIGN_CONTROL
+    identifier: DESIGN_CONTROL
+    description: Landing table for DESIGN_CONTROL file.
+  - name: CUE_REPAIR_TICKET
+    identifier: CUE_REPAIR_TICKET
+    description: Landing table for CUE_REPAIR_TICKET file.
+  - name: INCOMING_PART_INSPECTION
+    identifier: INCOMING_PART_INSPECTION
+    description: Landing table for INCOMING_PART_INSPECTION file.
+  - name: LZ_CUE_REPAIR_TICKET_ONLINE
+    identifier: CUE_REPAIR_TICKET_ONLINE
+    description: Landing table for CUE_REPAIR_TICKET_ONLINE file.
+  - name: LZ_INCOMING_PART_INSPECTION_ONLINE
+    identifier: INCOMING_PART_INSPECTION_ONLINE
+    description: Landing table for INCOMING_PART_INSPECTION_ONLINE file.
+  - name: LZ_GOOD_CATCH_TRACKER
+    identifier: GOOD_CATCH_TRACKER
+    description: Landing table for GOOD_CATCH_TRACKER file.
+  - name: LZ_SCORECARD_SUPPLIER_GOAL_MAPPING
+    identifier: SCORECARD_SUPPLIER_GOAL_MAPPING
+    description: Landing table for SCORECARD_SUPPLIER_GOAL_MAPPING file.
+  - name: LZ_SUPPLIER_DETAILS
+    identifier: SUPPLIER_DETAILS
+    description: Landing table for SUPPLIER_DETAILS file.
+  - name: LZ_TTCA_OPPORTUNITY_LIST
+    identifier: TTCA_OPPORTUNITY_LIST
+    description: Landing table for TTCA_OPPORTUNITY_LIST file.
+  - name: SCR_CYCLE_TIME_GOALS_BY_GROUP
+    identifier: SCR_CYCLE_TIME_GOALS_BY_GROUP
+    description: Landing table for SCR_CYCLE_TIME_GOALS_BY_GROUP file.
+  - name: TMEA_MANAGEMENT_KPI_GOALS
+    identifier: TMEA_MANAGEMENT_KPI_GOALS
+    description: Landing table for TMEA_MANAGEMENT_KPI_GOALS.
+  - name: TMEA_ENVIRONMENTAL_KPI
+    identifier: TMEA_ENVIRONMENTAL_KPI
+    description: Landing table for TMEA_ENVIRONMENTAL_KPI.
+  - name: CUSTOMER
+    identifier: CUSTOMER
+    description: Landing table for CUSTOMER.
+  - name: DEPARTMENT
+    identifier: DEPARTMENT
+    description: Landing table for DEPARTMENT.
+  - name: GL_ACCOUNT
+    identifier: GL_ACCOUNT
+    description: Landing table for GL_ACCOUNT.
+  - name: REGION
+    identifier: REGION
+    description: Landing table for REGION.
+  - name: SALES_CATEGORY
+    identifier: SALES_CATEGORY
+    description: Landing table for SALES_CATEGORY.
+  - name: SEGMENT
+    identifier: SEGMENT
+    description: Landing table for SEGMENT.
+  - name: ORACLE_PC_MGMT_HIERARCHY
+    identifier: ORACLE_PC_MGMT_HIERARCHY
+    description: Landing table for ORACLE_PC_MGMT_HIERARCHY.
+  - name: OVERALL_SUPPLIER_SCORECARD_GOAL
+    identifier: OVERALL_SUPPLIER_SCORECARD_GOAL
+    description: Landing table for OVERALL_SUPPLIER_SCORECARD_GOAL.
+  - name: CUSTOMER_SITE_SERVICE_MANAGER_MAPPING
+    identifier: CUSTOMER_SITE_SERVICE_MANAGER_MAPPING
+    description: Landing table for CUSTOMER_SITE_SERVICE_MANAGER_MAPPING.
+  - name: PURCHASING_MANUFACTURING_READINESS_KPI
+    identifier: PURCHASING_MANUFACTURING_READINESS_KPI
+    description: Landing table for PURCHASING_MANUFACTURING_READINESS_KPI.
+  - name: SUPPLIER_CORRECTIVE_ACTION_REQUEST
+    identifier: SUPPLIER_CORRECTIVE_ACTION_REQUEST
+    description: Landing table for SUPPLIER_CORRECTIVE_ACTION_REQUEST.
+  - name: GS_INTEL_BOOKING_ACTUAL_DETAILS
+    identifier: GS_INTEL_BOOKING_ACTUAL_DETAILS
+    description: Landing table for GS_INTEL_BOOKING_ACTUAL_DETAILS.
+  - name: GS_INTEL_BOOKING_BUDGET_DETAILS
+    identifier: GS_INTEL_BOOKING_BUDGET_DETAILS
+    description: Landing table for GS_INTEL_BOOKING_BUDGET_DETAILS.
+  - name: GS_INTEL_BOOKING_FCST_DETAILS
+    identifier: GS_INTEL_BOOKING_FCST_DETAILS
+    description: Landing table for GS_INTEL_BOOKING_FCST_DETAILS.
+  - name: GS_INTEL_SALES_FCST_DETAILS
+    identifier: GS_INTEL_SALES_FCST_DETAILS
+    description: Landing table for GS_INTEL_SALES_FCST_DETAILS.
+  - name: GS_INTEL_SALES_BUDGET_DETAILS
+    identifier: GS_INTEL_SALES_BUDGET_DETAILS
+    description: Landing table for GS_INTEL_SALES_BUDGET_DETAILS.
+  - name: GS_INTEL_SALES_ACTUAL_DETAILS
+    identifier: GS_INTEL_SALES_ACTUAL_DETAILS
+    description: Landing table for GS_INTEL_SALES_ACTUAL_DETAILS.
+  - name: SIRFIS_PRICE_ESTIMATE_INLINE
+    identifier: SIRFIS_PRICE_ESTIMATE_INLINE
+    description: Landing table for SIRFIS_PRICE_ESTIMATE_INLINE.
+  - name: ORDER_PROCESS_TRACKING_LEGACY
+    identifier: ORDER_PROCESS_TRACKING_LEGACY
+    description: Landing table for ORDER_PROCESS_TRACKING_LEGACY.
+  - name: RLS_SALES_CRM
+    identifier: RLS_SALES_CRM
+    description: Landing table for RLS_SALES_CRM.
+  - name: TMEA_EXPORT_SHIPMENT_HISTORY_SNOWFLAKE_UPDATE
+    identifier: TMEA_EXPORT_SHIPMENT_HISTORY_SNOWFLAKE_UPDATE
+    description: File used to capture manual export requests to be added to the ITC Shipment History Report.
+  - name: TMEA_MACHINE_EXPORT_PRICING
+    identifier: TMEA_MACHINE_EXPORT_PRICING
+    description: File used to manually enter order prices while the logic is still being investigated.
+  - name: CONTROLTABLE
+    identifier: CONTROLTABLE
+    description: Table used to capture ingestion activity.
+  - name: COMMON_BUSINESS_UNIT
+    identifier: COMMON_BUSINESS_UNIT
+    description: Table used to capture ingestion activity.
+  - name: COMMON_SALES_ACCOUNT
+    identifier: COMMON_SALES_ACCOUNT
+    description: Table used to capture ingestion activity.
+  - name: COMMON_ORDER_TYPE
+    identifier: COMMON_ORDER_TYPE
+    description: Table used to capture ingestion activity.
+  - name: SHAREPOINT_PURCHASE_ORDER_LEGACY
+    identifier: SHAREPOINT_PURCHASE_ORDER_LEGACY
+    description: Table used to capture ingestion activity.
+  - name: SHAREPOINT_PURCHASE_ORDER_CURRENT
+    identifier: SHAREPOINT_PURCHASE_ORDER_CURRENT
+    description: Table used to capture ingestion activity.
+  - name: COMMON_ACCOUNT_GROUP
+    identifier: COMMON_ACCOUNT_GROUP
+    description: Table used to capture ingestion activity.
+  - name: COMMON_BOOKING_CONFIDENCE
+    identifier: COMMON_BOOKING_CONFIDENCE
+    description: Table used to capture ingestion activity.
+  - name: COMMON_COUNTRY
+    identifier: COMMON_COUNTRY
+    description: Table used to capture ingestion activity.
+  - name: COMMON_FAB
+    identifier: COMMON_FAB
+    description: Table used to capture ingestion activity.
+  - name: COMMON_MODEL
+    identifier: COMMON_MODEL
+    description: Table used to capture ingestion activity.
+  - name: COMMON_SALES_ACCOUNT_MANUAL_APPEND
+    identifier: COMMON_SALES_ACCOUNT_MANUAL_APPEND
+    description: Table used to capture ingestion activity.
+  - name: COMMON_SALES_DISTRICT
+    identifier: COMMON_SALES_DISTRICT
+    description: Table used to capture ingestion activity.
+  - name: COMMON_SALES_ORGANIZATION
+    identifier: COMMON_SALES_ORGANIZATION
+    description: Table used to capture ingestion activity.
+  - name: SAS_GOLDEN_SAMSUNG
+    identifier: SAS_GOLDEN_SAMSUNG
+    description: Table used to capture ingestion activity.
+  - name: PRICING_ADJUSTMENT_EXCHANGE_RATES
+    identifier: PRICING_ADJUSTMENT_EXCHANGE_RATES
+    description: Table used to capture ingestion activity.
+  - name: SIRFIS_AREA
+    identifier: SIRFIS_AREA
+    description: Table used to capture ingestion activity.
+  - name: DATA2_ALLOCATION_DATA
+    identifier: DATA2_ALLOCATION_DATA
+    description: Table used to capture ingestion activity.
+  - name: DATA2_CODE_SHEET
+    identifier: DATA2_CODE_SHEET
+    description: Table used to capture ingestion activity.
+  - name: TMEA_ORDER_ACTUAL
+    identifier: TMEA_ORDER_ACTUAL
+    description: Table used to capture ingestion activity.
+  - name: TMEA_ORDER_BUDGET
+    identifier: TMEA_ORDER_BUDGET
+    description: Table used to capture ingestion activity.
+  - name: TMEA_ORDER_FORECAST
+    identifier: TMEA_ORDER_FORECAST
+    description: Table used to capture ingestion activity.
+  - name: TMEA_SALES_ACTUAL
+    identifier: TMEA_SALES_ACTUAL
+    description: Table used to capture ingestion activity.
+  - name: TMEA_SALES_BUDGET
+    identifier: TMEA_SALES_BUDGET
+    description: Table used to capture ingestion activity.
+  - name: TMEA_SALES_FORECAST
+    identifier: TMEA_SALES_FORECAST
+    description: Table used to capture ingestion activity.
+  - name: MAP_ORACLE_ACCOUNT
+    identifier: MAP_ORACLE_ACCOUNT
+    description: Table used to capture ingestion activity.

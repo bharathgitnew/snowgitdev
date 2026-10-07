@@ -1,0 +1,85 @@
+{{ config(
+	materialized = 'tel_incremental',
+	incremental_strategy = 'insert_overwrite',
+	alias = 'SAPAPI_ZCDV_T_CMTU201_BUT0ID',
+	tags = ["finance", "insert_overwrite_tea_logistics"],
+	transient = false
+) }}
+
+with source_data as (
+	SELECT
+		_FILEDATE,
+		_FILENAME,
+		JSONFIELD :Mandt :: STRING AS MANDT,
+		JSONFIELD :Client :: STRING AS CLIENT,
+		JSONFIELD :"PARTNER" :: STRING AS "PARTNER",
+		JSONFIELD :"TYPE" :: STRING AS "TYPE",
+		JSONFIELD :"IDNUMBER" :: STRING AS "IDNUMBER",
+		JSONFIELD :"VALID_DATE_FROM" :: STRING AS "VALIDDATEFROM",
+		JSONFIELD :"VALID_DATE_TO" :: STRING AS "VALIDDATETO",
+		JSONFIELD :"IDNUMBER_GUID" :: STRING AS "IDNUMBERGUID",
+		JSONFIELD :Institute :: STRING AS INSTITUTE,
+		JSONFIELD :EntryDate :: STRING AS ENTRYDATE,
+		JSONFIELD :Country :: STRING AS COUNTRY,
+		JSONFIELD :Region :: STRING AS REGION,
+		JSONFIELD :BpEewBut0id :: STRING AS BPEEWBUT0ID,
+		JSONFIELD :"DELFLAG" :: STRING AS "DELFLAG",
+		JSONFIELD :"CDCHANGENR" :: STRING AS "CDCHANGENR",
+		JSONFIELD :"PSL_INSDATE" :: STRING AS "PSL_INSDATE",
+		JSONFIELD :"PSL_UPDDATE" :: STRING AS "PSL_UPDDATE",
+	from {{ source('SAPH', 'SAP_ZZM_EV_BUT0ID_GMX') }}
+	WHERE _FILEDATE::STRING = (
+        SELECT MAX(RUN_TIME)::STRING
+        FROM {{ source('SAPH', 'CONTROLTABLE') }}
+        WHERE TABLE_NAME = 'SAP_ZZM_EV_BUT0ID_GMX'
+
+        )
+QUALIFY ROW_NUMBER() OVER ( PARTITION BY CLIENT, IDNUMBER, PARTNER, TYPE ORDER BY _FILEDATE DESC, _UPLOADDATE DESC) = 1
+),
+
+transform_data as (
+	SELECT
+		_Filename AS _Filename,
+        _Filedate AS _Filedate,
+		'{{ invocation_id }}' AS _AUDIT_LOG_ID,
+		SHA2('hash_me') AS _ROW_HASH,
+		CLIENT as CLIENT,
+		PARTNER as PARTNER,
+		TYPE as TYPE,
+		IDNUMBER as IDNUMBER,
+		INSTITUTE as INSTITUTE,
+		ENTRYDATE as ENTRYDATE,
+		VALIDDATEFROM as VALIDDATEFROM,
+		VALIDDATETO as VALIDDATETO,
+		COUNTRY as COUNTRY,
+		REGION as REGION,
+		IDNUMBERGUID as IDNUMBERGUID,
+		BPEEWBUT0ID as BPEEWBUT0ID
+	FROM
+		source_data
+),
+type_data as (
+	SELECT
+		_Filename AS _Filename,
+        _Filedate AS _Filedate,
+        cast(_AUDIT_LOG_ID as varchar(128)) as _AUDIT_LOG_ID,
+        cast(_ROW_HASH as varchar(128)) as _ROW_HASH,
+		CLIENT,
+		PARTNER,
+		TYPE,
+		IDNUMBER,
+		INSTITUTE,
+		ENTRYDATE,
+		VALIDDATEFROM,
+		VALIDDATETO,
+		COUNTRY,
+		REGION,
+		IDNUMBERGUID,
+		BPEEWBUT0ID
+	FROM
+		transform_data
+)
+select
+	*
+from
+	type_data

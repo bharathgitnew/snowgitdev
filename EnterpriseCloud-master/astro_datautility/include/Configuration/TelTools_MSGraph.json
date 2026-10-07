@@ -1,0 +1,845 @@
+{
+    "ms_graph": {
+        "connectors": {
+            "base_url": "https://graph.microsoft.com/v1.0",
+            "tenant_id": "8c433003-a081-4dfb-a631-100526250b1a",
+            "client_id": "5e456920-adaa-48e1-a8db-241cad08b48b",
+            "client_secret": "SPO-SECRET",
+            "oauth_url": "https://login.microsoftonline.com"
+        },
+        "resources": {
+            "get_az_active_directory": [
+                {
+                    "name": "Get_Users",
+                    "handler": "handle_simple_call",
+                    "resource_type": "users",
+                    "params": {
+                        "$select": "accountEnabled,displayName,givenName,id,mail,mailNickname,surname,userType,usageLocation,userPrincipalName,officeLocation"
+                    },
+                    "target_details": {
+                        "table": "USERLIST",
+                        "schema": "ACTIVEDIRECTORY"
+                    }
+                },
+                {
+                    "name": "Get_Group",
+                    "handler": "handle_simple_call",
+                    "resource_type": "groups",
+                    "params": {
+                        "$select": "description,id,displayname,mailnickname,securityEnabled"
+                    },
+                    "target_details": {
+                        "table": "GROUPLIST",
+                        "schema": "ACTIVEDIRECTORY"
+                    }
+                },
+                {
+                    "name": "Get_Group_Members",
+                    "handler": "handle_chained_call",
+                    "resource_type": "groups",
+                    "subresource": "{groupid}",
+                    "extra_path": "members",
+                    "target_details": {
+                        "table": "GROUPMEMBERSHIP",
+                        "schema": "ACTIVEDIRECTORY"
+                    },
+                    "required_resource": {
+                        "resource_type": "groups",
+                        "return_param": "id",
+                        "params": {
+                            "$filter": "startswith(displayName, 'BI-') or startswith(displayName, 'BI_') or startswith(displayName, 'SF_')",
+                            "$select": "id"
+                        }
+                    }
+                },
+                {
+                    "name": "Get_Group_Owners",
+                    "handler": "handle_chained_call",
+                    "resource_type": "groups",
+                    "subresource": "{groupid}",
+                    "extra_path": "owners",
+                    "target_details": {
+                        "table": "GROUPOWNERSHIP",
+                        "schema": "ACTIVEDIRECTORY"
+                    },
+                    "required_resource": {
+                        "resource_type": "groups",
+                        "return_param": "id",
+                        "params": {
+                            "$filter": "startswith(displayName, 'BI-') or startswith(displayName, 'BI_') or startswith(displayName, 'SF_')",
+                            "$select": "id"
+                        }
+                    }
+                }
+            ],
+            "get_list_items": [
+                {
+                    "name": "GOOD_CATCH_TRACKER",
+                    "handler": "handle_simple_call",
+                    "resource_type": "sites",
+                    "resource_id": "571a0e5c-35e6-4f11-b61c-928ed7315b9a",
+                    "subresource": "lists",
+                    "extra_path": "GoodCatchTracker/items",
+                    "params": {
+                        "expand": "fields(select=ASSIGNEDTO0,ISSUELOGGEDBY,EMPLOYEEMANAGER,EVALUATIONASSIGNTO,AUTHOR,EDITOR,*)"
+                    },
+                    "target_details": {
+                        "table": "GOOD_CATCH_TRACKER",
+                        "schema": "SHAREPOINT"
+                    }
+                },
+                {
+                    "name": "INCOMING_PART_INSPECTION",
+                    "handler": "handle_simple_call",
+                    "resource_type": "sites",
+                    "resource_id": "b352c349-71bc-4a13-a9a5-62304b438608",
+                    "subresource": "lists",
+                    "extra_path": "Incoming_Part_Inspection/items",
+                    "params": {
+                        "expand": "fields(select=AUTHOR,EDITOR,APPAUTHOR,APPEDITOR,*)"
+                    },
+                    "target_details": {
+                        "table": "INCOMING_PART_INSPECTION_ONLINE",
+                        "schema": "SHAREPOINT"
+                    }
+                },
+                {
+                    "name": "SCORECARD_SUPPLIER_GOAL_MAPPING",
+                    "handler": "handle_simple_call",
+                    "resource_type": "sites",
+                    "resource_id": "61222922-e6e6-46a4-882c-2368c3d96242",
+                    "subresource": "lists",
+                    "extra_path": "Scorecard Supplier Goal Mapping/items",
+                    "params": {
+                        "expand": "fields(select=AUTHOR,EDITOR,*)"
+                    },
+                    "target_details": {
+                        "table": "SCORECARD_SUPPLIER_GOAL_MAPPING",
+                        "schema": "SHAREPOINT"
+                    }
+                },
+                {
+                    "name": "TTCA_OPPORTUNITY_LIST",
+                    "handler": "handle_simple_call",
+                    "resource_type": "sites",
+                    "resource_id": "5df81199-9407-4e59-9dab-b687cfb231bd",
+                    "subresource": "lists",
+                    "extra_path": "TTCA-Opportunity-List/items",
+                    "params": {
+                        "expand": "fields(select=SALES_X0020_PERSON_X0020__X0028_,SALES_X0020_PERSON_X0020__X0028_0,AUTHOR,EDITOR,*)"
+                    },
+                    "target_details": {
+                        "table": "TTCA_OPPORTUNITY_LIST",
+                        "schema": "SHAREPOINT"
+                    }
+                },
+                {
+                    "name": "SUPPLIER_DETAILS",
+                    "handler": "handle_simple_call",
+                    "resource_type": "sites",
+                    "resource_id": "61222922-e6e6-46a4-882c-2368c3d96242",
+                    "subresource": "lists",
+                    "extra_path": "Supplier Details/items",
+                    "params": {
+                        "expand": "fields(select=AUTHOR,EDITOR,*)"
+                    },
+                    "target_details": {
+                        "table": "SUPPLIER_DETAILS",
+                        "schema": "SHAREPOINT"
+                    }
+                },
+                {
+                    "name": "CUE_REPAIR_TICKET",
+                    "handler": "handle_simple_call",
+                    "resource_type": "sites",
+                    "resource_id": "7936d357-0aa5-40f4-8401-3b881a833703",
+                    "subresource": "lists",
+                    "extra_path": "CUE_Repair_Ticket/items",
+                    "params": {
+                        "expand": "fields(select=ENGINEER,AUTHOR,EDITOR,*)"
+                    },
+                    "target_details": {
+                        "table": "CUE_REPAIR_TICKET_ONLINE",
+                        "schema": "SHAREPOINT"
+                    }
+                },
+                {
+                    "name": "SCR_CYCLE_TIME_GOALS_BY_GROUP",
+                    "handler": "handle_simple_call",
+                    "resource_type": "sites",
+                    "resource_id": "61222922-e6e6-46a4-882c-2368c3d96242",
+                    "subresource": "lists",
+                    "extra_path": "SCR - Cycle Time Goals by Group/items",
+                    "params": {
+                        "expand": "fields(select=AUTHOR,EDITOR,*)"
+                    },
+                    "target_details": {
+                        "table": "SCR_CYCLE_TIME_GOALS_BY_GROUP",
+                        "schema": "SHAREPOINT"
+                    }
+                },
+                {
+                    "name": "FT_BY_NAME",
+                    "handler": "handle_simple_call",
+                    "resource_type": "sites",
+                    "resource_id": "1b79a4e1-dbb0-474f-b18b-59c4c9118bfc",
+                    "subresource": "lists",
+                    "extra_path": "FT by Name/items",
+                    "params": {
+                        "expand": "fields(select=AUTHOR,EDITOR,*)"
+                    },
+                    "target_details": {
+                        "table": "FT_BY_NAME",
+                        "schema": "ITHD"
+                    }
+                },
+                {
+                    "name": "TMEA_MANAGEMENT_KPI_GOALS",
+                    "handler": "handle_simple_call",
+                    "resource_type": "sites",
+                    "resource_id": "17612095-e8ec-409c-b1ac-1d479256c2a8,6d5c88e8-9643-4689-bf41-3727a90683b1",
+                    "subresource": "lists",
+                    "extra_path": "TMEA Management KPI's/items",
+                    "params": {
+                        "expand": "fields(select=AUTHOR,EDITOR,*)"
+                    },
+                    "target_details": {
+                        "table": "TMEA_MANAGEMENT_KPI_GOALS",
+                        "schema": "SHAREPOINT"
+                    }
+                },
+                {
+                    "name": "TMEA_ENVIRONMENTAL_KPI",
+                    "handler": "handle_simple_call",
+                    "resource_type": "sites",
+                    "resource_id": "bce372c1-c74a-43c7-85aa-0011ca2852d4",
+                    "subresource": "lists",
+                    "extra_path": "TMEAEnvironmentalKPI/items",
+                    "params": {
+                        "expand": "fields(select=AUTHOR,EDITOR,*)"
+                    },
+                    "target_details": {
+                        "table": "TMEA_ENVIRONMENTAL_KPI",
+                        "schema": "SHAREPOINT"
+                    }
+                },
+                {
+                    "name": "DEPARTMENT",
+                    "handler": "handle_simple_call",
+                    "resource_type": "sites",
+                    "resource_id": "0898d71c-bf16-425f-ad73-3b789087dc09",
+                    "subresource": "lists",
+                    "extra_path": "Department/items",
+                    "params": {
+                        "expand": "fields(select=AUTHOR,EDITOR,*)"
+                    },
+                    "target_details": {
+                        "table": "DEPARTMENT",
+                        "schema": "SHAREPOINT"
+                    }
+                },
+                {
+                    "name": "REGION",
+                    "handler": "handle_simple_call",
+                    "resource_type": "sites",
+                    "resource_id": "0898d71c-bf16-425f-ad73-3b789087dc09",
+                    "subresource": "lists",
+                    "extra_path": "Region/items",
+                    "params": {
+                        "expand": "fields(select=AUTHOR,EDITOR,*)"
+                    },
+                    "target_details": {
+                        "table": "REGION",
+                        "schema": "SHAREPOINT"
+                    }
+                },
+                {
+                    "name": "SEGMENT",
+                    "handler": "handle_simple_call",
+                    "resource_type": "sites",
+                    "resource_id": "0898d71c-bf16-425f-ad73-3b789087dc09",
+                    "subresource": "lists",
+                    "extra_path": "Segment/items",
+                    "params": {
+                        "expand": "fields(select=AUTHOR,EDITOR,*)"
+                    },
+                    "target_details": {
+                        "table": "SEGMENT",
+                        "schema": "SHAREPOINT"
+                    }
+                },
+                {
+                    "name": "ORACLE_PC_MGMT_HIERARCHY",
+                    "handler": "handle_simple_call",
+                    "resource_type": "sites",
+                    "resource_id": "0898d71c-bf16-425f-ad73-3b789087dc09",
+                    "subresource": "lists",
+                    "extra_path": "ORACLE_PC_MGMT_HIERARCHY/items",
+                    "params": {
+                        "expand": "fields(select=AUTHOR,EDITOR,*)"
+                    },
+                    "target_details": {
+                        "table": "ORACLE_PC_MGMT_HIERARCHY",
+                        "schema": "SHAREPOINT"
+                    }
+                },
+                {
+                    "name": "SALES_CATEGORY",
+                    "handler": "handle_simple_call",
+                    "resource_type": "sites",
+                    "resource_id": "0898d71c-bf16-425f-ad73-3b789087dc09",
+                    "subresource": "lists",
+                    "extra_path": "Sales_Category/items",
+                    "params": {
+                        "expand": "fields(select=AUTHOR,EDITOR,*)"
+                    },
+                    "target_details": {
+                        "table": "SALES_CATEGORY",
+                        "schema": "SHAREPOINT"
+                    }
+                },
+                {
+                    "name": "CUSTOMER",
+                    "handler": "handle_simple_call",
+                    "resource_type": "sites",
+                    "resource_id": "0898d71c-bf16-425f-ad73-3b789087dc09",
+                    "subresource": "lists",
+                    "extra_path": "Customer/items",
+                    "params": {
+                        "expand": "fields(select=AUTHOR,EDITOR,*)"
+                    },
+                    "target_details": {
+                        "table": "CUSTOMER",
+                        "schema": "SHAREPOINT"
+                    }
+                },
+                {
+                    "name": "GL_ACCOUNT",
+                    "handler": "handle_simple_call",
+                    "resource_type": "sites",
+                    "resource_id": "0898d71c-bf16-425f-ad73-3b789087dc09",
+                    "subresource": "lists",
+                    "extra_path": "GL_ACCOUNT/items",
+                    "params": {
+                        "expand": "fields(select=AUTHOR,EDITOR,*)"
+                    },
+                    "target_details": {
+                        "table": "GL_ACCOUNT",
+                        "schema": "SHAREPOINT"
+                    }
+                },
+                {
+                    "name": "OVERALL_SUPPLIER_SCORECARD_GOAL",
+                    "handler": "handle_simple_call",
+                    "resource_type": "sites",
+                    "resource_id": "61222922-e6e6-46a4-882c-2368c3d96242",
+                    "subresource": "lists",
+                    "extra_path": "Overall Supplier Scorecard Goal/items",
+                    "params": {
+                        "expand": "fields(select=AUTHOR,EDITOR,*)"
+                    },
+                    "target_details": {
+                        "table": "OVERALL_SUPPLIER_SCORECARD_GOAL",
+                        "schema": "SHAREPOINT"
+                    }
+                },
+                {
+                    "name": "BUSINESS_UNIT_LOOKUP",
+                    "handler": "handle_simple_call",
+                    "resource_type": "sites",
+                    "resource_id": "4311964e-e330-46ce-bfba-94edcbfad2e2",
+                    "subresource": "lists",
+                    "extra_path": "SNOWFLAKE_INLINE_BU_LOOKUP/items",
+                    "params": {
+                        "expand": "fields(select=AUTHOR,EDITOR,*)"
+                    },
+                    "target_details": {
+                        "table": "BUSINESS_UNIT_LOOKUP",
+                        "schema": "SIRFIS"
+                    }
+                },
+                {
+                    "name": "SALES_OPERATIONS_ROWLEVEL_SECURITY",
+                    "handler": "handle_simple_call",
+                    "resource_type": "sites",
+                    "resource_id": "a7a71133-5c2e-420e-8b22-07415f5e0e75",
+                    "subresource": "lists",
+                    "extra_path": "DE_SALES_OPERATIONS_SECURITY/items",
+                    "params": {
+                        "expand": "fields(select=AUTHOR,EDITOR,*)"
+                    },
+                    "target_details": {
+                        "table": "SALES_OPERATIONS_ROWLEVEL_SECURITY",
+                        "schema": "CRM_FILE"
+                    }
+                },
+                {
+                    "name": "CUSTOMER_SITE_SERVICE_MANAGER_MAPPING",
+                    "handler": "handle_simple_call",
+                    "resource_type": "sites",
+                    "resource_id": "fe0e8410-9f5c-4a5e-9171-0467cd6724cd",
+                    "subresource": "lists",
+                    "extra_path": "Customer Site Service Manager Mapping/items",
+                    "params": {
+                        "expand": "fields(select=AUTHOR,EDITOR,*)"
+                    },
+                    "target_details": {
+                        "table": "CUSTOMER_SITE_SERVICE_MANAGER_MAPPING",
+                        "schema": "SHAREPOINT"
+                    }
+                },
+                {
+                    "name": "ORDER_PROCESS_TRACKING_LEGACY",
+                    "handler": "handle_simple_call",
+                    "resource_type": "sites",
+                    "resource_id": "20842aba-02a6-46a7-b947-32ff07c0df9a",
+                    "subresource": "lists",
+                    "extra_path": "Legacy_OPT_Data/items",
+                    "params": {
+                        "expand": "fields(select=AUTHOR,EDITOR,*)"
+                    },
+                    "target_details": {
+                        "table": "ORDER_PROCESS_TRACKING_LEGACY",
+                        "schema": "SHAREPOINT"
+                    }
+                },
+                {
+                    "name": "PURCHASING_MANUFACTURING_READINESS_KPI",
+                    "handler": "handle_simple_call",
+                    "resource_type": "sites",
+                    "resource_id": "17612095-e8ec-409c-b1ac-1d479256c2a8",
+                    "subresource": "lists",
+                    "extra_path": "TMEA Manufacturing Readiness KPIs/items",
+                    "params": {
+                        "expand": "fields(select=AUTHOR,EDITOR,*)"
+                    },
+                    "target_details": {
+                        "table": "PURCHASING_MANUFACTURING_READINESS_KPI",
+                        "schema": "SHAREPOINT"
+                    }
+                },
+                {
+                    "name": "PURCHASING_MANUFACTURING_READINESS_KPI",
+                    "handler": "handle_simple_call",
+                    "resource_type": "sites",
+                    "resource_id": "17612095-e8ec-409c-b1ac-1d479256c2a8",
+                    "subresource": "lists",
+                    "extra_path": "TMEA Manufacturing Readiness KPIs/items",
+                    "params": {
+                        "expand": "fields(select=AUTHOR,EDITOR,*)"
+                    },
+                    "target_details": {
+                        "table": "PURCHASING_MANUFACTURING_READINESS_KPI",
+                        "schema": "SHAREPOINT"
+                    }
+                },
+                {
+                    "name": "SUPPLIER_CORRECTIVE_ACTION_REQUEST",
+                    "handler": "handle_simple_call",
+                    "resource_type": "sites",
+                    "resource_id": "4765fea3-6ea4-442e-b0c7-4fd8c4f1ef54",
+                    "subresource": "lists",
+                    "extra_path": "SCAR/items",
+                    "params": {
+                        "expand": "fields(select=QUALITY_X0020_REP,MRP_X002F_BUYER_X0020_REP,AUTHOR,EDITOR,*)"
+                    },
+                    "target_details": {
+                        "table": "SUPPLIER_CORRECTIVE_ACTION_REQUEST",
+                        "schema": "SHAREPOINT"
+                    }
+                },
+                {
+                    "name": "CUSTOMER_GROUP_MAPPING",
+                    "handler": "handle_simple_call",
+                    "resource_type": "sites",
+                    "resource_id": "fe0e8410-9f5c-4a5e-9171-0467cd6724cd",
+                    "subresource": "lists",
+                    "extra_path": "Customer Group Mapping/items",
+                    "params": {
+                        "expand": "fields(select=AUTHOR,EDITOR,*)"
+                    },
+                    "target_details": {
+                        "table": "CUSTOMER_GROUP_MAPPING",
+                        "schema": "SHAREPOINT"
+                    }
+                },
+                {
+                    "name": "SERVICE_B_CODE_MAPPING",
+                    "handler": "handle_simple_call",
+                    "resource_type": "sites",
+                    "resource_id": "fe0e8410-9f5c-4a5e-9171-0467cd6724cd",
+                    "subresource": "lists",
+                    "extra_path": "Service B Code Mapping/items",
+                    "params": {
+                        "expand": "fields(select=AUTHOR,EDITOR,*)"
+                    },
+                    "target_details": {
+                        "table": "SERVICE_B_CODE_MAPPING",
+                        "schema": "SHAREPOINT"
+                    }
+                },
+                {
+                    "name": "CUSTOMER_MAPPING_SERVICE",
+                    "handler": "handle_simple_call",
+                    "resource_type": "sites",
+                    "resource_id": "fe0e8410-9f5c-4a5e-9171-0467cd6724cd",
+                    "subresource": "lists",
+                    "extra_path": "Customer Mapping Service/items",
+                    "params": {
+                        "expand": "fields(select=AUTHOR,EDITOR,*)"
+                    },
+                    "target_details": {
+                        "table": "CUSTOMER_MAPPING_SERVICE",
+                        "schema": "SHAREPOINT"
+                    }
+                },
+                {
+                    "name": "SERVICE_BUSINESS_UNIT_MAPPING",
+                    "handler": "handle_simple_call",
+                    "resource_type": "sites",
+                    "resource_id": "fe0e8410-9f5c-4a5e-9171-0467cd6724cd",
+                    "subresource": "lists",
+                    "extra_path": "Service Business Unit Mapping/items",
+                    "params": {
+                        "expand": "fields(select=AUTHOR,EDITOR,*)"
+                    },
+                    "target_details": {
+                        "table": "SERVICE_BUSINESS_UNIT_MAPPING",
+                        "schema": "SHAREPOINT"
+                    }
+                },
+                {
+                    "name": "SERVICE_SEGMENT_MAPPING",
+                    "handler": "handle_simple_call",
+                    "resource_type": "sites",
+                    "resource_id": "fe0e8410-9f5c-4a5e-9171-0467cd6724cd",
+                    "subresource": "lists",
+                    "extra_path": "Service Segment Mapping/items",
+                    "params": {
+                        "expand": "fields(select=AUTHOR,EDITOR,*)"
+                    },
+                    "target_details": {
+                        "table": "SERVICE_SEGMENT_MAPPING",
+                        "schema": "SHAREPOINT"
+                    }
+                },
+                {
+                    "name": "SERVICE_PRODUCT_TYPE_MAPPING",
+                    "handler": "handle_simple_call",
+                    "resource_type": "sites",
+                    "resource_id": "fe0e8410-9f5c-4a5e-9171-0467cd6724cd",
+                    "subresource": "lists",
+                    "extra_path": "Service Product Type Mapping/items",
+                    "params": {
+                        "expand": "fields(select=AUTHOR,EDITOR,*)"
+                    },
+                    "target_details": {
+                        "table": "SERVICE_PRODUCT_TYPE_MAPPING",
+                        "schema": "SHAREPOINT"
+                    }
+                },
+                {
+                    "name": "TAS_TYPE_OF_WORK_MAPPING",
+                    "handler": "handle_simple_call",
+                    "resource_type": "sites",
+                    "resource_id": "fe0e8410-9f5c-4a5e-9171-0467cd6724cd",
+                    "subresource": "lists",
+                    "extra_path": "TAS Type of Work Mapping/items",
+                    "params": {
+                        "expand": "fields(select=AUTHOR,EDITOR,*)"
+                    },
+                    "target_details": {
+                        "table": "TAS_TYPE_OF_WORK_MAPPING",
+                        "schema": "SHAREPOINT"
+                    }
+                },
+                {
+                    "name": "SERVICE_OFFICE_MAPPING",
+                    "handler": "handle_simple_call",
+                    "resource_type": "sites",
+                    "resource_id": "fe0e8410-9f5c-4a5e-9171-0467cd6724cd",
+                    "subresource": "lists",
+                    "extra_path": "Service Office Mapping/items",
+                    "params": {
+                        "expand": "fields(select=AUTHOR,EDITOR,*)"
+                    },
+                    "target_details": {
+                        "table": "SERVICE_OFFICE_MAPPING",
+                        "schema": "SHAREPOINT"
+                    }
+                },
+                {
+                    "name": "MACHINE_MODEL_MAPPING",
+                    "handler": "handle_simple_call",
+                    "resource_type": "sites",
+                    "resource_id": "fe0e8410-9f5c-4a5e-9171-0467cd6724cd",
+                    "subresource": "lists",
+                    "extra_path": "Machine Model Mapping/items",
+                    "params": {
+                        "expand": "fields(select=AUTHOR,EDITOR,*)"
+                    },
+                    "target_details": {
+                        "table": "MACHINE_MODEL_MAPPING",
+                        "schema": "SHAREPOINT"
+                    }
+                },
+                {
+                    "name": "SNOWFLAKE_INLINE_SIRFIS_PRICE_ESTIMATE",
+                    "handler": "handle_simple_call",
+                    "resource_type": "sites",
+                    "resource_id": "4311964e-e330-46ce-bfba-94edcbfad2e2",
+                    "subresource": "lists",
+                    "extra_path": "SNOWFLAKE_INLINE_SIRFIS_PRICE_ESTIMATE/items",
+                    "params": {
+                    "expand": "fields(select=Title,PRICE_ESTIMATE,*)"
+                    },
+                    "target_details": {
+                        "table": "SIRFIS_PRICE_ESTIMATE_INLINE",
+                        "schema": "SHAREPOINT"
+                    }
+                },
+                {
+                    "name": "SALES_ACCOUNT",
+                    "handler": "handle_simple_call",
+                    "resource_type": "sites",
+                    "resource_id": "a7a71133-5c2e-420e-8b22-07415f5e0e75",
+                    "subresource": "lists",
+                    "extra_path": "SALES_ACCOUNT/items",
+                    "params": {
+                    "expand": "fields(select=AUTHOR,EDITOR,APPAUTHOR,APPEDITOR,*)"
+                    },
+                    "target_details": {
+                        "table": "COMMON_SALES_ACCOUNT",
+                        "schema": "SHAREPOINT"
+                    }
+                },
+                {
+                    "name": "BUSINESS_UNIT",
+                    "handler": "handle_simple_call",
+                    "resource_type": "sites",
+                    "resource_id": "a7a71133-5c2e-420e-8b22-07415f5e0e75",
+                    "subresource": "lists",
+                    "extra_path": "BUSINESS_UNIT/items",
+                    "params": {
+                    "expand": "fields(select=AUTHOR,EDITOR,APPAUTHOR,APPEDITOR,*)"
+                    },
+                    "target_details": {
+                        "table": "COMMON_BUSINESS_UNIT",
+                        "schema": "SHAREPOINT"
+                    }
+                },
+                {
+                    "name": "ORDER_TYPE",
+                    "handler": "handle_simple_call",
+                    "resource_type": "sites",
+                    "resource_id": "a7a71133-5c2e-420e-8b22-07415f5e0e75",
+                    "subresource": "lists",
+                    "extra_path": "ORDER_TYPE/items",
+                    "params": {
+                    "expand": "fields(select=AUTHOR,EDITOR,APPAUTHOR,APPEDITOR,*)"
+                    },
+                    "target_details": {
+                        "table": "COMMON_ORDER_TYPE",
+                        "schema": "SHAREPOINT"
+                    }
+                },
+                {
+                    "name": "SHAREPOINT_PURCHASE_ORDER_LEGACY",
+                    "handler": "handle_simple_call",
+                    "resource_type": "sites",
+                    "resource_id": "a7a71133-5c2e-420e-8b22-07415f5e0e75",
+                    "subresource": "lists",
+                    "extra_path": "SHAREPOINT_PURCHASE_ORDER_LEGACY/items",
+                    "params": {
+                    "expand": "fields(select=AUTHOR,EDITOR,APPAUTHOR,APPEDITOR,*)"
+                    },
+                    "target_details": {
+                        "table": "SHAREPOINT_PURCHASE_ORDER_LEGACY",
+                        "schema": "SHAREPOINT"
+                    }
+                },
+                {
+                    "name": "SHAREPOINT_PURCHASE_ORDER_CURRENT",
+                    "handler": "handle_simple_call",
+                    "resource_type": "sites",
+                    "resource_id": "a7a71133-5c2e-420e-8b22-07415f5e0e75",
+                    "subresource": "lists",
+                    "extra_path": "SHAREPOINT_PURCHASE_ORDER_CURRENT/items",
+                    "params": {
+                    "expand": "fields(select=AUTHOR,EDITOR,APPAUTHOR,APPEDITOR,*)"
+                    },
+                    "target_details": {
+                        "table": "SHAREPOINT_PURCHASE_ORDER_CURRENT",
+                        "schema": "SHAREPOINT"
+                    }
+                },
+                {
+                    "name": "SALES_ACCOUNT_MANUAL_APPEND",
+                    "handler": "handle_simple_call",
+                    "resource_type": "sites",
+                    "resource_id": "a7a71133-5c2e-420e-8b22-07415f5e0e75",
+                    "subresource": "lists",
+                    "extra_path": "SALES_ACCOUNT_MANUAL_APPEND/items",
+                    "params": {
+                    "expand": "fields(select=AUTHOR,EDITOR,APPAUTHOR,APPEDITOR,*)"
+                    },
+                    "target_details": {
+                        "table": "COMMON_SALES_ACCOUNT_MANUAL_APPEND",
+                        "schema": "SHAREPOINT"
+                    }
+                },
+                {
+                    "name": "FAB",
+                    "handler": "handle_simple_call",
+                    "resource_type": "sites",
+                    "resource_id": "a7a71133-5c2e-420e-8b22-07415f5e0e75",
+                    "subresource": "lists",
+                    "extra_path": "FAB/items",
+                    "params": {
+                    "expand": "fields(select=AUTHOR,EDITOR,APPAUTHOR,APPEDITOR,*)"
+                    },
+                    "target_details": {
+                        "table": "COMMON_FAB",
+                        "schema": "SHAREPOINT"
+                    }
+                },
+                {
+                    "name": "ACCOUNT_GROUP",
+                    "handler": "handle_simple_call",
+                    "resource_type": "sites",
+                    "resource_id": "a7a71133-5c2e-420e-8b22-07415f5e0e75",
+                    "subresource": "lists",
+                    "extra_path": "ACCOUNT_GROUP/items",
+                    "params": {
+                    "expand": "fields(select=AUTHOR,EDITOR,APPAUTHOR,APPEDITOR,*)"
+                    },
+                    "target_details": {
+                        "table": "COMMON_ACCOUNT_GROUP",
+                        "schema": "SHAREPOINT"
+                    }
+                },
+                {
+                    "name": "BOOKING_CONFIDENCE",
+                    "handler": "handle_simple_call",
+                    "resource_type": "sites",
+                    "resource_id": "a7a71133-5c2e-420e-8b22-07415f5e0e75",
+                    "subresource": "lists",
+                    "extra_path": "BOOKING_CONFIDENCE/items",
+                    "params": {
+                    "expand": "fields(select=AUTHOR,EDITOR,APPAUTHOR,APPEDITOR,*)"
+                    },
+                    "target_details": {
+                        "table": "COMMON_BOOKING_CONFIDENCE",
+                        "schema": "SHAREPOINT"
+                    }
+                },
+                {
+                    "name": "MODEL",
+                    "handler": "handle_simple_call",
+                    "resource_type": "sites",
+                    "resource_id": "a7a71133-5c2e-420e-8b22-07415f5e0e75",
+                    "subresource": "lists",
+                    "extra_path": "MODEL/items",
+                    "params": {
+                    "expand": "fields(select=AUTHOR,EDITOR,APPAUTHOR,APPEDITOR,*)"
+                    },
+                    "target_details": {
+                        "table": "COMMON_MODEL",
+                        "schema": "SHAREPOINT"
+                    }
+                },
+                {
+                    "name": "SALES_DISTRICT",
+                    "handler": "handle_simple_call",
+                    "resource_type": "sites",
+                    "resource_id": "a7a71133-5c2e-420e-8b22-07415f5e0e75",
+                    "subresource": "lists",
+                    "extra_path": "SALES_DISTRICT/items",
+                    "params": {
+                    "expand": "fields(select=AUTHOR,EDITOR,APPAUTHOR,APPEDITOR,*)"
+                    },
+                    "target_details": {
+                        "table": "COMMON_SALES_DISTRICT",
+                        "schema": "SHAREPOINT"
+                    }
+                },
+                {
+                    "name": "COUNTRY",
+                    "handler": "handle_simple_call",
+                    "resource_type": "sites",
+                    "resource_id": "a7a71133-5c2e-420e-8b22-07415f5e0e75",
+                    "subresource": "lists",
+                    "extra_path": "COUNTRY/items",
+                    "params": {
+                    "expand": "fields(select=AUTHOR,EDITOR,APPAUTHOR,APPEDITOR,*)"
+                    },
+                    "target_details": {
+                        "table": "COMMON_COUNTRY",
+                        "schema": "SHAREPOINT"
+                    }
+                },
+                {
+                    "name": "SALES_ORGANIZATION",
+                    "handler": "handle_simple_call",
+                    "resource_type": "sites",
+                    "resource_id": "a7a71133-5c2e-420e-8b22-07415f5e0e75",
+                    "subresource": "lists",
+                    "extra_path": "SALES_ORGANIZATION/items",
+                    "params": {
+                    "expand": "fields(select=AUTHOR,EDITOR,APPAUTHOR,APPEDITOR,*)"
+                    },
+                    "target_details": {
+                        "table": "COMMON_SALES_ORGANIZATION",
+                        "schema": "SHAREPOINT"
+                    }
+                },
+            {
+                    "name": "SAS_GOLDEN_SAMSUNG",
+                    "handler": "handle_simple_call",
+                    "resource_type": "sites",
+                    "resource_id": "79adcbc2-ba2f-4c09-88c7-bcaa14e5fd2a",
+                    "subresource": "lists",
+                    "extra_path": "SAS_GOLDEN_SAMSUNG/items",
+                    "params": {
+                    "expand": "fields(select=AUTHOR,EDITOR,APPAUTHOR,APPEDITOR,*)"
+                    },
+                    "target_details": {
+                        "table": "SAS_GOLDEN_SAMSUNG",
+                        "schema": "SHAREPOINT"
+                    }
+                },               
+            {
+                    "name": "PRICING_ADJUSTMENT_EXCHANGE_RATES",
+                    "handler": "handle_simple_call",
+                    "resource_type": "sites",
+                    "resource_id": "79adcbc2-ba2f-4c09-88c7-bcaa14e5fd2a",
+                    "subresource": "lists",
+                    "extra_path": "TEA_EXCHANGE_RATE_PRICING/items",
+                    "params": {
+                    "expand": "fields(select=AUTHOR,EDITOR,APPAUTHOR,APPEDITOR,*)"
+                    },
+                    "target_details": {
+                        "table": "PRICING_ADJUSTMENT_EXCHANGE_RATES",
+                        "schema": "SHAREPOINT"
+                    }
+                },
+                {
+                    "name": "SIRFIS_AREA",
+                    "handler": "handle_simple_call",
+                    "resource_type": "sites",
+                    "resource_id": "4311964e-e330-46ce-bfba-94edcbfad2e2",
+                    "subresource": "lists",
+                    "extra_path": "SNOWFLAKE_INLINE_SIRFIS_AREA/items",
+                    "params": {
+                    "expand": "fields(select=AUTHOR,EDITOR,APPAUTHOR,APPEDITOR,*)"
+                    },
+                    "target_details": {
+                        "table": "SIRFIS_AREA",
+                        "schema": "SHAREPOINT"
+                    }
+                } 
+
+            ]
+        }
+    }
+}

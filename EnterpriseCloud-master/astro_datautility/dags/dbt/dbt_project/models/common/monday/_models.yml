@@ -1,0 +1,6 @@
+version: 2
+models:
+- name: COMMON__MONDAY__ITEMS
+  description: Model MONDAY ITEMS file.
+- name: COMMON__MONDAY__SUBITEMS
+  description: Model MONDAY SUBITEMS file.

@@ -1,0 +1,32 @@
+{{ config(
+        materialized='view',
+         alias='TIME_TYPES',
+         transient=false
+) }}
+
+with source_data as (
+    select
+        CLIENT,
+		GROUPING_OF_PERSONNEL_SUBAREAS_FOR_TIME_RECORDING,
+		TIME_TYPE,
+		END_DATE,
+		START_DATE,
+		CUMULATE_IN_PERIOD_BALANCE,
+		TRANSFER_FROM_PREVIOUS_PERIOD,
+		SAVE_AS_DAY_BALANCE,
+		TRANSFER_FROM_PREVIOUS_YEAR,
+		ELIGIBILITY_INDICATOR_FOR_TIME_TRANSFERS,
+		TRANSFER_TO_NEW_PERIOD_BALANCE_AT_START_OF_NEW_PERIOD,
+		TRANSFER_TO_NEW_PERIOD_BALANCE_AT_START_OF_NEW_YEAR,
+		STORE_FOR_TIME_ACCOUNTS_AND_DOWNLOAD_TO_SUBSYSTEM,
+		_CAPTUREDATETIME
+    from {{ ref('COMMON__SAPO__TIME_TYPES') }}
+),
+
+transform_data as (
+    select
+        *
+    from source_data
+)
+    
+select * from transform_data

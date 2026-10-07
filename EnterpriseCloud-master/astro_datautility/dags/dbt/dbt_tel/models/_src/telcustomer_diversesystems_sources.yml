@@ -1,0 +1,81 @@
+sources:
+- name: TELCUSTOMER_DIVERSESYSTEMS
+  description: Landing Zone - For TELCUSTOMER_DIVERSESYSTEMS Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: TELCUSTOMER
+  tables:
+  - name: DELIVERY_DATE
+    identifier: DELIVERY_DATE
+    description: Landing table for DELIVERY_DATE from SQLServer [TELCUSTOMER_REPORTING].[dbo].[DELIVERY_DATE]
+  - name: DELIVERY_RECIPIENT
+    identifier: DELIVERY_RECIPIENT
+    description: Landing table for DELIVERY_RECIPIENT from SQLServer [TELCUSTOMER_REPORTING].[dbo].[DELIVERY_RECIPIENT]
+  - name: DISTRIBUTION_LIST
+    identifier: DISTRIBUTION_LIST
+    description: Landing table for DISTRIBUTION_LIST from SQLServer [TELCUSTOMER_REPORTING].[dbo].[DISTRIBUTION_LIST]
+  - name: DISTRIBUTION_LIST_MODEL
+    identifier: DISTRIBUTION_LIST_MODEL
+    description: Landing table for DISTRIBUTION_LIST_MODEL from SQLServer [TELCUSTOMER_REPORTING].[dbo].[DISTRIBUTION_LIST_MODEL]
+  - name: DISTRIBUTION_LIST_CONTACT
+    identifier: DISTRIBUTION_LIST_CONTACT
+    description: Landing table for DISTRIBUTION_LIST_CONTACT from SQLServer [TELCUSTOMER_REPORTING].[dbo].[DISTRIBUTION_LIST_CONTACT]
+  - name: DOCUMENT
+    identifier: DOCUMENT
+    description: Landing table for DOCUMENT from SQLServer [TELCUSTOMER_REPORTING].[dbo].[DOCUMENT]
+  - name: DOCUMENT_MODEL
+    identifier: DOCUMENT_MODEL
+    description: Landing table for DOCUMENT_MODEL from SQLServer [TELCUSTOMER_REPORTING].[dbo].[DOCUMENT_MODEL]
+  - name: DOCUMENT_VIEWS
+    identifier: DOCUMENT_VIEWS
+    description: Landing table for DOCUMENT_VIEWS from SQLServer [TELCUSTOMER_REPORTING].[dbo].[DOCUMENT_VIEWS]
+  - name: UGK_ASK_TEL
+    identifier: UGK_ASK_TEL
+    description: Landing table for UGK_ASK_TEL from SQLServer [TELCUSTOMER_REPORTING].[dbo].[UGK_ASK_TEL]
+  - name: UGK_BENEFIT
+    identifier: UGK_BENEFIT
+    description: Landing table for UGK_BENEFIT from SQLServer [TELCUSTOMER_REPORTING].[dbo].[UGK_BENEFIT]
+  - name: UGK_MODEL
+    identifier: UGK_MODEL
+    description: Landing table for UGK_MODEL from SQLServer [TELCUSTOMER_REPORTING].[dbo].[UGK_MODEL]
+  - name: UGK_REGION
+    identifier: UGK_REGION
+    description: Landing table for UGK_REGION from SQLServer [TELCUSTOMER_REPORTING].[dbo].[UGK_REGION]
+  - name: UGK_VIEWS
+    identifier: UGK_VIEWS
+    description: Landing table for UGK_VIEWS from SQLServer [TELCUSTOMER_REPORTING].[dbo].[UGK_VIEWS]
+  - name: VW_UGK_INFO
+    identifier: VW_UGK_INFO
+    description: Landing table for VW_UGK_INFO from SQLServer [TELCUSTOMER_REPORTING].[dbo].[VW_UGK_INFO]
+  - name: USER_NOTIFICATIONS
+    identifier: USER_NOTIFICATIONS
+    description: Landing table for USER_NOTIFICATIONS from SQLServer [TELCUSTOMER_REPORTING].[dbo].[USER_NOTIFICATIONS]
+  - name: USER_NOTIFICATIONS_HIST
+    identifier: USER_NOTIFICATIONS_HIST
+    description: Landing table for USER_NOTIFICATIONS_HIST from SQLServer [TELCUSTOMER_REPORTING].[dbo].[USER_NOTIFICATIONS_HIST]
+  - name: USER_ROLE
+    identifier: USER_ROLE
+    description: Landing table for USER_ROLE from SQLServer [TELCUSTOMER_REPORTING].[dbo].[USER_ROLE]
+  - name: REGION_MODEL
+    identifier: REGION_MODEL
+    description: Landing table for REGION_MODEL from SQLServer [TELCUSTOMER_REPORTING].[dbo].[REGION_MODEL]
+  - name: PERSONALIZATION
+    identifier: PERSONALIZATION
+    description: Landing table for PERSONALIZATION from SQLServer [TELCUSTOMER_REPORTING].[dbo].[PERSONALIZATION]
+  - name: PRODUCT_H
+    identifier: PRODUCT_H
+    description: Landing table for PRODUCT_H from SQLServer [TELCUSTOMER_REPORTING].[dbo].[PRODUCT_H]
+  - name: PORTAL_ROLE
+    identifier: PORTAL_ROLE
+    description: Landing table for PORTAL_ROLE from SQLServer [TELCUSTOMER_REPORTING].[dbo].[PORTAL_ROLE]
+  - name: PRODUCT_INQUIRY
+    identifier: PRODUCT_INQUIRY
+    description: Landing table for PRODUCT_INQUIRY from SQLServer [TELCUSTOMER_REPORTING].[dbo].[PRODUCT_INQUIRY]
+  - name: PRODUCT_NOTICE_RESPONSE
+    identifier: PRODUCT_NOTICE_RESPONSE
+    description: Landing table for PRODUCT_NOTICE_RESPONSE from SQLServer [TELCUSTOMER_REPORTING].[dbo].[PRODUCT_NOTICE_RESPONSE]
+  - name: TEAMROOM_SUMMARY
+    identifier: TEAMROOM_SUMMARY
+    description: Landing table for TEAMROOM_SUMMARY from SQLServer [TELCUSTOMER_REPORTING].[dbo].[TEAMROOM_SUMMARY]
+  - name: CONTROLTABLE
+    identifier: CONTROLTABLE
+    description: EXTRACT AUDIT TABLE

@@ -1,0 +1,12 @@
+version: 2
+models:
+- name: COMMON__LEGACY93__CUSTOMER_GROUP
+  description: Model legacy93 customer_group file.
+- name: COMMON__LEGACY93__CARMA_NOW_ACCRUAL
+  description: Landing table for CARMA_NOW_ACCRUAL.
+- name: COMMON__LEGACY93__BAANV_SERVICE_ORDERS_ACCRUAL
+  description: Landing table for BAANV_SERVICE_ORDERS_ACCRUAL.
+- name: COMMON__LEGACY93__ARCHIVE_SAFETY_INVESTIGATION
+  description: Landing table for SAFETY_INVESTIGATION.
+- name: COMMON__LEGACY93__ARCHIVE_SAFETY_ACTION_ITEMS
+  description: Landing table for SAFETY_ACTION_ITEMS.

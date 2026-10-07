@@ -1,0 +1,30 @@
+Source.Name,CDS View,Technical Field Name(ODS),PK,Type,Field Name(Common),Comments
+PBED,Independent Requirements Data,MANDT,X,CLNT,CLIENT,Client
+PBED,Independent Requirements Data,BDZEI,X,NUMC,INDEPENDENT_REQUIREMENTS_POINTER,Reqmts pointer
+PBED,Independent Requirements Data,PDATU,X,DATS,DELIVERY_ORDER_FINISH_DATE,Finish date
+PBED,Independent Requirements Data,WDATU,,DATS,REQSTD_DATE,Reqstd date
+PBED,Independent Requirements Data,AENAM,,CHAR,NAME_OF_PERSON_WHO_CHANGED_OBJECT,Changed by
+PBED,Independent Requirements Data,LAEDA,,DATS,DATE_OF_LAST_CHANGE,Last Change
+PBED,Independent Requirements Data,MEINS,,UNIT,BASE_UNIT_OF_MEASURE,Base Unit
+PBED,Independent Requirements Data,PLNMG,,QUAN,PLANNED_QUANTITY,Planned qty
+PBED,Independent Requirements Data,ENTMG,,QUAN,WITHDRAWAL_QUANTITY,Withdrawal qty
+PBED,Independent Requirements Data,UPLMG,,QUAN,ORIGINALLY_PLANNED_QUANTITY,Orig. plnd qty
+PBED,Independent Requirements Data,ENTLI,,CHAR,DATE_TYPE_DAY_WEEK_MONTH_INTERVAL_,Date type
+PBED,Independent Requirements Data,ENTLU,,CHAR,PERIOD_INDICATOR_DAY_WEEK_MONTH_POSTING_PERIOD,PerIn
+PBED,Independent Requirements Data,PERXX,,CHAR,PLANNING_PERIOD,Period
+PBED,Independent Requirements Data,SERNR,,CHAR,BOM_EXPLOSION_NUMBER,BOM expl.number
+PBED,Independent Requirements Data,VERID,,CHAR,PRODUCTION_VERSION,Prod. Version
+PBED,Independent Requirements Data,ERFME,,UNIT,UNIT_OF_ENTRY,Unit of Entry
+PBED,Independent Requirements Data,ERFMG,,QUAN,QUANTITY_IN_UNIT_OF_ENTRY,Quantity in UnE
+PBED,Independent Requirements Data,UMREZ,,DEC,NUMERATOR_FOR_CONVERSION_TO_BASE_UNITS_OF_MEASURE,Numerator
+PBED,Independent Requirements Data,UMREN,,DEC,DENOMINATOR_FOR_CONVERSION_TO_BASE_UNITS_OF_MEASURE,Denominator
+PBED,Independent Requirements Data,FIXMG,,QUAN,PLANNED_QUANTITY,Planned qty
+PBED,Independent Requirements Data,TXTET,,CHAR,INDICATOR_LONG_TEXT_EXISTS,Long txt exists
+PBED,Independent Requirements Data,LOEVR,,CHAR,DELETION_INDICATOR,Deletion indicator
+PBED,Independent Requirements Data,CUOBJ,,NUMC,CONFIGURATION_INTERNAL_OBJECT_NUMBER,Int. object no.
+PBED,Independent Requirements Data,STPKT,,CHAR,SUPPORTING_POINT_FOR_INDEPENDENT_REQUIREMENTS,Supporting pnt
+PBED,Independent Requirements Data,TECHS,,CHAR,PARAMETER_VARIANT_STANDARD_VARIANT,StandardVariant
+PBED,Independent Requirements Data,FSH_SEASON_YEAR,,CHAR,SEASON_YEAR,Season Year
+PBED,Independent Requirements Data,FSH_SEASON,,CHAR,SEASON,Season
+PBED,Independent Requirements Data,FSH_COLLECTION,,CHAR,FASHION_COLLECTION,Collection
+PBED,Independent Requirements Data,FSH_THEME,,CHAR,FASHION_THEME,Theme

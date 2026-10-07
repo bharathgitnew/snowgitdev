@@ -1,0 +1,10 @@
+version: 2
+sources:
+- name: NOWDATA
+  description: Landing Zone - NOW Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: NOW_UAT
+  tables:
+  - name: NOWDATA
+    identifier: NOWDATA
+    description: Landing table for NOWDATA file.

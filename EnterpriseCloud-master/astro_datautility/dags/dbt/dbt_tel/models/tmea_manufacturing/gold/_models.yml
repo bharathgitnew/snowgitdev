@@ -1,0 +1,109 @@
+models:
+- name: GOLD__TMEA_MANUFACTURING__CUE_DASHBOARD
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_MANUFACTURING__CUE_DASHBOARD_WEEKLY_REPORTING
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_MANUFACTURING__CUE_REPAIR_BACKLOG
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_MANUFACTURING__CUE_REPAIR_QUEUE_BOM
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_MANUFACTURING__ENGINEERING_INTERNAL_ORDER_HOURS
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_MANUFACTURING__MATERIAL_DEMAND_LOCATION_REPORT
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_MANUFACTURING__MATERIAL_DOCUMENT_LIST
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_MANUFACTURING__ORDER_INFO_SYSTEM_ORDER_HEADERS
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_MANUFACTURING__PRODUCTION_OPERATION_LEVEL_SYSTEM_STATUS
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_MANUFACTURING__PRODUCTION_PLANNING
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_MANUFACTURING__PRODUCTION_PLANNING_OPERATION_LEVEL
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_MANUFACTURING__PRODUCTION_QN_PER_TOOL_BY_QUARTER
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_MANUFACTURING__PRODUCTION_SYSTEMS_OTD
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_MANUFACTURING__PRODUCTION_TOOL_BUILD_HOURS
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_MANUFACTURING__PRODUCTION_TOOL_QN_SUMMARY
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_MANUFACTURING__PRODUCTION_VALUE_STREAM
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_MANUFACTURING__QN_TOOL_SCORECARD
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_MANUFACTURING__TMEA_MANUFACTURING_READINESS
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_MANUFACTURING__TMEA_SHORTAGE_REPORT_DATA_WAREHOUSE
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_MANUFACTURING__ZPRODORDINFO
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_MANUFACTURING__BILL_OF_MATERIAL
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_MANUFACTURING__TMEA_HOLIDAYS_CALENDAR
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_MANUFACTURING__SHORTAGE_REPORT_MFG
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_MANUFACTURING__STANDARD_ROUTING_HOURS
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_MANUFACTURING__TMEA_TOOL_BOM_PROCUREMENT_TYPE_E
+  tests:
+  - has_data
+  - recently_run     
+- name: GOLD__TMEA_MANUFACTURING__MATERIAL_LIFECYCLE
+  tests:
+  - has_data
+  - recently_run    
+
+
+
+  

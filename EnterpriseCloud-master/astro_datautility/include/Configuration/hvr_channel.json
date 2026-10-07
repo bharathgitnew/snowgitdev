@@ -1,0 +1,18 @@
+{
+    "baan_sf": {
+        "source": "ora_b",
+        "target": [{"name":"sf_bl"}, {"name":"sf_bt"}]
+    },
+    "baan_sf_day": {
+        "source": "ora_b",
+        "target": [{"name":"sf_bl"}, {"name":"sf_bt"}]
+    },
+    "sap_sf": {
+        "source": "ora_s",
+        "target": [{"name":"sf_sl"}, {"name":"sf_st"}]
+    },
+    "sap_sf_day": {
+        "source": "ora_s",
+        "target": [{"name":"sf_sl"}, {"name":"sf_st"}]
+    }
+}

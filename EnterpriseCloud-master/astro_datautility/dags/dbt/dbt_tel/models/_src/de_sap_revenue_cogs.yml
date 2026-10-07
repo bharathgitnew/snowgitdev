@@ -1,0 +1,10 @@
+version: 2
+sources:
+- name: DE_SAP_REVENUE_COGS
+  description: PUB - DE_SAP_REVENUE_COGS Schema
+  database: '{{ env_var(''SNOWFLAKE_PUB'') }}'
+  schema: DE_SAP_REVENUE_COGS
+  tables:
+  - name: ACTUAL_BUDGET_FORECAST_PNL
+    identifier: ACTUAL_BUDGET_FORECAST_PNL
+    description: Pub view for ACTUAL_BUDGET_FORECAST_PNL.

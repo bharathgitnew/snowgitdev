@@ -1,0 +1,13 @@
+{{ config(
+        alias = 'TEL_COM_MATERIALGROUPMASTER',
+        materialized = 'view',
+        transient = false
+) }}
+
+with source_data as (
+    select
+        * exclude (_AUDIT_LOG_ID, _ROW_HASH)
+    from {{ ref('ODS__CRM_FILE__TEL_COM_MATERIALGROUPMASTER') }} 
+)
+
+select * from source_data

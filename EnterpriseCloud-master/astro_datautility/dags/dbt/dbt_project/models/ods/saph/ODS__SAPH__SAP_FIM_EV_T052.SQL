@@ -1,0 +1,127 @@
+/************
+	Model file generated from gmxDbtTemplateUtility.ipynb 
+	*************/
+
+	
+	{{ config(
+    	  materialized='incremental',
+    	  incremental_strategy='insert_overwrite',
+    	  alias='SAP_FIM_EV_T052',
+    	  unique_key = [''],
+    	  transient=false	
+) }} 
+
+	with source_data as (
+	SELECT
+		JSONFIELD:"ZTERM"::STRING AS "ZTERM", 
+ 	 	JSONFIELD:"ZTAGG"::STRING AS "ZTAGG", 
+ 	 	JSONFIELD:"ZDART"::STRING AS "ZDART", 
+ 	 	JSONFIELD:"ZFAEL"::STRING AS "ZFAEL", 
+ 	 	JSONFIELD:"ZMONA"::STRING AS "ZMONA", 
+ 	 	JSONFIELD:"ZTAG1"::STRING AS "ZTAG1", 
+ 	 	JSONFIELD:"ZPRZ1"::STRING AS "ZPRZ1", 
+ 	 	JSONFIELD:"ZTAG2"::STRING AS "ZTAG2", 
+ 	 	JSONFIELD:"ZPRZ2"::STRING AS "ZPRZ2", 
+ 	 	JSONFIELD:"ZTAG3"::STRING AS "ZTAG3", 
+ 	 	JSONFIELD:"ZSTG1"::STRING AS "ZSTG1", 
+ 	 	JSONFIELD:"ZSMN1"::STRING AS "ZSMN1", 
+ 	 	JSONFIELD:"ZSTG2"::STRING AS "ZSTG2", 
+ 	 	JSONFIELD:"ZSMN2"::STRING AS "ZSMN2", 
+ 	 	JSONFIELD:"ZSTG3"::STRING AS "ZSTG3", 
+ 	 	JSONFIELD:"ZSMN3"::STRING AS "ZSMN3", 
+ 	 	JSONFIELD:"XZBRV"::STRING AS "XZBRV", 
+ 	 	JSONFIELD:"ZSCHF"::STRING AS "ZSCHF", 
+ 	 	JSONFIELD:"XCHPB"::STRING AS "XCHPB", 
+ 	 	JSONFIELD:"TXN08"::STRING AS "TXN08", 
+ 	 	JSONFIELD:"ZLSCH"::STRING AS "ZLSCH", 
+ 	 	JSONFIELD:"XCHPM"::STRING AS "XCHPM", 
+ 	 	JSONFIELD:"KOART"::STRING AS "KOART", 
+ 	 	JSONFIELD:"XSPLT"::STRING AS "XSPLT", 
+ 	 	JSONFIELD:"XSCRC"::STRING AS "XSCRC", 
+ 	 	JSONFIELD:"DELFLAG"::STRING AS "DELFLAG", 
+ 	 	JSONFIELD:"CDCHANGENR"::STRING AS "CDCHANGENR", 
+ 	 	JSONFIELD:"PSL_INSDATE"::STRING AS "PSL_INSDATE", 
+ 	 	JSONFIELD:"PSL_UPDDATE"::STRING AS "PSL_UPDDATE",
+		_FILEDATE,
+		_FILENAME
+	from {{ source('SAPH','SAP_FIM_EV_T052') }}
+	WHERE REGEXP_SUBSTR(_FILENAME,'\\d{14}') = (SELECT MAX(REGEXP_SUBSTR(_filename,'\\d{14}')) from {{ source('SAPH', 'SAP_FIM_EV_T052') }})
+	),
+	
+	transform_data as (
+	SELECT 
+		"ZTERM", 
+ 	 	"ZTAGG", 
+ 	 	"ZDART", 
+ 	 	"ZFAEL", 
+ 	 	"ZMONA", 
+ 	 	"ZTAG1", 
+ 	 	"ZPRZ1", 
+ 	 	"ZTAG2", 
+ 	 	"ZPRZ2", 
+ 	 	"ZTAG3", 
+ 	 	"ZSTG1", 
+ 	 	"ZSMN1", 
+ 	 	"ZSTG2", 
+ 	 	"ZSMN2", 
+ 	 	"ZSTG3", 
+ 	 	"ZSMN3", 
+ 	 	"XZBRV", 
+ 	 	"ZSCHF", 
+ 	 	"XCHPB", 
+ 	 	"TXN08", 
+ 	 	"ZLSCH", 
+ 	 	"XCHPM", 
+ 	 	"KOART", 
+ 	 	"XSPLT", 
+ 	 	"XSCRC", 
+ 	 	"DELFLAG", 
+ 	 	"CDCHANGENR", 
+ 	 	"PSL_INSDATE", 
+ 	 	"PSL_UPDDATE",
+		_FILEDATE,
+		_FILENAME,
+		'{{ invocation_id }}' AS AUDIT_LOG_ID,
+        SHA2('hash_me') as _ROW_HASH -- Adds column to table on full refresh.
+	from source_data
+	),
+	
+	type_data as (
+	SELECT
+		CAST("ZTERM" AS NVARCHAR) AS "ZTERM", 
+ 	 	CAST("ZTAGG" AS VARCHAR) AS "ZTAGG", 
+ 	 	CAST("ZDART" AS NVARCHAR) AS "ZDART", 
+ 	 	CAST("ZFAEL" AS VARCHAR) AS "ZFAEL", 
+ 	 	CAST("ZMONA" AS VARCHAR) AS "ZMONA", 
+ 	 	CAST("ZTAG1" AS VARCHAR) AS "ZTAG1", 
+ 	 	CAST("ZPRZ1" AS FLOAT) AS "ZPRZ1", 
+ 	 	CAST("ZTAG2" AS VARCHAR) AS "ZTAG2", 
+ 	 	CAST("ZPRZ2" AS FLOAT) AS "ZPRZ2", 
+ 	 	CAST("ZTAG3" AS VARCHAR) AS "ZTAG3", 
+ 	 	CAST("ZSTG1" AS VARCHAR) AS "ZSTG1", 
+ 	 	CAST("ZSMN1" AS VARCHAR) AS "ZSMN1", 
+ 	 	CAST("ZSTG2" AS VARCHAR) AS "ZSTG2", 
+ 	 	CAST("ZSMN2" AS VARCHAR) AS "ZSMN2", 
+ 	 	CAST("ZSTG3" AS VARCHAR) AS "ZSTG3", 
+ 	 	CAST("ZSMN3" AS VARCHAR) AS "ZSMN3", 
+ 	 	CAST("XZBRV" AS NVARCHAR) AS "XZBRV", 
+ 	 	CAST("ZSCHF" AS NVARCHAR) AS "ZSCHF", 
+ 	 	CAST("XCHPB" AS NVARCHAR) AS "XCHPB", 
+ 	 	CAST("TXN08" AS NVARCHAR) AS "TXN08", 
+ 	 	CAST("ZLSCH" AS NVARCHAR) AS "ZLSCH", 
+ 	 	CAST("XCHPM" AS NVARCHAR) AS "XCHPM", 
+ 	 	CAST("KOART" AS NVARCHAR) AS "KOART", 
+ 	 	CAST("XSPLT" AS NVARCHAR) AS "XSPLT", 
+ 	 	CAST("XSCRC" AS NVARCHAR) AS "XSCRC", 
+ 	 	CAST("DELFLAG" AS BOOLEAN) AS "DELFLAG", 
+ 	 	CAST("CDCHANGENR" AS NVARCHAR) AS "CDCHANGENR", 
+ 	 	CAST("PSL_INSDATE" AS TIMESTAMP) AS "PSL_INSDATE", 
+ 	 	CAST("PSL_UPDDATE" AS TIMESTAMP) AS "PSL_UPDDATE",
+		cast(_FILEDATE AS TIMESTAMP_NTZ(9)) AS _FILEDATE,
+		cast(_FILENAME as varchar(128)) as _FILENAME,
+        cast(AUDIT_LOG_ID as varchar(128)) as AUDIT_LOG_ID,
+        cast(_ROW_HASH as varchar(128)) as _ROW_HASH
+	from transform_data
+	)
+
+	select * from type_data

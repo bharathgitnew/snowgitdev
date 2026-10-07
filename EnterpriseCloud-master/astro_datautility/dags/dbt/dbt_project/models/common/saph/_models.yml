@@ -1,0 +1,40 @@
+version: 2
+models:
+- name: COMMON__SAPH__NCDR_SAPH
+  description: Model of all NCDRs from SAP joined with satellite info from NOW and CRM. 
+    NOW data is joined by NCDR number while CRM data is joined by work order and material num.
+    Unique by sale doc line+item (SALES_DOC_HDR, SALES_DOC_LINE_NUMBER).
+  columns:
+    - name: SALES_DOC_HDR
+      description: Sales document header number
+    - name: SALES_DOC_LINE_NUMBER
+      description: Sales document line number
+    - name: SAP_NCDR15
+      description: NCDR number as it appears on the SAP Item data "FS:Order Info." tab.
+    - name: COALESCED_NCDR15
+      description: Sometimes SAP_NCDR15 is blank so we try to find a related sales order to pull it from or we look in CRM.
+    - name: NCDR_NUMBER_INFERRED_FROM_CRM_NUMBER
+      description: Indicator that COALESCED_NCDR15 was pulled from CRM because it could not be found in SAP.
+    - name: COALESCED_WORK_ORDER_NUMBER
+      description: Tries to pull the WO num from SAP first, then from NOW, then from related SAP sales orders.
+    - name: WO_SOURCE
+      description: Indicator of where COALESCED_WORK_ORDER_NUMBER came from. Either SAP or NOW or BACKUP SO.
+    - name: NCDR_PART_SOLINE_KEY
+      description: Concatenates the COALESCED_NCDR15, MATERIAL_NUMBER, SALES_DOC_HDR, SALES_DOC_LINE_NUMBER into column
+    - name: AGING_DAYS
+      description: Number of days since the item was ordered. If the part hasn't been delivered, this will return null.
+    - name: AGING_GROUP
+      description: Returns "*Not Delivered" if the item is not delivered, otherwise buckets by AGING_DAYS column.
+    - name: GOODS_ON_LOAN_QTY
+      description: Using the sales order's material documents, adds up the total quantity of goods.
+    - name: GOODS_CONSUMED_QTY
+      description: Using the sales order's material documents, adds up the total quantity of goods consumed. 
+        For consumption to count, the material document must link to a service order that then links to a ZS12 order with the same NCDR number.
+    - name: GOODS_RETURN_QTY
+      description: Using the sales order's material documents, adds up the total quantity of goods returned.
+    - name: GOODS_REMAINING_QTY
+      description: Subtracts the GOODS_CONSUMED_QTY and GOODS_RETURN_QTY from the GOODS_ON_LOAN_QTY.
+    - name: LINE_ITEM_STD_PRICE
+      description: Equates to the standard material cost x the sap order quantity
+    - name: BILL_TO_TEL_AMT
+      description: Raises the LINE_ITEM_STD_PRICE by 25%

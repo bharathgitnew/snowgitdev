@@ -1,0 +1,125 @@
+models:
+- name: GOLD__TEH_SALES_TO_INSTALLATION__ACTION_REQUEST_FORM_LIFECYCLE
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_SALES_TO_INSTALLATION__FORECAST
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_SALES_TO_INSTALLATION__FORECAST_HISTORY
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_SALES_TO_INSTALLATION__GLOBAL_MACHINES
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_SALES_TO_INSTALLATION__GLOBAL_SALES_INTEL_BOOKING_DETAIL
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_SALES_TO_INSTALLATION__GLOBAL_SALES_INTEL_SALES_DETAIL
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_SALES_TO_INSTALLATION__QUOTE_ACTION_HISTORY
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_SALES_TO_INSTALLATION__QUOTE_ACTION_LIFECYCLE
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_SALES_TO_INSTALLATION__QUOTE_REQUEST_FORM_LIFECYCLE
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_SALES_TO_INSTALLATION__SALES_CRM_ITEM_CONFIGURATION
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_SALES_TO_INSTALLATION__SALES_CRM_OPPORTUNITY_FLOW
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_SALES_TO_INSTALLATION__SALES_CRM_REVENUE_RECOGNITION
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_SALES_TO_INSTALLATION__SIMULATED_BOOKING_HISTORY
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_SALES_TO_INSTALLATION__SIMULATED_REVENUE_RECOGNITION
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_SALES_TO_INSTALLATION__SIMULATED_REVENUE_RECOGNITION_HISTORY
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_SALES_TO_INSTALLATION__SIRFIS_AREA
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_SALES_TO_INSTALLATION__SIRFIS_CRM_LINKAGE
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_SALES_TO_INSTALLATION__SIRFIS_ITEM_EVALUATION
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_SALES_TO_INSTALLATION__SIRFIS_LIFECYCLE
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_SALES_TO_INSTALLATION__SIRFIS_LIFECYCLE_TMEA
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_SALES_TO_INSTALLATION__SIRFIS_PRICE_CHANGE_HISTORY
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_SALES_TO_INSTALLATION__SIRFIS_PRICING
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_SALES_TO_INSTALLATION__INTEL_PURCHASE_ORDER_CHANGE_ORDER_HISTORY
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_SALES_TO_INSTALLATION__INTEL_PURCHASE_ORDER_CHANGE_ORDER
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_SALES_TO_INSTALLATION__FORECAST_HISTORY_TMEA
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_SALES_TO_INSTALLATION__SIRFIS_CONFIG_PO_BT_CHANGE_HISTORY
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_SALES_TO_INSTALLATION__SIRFIS_EVENT_CHANGE_HISTORY
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_SALES_TO_INSTALLATION__SIRFIS_ITEM_HIERARCHY_TMEA
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_SALES_TO_INSTALLATION__SIRFIS_ITEM_HIERARCHY
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_SALES_TO_INSTALLATION__SIRFIS_CANCELLATION_CHURN_HISTORY
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_SALES_TO_INSTALLATION__SIRFIS_LATEST_CANCELLATIONS
+  tests:
+  - has_data
+  - recently_run    

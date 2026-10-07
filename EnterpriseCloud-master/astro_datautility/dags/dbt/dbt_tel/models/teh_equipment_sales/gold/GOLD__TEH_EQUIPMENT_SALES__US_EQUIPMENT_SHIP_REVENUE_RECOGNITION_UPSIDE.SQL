@@ -1,0 +1,326 @@
+{{ config(
+    materialized='tel_incremental',
+	incremental_strategy='insert_overwrite',
+    alias='US_EQUIPMENT_SHIP_REVENUE_RECOGNITION_UPSIDE',
+    transient=false
+) }}
+
+with
+MachineData
+as
+(
+select distinct
+	listagg(distinct SERIAL_NUMBER, ', ')              as SERIAL_NUMBER,
+	listagg(distinct CUSTOMER_TOOL_ID, ', ')           as CUSTOMER_TOOL_ID,
+	listagg(distinct WISDOM_BU, ', ')                  as TEL_BU,
+    listagg(distinct TEL_MODEL, ', ')                  as MODEL,
+	listagg(distinct MACHINE_HISTORY_REASON, ', ')     as SYSTEM_STATUS,
+	max(TEL_SHIP_DATE)                                 as SHIP_DATE,
+	listagg(distinct PO_NO, ', ')                      as CUSTOMER_PURCHASE_ORDER,
+	listagg(distinct right(TEL_SALES_ORDER, 9), ', ')  as SALES_ORDER_NO
+from {{ ref('GOLD__TEH_EQUIPMENT_SALES__WISDOM_GLOBAL_MACHINES') }}
+where TEL_REGION = 'North America'
+    and ACTIVE_FLAG = 'Active'
+    and WISDOM_BU not in ('FSI', 'Epion')
+    and TEL_SHIP_DATE >= '4/1/2020'
+    and TEL_SALES_ORDER is not null
+group by right(TEL_SALES_ORDER, 9)
+),
+UpsidewSN
+as
+(
+select
+    ''                                                  as GS_FY_Q,
+    crm.ACCOUNT_REVENUE_FY_Q                            as Account_FY_Q,
+    'Upside'                                            as Risk_Upside,
+    crm.SALES_ACCOUNT,
+    crm.Sales_Region,
+    crm.SOLD_TO_PARTY,
+    crm.End_User,
+    crm.FAB,
+    crm.BU,
+    crm.BU_Group,
+    crm.Sub_BU,
+    crm.SALES_CATEGORY_GROUP_DISTINCT                   as Sales_Category_Group,
+    crm.SALES_CATEGORY_DISTINCT                         as Sales_Category_All,
+    crm.Primary_Sales_Category,
+    crm.ORDER_ITEM_OPPORTUNITY                          as Product_Name_All,
+    crm.ORDER_ITEM_SALES_DOCUMENT_ALL                   as Product_Details,
+    crm.OPPORTUNITY_ID_DISTINCT,
+    crm.SALES_DOCUMENT_ITEM_NO_ALL,
+    crm.OPPORTUNITY_TITLE_FREE_TEXT,
+    crm.PROJECT_NO_DISTINCT,
+    crm.SALES_ORDER_NO_DISTINCT                         as Sales_Order_No_All,
+    case when crm.Model is null then machine.Model
+        else crm.Model end                              as Model,
+    crm.ADJUSTED_SERIAL_NO_DISTINCT                     as Adjusted_Serial_No,
+    case when crm.Customer_Tool_ID is null then machine.Customer_Tool_ID
+        else crm.Customer_Tool_ID
+    end                                                 as CUSTOMER_TOOL_ID,
+	machine.SYSTEM_STATUS                               as Machine_Status,
+	crm.ADJUSTED_SHIP_DATE_MAX                          as Adjusted_Ship_Date,
+    NULL                                                as Sales_Month_Max,
+    crm.END_USER_SALES_DATE_BU_MAX,
+    crm.END_USER_SALES_DATE_ACCOUNT_MAX,
+    crm.ACTUAL_SALES_DATE_MAX,
+    crm.IS_LOANER,
+	crm.LOAN_EXPIRATION_DATE,
+    crm.VPA,
+	crm.REVENUE_RECOGNITION_STATUS_DISTINCT,
+    crm.BOOKING_SALES_STATUS,
+    crm.END_USER_SALES_AMOUNT_JPY_SUMMED                as Sales_Amount_Summed,
+	crm.REVENUE_RECOGNITION_CRITERIA_SHORT,
+	crm.SALES_REPORTING_FLAG,
+    ''                                                  as Is_Placeholder,
+	crm.END_USER_BOOKING_DATE_BU_MAX,
+	crm.IS_BOOKING_ACTUAL,
+    crm.CONFIDENCE_BU_SHORT,
+	crm.QUOTE_NO,
+	case when crm.PURCHASE_ORDER_NO is null then machine.CUSTOMER_PURCHASE_ORDER
+        else crm.PURCHASE_ORDER_NO
+    end                                                 as PURCHASE_ORDER_NO,
+	crm.ACCOUNT_SALES_PERSON,
+    crm.BU_SALES_PERSON,
+    crm.ACCOUNT_COMMENTS,
+    crm.BU_COMMENTS,
+    crm.SALES_COMMENTS_TO_SAP,
+    crm.ASSISTANTS_COMMENTS_FROM_SAP,
+    ''                                                  as Data_Type,
+    ''                                                  as Budget_Type,
+	crm.End_User_Code,
+    NULL                                                as GS_Data_Snapshot,
+    crm.DATA_SNAPSHOT                                   as CRM_Data_Snapshot,
+    NULL                                                as ACC_Data_Snapshot,
+    crm.QUANTITY                                        as Quantity_Summed,
+    NULL                                                as GS_FK_Date,
+    ''                                                  as GS_FY,
+    ''                                                  as GS_FY_Half,
+    crm.ACCOUNT_REVENUE_FY                              as Account_FY,
+    crm.ACCOUNT_REVENUE_FY_HALF                         as Account_FY_Half
+from {{ ref('GOLD__TEH_EQUIPMENT_SALES__SALES_CRM_EQUIPMENT_SHIP_BASE_REVENUE_RECOGNITION') }} crm
+left outer join MachineData machine on machine.Sales_Order_No = crm.SALES_ORDER_NO_DISTINCT
+where crm.SALES_CATEGORY_GROUP_DISTINCT in ('Equipment', 'Pre-kit', 'Chamber')
+    and crm.ADJUSTED_SERIAL_NO_DISTINCT is not null
+	and crm.ADJUSTED_SERIAL_NO_DISTINCT <> ''
+    and crm.ADJUSTED_SERIAL_NO_DISTINCT not ilike 'TBD'
+    and crm.ADJUSTED_SERIAL_NO_DISTINCT not ilike 'NONE'
+	and crm.ADJUSTED_SERIAL_NO_DISTINCT <> '0'
+    and crm.SALES_ORDER_NO_DISTINCT is not null
+    and crm.SALES_ORDER_NO_DISTINCT <> ''
+	and crm.END_USER_SALES_AMOUNT_JPY_SUMMED <> 0
+    and ((crm.IS_LOANER = 'Yes'
+            and (crm.END_USER_SALES_DATE_BU_MAX >= crm.Beginning_of_Current_FY_Half
+            and crm.END_USER_SALES_DATE_BU_MAX <= crm.End_of_Current_FY_Half))
+        or (IS_LOANER = 'Yes'
+            and (crm.END_USER_SALES_DATE_ACCOUNT_MAX >= crm.Beginning_of_Current_FY_Half
+            and crm.END_USER_SALES_DATE_ACCOUNT_MAX <= crm.End_of_Current_FY_Half))
+        or crm.IS_LOANER = 'No')
+),
+SOURCE_DATA AS (
+select
+    crm.GS_FY_Q,
+    crm.Account_FY_Q,
+    crm.Risk_Upside,
+    crm.SALES_ACCOUNT,
+    crm.Sales_Region,
+    crm.SOLD_TO_PARTY,
+    crm.End_User,
+    crm.FAB,
+    crm.BU,
+    crm.BU_Group,
+    crm.Sub_BU,
+    crm.Sales_Category_Group,
+    crm.Sales_Category_All,
+    crm.Primary_Sales_Category,
+    crm.Product_Name_All,
+    crm.Product_Details,
+    crm.OPPORTUNITY_ID_DISTINCT,
+    crm.SALES_DOCUMENT_ITEM_NO_ALL,
+    crm.OPPORTUNITY_TITLE_FREE_TEXT,
+    crm.PROJECT_NO_DISTINCT,
+    crm.Sales_Order_No_All,
+    crm.Model,
+    crm.Adjusted_Serial_No,
+    crm.CUSTOMER_TOOL_ID,
+	crm.Machine_Status,
+	crm.Adjusted_Ship_Date,
+    crm.Sales_Month_Max,
+    crm.END_USER_SALES_DATE_BU_MAX,
+    crm.END_USER_SALES_DATE_ACCOUNT_MAX,
+    crm.ACTUAL_SALES_DATE_MAX,
+	crm.Is_Loaner,
+	crm.LOAN_EXPIRATION_DATE,
+    crm.VPA,
+	crm.REVENUE_RECOGNITION_STATUS_DISTINCT,
+    crm.BOOKING_SALES_STATUS,
+    crm.Sales_Amount_Summed,
+	crm.REVENUE_RECOGNITION_CRITERIA_SHORT,
+	crm.SALES_REPORTING_FLAG,
+    crm.Is_Placeholder,
+	crm.END_USER_BOOKING_DATE_BU_MAX,
+	crm.IS_BOOKING_ACTUAL,
+    crm.CONFIDENCE_BU_SHORT,
+	crm.QUOTE_NO,
+	crm.PURCHASE_ORDER_NO,
+	crm.ACCOUNT_SALES_PERSON,
+    crm.BU_SALES_PERSON,
+    crm.ACCOUNT_COMMENTS,
+    crm.BU_COMMENTS,
+    crm.SALES_COMMENTS_TO_SAP,
+    crm.ASSISTANTS_COMMENTS_FROM_SAP,
+    crm.Data_Type,
+    crm.Budget_Type,
+	crm.End_User_Code,
+    crm.GS_Data_Snapshot,
+    crm.CRM_Data_Snapshot,
+    crm.ACC_Data_Snapshot,
+    crm.Quantity_Summed,
+    crm.GS_FK_Date,
+    crm.GS_FY,
+    crm.GS_FY_Half,
+    crm.Account_FY,
+    crm.Account_FY_Half
+from UpsidewSN crm
+left outer join {{ ref('GOLD__TEH_EQUIPMENT_SALES__US_EQUIPMENT_SHIP_REVENUE_RECOGNITION_RISK') }} gs --on gs.Adjusted_Serial_No = crm.ADJUSTED_SERIAL_NO
+    on gs.SALES_ORDER_NO_ALL = crm.SALES_ORDER_NO_ALL
+where gs.SALES_ORDER_NO_ALL is null
+),
+TRANSFORM_DATA AS (
+SELECT
+        '{{ invocation_id }}' AS _AUDIT_LOG_ID,
+        SHA2('hash_me') AS _ROW_HASH,
+        GS_FY_Q,
+        ACCOUNT_FY_Q,
+        RISK_UPSIDE,
+        SALES_ACCOUNT,
+        SALES_REGION,
+        SOLD_TO_PARTY,
+        END_USER,
+        FAB,
+        BU,
+        BU_GROUP,
+        SUB_BU,
+        SALES_CATEGORY_GROUP,
+        SALES_CATEGORY_ALL,
+        PRIMARY_SALES_CATEGORY,
+        PRODUCT_NAME_ALL,
+        PRODUCT_DETAILS,
+        OPPORTUNITY_ID_DISTINCT,
+        SALES_DOCUMENT_ITEM_NO_ALL,
+        OPPORTUNITY_TITLE_FREE_TEXT,
+        PROJECT_NO_DISTINCT,
+        SALES_ORDER_NO_ALL,
+        MODEL,
+        ADJUSTED_SERIAL_NO,
+        CUSTOMER_TOOL_ID,
+        MACHINE_STATUS,
+        ADJUSTED_SHIP_DATE,
+        SALES_MONTH_MAX,
+        END_USER_SALES_DATE_BU_MAX,
+        END_USER_SALES_DATE_ACCOUNT_MAX,
+        ACTUAL_SALES_DATE_MAX,
+        IS_LOANER,
+        LOAN_EXPIRATION_DATE,
+        VPA,
+        REVENUE_RECOGNITION_STATUS_DISTINCT,
+        BOOKING_SALES_STATUS,
+        SALES_AMOUNT_SUMMED,
+        REVENUE_RECOGNITION_CRITERIA_SHORT,
+        SALES_REPORTING_FLAG,
+        IS_PLACEHOLDER,
+        END_USER_BOOKING_DATE_BU_MAX,
+        IS_BOOKING_ACTUAL,
+        CONFIDENCE_BU_SHORT,
+        QUOTE_NO,
+        PURCHASE_ORDER_NO,
+        ACCOUNT_SALES_PERSON,
+        BU_SALES_PERSON,
+        ACCOUNT_COMMENTS,
+        BU_COMMENTS,
+        SALES_COMMENTS_TO_SAP,
+        ASSISTANTS_COMMENTS_FROM_SAP,
+        DATA_TYPE,
+        BUDGET_TYPE,
+        END_USER_CODE,
+        GS_DATA_SNAPSHOT,
+        CRM_DATA_SNAPSHOT,
+        ACC_DATA_SNAPSHOT,
+        QUANTITY_SUMMED,
+        GS_FK_DATE,
+        GS_FY,
+        GS_FY_HALF,
+        ACCOUNT_FY,
+        ACCOUNT_FY_HALF
+FROM SOURCE_DATA
+)
+
+,
+TYPE_DATA AS (
+select
+        cast(_AUDIT_LOG_ID as varchar(128)) as _AUDIT_LOG_ID,
+        cast(_ROW_HASH as varchar(128)) as _ROW_HASH,
+        GS_FY_Q,
+        ACCOUNT_FY_Q,
+        RISK_UPSIDE,
+        SALES_ACCOUNT,
+        SALES_REGION,
+        SOLD_TO_PARTY,
+        END_USER,
+        FAB,
+        BU,
+        BU_GROUP,
+        SUB_BU,
+        SALES_CATEGORY_GROUP,
+        SALES_CATEGORY_ALL,
+        PRIMARY_SALES_CATEGORY,
+        PRODUCT_NAME_ALL,
+        PRODUCT_DETAILS,
+        OPPORTUNITY_ID_DISTINCT,
+        SALES_DOCUMENT_ITEM_NO_ALL,
+        OPPORTUNITY_TITLE_FREE_TEXT,
+        PROJECT_NO_DISTINCT,
+        SALES_ORDER_NO_ALL,
+        MODEL,
+        ADJUSTED_SERIAL_NO,
+        CUSTOMER_TOOL_ID,
+        MACHINE_STATUS,
+        CAST(ADJUSTED_SHIP_DATE as DATE) as ADJUSTED_SHIP_DATE,
+        SALES_MONTH_MAX,
+        CAST(END_USER_SALES_DATE_BU_MAX as DATE) as END_USER_SALES_DATE_BU_MAX,
+        CAST(END_USER_SALES_DATE_ACCOUNT_MAX as DATE) as END_USER_SALES_DATE_ACCOUNT_MAX,
+        CAST(ACTUAL_SALES_DATE_MAX as DATE) as ACTUAL_SALES_DATE_MAX,
+        IS_LOANER,
+        CAST(LOAN_EXPIRATION_DATE as DATE) as LOAN_EXPIRATION_DATE,
+        VPA,
+        REVENUE_RECOGNITION_STATUS_DISTINCT,
+        BOOKING_SALES_STATUS,
+        CAST(SALES_AMOUNT_SUMMED as NUMBER(38,0)) as SALES_AMOUNT_SUMMED,
+        REVENUE_RECOGNITION_CRITERIA_SHORT,
+        SALES_REPORTING_FLAG,
+        IS_PLACEHOLDER,
+        CAST(END_USER_BOOKING_DATE_BU_MAX as DATE) as END_USER_BOOKING_DATE_BU_MAX,
+        IS_BOOKING_ACTUAL,
+        CONFIDENCE_BU_SHORT,
+        QUOTE_NO,
+        PURCHASE_ORDER_NO,
+        ACCOUNT_SALES_PERSON,
+        BU_SALES_PERSON,
+        ACCOUNT_COMMENTS,
+        BU_COMMENTS,
+        SALES_COMMENTS_TO_SAP,
+        ASSISTANTS_COMMENTS_FROM_SAP,
+        DATA_TYPE,
+        BUDGET_TYPE,
+        END_USER_CODE,
+        GS_DATA_SNAPSHOT,
+        CAST(CRM_DATA_SNAPSHOT as DATE) as CRM_DATA_SNAPSHOT,
+        ACC_DATA_SNAPSHOT,
+        CAST(QUANTITY_SUMMED as NUMBER(38,0)) as QUANTITY_SUMMED,
+        GS_FK_DATE,
+        GS_FY,
+        GS_FY_HALF,
+        ACCOUNT_FY,
+        ACCOUNT_FY_HALF
+from transform_data
+)
+SELECT * FROM TYPE_DATA

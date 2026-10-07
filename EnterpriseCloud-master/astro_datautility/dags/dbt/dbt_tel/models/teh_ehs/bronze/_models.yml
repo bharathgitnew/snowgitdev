@@ -1,0 +1,29 @@
+models:
+- name: BRONZE__TEH_EHS__TIRS_ACCIDENTREPORTSFORUS_NOLOCK
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_EHS__TIRS_ACCIDENTWORKFLOWPROGRESSFORUS_NOLOCK
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_EHS__TIRS_TRAFFICREPORTSFORUS_NOLOCK
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_EHS__TIRS_TRAFFICWORKFLOWPROGRESSFORUS_NOLOCK
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_EHS__FILE_ATTENDANCE_STATUS
+  tests:
+  - has_data
+  - recently_run  
+- name: BRONZE__TEH_EHS__FILE_CAMPAIGN
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_EHS__FILE_FAB21_EHS_AUDIT_ETC
+  tests:
+  - has_data
+  - recently_run

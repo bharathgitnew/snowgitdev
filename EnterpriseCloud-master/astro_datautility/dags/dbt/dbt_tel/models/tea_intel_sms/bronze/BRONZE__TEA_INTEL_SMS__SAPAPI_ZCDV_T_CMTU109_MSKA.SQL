@@ -1,0 +1,192 @@
+	{{ config(
+    	  materialized='tel_incremental',
+    	  incremental_strategy='merge',
+    	  alias='SAPAPI_ZCDV_T_CMTU109_MSKA',
+    	  unique_key = ['MATNR','WERKS','LGORT','CHARG','SOBKZ','VBELN','POSNR'],
+    	  transient=false
+) }}
+
+	with source_data as (
+    SELECT
+        _FILEDATE,
+        _FILENAME,
+		JSONFIELD:"Mandt"::STRING AS MANDT, -- No Mapping in GMX
+		JSONFIELD:"MATNR"::STRING AS MATNR,
+		JSONFIELD:"WERKS"::STRING AS WERKS,
+		JSONFIELD:"LGORT"::STRING AS LGORT,
+ 	 	CASE
+			WHEN JSONFIELD:"CHARG"::STRING IS NULL THEN ''
+			ELSE LPAD(JSONFIELD:"CHARG"::STRING, 10, '0')
+		END as "CHARG",
+ 	 	JSONFIELD:"SOBKZ"::STRING AS "SOBKZ",
+ 	 	JSONFIELD:"VBELN"::STRING AS "VBELN",
+		LPAD(COALESCE(JSONFIELD:"POSNR"::STRING ,''),6,'0') AS "POSNR",
+		JSONFIELD:"LFGJA"::STRING AS LFGJA,
+		JSONFIELD:"LFMON"::STRING AS LFMON,
+		JSONFIELD:"Kaspr"::STRING AS KASPR, -- No Mapping in GMX
+		JSONFIELD:"KALAB"::STRING AS KALAB,
+		JSONFIELD:"KAINS"::STRING AS KAINS,
+		JSONFIELD:"KASPE"::STRING AS KASPE,
+		JSONFIELD:"Kavla"::STRING AS KAVLA, -- No Mapping in GMX
+		JSONFIELD:"Kavin"::STRING AS KAVIN, -- No Mapping in GMX
+		JSONFIELD:"Kavsp"::STRING AS KAVSP, -- No Mapping in GMX
+		JSONFIELD:"Kaill"::STRING AS KAILL, -- No Mapping in GMX
+		JSONFIELD:"Kailq"::STRING AS KAILQ, -- No Mapping in GMX
+		JSONFIELD:"Kails"::STRING AS KAILS, -- No Mapping in GMX
+		JSONFIELD:"Kavll"::STRING AS KAVLL, -- No Mapping in GMX
+		JSONFIELD:"Kavlq"::STRING AS KAVLQ, -- No Mapping in GMX
+		JSONFIELD:"Kavls"::STRING AS KAVLS, -- No Mapping in GMX
+		JSONFIELD:"Kafll"::STRING AS KAFLL, -- No Mapping in GMX
+		JSONFIELD:"Kaflq"::STRING AS KAFLQ, -- No Mapping in GMX
+		JSONFIELD:"Kafls"::STRING AS KAFLS, -- No Mapping in GMX
+		JSONFIELD:"Kadll"::STRING AS KADLL, -- No Mapping in GMX
+		JSONFIELD:"KAEIN"::STRING AS KAEIN,
+		JSONFIELD:"Kavei"::STRING AS KAVEI, -- No Mapping in GMX
+		JSONFIELD:"Ersda"::STRING AS ERSDA, -- No Mapping in GMX
+		JSONFIELD:"Kajin"::STRING AS KAJIN, -- No Mapping in GMX
+		JSONFIELD:"Karue"::STRING AS KARUE, -- No Mapping in GMX
+		JSONFIELD:"SgtScat"::STRING AS SGTSCAT, -- No Mapping in GMX
+		JSONFIELD:"FshSeasonYear"::STRING AS FSHSEASONYEAR, -- No Mapping in GMX
+		JSONFIELD:"FshSeason"::STRING AS FSHSEASON, -- No Mapping in GMX
+		JSONFIELD:"FshCollection"::STRING AS FSHCOLLECTION, -- No Mapping in GMX
+		JSONFIELD:"FshTheme"::STRING AS FSHTHEME, -- No Mapping in GMX
+		JSONFIELD:"FshSallocQty"::STRING AS FSHSALLOCQTY, -- No Mapping in GMX
+		JSONFIELD:"Cwm_Kalab"::STRING AS CWM_KALAB, -- No Mapping in GMX
+		JSONFIELD:"Cwm_Kains"::STRING AS CWM_KAINS, -- No Mapping in GMX
+		JSONFIELD:"Cwm_Kaspe"::STRING AS CWM_KASPE, -- No Mapping in GMX
+		JSONFIELD:"Cwm_Kaein"::STRING AS CWM_KAEIN, -- No Mapping in GMX
+		JSONFIELD:"Cwm_Kavla"::STRING AS CWM_KAVLA, -- No Mapping in GMX
+		JSONFIELD:"Cwm_Kavin"::STRING AS CWM_KAVIN, -- No Mapping in GMX
+		JSONFIELD:"Cwm_Kavsp"::STRING AS CWM_KAVSP, -- No Mapping in GMX
+		JSONFIELD:"Cwm_Kavei"::STRING AS CWM_KAVEI, -- No Mapping in GMX
+		JSONFIELD:"update_date"::STRING AS UPDATE_DATE -- No Mapping in GMX
+	from {{ source('SAPH','SAP_US_MMT_EV_MSKA') }}
+	{% if is_tel_incremental() %}
+		WHERE  _FILEDATE >= IFNULL((SELECT MAX(_FILEDATE) FROM {{ this }}),'1970-01-01')
+	{% endif %}
+        QUALIFY (ROW_NUMBER() OVER (
+			PARTITION BY
+				JSONFIELD:"MATNR"::STRING,
+				JSONFIELD:"WERKS"::STRING,
+				JSONFIELD:"LGORT"::STRING,
+				CHARG,
+				JSONFIELD:"SOBKZ"::STRING,
+				JSONFIELD:"VBELN"::STRING,
+				LPAD(COALESCE(JSONFIELD:"POSNR"::STRING ,''),6,'0')
+			ORDER BY _FILEDATE DESC )) = 1
+	),
+
+	transform_data as (
+    SELECT
+        _FILEDATE AS _FILEDATE,
+        _FILENAME AS _FILENAME,
+        '{{ invocation_id }}' AS _AUDIT_LOG_ID,
+        SHA2('hash_me') AS _ROW_HASH,
+		MATNR as MATNR,
+		WERKS as WERKS,
+		LGORT as LGORT,
+		CASE
+			WHEN "CHARG" IS NULL THEN ''
+			ELSE LPAD("CHARG", 10, '0')
+		END as "CHARG",
+		SOBKZ as SOBKZ,
+		VBELN as VBELN,
+		LPAD(COALESCE("POSNR",''),6,'0') AS "POSNR",
+		LFGJA as LFGJA,
+		coalesce(LPAD("LFMON",2,'0'),'') as "LFMON",
+		KASPR as KASPR,
+		KALAB as KALAB,
+		KAINS as KAINS,
+		KASPE as KASPE,
+		KAVLA as KAVLA,
+		KAVIN as KAVIN,
+		KAVSP as KAVSP,
+		KAILL as KAILL,
+		KAILQ as KAILQ,
+		KAILS as KAILS,
+		KAVLL as KAVLL,
+		KAVLQ as KAVLQ,
+		KAVLS as KAVLS,
+		KAFLL as KAFLL,
+		KAFLQ as KAFLQ,
+		KAFLS as KAFLS,
+		KADLL as KADLL,
+		KAEIN as KAEIN,
+		KAVEI as KAVEI,
+		ERSDA as ERSDA,
+		KAJIN as KAJIN,
+		KARUE as KARUE,
+		SGTSCAT as SGTSCAT,
+		FSHSEASONYEAR as FSHSEASONYEAR,
+		FSHSEASON as FSHSEASON,
+		FSHCOLLECTION as FSHCOLLECTION,
+		FSHTHEME as FSHTHEME,
+		FSHSALLOCQTY as FSHSALLOCQTY,
+		CWM_KALAB as CWM_KALAB,
+		CWM_KAINS as CWM_KAINS,
+		CWM_KASPE as CWM_KASPE,
+		CWM_KAEIN as CWM_KAEIN,
+		CWM_KAVLA as CWM_KAVLA,
+		CWM_KAVIN as CWM_KAVIN,
+		CWM_KAVSP as CWM_KAVSP,
+		CWM_KAVEI as CWM_KAVEI,
+		UPDATE_DATE as UPDATE_DATE
+    FROM source_data
+),
+
+type_data as (
+    SELECT
+        _FILEDATE,
+        _FILENAME,
+        _AUDIT_LOG_ID,
+        _ROW_HASH,
+		MATNR,
+		WERKS,
+		LGORT,
+		CHARG,
+		SOBKZ,
+		VBELN,
+		POSNR,
+		LFGJA,
+		LFMON,
+		KASPR,
+		KALAB,
+		KAINS,
+		KASPE,
+		KAVLA,
+		KAVIN,
+		KAVSP,
+		KAILL,
+		KAILQ,
+		KAILS,
+		KAVLL,
+		KAVLQ,
+		KAVLS,
+		KAFLL,
+		KAFLQ,
+		KAFLS,
+		KADLL,
+		KAEIN,
+		KAVEI,
+		ERSDA,
+		KAJIN,
+		KARUE,
+		SGTSCAT,
+		FSHSEASONYEAR,
+		FSHSEASON,
+		FSHCOLLECTION,
+		FSHTHEME,
+		FSHSALLOCQTY,
+		CWM_KALAB,
+		CWM_KAINS,
+		CWM_KASPE,
+		CWM_KAEIN,
+		CWM_KAVLA,
+		CWM_KAVIN,
+		CWM_KAVSP,
+		CWM_KAVEI,
+		UPDATE_DATE
+    FROM transform_data
+)
+
+	select * from type_data

@@ -1,0 +1,130 @@
+{{ config(
+    materialized='tel_incremental',
+	incremental_strategy='insert_overwrite',
+    alias='TEL_SALES_CRM_PRODUCT_SHIPMENT_FORECAST_NORTH_AMERICA',
+    transient=false
+) }}
+
+WITH
+SOURCE_DATA AS (
+
+select
+    Sales_Account,
+    Sales_Region,
+    TEL_Sold_to_Party,
+    End_User,
+    FAB,
+    BU,
+    Sub_BU,
+    Opportunity_ID,
+    Project_No,
+    Sales_Order_No,
+    Customer_Forecast_ID,
+    Sales_Category_Group,
+    Sales_Category,
+    Model, 
+    Order_Item,
+    Opportunity_Title_Free_Text,
+    Confidence_BU_Short,
+	Adjusted_Confidence_Account_Short,
+    Adjusted_Serial_No, 
+    Customer_Tool_ID,
+    Quote_No,
+    Purchase_Order_No,
+    Quantity,
+    Is_Loaner,
+    Loan_Expiration_Date,   
+    Is_Booking_Actual,
+    Ship_Date,
+    Scheduled_On_Dock_Date,
+    Actual_On_Dock_Date,
+    Account_Sales_Person,
+	Account_Comments,
+    Data_Snapshot_Timestamp
+from {{ ref('SILVER__TEA_TECHNICAL_SUPPORT__SALES_CRM_OPPORTUNITIES') }}
+where SHIP_DATE >= BEGINNING_OF_2_FY_AGO
+   and SHIP_DATE <= dateadd(year, 1, END_OF_2_FY_AHEAD)
+   and not CONFIDENCE_BU_SHORT ilike any ('G', 'L')
+   and BU ilike 'TFF'
+),
+TRANSFORM_DATA AS (
+SELECT
+	'{{ invocation_id }}' AS _AUDIT_LOG_ID,
+	SHA2('hash_me') AS _ROW_HASH,
+	SALES_ACCOUNT,
+	SALES_REGION,
+	TEL_SOLD_TO_PARTY,
+	END_USER,
+	FAB,
+	BU,
+	SUB_BU,
+	OPPORTUNITY_ID,
+	PROJECT_NO,
+	SALES_ORDER_NO,
+	CUSTOMER_FORECAST_ID,
+	SALES_CATEGORY_GROUP,
+	SALES_CATEGORY,
+	MODEL,
+	ORDER_ITEM,
+	OPPORTUNITY_TITLE_FREE_TEXT,
+	CONFIDENCE_BU_SHORT,
+	ADJUSTED_CONFIDENCE_ACCOUNT_SHORT,
+	ADJUSTED_SERIAL_NO,
+	CUSTOMER_TOOL_ID,
+	QUOTE_NO,
+	PURCHASE_ORDER_NO,
+	QUANTITY,
+	IS_LOANER,
+	LOAN_EXPIRATION_DATE,
+	IS_BOOKING_ACTUAL,
+	SHIP_DATE,
+	SCHEDULED_ON_DOCK_DATE,
+	ACTUAL_ON_DOCK_DATE,
+	ACCOUNT_SALES_PERSON,
+	ACCOUNT_COMMENTS,
+	DATA_SNAPSHOT_TIMESTAMP
+
+FROM SOURCE_DATA
+
+)
+
+,
+TYPE_DATA AS (
+select
+	CAST(_AUDIT_LOG_ID as VARCHAR(128)) as _AUDIT_LOG_ID,
+	CAST(_ROW_HASH as VARCHAR(128)) as _ROW_HASH,
+	SALES_ACCOUNT,
+	SALES_REGION,
+	TEL_SOLD_TO_PARTY,
+	END_USER,
+	FAB,
+	BU,
+	SUB_BU,
+	OPPORTUNITY_ID,
+	PROJECT_NO,
+	SALES_ORDER_NO,
+	CUSTOMER_FORECAST_ID,
+	SALES_CATEGORY_GROUP,
+	SALES_CATEGORY,
+	MODEL,
+	ORDER_ITEM,
+	OPPORTUNITY_TITLE_FREE_TEXT,
+	CONFIDENCE_BU_SHORT,
+	ADJUSTED_CONFIDENCE_ACCOUNT_SHORT,
+	ADJUSTED_SERIAL_NO,
+	CUSTOMER_TOOL_ID,
+	QUOTE_NO,
+	PURCHASE_ORDER_NO,
+	CAST(QUANTITY as NUMBER(38,0)) as QUANTITY,
+	IS_LOANER,
+	CAST(LOAN_EXPIRATION_DATE as DATE) as LOAN_EXPIRATION_DATE,
+	IS_BOOKING_ACTUAL,
+	CAST(SHIP_DATE as DATE) as SHIP_DATE,
+	CAST(SCHEDULED_ON_DOCK_DATE as DATE) as SCHEDULED_ON_DOCK_DATE,
+	CAST(ACTUAL_ON_DOCK_DATE as DATE) as ACTUAL_ON_DOCK_DATE,
+	ACCOUNT_SALES_PERSON,
+	ACCOUNT_COMMENTS,
+	CAST(DATA_SNAPSHOT_TIMESTAMP as TIMESTAMP_NTZ(9)) as DATA_SNAPSHOT_TIMESTAMP
+from transform_data
+)
+SELECT * FROM TYPE_DATA

@@ -1,0 +1,42 @@
+{  
+    
+    "connection" :{
+        "auth": "JWT",
+        "client_id": "TEL-BOX-CLIENT-ID", 
+        "client_secret": "TEL-BOX-CLIENT-SECRET", 
+        "enterprise_id": "TEL-BOX-ENTERPRISE-ID",
+        "jwt_key_id": "TEL-BOX-JWT-KEY",
+        "rsa_private_key_passphrase":"TEL-BOX-PASSPHASE",
+        "rsa_private_key_data":"TEL-BOX-PK-DATA"
+    },
+    "extraction" : {
+        "SafetyFiles": {
+            "is_active": true,
+            "destination":{
+                "table":"FAB21_EHS_AUDIT_ETC",
+                "schema":"FILE"
+            },
+            "parameters":{
+                "folder_id" : {
+                    "id" : 382662796625,
+                    "matches" : 
+                        "tsmcSafetyFile_*|samsungSafetyFile_*|micronSafetyFile_*|intelORsafetyfile_*|intelNMsafetyfile_*|intelAZsafetyfile_*|intelCAsafetyfile_*|intelSafetyfile_*|samsungT1safetyfile_*|micronIDsafetyfile_*|micronVAsafetyfile_*|micronBOSafetyFile_*|micronMSSafetyFile_*|samsungS2SafetyFile_*|albanySafetyFile_*"
+                },
+                "type_of_file" : "xlsx",
+                "sheet_name" : "Audit",
+                "is_incremental": false,
+                "drop_unnamed_columns":true,
+                "pandas_engine":{
+                    "skip_header": true,
+                    "ignore_header": false,
+                    "delimiter" : ",",
+                    "convert_to_json" : true
+                },
+                "threading": {
+                    "enabled": true,
+                    "max_workers": 2
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,86 @@
+version: 2
+models:
+- name: SILVER__TEA_GCE_AFS__BUSINESS_PARTNERS_GENERAL_DATA
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_GCE_AFS__CONSIGNMENT_TRANSACTION
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_GCE_AFS__CONTRACTS_MASTER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_GCE_AFS__CONTRACT_SUMMARY_DETAILS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_GCE_AFS__CONTRACT_SUMMARY_PURCHASE_ORDER_DETAILS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_GCE_AFS__MAC_MAIN
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_GCE_AFS__MATERIAL_PLANT_MASTER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_GCE_AFS__MATERIAL_VALUATION_MASTER_CODED
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_GCE_AFS__OPTIONSET_METADATA
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_GCE_AFS__PURCHASE_ORDER_DELIVERY_LINE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_GCE_AFS__SALES_ORDER_BILLING_LINE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_GCE_AFS__SALES_ORDER_BILLING_PLAN
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_GCE_AFS__SALES_ORDER_DELIVERY_LINE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_GCE_AFS__SALES_ORDER_MASTER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_GCE_AFS__SALES_ORDER_SCHEDULE_LINE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_GCE_AFS__SAPH_PRICE_MATRIX
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_GCE_AFS__SAP_SURB
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_GCE_AFS__SERVICE_B_CODE_MAPPING
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_GCE_AFS__TEA_MAC_LIST
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_GCE_AFS__WISDOM_SURB_PROGRESS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_GCE_AFS__WORKORDER_R2
+  tests:
+  - has_data
+  - recently_run

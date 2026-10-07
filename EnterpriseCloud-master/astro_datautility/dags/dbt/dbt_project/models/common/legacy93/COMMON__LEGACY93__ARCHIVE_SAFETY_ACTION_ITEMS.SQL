@@ -1,0 +1,82 @@
+/************
+    Model file generated from TelTool SQL SERVER Ingestion Utility 
+    *************/
+    
+
+    {{ config(
+            materialized='incremental',
+            incremental_strategy='insert_overwrite',
+            alias='ARCHIVE_SAFETY_ACTION_ITEMS',
+            unique_key=[],
+            transient=false    
+) }} 
+    
+    with source_data as (
+        SELECT
+        _FILEDATE,
+		_FILENAME,
+        ACTION_ITEM_ID, 
+ 	 	INCIDENT_INVESTIGATION_ID, 
+ 	 	INCIDENT_TITLE, 
+ 	 	FIRST_NAME, 
+ 	 	LAST_NAME, 
+ 	 	DESCRIPTION, 
+ 	 	DUE_DATE, 
+ 	 	COMPLETED_DATE, 
+ 	 	STATUS, 
+ 	 	UPDATER_ID, 
+ 	 	UPDATED_DATE, 
+ 	 	COMMENT, 
+ 	 	COMMENT_FIRST_NAME, 
+ 	 	COMMENT_LAST_NAME, 
+ 	 	COMMENT_CREATED_DATE
+        FROM {{ ref('ODS__LEGACY93__ARCHIVE_SAFETY_ACTION_ITEMS') }} AS SAFETY_ACTION_ITEMS
+        
+    ),
+    transform_data as (
+        SELECT
+        _FILEDATE,
+		_FILENAME,
+		'{{ invocation_id }}' AS _AUDIT_LOG_ID,
+        SHA2('hash_me') as _ROW_HASH,
+        ACTION_ITEM_ID, 
+ 	 	INCIDENT_INVESTIGATION_ID, 
+ 	 	INCIDENT_TITLE, 
+ 	 	FIRST_NAME, 
+ 	 	LAST_NAME, 
+ 	 	DESCRIPTION, 
+ 	 	DUE_DATE, 
+ 	 	COMPLETED_DATE, 
+ 	 	STATUS, 
+ 	 	UPDATER_ID, 
+ 	 	UPDATED_DATE, 
+ 	 	COMMENT, 
+ 	 	COMMENT_FIRST_NAME, 
+ 	 	COMMENT_LAST_NAME, 
+ 	 	COMMENT_CREATED_DATE
+        FROM source_data
+    ),
+    type_data as (
+        SELECT
+        CAST(_FILEDATE AS TIMESTAMP_NTZ(9)) AS _FILEDATE,
+		CAST(_FILENAME AS VARCHAR(128)) AS _FILENAME,
+        CAST(_AUDIT_LOG_ID AS VARCHAR(128)) AS _AUDIT_LOG_ID,
+        CAST(_ROW_HASH AS VARCHAR(128)) AS _ROW_HASH,
+        CAST(ACTION_ITEM_ID AS NUMBER(38,0)) AS ACTION_ITEM_ID, 
+ 	 	CAST(INCIDENT_INVESTIGATION_ID AS NUMBER(38,0)) AS INCIDENT_INVESTIGATION_ID, 
+ 	 	INCIDENT_TITLE, 
+ 	 	FIRST_NAME, 
+ 	 	LAST_NAME, 
+ 	 	DESCRIPTION, 
+ 	 	CAST(DUE_DATE AS TIMESTAMP_NTZ(9)) AS DUE_DATE, 
+ 	 	CAST(COMPLETED_DATE AS TIMESTAMP_NTZ(9)) AS COMPLETED_DATE, 
+ 	 	STATUS, 
+ 	 	CAST(UPDATER_ID AS NUMBER(38,0)) AS UPDATER_ID, 
+ 	 	CAST(UPDATED_DATE AS TIMESTAMP_NTZ(9)) AS UPDATED_DATE, 
+ 	 	COMMENT, 
+ 	 	COMMENT_FIRST_NAME, 
+ 	 	COMMENT_LAST_NAME, 
+ 	 	CAST(COMMENT_CREATED_DATE AS TIMESTAMP_NTZ(9)) AS COMMENT_CREATED_DATE
+        FROM transform_data
+    )
+    SELECT * FROM type_data

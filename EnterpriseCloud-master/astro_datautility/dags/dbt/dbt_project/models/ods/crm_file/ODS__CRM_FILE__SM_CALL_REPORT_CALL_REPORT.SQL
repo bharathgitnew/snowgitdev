@@ -1,0 +1,68 @@
+/************
+    Model file generated from SAPAPIUtility 
+    *************/
+    
+    
+    {{ config(
+          materialized='incremental',
+          incremental_strategy='merge',
+          alias='SM_CALL_REPORT_CALL_REPORT',
+          unique_key=['ID'],
+          transient=false    
+) }} 
+    
+    with source_data as (
+        SELECT
+        get_ignore_case(to_object(JSONFIELD),'Id')::STRING AS "ID", 
+ 	 	get_ignore_case(to_object(JSONFIELD),'SinkCreatedOn')::STRING AS "SINKCREATEDON", 
+ 	 	get_ignore_case(to_object(JSONFIELD),'SinkModifiedOn')::STRING AS "SINKMODIFIEDON", 
+ 	 	get_ignore_case(to_object(JSONFIELD),'versionnumber')::STRING AS "VERSIONNUMBER", 
+ 	 	get_ignore_case(to_object(JSONFIELD),'sm_call_reportidtwo')::STRING AS "SM_CALL_REPORTIDTWO", 
+ 	 	get_ignore_case(to_object(JSONFIELD),'sm_call_reportidone')::STRING AS "SM_CALL_REPORTIDONE", 
+ 	 	get_ignore_case(to_object(JSONFIELD),'sm_call_report_call_reportid')::STRING AS "SM_CALL_REPORT_CALL_REPORTID", 
+ 	 	get_ignore_case(to_object(JSONFIELD),'IsDelete')::STRING AS "ISDELETE", 
+ 	 	get_ignore_case(to_object(JSONFIELD),'CreatedOn')::STRING AS "CREATEDON",
+        _FILEDATE,
+		_FILENAME,
+        _UPLOADDATE
+        FROM {{ source('CRM_FILE', 'SM_CALL_REPORT_CALL_REPORT') }} AS SM_CALL_REPORT_CALL_REPORT
+        {% if is_incremental() %}WHERE  _UPLOADDATE > IFNULL((SELECT MAX(_UPLOADDATE) FROM {{ this }}),'1970-01-01'){% endif %}
+        QUALIFY (ROW_NUMBER() OVER (PARTITION BY get_ignore_case(to_object(JSONFIELD),'Id')::STRING  ORDER BY _FILEDATE DESC,_UPLOADDATE DESC)) = 1
+    ),
+    transform_data as (
+        SELECT
+        "ID", 
+ 	 	TRY_TO_TIMESTAMP("SINKCREATEDON", 'MM/DD/YYYY HH:MI:SS PM') AS "SINKCREATEDON", 
+ 	 	TRY_TO_TIMESTAMP("SINKMODIFIEDON", 'MM/DD/YYYY HH:MI:SS PM') AS "SINKMODIFIEDON", 
+ 	 	"VERSIONNUMBER", 
+ 	 	"SM_CALL_REPORTIDTWO", 
+ 	 	"SM_CALL_REPORTIDONE", 
+ 	 	"SM_CALL_REPORT_CALL_REPORTID", 
+ 	 	"ISDELETE", 
+ 	 	"CREATEDON",
+        _FILEDATE,
+		_FILENAME,
+        _UPLOADDATE,
+		'{{ invocation_id }}' AS AUDIT_LOG_ID,
+        SHA2('hash_me') as _ROW_HASH
+        FROM source_data
+    ),
+    type_data as (
+        SELECT
+        CAST("ID" AS VARCHAR(16777216)) AS "ID", 
+ 	 	CAST("SINKCREATEDON" AS TIMESTAMP_LTZ(9)) AS "SINKCREATEDON", 
+ 	 	CAST("SINKMODIFIEDON" AS TIMESTAMP_LTZ(9)) AS "SINKMODIFIEDON", 
+ 	 	CAST("VERSIONNUMBER" AS NUMBER(38,0)) AS "VERSIONNUMBER", 
+ 	 	CAST("SM_CALL_REPORTIDTWO" AS VARCHAR(16777216)) AS "SM_CALL_REPORTIDTWO", 
+ 	 	CAST("SM_CALL_REPORTIDONE" AS VARCHAR(16777216)) AS "SM_CALL_REPORTIDONE", 
+ 	 	CAST("SM_CALL_REPORT_CALL_REPORTID" AS VARCHAR(16777216)) AS "SM_CALL_REPORT_CALL_REPORTID", 
+ 	 	CAST("ISDELETE" AS BOOLEAN) AS "ISDELETE", 
+ 	 	CAST("CREATEDON" AS TIMESTAMP_LTZ(9)) AS "CREATEDON",
+        cast(_FILEDATE AS TIMESTAMP_NTZ(9)) AS _FILEDATE,
+		cast(_FILENAME as varchar(128)) as _FILENAME,
+        cast(_UPLOADDATE as TIMESTAMP_NTZ(9)) as _UPLOADDATE,
+        cast(AUDIT_LOG_ID as varchar(128)) as AUDIT_LOG_ID,
+        cast(_ROW_HASH as varchar(128)) as _ROW_HASH
+        FROM transform_data
+    )
+    SELECT * FROM type_data

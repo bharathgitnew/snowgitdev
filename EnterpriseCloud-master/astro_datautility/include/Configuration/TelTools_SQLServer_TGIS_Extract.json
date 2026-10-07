@@ -1,0 +1,116 @@
+{
+    "TGIS":{
+		"DataSet1":{
+            "schema":"dbo",
+            "table":"dwh_incident_details",
+            "Incremental":"NULL",
+            "sftablename":"INCIDENT_DETAILS",
+            "filter": ""
+		},
+        "DataSet2":{
+            "schema":"dbo",
+            "table":"dwh_incident_summary",
+            "Incremental":"NULL",
+            "sftablename":"INCIDENT_SUMMARY",
+            "filter": ""
+        },
+        "DataSet3":{
+            "schema":"dbo",
+            "table":"dwh_relationship_info",
+            "Incremental":"NULL",
+            "sftablename":"RELATIONSHIP_INFO",
+            "filter": ""
+        },
+        "DataSet4":{
+            "schema":"dbo",
+            "table":"dwh_servicerequest_details",
+            "Incremental":"NULL",
+            "sftablename":"SERVICEREQUEST_DETAILS",
+            "filter": ""
+        },
+        "DataSet5":{
+            "schema":"dbo",
+            "table":"dwh_servicerequest_summary",
+            "Incremental":"NULL",
+            "sftablename":"SERVICEREQUEST_SUMMARY",
+            "filter": ""
+        },
+        "DataSet6":{
+            "schema":"dbo",
+            "table":"dwh_servicerequest_timeline",
+            "Incremental":"NULL",
+            "sftablename":"SERVICEREQUEST_TIMELINE",
+            "filter": ""
+        },
+        "DataSet7":{
+            "schema":"dbo",
+            "table":"dwh_servicerequest_workincharge",
+            "Incremental":"NULL",
+            "sftablename":"SERVICEREQUEST_WORKINCHARGE",
+            "filter": ""
+        },
+        "DataSet8":{
+            "schema":"dbo",
+            "table":"dwh_release_details",
+            "Incremental":"NULL",
+            "sftablename":"RELEASE_DETAILS",
+            "filter": ""
+        },
+        "DataSet9":{
+            "schema":"dbo",
+            "table":"dwh_release_summary",
+            "Incremental":"NULL",
+            "sftablename":"RELEASE_SUMMARY",
+            "filter": ""
+        },
+        "DataSet10":{
+            "schema":"dbo",
+            "table":"dwh_release_workincharge",
+            "Incremental":"NULL",
+            "sftablename":"RELEASE_WORKINCHARGE",
+            "filter": ""
+        },
+        "DataSet11":{
+            "schema":"dbo",
+            "table":"dwh_change_details",
+            "Incremental":"NULL",
+            "sftablename":"CHANGE_DETAILS",
+            "filter": ""
+        },
+        "DataSet12":{
+            "schema":"dbo",
+            "table":"dwh_change_summary",
+            "Incremental":"NULL",
+            "sftablename":"CHANGE_SUMMARY",
+            "filter": ""
+        },
+        "DataSet13":{
+            "schema":"dbo",
+            "table":"dwh_change_workincharge",
+            "Incremental":"NULL",
+            "sftablename":"CHANGE_WORKINCHARGE",
+            "filter": ""
+        },
+        "DataSet14":{
+            "schema":"dbo",
+            "table":"dwh_problem_details",
+            "Incremental":"NULL",
+            "sftablename":"PROBLEM_DETAILS",
+            "filter": ""
+        },
+        "DataSet15":{
+            "schema":"dbo",
+            "table":"dwh_problem_summary",
+            "Incremental":"NULL",
+            "sftablename":"PROBLEM_SUMMARY",
+            "filter": ""
+        },
+        "DataSet16":{
+            "schema":"dbo",
+            "table":"dwh_problem_workincharge",
+            "Incremental":"NULL",
+            "sftablename":"PROBLEM_WORKINCHARGE",
+            "filter": ""
+        }
+	}
+}

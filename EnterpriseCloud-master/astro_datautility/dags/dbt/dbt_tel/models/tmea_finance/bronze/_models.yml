@@ -1,0 +1,3022 @@
+models:
+- name: BRONZE__TMEA_FINANCE__SAPO_ACTUAL_LINE_ITEMS
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _CAPTUREDATETIME
+    description: Check the _CAPTUREDATETIME column in the BRONZE.TMEA_FINANCE.SAPO_ACTUAL_LINE_ITEMS
+      table to ensure it falls within the last 24-hour interval.
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 72
+  - name: WWPH3
+    description: Prod Hier Level 3
+  - name: VVCOS
+    description: Cost-of-Sales Mfg
+  - name: VVWAR
+    description: Warranty Costs
+  - name: RPOSN
+    description: Item number from reference document (CO-PA)
+  - name: BUDAT
+    description: Posting Date
+  - name: VVENG
+    description: Engineering COGS
+  - name: AUART
+    description: Sales Document Type
+  - name: PRODH
+    description: Product Hierarchy
+  - name: VVSCR
+    description: Inv Var -Scrap
+  - name: WERKS
+    description: Plant
+  - name: KURSBK
+    description: Exchange rate for op.concern currency -> Co.code currency
+  - name: WADAT
+    description: Goods Issue Date
+  - name: ERLOS
+    description: Revenue
+  - name: ARTNR
+    description: Product number
+  - name: PERDE
+    description: Period
+  - name: COPA_AWORG
+    description: Reference organisational units
+  - name: GSBER
+    description: Business Area
+  - name: KUNRE
+    description: Bill-To Party
+  - name: AUGRU
+    description: Order reason (reason for the business transaction)
+  - name: VVPHY
+    description: Physical Inv Var
+  - name: ABSMG
+    description: Sales quantity
+  - name: VRGAR
+    description: Record Type
+  - name: VVBNS
+    description: Bonus
+  - name: ALTPERIO
+    description: Period/year in alternative period type
+  - name: PERIO
+    description: Period/Year
+  - name: KURSKZ
+    description: Exchange rate op.concern currency -> group currency
+  - name: VVLBR
+    description: Labor & FB Std
+  - name: GJAHR
+    description: Fiscal Year
+  - name: VVMTL
+    description: Materials Std
+  - name: STO_POSNR
+    description: Canceled document item
+  - name: VVSOH
+    description: Overhead -Spares
+  - name: VVSAL
+    description: Sales & Marketing
+  - name: FRWAE
+    description: Foreign currency key
+  - name: USNAM
+    description: Created by
+  - name: BELNR
+    description: Document number of line item in Profitability Analysis
+  - name: KUNRG
+    description: Payer
+  - name: ABSMG_ME
+    description: Base Unit of Measure
+  - name: COPA_BWZPT
+    description: CO-PA Point of valuation
+  - name: POSNR
+    description: Item no. of CO-PA line item
+  - name: VVCAP
+    description: Capacity Variance
+  - name: COPA_AWSYS
+    description: Logical system of source document
+  - name: SPDNR
+    description: Forwarding agent
+  - name: WWREG
+    description: US State
+  - name: SKOST
+    description: Sender cost center
+  - name: HZDAT
+    description: Date on Which Record Was Created
+  - name: KURSF
+    description: Exchange rate
+  - name: VVLOH
+    description: Labor OH Std
+  - name: PPRCTR
+    description: Partner Profit Center
+  - name: COPA_AWTYP
+    description: Reference procedure
+  - name: VVREV
+    description: Inv Revaluation
+  - name: VVDMO
+    description: Demo Mach Costs
+  - name: KSTAR
+    description: Cost Element
+  - name: TIMESTMP
+    description: Time created (Greenwich Meantime)
+  - name: VVOBS
+    description: Inv Var-Obsolensence
+  - name: VVRD
+    description: Resrch & Development
+  - name: REC_WAERS
+    description: Currency of the data record
+  - name: VVV01
+    description: Production Variances
+  - name: VRTNR
+    description: Sales employee
+  - name: PAPASUBNR
+    description: Changes to partner profitability segments (CO-PA)
+  - name: PRCTR
+    description: Profit Center
+  - name: KNDNR
+    description: Customer
+  - name: MANDT
+    description: Client
+  - name: PLIKZ
+    description: Plan/Actual Indicator
+  - name: VKBUR
+    description: Sales Office
+  - name: VRPRS
+    description: Stock Value
+  - name: KDGRP
+    description: Customer group
+  - name: LAND1
+    description: Country Key
+  - name: RKESTATU
+    description: Update status for CO-PA line items
+  - name: KSTRG
+    description: Cost Object
+  - name: PAOBJNR
+    description: Profitability Segment Number (CO-PA)
+  - name: VVCS
+    description: Customer Service
+  - name: WWMAT
+    description: Material No (FSI)
+  - name: VTWEG
+    description: Distribution Channel
+  - name: WWPH2
+    description: Prod Hier Level 2
+  - name: PSTYV
+    description: Sales Document Item Category
+  - name: PALEDGER
+    description: Currency type for an operating concern
+  - name: FADAT
+    description: Invoice date (date created)
+  - name: KUNWE
+    description: Ship-To Party
+  - name: KAUFN
+    description: Sales Order Number
+  - name: VVTRF
+    description: Inv Transfer Var
+  - name: FKART
+    description: Billing Type
+  - name: KUKLA
+    description: Customer Classification
+  - name: VVCOM
+    description: Commissions
+  - name: VKGRP
+    description: Sales Group
+  - name: HRKFT
+    description: Origins (CO-PA)
+  - name: VVMOH
+    description: Material OH Std
+  - name: AUSFR
+    description: Outgoing freight
+  - name: PSPNR
+    description: Work Breakdown Structure Element (WBS Element)
+  - name: VVFRE
+    description: COGS -Free Goods
+  - name: RABAT
+    description: Other discounts
+  - name: BUKRS
+    description: Company Code
+  - name: WWRGN
+    description: Accounting Region
+  - name: PRZNR
+    description: Sender Business Process
+  - name: VVPR0
+    description: List Price
+  - name: MATWA
+    description: Material entered
+  - name: WWPH1
+    description: Prod Hier Level 1
+  - name: BZIRK
+    description: Sales district
+  - name: VVGA
+    description: Administration
+  - name: GEBIE
+    description: Area
+  - name: WWZ1
+    description: End user
+  - name: PASUBNR
+    description: Profitability Segment Changes (CO-PA)
+  - name: VERSG
+    description: Material statistics group
+  - name: RKAUFNR
+    description: Order Number
+  - name: VVPPV
+    description: Purch Price Variance
+  - name: VVOU
+    description: Over/Under Absorpt
+  - name: VKORG
+    description: Sales Organization
+  - name: KOKRS
+    description: Controlling Area
+  - name: MATKL
+    description: Material Group
+  - name: RBELN
+    description: Reference document number for CO-PA line item
+  - name: VVSUB
+    description: Subcontracting Std
+  - name: SPART
+    description: Division
+  - name: KDPOS
+    description: Item number in Sales Order
+  - name: VERSI
+    description: Plan version (CO-PA)
+  - name: PAPAOBJNR
+    description: Partner profitability segment number (CO-PA)
+  - name: KTOKD
+    description: Customer Account Group
+  - name: BISMT
+    description: Old material number
+  - name: STO_BELNR
+    description: Canceled document
+- name: BRONZE__TMEA_FINANCE__SAPO_BILLING_DOCUMENT_ITEM_DATA
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _CAPTUREDATETIME
+    description: Check the _CAPTUREDATETIME column in the BRONZE.TMEA_FINANCE.SAPO_BILLING_DOCUMENT_ITEM_DATA
+      table to ensure it falls within the last 24-hour interval.
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 72
+  - name: MATWA
+    description: Material entered
+  - name: PRS_WORK_PERIOD
+    description: Work Period (Internal Representation)
+  - name: KDKG5
+    description: Customer condition group 5
+  - name: PMATN
+    description: Pricing Reference Material
+  - name: VGPOS
+    description: Item Number of the Reference Item
+  - name: DPCNR
+    description: Down Payment Chain Number
+  - name: VSTEL
+    description: Shipping Point/Receiving Point
+  - name: J_1BCFOP
+    description: CFOP Code and Extension
+  - name: SPARA
+    description: Division for order header
+  - name: VKAUS
+    description: Usage Indicator
+  - name: BUDGET_PD
+    description: 'FM: Budget Period'
+  - name: FISTL
+    description: Funds Center
+  - name: ERZET
+    description: Entry time
+  - name: J_1ATXREL
+    description: Tax relevant classification
+  - name: CAMPAIGN
+    description: 'Generic project planning: GUID from external R/3 system'
+  - name: PSTYV
+    description: Sales Document Item Category
+  - name: PRCTR
+    description: Profit Center
+  - name: POSAR
+    description: Item type
+  - name: ALAND
+    description: Departure country (country from which the goods are sent)
+  - name: TAXM8
+    description: Tax Classification 8 Material
+  - name: FAREG
+    description: Rule in billing plan/invoice plan
+  - name: SPART
+    description: Division
+  - name: VGTYP_EXT
+    description: Extension of SD document category of preceding document
+  - name: TAXM4
+    description: Tax Classification 4 Material
+  - name: GRANT_NBR
+    description: Grant
+  - name: VBELV
+    description: Originating Document
+  - name: J_1BTAXLW4
+    description: COFINS Tax Law
+  - name: KOKRS
+    description: Controlling Area
+  - name: MWSBP
+    description: Tax amount in document currency
+  - name: SMENG
+    description: Scale quantity in base unit of measure
+  - name: KOSTL
+    description: Cost Center
+  - name: AUPOS
+    description: Sales Document Item
+  - name: WMINR
+    description: Product catalog number
+  - name: GLO_LOG_REF1_IT
+    description: Country Specific Reference 1 in the Document
+  - name: KZWI2
+    description: Subtotal 2 from pricing procedure for condition
+  - name: PS_PSP_PNR
+    description: Work Breakdown Structure Element (WBS Element)
+  - name: EANNR
+    description: European Article Number (EAN) - obsolete!!!!!
+  - name: MVGR2
+    description: Material group 2
+  - name: FKBER
+    description: Functional Area
+  - name: RPLNR
+    description: Payment card plan number of sales document
+  - name: VTWEG_AUFT
+    description: Distribution channel of sales order
+  - name: STADAT
+    description: Statistics date
+  - name: FSH_COLLECTION
+    description: Fashion Collection
+  - name: J_1BTAXLW3
+    description: ISS Tax Law
+  - name: WGRU1
+    description: Material group hierarchy 1
+  - name: KNUMA_PI
+    description: Promotion
+  - name: TAXM7
+    description: Tax classification 7 for material
+  - name: MVGR5
+    description: Material group 5
+  - name: WAVWR
+    description: Cost in document currency
+  - name: WKREG
+    description: Region in which plant is located
+  - name: FSH_SEASON_YEAR
+    description: Season Year
+  - name: MSR_RET_REASON
+    description: Return Reason
+  - name: REGIO_AUFT
+    description: Region of sales order
+  - name: TXJCD
+    description: Tax Jurisdiction
+  - name: AUGRU_AUFT
+    description: Order reason (reason for the business transaction)
+  - name: KZWI6
+    description: Subtotal 6 from pricing procedure for condition
+  - name: SKFBP
+    description: Amount eligible for cash discount in document currency
+  - name: VERTT
+    description: Contract Type
+  - name: MVGR3
+    description: Material group 3
+  - name: J_1AIDATEP
+    description: Indexing base date
+  - name: TAXM9
+    description: Tax Classification 9 Material
+  - name: BRTWR
+    description: Gross value of the billing item in document currency
+  - name: AUBEL
+    description: Sales Document
+  - name: AUTYP
+    description: SD document category
+  - name: UVALL
+    description: Generally incomplete
+  - name: KDKG3
+    description: Customer condition group 3
+  - name: CMPRE_FLT
+    description: Item credit price
+  - name: KURSK_DAT
+    description: Translation date
+  - name: VGPOS_EX
+    description: Item Number of the Reference Item
+  - name: KDKG1
+    description: Customer condition group 1
+  - name: KVGR3
+    description: Customer group 3
+  - name: PREFE
+    description: Eligible for preferential treatment
+  - name: FBUDA
+    description: Date on which services rendered
+  - name: VKORG_AUFT
+    description: Sales organization of sales order
+  - name: VGTYP
+    description: Document category of preceding SD document
+  - name: FMFGUS_KEY
+    description: United States Federal Government Fields
+  - name: FONDS
+    description: Fund
+  - name: NRAB_KNUMH
+    description: Condition record number
+  - name: KOWRR
+    description: Statistical values
+  - name: UPMAT
+    description: Pricing reference material of main item
+  - name: CMPRE
+    description: Item credit price
+  - name: KZWI3
+    description: Subtotal 3 from pricing procedure for condition
+  - name: AUFPL
+    description: Routing number of operations in the order
+  - name: VOLEH
+    description: Volume Unit
+  - name: MWSKZ
+    description: Tax on Sales/Purchases Code
+  - name: SHKZG
+    description: Returns item
+  - name: ATPKZ
+    description: Replacement part
+  - name: PLTYP_AUFT
+    description: Price list type of sales order
+  - name: BONUS
+    description: Volume rebate group
+  - name: KOUPD
+    description: Condition update
+  - name: KURSK
+    description: Exchange Rate for Price Determination
+  - name: PARGB
+    description: Trading partner's business area
+  - name: KZWI5
+    description: Subtotal 5 from pricing procedure for condition
+  - name: KVGR2
+    description: Customer group 2
+  - name: ABRVW
+    description: Usage Indicator
+  - name: KDKG2
+    description: Customer condition group 2
+  - name: PROSA
+    description: ID for material determination
+  - name: SGTXT
+    description: Item Text
+  - name: NTGEW
+    description: Net weight
+  - name: MPROK
+    description: Status manual price change
+  - name: AUFNR
+    description: Order Number
+  - name: LOGSYS
+    description: Logical System
+  - name: VRKME
+    description: Sales Unit
+  - name: BZIRK_AUFT
+    description: Sales district of sales order
+  - name: DPNRB
+    description: Sequence Number of Accounting Document in Transaction
+  - name: MVGR4
+    description: Material group 4
+  - name: SKTOF
+    description: Cash discount indicator
+  - name: WGRU2
+    description: Material group hierarchy 2
+  - name: FKLMG
+    description: Billing quantity in stockkeeping unit
+  - name: ERDAT
+    description: Date on Which Record Was Created
+  - name: KDKG4
+    description: Customer condition group 4
+  - name: WKCTY
+    description: City in which plant is located
+  - name: UEPOS
+    description: Higher-level item in bill of material structures
+  - name: XCHAR
+    description: Batch management indicator (internal)
+  - name: PRSFD
+    description: Carry out pricing
+  - name: CLAIMS_TAXATION
+    description: Claims Taxation
+  - name: VKBUR
+    description: Sales Office
+  - name: VOLUM
+    description: Volume
+  - name: LGORT
+    description: Storage Location
+  - name: FKIMG
+    description: Actual billed quantity
+  - name: UEPVW
+    description: ID for higher-level item usage
+  - name: POSPA
+    description: Item number in the partner segment
+  - name: ARKTX
+    description: Short text for sales order item
+  - name: TAXM6
+    description: Tax classification 6 for material
+  - name: APLZL
+    description: Internal counter
+  - name: WKTNR
+    description: Value contract no.
+  - name: J_1ADTYP
+    description: Distribution Type for Employment Tax
+  - name: WRF_CHARSTC2
+    description: Characteristic Value 2
+  - name: MSR_REFUND_CODE
+    description: Returns Refund Code
+  - name: TAXM5
+    description: Tax classification 5 for material
+  - name: FPLNR
+    description: Billing Plan Number / Invoicing Plan Number
+  - name: MATNR
+    description: Material Number
+  - name: KONDM
+    description: Material Pricing Group
+  - name: VBELN
+    description: Billing Document
+  - name: POSNV
+    description: Originating item
+  - name: MSR_ID
+    description: Process Identification Number
+  - name: MEINS
+    description: Base Unit of Measure
+  - name: SGT_RCAT
+    description: Requirement Segment
+  - name: ABRBG
+    description: Start of accounting settlement period
+  - name: J_1BTAXLW5
+    description: PIS Tax Law
+  - name: KONDA_AUFT
+    description: Price group of sales order
+  - name: FUND_USAGE_ITEM
+    description: Fund Usage Item
+  - name: TAXM3
+    description: Tax classification 3 for material
+  - name: UVPRS
+    description: Incomplete with respect to pricing
+  - name: UMVKN
+    description: Denominator (Divisor) for Conversion of Sales Qty into SKU
+  - name: SGT_SCAT
+    description: Stock Segment
+  - name: KVGR5
+    description: Customer group 5
+  - name: BEMOT
+    description: Accounting Indicator
+  - name: ABGES
+    description: Guaranteed (factor between 0 and 1)
+  - name: CMPNT
+    description: 'ID: Item with active credit function / relevant for credit'
+  - name: FSH_SEASON
+    description: Season
+  - name: PRSDT
+    description: Date for Pricing and Exchange Rate
+  - name: TAXM2
+    description: Tax classification 2 for material
+  - name: WERKS
+    description: Plant
+  - name: APLZL_OAA
+    description: Internal counter
+  - name: VERTN
+    description: Contract Number
+  - name: KVGR4
+    description: Customer group 4
+  - name: UMVKZ
+    description: Numerator (factor) for conversion of sales quantity into SKU
+  - name: DCPNR
+    description: Transaction Number
+  - name: DISPUTE_CASE
+    description: Dispute Case
+  - name: BRGEW
+    description: Gross weight
+  - name: J_1BTAXLW2
+    description: 'Tax law: IPI'
+  - name: KNUMA_AG
+    description: Sales deal
+  - name: RRREL
+    description: Revenue recognition category
+  - name: VGBEL
+    description: Document Number of the Reference Document
+  - name: GSBER
+    description: Business Area
+  - name: PPRCTR
+    description: Partner Profit Center
+  - name: WKTPS
+    description: Value contract item
+  - name: J_1AINDXP
+    description: Inflation Index
+  - name: AKTNR
+    description: Promotion
+  - name: J_1BTAXLW1
+    description: 'Tax law: ICMS'
+  - name: STCUR
+    description: Exchange rate for statistics (Exch.rate at time of creation)
+  - name: AUREF
+    description: Sales document was created from reference
+  - name: J_1AREGIO
+    description: Region (State, Province, County)
+  - name: NRAB_VALUE
+    description: Condition value
+  - name: COMPREAS
+    description: Abbreviation for Complaints Reason
+  - name: MATKL
+    description: Material Group
+  - name: UKONM
+    description: Material pricing group of main item
+  - name: PROVG
+    description: Commission group
+  - name: J_1ARFZ
+    description: Reason for zero VAT
+  - name: AKKUR
+    description: Exchange rate for letter-of-credit procg in foreign trade
+  - name: STAFO
+    description: Update group for statistics update
+  - name: KZWI4
+    description: Subtotal 4 from pricing procedure for condition
+  - name: FPLTR
+    description: Item for billing plan/invoice plan/payment cards
+  - name: ERNAM
+    description: Name of Person Who Created the Object
+  - name: WRF_CHARSTC1
+    description: Characteristic Value 1
+  - name: KZFME
+    description: 'ID: Leading unit of measure for completing a transaction'
+  - name: NETWR
+    description: Net value of the billing item in document currency
+  - name: DELCO
+    description: Agreed delivery time
+  - name: AUFPL_OAA
+    description: Routing number of operations in the order
+  - name: FSH_THEME
+    description: Fashion Theme
+  - name: CUOBJ_CH
+    description: Internal object number of the batch classification
+  - name: VGBEL_EX
+    description: Document Number of the Reference Document
+  - name: ABFOR
+    description: Form of payment guarantee
+  - name: VKGRP
+    description: Sales Group
+  - name: LLAND_AUFT
+    description: Country of destination of sales order
+  - name: TAXM1
+    description: Tax classification material
+  - name: BWTAR
+    description: Valuation Type
+  - name: CUOBJ
+    description: Configuration
+  - name: KVGR1
+    description: Customer group 1
+  - name: WRF_CHARSTC3
+    description: Characteristic Value 3
+  - name: GEWEI
+    description: Weight Unit
+  - name: VGTYP_EX
+    description: Category of an external transaction or element
+  - name: KTGRM
+    description: Account assignment group for this material
+  - name: PEROP_END
+    description: Period of Performance End Date
+  - name: PEROP_BEG
+    description: Period of Performance Start Date
+  - name: MANDT
+    description: Client
+  - name: MVGR1
+    description: Material group 1
+  - name: J_1AGICD
+    description: Activity Code for Gross Income Tax
+  - name: PAOBJNR
+    description: Profitability Segment Number (CO-PA)
+  - name: LMENG
+    description: Required quantity for mat.management in stockkeeping units
+  - name: KZWI1
+    description: Subtotal 1 from pricing procedure for condition
+  - name: BONBA
+    description: Rebate basis 1
+  - name: PRODH
+    description: Product Hierarchy
+  - name: FARR_RELTYPE
+    description: Relevance Type for Revenue Accounting
+  - name: EAN11
+    description: International Article Number (EAN/UPC)
+  - name: CHARG
+    description: Batch Number
+  - name: KURRF_DAT_ORIG
+    description: Translation date
+  - name: SERNR
+    description: BOM explosion number
+  - name: KDGRP_AUFT
+    description: Customer group of sales order
+  - name: UECHA
+    description: Higher-Level Item of Batch Split Item
+  - name: POSNR
+    description: Billing item
+  - name: J_1BTXSDC
+    description: SD tax code
+  - name: WKCOU
+    description: County in which plant is located
+  description: 'Billing Document: Item Data'
+- name: BRONZE__TMEA_FINANCE__SAPO_COST_CENTER_MASTER_RECORD
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: DRNAM
+    description: Printer destination for CCtr report
+  - name: CPI_TEMPL
+    description: Template for Activity-Independent Formula Planning
+  - name: BKZKS
+    description: Lock Indicator for Actual Secondary Costs
+  - name: KOSAR
+    description: Cost Center Category
+  - name: DATBI
+    description: Valid To Date
+  - name: JV_OTYPE
+    description: Joint Venture Object Type
+  - name: WERKS
+    description: Plant
+  - name: BKZKP
+    description: Lock Indicator for Actual Primary Postings
+  - name: TELF2
+    description: Second telephone number
+  - name: KOMPL
+    description: Completion flag for the cost center master record
+  - name: PSTL2
+    description: P.O. Box Postal Code
+  - name: USNAM
+    description: Entered by
+  - name: PKZKS
+    description: Lock Indicator for Plan Secondary Costs
+  - name: MANDT
+    description: Client
+  - name: KOSTL
+    description: Cost Center
+  - name: CCKEY
+    description: Cost collector key
+  - name: SCI_TEMPL
+    description: 'Template: Activity-Independent Allocation to Cost Center'
+  - name: TELF1
+    description: First telephone number
+  - name: NAME1
+    description: Name 1
+  - name: KHINR
+    description: Standard Hierarchy Area
+  - name: VERAK
+    description: Person Responsible
+  - name: SKI_TEMPL
+    description: 'Template: Actual Statistical Key Figure on Cost Center'
+  - name: ORT01
+    description: City
+  - name: BKZOB
+    description: Lock Indicator for Commitment Update
+  - name: ORT02
+    description: District
+  - name: TXJCD
+    description: Tax Jurisdiction
+  - name: NAME4
+    description: Name 4
+  - name: NKOST
+    description: Subsequent cost center
+  - name: DATAB
+    description: Valid-From Date
+  - name: PRCTR
+    description: Profit Center
+  - name: LOGSYSTEM
+    description: Logical System
+  - name: NAME3
+    description: Name 3
+  - name: SPRAS
+    description: Language Key
+  - name: ERSDA
+    description: Created on
+  - name: STAKZ
+    description: Indicator. object is statistical
+  - name: ABTEI
+    description: Department
+  - name: FUNC_AREA
+    description: Functional Area
+  - name: GSBER
+    description: Business Area
+  - name: ANRED
+    description: Title
+  - name: LAND1
+    description: Country Key
+  - name: TELFX
+    description: Fax Number
+  - name: KVEWE
+    description: Usage of the condition table
+  - name: AFUNK
+    description: Alternative function of cost center
+  - name: MGEFL
+    description: Indicator for Recording Consumption Quantities
+  - name: TELX1
+    description: Telex number
+  - name: PFACH
+    description: PO Box
+  - name: WAERS
+    description: Currency Key
+  - name: CPD_TEMPL
+    description: Template for Activity-Dependent Formula Planning
+  - name: BUKRS
+    description: Company Code
+  - name: SKD_TEMPL
+    description: 'Template: Act. Stat. Key Figure - Cost Center/Activity Type'
+  - name: DATLT
+    description: Data communication line no.
+  - name: BKZER
+    description: Lock Indicator for Actual Revenue Postings
+  - name: RECID
+    description: Recovery Indicator
+  - name: KOKRS
+    description: Controlling Area
+  - name: TELTX
+    description: Teletex number
+  - name: KALSM
+    description: Costing Sheet
+  - name: OBJNR
+    description: Object number
+  - name: PKZER
+    description: Lock Indicator for Planning Revenues
+  - name: REGIO
+    description: Region (State, Province, County)
+  - name: ETYPE
+    description: Equity type
+  - name: SCD_TEMPL
+    description: 'Template: Activity-Dependent Allocation to Cost Center'
+  - name: PSTLZ
+    description: Postal Code
+  - name: FERC_IND
+    description: Regulatory indicator
+  - name: NAME2
+    description: Name 2
+  - name: STRAS
+    description: Street and House Number
+  - name: KAPPL
+    description: Application
+  - name: PKZKP
+    description: Lock Indicator for Plan Primary Costs
+  - name: TELBX
+    description: Telebox number
+  - name: VERAK_USER
+    description: User Responsible
+  - name: JV_JIBSA
+    description: JIB/JIBE Subclass A
+  - name: JV_JIBCL
+    description: JIB/JIBE Class
+  - name: FUNKT
+    description: Function of cost center
+  - name: KOSZSCHL
+    description: CO-CCA Overhead Key
+  - name: VNAME
+    description: Joint Venture
+  - name: VMETH
+    description: Indicator for Allowed Allocation Methods
+  description: Cost Center Master Record
+- name: BRONZE__TMEA_FINANCE__SAPO_COST_CENTER_TEXTS
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: KOSTL
+    description: Cost Center
+  - name: SPRAS
+    description: Language Key
+  - name: KOKRS
+    description: Controlling Area
+  - name: KTEXT
+    description: General Name
+  - name: MCTXT
+    description: Search term for matchcode use
+  - name: DATBI
+    description: Valid To Date
+  - name: MANDT
+    description: Client
+  - name: LTEXT
+    description: Description
+  description: Cost Center Texts
+- name: BRONZE__TMEA_FINANCE__SAPO_CO_OBJECT_COST_TOTALS_FOR_EXTERNAL_POSTINGS
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _CAPTUREDATETIME
+    description: Check the _CAPTUREDATETIME column in the BRONZE.TMEA_FINANCE.SAPO_CO_OBJECT_COST_TOTALS_FOR_EXTERNAL_POSTINGS
+      table to ensure it falls within the last 24-hour interval.
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 60
+  - name: TWAER
+    description: Transaction Currency
+  - name: MEG007
+    description: Total Quantity
+  - name: PAG009
+    description: Total Price Variance in CO Area Currency
+  - name: WKG014
+    description: Total Value in Controlling Area Currency
+  - name: WTG004
+    description: Total Value in Transaction Currency
+  - name: MEINH
+    description: Unit of Measure
+  - name: WOG006
+    description: Total Value in Object Currency
+  - name: WTG013
+    description: Total Value in Transaction Currency
+  - name: MUV012
+    description: Quantities Incomplete
+  - name: MEF011
+    description: Fixed Quantity
+  - name: WKF013
+    description: Fixed Value in Controlling Area Currency
+  - name: WKF004
+    description: Fixed Value in Controlling Area Currency
+  - name: PAG015
+    description: Total Price Variance in CO Area Currency
+  - name: VERSN
+    description: Version
+  - name: MEG003
+    description: Total Quantity
+  - name: WKF011
+    description: Fixed Value in Controlling Area Currency
+  - name: MEF016
+    description: Fixed Quantity
+  - name: MEF014
+    description: Fixed Quantity
+  - name: MEF012
+    description: Fixed Quantity
+  - name: MUV006
+    description: Quantities Incomplete
+  - name: WOG005
+    description: Total Value in Object Currency
+  - name: LEDNR
+    description: Ledger for Controlling objects
+  - name: PAG010
+    description: Total Price Variance in CO Area Currency
+  - name: BUKRS
+    description: Company Code
+  - name: MEF013
+    description: Fixed Quantity
+  - name: PAG014
+    description: Total Price Variance in CO Area Currency
+  - name: WKF012
+    description: Fixed Value in Controlling Area Currency
+  - name: WKG006
+    description: Total Value in Controlling Area Currency
+  - name: WTG015
+    description: Total Value in Transaction Currency
+  - name: WOG002
+    description: Total Value in Object Currency
+  - name: SEGMENT
+    description: Segment for Segmental Reporting
+  - name: WKF005
+    description: Fixed Value in Controlling Area Currency
+  - name: WTG002
+    description: Total Value in Transaction Currency
+  - name: MEF009
+    description: Fixed Quantity
+  - name: PAG011
+    description: Total Price Variance in CO Area Currency
+  - name: WOG013
+    description: Total Value in Object Currency
+  - name: WOG003
+    description: Total Value in Object Currency
+  - name: MEF007
+    description: Fixed Quantity
+  - name: WTG003
+    description: Total Value in Transaction Currency
+  - name: MUV007
+    description: Quantities Incomplete
+  - name: WKF007
+    description: Fixed Value in Controlling Area Currency
+  - name: WKF001
+    description: Fixed Value in Controlling Area Currency
+  - name: WTG010
+    description: Total Value in Transaction Currency
+  - name: WKF003
+    description: Fixed Value in Controlling Area Currency
+  - name: WOG001
+    description: Total Value in Object Currency
+  - name: WTG006
+    description: Total Value in Transaction Currency
+  - name: WKG016
+    description: Total Value in Controlling Area Currency
+  - name: WKG015
+    description: Total Value in Controlling Area Currency
+  - name: WTG014
+    description: Total Value in Transaction Currency
+  - name: WKF008
+    description: Fixed Value in Controlling Area Currency
+  - name: WKF014
+    description: Fixed Value in Controlling Area Currency
+  - name: WKG001
+    description: Total Value in Controlling Area Currency
+  - name: WKG007
+    description: Total Value in Controlling Area Currency
+  - name: WOG009
+    description: Total Value in Object Currency
+  - name: WKG008
+    description: Total Value in Controlling Area Currency
+  - name: MUV014
+    description: Quantities Incomplete
+  - name: WOG010
+    description: Total Value in Object Currency
+  - name: WTG011
+    description: Total Value in Transaction Currency
+  - name: BEKNZ
+    description: Debit/credit indicator
+  - name: HRKFT
+    description: CO key subnumber
+  - name: OBJNR
+    description: Object number
+  - name: GRANT_NBR
+    description: Grant
+  - name: KSTAR
+    description: Cost Element
+  - name: PAG004
+    description: Total Price Variance in CO Area Currency
+  - name: MEG005
+    description: Total Quantity
+  - name: MEG009
+    description: Total Quantity
+  - name: MANDT
+    description: Client
+  - name: GJAHR
+    description: Fiscal Year
+  - name: WKG002
+    description: Total Value in Controlling Area Currency
+  - name: WKF006
+    description: Fixed Value in Controlling Area Currency
+  - name: PAG012
+    description: Total Price Variance in CO Area Currency
+  - name: MUV015
+    description: Quantities Incomplete
+  - name: WOG015
+    description: Total Value in Object Currency
+  - name: WTG001
+    description: Total Value in Transaction Currency
+  - name: PAG001
+    description: Total Price Variance in CO Area Currency
+  - name: WTG012
+    description: Total Value in Transaction Currency
+  - name: WTG005
+    description: Total Value in Transaction Currency
+  - name: MUV016
+    description: Quantities Incomplete
+  - name: PAG016
+    description: Total Price Variance in CO Area Currency
+  - name: WKG004
+    description: Total Value in Controlling Area Currency
+  - name: PAG006
+    description: Total Price Variance in CO Area Currency
+  - name: MEF008
+    description: Fixed Quantity
+  - name: MEG016
+    description: Total Quantity
+  - name: WOG008
+    description: Total Value in Object Currency
+  - name: MEG002
+    description: Total Quantity
+  - name: PARGB
+    description: Trading partner's business area
+  - name: MEG001
+    description: Total Quantity
+  - name: WOG011
+    description: Total Value in Object Currency
+  - name: WOG016
+    description: Total Value in Object Currency
+  - name: FKBER
+    description: Functional Area
+  - name: PAG007
+    description: Total Price Variance in CO Area Currency
+  - name: WKF015
+    description: Fixed Value in Controlling Area Currency
+  - name: MUV010
+    description: Quantities Incomplete
+  - name: WKG009
+    description: Total Value in Controlling Area Currency
+  - name: MEF015
+    description: Fixed Quantity
+  - name: PAG013
+    description: Total Price Variance in CO Area Currency
+  - name: MEF010
+    description: Fixed Quantity
+  - name: MUV002
+    description: Quantities Incomplete
+  - name: MEF002
+    description: Fixed Quantity
+  - name: VBUND
+    description: Company ID of trading partner
+  - name: WOG014
+    description: Total Value in Object Currency
+  - name: MUV003
+    description: Quantities Incomplete
+  - name: MUV005
+    description: Quantities Incomplete
+  - name: WKF010
+    description: Fixed Value in Controlling Area Currency
+  - name: WKF009
+    description: Fixed Value in Controlling Area Currency
+  - name: WKG005
+    description: Total Value in Controlling Area Currency
+  - name: MEF001
+    description: Fixed Quantity
+  - name: WKF016
+    description: Fixed Value in Controlling Area Currency
+  - name: WTG009
+    description: Total Value in Transaction Currency
+  - name: MUV009
+    description: Quantities Incomplete
+  - name: PAG008
+    description: Total Price Variance in CO Area Currency
+  - name: WOG004
+    description: Total Value in Object Currency
+  - name: MEG006
+    description: Total Quantity
+  - name: MUV004
+    description: Quantities Incomplete
+  - name: MEF006
+    description: Fixed Quantity
+  - name: PERBL
+    description: Period block
+  - name: TIMESTMP
+    description: Time created (Greenwich Meantime)
+  - name: MEF004
+    description: Fixed Quantity
+  - name: MEG015
+    description: Total Quantity
+  - name: WKG011
+    description: Total Value in Controlling Area Currency
+  - name: WOG012
+    description: Total Value in Object Currency
+  - name: MUV001
+    description: Quantities Incomplete
+  - name: WTG016
+    description: Total Value in Transaction Currency
+  - name: WKG003
+    description: Total Value in Controlling Area Currency
+  - name: MEG012
+    description: Total Quantity
+  - name: MEG010
+    description: Total Quantity
+  - name: WKF002
+    description: Fixed Value in Controlling Area Currency
+  - name: VRGNG
+    description: CO Business Transaction
+  - name: MEG004
+    description: Total Quantity
+  - name: MEG014
+    description: Total Quantity
+  - name: MUV008
+    description: Quantities Incomplete
+  - name: WKG012
+    description: Total Value in Controlling Area Currency
+  - name: MEG008
+    description: Total Quantity
+  - name: WTG008
+    description: Total Value in Transaction Currency
+  - name: WKG010
+    description: Total Value in Controlling Area Currency
+  - name: WTG007
+    description: Total Value in Transaction Currency
+  - name: BUDGET_PD
+    description: 'FM: Budget Period'
+  - name: MEG013
+    description: Total Quantity
+  - name: WKG013
+    description: Total Value in Controlling Area Currency
+  - name: BELTP
+    description: Debit type
+  - name: MEG011
+    description: Total Quantity
+  - name: MUV013
+    description: Quantities Incomplete
+  - name: GEBER
+    description: Fund
+  - name: WRTTP
+    description: Value Type
+  - name: PAG002
+    description: Total Price Variance in CO Area Currency
+  - name: MUV011
+    description: Quantities Incomplete
+  - name: MEF003
+    description: Fixed Quantity
+  - name: PAG005
+    description: Total Price Variance in CO Area Currency
+  - name: WOG007
+    description: Total Value in Object Currency
+  - name: MEF005
+    description: Fixed Quantity
+  - name: PAG003
+    description: Total Price Variance in CO Area Currency
+- name: BRONZE__TMEA_FINANCE__SAPO_CO_OBJECT_COST_TOTALS_FOR_INTERNAL_POSTINGS
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _CAPTUREDATETIME
+    description: Check the _CAPTUREDATETIME column in the BRONZE.TMEA_FINANCE.SAPO_CO_OBJECT_COST_TOTALS_FOR_INTERNAL_POSTINGS
+      table to ensure it falls within the last 36-hour interval.
+  - name: WTG006
+    description: Total Value in Transaction Currency
+  - name: PAG012
+    description: Total Price Variance in CO Area Currency
+  - name: PAROB
+    description: Partner Object
+  - name: WTG008
+    description: Total Value in Transaction Currency
+  - name: PAF008
+    description: Fixed Price Variance in CO Area Currency
+  - name: MEG002
+    description: Total Quantity
+  - name: PAF002
+    description: Fixed Price Variance in CO Area Currency
+  - name: PAG016
+    description: Total Price Variance in CO Area Currency
+  - name: MEF006
+    description: Fixed Quantity
+  - name: MEG005
+    description: Total Quantity
+  - name: MUV015
+    description: Quantities Incomplete
+  - name: WKF012
+    description: Fixed Value in Controlling Area Currency
+  - name: WKG012
+    description: Total Value in Controlling Area Currency
+  - name: MEF016
+    description: Fixed Quantity
+  - name: MEG011
+    description: Total Quantity
+  - name: PAF003
+    description: Fixed Price Variance in CO Area Currency
+  - name: MUV006
+    description: Quantities Incomplete
+  - name: MANDT
+    description: Client
+  - name: WKF009
+    description: Fixed Value in Controlling Area Currency
+  - name: BELTP
+    description: Debit type
+  - name: WOG004
+    description: Total Value in Object Currency
+  - name: MUV009
+    description: Quantities Incomplete
+  - name: WKG006
+    description: Total Value in Controlling Area Currency
+  - name: WTG014
+    description: Total Value in Transaction Currency
+  - name: PAG005
+    description: Total Price Variance in CO Area Currency
+  - name: PAG014
+    description: Total Price Variance in CO Area Currency
+  - name: MEF007
+    description: Fixed Quantity
+  - name: USPOB
+    description: Source Object (Cost Center/Activity Type)
+  - name: WKF010
+    description: Fixed Value in Controlling Area Currency
+  - name: PAF012
+    description: Fixed Price Variance in CO Area Currency
+  - name: WOG010
+    description: Total Value in Object Currency
+  - name: WKG004
+    description: Total Value in Controlling Area Currency
+  - name: WTG012
+    description: Total Value in Transaction Currency
+  - name: WOG005
+    description: Total Value in Object Currency
+  - name: HRKFT
+    description: CO key subnumber
+  - name: PAG002
+    description: Total Price Variance in CO Area Currency
+  - name: MEG010
+    description: Total Quantity
+  - name: WKF011
+    description: Fixed Value in Controlling Area Currency
+  - name: MUV003
+    description: Quantities Incomplete
+  - name: MEF015
+    description: Fixed Quantity
+  - name: PAG010
+    description: Total Price Variance in CO Area Currency
+  - name: MEF003
+    description: Fixed Quantity
+  - name: WKF008
+    description: Fixed Value in Controlling Area Currency
+  - name: WOG009
+    description: Total Value in Object Currency
+  - name: WOG014
+    description: Total Value in Object Currency
+  - name: WKG002
+    description: Total Value in Controlling Area Currency
+  - name: WKG008
+    description: Total Value in Controlling Area Currency
+  - name: WOG016
+    description: Total Value in Object Currency
+  - name: WKF002
+    description: Fixed Value in Controlling Area Currency
+  - name: WKF004
+    description: Fixed Value in Controlling Area Currency
+  - name: SEGMENT
+    description: Segment for Segmental Reporting
+  - name: WOG012
+    description: Total Value in Object Currency
+  - name: MEINH
+    description: Unit of Measure
+  - name: MUV002
+    description: Quantities Incomplete
+  - name: WOG006
+    description: Total Value in Object Currency
+  - name: MUV004
+    description: Quantities Incomplete
+  - name: VRGNG
+    description: CO Business Transaction
+  - name: PAF007
+    description: Fixed Price Variance in CO Area Currency
+  - name: PAF004
+    description: Fixed Price Variance in CO Area Currency
+  - name: PAF015
+    description: Fixed Price Variance in CO Area Currency
+  - name: WKG003
+    description: Total Value in Controlling Area Currency
+  - name: MEF013
+    description: Fixed Quantity
+  - name: MEG007
+    description: Total Quantity
+  - name: WKF005
+    description: Fixed Value in Controlling Area Currency
+  - name: WTG010
+    description: Total Value in Transaction Currency
+  - name: WTG003
+    description: Total Value in Transaction Currency
+  - name: MEF010
+    description: Fixed Quantity
+  - name: MEG016
+    description: Total Quantity
+  - name: LEDNR
+    description: Ledger for Controlling objects
+  - name: WKG011
+    description: Total Value in Controlling Area Currency
+  - name: WOG011
+    description: Total Value in Object Currency
+  - name: PAG015
+    description: Total Price Variance in CO Area Currency
+  - name: WTG005
+    description: Total Value in Transaction Currency
+  - name: WKF015
+    description: Fixed Value in Controlling Area Currency
+  - name: PAF016
+    description: Fixed Price Variance in CO Area Currency
+  - name: GEBER
+    description: Fund
+  - name: MEG006
+    description: Total Quantity
+  - name: PAG013
+    description: Total Price Variance in CO Area Currency
+  - name: MEG001
+    description: Total Quantity
+  - name: PAF005
+    description: Fixed Price Variance in CO Area Currency
+  - name: MUV007
+    description: Quantities Incomplete
+  - name: WKG010
+    description: Total Value in Controlling Area Currency
+  - name: WTG004
+    description: Total Value in Transaction Currency
+  - name: WTG011
+    description: Total Value in Transaction Currency
+  - name: WOG002
+    description: Total Value in Object Currency
+  - name: MUV012
+    description: Quantities Incomplete
+  - name: MEG012
+    description: Total Quantity
+  - name: WKF014
+    description: Fixed Value in Controlling Area Currency
+  - name: WTG015
+    description: Total Value in Transaction Currency
+  - name: MUV001
+    description: Quantities Incomplete
+  - name: PAF011
+    description: Fixed Price Variance in CO Area Currency
+  - name: MEG004
+    description: Total Quantity
+  - name: PAF014
+    description: Fixed Price Variance in CO Area Currency
+  - name: WTG002
+    description: Total Value in Transaction Currency
+  - name: PAG007
+    description: Total Price Variance in CO Area Currency
+  - name: WOG008
+    description: Total Value in Object Currency
+  - name: TWAER
+    description: Transaction Currency
+  - name: WTG001
+    description: Total Value in Transaction Currency
+  - name: MEF009
+    description: Fixed Quantity
+  - name: WTG009
+    description: Total Value in Transaction Currency
+  - name: PAG011
+    description: Total Price Variance in CO Area Currency
+  - name: WOG015
+    description: Total Value in Object Currency
+  - name: WKG014
+    description: Total Value in Controlling Area Currency
+  - name: PAG009
+    description: Total Price Variance in CO Area Currency
+  - name: PAF009
+    description: Fixed Price Variance in CO Area Currency
+  - name: MEF002
+    description: Fixed Quantity
+  - name: WKG013
+    description: Total Value in Controlling Area Currency
+  - name: MEF008
+    description: Fixed Quantity
+  - name: MEF012
+    description: Fixed Quantity
+  - name: MEG008
+    description: Total Quantity
+  - name: WKG001
+    description: Total Value in Controlling Area Currency
+  - name: PAG004
+    description: Total Price Variance in CO Area Currency
+  - name: WOG003
+    description: Total Value in Object Currency
+  - name: MUV008
+    description: Quantities Incomplete
+  - name: WKG016
+    description: Total Value in Controlling Area Currency
+  - name: PAG001
+    description: Total Price Variance in CO Area Currency
+  - name: MUV005
+    description: Quantities Incomplete
+  - name: MEF011
+    description: Fixed Quantity
+  - name: PAF001
+    description: Fixed Price Variance in CO Area Currency
+  - name: PAF010
+    description: Fixed Price Variance in CO Area Currency
+  - name: MEF005
+    description: Fixed Quantity
+  - name: FKBER
+    description: Functional Area
+  - name: BUKRS
+    description: Company Code
+  - name: WKG005
+    description: Total Value in Controlling Area Currency
+  - name: MUV016
+    description: Quantities Incomplete
+  - name: PERBL
+    description: Period block
+  - name: WKG009
+    description: Total Value in Controlling Area Currency
+  - name: WRTTP
+    description: Value Type
+  - name: PAG003
+    description: Total Price Variance in CO Area Currency
+  - name: GRANT_NBR
+    description: Grant
+  - name: WTG013
+    description: Total Value in Transaction Currency
+  - name: BEKNZ
+    description: Debit/credit indicator
+  - name: MEF001
+    description: Fixed Quantity
+  - name: MEG015
+    description: Total Quantity
+  - name: WKF006
+    description: Fixed Value in Controlling Area Currency
+  - name: MUV013
+    description: Quantities Incomplete
+  - name: WKF001
+    description: Fixed Value in Controlling Area Currency
+  - name: WOG001
+    description: Total Value in Object Currency
+  - name: WOG007
+    description: Total Value in Object Currency
+  - name: WKF007
+    description: Fixed Value in Controlling Area Currency
+  - name: VERSN
+    description: Version
+  - name: PAF013
+    description: Fixed Price Variance in CO Area Currency
+  - name: TIMESTMP
+    description: Time created (Greenwich Meantime)
+  - name: WKG007
+    description: Total Value in Controlling Area Currency
+  - name: MUV011
+    description: Quantities Incomplete
+  - name: MUV010
+    description: Quantities Incomplete
+  - name: MEF004
+    description: Fixed Quantity
+  - name: MUV014
+    description: Quantities Incomplete
+  - name: PAG008
+    description: Total Price Variance in CO Area Currency
+  - name: WKG015
+    description: Total Value in Controlling Area Currency
+  - name: BUDGET_PD
+    description: 'FM: Budget Period'
+  - name: WKF016
+    description: Fixed Value in Controlling Area Currency
+  - name: MEG014
+    description: Total Quantity
+  - name: KSTAR
+    description: Cost Element
+  - name: WTG016
+    description: Total Value in Transaction Currency
+  - name: MEF014
+    description: Fixed Quantity
+  - name: WKF003
+    description: Fixed Value in Controlling Area Currency
+  - name: OBJNR
+    description: Object number
+  - name: WTG007
+    description: Total Value in Transaction Currency
+  - name: MEG009
+    description: Total Quantity
+  - name: WKF013
+    description: Fixed Value in Controlling Area Currency
+  - name: WOG013
+    description: Total Value in Object Currency
+  - name: MEG013
+    description: Total Quantity
+  - name: PAF006
+    description: Fixed Price Variance in CO Area Currency
+  - name: PAG006
+    description: Total Price Variance in CO Area Currency
+  - name: GJAHR
+    description: Fiscal Year
+  - name: MEG003
+    description: Total Quantity
+- name: BRONZE__TMEA_FINANCE__SAPO_CO_OBJECT_DOCUMENT_HEADER
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _CAPTUREDATETIME
+    description: Check the _CAPTUREDATETIME column in the BRONZE.TMEA_FINANCE.SAPO_CO_OBJECT_DOCUMENT_HEADER
+      table to ensure it falls within the last 24-hour interval.
+  - name: GJAHR
+    description: Fiscal Year
+  - name: STOKZ
+    description: 'Indicator: Document was reversed'
+  - name: MANDT
+    description: Client
+  - name: AWREF_REV
+    description: 'Reversal: Reverse Document Reference Document Number'
+  - name: CPUDT
+    description: Date Document Was Created
+  - name: TIMESTMP
+    description: Time created (Greenwich Meantime)
+  - name: PERAB
+    description: From Period
+  - name: BUDAT
+    description: Posting Date
+  - name: ALEBN
+    description: 'For ALE: CO Document Number in Generating System'
+  - name: VERSN
+    description: Version in CO Document Header
+  - name: AWSYS
+    description: Logical system of source document
+  - name: SUMBZ
+    description: Number of posting lines for local objects
+  - name: REFBT
+    description: Document type of reference document
+  - name: BLTXT
+    description: Document Header Text
+  - name: AWORG_REV
+    description: 'Reversal: Reverse Document Reference Organization'
+  - name: VALDT
+    description: Special Valuation Date for Cost  Accounting
+  - name: REFBK
+    description: Company code of FI document
+  - name: WSDAT
+    description: Value Date for Currency Translation
+  - name: ALEBZ
+    description: Number of posting rows sent to external systems
+  - name: AWORG
+    description: Reference organisational units
+  - name: CTYP1
+    description: Currency Type 1 in CO Standard Ledger
+  - name: ORGVG
+    description: Original CO business transaction
+  - name: KOKRS
+    description: Controlling Area
+  - name: USNAM
+    description: User Name
+  - name: CTYP4
+    description: Currency Type 4 in CO Standard Ledger
+  - name: KWAER
+    description: Controlling area currency
+  - name: STFLG
+    description: Identifier for reversal document
+  - name: CPUTM
+    description: Time of Entry
+  - name: REFBN
+    description: Reference Document Number
+  - name: PERBI
+    description: To period
+  - name: BELNR
+    description: Document Number
+  - name: CTYP3
+    description: Currency Type 3 in CO Standard Ledger
+  - name: BLART
+    description: Document type of FI reference document
+  - name: AWTYP
+    description: Reference procedure
+  - name: VRGNG
+    description: CO Business Transaction
+  - name: CTYP2
+    description: Currency Type 2 in CO Standard Ledger
+  - name: KURST
+    description: Exchange Rate Type
+  - name: BLDAT
+    description: Document Date
+  - name: LOGSYSTEM
+    description: Logical System
+  - name: REFGJ
+    description: Fiscal year of reference document
+  - name: VARNR
+    description: 'CO actual postings fast input: Variant'
+  - name: DELBZ
+    description: Number of deleted line items
+  description: 'CO Object: Document Header'
+- name: BRONZE__TMEA_FINANCE__SAPO_CO_OBJECT_LINE_ITEMS_BY_PERIOD
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _CAPTUREDATETIME
+    description: Check the _CAPTUREDATETIME column in the BRONZE.TMEA_FINANCE.SAPO_CO_OBJECT_LINE_ITEMS_BY_PERIOD
+      table to ensure it falls within the last 24-hour interval.
+  - name: SCOPE
+    description: Object Class
+  - name: WOGBTR
+    description: Total Value in Object Currency
+  - name: BUZEI
+    description: Posting row
+  - name: BELTP
+    description: Debit type
+  - name: FKBER
+    description: Functional Area
+  - name: PGRANT_NBR
+    description: Partner Grant
+  - name: OBJNR
+    description: Object number
+  - name: KOKRS
+    description: Controlling Area
+  - name: BW_REFBZ
+    description: Posting Row in Operative Version
+  - name: PERIO
+    description: Period
+  - name: PAOBJNR
+    description: Profitability Segment Number (CO-PA)
+  - name: GRANT_NBR
+    description: Grant
+  - name: SGTXT
+    description: Segment text
+  - name: PSEGMENT
+    description: Partner Segment for Segmental Reporting
+  - name: EBELN
+    description: Purchasing Document Number
+  - name: GEBER
+    description: Fund
+  - name: MEFBTR
+    description: Fixed Quantity
+  - name: OWAER
+    description: Currency Key
+  - name: OBJNR_N1
+    description: Auxiliary account assignment 1
+  - name: WKGBTR
+    description: Total Value in Controlling Area Currency
+  - name: OBJNR_N3
+    description: Auxiliary account assignment 3
+  - name: ZLENR
+    description: Document Item Number
+  - name: TWAER
+    description: Transaction Currency
+  - name: HRKFT
+    description: CO key subnumber
+  - name: PBUKRS
+    description: Company code of partner
+  - name: TIMESTMP
+    description: Time created (Greenwich Meantime)
+  - name: BWSTRAT
+    description: Strategy for Determining an Allocation Price
+  - name: PGEBER
+    description: Partner Fund
+  - name: QMNUM
+    description: Notification No
+  - name: ERLKZ
+    description: Completion indicator for line item
+  - name: OBJNR_HK
+    description: Object Number of Origin Object
+  - name: BELNR
+    description: Document Number
+  - name: PKSTAR
+    description: Cost element of partner
+  - name: PRODPER
+    description: Production Month for JVA in CO
+  - name: MATNR
+    description: Material Number
+  - name: PAFBTR
+    description: Fixed Price Variance in CO Area Currency
+  - name: BTRKL
+    description: Amount Class for Value in Controlling Area Currency
+  - name: BUDGET_PD
+    description: 'FM: Budget Period'
+  - name: PAROB
+    description: Partner Object
+  - name: SEGMENT
+    description: Segment for Segmental Reporting
+  - name: VERSN
+    description: Version
+  - name: ZEKKN
+    description: Sequential Number of Account Assignment
+  - name: MEINB
+    description: Posted Unit of Measure
+  - name: REFBZ_FI
+    description: Posting Item of FI Reference Document
+  - name: GSBER
+    description: Business Area
+  - name: GKONT
+    description: Offsetting Account Number
+  - name: RBEST
+    description: Category of Reference Purchase Order
+  - name: PBUDGET_PD
+    description: 'FM: Partner Budget Period'
+  - name: USPOB
+    description: Source Object (Cost Center/Activity Type)
+  - name: MEGBTR
+    description: Total Quantity
+  - name: PAROB1
+    description: Partner object (always filled)
+  - name: GKOAR
+    description: Offsetting Account Type
+  - name: GJAHR
+    description: Fiscal Year
+  - name: PAGBTR
+    description: Total Price Variance in CO Area Currency
+  - name: LOGSYSP
+    description: Logical system of partner object
+  - name: BUKRS
+    description: Company Code
+  - name: WTGBTR
+    description: Total Value in Transaction Currency
+  - name: MBFBTR
+    description: Fixed quantity entered
+  - name: OBJNR_N2
+    description: Auxiliary account assignment 2
+  - name: VBUND
+    description: Company ID of trading partner
+  - name: WERKS
+    description: Plant
+  - name: REFBZ
+    description: Posting row of reference document
+  - name: PSCOPE
+    description: Partner object class
+  - name: LOGSYSO
+    description: Logical system of object
+  - name: DABRZ
+    description: Reference date for settlement
+  - name: WKFBTR
+    description: Fixed Value in Controlling Area Currency
+  - name: MANDT
+    description: Client
+  - name: PFKBER
+    description: Partner Functional Area
+  - name: LEDNR
+    description: Ledger for Controlling objects
+  - name: KSTAR
+    description: Cost Element
+  - name: MVFLG
+    description: Quantity Complete/Incomplete
+  - name: VRGNG
+    description: CO Business Transaction
+  - name: MEINH
+    description: Unit of Measure
+  - name: BEKNZ
+    description: Debit/credit indicator
+  - name: MBGBTR
+    description: Total quantity entered
+  - name: EBELP
+    description: Item Number of Purchasing Document
+  - name: PERNR
+    description: Personnel Number
+  - name: PARGB
+    description: Trading partner's business area
+  - name: WRTTP
+    description: Value Type
+- name: BRONZE__TMEA_FINANCE__SAPO_GENERAL_DATA_IN_CUSTOMER_MASTER
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: PMT_OFFICE
+    description: Payment Office
+  - name: CCC02
+    description: Indicator for nuclear nonproliferation for legal control
+  - name: CFOPC
+    description: Customer's CFOP category
+  - name: RPMKR
+    description: Regional market
+  - name: UF
+    description: State
+  - name: J_1KFTIND
+    description: Type of Industry
+  - name: MCOD3
+    description: Search term for matchcode search
+  - name: NIELS
+    description: Nielsen ID
+  - name: XZEMP
+    description: 'Indicator: Is an alternative payer allowed in document?'
+  - name: PSOHS
+    description: 'House number: is no longer used from Release 4.6B'
+  - name: GFORM
+    description: Legal status
+  - name: PSOFG
+    description: Processor group
+  - name: ICMSTAXPAY
+    description: ICMS Taxpayer
+  - name: XSUBT
+    description: Customer group for Substituiçao Tributária calculation
+  - name: INSPATDEBI
+    description: Inspection for a Delivery Note After Outbound Delivery
+  - name: ALC
+    description: Agency Location Code
+  - name: TXJCD
+    description: Tax Jurisdiction
+  - name: KDKG3
+    description: Customer condition group 3
+  - name: LEGALNAT
+    description: Legal Nature
+  - name: DEAR4
+    description: Indicator for customer type 4
+  - name: BRAN5
+    description: Industry code 5
+  - name: STCD2
+    description: Tax Number 2
+  - name: DUEFL
+    description: Status of Data Transfer into Subsequent Release
+  - name: PSOO1
+    description: Description
+  - name: UMSA1
+    description: Annual sales
+  - name: SPERR
+    description: Central posting block
+  - name: XICMS
+    description: Customer is ICMS-exempt
+  - name: TELTX
+    description: Teletex number
+  - name: BRAN1
+    description: Industry code 1
+  - name: DTAWS
+    description: Instruction key for data medium exchange
+  - name: WERKS
+    description: Plant
+  - name: ORT02
+    description: District
+  - name: NAME3
+    description: Name 3
+  - name: PSON1
+    description: Name 1
+  - name: KATR8
+    description: Attribute 8
+  - name: MILVE
+    description: ID for mainly military use
+  - name: PSOTL
+    description: Title
+  - name: STCDT
+    description: Tax Number Type
+  - name: ERNAM
+    description: Name of Person who Created the Object
+  - name: EXP
+    description: Issued by
+  - name: DTAMS
+    description: Report key for data medium exchange
+  - name: BBBNR
+    description: International location number  (part 1)
+  - name: JMZAH
+    description: Yearly number of employees
+  - name: KTOCD
+    description: Reference Account Group for One-Time Account (Customer)
+  - name: UMSAT
+    description: Annual sales
+  - name: BRAN2
+    description: Industry code 2
+  - name: BRAN4
+    description: Industry code 4
+  - name: SPERZ
+    description: Payment Block
+  - name: REGIO
+    description: Region (State, Province, County)
+  - name: SPRAS
+    description: Language Key
+  - name: CONFS
+    description: Status of Change Authorization (Central)
+  - name: EXABL
+    description: 'Indicator: Unloading points exist'
+  - name: PSOIS
+    description: Subledger acct preprocessing procedure
+  - name: KATR9
+    description: Attribute 9
+  - name: PSON3
+    description: Name 3
+  - name: ORT01
+    description: City
+  - name: DEAR5
+    description: ID for default sold-to party
+  - name: KNRZA
+    description: Account number of an alternative payer
+  - name: KNURL
+    description: Uniform resource locator
+  - name: KATR7
+    description: Attribute 7
+  - name: KATR6
+    description: Attribute 6
+  - name: TELFX
+    description: Fax Number
+  - name: ADRNR
+    description: Address
+  - name: STCD5
+    description: Tax Number 5
+  - name: FITYP
+    description: Tax type
+  - name: XCPDK
+    description: 'Indicator: Is the account a one-time account?'
+  - name: PERIV
+    description: Fiscal Year Variant
+  - name: ANRED
+    description: Title
+  - name: NAME4
+    description: Name 4
+  - name: DEAR3
+    description: 'Indicator: Sales prospect'
+  - name: MCOD2
+    description: Search Term for Matchcode Search
+  - name: CIVVE
+    description: ID for mainly non-military use
+  - name: DATLT
+    description: Data communication line no.
+  - name: RIC
+    description: RIC Number
+  - name: EKONT
+    description: Initial contact
+  - name: XXIPI
+    description: Customer is IPI-exempt
+  - name: NAME2
+    description: Name 2
+  - name: CNAE
+    description: CNAE
+  - name: TDT
+    description: Tax Declaration Type
+  - name: UPDAT
+    description: Date on Which the Changes Were Confirmed
+  - name: PSOO3
+    description: Description
+  - name: CVP_XBLCK
+    description: Business Purpose Completed Flag
+  - name: INSPBYDEBI
+    description: Inspection Carried Out By Customer (No Inspection Lot)
+  - name: STCD4
+    description: Tax Number 4
+  - name: HZUOR
+    description: Assignment to Hierarchy
+  - name: PFORT
+    description: PO Box city
+  - name: KUKLA
+    description: Customer Classification
+  - name: PSON2
+    description: Name 2
+  - name: CCC03
+    description: Indicator for national security for legal control
+  - name: CITYC
+    description: City Code
+  - name: TELX1
+    description: Telex number
+  - name: STCD3
+    description: Tax Number 3
+  - name: KATR1
+    description: Attribute 1
+  - name: MCOD1
+    description: Search term for matchcode search
+  - name: AUFSD
+    description: Central order block for customer
+  - name: BAHNS
+    description: Train station
+  - name: DEAR1
+    description: 'Indicator: Competitor'
+  - name: KATR10
+    description: Attribute 10
+  - name: MANDT
+    description: Client
+  - name: VBUND
+    description: Company ID of trading partner
+  - name: CASSD
+    description: Central sales block for customer
+  - name: J_1KFTBUS
+    description: Type of Business
+  - name: DEAR2
+    description: 'Indicator: Sales partner'
+  - name: PSOO2
+    description: Description
+  - name: JMJAH
+    description: Year for which the number of employees is given
+  - name: SORTL
+    description: Sort field
+  - name: KATR4
+    description: Attribute 4
+  - name: CCC01
+    description: Indicator for biochemical warfare for legal control
+  - name: TELBX
+    description: Telebox number
+  - name: KDKG4
+    description: Customer condition group 4
+  - name: UWAER
+    description: Currency of sales figure
+  - name: LOCCO
+    description: City Coordinates
+  - name: RNE
+    description: Foreign National Registration
+  - name: LIFNR
+    description: Account Number of Vendor or Creditor
+  - name: FAKSD
+    description: Central billing block for customer
+  - name: RGDATE
+    description: RG Issuing Date
+  - name: BUBKZ
+    description: Check digit for the international location number
+  - name: DUNS4
+    description: DUNS+4
+  - name: FISKN
+    description: Account number of the master record with the fiscal address
+  - name: NODEL
+    description: Central deletion block for master record
+  - name: COMSIZE
+    description: Company Size
+  - name: SUFRAMA
+    description: Suframa Code
+  - name: ERDAT
+    description: Date on which the Record Was Created
+  - name: LOEVM
+    description: Central Deletion Flag for Master Record
+  - name: BBSNR
+    description: International location number (Part 2)
+  - name: LAND1
+    description: Country Key
+  - name: KTOKD
+    description: Customer Account Group
+  - name: SAM_UE_ID
+    description: System for Award Management Unique Entity Identifier
+  - name: BRAN3
+    description: Industry code 3
+  - name: BAHNE
+    description: Express train station
+  - name: STCEG
+    description: VAT Registration Number
+  - name: KUNNR
+    description: Customer Number
+  - name: BRSCH
+    description: Industry key
+  - name: J_1KFREPRE
+    description: Name of Representative
+  - name: KDKG1
+    description: Customer condition group 1
+  - name: KATR5
+    description: Attribute 5
+  - name: PSOO4
+    description: Description
+  - name: PSOO5
+    description: Description
+  - name: KONZS
+    description: Group key
+  - name: LIFSD
+    description: Central delivery block for the customer
+  - name: PSTLZ
+    description: Postal Code
+  - name: RNEDATE
+    description: RNE Issuing Date
+  - name: XKNZA
+    description: 'Indicator: Alternative payer using account number'
+  - name: COUNC
+    description: County Code
+  - name: STKZA
+    description: 'Indicator: Business Partner Subject to Equalization Tax?'
+  - name: NAME1
+    description: Name 1
+  - name: SAM_EFT_IND
+    description: System for Aware Management Electronic Funds Transfer Ind
+  - name: DUNS
+    description: DUNS Number
+  - name: FEE_SCHEDULE
+    description: Fee schedule
+  - name: UMJAH
+    description: Year For Which Sales are Given
+  - name: CRTN
+    description: CRT Number
+  - name: TXLW2
+    description: 'Tax law: IPI'
+  - name: PSOST
+    description: 'Street: No longer used from Release 4.6B'
+  - name: STKZN
+    description: Natural Person
+  - name: PSOVN
+    description: First Name
+  - name: KNAZK
+    description: Working Time Calendar
+  - name: BEGRU
+    description: Authorization Group
+  - name: DEAR6
+    description: 'Indicator: Consumer'
+  - name: TELF1
+    description: First telephone number
+  - name: DECREGPC
+    description: Declaration Regimen for PIS/COFINS
+  - name: CCC04
+    description: Indicator for missile technology for legal control
+  - name: KDKG2
+    description: Customer condition group 2
+  - name: RG
+    description: RG Number
+  - name: ETIKG
+    description: 'IS-R Labeling: customer/plant group'
+  - name: STCD1
+    description: Tax Number 1
+  - name: UPTIM
+    description: Time of Last Change Confirmation
+  - name: KATR2
+    description: Attribute 2
+  - name: PSTL2
+    description: P.O. Box Postal Code
+  - name: TELF2
+    description: Second telephone number
+  - name: KDKG5
+    description: Customer condition group 5
+  - name: KATR3
+    description: Attribute 3
+  - name: INDTYP
+    description: Industry Main Type
+  - name: STKZU
+    description: Liable for VAT
+  - name: LZONE
+    description: Transportation zone to or from which the goods are delivered
+  - name: PFACH
+    description: PO Box
+  - name: TXLW1
+    description: 'Tax law: ICMS'
+  - name: STRAS
+    description: Street and House Number
+  - name: ABRVW
+    description: Usage Indicator
+  description: General Data in Customer Master
+- name: BRONZE__TMEA_FINANCE__SAPO_GL_ACCOUNT_MASTER_RECORD
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: TXT50
+    description: G/L Account Long Text
+  - name: MCOD1
+    description: Search Term for Matchcode Search
+  - name: TXT20
+    description: G/L account short text
+  - name: MANDT
+    description: Client
+  - name: KTOPL
+    description: Chart of Accounts
+  - name: SAKNR
+    description: G/L Account Number
+  - name: SPRAS
+    description: Language Key
+  description: 'G/L Account Master Record (Chart of Accounts: Description)'
+- name: BRONZE__TMEA_FINANCE__SAPO_LOWER_LEVEL_SETS_IN_SETS
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: SUBSETNAME
+    description: Subordinate set ID
+  - name: SETNAME
+    description: Set Name
+  - name: SUBSETSCLS
+    description: Subclass of a subordinate set
+  - name: SETCLASS
+    description: Set class
+  - name: SUBSETCLS
+    description: Class of a subordinate set
+  - name: LINEID
+    description: Set line counter
+  - name: MANDT
+    description: Client
+  - name: SEQNR
+    description: Sequential number of set line
+  - name: SUBCLASS
+    description: Organizational Unit as Set Subclass
+- name: BRONZE__TMEA_FINANCE__SAPO_PROFIT_CENTER_DESCRIPTION
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: MCTXT
+    description: Search term for matchcode search
+  - name: PRCTR
+    description: Profit Center
+  - name: KTEXT
+    description: General Name
+  - name: LTEXT
+    description: Long Text
+  - name: MANDT
+    description: Client
+  - name: SPRAS
+    description: Language Key
+  - name: KOKRS
+    description: Controlling Area
+  - name: DATBI
+    description: Valid To Date
+  description: Texts for Profit Center Master Data
+- name: BRONZE__TMEA_FINANCE__SAPO_SHORT_DESCRIPTION_OF_SETS
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: LANGU
+    description: Language Key
+  - name: SETCLASS
+    description: Set class
+  - name: SUBCLASS
+    description: Organizational Unit as Set Subclass
+  - name: DESCRIPT
+    description: Short description of a set
+  - name: MANDT
+    description: Client
+  - name: SETNAME
+    description: Set Name
+- name: BRONZE__TMEA_FINANCE__SAPO_VALUES_IN_SETS
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: LINEID
+    description: Set line counter
+  - name: SEQNR
+    description: Sequential number of set line
+  - name: SUBCLASS
+    description: Organizational Unit as Set Subclass
+  - name: VALOPTION
+    description: OPTION field in structure of SELECT-OPTIONS tables
+  - name: SETCLASS
+    description: Set class
+  - name: SETNAME
+    description: Set Name
+  - name: VALFROM
+    description: From Value
+  - name: VALSIGN
+    description: SIGN field in creation of SELECT-OPTIONS tables
+  - name: VALTO
+    description: To value
+  - name: MANDT
+    description: Client
+  - name: BRONZE__TMEA_FINANCE__SAPO_MAIN_ASSET_NUMBER
+    description: MAIN_ASSET_NUMBER
+    columns:
+      - name: MANDT
+        description: Client
+      - name: BUKRS
+        description: Company Code
+      - name: ANLN1
+        description: Main Asset Number
+      - name: LUNTN
+        description: Last subnumber assigned to this main number
+      - name: LANEP
+        description: Last line item number assigned
+      - name: ANUPD
+        description: Indicator Type of change to table
+      - name: FUNTN
+        description: First subnumber assigned
+      - name: ANLHTXT
+        description: Asset main number text  
+  - name: BRONZE__TMEA_FINANCE__SAPO_ASSET_VALUE_FIELDS
+    description: ASSET_VALUE_FIELDS
+    columns:
+      - name: MANDT
+        description: Client
+      - name: BUKRS
+        description: Company Code
+      - name: ANLN1
+        description: Main Asset Number
+      - name: ANLN2
+        description: Asset Subnumber
+      - name: GJAHR
+        description: Fiscal Year
+      - name: AFABE
+        description: Real depreciation area
+      - name: ZUJHR
+        description: Asset acquisition year (currently not used)
+      - name: ZUCOD
+        description: Sub-classification of asset acquisitions(currently not used)
+      - name: AFBLPE
+        description: Period in which last depreciation was posted
+      - name: AFBANZ
+        description: Number of depreciation posting runs in the period
+      - name: XAFAR
+        description: Indicator Errors in depreciation
+      - name: NDABJ
+        description: Expired useful life in years at start of the fiscal year
+      - name: NDABP
+        description: Expired useful life in periods at start of fiscal year
+      - name: ANDSJ
+        description: Yrs Expired up to Fisc.Yr Start from Start of Spec.Dep.
+      - name: ANDSP
+        description: Expired useful life in periods during FY from SDep start dat
+      - name: RSTCK
+        description: Number of units depreciated in unit-of-prod. depreciation
+      - name: KANSW
+        description: Cumulative acquisition and production costs
+      - name: KAUFW
+        description: Cumulative revaluation on the replacement value
+      - name: KINVZ
+        description: Cumulative investment grants
+      - name: KNAFA
+        description: Accumulated ordinary depreciation
+      - name: KSAFA
+        description: Cumulative special depreciation
+      - name: KAAFA
+        description: Cumulative unplanned depreciation
+      - name: KMAFA
+        description: Cumulative reserves transfer
+      - name: KZINW
+        description: Cumulative interest
+      - name: KAUFN
+        description: Cumulative revaluation of ordinary depreciation
+      - name: KANZA
+        description: Cumulative down payments
+      - name: KVOST
+        description: Cumulative input tax
+      - name: AUFWP
+        description: Planned revaluation on replacement value
+      - name: NAFAP
+        description: Planned ordinary depreciation for the year
+      - name: SAFAP
+        description: Planned special depreciation for the year
+      - name: AAFAP
+        description: Scheduled unplanned depreciation for the year
+      - name: MAFAP
+        description: Planned transfer of reserves for the year
+      - name: ZINSP
+        description: Interest planned for the year
+      - name: AUFNP
+        description: Planned revaluation of accumulated ordinary depreciation
+      - name: AUFWB
+        description: Revaluation posted on replacement value
+      - name: NAFAG
+        description: Ordinary depreciation posted in the current year
+      - name: SAFAG
+        description: Special depreciation posted in the current fiscal year
+      - name: AAFAG
+        description: Unplanned depreciation posted for the year
+      - name: MAFAG
+        description: Acquisition value reducing depreciation posted for the year
+      - name: ZINSG
+        description: Interest posted for the year
+      - name: AUFNG
+        description: Posted revaluation of accumulated ordinary depreciation
+      - name: ANSWL
+        description: Transactions for the year affecting asset values
+      - name: ABGAN
+        description: Total retirements and retiring transfer
+  - name: BRONZE__TMEA_FINANCE__SAPO_DEPRECIATION_TERMS
+    description: DEPRECIATION_TERMS
+    columns:
+      - name: MANDT
+        description: Client
+      - name: BUKRS
+        description: Company Code
+      - name: ANLN1
+        description: Main Asset Number
+      - name: ANLN2
+        description: Asset Subnumber
+      - name: AFABE
+        description: Real depreciation area
+      - name: BDATU
+        description: Date validity ends
+      - name: ADATU
+        description: Date for beginning of validity
+      - name: ERNAM
+        description: Name of Person Who Created the Object
+      - name: ERDAT
+        description: Date on Which Record Was Created
+      - name: AENAM
+        description: Name of person who changed object
+      - name: AEDAT
+        description: Changed on
+      - name: XLOEV
+        description: Indicator Account marked for deletion?
+      - name: XSPEB
+        description: Indicator Is account blocked for posting?
+      - name: FELEI
+        description: Screen layout for Asset Accounting
+      - name: XNEGA
+        description: Indicator Negative values allowed
+      - name: XGWGK
+        description: Low-value asset amount and quantity check
+      - name: XUNTA
+        description: Indicator Depreciate main asset number totally
+      - name: AFABG
+        description: Depreciation calculation start date
+      - name: ZINBG
+        description: Start date for interest calculation
+      - name: SAFBG
+        description: Start date for special depreciation
+      - name: INVSL
+        description: Investment support key
+      - name: AFASL
+        description: Depreciation key
+      - name: NDJAR
+        description: Planned useful life in years
+      - name: NDPER
+        description: Planned useful life in periods
+      - name: NAPRZ
+        description: Ordinary depreciation percentage rate
+      - name: SAPRZ
+        description: Special depreciation percentage rate
+      - name: WBIND
+        description: Index series for replacement values
+      - name: ALIND
+        description: Index series for replacement values by age
+      - name: APROP
+        description: Variable depreciation portion
+      - name: UMJAR
+        description: Depreciation key for the changeover year
+      - name: NDURJ
+        description: Original useful life in years
+      - name: NDURP
+        description: Original useful life in periods
+      - name: SCHRW
+        description: Asset scrap value
+      - name: LGJAN
+        description: Last fiscal year for the annual values in Asset Acct.
+      - name: PERFY
+        description: Period scaling in depreciation start year
+      - name: ANUPD
+        description: Indicator Type of change to table
+      - name: AUFWTG
+        description: Revaluation
+      - name: XAFBE
+        description: Indicator Depreciation area is deactivated
+      - name: ANLGR
+        description: Group asset
+      - name: ANLGR2
+        description: Subnumber of group asset
+      - name: VYEAR
+        description: Acquisition year of the asset (manually changeable)
+      - name: VMNTH
+        description: Asset Accounting Acquis. month (in depreciation area)
+      - name: INBDA
+        description: Asset Accounting Date of operating readiness
+      - name: ABGDAT_B
+        description: Value date of last retirement for the depreciation area
+      - name: J_1AARVKEY
+        description: Revaluation Key
+      - name: J_1AALTDAT
+        description: Last Revaluation Date
+      - name: J_1AALTIDX
+        description: Last Index Used
+      - name: SCHRW_PROZ
+        description: Scrap Value as Percentage of APC
+      - name: UMPER
+        description: Changeover Period of Depreciation Key
+  - name: BRONZE__TMEA_FINANCE__SAPO_ASSET_MASTER_RECORD_SEGMENT
+    description: ASSET_MASTER_RECORD_SEGMENT
+    columns:
+      - name: MANDT
+        description: Client
+      - name: BUKRS
+        description: Company Code
+      - name: ANLN1
+        description: Main Asset Number
+      - name: ANLN2
+        description: Asset Subnumber
+      - name: ANLKL
+        description: Asset Class
+      - name: GEGST
+        description: Technical asset number
+      - name: ANLAR
+        description: Asset types
+      - name: ERNAM
+        description: Name of Person Who Created the Object
+      - name: ERDAT
+        description: Date on Which Record Was Created
+      - name: AENAM
+        description: Name of person who changed object
+      - name: AEDAT
+        description: Changed on
+      - name: XLOEV
+        description: Indicator Account marked for deletion?
+      - name: XSPEB
+        description: Indicator Asset Locked to Acquisition Postings
+      - name: FELEI
+        description: Screen layout for Asset Accounting
+      - name: KTOGR
+        description: Account determination
+      - name: XOPVW
+        description: Asset under construct. with line item settlement
+      - name: ANLTP
+        description: Asset Category
+      - name: ZUJHR
+        description: Fiscal year in which first acquisition was posted
+      - name: ZUPER
+        description: Period in which first acquisition was posted
+      - name: ZUGDT
+        description: Asset value date of the first posting
+      - name: AKTIV
+        description: Asset capitalization date
+      - name: ABGDT
+        description: Asset value date for the last retirement
+      - name: DEAKT
+        description: Deactivation date
+      - name: GPLAB
+        description: Planned retirement date
+      - name: BSTDT
+        description: Asset purchase order date
+      - name: ORD41
+        description: Evaluation group 1
+      - name: ORD42
+        description: Evaluation group 2
+      - name: ORD43
+        description: Evaluation group 3
+      - name: ORD44
+        description: Evaluation group 4
+      - name: ANLUE
+        description: Asset super number
+      - name: ZUAWA
+        description: Key for sorting according to assignment numbers
+      - name: ANEQK
+        description: Indicator Historical management
+      - name: ANEQS
+        description: Completeness indicator for the asset
+      - name: LIFNR
+        description: Account number of vendor (other key word)
+      - name: LAND1
+        description: Asset's country of origin
+      - name: LIEFE
+        description: Name of asset supplier
+      - name: HERST
+        description: Manufacturer of asset
+      - name: EIGKZ
+        description: Property indicator
+      - name: AIBN1
+        description: Original asset that was transferred
+      - name: AIBN2
+        description: Original asset that was transferred
+      - name: AIBDT
+        description: Original acquisition date of AuC/ transferred asset
+      - name: URJHR
+        description: Fiscal year of original acquisition
+      - name: URWRT
+        description: Original acquisition value
+      - name: ANTEI
+        description: In-house production percentage
+      - name: PROJN
+        description: Old Project number  No longer used --> PS_POSNR
+      - name: EAUFN
+        description: Investment Order
+      - name: MEINS
+        description: Base Unit of Measure
+      - name: MENGE
+        description: Quantity
+      - name: TYPBZ
+        description: Asset type name
+      - name: IZWEK
+        description: Reason for investment
+      - name: INKEN
+        description: Inventory indicator
+      - name: IVDAT
+        description: Last inventory date
+      - name: INVZU
+        description: Supplementary inventory specifications
+      - name: VMGLI
+        description: Property classification key
+      - name: XVRMW
+        description: Manual net worth tax value
+      - name: WRTMA
+        description: Manual net worth tax value
+      - name: EHWRT
+        description: Assessed value
+      - name: AUFLA
+        description: Date of conveyance
+      - name: EHWZU
+        description: Date of last notice of assessment
+      - name: EHWNR
+        description: Tax number of the notice of assessment
+      - name: GRUVO
+        description: Land Register of
+      - name: GREIN
+        description: Land register entry on
+      - name: GRBND
+        description: Land register volume
+      - name: GRBLT
+        description: Land register page
+      - name: GRLFD
+        description: Land register entry Sequence number
+      - name: FLURK
+        description: Land register map number
+      - name: FLURN
+        description: Plot number
+      - name: FIAMT
+        description: Local tax office
+      - name: STADT
+        description: Municipality
+      - name: GRUND
+        description: Reason for manual valuation of net assets
+      - name: FEINS
+        description: Area unit
+      - name: GRUFL
+        description: Surface area
+      - name: INVNR
+        description: Inventory number
+      - name: VBUND
+        description: Company ID of trading partner
+      - name: SPRAS
+        description: Language Key
+      - name: TXT50
+        description: Asset description
+      - name: TXA50
+        description: Additional asset description
+      - name: XLTXID
+        description: Indicator Long text active
+      - name: XVERID
+        description: Long text indicator Property values
+      - name: XTCHID
+        description: Indicator Technical view long text
+      - name: XKALID
+        description: Indicator Long text active
+      - name: XHERID
+        description: Indicator Long text for manufacturer/origin
+      - name: XLEAID
+        description: Indicator Leasing data long text
+      - name: LEAFI
+        description: Leasing company
+      - name: LVDAT
+        description: Leasing agreement date
+      - name: LKDAT
+        description: Leasing agreement notice date
+      - name: LEABG
+        description: Lease start date
+      - name: LEJAR
+        description: Length of lease in years
+      - name: LEPER
+        description: Length of lease in periods
+      - name: LRYTH
+        description: Lease payment cycle
+      - name: LEFEB
+        description: Periodic lease payment paid to leasing company/lessor
+      - name: LBASW
+        description: Leasing base value as new
+      - name: LKAUF
+        description: Leased asset purchase price
+      - name: LMZIN
+        description: Leasing monthly interest rate (Capital Lease)
+      - name: LZINS
+        description: Leasing interest rate (capital lease)
+      - name: LTZBW
+        description: Posting date of the last lease payment
+      - name: LKUZA
+        description: Total of posted leasing payments
+      - name: LKUZI
+        description: Total leasing interest posted
+      - name: LLAVB
+        description: Total of long-term leasing liability
+      - name: LEANZ
+        description: Number of lease payments
+      - name: LVTNR
+        description: Leasing agreement number
+      - name: LETXT
+        description: Leasing data text
+      - name: XAKTIV
+        description: Indicator Capitalize fixed asset
+      - name: ANUPD
+        description: Indicator Type of change to table
+      - name: LBLNR
+        description: No of last document with which posting to asset was made
+      - name: XV0DT
+        description: Change date View 0
+      - name: XV0NM
+        description: Name of person in charge, who changed View0
+      - name: XV1DT
+        description: Change date View 1
+      - name: XV1NM
+        description: Name of person in charge, who changed view 1
+      - name: XV2DT
+        description: Change date View 2
+      - name: XV2NM
+        description: Name of the person in charge, who changed view 2
+      - name: XV3DT
+        description: Change date View 3
+      - name: XV3NM
+        description: Name of the person in charge, who changed view 3
+      - name: XV4DT
+        description: Change date View 4
+      - name: XV4NM
+        description: Name of the person in charge, who changed view 4
+      - name: XV5DT
+        description: Change date View 5
+      - name: XV5NM
+        description: Name of the person in charge who changed view 5
+      - name: XV6DT
+        description: Change date View 6
+      - name: XV6NM
+        description: Name of the person in charge who changed view 6
+      - name: AIMMO
+        description: Indicator real estate
+      - name: OBJNR
+        description: Object number
+      - name: LEART
+        description: Leasing type
+      - name: LVORS
+        description: Advance payments
+      - name: GDLGRP
+        description: Evaluation Group 5
+      - name: POSNR
+        description: WBS element investment project
+      - name: XERWRT
+        description: Indicator Ignore memo value
+      - name: XAFABCH
+        description: Asset acquired used
+      - name: XANLGR
+        description: Indicator Asset is a group asset
+      - name: MCOA1
+        description: Search term for matchcode search
+      - name: XINVM
+        description: Asset under Construction for Investment Measures
+      - name: SERNR
+        description: Serial number
+      - name: UMWKZ
+        description: Reason for environmental investment
+      - name: LRVDAT
+        description: Date of last revaluation
+      - name: ACT_CHANGE_PM
+        description: Change Asset Master Record from Equipment Master
+      - name: HAS_TDDP
+        description: Asset Has Time-Dependent Valuation Parameters in ANLBZA
+      - name: LAST_REORG_DATE
+        description: Date of Last Reorganization
+      - name: INTERNAL_CODE
+        description: Internal code
+      - name: APPROVAL_NUMBER
+        description: Approval document number
+      - name: APPROVAL_VERSION
+        description: Approval version
+      - name: BOGUS_ANLN1
+        description: bogus asset number
+      - name: ASSET_VERSION
+        description: Asset version    
+- name: BRONZE__TMEA_FINANCE__SAPO_ACCOUNTING_DOCUMENT_HEADER
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _CAPTUREDATETIME
+    description: Check the _CAPTUREDATETIME column in the BRONZE.TMEA_FINANCE.SAPO_ACCOUNTING_DOCUMENT_HEADER
+      table to ensure it falls within the last 24-hour interval.
+  - name: AWKEY
+    description: Object key
+  - name: HWAER
+    description: Local Currency
+  - name: SSBLK
+    description: Payment Statistical Sampling Block
+  - name: XNETB
+    description: 'Indicator: Document posted net ?'
+  - name: CCNUM
+    description: 'Payment cards: Card number'
+  - name: WAERS
+    description: Currency Key
+  - name: WWERT
+    description: Translation date
+  - name: CPUTM
+    description: Time of Entry
+  - name: PSOBT
+    description: Posting Day
+  - name: STODT
+    description: Planned Date for the Reverse Posting
+  - name: BATCH
+    description: Lot Number for Documents
+  - name: KUR3X
+    description: Market Data Exchange Rate 3
+  - name: UMRD2
+    description: Translation Date Type for Second Local Currency
+  - name: XBLNR_ALT
+    description: Alternative Reference Number
+  - name: XMWST
+    description: Calculate tax automatically
+  - name: PSOAK
+    description: Reason
+  - name: MONAT
+    description: Fiscal period
+  - name: BUKRS
+    description: Company Code
+  - name: AWTYP
+    description: Reference procedure
+  - name: BLIND
+    description: Budgetary Ledger Indicator
+  - name: PENRC
+    description: Reason for Late Payment
+  - name: PYBASTYP
+    description: Type of Payment Basis Document
+  - name: MANDT
+    description: Client
+  - name: PSOKS
+    description: Region
+  - name: IBLAR
+    description: Internal Document Type for Document Control
+  - name: CURT2
+    description: Currency Type of Second Local Currency
+  - name: CASH_ALLOC
+    description: Cash-Relevant Document
+  - name: CPUDT
+    description: Day On Which Accounting Document Was Entered
+  - name: PPTME
+    description: Time of Parking
+  - name: OFFSET_STATUS
+    description: Treasury Offset Status
+  - name: XREF2_HD
+    description: Reference Key 2 Internal for Document Header
+  - name: BSTAT
+    description: Document Status
+  - name: GLVOR
+    description: Business Transaction
+  - name: BASW3
+    description: Source Currency for Currency Translation
+  - name: PSOZL
+    description: Actual posting
+  - name: HWAE3
+    description: Currency Key of Third Local Currency
+  - name: PPDAT
+    description: Day of Parking of Accounting Document
+  - name: AWSYS
+    description: Logical System
+  - name: PPNAM
+    description: Name of User Who Parked this Document
+  - name: TXKRS
+    description: Exchange Rate for Taxes
+  - name: XUSVR
+    description: Enter VAT, Use Tax, Sales Tax on Detail Screen
+  - name: KUR2X
+    description: Market Data Exchange Rate 2
+  - name: KURS2
+    description: Exchange Rate for the Second Local Currency
+  - name: VATDATE
+    description: Tax Reporting Date
+  - name: XMCA
+    description: Document Originates from Multi Currency Accounting
+  - name: AEDAT
+    description: Date of the Last Document Change by Transaction
+  - name: FRATH
+    description: Unplanned delivery costs
+  - name: PPTCOD
+    description: Parking Transaction
+  - name: BKTXT
+    description: Document Header Text
+  - name: INTDATE
+    description: Interest Calc. Date
+  - name: PYIBAN
+    description: IBAN (International Bank Account Number)
+  - name: BVORG
+    description: Number of a Cross-Company Code Posting Transaction
+  - name: XREVERSAL
+    description: Specifies whether doc. is reversal doc. or reversed doc.
+  - name: XSNET
+    description: G/L account amounts entered exclude tax
+  - name: PSOTM
+    description: Last changed at
+  - name: BRNCH
+    description: Branch Number
+  - name: PSOFN
+    description: 'IS-PS: File number'
+  - name: SAMPLED
+    description: Sampled Invoice by Payment Certification
+  - name: INWARDDT_HD
+    description: Incoming Document Date
+  - name: XWVOF
+    description: 'Indicator: Customer bill of exchange payment before due date'
+  - name: KZWRS
+    description: Currency Key for the Group Currency
+  - name: TCODE
+    description: Transaction Code
+  - name: XSTOV
+    description: 'Indicator: Document is flagged for reversal'
+  - name: BASW2
+    description: Source Currency for Currency Translation
+  - name: BLDAT
+    description: Document Date in Document
+  - name: KUTY3
+    description: Exchange Rate Type
+  - name: FIKRS
+    description: Financial Management Area
+  - name: FM_UMART
+    description: Type of Payment Transfer
+  - name: STGRD
+    description: Reason for Reversal
+  - name: DOKID
+    description: Document Name in the Archive System
+  - name: PYBASDAT
+    description: Payment Basis Document Date
+  - name: OFFSET_REFER_DAT
+    description: Date Record Referred to Treasury
+  - name: SUBSET
+    description: Defines subset of components for the FI/CO interface
+  - name: CTXKRS
+    description: Rate for Tax Values in Local Currency (Plants Abroad)
+  - name: AUSBK
+    description: Source Company Code
+  - name: DOCCAT
+    description: Classification of an FI Document
+  - name: PSODT
+    description: Date of Last Change
+  - name: XBLNR
+    description: Reference Document Number
+  - name: CCINS
+    description: 'Payment cards: Card type'
+  - name: BELNR
+    description: Accounting Document Number
+  - name: KURS3
+    description: Exchange Rate for the Third Local Currency
+  - name: PYBASNO
+    description: Payment Basis Document Number
+  - name: RLDNR
+    description: Ledger in General Ledger Accounting
+  - name: KURST
+    description: Exchange Rate Type
+  - name: PSOTY
+    description: Document category payment requests
+  - name: INTFORM
+    description: Interest Formula
+  - name: INWARDNO_HD
+    description: Incoming Document Number
+  - name: SNAME
+    description: User Name
+  - name: XREF1_HD
+    description: Reference Key 1 Internal for Document Header
+  - name: KUTY2
+    description: Exchange Rate Type
+  - name: KZKRS
+    description: Group Currency Exchange Rate
+  - name: GJAHR
+    description: Fiscal Year
+  - name: EXCLUDE_FLAG
+    description: PPA Exclude Indicator
+  - name: HWAE2
+    description: Currency Key of Second Local Currency
+  - name: STBLG
+    description: Reverse Document Number
+  - name: BUDAT
+    description: Posting Date in the Document
+  - name: FOLLOW_ON
+    description: Follow-on document indicator
+  - name: LOTKZ
+    description: Lot Number for Requests
+  - name: RESUBMISSION
+    description: Date of Resubmission
+  - name: NUMPG
+    description: Number of pages of invoice
+  - name: LDGRP
+    description: Ledger Group
+  - name: REINDAT
+    description: Invoice Receipt Date
+  - name: USNAM
+    description: User Name
+  - name: ADISC
+    description: 'Indicator: entry represents a discount document'
+  - name: CURT3
+    description: Currency Type of Third Local Currency
+  - name: UPDDT
+    description: Date of the Last Document Update
+  - name: XREORG
+    description: Doc. Contains Open Item that Was Transferred During Reorg.
+  - name: PSOSG
+    description: Reason for reversal - IS-PS requests
+  - name: XRUEB
+    description: 'Indicator: Document is posted to a previous period'
+  - name: GRPID
+    description: Batch Input Session Name
+  - name: DBBLG
+    description: Recurring Entry Document Number
+  - name: XSPLIT
+    description: FI Document Originates from Split Posting (Indicator)
+  - name: UMRD3
+    description: Translation Date Type for Third Local Currency
+  - name: BLART
+    description: Document type
+  - name: PROPMANO
+    description: Real Estate Management Mandate
+  - name: KURSX
+    description: Market Data Exchange Rate
+  - name: KURSF
+    description: Exchange rate
+  - name: DUEFL
+    description: Status of Data Transfer into Subsequent Release
+  - name: ARCID
+    description: Extract ID Document Header
+  - name: KNUMV
+    description: Number of the document condition
+  - name: STJAH
+    description: Reverse document fiscal year
+- name: BRONZE__TMEA_FINANCE__SAPO_ACCOUNTING_DOCUMENT_SEGMENT
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _CAPTUREDATETIME
+    description: Check the _CAPTUREDATETIME column in the BRONZE.TMEA_FINANCE.SAPO_ACCOUNTING_DOCUMENT_SEGMENT
+      table to ensure it falls within the last 24-hour interval.

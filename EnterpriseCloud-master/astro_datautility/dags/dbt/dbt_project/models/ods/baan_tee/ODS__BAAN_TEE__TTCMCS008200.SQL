@@ -1,0 +1,70 @@
+{{ config(
+    	  materialized='incremental',
+    	  incremental_strategy='merge',
+    	  alias='TTCMCS008200',
+    	  unique_key = ['T$CCUR',
+    'T$STDT'],
+    	  transient=false	
+) }} 
+
+	with source_data as (
+	SELECT
+      	
+		TTCMCS008200."T$CCUR" AS "T$CCUR", 
+ 	 	TTCMCS008200."T$STDT" AS "T$STDT", 
+ 	 	TTCMCS008200."T$RATP" AS "T$RATP", 
+ 	 	TTCMCS008200."T$RATS" AS "T$RATS", 
+ 	 	TTCMCS008200."T$ECRT" AS "T$ECRT", 
+ 	 	TTCMCS008200."T$RATF" AS "T$RATF", 
+ 	 	TTCMCS008200."T$REFCNTD" AS "T$REFCNTD", 
+ 	 	TTCMCS008200."T$REFCNTU" AS "T$REFCNTU", 
+ 	 	TTCMCS008200."_CAPTUREDATETIME" AS "_CAPTUREDATETIME", 
+ 	 	TTCMCS008200."_INTEGRATEDATETIME" AS "_INTEGRATEDATETIME", 
+ 	 	TTCMCS008200."_INTEGRATIONKEY" AS "_INTEGRATIONKEY", 
+ 	 	TTCMCS008200."_TRANSACTIONTYPE" AS "_TRANSACTIONTYPE"
+                	
+	from {{ source('BAAN3_ORACLE_LIVE','TTCMCS008200') }} AS TTCMCS008200 
+     
+	
+
+	),
+	
+	transform_data as (
+	SELECT 
+		"T$CCUR", 
+ 	 	"T$STDT", 
+ 	 	"T$RATP", 
+ 	 	"T$RATS", 
+ 	 	"T$ECRT", 
+ 	 	"T$RATF", 
+ 	 	"T$REFCNTD", 
+ 	 	"T$REFCNTU", 
+ 	 	"_CAPTUREDATETIME", 
+ 	 	"_INTEGRATEDATETIME", 
+ 	 	"_INTEGRATIONKEY", 
+ 	 	"_TRANSACTIONTYPE",
+		'{{ invocation_id }}' AS AUDIT_LOG_ID,
+        SHA2('hash_me') as _ROW_HASH
+	from source_data
+	),
+	
+	type_data as (
+	SELECT
+		CAST("T$CCUR" AS VARCHAR(16777216)) AS "T$CCUR", 
+ 	 	CAST("T$STDT" AS TIMESTAMP_NTZ(9)) AS "T$STDT", 
+ 	 	CAST("T$RATP" AS NUMBER(38,10)) AS "T$RATP", 
+ 	 	CAST("T$RATS" AS NUMBER(38,10)) AS "T$RATS", 
+ 	 	CAST("T$ECRT" AS NUMBER(38,10)) AS "T$ECRT", 
+ 	 	CAST("T$RATF" AS NUMBER(38,10)) AS "T$RATF", 
+ 	 	CAST("T$REFCNTD" AS NUMBER(38,10)) AS "T$REFCNTD", 
+ 	 	CAST("T$REFCNTU" AS NUMBER(38,10)) AS "T$REFCNTU", 
+ 	 	CAST("_CAPTUREDATETIME" AS TIMESTAMP_LTZ(9)) AS "_CAPTUREDATETIME", 
+ 	 	CAST("_INTEGRATEDATETIME" AS TIMESTAMP_LTZ(9)) AS "_INTEGRATEDATETIME", 
+ 	 	CAST("_INTEGRATIONKEY" AS VARCHAR(16777216)) AS "_INTEGRATIONKEY", 
+ 	 	CAST("_TRANSACTIONTYPE" AS NUMBER(38,10)) AS "_TRANSACTIONTYPE",
+        cast(AUDIT_LOG_ID as varchar(128)) as AUDIT_LOG_ID,
+        cast(_ROW_HASH as varchar(128)) as _ROW_HASH 
+    from transform_data
+	)
+
+	select * from type_data

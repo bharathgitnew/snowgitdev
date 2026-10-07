@@ -1,0 +1,32 @@
+{
+    "TIRS":{
+	"DataSet1":{
+            "schema":"dbo",
+            "table":"AccidentReportsForUS_nolock",
+            "Incremental":"NULL",
+            "sftablename":"AccidentReportsForUS_nolock",
+            "filter": ""
+		},
+      "DataSet2":{
+            "schema":"dbo",
+            "table":"AccidentWorkflowProgressForUS_nolock",
+            "Incremental":"NULL",
+            "sftablename":"AccidentWorkflowProgressForUS_nolock",
+            "filter": ""
+            },
+	"DataSet3":{
+            "schema":"dbo",
+            "table":"TrafficReportsForUS_nolock",
+            "Incremental":"NULL",
+            "sftablename":"TrafficReportsForUS_nolock",
+            "filter": ""
+		},
+	"DataSet4":{
+            "schema":"dbo",
+            "table":"TrafficWorkflowProgressForUS_nolock",
+            "Incremental":"NULL",
+            "sftablename":"TrafficWorkflowProgressForUS_nolock",
+            "filter": ""
+		}
+      }
+}

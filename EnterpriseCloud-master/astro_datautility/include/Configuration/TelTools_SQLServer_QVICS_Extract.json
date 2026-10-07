@@ -1,0 +1,18 @@
+{
+    "QVICS": {
+        "DataSet1": {
+            "schema": "dbo",
+            "table": "ALLPART",
+            "Incremental": "NULL",
+            "sftablename": "ALLPART",
+            "filter": ""
+        },
+        "DataSet2": {
+            "schema": "dbo",
+            "table": "ALLTROUBLE",
+            "Incremental": "NULL",
+            "sftablename": "ALLTROUBLE",
+            "filter": ""
+        }
+    }
+}

@@ -1,0 +1,548 @@
+version: 2
+models:
+- name: BRONZE__TTCA_QUALITY__GWS_BK_GWS_ORDER_LOT_LINE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_AUDIT_DOCUMENTS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_AUDIT_ENTITY_DOCUMENTS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_AUDIT_ENTITY_IMEC
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_AUDIT_ENTITY_ORDERS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_AUDIT_ENTITY_REFERENCE_DATA
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_AUDIT_ENTITY_REQUESTS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_AUDIT_IMEC
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_AUDIT_MESSAGES
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_AUDIT_ORDERS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_AUDIT_REFERENCE_DATA
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_AUDIT_REQUESTS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_BUSINESS_UNIT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_CATEGORY
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_CATEGORY_SITE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_CONFIDENCIAL_LEVEL
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_COST_FORMULA
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_COUNTRIES
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_CURRENCY
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_DEPARTMENT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_DEPARTMENT_GEM_MAPPING
+- name: BRONZE__TTCA_QUALITY__GWS_DOCUMENT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_DOCUMENT_CATEGORY
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_DOCUMENT_TYPE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_DOCUMENT_TYPE_ORDER_STATUS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_DOCUMENT_TYPE_REQUEST_STATUS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_DOCUMENT_TYPE_ROLE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_KPI
+- name: BRONZE__TTCA_QUALITY__GWS_MESSAGE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_MESSAGE_CENTER
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_MESSAGE_FUNCTIONALITY
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_NEWS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_NEWS_LOG
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_ORDER
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_ORDER_ASSIGN_LOT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_ORDER_ASSIGN_LOT_STATUS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_ORDER_ASSIGN_LOT_VERSIONS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_ORDER_DOCUMENT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_ORDER_DOCUMENT_TYPE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_ORDER_DOCUMENT_VERSIONS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_ORDER_FORMAT_ID_MANAGEMENT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_ORDER_LOT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_ORDER_LOT_LINE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_ORDER_LOT_LINE_CHECKBOX
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_ORDER_LOT_LINE_CHECKBOX_VERSIONS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_ORDER_LOT_LINE_VERSIONS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_ORDER_LOT_LINE_WAFER
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_ORDER_LOT_LINE_WAFER_VERSIONS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_ORDER_LOT_VERSIONS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_ORDER_NOTES
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_ORDER_SHIPPING_FEEDBACK
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_ORDER_STAKEHOLDERS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_ORDER_STAKEHOLDERS_VERSIONS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_ORDER_STATUS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_ORDER_TAG
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_ORDER_TAG_VERSIONS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_ORDER_USING_BONDED_WAFER_TYPE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_ORDER_VERSIONS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_ORGANIZATION
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_ORGANIZATION_GEM_MAPPING
+- name: BRONZE__TTCA_QUALITY__GWS_PROCESS_AREAS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_PROCESS_PARAMETER
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_PROCESS_PARAMETER_VALUE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_PROJECT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_QUESTINIOR
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_RECIPE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_RECIPE_NEEDED
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_RECIPE_PARAMETER_VALUE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_RECIPE_TYPE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_REQUEST
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_REQUEST_DOCUMENT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_REQUEST_DOCUMENT_TYPE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_REQUEST_FORMAT_ID_MANAGEMENT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_REQUEST_PRIORITY
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_REQUEST_SHIPPING_WAFER_FEEDBACK
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_REQUEST_SHIPPING_WAFERS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_REQUEST_STAKEHOLDERS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_REQUEST_UPDATE_LOG
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_REQUEST_UPDATE_LOG_USER
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_REQUESTSTATUS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_ROLE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_ROUTE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_ROUTE_DOCUMENT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_SHIPPING_ADDRESS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_SITE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_SITE_COST
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_TAG
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_TOOL
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_TOOL_AREA
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_TOOL_COST
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_TOOL_PROCESS_AREAS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_TOOL_TAGS
+- name: BRONZE__TTCA_QUALITY__GWS_TOOL_TYPE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_USER
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_USER_CONFIGURATION
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_USER_EMAIL
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_USER_EMAIL_NOTIFICATIONS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_USER_EMAIL_SITE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_USER_ROLE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_USER_V3
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_WAFER_TYPE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_WAFER_TYPE_COST
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_BK_GWS_COST_FORMULA
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_BK_GWS_SITE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_BK_GWS_USER_UV
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_BKR_GWS_ORDER_LOT_LINE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_GEM_EMPLOYEE_GWS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_IMEC_BUDGET
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_IMEC_COMPANY_ADDRESS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_IMEC_CONFIDENCIAL_LEVEL
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_IMEC_FACTORY_BU_DEPARTMENT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_IMEC_IMEC_DOCUMENT_TYPE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_IMEC_IMEC_STATUS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_IMEC_INTEGRATOR
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_IMEC_LITHO_MASKSET
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_IMEC_NO_OF_WAFER
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_IMEC_ORDER
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_IMEC_ORDER_ASSIGN_LOT
+- name: BRONZE__TTCA_QUALITY__GWS_IMEC_ORDER_ASSIGN_LOT_VERSIONS
+- name: BRONZE__TTCA_QUALITY__GWS_IMEC_ORDER_DOCUMENT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_IMEC_ORDER_DOCUMENT_VERSIONS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_IMEC_ORDER_FORMAT_ID_MANAGEMENT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_IMEC_ORDER_LOT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_IMEC_ORDER_LOT_LINE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_IMEC_ORDER_LOT_LINE_VERSIONS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_IMEC_ORDER_LOT_VERSIONS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_IMEC_ORDER_NOTES
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_IMEC_ORDER_NOTES_VERSIONS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_IMEC_ORDER_SHIPPING_FEEDBACK
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_IMEC_ORDER_STAKEHOLDERS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_IMEC_ORDER_STAKEHOLDERS_VERSIONS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_IMEC_ORDER_TAG
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_IMEC_ORDER_TAG_VERSIONS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_IMEC_ORDER_VERSIONS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_IMEC_PROJECT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_IMEC_REPORT_DATA
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_IMEC_REQUEST_TYPE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_IMEC_SHIPPER
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_IMEC_WAFER_TYPE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_OLD_USERS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TTCA_QUALITY__GWS_V_GEM_EMPLOYEE_GWS
+  tests:
+  - has_data
+  - recently_run

@@ -1,0 +1,91 @@
+version: 2
+sources:
+  - name: SERVICENOW
+    description: Landing Zone - SERVICENOW Schema
+    database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+    schema: SERVICENOW
+    tables:
+      - name: ALM_ASSET
+        identifier: ALM_ASSET
+        description: Landing table for ALM_ASSET file.
+      - name: CAB_MEETING
+        identifier: CAB_MEETING
+        description: Landing table for CAB_MEETING file.
+      - name: CHANGE_REQUEST
+        identifier: CHANGE_REQUEST
+        description: Landing table for CHANGE_REQUEST file.
+      - name: CMDB_CI
+        identifier: CMDB_CI
+        description: Landing table for CMDB_CI file.
+      - name: CMN_DEPARTMENT
+        identifier: CMN_DEPARTMENT
+        description: Landing table for CMN_DEPARTMENT file.
+      - name: CMN_LOCATION
+        identifier: CMN_LOCATION
+        description: Landing table for CMN_LOCATION file.
+      - name: CONTRACT_SLA
+        identifier: CONTRACT_SLA
+        description: Landing table for CONTRACT_SLA file.
+      - name: CORE_COMPANY
+        identifier: CORE_COMPANY
+        description: Landing table for CORE_COMPANY file.
+      - name: INCIDENT
+        identifier: INCIDENT
+        description: Landing table for INCIDENT file.
+      - name: INTERACTION
+        identifier: INTERACTION
+        description: Landing table for INTERACTION file.
+      - name: LABEL
+        identifier: LABEL
+        description: Landing table for LABEL file.
+      - name: LABEL_ENTRY
+        identifier: LABEL_ENTRY
+        description: Landing table for LABEL_ENTRY file.
+      - name: METRIC_DEFINITION
+        identifier: METRIC_DEFINITION
+        description: Landing table for METRIC_DEFINITION file.
+      - name: METRIC_INSTANCE
+        identifier: METRIC_INSTANCE
+        description: Landing table for METRIC_INSTANCE file.
+      - name: SC_CAT_ITEM
+        identifier: SC_CAT_ITEM
+        description: Landing table for SC_CAT_ITEM file.
+      - name: SC_REQUEST
+        identifier: SC_REQUEST
+        description: Landing table for SC_REQUEST file.
+      - name: SC_REQ_ITEM
+        identifier: SC_REQ_ITEM
+        description: Landing table for SC_REQ_ITEM file.
+      - name: SC_TASK
+        identifier: SC_TASK
+        description: Landing table for SC_TASK file.
+      - name: STD_CHANGE_RECORD_PRODUCER
+        identifier: STD_CHANGE_RECORD_PRODUCER
+        description: Landing table for STD_CHANGE_RECORD_PRODUCER file.
+      - name: SYS_CHOICE
+        identifier: SYS_CHOICE
+        description: Landing table for SYS_CHOICE file.
+      - name: SYS_DB_OBJECT
+        identifier: SYS_DB_OBJECT
+        description: Landing table for SYS_DB_OBJECT file.
+      - name: SYS_DICTIONARY
+        identifier: SYS_DICTIONARY
+        description: Landing table for SYS_DICTIONARY file.
+      - name: SYS_DOCUMENTATION
+        identifier: SYS_DOCUMENTATION
+        description: Landing table for SYS_DOCUMENTATION file.
+      - name: SYS_UI_FORM
+        identifier: SYS_UI_FORM
+        description: Landing table for SYS_UI_FORM file.
+      - name: SYS_UI_SECTION
+        identifier: SYS_UI_SECTION
+        description: Landing table for SYS_UI_SECTION file.
+      - name: SYS_USER
+        identifier: SYS_USER
+        description: Landing table for SYS_USER file.
+      - name: SYS_USER_GROUP
+        identifier: SYS_USER_GROUP
+        description: Landing table for SYS_USER_GROUP file.
+      - name: TASK_SLA
+        identifier: TASK_SLA
+        description: Landing table for TASK_SLA file.

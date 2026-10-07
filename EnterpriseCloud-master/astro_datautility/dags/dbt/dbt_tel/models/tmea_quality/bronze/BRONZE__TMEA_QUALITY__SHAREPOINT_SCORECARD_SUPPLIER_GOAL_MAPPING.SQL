@@ -1,0 +1,127 @@
+{{ config(
+    	  materialized='tel_incremental',
+    	  incremental_strategy='insert_overwrite',
+    	  alias='SHAREPOINT_SCORECARD_SUPPLIER_GOAL_MAPPING',
+    	  unique_key = [''],
+    	  transient=false	
+) }} 
+
+	with source_data as (
+	SELECT
+                jsonfield:fields.Title::string as Title,
+                TO_TIMESTAMP_NTZ(TRIM(jsonfield:fields.field_1,'/Date()/')) AS DATE,
+                jsonfield:fields.field_2::VARCHAR as ROLLING_PPM_3_MONTH_GOAL,
+                jsonfield:fields.Attachments::String as Attachments,
+                jsonfield:fields.AuthorLookupId::String as AuthorLookupId,
+                jsonfield:fields.ContentType::String as ContentType,
+                jsonfield:fields.Created AS Created,
+                jsonfield:fields.Modified AS Modified,
+                jsonfield:fields.Edit::String as Edit,
+                jsonfield:fields.EditorLookupId::String as EditorLookupId,
+                jsonfield:fields.FolderChildCount::String as Folder_Child_Count,
+                jsonfield:fields.ItemChildCount::String as Item_Child_Count,
+                jsonfield:fields.LinkTitle::String as Link_Title,
+                jsonfield:fields.LinkTitleNoMenu::String as Link_Title_NoMenu,
+                jsonfield:fields._ComplianceFlags::String as Compliance_Flags,
+                jsonfield:fields._ComplianceTag::String as Compliance_Tag,
+                jsonfield:fields._ComplianceTagUserId::String as ComplianceTagUser_Id,
+                jsonfield:fields._ComplianceTagWrittenTime::String as Compliance_Tag_Written_Time,
+                jsonfield:fields._UIVersionString::String as UI_VersionString,
+                jsonfield:fields.id::String as id,
+                jsonfield:contentType.id::STRING AS CONTENT_TYPE_ID,
+                jsonfield:contentType.name::STRING AS CONTENT_NAME,
+                jsonfield:createdBy.user.displayName::string as created_By,
+                jsonfield:createdBy.user.email::string as created_By_email,
+                jsonfield:createdBy.user.id::string as created_By_id,
+                jsonfield:lastModifiedBy.user.displayName::string as last_modified_by,
+                jsonfield:lastModifiedBy.user.email::string as last_modified_by_email,
+                jsonfield:lastModifiedBy.user.id::string as last_modified_by_id,
+                jsonfield:lastModifiedDateTime AS last_Modified_Date_Time,
+                jsonfield:parentReference.siteId::string as site_Id,
+                _FILEDATE,
+                _FILENAME
+	from {{ source('SHAREPOINT','LZ_SCORECARD_SUPPLIER_GOAL_MAPPING') }}
+	where _FILEDATE = (SELECT MAX(_FILEDATE) from {{ source('SHAREPOINT','LZ_SCORECARD_SUPPLIER_GOAL_MAPPING') }})
+
+	),
+	
+	transform_data as (
+	SELECT 
+                '{{ invocation_id }}' AS _AUDIT_LOG_ID,
+                SHA2('hash_me') AS _ROW_HASH,
+                _FILEDATE,
+                _FILENAME,
+                TITLE,
+                DATE,
+                ROLLING_PPM_3_MONTH_GOAL,
+                ATTACHMENTS,
+                AUTHORLOOKUPID,
+                CONTENTTYPE,
+                CREATED,
+                MODIFIED,
+                EDIT,
+                EDITORLOOKUPID,
+                FOLDER_CHILD_COUNT,
+                ITEM_CHILD_COUNT,
+                LINK_TITLE,
+                LINK_TITLE_NOMENU,
+                COMPLIANCE_FLAGS,
+                COMPLIANCE_TAG,
+                COMPLIANCETAGUSER_ID,
+                COMPLIANCE_TAG_WRITTEN_TIME,
+                UI_VERSIONSTRING,
+                ID,
+                CONTENT_TYPE_ID,
+                CONTENT_NAME,
+                CREATED_BY,
+                CREATED_BY_EMAIL,
+                CREATED_BY_ID,
+                LAST_MODIFIED_BY,
+                LAST_MODIFIED_BY_EMAIL,
+                LAST_MODIFIED_BY_ID,
+                LAST_MODIFIED_DATE_TIME,
+                SITE_ID
+	from source_data
+	where ROLLING_PPM_3_MONTH_GOAL not in ('TBD')
+	),
+	
+	type_data as (
+	SELECT
+                CAST(_AUDIT_LOG_ID AS VARCHAR(16777216)) AS _AUDIT_LOG_ID,
+                CAST(_ROW_HASH AS VARCHAR(16777216)) AS _ROW_HASH,
+                CAST(_FILEDATE AS VARCHAR(16777216)) AS _FILEDATE,
+                CAST(_FILENAME AS VARCHAR(16777216)) AS _FILENAME,
+                CAST(TITLE AS VARCHAR(16777216)) AS TITLE,
+                CAST(DATE AS VARCHAR(16777216)) AS DATE,
+                CAST(ROLLING_PPM_3_MONTH_GOAL AS VARCHAR(16777216)) AS ROLLING_PPM_3_MONTH_GOAL,
+                CAST(ATTACHMENTS AS VARCHAR(16777216)) AS ATTACHMENTS,
+                CAST(AUTHORLOOKUPID AS VARCHAR(16777216)) AS AUTHORLOOKUPID,
+                CAST(CONTENTTYPE AS VARCHAR(16777216)) AS CONTENTTYPE,
+                CAST(CREATED AS VARCHAR(16777216)) AS CREATED,
+                CAST(MODIFIED AS VARCHAR(16777216)) AS MODIFIED,
+                CAST(EDIT AS VARCHAR(16777216)) AS EDIT,
+                CAST(EDITORLOOKUPID AS VARCHAR(16777216)) AS EDITORLOOKUPID,
+                CAST(FOLDER_CHILD_COUNT AS VARCHAR(16777216)) AS FOLDER_CHILD_COUNT,
+                CAST(ITEM_CHILD_COUNT AS VARCHAR(16777216)) AS ITEM_CHILD_COUNT,
+                CAST(LINK_TITLE AS VARCHAR(16777216)) AS LINK_TITLE,
+                CAST(LINK_TITLE_NOMENU AS VARCHAR(16777216)) AS LINK_TITLE_NOMENU,
+                CAST(COMPLIANCE_FLAGS AS VARCHAR(16777216)) AS COMPLIANCE_FLAGS,
+                CAST(COMPLIANCE_TAG AS VARCHAR(16777216)) AS COMPLIANCE_TAG,
+                CAST(COMPLIANCETAGUSER_ID AS VARCHAR(16777216)) AS COMPLIANCETAGUSER_ID,
+                CAST(COMPLIANCE_TAG_WRITTEN_TIME AS VARCHAR(16777216)) AS COMPLIANCE_TAG_WRITTEN_TIME,
+                CAST(UI_VERSIONSTRING AS VARCHAR(16777216)) AS UI_VERSIONSTRING,
+                CAST(ID AS VARCHAR(16777216)) AS ID,
+                CAST(CONTENT_TYPE_ID AS VARCHAR(16777216)) AS CONTENT_TYPE_ID,
+                CAST(CONTENT_NAME AS VARCHAR(16777216)) AS CONTENT_NAME,
+                CAST(CREATED_BY AS VARCHAR(16777216)) AS CREATED_BY,
+                CAST(CREATED_BY_EMAIL AS VARCHAR(16777216)) AS CREATED_BY_EMAIL,
+                CAST(CREATED_BY_ID AS VARCHAR(16777216)) AS CREATED_BY_ID,
+                CAST(LAST_MODIFIED_BY AS VARCHAR(16777216)) AS LAST_MODIFIED_BY,
+                CAST(LAST_MODIFIED_BY_EMAIL AS VARCHAR(16777216)) AS LAST_MODIFIED_BY_EMAIL,
+                CAST(LAST_MODIFIED_BY_ID AS VARCHAR(16777216)) AS LAST_MODIFIED_BY_ID,
+                CAST(LAST_MODIFIED_DATE_TIME AS VARCHAR(16777216)) AS LAST_MODIFIED_DATE_TIME,
+                CAST(SITE_ID AS VARCHAR(16777216)) AS SITE_ID
+	from transform_data
+	)
+
+	select * from type_data

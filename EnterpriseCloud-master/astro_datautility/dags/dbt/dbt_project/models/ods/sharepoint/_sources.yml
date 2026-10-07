@@ -1,0 +1,151 @@
+version: 2
+sources:
+- name: SHAREPOINT
+  description: Landing Zone - SHAREPOINT Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: SHAREPOINT
+  tables:
+  - name: TAS_TYPE_OF_WORK_MAPPING
+    identifier: TAS_TYPE_OF_WORK_MAPPING
+    description: Landing table for TAS_TYPE_OF_WORK_MAPPING file.
+  - name: SERVICE_SEGMENT_MAPPING
+    identifier: SERVICE_SEGMENT_MAPPING
+    description: Landing table for SERVICE_SEGMENT_MAPPING file.
+  - name: SERVICE_PRODUCT_TYPE_MAPPING
+    identifier: SERVICE_PRODUCT_TYPE_MAPPING
+    description: Landing table for SERVICE_PRODUCT_TYPE_MAPPING file.
+  - name: SERVICE_OFFICE_MAPPING
+    identifier: SERVICE_OFFICE_MAPPING
+    description: Landing table for SERVICE_OFFICE_MAPPING file.
+  - name: CUSTOMER_MAPPING_SERVICE
+    identifier: CUSTOMER_MAPPING_SERVICE
+    description: Landing table for CUSTOMER_MAPPING_SERVICE file.
+  - name: SERVICE_BUSINESS_UNIT_MAPPING
+    identifier: SERVICE_BUSINESS_UNIT_MAPPING
+    description: Landing table for SERVICE_BUSINESS_UNIT_MAPPING file.
+  - name: MACHINE_MODEL_MAPPING
+    identifier: MACHINE_MODEL_MAPPING
+    description: Landing table for MACHINE_MODEL_MAPPING file.
+  - name: SERVICE_B_CODE_MAPPING
+    identifier: SERVICE_B_CODE_MAPPING
+    description: Landing table for SERVICE_B_CODE_MAPPING file.
+  - name: CUSTOMER_GROUP_MAPPING
+    identifier: CUSTOMER_GROUP_MAPPING
+    description: Landing table for CUSTOMER_GROUP_MAPPING file.
+  - name: ENGINEERING_ACTION_REQUEST
+    identifier: ENGINEERING_ACTION_REQUEST
+    description: Landing table for ENGINEERING_ACTION_REQUEST file.
+  - name: REQUEST_FOR_QUOTE
+    identifier: REQUEST_FOR_QUOTE
+    description: Landing table for REQUEST_FOR_QUOTE file.
+  - name: SERVICE_CONTRACTS_FLEX_TSRS
+    identifier: SERVICE_CONTRACTS_FLEX_TSRS
+    description: Landing table for SERVICE_CONTRACTS_FLEX_TSRS file.
+  - name: LISTS
+    identifier: Lists
+    description: Landing table for Lists file.
+  - name: OPT_PURCHASE_ORDER
+    identifier: OPT_PURCHASE_ORDER
+    description: Landing table for OPT_PURCHASE_ORDER file.
+  - name: PAID_SERVICE_QUOTE
+    identifier: Paid_Service_Quote
+    description: Landing table for Paid_Service_Quote file.
+  - name: PAID_SERVICE_SO_REQUEST
+    identifier: PAID_SERVICE_SO_REQUEST
+    description: Landing table for PAID_SERVICE_SO_REQUEST file.
+  - name: PAID_SERVICE_CUSTOMER_PO
+    identifier: PAID_SERVICE_CUSTOMER_PO
+    description: Landing table for PAID_SERVICE_CUSTOMER_PO file.
+  - name: CUSTOMER_DEMO
+    identifier: CUSTOMER_DEMO
+    description: Landing table for CUSTOMER_DEMO file.
+  - name: DESIGN_CONTROL
+    identifier: DESIGN_CONTROL
+    description: Landing table for DESIGN_CONTROL file.
+  - name: CUE_REPAIR_TICKET
+    identifier: CUE_REPAIR_TICKET
+    description: Landing table for CUE_REPAIR_TICKET file.
+  - name: INCOMING_PART_INSPECTION
+    identifier: INCOMING_PART_INSPECTION
+    description: Landing table for INCOMING_PART_INSPECTION file.
+  - name: LZ_CUE_REPAIR_TICKET_ONLINE
+    identifier: CUE_REPAIR_TICKET_ONLINE
+    description: Landing table for CUE_REPAIR_TICKET_ONLINE file.
+  - name: LZ_INCOMING_PART_INSPECTION_ONLINE
+    identifier: INCOMING_PART_INSPECTION_ONLINE
+    description: Landing table for INCOMING_PART_INSPECTION_ONLINE file.
+  - name: LZ_GOOD_CATCH_TRACKER
+    identifier: GOOD_CATCH_TRACKER
+    description: Landing table for GOOD_CATCH_TRACKER file.
+  - name: LZ_SCORECARD_SUPPLIER_GOAL_MAPPING
+    identifier: SCORECARD_SUPPLIER_GOAL_MAPPING
+    description: Landing table for SCORECARD_SUPPLIER_GOAL_MAPPING file.
+  - name: LZ_SUPPLIER_DETAILS
+    identifier: SUPPLIER_DETAILS
+    description: Landing table for SUPPLIER_DETAILS file.
+  - name: LZ_TTCA_OPPORTUNITY_LIST
+    identifier: TTCA_OPPORTUNITY_LIST
+    description: Landing table for TTCA_OPPORTUNITY_LIST file.
+  - name: SCR_CYCLE_TIME_GOALS_BY_GROUP
+    identifier: SCR_CYCLE_TIME_GOALS_BY_GROUP
+    description: Landing table for SCR_CYCLE_TIME_GOALS_BY_GROUP file.
+  - name: TMEA_MANAGEMENT_KPI_GOALS
+    identifier: TMEA_MANAGEMENT_KPI_GOALS
+    description: Landing table for TMEA_MANAGEMENT_KPI_GOALS.
+  - name: TMEA_ENVIRONMENTAL_KPI
+    identifier: TMEA_ENVIRONMENTAL_KPI
+    description: Landing table for TMEA_ENVIRONMENTAL_KPI.
+  - name: CUSTOMER
+    identifier: CUSTOMER
+    description: Landing table for CUSTOMER.
+  - name: DEPARTMENT
+    identifier: DEPARTMENT
+    description: Landing table for DEPARTMENT.
+  - name: GL_ACCOUNT
+    identifier: GL_ACCOUNT
+    description: Landing table for GL_ACCOUNT.
+  - name: REGION
+    identifier: REGION
+    description: Landing table for REGION.
+  - name: SALES_CATEGORY
+    identifier: SALES_CATEGORY
+    description: Landing table for SALES_CATEGORY.
+  - name: SEGMENT
+    identifier: SEGMENT
+    description: Landing table for SEGMENT.
+  - name: ORACLE_PC_MGMT_HIERARCHY
+    identifier: ORACLE_PC_MGMT_HIERARCHY
+    description: Landing table for ORACLE_PC_MGMT_HIERARCHY.
+  - name: OVERALL_SUPPLIER_SCORECARD_GOAL
+    identifier: OVERALL_SUPPLIER_SCORECARD_GOAL
+    description: Landing table for OVERALL_SUPPLIER_SCORECARD_GOAL.
+  - name: ODM
+    identifier: ODM
+    description: Landing table for ODM.
+  - name: GS_INTEL_SALES_FCST_DETAILS
+    identifier: GS_INTEL_SALES_FCST_DETAILS
+    description: Landing table for GS_INTEL_SALES_FCST_DETAILS.
+  - name: GS_INTEL_SALES_BUDGET_DETAILS
+    identifier: GS_INTEL_SALES_BUDGET_DETAILS
+    description: Landing table for GS_INTEL_SALES_BUDGET_DETAILS.
+  - name: GS_INTEL_SALES_ACTUAL_DETAILS
+    identifier: GS_INTEL_SALES_ACTUAL_DETAILS
+    description: Landing table for GS_INTEL_SALES_ACTUAL_DETAILS.
+  - name: GS_INTEL_BOOKING_BUDGET_DETAILS
+    identifier: GS_INTEL_BOOKING_BUDGET_DETAILS
+    description: Landing table for GS_INTEL_BOOKING_BUDGET_DETAILS.
+  - name: GS_INTEL_BOOKING_FCST_DETAILS
+    identifier: GS_INTEL_BOOKING_FCST_DETAILS
+    description: Landing table for GS_INTEL_BOOKING_FCST_DETAILS.
+  - name: GS_INTEL_BOOKING_ACTUAL_DETAILS
+    identifier: GS_INTEL_BOOKING_ACTUAL_DETAILS
+    description: Landing table for GS_INTEL_BOOKING_ACTUAL_DETAILS.
+  - name: CUSTOMER_SITE_SERVICE_MANAGER_MAPPING
+    identifier: CUSTOMER_SITE_SERVICE_MANAGER_MAPPING
+    description: Landing table for CUSTOMER_SITE_SERVICE_MANAGER_MAPPING.
+  - name: ORDER_PROCESS_TRACKING_LEGACY
+    identifier: ORDER_PROCESS_TRACKING_LEGACY
+    description: Landing table for ORDER_PROCESS_TRACKING_LEGACY.
+  - name: SIRFIS_PRICE_ESTIMATE_INLINE
+    identifier: SIRFIS_PRICE_ESTIMATE_INLINE
+    description: Landing table for SIRFIS_PRICE_ESTIMATE_INLINE.

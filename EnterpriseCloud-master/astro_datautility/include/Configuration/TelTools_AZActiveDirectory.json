@@ -1,0 +1,18 @@
+{
+    "AzActiveDirectory": {
+        "ConnectionInformation": {
+          "CertPath": "Cert:\\LocalMachine\\My",
+          "CertSubject": "SPNTestPowerShell",
+          "TenantId": "8c433003-a081-4dfb-a631-100526250b1a",
+          "ApplicationId": "fc5941f1-3052-4ec6-ad3a-cc19d35818a2",
+          "SubscriptionId": "dc3d1711-490f-4c8f-8e88-a8650c88819e"
+        },
+        "VaultInformation": {
+          "VaultName": "TELUSSNOWFLAKEDEV"
+        },
+        "ModuleInfo": {
+          "ModuleConnect": "Connect-AzureActiveDirectory",
+          "ModuleDisconnect": "Disconnect-AzAccount"
+        } 
+      }
+}

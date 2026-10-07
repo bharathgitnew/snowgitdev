@@ -1,0 +1,56 @@
+version: 2
+sources:
+- name: CARMA
+  description: Landing Zone - CARMA Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: CARMA
+  tables:
+  - name: CORE_RETURN_REASON_TYPE
+    identifier: core_return_reason_type
+    description: Landing table for core_return_reason_type file.
+  - name: CSO_LINE_ITEM
+    identifier: cso_line_item
+    description: Landing table for cso_line_item file.
+  - name: CSO
+    identifier: cso
+    description: Landing table for cso file.
+  - name: DISPOSITION_TYPE
+    identifier: disposition_type
+    description: Landing table for disposition_type file.
+  - name: DMG_LIABILITY_DISP_TYPE
+    identifier: dmg_liability_disp_type
+    description: Landing table for dmg_liability_disp_type file.
+  - name: NCDR_TYPE
+    identifier: ncdr_type
+    description: Landing table for ncdr_type file.
+  - name: ORDER_TYPE
+    identifier: order_type
+    description: Landing table for order_type file.
+  - name: PART_SCRAP_DISP_TYPE
+    identifier: part_scrap_disp_type
+    description: Landing table for part_scrap_disp_type file.
+  - name: POST_CONSUME_PART_RETURN
+    identifier: post_consume_part_return
+    description: Landing table for post_consume_part_return file.
+  - name: PROCESS_SALES
+    identifier: process_sales
+    description: Landing table for process_sales file.
+  - name: RECEIVE_REQUEST
+    identifier: receive_request
+    description: Landing table for receive_request file.
+  - name: REQUEST_SALES
+    identifier: request_sales
+    description: Landing table for request_sales file.
+  - name: REQUEST_SERVICE
+    identifier: request_service
+    description: Landing table for request_service file.
+  - name: RETURN_REASON_TYPE
+    identifier: return_reason_type
+    description: Landing table for return_reason_type file.
+  - name: RMA_CONTACT
+    identifier: rma_contact
+    description: Landing table for rma_contact file.
+  - name: RMA
+    identifier: rma
+    description: Landing table for rma file.
+    

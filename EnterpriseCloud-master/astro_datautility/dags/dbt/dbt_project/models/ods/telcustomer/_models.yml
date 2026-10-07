@@ -1,0 +1,97 @@
+version: 2
+models:
+- name: ODS__TELCUSTOMER__CAPITAL_PO_HEADER_MAX_DATE_TEST
+  description: Model telcustomer Capital_PO_Header_Max_Date_Test file.
+- name: ODS__TELCUSTOMER__CAPITAL_PO_CHANGE_LOG
+  description: Model telcustomer Capital_PO_Change_Log file.
+  columns:
+  - name: PO_Number
+  - name: Line_Number
+  - name: Rev
+  - name: Change_Type_Id
+  - name: Old_Value
+  - name: New_Value
+- name: ODS__TELCUSTOMER__CAPITAL_PO_CHANGE_TYPE
+  description: Model telcustomer Capital_PO_Change_Type file.
+  columns:
+  - name: Change_Type_Id
+    tests:
+    - unique
+    - not_null
+  - name: Description
+- name: ODS__TELCUSTOMER__CAPITAL_PO_COMMENTS
+  description: Model telcustomer Capital_PO_Comments file.
+  columns:
+  - name: PO_Number
+  - name: Rev
+  - name: Comment_Id
+  - name: Comment_DT
+  - name: UserId
+  - name: Descr
+- name: ODS__TELCUSTOMER__CAPITAL_PO_EVENT_TRACKING
+  description: Model telcustomer Capital_PO_Event_Tracking file.
+  columns:
+  - name: PO_Number
+  - name: Rev
+  - name: UserId
+  - name: Action_Date
+  - name: Event_Type
+  - name: Old_Status
+  - name: New_Status
+- name: ODS__TELCUSTOMER__CAPITAL_PO_HEADER
+  description: Model telcustomer Capital_PO_Header file.
+- name: ODS__TELCUSTOMER__CAPITAL_PO_LINE
+  description: Model telcustomer Capital_PO_Line file.
+- name: ODS__TELCUSTOMER__CAPITAL_PO_QUOTE_MAP
+  description: Model telcustomer Capital_PO_Quote_Map file.
+  columns:
+  - name: Quote_Prefix
+    tests:
+    - unique
+    - not_null
+  - name: BU
+  - name: Sub_BU
+- name: ODS__TELCUSTOMER__CAPITAL_PO_REASON_CODE
+  description: Model telcustomer Capital_PO_Reason_Code file.
+  columns:
+  - name: Reason_Code
+    tests:
+    - unique
+    - not_null
+  - name: Reason
+  - name: Type
+- name: ODS__TELCUSTOMER__CAPITAL_PO_SHIP_TO_DESCR
+  description: Model telcustomer Capital_PO_Ship_To_Descr file.
+  columns:
+  - name: Baan_BPID
+    tests:
+    - unique
+    - not_null
+  - name: Descr
+- name: ODS__TELCUSTOMER__CAPITAL_PO_SHIP_TO_LOCATION
+  description: Model telcustomer Capital_PO_Ship_To_Location file.
+  columns:
+  - name: Ship_To_Location_Id
+  - name: Baan_BPID
+- name: ODS__TELCUSTOMER__CAPITAL_PO_VALIDATION_LOG
+  description: Model telcustomer Capital_PO_Validation_Log file.
+- name: ODS__TELCUSTOMER__SHIPPING_ADVICE
+  description: Model telcustomer Shipping_Advice file.
+- name: ODS__TELCUSTOMER__TELCUST_ARF_NEW_QUOTE
+  description: Model telcustomer TelCust_Arf_New_Quote file.
+- name: ODS__TELCUSTOMER__TELCUST_ARF_QRF_DATA
+  description: Model telcustomer TelCust_ARF_QRF_Data file.
+- name: ODS__TELCUSTOMER__USER_INFO
+  description: Model telcustomer USER_INFO file.
+- name: ODS__TELCUSTOMER__PRODUCT
+  description: Model telcustomer PRODUCT_TELCUSTOMER file.
+- name: ODS__TELCUSTOMER__UGK
+  description: Model telcustomer UGK file.
+- name: ODS__TELCUSTOMER__BUSINESS_PARTNER
+  description: Model telcustomer BUSINESS_PARTNER file.
+- name: ODS__TELCUSTOMER__CDI_VISIT
+  description: Model telcustomer CDI_VISIT file.
+- name: ODS__TELCUSTOMER__CDI_PAGEVIEW
+  description: Model telcustomer CDI_PAGEVIEW file.
+- name: ODS__TELCUSTOMER__CONTACT
+  description: Model telcustomer CONTACT_TELCUSTOMER file.

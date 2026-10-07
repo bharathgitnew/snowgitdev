@@ -1,0 +1,72 @@
+version: 2
+sources:
+- name: ITHD
+  description: Landing Zone - ITHD Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: ITHD
+  tables:
+  - name: ATTRIBUTEMETADATA
+    identifier: ATTRIBUTEMETADATA
+    description: Landing table for ATTRIBUTEMETADATA file.
+  - name: GLOBALOPTIONSETMETADATA
+    identifier: GLOBALOPTIONSETMETADATA
+    description: Landing table for GLOBALOPTIONSETMETADATA file.
+  - name: OPTIONSETMETADATA
+    identifier: OPTIONSETMETADATA
+    description: Landing table for OPTIONSETMETADATA file.
+  - name: STATEMETADATA
+    identifier: STATEMETADATA
+    description: Landing table for STATEMETADATA file.
+  - name: STATUSMETADATA
+    identifier: STATUSMETADATA
+    description: Landing table for STATUSMETADATA file.
+  - name: TARGETMETADATA
+    identifier: TARGETMETADATA
+    description: Landing table for TARGETMETADATA file.
+  - name: ADX_PORTALCOMMENT
+    identifier: ADX_PORTALCOMMENT
+    description: Landing table for ADX_PORTALCOMMENT file.
+  - name: ANNOTATION
+    identifier: ANNOTATION
+    description: Landing table for ANNOTATION file.
+  - name: CONTACT
+    identifier: CONTACT
+    description: Landing table for CONTACT file.
+  - name: INCIDENT
+    identifier: INCIDENT
+    description: Landing table for INCIDENT file.
+  - name: QUEUE
+    identifier: QUEUE
+    description: Landing table for QUEUE file.
+  - name: QUEUEITEM
+    identifier: QUEUEITEM
+    description: Landing table for QUEUEITEM file.
+  - name: SLAKPIINSTANCE
+    identifier: SLAKPIINSTANCE
+    description: Landing table for SLAKPIINSTANCE file.
+  - name: SYSTEMUSER
+    identifier: SYSTEMUSER
+    description: Landing table for SYSTEMUSER file.
+  - name: MCA_EXTERNALCASESUBTYPE
+    identifier: MCA_EXTERNALCASESUBTYPE
+    description:  Landing table for MCA_EXTERNALCASESUBTYPE file.
+
+  - name: MCA_EXTERNALCASETYPE
+    identifier: MCA_EXTERNALCASETYPE
+    description:  Landing table for MCA_EXTERNALCASETYPE file.
+
+  - name: MCA_INTERNALSYSTEMMODULE
+    identifier: MCA_INTERNALSYSTEMMODULE
+    description:  Landing table for MCA_INTERNALSYSTEMMODULE file.
+
+  - name: MCA_INTERNALSYSTEMNAME
+    identifier: MCA_INTERNALSYSTEMNAME
+    description:  Landing table for MCA_INTERNALSYSTEMNAME file.
+
+  - name: MCA_LOCATION
+    identifier: MCA_LOCATION
+    description:  Landing table for MCA_LOCATION file.
+
+  - name: FT_BY_NAME
+    identifier: FT_BY_NAME
+    description:  Landing table for FT_BY_NAME file.

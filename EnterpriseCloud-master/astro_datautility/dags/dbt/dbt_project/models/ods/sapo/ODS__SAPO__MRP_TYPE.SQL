@@ -1,0 +1,101 @@
+{{ config(
+        materialized='incremental',
+        incremental_strategy='merge',
+        alias='MRP_TYPE',
+        unique_key = ['MANDT',
+    'DISMM'],
+        transient=false
+) }}
+
+with source_data as (
+	SELECT 
+	_CAPTUREDATETIME,
+	MANDT,
+	DISMM,
+	DISVF,
+	PROKZ,
+	PROVB,
+	PROOS,
+	KZSIB,
+	KZMEB,
+	PRRED,
+	FXART,
+	RESPL,
+	KZREG,
+	ICBED,
+	RYBED,
+	DYFOL,
+	CBPPT,
+	BBBED,
+	U1BED,
+	U2BED,
+	U4BED,
+	A1BED,
+	A2BED
+	FROM {{source('SAP_ORACLE_LIVE', 'T438A')}}
+),
+
+
+transform_data as 
+(
+SELECT
+    _CAPTUREDATETIME,
+    '{{ invocation_id }}' AS _AUDIT_LOG_ID,
+    SHA2('hash_me') as _ROW_HASH,
+	MANDT as MANDT,
+	DISMM as DISMM,
+	DISVF as DISVF,
+	PROKZ as PROKZ,
+	PROVB as PROVB,
+	PROOS as PROOS,
+	KZSIB as KZSIB,
+	KZMEB as KZMEB,
+	PRRED as PRRED,
+	FXART as FXART,
+	RESPL as RESPL,
+	KZREG as KZREG,
+	ICBED as ICBED,
+	RYBED as RYBED,
+	DYFOL as DYFOL,
+	CBPPT as CBPPT,
+	BBBED as BBBED,
+	U1BED as U1BED,
+	U2BED as U2BED,
+	U4BED as U4BED,
+	A1BED as A1BED,
+	A2BED as A2BED
+	FROM SOURCE_DATA
+), 
+
+type_data as 
+(
+SELECT 
+	CAST(_CAPTUREDATETIME AS TIMESTAMP_LTZ(9)) AS _CAPTUREDATETIME,
+	CAST(_AUDIT_LOG_ID AS VARCHAR(128)) AS _AUDIT_LOG_ID,
+	CAST(_ROW_HASH AS VARCHAR(128)) AS _ROW_HASH,
+	MANDT,
+	DISMM,
+	DISVF,
+	PROKZ,
+	PROVB,
+	PROOS,
+	KZSIB,
+	KZMEB,
+	PRRED,
+	FXART,
+	RESPL,
+	KZREG,
+	ICBED,
+	RYBED,
+	DYFOL,
+	CBPPT,
+	BBBED,
+	U1BED,
+	U2BED,
+	U4BED,
+	A1BED,
+	A2BED
+FROM TRANSFORM_DATA
+)
+ 
+SELECT * FROM TYPE_DATA

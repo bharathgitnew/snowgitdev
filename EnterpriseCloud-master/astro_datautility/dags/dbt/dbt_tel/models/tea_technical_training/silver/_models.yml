@@ -1,0 +1,25 @@
+models:
+- name: SILVER__TEA_TECHNICAL_TRAINING__MDM_COMPANY
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_TRAINING__EMPLOYEE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_TRAINING__GLOBAL_EMPLOYEE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_TRAINING__MYSKILLS_COMPANY
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_TRAINING__SHARED_DATASETS_COMPANY
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_TRAINING__WORKERCOMPANYLIST
+  tests:
+  - has_data
+  - recently_run

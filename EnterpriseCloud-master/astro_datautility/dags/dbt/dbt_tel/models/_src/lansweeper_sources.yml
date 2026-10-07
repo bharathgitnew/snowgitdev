@@ -1,0 +1,43 @@
+version: 2
+sources:
+- name: LANSWEEPER
+  description: Landing Zone - LANSWEEPER Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: LANSWEEPER
+  tables:
+  - name: TBLADCOMPUTERS
+    identifier: TBLADCOMPUTERS
+    description: Landing table for TBLADCOMPUTERS file.
+  - name: TBLADGROUPS
+    identifier: TBLADGROUPS
+    description: Landing table for TBLADGROUPS file.
+  - name: TBLADMEMBERSHIP
+    identifier: TBLADMEMBERSHIP
+    description: Landing table for TBLADMEMBERSHIP file.
+  - name: TBLADUSERS
+    identifier: TBLADUSERS
+    description: Landing table for TBLADUSERS file.
+  - name: TBLASSETS
+    identifier: TBLASSETS
+    description: Landing table for TBLASSETS file.
+  - name: TBLASSETCUSTOM
+    identifier: TBLASSETCUSTOM
+    description: Landing table for TBLASSETCUSTOM file.
+  - name: TBLCOMPUTERSYSTEM
+    identifier: TBLCOMPUTERSYSTEM
+    description: Landing table for TBLCOMPUTERSYSTEM file.
+  - name: TBLPROCESSOR
+    identifier: TBLPROCESSOR
+    description: Landing table for TBLPROCESSOR file.
+  - name: TBLSTATE
+    identifier: TBLSTATE
+    description: Landing table for TBLSTATE file.
+  - name: TSYSASSETTYPES
+    identifier: TSYSASSETTYPES
+    description: Landing table for TSYSASSETTYPES file.
+  - name: TSYSIPLOCATIONS
+    identifier: TSYSIPLOCATIONS
+    description: Landing table for TSYSIPLOCATIONS file.
+  - name: TSYSOS
+    identifier: TSYSOS
+    description: Landing table for TSYSOS file.

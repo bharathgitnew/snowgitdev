@@ -1,0 +1,17 @@
+models:
+- name: GOLD__TMEA_ENGINEERING__EAR_DASHBOARD
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_ENGINEERING__ENGINEERING_CHANGE_REVIEW_BOARD_PH2_STATUS
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_ENGINEERING__ENGINEERING_INTERNAL_ORDER_HOURS
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_ENGINEERING__ON_TIME_DELIVERY_CALCULATIONS_MONTH_END
+  tests:
+  - has_data
+  - recently_run

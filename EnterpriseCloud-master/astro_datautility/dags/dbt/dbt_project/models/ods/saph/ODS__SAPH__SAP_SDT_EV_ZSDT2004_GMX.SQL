@@ -1,0 +1,114 @@
+
+
+	/************
+	Model file generated from gmxDbtTemplateUtility.ipynb
+	*************/
+
+
+	{{ config(
+	  materialized='incremental',
+	  incremental_strategy='merge',
+	  alias='SAP_SDT_EV_ZSDT2004_GMX',
+	  unique_key = ['SEQNO'],
+	  transient=false,
+	  enabled=false
+	) }}
+
+	with source_data as (
+	SELECT
+    	_FILEDATE,
+		_FILENAME,
+		JSONFIELD:"SEQNO"::STRING AS "SEQNO",
+ 	 	JSONFIELD:"PRC_STS"::STRING AS "PRC_STS",
+ 	 	JSONFIELD:"AUFNR"::STRING AS "AUFNR",
+ 	 	JSONFIELD:"VORNR"::STRING AS "VORNR",
+ 	 	JSONFIELD:"BUDAT"::STRING AS "BUDAT",
+ 	 	JSONFIELD:"WERKS"::STRING AS "WERKS",
+ 	 	JSONFIELD:"ZSEQUE"::STRING AS "ZSEQUE",
+ 	 	JSONFIELD:"ARBPL"::STRING AS "ARBPL",
+ 	 	JSONFIELD:"ZKUNNR"::STRING AS "ZKUNNR",
+ 	 	JSONFIELD:"ZACTBC"::STRING AS "ZACTBC",
+ 	 	JSONFIELD:"ZACTWH"::STRING AS "ZACTWH",
+ 	 	JSONFIELD:"C_DATE"::STRING AS "C_DATE",
+ 	 	JSONFIELD:"C_TIME"::STRING AS "C_TIME",
+ 	 	JSONFIELD:"C_USER"::STRING AS "C_USER",
+ 	 	JSONFIELD:"C_PGM"::STRING AS "C_PGM",
+ 	 	JSONFIELD:"U_DATE"::STRING AS "U_DATE",
+ 	 	JSONFIELD:"U_TIME"::STRING AS "U_TIME",
+ 	 	JSONFIELD:"U_USER"::STRING AS "U_USER",
+ 	 	JSONFIELD:"U_PGM"::STRING AS "U_PGM",
+ 	 	JSONFIELD:"DELFLAG"::STRING AS "DELFLAG",
+ 	 	JSONFIELD:"CDCHANGENR"::STRING AS "CDCHANGENR",
+ 	 	JSONFIELD:"PSL_INSDATE"::STRING AS "PSL_INSDATE",
+ 	 	JSONFIELD:"PSL_UPDDATE"::STRING AS "PSL_UPDDATE"
+	from {{ source('SAPH','SAP_SDT_EV_ZSDT2004_GMX') }}
+	{% if is_incremental() %}WHERE  _FILENAME > IFNULL((SELECT MAX(_FILENAME) FROM {{ this }}),'1970-01-01'){% endif %}
+        QUALIFY (ROW_NUMBER() OVER (PARTITION BY JSONFIELD:"SEQNO"::STRING  ORDER BY _FILEDATE DESC )) = 1
+	),
+
+	transform_data as (
+	SELECT
+		_FILEDATE,
+		_FILENAME,
+		'{{ invocation_id }}' AS _AUDIT_LOG_ID,
+        SHA2('hash_me') as _ROW_HASH,
+		LPAD(coalesce("SEQNO",''),10,'0') as "SEQNO",
+ 	 	"PRC_STS",
+		coalesce("AUFNR",'') as "AUFNR",
+		LPAD(coalesce("VORNR",''),4,'0') as "VORNR",
+		COALESCE(REGEXP_REPLACE(TRY_TO_DATE("BUDAT"),'-',''),'') as "BUDAT",
+ 	 	"WERKS",
+		coalesce("ZSEQUE",'') as "ZSEQUE",
+		coalesce("ARBPL",'') as "ARBPL",
+		LPAD(coalesce("ZKUNNR",''),6,'0') as "ZKUNNR",
+		coalesce("ZACTBC",'') as "ZACTBC",
+		coalesce("ZACTWH",'') as "ZACTWH",
+		COALESCE(REGEXP_REPLACE(TRY_TO_DATE("C_DATE"),'-',''),'') as "C_DATE",
+		REGEXP_REPLACE("C_TIME",':') as "C_TIME",
+ 	 	"C_USER",
+ 	 	"C_PGM",
+		COALESCE(REGEXP_REPLACE(TRY_TO_DATE("U_DATE"),'-',''),'') as "U_DATE",
+		REGEXP_REPLACE("U_TIME",':') as "U_TIME",
+		coalesce("U_USER",'') as "U_USER",
+ 	 	"U_PGM",
+ 	 	"DELFLAG",
+ 	 	"CDCHANGENR",
+ 	 	"PSL_INSDATE",
+ 	 	"PSL_UPDDATE"
+	from source_data
+	),
+
+	type_data as (
+	SELECT
+		cast(_FILEDATE AS TIMESTAMP_NTZ(9)) AS _FILEDATE,
+		cast(_FILENAME as varchar(128)) as _FILENAME,
+        cast(_AUDIT_LOG_ID as varchar(128)) as _AUDIT_LOG_ID,
+        cast(_ROW_HASH as varchar(128)) as _ROW_HASH,
+		CAST("SEQNO" AS VARCHAR) AS "SEQNO",
+ 	 	CAST("PRC_STS" AS VARCHAR) AS "PRC_STS",
+ 	 	CAST("AUFNR" AS VARCHAR) AS "AUFNR",
+ 	 	CAST("VORNR" AS VARCHAR) AS "VORNR",
+ 	 	CAST("BUDAT" AS VARCHAR) AS "BUDAT",
+ 	 	CAST("WERKS" AS VARCHAR) AS "WERKS",
+ 	 	CAST("ZSEQUE" AS VARCHAR) AS "ZSEQUE",
+ 	 	CAST("ARBPL" AS VARCHAR) AS "ARBPL",
+ 	 	CAST("ZKUNNR" AS VARCHAR) AS "ZKUNNR",
+ 	 	CAST("ZACTBC" AS VARCHAR) AS "ZACTBC",
+ 	 	CAST("ZACTWH" AS VARCHAR) AS "ZACTWH",
+ 	 	CAST("C_DATE" AS VARCHAR) AS "C_DATE",
+ 	 	CAST("C_TIME" AS VARCHAR) AS "C_TIME",
+ 	 	CAST("C_USER" AS VARCHAR) AS "C_USER",
+ 	 	CAST("C_PGM" AS VARCHAR) AS "C_PGM",
+ 	 	CAST("U_DATE" AS VARCHAR) AS "U_DATE",
+ 	 	CAST("U_TIME" AS VARCHAR) AS "U_TIME",
+ 	 	CAST("U_USER" AS VARCHAR) AS "U_USER",
+ 	 	CAST("U_PGM" AS VARCHAR) AS "U_PGM",
+ 	 	CAST("DELFLAG" AS BOOLEAN) AS "DELFLAG",
+ 	 	CAST("CDCHANGENR" AS VARCHAR) AS "CDCHANGENR",
+ 	 	CAST("PSL_INSDATE" AS TIMESTAMP) AS "PSL_INSDATE",
+ 	 	CAST("PSL_UPDDATE" AS TIMESTAMP) AS "PSL_UPDDATE"
+	from transform_data
+	)
+
+	select * from type_data
+

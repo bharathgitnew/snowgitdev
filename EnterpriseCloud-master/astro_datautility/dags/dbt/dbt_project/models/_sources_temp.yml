@@ -1,0 +1,236 @@
+# This file is used to define objects that live outside of dbt for now.
+# Please do not add to it without consulting someone beforehand.
+
+version: 2
+sources:
+- name: LEGACYPROD1
+  description: ODS - LEGACYPROD1 Schema
+  database: '{{ env_var(''SNOWFLAKE_ODS'') }}'
+  schema: LEGACYPROD1
+  tables:
+  - name: LEGACY_USDW_CT
+    identifier: LEGACY_USDW_CT
+    desription: Landing Table for LEGACY_USDW_CT
+  - name: LEGACY_USDW_SPS
+    identifier: LEGACY_USDW_SPS
+    desription: Landing Table for LEGACY_USDW_SPS
+- name: SNOWFLAKE__ACCOUNT_USAGE
+  database: SNOWFLAKE
+  schema: ACCOUNT_USAGE
+  tables:
+  - name: GRANTS_TO_USERS
+    identifier: GRANTS_TO_USERS
+- name: ADMIN__ACCESSCONTROL
+  database: '{{ env_var(''SNOWFLAKE_ADMIN'') }}'
+  schema: ACCESSCONTROL
+  tables:
+  - name: COLUMNMASKDEFINITION
+    identifier: COLUMNMASKDEFINITION
+  - name: SERVICEACCOUNTGRANTDEFINITION
+    identifier: SERVICEACCOUNTGRANTDEFINITION
+- name: ADMIN__SECURITY
+  database: '{{ env_var(''SNOWFLAKE_ADMIN'') }}'
+  schema: SECURITY
+  tables:
+  - name: COMPANYGROUPING
+    identifier: COMPANYGROUPING
+- name: LZ__STATIC_OBJECTS
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: STATIC_OBJECTS
+  tables:
+  - name: CALENDAR_DATE
+    identifier: CALENDAR_DATE
+- name: ODS__ARIBA
+  database: '{{ env_var(''SNOWFLAKE_ODS'') }}'
+  schema: ARIBA
+  tables:
+  - name: METADATA
+    identifier: METADATA
+  - name: REQUISITION_APPROVALRECORD
+    identifier: REQUISITION_APPROVALRECORD
+  - name: REQUISITION_APPROVALREQUEST
+    identifier: REQUISITION_APPROVALREQUEST
+- name: ODS__BAAN
+  database: '{{ env_var(''SNOWFLAKE_ODS'') }}'
+  schema: BAAN
+  tables:
+  - name: BAANCOMMONCOMMONDATA_PAYBYBUSINESSPARTNERS
+    identifier: BAANCOMMONCOMMONDATA_PAYBYBUSINESSPARTNERS
+  - name: LEGACY_FSTR_FST_BUDGET_ACTUAL_FORECAST_LEGACY
+    identifier: LEGACY_FSTR_FST_BUDGET_ACTUAL_FORECAST_LEGACY
+  - name: LEGACY_TELR_BAANV_TEA_FINALIZED_TRANSACTIONS
+    identifier: LEGACY_TELR_BAANV_TEA_FINALIZED_TRANSACTIONS
+  - name: LEGACY_TELR_BAANV_TEA_DIMENSIONS
+    identifier: LEGACY_TELR_BAANV_TEA_DIMENSIONS
+- name: ODS__CARMA
+  database: '{{ env_var(''SNOWFLAKE_ODS'') }}'
+  schema: CARMA
+  tables:
+  - name: RMA_CUSTOMER_EMPLOYEE_CONTACT
+    identifier: RMA_CUSTOMER_EMPLOYEE_CONTACT
+- name: ODS__FILE
+  database: '{{ env_var(''SNOWFLAKE_ODS'') }}'
+  schema: FILE
+  tables:
+  - name: CONTRACT_FLX_TRANSITIONHRS
+    identifier: CONTRACT_FLX_TRANSITIONHRS
+  - name: FST_KRONOS_WRENCH_TIME_MAPPING
+    identifier: FST_KRONOS_WRENCH_TIME_MAPPING
+  - name: LEGACYFINANCIALBUDGETFORECAST
+    identifier: LEGACYFINANCIALBUDGETFORECAST
+  - name: LEGACYFINANCIALTRANSACTIONS
+    identifier: LEGACYFINANCIALTRANSACTIONS
+  - name: PAID_SERVICE_EXCEPTION_PRICING
+    identifier: PAID_SERVICE_EXCEPTION_PRICING
+- name: ODS__GEM
+  database: '{{ env_var(''SNOWFLAKE_ODS'') }}'
+  schema: GEM
+  tables:
+  - name: EMPLOYEE
+    identifier: EMPLOYEE
+- name: ODS__KRONOS
+  database: '{{ env_var(''SNOWFLAKE_ODS'') }}'
+  schema: KRONOS
+  tables:
+  - name: COMMENTS
+    identifier: COMMENTS
+  - name: COMNTNOTEDTL
+    identifier: COMNTNOTEDTL
+  - name: PUNCHCOMMENTMM
+    identifier: PUNCHCOMMENTMM
+  - name: TEA_RECENT_TIMESHEET
+    identifier: TEA_RECENT_TIMESHEET
+  - name: TSCOMMENTMM
+    identifier: TSCOMMENTMM
+- name: ODS__MDM
+  database: '{{ env_var(''SNOWFLAKE_ODS'') }}'
+  schema: MDM
+  tables:
+  - name: KRONOS_COMMENT_CLEANUP
+    identifier: KRONOS_COMMENT_CLEANUP
+- name: ODS__SAPAPI
+  database: '{{ env_var(''SNOWFLAKE_ODS'') }}'
+  schema: SAPAPI
+  tables:
+  - name: ZCDV_T_CMTU022_TVAK
+    identifier: ZCDV_T_CMTU022_TVAK
+  - name: ZCDV_T_CMTU043_FAAT_PLAN_VALUES
+    identifier: ZCDV_T_CMTU043_FAAT_PLAN_VALUES
+  - name: ZCDV_T_CMTU044_FAAT_YDDA
+    identifier: ZCDV_T_CMTU044_FAAT_YDDA
+  - name: ZCDV_T_CMTU055_KNVP
+    identifier: ZCDV_T_CMTU055_KNVP
+  - name: ZCDV_T_CMTU075_KNVD
+    identifier: ZCDV_T_CMTU075_KNVD
+  - name: ZCDV_T_CMTU081_T001K
+    identifier: ZCDV_T_CMTU081_T001K
+  - name: ZCDV_T_CMTU113_PRHIS
+    identifier: ZCDV_T_CMTU113_PRHIS
+  - name: ZCDV_T_CMTU122_T023
+    identifier: ZCDV_T_CMTU122_T023
+  - name: ZCDV_T_CMTU128_T161
+    identifier: ZCDV_T_CMTU128_T161
+  - name: ZCDV_T_CMTU131_T163K
+    identifier: ZCDV_T_CMTU131_T163K
+  - name: ZCDV_T_CMTU133_T171
+    identifier: ZCDV_T_CMTU133_T171
+  - name: ZCDV_T_CMTU138_T685
+    identifier: ZCDV_T_CMTU138_T685
+  - name: ZCDV_T_CMTU141_T880
+    identifier: ZCDV_T_CMTU141_T880
+  - name: ZCDV_T_CMTU142_TABW
+    identifier: ZCDV_T_CMTU142_TABW
+  - name: ZCDV_T_CMTU144_TCURC
+    identifier: ZCDV_T_CMTU144_TCURC
+  - name: ZCDV_T_CMTU146_TKA02
+    identifier: ZCDV_T_CMTU146_TKA02
+  - name: ZCDV_T_CMTU149_TSADV
+    identifier: ZCDV_T_CMTU149_TSADV
+  - name: ZCDV_T_CMTU150_TSADVT
+    identifier: ZCDV_T_CMTU150_TSADVT
+  - name: ZCDV_T_CMTU151_TSKD
+    identifier: ZCDV_T_CMTU151_TSKD
+  - name: ZCDV_T_CMTU153_TSKM
+    identifier: ZCDV_T_CMTU153_TSKM
+  - name: ZCDV_T_CMTU154_TSTL
+    identifier: ZCDV_T_CMTU154_TSTL
+  - name: ZCDV_T_CMTU157_TVAP
+    identifier: ZCDV_T_CMTU157_TVAP
+  - name: ZCDV_T_CMTU159_TVAU
+    identifier: ZCDV_T_CMTU159_TVAU
+  - name: ZCDV_T_CMTU161_TVBUR
+    identifier: ZCDV_T_CMTU161_TVBUR
+  - name: ZCDV_T_CMTU162_TVFK
+    identifier: ZCDV_T_CMTU162_TVFK
+  - name: ZCDV_T_CMTU167_TVKGR
+    identifier: ZCDV_T_CMTU167_TVKGR
+  - name: ZCDV_T_CMTU170_TVM1
+    identifier: ZCDV_T_CMTU170_TVM1
+  - name: ZCDV_T_CMTU172_TVM2
+    identifier: ZCDV_T_CMTU172_TVM2
+  - name: ZCDV_T_CMTU198_FAGL_011ZC
+    identifier: ZCDV_T_CMTU198_FAGL_011ZC
+  - name: ZCDV_T_CMTU205_EQBS
+    identifier: ZCDV_T_CMTU205_EQBS
+- name: ODS__SAPH
+  database: '{{ env_var(''SNOWFLAKE_ODS'') }}'
+  schema: SAPH
+  tables:
+  - name: SAP_MMT_EV_ZCSV_CM1560_00_GMX
+    identifier: SAP_MMT_EV_ZCSV_CM1560_00_GMX
+- name: COMMON__SAPH
+  database: '{{ env_var(''SNOWFLAKE_COMMON'') }}'
+  schema: SAPH
+  tables:
+  - name: ROP_SS_REPORT
+    identifier: ROP_SS_REPORT
+- name: COMMON__SAPO
+  database: '{{ env_var(''SNOWFLAKE_COMMON'') }}'
+  schema: SAPO
+  tables:
+  - name: MATERIAL_REVIEW_BOARD_FLOOR_QUALITY_CONTROL
+    identifier: MATERIAL_REVIEW_BOARD_FLOOR_QUALITY_CONTROL
+  - name: RETURN_TO_VENDOR_STOCK
+    identifier: RETURN_TO_VENDOR_STOCK
+- name: COMMON__TEACOMMON
+  database: '{{ env_var(''SNOWFLAKE_COMMON'') }}'
+  schema: TEACOMMON
+  tables:
+  - name: FST_EMPLOYEE_HISTORY
+    identifier: FST_EMPLOYEE_HISTORY
+- name: COMMON__DE_FIELD_SERVICE
+  database: '{{ env_var(''SNOWFLAKE_COMMON'') }}'
+  schema: DE_FIELD_SERVICE
+  tables:
+  - name: TIMESHEET_RECONCILIATION_CRM
+    identifier: TIMESHEET_RECONCILIATION_CRM
+- name: COMMON__DE_SAP_MASTER_DATA
+  database: '{{ env_var(''SNOWFLAKE_COMMON'') }}'
+  schema: DE_SAP_MASTER_DATA
+  tables:
+  - name: CALENDAR_DATE
+    identifier: CALENDAR_DATE
+- name: PUB__COMMON_SYSTEM
+  database: '{{ env_var(''SNOWFLAKE_PUB'') }}'
+  schema: COMMON_SYSTEM
+  tables:
+  - name: CALENDARDATE
+    identifier: CALENDARDATE
+- name: EDW__DE
+  database: '{{ env_var(''SNOWFLAKE_EDW'') }}'
+  schema: DE
+  tables:
+  - name: D_CUSTOMER
+    identifier: D_CUSTOMER
+  - name: D_DATE
+    identifier: D_DATE
+  - name: D_DEPARTMENT
+    identifier: D_DEPARTMENT
+  - name: D_EMPLOYEE
+    identifier: D_EMPLOYEE
+  - name: D_OFFICE
+    identifier: D_OFFICE
+  - name: D_PRODUCT_TYPE
+    identifier: D_PRODUCT_TYPE
+  - name: D_SEGMENT
+    identifier: D_SEGMENT

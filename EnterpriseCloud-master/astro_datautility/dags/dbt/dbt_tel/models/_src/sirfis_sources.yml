@@ -1,0 +1,56 @@
+version: 2
+sources:
+- name: SIRFIS
+  description: Landing Zone - sirfis Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: sirfis
+  tables:
+  - name: BUSINESS_UNIT_LOOKUP
+    identifier: Business_Unit_Lookup
+    description: Landing table for Business_Unit_Lookup file.
+    columns:
+    - name: _filename
+      description: The name of the file.
+    - name: _filedate
+      description: The date of the file.
+    - name: _uploaddate
+      description: The date that the file was uploaded into the LZ.
+    - name: jsonfield
+      description: The contents that the file was uploaded into the LZ.
+  - name: SIRFIS_FORECAST
+    identifier: SIRFIS_Forecast
+    description: Landing table for SIRFIS_Forecast file.
+    columns:
+    - name: _filename
+      description: The name of the file.
+    - name: _filedate
+      description: The date of the file.
+    - name: _uploaddate
+      description: The date that the file was uploaded into the LZ.
+    - name: jsonfield
+      description: The contents that the file was uploaded into the LZ.
+  - name: SIRFIS_TOOL_INSTALLATION
+    identifier: SIRFIS_TOOL_INSTALLATION
+    description: Landing table for SIRFIS_TOOL_INSTALLATION file.
+    columns:
+    - name: _filename
+      description: The name of the file.
+    - name: _filedate
+      description: The date of the file.
+    - name: _uploaddate
+      description: The date that the file was uploaded into the LZ.
+    - name: jsonfield
+      description: The contents that the file was uploaded into the LZ.
+
+  - name: PARTS_SIRFIS_FORECAST
+    identifier: PARTS_SIRFIS_FORECAST
+    description: Landing table for PARTS_SIRFIS_FORECAST file.
+    columns:
+    - name: _filename
+      description: The name of the file.
+    - name: _filedate
+      description: The date of the file.
+    - name: _uploaddate
+      description: The date that the file was uploaded into the LZ.
+    - name: jsonfield
+      description: The contents that the file was uploaded into the LZ.      

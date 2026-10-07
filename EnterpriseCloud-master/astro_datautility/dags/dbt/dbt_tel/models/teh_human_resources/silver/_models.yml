@@ -1,0 +1,115 @@
+models:
+- name: SILVER__TEH_HUMAN_RESOURCES__ATTENDANCE_STATUS
+  description: |
+    PURPOSE: Provides a cleaned learning-attendance dataset for workforce training reporting by combining employee organizational context with enrollment, completion, and attendance outcomes.
+    GRAIN: One row = one training enrollment record identified by ENROLLMENT_ID.
+    KEY LOGIC: Carries forward the bronze attendance-status feed, preserves employee, manager, and course attributes, and appends run-level audit metadata without changing the business grain.
+    CAVEAT: This model reflects source enrollment snapshots as delivered from Workday learning, so late status corrections or course-title changes can appear between file drops without historical restatement.
+  tests:
+  - has_data
+  columns:
+  - name: _AUDIT_LOG_ID
+    description: dbt run identifier captured for the attendance row. Text identifier format. Used to trace the record back to a specific silver-model execution.
+  - name: _ROW_HASH
+    description: Deterministic row hash generated during the silver load. Text hash format. Used for change tracking rather than business reporting.
+  - name: EMPLOYEE_ID
+    description: Employee identifier tied to the training enrollment. Text identifier format. May not always align to curated workforce keys used outside the Workday learning feed.
+  - name: NAME
+    description: Employee name shown on the learning enrollment record. Text display value. Name formatting follows the source extract and can change across snapshots.
+  - name: COMPANY_CODE
+    description: Company code assigned to the enrolled employee. Text organizational code. Used to group training activity by legal entity or business company.
+  - name: COMPANY
+    description: Company name associated with the enrolled employee. Text organizational label. Naming can differ from standardized legal-entity labels used in downstream enterprise reporting.
+  - name: COST_CENTER_CODE
+    description: Cost center code carried on the enrollment record. Text organizational code. Useful for cost ownership analysis but can shift when reorganizations are applied in HR.
+  - name: COST_CENTER_NAME
+    description: Cost center name carried on the enrollment record. Text organizational label. Historical rows can retain older naming after cost-center restructures.
+  - name: LOCATION_CODE
+    description: Work location code for the enrolled employee. Text location code. Used to connect training activity to site and geography reporting.
+  - name: LOCATION
+    description: Work location name for the enrolled employee. Text location label. Source naming can include local aliases rather than standardized facility names.
+  - name: EMPLOYEE_TYPE
+    description: Worker type reported for the enrolled person. Text category value. Includes employee and contingent-worker classifications from the learning source.
+  - name: MANAGER_ID
+    description: Manager identifier associated with the enrolled employee. Text identifier format. Reflects the source hierarchy at extract time and can lag HR changes.
+  - name: MANAGER_NAME
+    description: Manager name associated with the enrolled employee. Text display value. May differ from enterprise directory formatting or later HR updates.
+  - name: TERMINATION_STATUS
+    description: Employment termination status at the time of the learning extract. Text status value. Can appear alongside open training activity while HR cleanup is still in progress.
+  - name: JOB_FAMILY_GROUP
+    description: High-level job family grouping for the employee role. Text classification value. Used to segment learning activity by broad workforce taxonomy.
+  - name: JOB_FAMILY
+    description: Job family assigned to the employee role. Text classification value. Granularity and naming depend on current Workday taxonomy maintenance.
+  - name: CAREER_BAND
+    description: Career band associated with the employee role. Text leveling value. Labels can vary across operating companies or role frameworks.
+  - name: POSITION_TITLE
+    description: Position title held by the enrolled employee. Text role label. Small title changes can create near-duplicate reporting categories over time.
+  - name: HIRE_DATE
+    description: Original hire date for the employee. Date value. Used in tenure and training-timeline analysis but may contain legacy placeholder dates in older records.
+  - name: SENIORITY_DATE
+    description: Seniority date used for service-based HR calculations. Date value. Can differ from HIRE_DATE when policy-driven adjustments are applied.
+  - name: CONTINGENT_HIRE_DATE
+    description: Start date for a contingent worker assignment. Date value. Usually blank for standard employees.
+  - name: TERMINATION_DATE
+    description: Termination date for the employee. Date value. Blank when the employee is still active or no termination is recorded in the source snapshot.
+  - name: COURSE_NUMBER
+    description: Course identifier linked to the enrollment. Text course code. The same code can remain in use while the underlying learning content is revised.
+  - name: COURSE_TITLE
+    description: Course title linked to the enrollment. Text course label. Title wording can change while the course number stays constant.
+  - name: COURSE_DURATION
+    description: Duration recorded for the course. Source-defined duration value. Unit and format depend on the learning catalog setup.
+  - name: TOPIC
+    description: Learning topic category for the course. Text topic label. Topic taxonomy can shift when curriculum owners reorganize content.
+  - name: REGISTRATION_STATUS
+    description: Registration status for the employee's course enrollment. Text status value. Status updates can trail completion events between source file drops.
+  - name: COMPLETION_DATE
+    description: Timestamp when the learner completed the course. Timestamp value. Blank when the training is still in progress or not completed.
+  - name: SCORE
+    description: Assessment score captured for the enrollment. Numeric or score-style value. Scoring scales vary by course and are not standardized here.
+  - name: SUCCESS
+    description: Course outcome recorded for the learner's enrollment. Text or flag-style value. Source values can appear as boolean-like results or descriptive pass/fail labels.
+  - name: COMPLETION_STATUS
+    description: Completion status reported for the enrollment. Text status value. Some course setups use values that overlap with REGISTRATION_STATUS, so both fields may need to be read together.
+  - name: COURSE_ATTENDANCE_STATUS
+    description: Attendance status recorded for the course activity. Text attendance value. It can differ from completion status for waived, self-paced, or partially attended courses.
+  - name: ENROLLMENT_ID
+    description: Unique enrollment identifier for the employee training registration. Text identifier format. This field defines the model grain for attendance reporting.
+- name: SILVER__TEH_HUMAN_RESOURCES__CAMPAIGN
+  description: |
+    PURPOSE: Provides a cleaned campaign-assignment dataset for tracking required learning, due dates, completions, and waivers across the workforce.
+    GRAIN: One row = one employee and course assignment from the campaign feed.
+    KEY LOGIC: Carries forward the bronze campaign-assignment feed, preserves employee, course, and campaign window attributes, and appends run-level audit metadata without changing the assignment grain.
+    CAVEAT: Campaign dates and requirement statuses reflect the latest source snapshot, so reassigned due dates or waived requirements can change between file drops without preserving intermediate states.
+  tests:
+  - has_data
+  columns:
+  - name: _AUDIT_LOG_ID
+    description: dbt run identifier captured for the campaign-assignment row. Text identifier format. Used to trace the record back to the specific silver-model execution that produced it.
+  - name: _ROW_HASH
+    description: Deterministic row hash generated during the silver load. Text hash format. Used for change tracking rather than business reporting.
+  - name: EMPLOYEE_ID
+    description: Employee identifier tied to the campaign requirement. Text identifier format. May not always align to curated workforce keys used outside the Workday learning feed.
+  - name: NAME
+    description: Employee name shown in the campaign extract. Text display value. Name formatting follows the source file and can change as employee profiles are updated.
+  - name: COURSE_NUMBER
+    description: Course identifier assigned by the campaign. Text course code. The same course code can stay active across multiple campaign refreshes.
+  - name: COURSE_TITLE
+    description: Course title assigned by the campaign. Text course label. Title wording can change while the course number remains the same.
+  - name: ASSIGNED_DATE
+    description: Timestamp when the campaign course was assigned to the employee. Timestamp value. Invalid or malformed source timestamps can surface as blank values after parsing.
+  - name: DUE_DATE
+    description: Due date for the assigned campaign course. Date value. Blank when the campaign does not enforce a due date.
+  - name: COMPLETION_DATE
+    description: Completion timestamp for the assigned campaign course. Timestamp value. Blank when the requirement is still incomplete.
+  - name: EXPIRATION_DATE
+    description: Expiration date for the campaign requirement. Date value. Blank when no expiration policy is configured for the assigned course.
+  - name: REQUIREMENT_STATUS
+    description: Requirement status recorded for the campaign assignment. Text status value. Vocabulary can change between campaign cycles or learning configuration updates.
+  - name: CAMPAIGN_START_DATE
+    description: Start date of the campaign window. Date value. Can predate individual assignments when standard campaign schedules are reused.
+  - name: CAMPAIGN_END_DATE
+    description: End date of the campaign window. Date value. May be extended or cleared in later snapshots without preserving interim values.
+  - name: WAIVED
+    description: Manual-waiver indicator for the campaign requirement. Text or flag-style value. Source values can appear as labels instead of strict true or false values.
+  - name: TOPIC
+    description: Learning topic associated with the campaign course. Text topic label. It can be blank for uncategorized or loosely maintained content.

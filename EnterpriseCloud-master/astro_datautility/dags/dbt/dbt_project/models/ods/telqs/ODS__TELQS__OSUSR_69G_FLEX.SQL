@@ -1,0 +1,42 @@
+{{ config(
+    materialized='incremental',
+    incremental_strategy='insert_overwrite',
+    alias='OSUSR_69G_FLEX'
+) }}
+
+with source_data as
+(
+SELECT
+JSONFIELD:ID::STRING AS ID,
+JSONFIELD:SERVICEQUOTEWITHCONTRACTID::STRING AS SERVICEQUOTEWITHCONTRACTID,
+JSONFIELD:TOTALFLEXHOURS::STRING AS TOTALFLEXHOURS,
+JSONFIELD:REQUESTTOFSC::STRING AS REQUESTTOFSC
+
+FROM {{ source('LZ_TELQS', 'OSUSR_69G_FLEX') }}
+    WHERE _Filedate = (SELECT MAX(_FileDate) FROM {{ source('LZ_TELQS', 'OSUSR_69G_FLEX') }})
+)
+
+,transform_data as
+(
+SELECT
+'{{ invocation_id }}' AS _AUDIT_LOG_ID,
+ SHA2('hash_me') AS _ROW_HASH,
+ID,
+SERVICEQUOTEWITHCONTRACTID,
+TOTALFLEXHOURS,
+REQUESTTOFSC
+FROM source_data
+)
+
+,type_data as 
+(
+SELECT
+_AUDIT_LOG_ID,
+_ROW_HASH,
+ID,
+SERVICEQUOTEWITHCONTRACTID,
+TOTALFLEXHOURS,
+REQUESTTOFSC
+from transform_data 
+)
+SELECT * from type_data

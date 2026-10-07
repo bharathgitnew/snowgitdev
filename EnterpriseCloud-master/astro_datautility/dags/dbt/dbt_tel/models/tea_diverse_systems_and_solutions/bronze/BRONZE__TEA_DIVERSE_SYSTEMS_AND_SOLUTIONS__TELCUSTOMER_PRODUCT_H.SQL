@@ -1,0 +1,60 @@
+/************
+Model file generated from Python utility
+*************/
+
+{{ config(
+	materialized='tel_incremental',
+	incremental_strategy='insert_overwrite',
+	alias='TELCUSTOMER_PRODUCT_H',
+	transient=false
+) }}
+
+with source_data as (
+	SELECT
+		_FILEDATE,
+		_FILENAME,
+		_UPLOADDATE,
+		JSONFIELD:"part_nbr"::VARCHAR AS PART_NBR,
+		JSONFIELD:"tel_region"::VARCHAR AS TEL_REGION,
+		JSONFIELD:"hash"::CHAR AS HASH_A,
+		JSONFIELD:"commit_flag"::NUMBER(38,10) AS COMMIT_FLAG,
+		JSONFIELD:"row_number"::NUMBER(38,10) AS ROWNUMBER,
+		JSONFIELD:"load_dt"::TIMESTAMP_TZ AS LOAD_DT
+	FROM {{ source("TELCUSTOMER_DIVERSESYSTEMS", "PRODUCT_H") }}
+WHERE
+	_FILEDATE = (SELECT MAX(RUN_TIME) FROM {{ source('TELCUSTOMER_DIVERSESYSTEMS', 'CONTROLTABLE') }} WHERE TABLE_NAME = 'PRODUCT_H' ) 
+),
+
+transform_data as (
+	SELECT
+		_FILEDATE AS _FILEDATE,
+		_FILENAME AS _FILENAME,
+		_UPLOADDATE AS _UPLOADDATE,
+		'{{ invocation_id }}' AS _AUDIT_LOG_ID,
+		SHA2('hash_me') AS _ROW_HASH,
+		PART_NBR,
+		TEL_REGION,
+		HASH_A,
+		COMMIT_FLAG,
+		ROWNUMBER,
+		LOAD_DT
+	FROM source_data
+),
+
+type_data as (
+	SELECT
+		CAST(_FILEDATE AS TIMESTAMP_NTZ(9)) AS _FILEDATE,
+		_FILENAME,
+		_UPLOADDATE,
+		CAST(_AUDIT_LOG_ID AS VARCHAR(128)) AS _AUDIT_LOG_ID,
+		CAST(_ROW_HASH AS VARCHAR(128)) AS _ROW_HASH,
+		PART_NBR,
+		TEL_REGION,
+		CAST(HASH_A AS VARCHAR) AS HASH_A,
+		CAST(COMMIT_FLAG AS NUMBER(38,10)) AS COMMIT_FLAG,
+		CAST(ROWNUMBER AS NUMBER(38,10)) AS ROWNUMBER,
+		CAST(LOAD_DT AS TIMESTAMP_TZ) AS LOAD_DT
+	FROM transform_data
+)
+
+SELECT * FROM type_data

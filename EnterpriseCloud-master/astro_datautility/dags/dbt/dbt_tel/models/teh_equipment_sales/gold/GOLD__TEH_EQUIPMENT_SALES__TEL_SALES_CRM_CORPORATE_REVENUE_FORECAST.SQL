@@ -1,0 +1,470 @@
+{{ config(
+    	materialized='tel_incremental',
+    	incremental_strategy='insert_overwrite',
+    	alias='TEL_SALES_CRM_CORPORATE_REVENUE_FORECAST',
+    	transient=false
+) }}
+
+WITH ref_cte_SALES_CRM_SALES_DOCUMENTS as (
+    select * from {{ ref('GOLD__TEH_EQUIPMENT_SALES__SALES_CRM_SALES_DOCUMENTS') }}
+),
+
+
+
+source_data as (
+select
+
+    Sales_Account,
+
+    Sales_Region,
+
+    TEL_Sold_to_Party,
+
+    End_User,
+
+    FAB,
+
+    BU, 
+
+    BU_Group,
+
+    BU_Type,
+
+    Sub_BU, 
+
+    Sales_Order_No,
+
+    Opportunity_ID,
+
+    Sales_Document_Item_No,
+
+    Project_No,
+
+    Sales_Category_Group,
+
+    Sales_Category,
+
+    Material_Type,
+
+    Model, 
+
+    Order_Item_Opportunity,
+
+    Order_Item_Sales_Document,
+
+    Opportunity_Title_Free_Text,
+
+    Sales_Reporting_Flag,
+
+    Is_Placeholder,
+
+    Confidence_BU_Short,
+
+	-- Adjusted_Confidence_Account_Short,
+
+    Adjusted_Serial_No, 
+
+    First_Serial_No,
+
+    First_PM_Serial_No,
+
+    Customer_Tool_ID,
+
+    Quote_No,
+
+    Purchase_Order_No,
+
+    Quantity,
+
+    Is_Loaner,
+
+    Loan_Expiration_Date,
+
+    VPA,
+
+    End_User_Booking_Date_BU,
+
+    -- Adjusted_Booking_Date_Account, 
+
+    Actual_Booking_Date,    
+
+    Is_Booking_Actual,
+
+    Ship_Date,
+
+    Confirmed_Customs_Clearance_Date, 
+
+    Is_Customs_Clearance_Date_Confirmed,
+
+    Adjusted_Ship_Date, 
+
+    Scheduled_On_Dock_Date,
+
+    Actual_On_Dock_Date,
+
+    Adjusted_Ship_Date_Plus_120,
+
+    PO_Include_Labor,
+
+    Mod_Labor_Type,
+
+    Updated_Work_Order_No_Sales_CRM,
+
+    Work_Order_Sales_CRM_Issue_Date,
+
+    Work_Order_No_Service_CRM,
+
+    Work_Order_Service_CRM_Issue_Date,
+
+    Scheduled_Acceptance_TSR_Sign_Off_Date, 
+
+    Scheduled_Acceptance_TSR_Sign_Off_Date_FE,
+
+    Actual_Acceptance_TSR_Sign_Off_Date,
+
+    Is_Sign_Off_Actual, 
+
+    Is_Sign_Off_Waved,
+
+    Is_EST, --WISDOM data not available yet, is this equal to Is_Sign_Off_Waved above?
+
+    Revenue_Recognition_Flag,
+
+    Revenue_Recognition_Criteria, 
+
+    Revenue_Recognition_Criteria_Short, --need to use the correct Criteria column in logic?
+
+    End_User_Sales_Date_BU,
+
+    Revenue_Recognition_Status,
+
+    Booking_Sales_Status,
+
+    Actual_Sales_Date,
+
+    -- Adjusted_End_User_Sales_Date_Account,
+
+	-- ODSSD.TEL_SM_SALESAMNT                          AS Sales_Amount,
+
+    -- ODSSD.tel_sm_enduser_salesamnt                  AS End_User_Sales_Amount_Sales_Document,
+
+    Sales_Amount_JPY_Adjusted, --TEL's Sales Amount after adjustments
+
+    End_User_Sales_Amount_JPY,  --Sales Amount to the customer
+
+    BU_Sales_Person,
+
+    Account_Sales_Person,
+
+    BU_Comments,
+
+	Account_Comments,
+
+	Sales_Comments_to_SAP,
+
+	Assistants_Comments_from_SAP,
+
+    BU_Account_Difference_Reason,
+
+    Sign_off_Delay_Reason,
+
+    Corporate_BU_Revenue_FY, 
+
+    Corporate_BU_Revenue_FY_Half,
+
+    Corporate_BU_Revenue_FY_Q,
+
+	CORPORATE_BU_Revenue_Beginning_of_FY,
+
+	CORPORATE_BU_Revenue_End_of_FY,
+
+	CORPORATE_BU_Revenue_Beginning_of_FY_Half,
+
+	CORPORATE_BU_Revenue_End_of_FY_Half,
+
+    Corporate_BU_Revenue_Beginning_of_FY_Q,
+
+    Corporate_BU_Revenue_End_of_FY_Q,
+
+    -- Account_Revenue_FY,   
+
+    -- Account_Revenue_FY_Half,  
+
+    -- Account_Revenue_FY_Q,  
+
+    -- Account_Revenue_Beginning_of_FY_Q,  
+
+    -- Account_Revenue_End_of_FY_Q,  
+
+    Beginning_of_Current_FY,
+
+	End_of_Current_FY,
+
+	Beginning_of_Current_FY_Half,
+
+	End_of_Current_FY_Half,
+
+	Beginning_of_Current_FY_Q,
+
+	End_of_Current_FY_Q,
+
+    Beginning_of_Next_FY,
+
+	End_of_Next_FY,
+
+	Beginning_of_Next_FY_Half,
+
+	End_of_Next_FY_Half,
+
+    Beginning_of_Next_FY_Q,
+
+    End_of_Next_FY_Q,
+
+    Corporate_BU_Revenue_Forecast_FK_Date,
+
+	-- Account_Revenue_Forecast_FK_Date,     
+
+    Corporate_Revenue_Forecast_Flag,
+
+    -- BU_Revenue_Forecast_Flag, 
+
+    -- Account_Revenue_Forecast_Flag, 
+
+    Corporate_Revenue_Actuals_Flag,  --LABOpp.Is_Sign_Off_Actual ='Yes' not included for Ship+120 RevRec
+
+    Corporate_Revenue_Backlog_Flag, 
+
+    End_User_Code,
+
+    _5_Digits_Old_End_User_Code,
+
+    Data_Snapshot,
+
+    Data_Snapshot_Timestamp
+
+from ref_cte_SALES_CRM_SALES_DOCUMENTS
+
+where Corporate_BU_Revenue_Forecast_FK_Date >= BEGINNING_OF_2_FY_AGO
+
+   and Corporate_BU_Revenue_Forecast_FK_Date <= END_OF_2_FY_AHEAD
+
+   and Corporate_Revenue_Forecast_Flag = 'Yes'
+
+),
+
+transform_data as (
+select
+        '{{ invocation_id }}' AS _AUDIT_LOG_ID,
+        SHA2('hash_me') AS _ROW_HASH,
+        SALES_ACCOUNT,
+        SALES_REGION,
+        TEL_SOLD_TO_PARTY,
+        END_USER,
+        FAB,
+        BU,
+        BU_GROUP,
+        BU_TYPE,
+        SUB_BU,
+        SALES_ORDER_NO,
+        OPPORTUNITY_ID,
+        SALES_DOCUMENT_ITEM_NO,
+        PROJECT_NO,
+        SALES_CATEGORY_GROUP,
+        SALES_CATEGORY,
+        MATERIAL_TYPE,
+        MODEL,
+        ORDER_ITEM_OPPORTUNITY,
+        ORDER_ITEM_SALES_DOCUMENT,
+        OPPORTUNITY_TITLE_FREE_TEXT,
+        SALES_REPORTING_FLAG,
+        IS_PLACEHOLDER,
+        CONFIDENCE_BU_SHORT,
+        ADJUSTED_SERIAL_NO,
+        FIRST_SERIAL_NO,
+        FIRST_PM_SERIAL_NO,
+        CUSTOMER_TOOL_ID,
+        QUOTE_NO,
+        PURCHASE_ORDER_NO,
+        QUANTITY,
+        IS_LOANER,
+        LOAN_EXPIRATION_DATE,
+        VPA,
+        END_USER_BOOKING_DATE_BU,
+        ACTUAL_BOOKING_DATE,
+        IS_BOOKING_ACTUAL,
+        SHIP_DATE,
+        CONFIRMED_CUSTOMS_CLEARANCE_DATE,
+        IS_CUSTOMS_CLEARANCE_DATE_CONFIRMED,
+        ADJUSTED_SHIP_DATE,
+        SCHEDULED_ON_DOCK_DATE,
+        ACTUAL_ON_DOCK_DATE,
+        ADJUSTED_SHIP_DATE_PLUS_120,
+        PO_INCLUDE_LABOR,
+        MOD_LABOR_TYPE,
+        UPDATED_WORK_ORDER_NO_SALES_CRM,
+        WORK_ORDER_SALES_CRM_ISSUE_DATE,
+        WORK_ORDER_NO_SERVICE_CRM,
+        WORK_ORDER_SERVICE_CRM_ISSUE_DATE,
+        SCHEDULED_ACCEPTANCE_TSR_SIGN_OFF_DATE,
+        SCHEDULED_ACCEPTANCE_TSR_SIGN_OFF_DATE_FE,
+        ACTUAL_ACCEPTANCE_TSR_SIGN_OFF_DATE,
+        IS_SIGN_OFF_ACTUAL,
+        IS_SIGN_OFF_WAVED,
+        IS_EST,
+        REVENUE_RECOGNITION_FLAG,
+        REVENUE_RECOGNITION_CRITERIA,
+        REVENUE_RECOGNITION_CRITERIA_SHORT,
+        END_USER_SALES_DATE_BU,
+        REVENUE_RECOGNITION_STATUS,
+        BOOKING_SALES_STATUS,
+        ACTUAL_SALES_DATE,
+        SALES_AMOUNT_JPY_ADJUSTED,
+        END_USER_SALES_AMOUNT_JPY,
+        BU_SALES_PERSON,
+        ACCOUNT_SALES_PERSON,
+        BU_COMMENTS,
+        ACCOUNT_COMMENTS,
+        SALES_COMMENTS_TO_SAP,
+        ASSISTANTS_COMMENTS_FROM_SAP,
+        BU_ACCOUNT_DIFFERENCE_REASON,
+        SIGN_OFF_DELAY_REASON,
+        CORPORATE_BU_REVENUE_FY,
+        CORPORATE_BU_REVENUE_FY_HALF,
+        CORPORATE_BU_REVENUE_FY_Q,
+        CORPORATE_BU_REVENUE_BEGINNING_OF_FY,
+        CORPORATE_BU_REVENUE_END_OF_FY,
+        CORPORATE_BU_REVENUE_BEGINNING_OF_FY_HALF,
+        CORPORATE_BU_REVENUE_END_OF_FY_HALF,
+        CORPORATE_BU_REVENUE_BEGINNING_OF_FY_Q,
+        CORPORATE_BU_REVENUE_END_OF_FY_Q,
+        BEGINNING_OF_CURRENT_FY,
+        END_OF_CURRENT_FY,
+        BEGINNING_OF_CURRENT_FY_HALF,
+        END_OF_CURRENT_FY_HALF,
+        BEGINNING_OF_CURRENT_FY_Q,
+        END_OF_CURRENT_FY_Q,
+        BEGINNING_OF_NEXT_FY,
+        END_OF_NEXT_FY,
+        BEGINNING_OF_NEXT_FY_HALF,
+        END_OF_NEXT_FY_HALF,
+        BEGINNING_OF_NEXT_FY_Q,
+        END_OF_NEXT_FY_Q,
+        CORPORATE_BU_REVENUE_FORECAST_FK_DATE,
+        CORPORATE_REVENUE_FORECAST_FLAG,
+        CORPORATE_REVENUE_ACTUALS_FLAG,
+        CORPORATE_REVENUE_BACKLOG_FLAG,
+        END_USER_CODE,
+        _5_DIGITS_OLD_END_USER_CODE,
+        DATA_SNAPSHOT,
+        DATA_SNAPSHOT_TIMESTAMP
+from source_data
+),
+
+type_data as (
+select
+        cast(_AUDIT_LOG_ID as varchar(128)) as _AUDIT_LOG_ID,
+        cast(_ROW_HASH as varchar(128)) as _ROW_HASH,
+        CAST(SALES_ACCOUNT as VARCHAR(16777216)) as SALES_ACCOUNT,
+        CAST(SALES_REGION as VARCHAR(16777216)) as SALES_REGION,
+        CAST(TEL_SOLD_TO_PARTY as VARCHAR(16777216)) as TEL_SOLD_TO_PARTY,
+        CAST(END_USER as VARCHAR(16777216)) as END_USER,
+        CAST(FAB as VARCHAR(16777216)) as FAB,
+        CAST(BU as VARCHAR(16777216)) as BU,
+        CAST(BU_GROUP as VARCHAR(16777216)) as BU_GROUP,
+        CAST(BU_TYPE as VARCHAR(16777216)) as BU_TYPE,
+        CAST(SUB_BU as VARCHAR(16777216)) as SUB_BU,
+        CAST(SALES_ORDER_NO as VARCHAR(16777216)) as SALES_ORDER_NO,
+        CAST(OPPORTUNITY_ID as VARCHAR(16777216)) as OPPORTUNITY_ID,
+        CAST(SALES_DOCUMENT_ITEM_NO as VARCHAR(16777216)) as SALES_DOCUMENT_ITEM_NO,
+        CAST(PROJECT_NO as VARCHAR(16777216)) as PROJECT_NO,
+        CAST(SALES_CATEGORY_GROUP as VARCHAR(16777216)) as SALES_CATEGORY_GROUP,
+        CAST(SALES_CATEGORY as VARCHAR(16777216)) as SALES_CATEGORY,
+        CAST(MATERIAL_TYPE as VARCHAR(16777216)) as MATERIAL_TYPE,
+        CAST(MODEL as VARCHAR(16777216)) as MODEL,
+        CAST(ORDER_ITEM_OPPORTUNITY as VARCHAR(16777216)) as ORDER_ITEM_OPPORTUNITY,
+        CAST(ORDER_ITEM_SALES_DOCUMENT as VARCHAR(16777216)) as ORDER_ITEM_SALES_DOCUMENT,
+        CAST(OPPORTUNITY_TITLE_FREE_TEXT as VARCHAR(16777216)) as OPPORTUNITY_TITLE_FREE_TEXT,
+        CAST(SALES_REPORTING_FLAG as VARCHAR(16777216)) as SALES_REPORTING_FLAG,
+        CAST(IS_PLACEHOLDER as VARCHAR(16777216)) as IS_PLACEHOLDER,
+        CAST(CONFIDENCE_BU_SHORT as VARCHAR(16777216)) as CONFIDENCE_BU_SHORT,
+        CAST(ADJUSTED_SERIAL_NO as VARCHAR(16777216)) as ADJUSTED_SERIAL_NO,
+        CAST(FIRST_SERIAL_NO as VARCHAR(16777216)) as FIRST_SERIAL_NO,
+        CAST(FIRST_PM_SERIAL_NO as VARCHAR(16777216)) as FIRST_PM_SERIAL_NO,
+        CAST(CUSTOMER_TOOL_ID as VARCHAR(16777216)) as CUSTOMER_TOOL_ID,
+        CAST(QUOTE_NO as VARCHAR(16777216)) as QUOTE_NO,
+        CAST(PURCHASE_ORDER_NO as VARCHAR(16777216)) as PURCHASE_ORDER_NO,
+        CAST(QUANTITY as NUMBER(38,0)) as QUANTITY,
+        CAST(IS_LOANER as VARCHAR(16777216)) as IS_LOANER,
+        CAST(LOAN_EXPIRATION_DATE as DATE) as LOAN_EXPIRATION_DATE,
+        CAST(VPA as VARCHAR(16777216)) as VPA,
+        CAST(END_USER_BOOKING_DATE_BU as DATE) as END_USER_BOOKING_DATE_BU,
+        CAST(ACTUAL_BOOKING_DATE as DATE) as ACTUAL_BOOKING_DATE,
+        CAST(IS_BOOKING_ACTUAL as VARCHAR(16777216)) as IS_BOOKING_ACTUAL,
+        CAST(SHIP_DATE as DATE) as SHIP_DATE,
+        CAST(CONFIRMED_CUSTOMS_CLEARANCE_DATE as DATE) as CONFIRMED_CUSTOMS_CLEARANCE_DATE,
+        CAST(IS_CUSTOMS_CLEARANCE_DATE_CONFIRMED as VARCHAR(16777216)) as IS_CUSTOMS_CLEARANCE_DATE_CONFIRMED,
+        CAST(ADJUSTED_SHIP_DATE as DATE) as ADJUSTED_SHIP_DATE,
+        CAST(SCHEDULED_ON_DOCK_DATE as DATE) as SCHEDULED_ON_DOCK_DATE,
+        CAST(ACTUAL_ON_DOCK_DATE as DATE) as ACTUAL_ON_DOCK_DATE,
+        CAST(ADJUSTED_SHIP_DATE_PLUS_120 as DATE) as ADJUSTED_SHIP_DATE_PLUS_120,
+        CAST(PO_INCLUDE_LABOR as VARCHAR(16777216)) as PO_INCLUDE_LABOR,
+        CAST(MOD_LABOR_TYPE as VARCHAR(16777216)) as MOD_LABOR_TYPE,
+        CAST(UPDATED_WORK_ORDER_NO_SALES_CRM as VARCHAR(16777216)) as UPDATED_WORK_ORDER_NO_SALES_CRM,
+        CAST(WORK_ORDER_SALES_CRM_ISSUE_DATE as DATE) as WORK_ORDER_SALES_CRM_ISSUE_DATE,
+        CAST(WORK_ORDER_NO_SERVICE_CRM as VARCHAR(16777216)) as WORK_ORDER_NO_SERVICE_CRM,
+        CAST(WORK_ORDER_SERVICE_CRM_ISSUE_DATE as VARCHAR(16777216)) as WORK_ORDER_SERVICE_CRM_ISSUE_DATE,
+        CAST(SCHEDULED_ACCEPTANCE_TSR_SIGN_OFF_DATE as DATE) as SCHEDULED_ACCEPTANCE_TSR_SIGN_OFF_DATE,
+        CAST(SCHEDULED_ACCEPTANCE_TSR_SIGN_OFF_DATE_FE as DATE) as SCHEDULED_ACCEPTANCE_TSR_SIGN_OFF_DATE_FE,
+        CAST(ACTUAL_ACCEPTANCE_TSR_SIGN_OFF_DATE as DATE) as ACTUAL_ACCEPTANCE_TSR_SIGN_OFF_DATE,
+        CAST(IS_SIGN_OFF_ACTUAL as VARCHAR(16777216)) as IS_SIGN_OFF_ACTUAL,
+        CAST(IS_SIGN_OFF_WAVED as VARCHAR(16777216)) as IS_SIGN_OFF_WAVED,
+        CAST(IS_EST as VARCHAR(16777216)) as IS_EST,
+        CAST(REVENUE_RECOGNITION_FLAG as VARCHAR(16777216)) as REVENUE_RECOGNITION_FLAG,
+        CAST(REVENUE_RECOGNITION_CRITERIA as VARCHAR(16777216)) as REVENUE_RECOGNITION_CRITERIA,
+        CAST(REVENUE_RECOGNITION_CRITERIA_SHORT as VARCHAR(16777216)) as REVENUE_RECOGNITION_CRITERIA_SHORT,
+        CAST(END_USER_SALES_DATE_BU as DATE) as END_USER_SALES_DATE_BU,
+        CAST(REVENUE_RECOGNITION_STATUS as VARCHAR(16777216)) as REVENUE_RECOGNITION_STATUS,
+        CAST(BOOKING_SALES_STATUS as VARCHAR(16777216)) as BOOKING_SALES_STATUS,
+        CAST(ACTUAL_SALES_DATE as DATE) as ACTUAL_SALES_DATE,
+        CAST(SALES_AMOUNT_JPY_ADJUSTED as NUMBER(38,0)) as SALES_AMOUNT_JPY_ADJUSTED,
+        CAST(END_USER_SALES_AMOUNT_JPY as NUMBER(38,0)) as END_USER_SALES_AMOUNT_JPY,
+        CAST(BU_SALES_PERSON as VARCHAR(16777216)) as BU_SALES_PERSON,
+        CAST(ACCOUNT_SALES_PERSON as VARCHAR(16777216)) as ACCOUNT_SALES_PERSON,
+        CAST(BU_COMMENTS as VARCHAR(16777216)) as BU_COMMENTS,
+        CAST(ACCOUNT_COMMENTS as VARCHAR(16777216)) as ACCOUNT_COMMENTS,
+        CAST(SALES_COMMENTS_TO_SAP as VARCHAR(16777216)) as SALES_COMMENTS_TO_SAP,
+        CAST(ASSISTANTS_COMMENTS_FROM_SAP as VARCHAR(16777216)) as ASSISTANTS_COMMENTS_FROM_SAP,
+        CAST(BU_ACCOUNT_DIFFERENCE_REASON as VARCHAR(16777216)) as BU_ACCOUNT_DIFFERENCE_REASON,
+        CAST(SIGN_OFF_DELAY_REASON as VARCHAR(16777216)) as SIGN_OFF_DELAY_REASON,
+        CAST(CORPORATE_BU_REVENUE_FY as VARCHAR(16777216)) as CORPORATE_BU_REVENUE_FY,
+        CAST(CORPORATE_BU_REVENUE_FY_HALF as VARCHAR(16777216)) as CORPORATE_BU_REVENUE_FY_HALF,
+        CAST(CORPORATE_BU_REVENUE_FY_Q as VARCHAR(16777216)) as CORPORATE_BU_REVENUE_FY_Q,
+        CAST(CORPORATE_BU_REVENUE_BEGINNING_OF_FY as DATE) as CORPORATE_BU_REVENUE_BEGINNING_OF_FY,
+        CAST(CORPORATE_BU_REVENUE_END_OF_FY as DATE) as CORPORATE_BU_REVENUE_END_OF_FY,
+        CAST(CORPORATE_BU_REVENUE_BEGINNING_OF_FY_HALF as DATE) as CORPORATE_BU_REVENUE_BEGINNING_OF_FY_HALF,
+        CAST(CORPORATE_BU_REVENUE_END_OF_FY_HALF as DATE) as CORPORATE_BU_REVENUE_END_OF_FY_HALF,
+        CAST(CORPORATE_BU_REVENUE_BEGINNING_OF_FY_Q as DATE) as CORPORATE_BU_REVENUE_BEGINNING_OF_FY_Q,
+        CAST(CORPORATE_BU_REVENUE_END_OF_FY_Q as DATE) as CORPORATE_BU_REVENUE_END_OF_FY_Q,
+        CAST(BEGINNING_OF_CURRENT_FY as DATE) as BEGINNING_OF_CURRENT_FY,
+        CAST(END_OF_CURRENT_FY as DATE) as END_OF_CURRENT_FY,
+        CAST(BEGINNING_OF_CURRENT_FY_HALF as DATE) as BEGINNING_OF_CURRENT_FY_HALF,
+        CAST(END_OF_CURRENT_FY_HALF as DATE) as END_OF_CURRENT_FY_HALF,
+        CAST(BEGINNING_OF_CURRENT_FY_Q as DATE) as BEGINNING_OF_CURRENT_FY_Q,
+        CAST(END_OF_CURRENT_FY_Q as DATE) as END_OF_CURRENT_FY_Q,
+        CAST(BEGINNING_OF_NEXT_FY as DATE) as BEGINNING_OF_NEXT_FY,
+        CAST(END_OF_NEXT_FY as DATE) as END_OF_NEXT_FY,
+        CAST(BEGINNING_OF_NEXT_FY_HALF as DATE) as BEGINNING_OF_NEXT_FY_HALF,
+        CAST(END_OF_NEXT_FY_HALF as DATE) as END_OF_NEXT_FY_HALF,
+        CAST(BEGINNING_OF_NEXT_FY_Q as DATE) as BEGINNING_OF_NEXT_FY_Q,
+        CAST(END_OF_NEXT_FY_Q as DATE) as END_OF_NEXT_FY_Q,
+        CAST(CORPORATE_BU_REVENUE_FORECAST_FK_DATE as DATE) as CORPORATE_BU_REVENUE_FORECAST_FK_DATE,
+        CAST(CORPORATE_REVENUE_FORECAST_FLAG as VARCHAR(16777216)) as CORPORATE_REVENUE_FORECAST_FLAG,
+        CAST(CORPORATE_REVENUE_ACTUALS_FLAG as VARCHAR(16777216)) as CORPORATE_REVENUE_ACTUALS_FLAG,
+        CAST(CORPORATE_REVENUE_BACKLOG_FLAG as VARCHAR(16777216)) as CORPORATE_REVENUE_BACKLOG_FLAG,
+        CAST(END_USER_CODE as VARCHAR(16777216)) as END_USER_CODE,
+        CAST(_5_DIGITS_OLD_END_USER_CODE as VARCHAR(16777216)) as _5_DIGITS_OLD_END_USER_CODE,
+        CAST(DATA_SNAPSHOT as DATE) as DATA_SNAPSHOT,
+        CAST(DATA_SNAPSHOT_TIMESTAMP as TIMESTAMP_NTZ(9)) as DATA_SNAPSHOT_TIMESTAMP
+from transform_data 
+)
+select * from type_data

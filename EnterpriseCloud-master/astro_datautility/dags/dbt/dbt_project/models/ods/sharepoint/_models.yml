@@ -1,0 +1,28 @@
+version: 2
+models:
+- name: ODS__SHAREPOINT__SERVICECONTRACTSFLEXTSRS
+  description: Model SHAREPOINT ServiceContractsFlextsrs file.
+- name: ODS__SHAREPOINT__GROUPS
+  description: Model SHAREPOINT Groups file.
+- name: ODS__SHAREPOINT__PAIDSERVICEQUOTE
+  description: Model SHAREPOINT PaidServiceQuote file.
+- name: ODS__SHAREPOINT__PAIDSERVICESOREQUEST
+  description: Model SHAREPOINT PaidServiceSORequest file.
+- name: ODS__SHAREPOINT__USERREQUESTS
+  description: Model SHAREPOINT UserRequests file.
+- name: ODS__SHAREPOINT__PAID_SERVICE_CUSTOMER_PO
+  description: Model SHAREPOINT PaidServiceCustomerPO file.
+- name: ODS__SHAREPOINT__CUSTOMER_DEMO
+  description: Landing table for CUSTOMER_DEMO file.
+- name: ODS__SHAREPOINT__DESIGN_CONTROL
+  description: Landing table for DESIGN_CONTROL file.
+- name: ODS__SHAREPOINT__CUE_REPAIR_TICKET
+  description: Landing table for CUE_REPAIR_TICKET file.
+- name: ODS__SHAREPOINT__INCOMING_PART_INSPECTION
+  description: Landing table for INCOMING_PART_INSPECTION file.
+- name: ODS__SHAREPOINT__TTCA_OPPORTUNITY_LIST
+  description: Landing table for TTCA_OPPORTUNITY_LIST file.
+- name: ODS__SHAREPOINT__SCR_CYCLE_TIME_GOALS_BY_GROUP
+  description: Landing table for SCR_CYCLE_TIME_GOALS_BY_GROUP file.
+- name: ODS__SHAREPOINT__ODM
+  description: Landing table for ODM.

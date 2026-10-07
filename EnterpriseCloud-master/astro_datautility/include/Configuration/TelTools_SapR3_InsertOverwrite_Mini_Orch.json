@@ -1,0 +1,48 @@
+{
+    "connection": {
+        "DEV": {
+            "host": "telsapqasdb.us.tel.com",
+            "user": "ORACLE-ERP-HVR-<<ENV>>-USER",
+            "secret": "ORACLE-ERP-HVR-<<ENV>>-SECRET",
+            "port": 1527,
+            "database": "erq",
+            "retry_count": 5,
+            "retry_delay": 30,
+            "tcp_connect_timeout": 180
+        },
+        "QA": {
+            "host": "telsapqasdb.us.tel.com",
+            "user": "ORACLE-ERP-HVR-<<ENV>>-USER",
+            "secret": "ORACLE-ERP-HVR-<<ENV>>-SECRET",
+            "port": 1527,
+            "database": "erq",
+            "retry_count": 5,
+            "retry_delay": 30,
+            "tcp_connect_timeout": 180
+        },
+        "PROD": {
+            "host": "telsapprddb.us.tel.com",
+            "user": "ORACLE-ERP-HVR-<<ENV>>-USER",
+            "secret": "ORACLE-ERP-HVR-<<ENV>>-SECRET",
+            "port": 1521,
+            "database": "ERP",
+            "retry_count": 5,
+            "retry_delay": 30,
+            "tcp_connect_timeout": 180
+        }
+    },
+    "extraction": {
+        "CKIS": {
+            "is_active": true,
+            "chunk_size": 300000,
+            "table": "CKIS",
+            "schema": "SAPR3",
+            "incremental_strategy": "insert_overwrite",
+            "snowflake_table": "CKIS",
+            "snowflake_schema": "SAP_ORACLE_LIVE",
+            "primary_key": "MANDT,LEDNR,BZOBJ,KALNR,KALKA,KADKY,TVERS,BWVAR,KKZMA,POSNR",
+            "query_filter_function": "get_kadky_filter",
+            "query_filter_column": "KADKY"
+        }
+    }
+}

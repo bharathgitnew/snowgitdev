@@ -1,0 +1,102 @@
+{{ config(
+    materialized='tel_incremental',
+    incremental_strategy='insert_overwrite',
+    alias='SR_REPLENISHMENTORDER'
+) }}
+
+
+with replenishment_order_ref as (
+      SELECT
+        WAREHOUSE_ORDER_NO,
+        POSITION_NO,
+        SEQUENCE_NO,
+        ITEM,
+        ITEM_DESCRIPTION,
+        SHIP_TO,
+        SHIP_FROM,
+        ORDER_DATE,
+        PLANNED_DELIVERY_DATE,
+        PLANNED_RECEIPT_DATE,
+        ACT_DELIVERY_DATE,
+        ACT_RECEIPT_DATE,
+        UNIT_OF_MEASURE,
+        ORDERED_QTY,
+        RECEIVED_QTY,
+        RECEIPT_NO,
+        REFERENCE,
+        OB_LINE_STATUS,
+        IB_LINE_STATUS,
+        LOGON_CODE,
+        INFORMATION
+    from {{ ref('SILVER__TEA_SPARES_REVENUE__REPLENISHMENTORDER') }}
+)
+,source_data as (
+    SELECT 
+    REPLENISHMENTORDER.WAREHOUSE_ORDER_NO||'_'||REPLENISHMENTORDER.POSITION_NO AS MTLINE, 
+    REPLENISHMENTORDER.ITEM, 
+    REPLENISHMENTORDER.ITEM_DESCRIPTION, 
+    REPLENISHMENTORDER.RECEIVED_QTY, 
+    REPLENISHMENTORDER.SHIP_TO,
+    REPLENISHMENTORDER.SHIP_FROM,
+    REPLENISHMENTORDER.ORDER_DATE,
+    REPLENISHMENTORDER.PLANNED_DELIVERY_DATE,
+    REPLENISHMENTORDER.PLANNED_RECEIPT_DATE,
+    REPLENISHMENTORDER.ACT_DELIVERY_DATE,
+    REPLENISHMENTORDER.ACT_RECEIPT_DATE
+    FROM replenishment_order_ref as REPLENISHMENTORDER
+    WHERE (((REPLENISHMENTORDER.ITEM) ilike 'cs%' 
+    Or (REPLENISHMENTORDER.ITEM) ilike 'es%' 
+    Or (REPLENISHMENTORDER.ITEM) ilike 'ds%' 
+    Or (REPLENISHMENTORDER.ITEM) ilike 't%' 
+    Or (REPLENISHMENTORDER.ITEM) ilike 'ct%' 
+    Or (REPLENISHMENTORDER.ITEM) ilike 'l1%' 
+    Or (REPLENISHMENTORDER.ITEM) ilike 'mb%' 
+    Or (REPLENISHMENTORDER.ITEM) ilike 'Sr%' 
+    Or (REPLENISHMENTORDER.ITEM) ilike 'r%' 
+    Or (REPLENISHMENTORDER.ITEM) ilike 'p%' 
+    Or (REPLENISHMENTORDER.ITEM) ilike 'ss%' 
+    Or (REPLENISHMENTORDER.ITEM) ilike 'g7%'
+    Or (REPLENISHMENTORDER.ITEM) ilike 'vd%' 
+    Or (REPLENISHMENTORDER.ITEM) ilike 'm%' 
+    Or (REPLENISHMENTORDER.ITEM) ilike 'n%'))
+    ORDER BY REPLENISHMENTORDER.WAREHOUSE_ORDER_NO||'_'||REPLENISHMENTORDER.POSITION_NO 
+      
+)
+
+,transform_data as (
+  select 
+  '{{ invocation_id }}' AS _AUDIT_LOG_ID,
+  SHA2('hash_me') as _ROW_HASH,
+  MTLINE,
+  ITEM,
+  ITEM_DESCRIPTION,
+  RECEIVED_QTY,
+  SHIP_TO,
+  SHIP_FROM,
+  ORDER_DATE,
+  PLANNED_DELIVERY_DATE,
+  PLANNED_RECEIPT_DATE,
+  ACT_DELIVERY_DATE,
+  ACT_RECEIPT_DATE
+  from source_data
+)
+
+,type_data as 
+(
+    select
+        _AUDIT_LOG_ID,
+        _ROW_HASH,
+        MTLINE,
+        ITEM,
+        ITEM_DESCRIPTION,
+        cast(RECEIVED_QTY as NUMBER(15,2)) as RECEIVED_QTY,
+        SHIP_TO,
+        SHIP_FROM,
+        ORDER_DATE,
+        PLANNED_DELIVERY_DATE,
+        PLANNED_RECEIPT_DATE,
+        ACT_DELIVERY_DATE,
+        ACT_RECEIPT_DATE
+    from transform_data
+    )
+select * from type_data

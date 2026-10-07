@@ -1,0 +1,85 @@
+{{ config(
+        materialized='incremental',
+        incremental_strategy='merge',
+        alias='PLANT_MAINTENANCE_PARTNERS',
+        unique_key = ['MANDT',
+    'OBJNR',
+    'PARVW',
+    'COUNTER'],
+        transient=false
+) }}
+
+with source_data as (
+	SELECT 
+	_CAPTUREDATETIME,
+	MANDT,
+	OBJNR,
+	PARVW,
+	COUNTER,
+	OBTYP,
+	PARNR,
+	INHER,
+	ERDAT,
+	ERZEIT,
+	ERNAM,
+	AEDAT,
+	AEZEIT,
+	AENAM,
+	KZLOESCH,
+	ADRNR,
+	TZONSP
+	FROM {{source('SAP_ORACLE_LIVE', 'IHPA')}}
+),
+
+
+transform_data as 
+(
+SELECT
+    _CAPTUREDATETIME,
+    '{{ invocation_id }}' AS _AUDIT_LOG_ID,
+    SHA2('hash_me') as _ROW_HASH,
+	MANDT as MANDT,
+	OBJNR as OBJNR,
+	PARVW as PARVW,
+	COUNTER as COUNTER,
+	OBTYP as OBTYP,
+	PARNR as PARNR,
+	INHER as INHER,
+	ERDAT as ERDAT,
+	ERZEIT as ERZEIT,
+	ERNAM as ERNAM,
+	AEDAT as AEDAT,
+	AEZEIT as AEZEIT,
+	AENAM as AENAM,
+	KZLOESCH as KZLOESCH,
+	ADRNR as ADRNR,
+	TZONSP as TZONSP
+	FROM SOURCE_DATA
+), 
+
+type_data as 
+(
+SELECT 
+	CAST(_CAPTUREDATETIME AS TIMESTAMP_LTZ(9)) AS _CAPTUREDATETIME,
+	CAST(_AUDIT_LOG_ID AS VARCHAR(128)) AS _AUDIT_LOG_ID,
+	CAST(_ROW_HASH AS VARCHAR(128)) AS _ROW_HASH,
+	MANDT,
+	OBJNR,
+	PARVW,
+	COUNTER,
+	OBTYP,
+	PARNR,
+	INHER,
+	ERDAT,
+	ERZEIT,
+	ERNAM,
+	AEDAT,
+	AEZEIT,
+	AENAM,
+	KZLOESCH,
+	ADRNR,
+	TZONSP
+FROM TRANSFORM_DATA
+)
+ 
+SELECT * FROM TYPE_DATA

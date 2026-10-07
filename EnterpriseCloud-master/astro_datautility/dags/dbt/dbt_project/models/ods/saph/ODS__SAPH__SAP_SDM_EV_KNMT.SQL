@@ -1,0 +1,125 @@
+/************
+	Model file generated from gmxDbtTemplateUtility.ipynb 
+	*************/
+
+	
+	{{ config(
+    	  materialized='incremental',
+    	  incremental_strategy='merge',
+    	  alias='SAP_SDM_EV_KNMT',
+    	  unique_key = ['VKORG',
+    'VTWEG',
+    'KUNNR',
+    'MATNR'],
+    	  transient=false	
+) }} 
+
+	with source_data as (
+	SELECT
+		JSONFIELD:"VKORG"::STRING AS "VKORG", 
+ 	 	JSONFIELD:"VTWEG"::STRING AS "VTWEG", 
+ 	 	JSONFIELD:"KUNNR"::STRING AS "KUNNR", 
+ 	 	JSONFIELD:"MATNR"::STRING AS "MATNR", 
+ 	 	JSONFIELD:"ERNAM"::STRING AS "ERNAM", 
+ 	 	JSONFIELD:"ERDAT"::STRING AS "ERDAT", 
+ 	 	JSONFIELD:"SORTL"::STRING AS "SORTL", 
+ 	 	JSONFIELD:"KDMAT"::STRING AS "KDMAT", 
+ 	 	JSONFIELD:"POSTX"::STRING AS "POSTX", 
+ 	 	JSONFIELD:"LPRIO"::STRING AS "LPRIO", 
+ 	 	JSONFIELD:"MINLF"::STRING AS "MINLF", 
+ 	 	JSONFIELD:"MEINS"::STRING AS "MEINS", 
+ 	 	JSONFIELD:"MEINS001"::STRING AS "MEINS001", 
+ 	 	JSONFIELD:"CHSPL"::STRING AS "CHSPL", 
+ 	 	JSONFIELD:"KZTLF"::STRING AS "KZTLF", 
+ 	 	JSONFIELD:"ANTLF"::STRING AS "ANTLF", 
+ 	 	JSONFIELD:"UNTTO"::STRING AS "UNTTO", 
+ 	 	JSONFIELD:"UEBTO"::STRING AS "UEBTO", 
+ 	 	JSONFIELD:"UEBTK"::STRING AS "UEBTK", 
+ 	 	JSONFIELD:"WERKS"::STRING AS "WERKS", 
+ 	 	JSONFIELD:"RDPRF"::STRING AS "RDPRF", 
+ 	 	JSONFIELD:"MEGRU"::STRING AS "MEGRU", 
+ 	 	JSONFIELD:"VRKME_T"::STRING AS "VRKME_T", 
+ 	 	JSONFIELD:"DELFLAG"::STRING AS "DELFLAG", 
+ 	 	JSONFIELD:"CDCHANGENR"::STRING AS "CDCHANGENR", 
+ 	 	JSONFIELD:"PSL_INSDATE"::STRING AS "PSL_INSDATE", 
+ 	 	JSONFIELD:"PSL_UPDDATE"::STRING AS "PSL_UPDDATE",
+		_FILEDATE,
+		_FILENAME
+	from {{ source('SAPH','SAP_SDM_EV_KNMT') }}
+	{% if is_incremental() %}WHERE  _FILENAME > IFNULL((SELECT MAX(_FILENAME) FROM {{ this }}),'1970-01-01'){% endif %}
+        QUALIFY (ROW_NUMBER() OVER (PARTITION BY JSONFIELD:"VKORG"::STRING,JSONFIELD:"VTWEG"::STRING,JSONFIELD:"KUNNR"::STRING,JSONFIELD:"MATNR"::STRING  ORDER BY _FILEDATE DESC )) = 1
+	),
+	
+	transform_data as (
+	SELECT 
+		"VKORG", 
+ 	 	"VTWEG", 
+ 	 	"KUNNR", 
+ 	 	"MATNR", 
+ 	 	"ERNAM", 
+ 	 	"ERDAT", 
+ 	 	"SORTL", 
+ 	 	"KDMAT", 
+ 	 	"POSTX", 
+ 	 	"LPRIO", 
+ 	 	"MINLF", 
+ 	 	"MEINS", 
+ 	 	"MEINS001", 
+ 	 	"CHSPL", 
+ 	 	"KZTLF", 
+ 	 	"ANTLF", 
+ 	 	"UNTTO", 
+ 	 	"UEBTO", 
+ 	 	"UEBTK", 
+ 	 	"WERKS", 
+ 	 	"RDPRF", 
+ 	 	"MEGRU", 
+ 	 	"VRKME_T", 
+ 	 	"DELFLAG", 
+ 	 	"CDCHANGENR", 
+ 	 	"PSL_INSDATE", 
+ 	 	"PSL_UPDDATE",
+		_FILEDATE,
+		_FILENAME,
+		'{{ invocation_id }}' AS AUDIT_LOG_ID,
+        SHA2('hash_me') as _ROW_HASH -- Adds column to table on full refresh.
+	from source_data
+	),
+	
+	type_data as (
+	SELECT
+		CAST("VKORG" AS NVARCHAR) AS "VKORG", 
+ 	 	CAST("VTWEG" AS NVARCHAR) AS "VTWEG", 
+ 	 	CAST("KUNNR" AS NVARCHAR) AS "KUNNR", 
+ 	 	CAST("MATNR" AS NVARCHAR) AS "MATNR", 
+ 	 	CAST("ERNAM" AS NVARCHAR) AS "ERNAM", 
+ 	 	CAST("ERDAT" AS TIMESTAMP) AS "ERDAT", 
+ 	 	CAST("SORTL" AS NVARCHAR) AS "SORTL", 
+ 	 	CAST("KDMAT" AS NVARCHAR) AS "KDMAT", 
+ 	 	CAST("POSTX" AS NVARCHAR) AS "POSTX", 
+ 	 	CAST("LPRIO" AS VARCHAR) AS "LPRIO", 
+ 	 	CAST("MINLF" AS FLOAT) AS "MINLF", 
+ 	 	CAST("MEINS" AS NVARCHAR) AS "MEINS", 
+ 	 	CAST("MEINS001" AS NVARCHAR) AS "MEINS001", 
+ 	 	CAST("CHSPL" AS NVARCHAR) AS "CHSPL", 
+ 	 	CAST("KZTLF" AS NVARCHAR) AS "KZTLF", 
+ 	 	CAST("ANTLF" AS FLOAT) AS "ANTLF", 
+ 	 	CAST("UNTTO" AS FLOAT) AS "UNTTO", 
+ 	 	CAST("UEBTO" AS FLOAT) AS "UEBTO", 
+ 	 	CAST("UEBTK" AS NVARCHAR) AS "UEBTK", 
+ 	 	CAST("WERKS" AS NVARCHAR) AS "WERKS", 
+ 	 	CAST("RDPRF" AS NVARCHAR) AS "RDPRF", 
+ 	 	CAST("MEGRU" AS NVARCHAR) AS "MEGRU", 
+ 	 	CAST("VRKME_T" AS NVARCHAR) AS "VRKME_T", 
+ 	 	CAST("DELFLAG" AS BOOLEAN) AS "DELFLAG", 
+ 	 	CAST("CDCHANGENR" AS NVARCHAR) AS "CDCHANGENR", 
+ 	 	CAST("PSL_INSDATE" AS TIMESTAMP) AS "PSL_INSDATE", 
+ 	 	CAST("PSL_UPDDATE" AS TIMESTAMP) AS "PSL_UPDDATE",
+		cast(_FILEDATE AS TIMESTAMP_NTZ(9)) AS _FILEDATE,
+		cast(_FILENAME as varchar(128)) as _FILENAME,
+        cast(AUDIT_LOG_ID as varchar(128)) as AUDIT_LOG_ID,
+        cast(_ROW_HASH as varchar(128)) as _ROW_HASH
+	from transform_data
+	)
+
+	select * from type_data

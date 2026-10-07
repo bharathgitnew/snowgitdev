@@ -1,0 +1,98 @@
+{{ config(
+    alias = 'SAPO_SALES_DATA_FOR_MATERIALS',
+    materialized = 'tel_incremental',
+    incremental_strategy = 'insert_overwrite',
+    unique_key = ['MANDT', 'VKORG', 'VTWEG']
+) }}
+
+with source_data as (
+	select 
+        *,
+	from {{ source('SAP_ORACLE_LIVE', 'MVKE') }}
+),
+
+transform_data as (
+    select
+        '{{ invocation_id }}' as _AUDIT_LOG_ID,
+        SHA2('hash_me') as _ROW_HASH,
+        *,
+	from source_data
+), 
+
+type_data as (
+    select 
+        _AUDIT_LOG_ID::varchar(128) as _AUDIT_LOG_ID,
+        _ROW_HASH::varchar(128) as _ROW_HASH,
+        _CAPTUREDATETIME::timestamp_ltz(9) as _CAPTUREDATETIME,
+        MANDT,
+        MATNR,
+        VKORG,
+        VTWEG,
+        LVORM,
+        VERSG,
+        BONUS,
+        PROVG,
+        SKTOF,
+        VMSTA,
+        VMSTD,
+        AUMNG,
+        LFMNG,
+        EFMNG,
+        SCMNG,
+        SCHME,
+        VRKME,
+        MTPOS,
+        DWERK,
+        PRODH,
+        PMATN,
+        KONDM,
+        KTGRM,
+        MVGR1,
+        MVGR2,
+        MVGR3,
+        MVGR4,
+        MVGR5,
+        SSTUF,
+        PFLKS,
+        LSTFL,
+        LSTVZ,
+        LSTAK,
+        LDVFL,
+        LDBFL,
+        LDVZL,
+        LDBZL,
+        VDVFL,
+        VDBFL,
+        VDVZL,
+        VDBZL,
+        PRAT1,
+        PRAT2,
+        PRAT3,
+        PRAT4,
+        PRAT5,
+        PRAT6,
+        PRAT7,
+        PRAT8,
+        PRAT9,
+        PRATA,
+        RDPRF,
+        MEGRU,
+        LFMAX,
+        RJART,
+        PBIND,
+        VAVME,
+        MATKC,
+        PVMSO,
+        "/BEV1/EMLGRP" as BEV1_EMLGRP,
+        "/BEV1/EMDRCKSPL" as BEV1_EMDRCKSPL,
+        "/BEV1/RPBEZME" as BEV1_RPBEZME,
+        "/BEV1/RPSNS" as BEV1_RPSNS,
+        "/BEV1/RPSFA" as BEV1_RPSFA,
+        "/BEV1/RPSKI" as BEV1_RPSKI,
+        "/BEV1/RPSCO" as BEV1_RPSCO,
+        "/BEV1/RPSSO" as BEV1_RPSSO,
+        PLGTP,
+    from transform_data
+)
+ 
+select * from type_data

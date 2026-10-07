@@ -1,0 +1,28 @@
+version: 2
+sources:
+- name: ARIBA
+  description: Landing Zone - Ariba Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: Ariba
+  tables:
+  - name: AUDITLOG
+    identifier: AuditLog
+    description: Landing table for AuditLog file.
+  - name: DIRECTORDER
+    identifier: DirectOrder
+    description: Landing table for DirectOrder file.
+  - name: ERPORDER
+    identifier: ERPOrder
+    description: Landing table for ERPOrder file.
+  - name: INVOICERECONCILIATION
+    identifier: InvoiceReconciliation
+    description: Landing table for InvoiceReconciliation file.
+  - name: INVOICE
+    identifier: Invoice
+    description: Landing table for Invoice file.
+  - name: RECEIPT
+    identifier: Receipt
+    description: Landing table for Receipt file.
+  - name: REQUISITION
+    identifier: Requisition
+    description: Landing table for Requisition file.

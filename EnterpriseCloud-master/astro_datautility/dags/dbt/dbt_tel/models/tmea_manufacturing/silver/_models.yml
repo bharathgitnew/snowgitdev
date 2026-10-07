@@ -1,0 +1,353 @@
+models:
+- name: SILVER__TMEA_MANUFACTURING__BOMS_ITEM_SELECTION
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__BOM_HEADER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__BOM_ITEM
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__CATS_DATABASE_TABLE_FOR_TIME_SHEET
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__CHANGE_DOCUMENT_ITEMS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__CODE_GROUP_TEXTS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__CODE_TEXTS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__COST_CENTER_TEXTS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__CUE_REPAIR_TICKET_ONLINE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__DB_STRUCTURE_OF_THE_QUANTITIESDATES_VALUES_IN_THE_OPERATION
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__DOCUMENT_SEGMENT_MATERIAL
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__EMPLOYEE_GROUP_NAMES
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__EMPLOYEE_SUBGROUP_NAMES
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__GENERAL_DATA_IN_CUSTOMER_MASTER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__GENERAL_MATERIAL_DATA
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__GOOD_RECEIPT_RECEIVABLES
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__HEADER_DATA_FOR_MRP_DOCUMENT
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__HEADER_MATERIAL_DOCUMENT
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__HR_MASTER_RECORD_INFOTYPE_0001
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__INCOMING_PART_INSPECTION_ONLINE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__INDIVIDUAL_OBJECT_STATUS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__INSPECTION_LOT_RECORD
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__LANGUAGE_DEPENDENT_TEXT_TABLE_FOR_THE_CONTROL_KEY_T430
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__MATERIAL_DESCRIPTIONS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__MATERIAL_TO_BOM_LINK
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__MRP_CONTROLLERS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__MRP_TABLE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__OPERATION_WITHIN_AN_ORDER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__ORDER_CONFIRMATIONS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__ORDER_HEADER_DATA_PP_ORDERS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__ORDER_ITEM
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__ORDER_MASTER_DATA
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__PERSONNEL_AREAS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__PLANNED_ORDER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__PLANT_DATA_FOR_MATERIAL
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__POSITION_TEXTS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__PRIORITY_TEXT
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__PRODUCTION_SUPERVISOR
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__PRODUCTION_VALUE_STREAM
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__PURCHASE_REQUISITION
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__QUALITY_NOTIFICATION
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__QUALITY_NOTIFICATION_CAUSES
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__QUALITY_NOTIFICATION_ITEMS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__QUANTS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__REJECTION_REASONS_FOR_SALES_DOCUMENTS_TEXTS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__RESERVATIONDEPENDENT_REQUIREMENTS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__RMA_SAPH
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__SALES_DOCUMENT_BUSINESS_DATA
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__SALES_DOCUMENT_FLOW
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__SALES_DOCUMENT_HEADER_DATA
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__SALES_DOCUMENT_ITEM_CATEGORIES_TEXTS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__SALES_DOCUMENT_ITEM_DATA
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__SALES_DOCUMENT_PARTNER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__SALES_DOCUMENT_SCHEDULE_LINE_DATA
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__SALES_ORDER_BILLING_PLAN
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__SCHEDULING_AGREEMENT_SCHEDULE_LINES
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__SHORTAGE_REPORT_DATA_WAREHOUSE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__STATUS_CONTROL_FOR_OBJECT_TYPE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__STATUS_OBJECT_INFORMATION
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__STORAGE_LOCATION_DATA_FOR_MATERIAL
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__SUPPLIER_QUALITY_NOTIFICATIONS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__SYSTEM_STATUS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__SYSTEM_STATUS_TEXTS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__TABLE_WITH_DELETION_TIME_OF_DELETED_CATS_RECORDS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__TMEA_MANAGEMENT_KPI_GOALS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__TMEA_WORK_CALENDAR
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__VENDOR_MASTER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__WORK_CENTER_HEADER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__EQUIPMENT_MASTER_DATA
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__TROUBLES
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__MACHINES
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__HR_MASTER_RECORD_INFOTYPE_0000
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__PERSONNEL_ACTION_TEXTS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__MATERIAL_DATA_FOR_EACH_WAREHOUSE_NUMBER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__TASK_LIST_OPERATION_ACTIVITY
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__TRANSFER_ORDER_ITEM
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__ASSIGNMENT_TASK_LISTS_MATERIALS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__DESCRIPTION_OF_MRP_ELEMENTS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__PURCHASING_DOCUMENT_HEADER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__PURCHASING_DOCUMENT_ITEM
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__CONFIRMATION_CATEGORIES_DESCRIPTIONS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__READTXT
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__METRICS_RESULTS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__SHAREPOINT_PURCHASING_MANUFACTURING_READINESS_KPI
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__PRODUCT_COSTING_COST_COMPONENTS_COGS_MFD
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__PRODUCT_COSTING_HEADER_DATA
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__ITEMS_UNIT_COSTING_ITEMIZATION_PRODUCT_COSTING
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_MANUFACTURING__TASK_LIST_SELECTION_OF_OPERATIONS_ACTIVITIES
+  tests:
+  - has_data
+  - recently_run  

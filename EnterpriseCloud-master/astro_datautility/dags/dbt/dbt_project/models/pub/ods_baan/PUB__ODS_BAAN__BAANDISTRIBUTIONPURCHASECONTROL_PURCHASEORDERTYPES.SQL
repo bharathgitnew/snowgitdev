@@ -1,0 +1,50 @@
+/************
+Model file generated from dbtGeneratePubViews: 03.10.2022.08.14.07"
+*************/
+
+{{ config(
+      materialized='view',
+      alias='BAANDISTRIBUTIONPURCHASECONTROL_PURCHASEORDERTYPES',
+      transient=false
+) }}
+
+with source_data as (
+    SELECT
+        _CAPTUREDATETIME,
+        _COMPANYID,
+        BUSINESSPROCESS,
+        COLLECTORDERDESCRIPTION,
+        COLLECTORDERID,
+        CONSIGNMENTPAYMENTDESCRIPTION,
+        CONSIGNMENTPAYMENTID,
+        CONSIGNMENTREPLENISHDESCRIPTION,
+        CONSIGNMENTREPLENISHID,
+        CONTRACTGROUP,
+        CONTRACTSERIES,
+        COSTORDERDESCRIPTION,
+        COSTORDERID,
+        DESCRIPTION,
+        DIRECTDELIVERYDESCRIPTION,
+        DIRECTDELIVERYID,
+        EXECUTIONMODEDESCRIPTION,
+        EXECUTIONMODEID,
+        ORDER_GROUP,
+        ORDER_SERIES,
+        PROCEDUREMASK,
+        PURCHASEORDERTYPE,
+        RETURNORDERDESCRIPTION,
+        RETURNORDERID,
+        RFQGROUP,
+        RFQSERIES,
+        SUBCONTRACTINRDERDESCRIPTION,
+        SUBCONTRACTINRDERID,
+        WAREHOUSINRDERTYPE
+    from {{ ref('ODS__BAAN__BAANDISTRIBUTIONPURCHASECONTROL_PURCHASEORDERTYPES') }}
+),
+
+transform_data AS
+(
+    select * from source_data
+)
+
+    select * from transform_data

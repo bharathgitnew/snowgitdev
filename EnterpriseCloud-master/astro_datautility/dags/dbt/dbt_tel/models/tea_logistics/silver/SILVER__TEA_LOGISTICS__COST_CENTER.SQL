@@ -1,0 +1,48 @@
+{{ config(
+    	  materialized='tel_incremental',
+    	  incremental_strategy='insert_overwrite',
+        tags=["insert_overwrite_tea_logistics"],
+    	  alias='COST_CENTER',
+    	  transient=false	
+) }} 
+
+
+WITH CSKT AS (
+SELECT * 
+FROM {{ ref('BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU092_CSKT') }}
+WHERE SPRAS='EN'
+AND TO_DATE(DATBI,'YYYYMMDD')>CURRENT_DATE
+)
+,SOURCE_DATA as (
+SELECT 
+	CSKS.KOSTL AS COST_CENTER_CODE,
+	CSKT.LTEXT AS COST_CENTER_NAME,
+	CSKS.BUKRS AS COMPANY_CODE,
+	TO_DATE(CSKS.UPDATE_DATE,'YYYYMMDD') AS UPDATE_DATE
+FROM {{ ref('BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU036_CSKS') }} CSKS
+LEFT JOIN CSKT on CSKS.KOSTL=CSKT.KOSTL
+QUALIFY (ROW_NUMBER() OVER (PARTITION BY CSKS.KOSTL ORDER BY TO_DATE(CSKS.UPDATE_DATE,'YYYYMMDD') DESC))=1
+)
+,TRANSFORM_DATA AS (
+SELECT
+	'{{ invocation_id }}' AS _AUDIT_LOG_ID,
+	SHA2('hash_me') as _ROW_HASH,
+	COST_CENTER_CODE,
+	COST_CENTER_NAME,
+	COMPANY_CODE,
+	UPDATE_DATE
+FROM SOURCE_DATA
+)
+
+,type_data as 
+(
+    select
+        CAST(_AUDIT_LOG_ID as VARCHAR(128)) as _AUDIT_LOG_ID,
+        CAST(_ROW_HASH AS VARCHAR(128)) AS _ROW_HASH,
+		COST_CENTER_CODE,
+		COST_CENTER_NAME,
+		COMPANY_CODE,
+		CAST(UPDATE_DATE AS DATE) AS UPDATE_DATE
+    from transform_data
+    )
+select * from type_data

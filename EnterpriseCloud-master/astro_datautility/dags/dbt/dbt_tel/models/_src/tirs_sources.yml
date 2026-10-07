@@ -1,0 +1,22 @@
+version: 2
+sources:
+- name: TIRS
+  description: Landing Zone - TIRS Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: TIRS
+  tables:
+  - name: ACCIDENTREPORTSFORUS_NOLOCK
+    identifier: ACCIDENTREPORTSFORUS_NOLOCK
+    description: Landing table for ACCIDENTREPORTSFORUS_NOLOCK file.
+  - name: ACCIDENTWORKFLOWPROGRESSFORUS_NOLOCK
+    identifier: ACCIDENTWORKFLOWPROGRESSFORUS_NOLOCK
+    description: Landing table for ACCIDENTWORKFLOWPROGRESSFORUS_NOLOCK file.
+  - name: TRAFFICREPORTSFORUS_NOLOCK
+    identifier: TRAFFICREPORTSFORUS_NOLOCK
+    description: Landing table for TRAFFICREPORTSFORUS_NOLOCK file.
+  - name: TRAFFICWORKFLOWPROGRESSFORUS_NOLOCK
+    identifier: TRAFFICWORKFLOWPROGRESSFORUS_NOLOCK
+    description: Landing table for TRAFFICWORKFLOWPROGRESSFORUS_NOLOCK file.
+  - name: ACCIDENTREPORTSFORTMEA_NOLOCK
+    identifier: ACCIDENTREPORTSFORTMEA_NOLOCK
+    description: Landing table for ACCIDENTREPORTSFORTMEA_NOLOCK file.  

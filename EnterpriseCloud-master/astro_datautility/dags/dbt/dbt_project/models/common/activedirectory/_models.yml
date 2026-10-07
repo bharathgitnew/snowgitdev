@@ -1,0 +1,11 @@
+version: 2
+models:
+- name: COMMON__ACTIVEDIRECTORY__EMPLOYEE
+  description: Model activedirectory Employee file.
+  columns:
+  - name: UserID
+    description: The pk of the group.
+  - name: Audit_Log_Id
+    description: Ack
+  - name: _Row_Hash
+    description: Ack

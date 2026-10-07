@@ -1,0 +1,10 @@
+version: 2
+sources:
+- name: ODS_SAPH
+  database: "{{ env_var('SNOWFLAKE_ODS', 'ODS') }}"
+  schema: SAPH
+  tables:
+  # temporarily need GMX data to be included in live Bronze model. This source can be removed once the Bronze model is repointed to use SAPH entirely.
+  - name: SAP_COM_EV_AUFK
+    identifier: SAP_COM_EV_AUFK
+  

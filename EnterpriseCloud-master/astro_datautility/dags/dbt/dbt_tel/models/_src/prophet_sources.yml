@@ -1,0 +1,19 @@
+version: 2
+sources:
+- name: PROPHET
+  description: Landing Zone - PROPHET Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: PROPHET
+  tables:
+  - name: DEMANDRETURN
+    identifier: DEMANDRETURN
+    description: Landing table for DEMANDRETURN file.
+  - name: DEMAND
+    identifier: DEMAND
+    description: Landing table for DEMAND file.
+  - name: INVENTORY
+    identifier: INVENTORY
+    description: Landing table for INVENTORY file.
+  - name: ORDERS
+    identifier: ORDERS
+    description: Landing table for ORDERS file.

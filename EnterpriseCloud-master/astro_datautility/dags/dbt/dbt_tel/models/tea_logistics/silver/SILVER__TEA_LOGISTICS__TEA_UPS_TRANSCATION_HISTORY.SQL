@@ -1,0 +1,358 @@
+{{ config(
+        materialized='tel_incremental',
+        incremental_strategy='insert_overwrite',
+        tags=["insert_overwrite_tea_logistics"],
+        alias='TEA_UPS_TRANSCATION_HISTORY',
+        transient=false
+) }}
+
+WITH
+SHIP as (
+    select
+        SHIP.TPL_ORDER_NUMBER,
+        SHIPMENT_CONFIRMATION_ID,
+        try_to_number(DOCUMENT_NUMBER) as DOCUMENT_NUMBER,
+        try_to_number(LINE_NUMBER) as LINE_NUMBER,
+        SHIP.MATERIAL_NUMBER,
+        SHIP.WMS_BATCH_NUMBER,
+        PICKING_QUANTITY,
+        GOODS_ISSUE_DATE,
+        STORAGE_LOCATION,
+        case when mara.XCHPF = 'true' then 'BATCH' else 'No Batch' end as SAP_Batch_Flag
+    from
+        {{ ref('BRONZE__TEA_LOGISTICS__THREEPL_TPL_SHIPMENT_CONFIRMATION') }} as SHIP
+    inner join  {{ ref('BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU017_MARA') }}  as mara on mara.Matnr = Material_number --General material data
+  where SHIp.MATERIAL_NUMBER is not null 
+),
+
+ADVICE as (
+    select
+        '' AS TPL_ORDER_NUMBER,
+        RECEIVING_ADVICE_ID AS RECEIVING_ADVICE_ID,
+        try_to_number(DOCUMENT_NUMBER) as DOCUMENT_NUMBER,
+        try_to_number(LINE_NUMBER) as LINE_NUMBER,
+        ADVICE.MATERIAL_NUMBER,
+        ADVICE.WMS_BATCH as WMS_BATCH_NUMBER,
+        RECEIPT_QUANTITY,
+     case when mara.XCHPF = 'true' then 'BATCH' else 'NO_BATCH' end as SAP_Batch_Flag
+        FROM {{ ref('BRONZE__TEA_LOGISTICS__THREEPL_TPL_RECEIVING_ADVICE') }} as advice
+   inner join  {{ ref('BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU017_MARA') }}  as mara on mara.Matnr = Material_number--General material data
+   where MATERIAL_NUMBER is not null 
+),
+
+ADVICE_SHIP as (
+    select
+        TPL_ORDER_NUMBER,---
+        DOCUMENT_NUMBER,
+        LINE_NUMBER,
+        MATERIAL_NUMBER,
+        LISTAGG(DISTINCT WMS_BATCH_NUMBER,'|') WITHIN GROUP (ORDER BY WMS_BATCH_NUMBER) AS WMS_BATCH_NUMBER,
+        SAP_Batch_Flag,
+        LISTAGG(DISTINCT RECEIVING_ADVICE_ID,'|') WITHIN GROUP (ORDER BY RECEIVING_ADVICE_ID) AS ADVICE_ID,
+        '' as SHIP_ID,
+        sum(RECEIPT_QUANTITY) as ADVICE_QUANTITY,
+         0 as PICKING_QUANTITY
+    from
+        ADVICE
+    group by
+        DOCUMENT_NUMBER,LINE_NUMBER,MATERIAL_NUMBER,SAP_Batch_Flag,TPL_ORDER_NUMBER
+  union all 
+      select
+        TPL_ORDER_NUMBER,
+        DOCUMENT_NUMBER,
+        LINE_NUMBER,
+        MATERIAL_NUMBER,
+         LISTAGG(DISTINCT WMS_BATCH_NUMBER,'|') WITHIN GROUP (ORDER BY WMS_BATCH_NUMBER) AS WMS_BATCH_NUMBER,
+        SAP_Batch_Flag,
+         '' as ADVICE_ID,
+       LISTAGG(DISTINCT SHIPMENT_CONFIRMATION_ID,'|') WITHIN GROUP (ORDER BY SHIPMENT_CONFIRMATION_ID) AS SHIP_ID,
+        0 as ADVICE_QUANTITY,
+        sum(PICKING_QUANTITY) as PICKING_QUANTITY
+    from
+        SHIP
+    group by
+        DOCUMENT_NUMBER,LINE_NUMBER,MATERIAL_NUMBER,SAP_Batch_Flag,TPL_ORDER_NUMBER
+),
+
+ADVICE_SHIP_AGG as (
+    select
+        DOCUMENT_NUMBER,
+        LINE_NUMBER,
+        concat(DOCUMENT_NUMBER,LINE_NUMBER) as PRIMARY_KEY,
+        MATERIAL_NUMBER,
+        WMS_BATCH_NUMBER,
+        SAP_Batch_Flag,
+        TPL_ORDER_NUMBER,
+        LISTAGG(DISTINCT ADVICE_ID,'|') WITHIN GROUP (ORDER BY ADVICE_ID DESC) AS ADVICE_ID,
+        LISTAGG(DISTINCT SHIP_ID,'|') WITHIN GROUP (ORDER BY SHIP_ID DESC) AS SHIP_ID,
+        sum(ADVICE_QUANTITY) as ADVICE_QUANTITY,
+        sum(PICKING_QUANTITY) as PICKING_QUANTITY
+    from
+        ADVICE_SHIP
+    group by
+         DOCUMENT_NUMBER,
+        LINE_NUMBER,
+        MATERIAL_NUMBER,
+        WMS_BATCH_NUMBER,
+        SAP_Batch_Flag,
+        TPL_ORDER_NUMBER
+ 
+),
+DELIVERY as (
+    SElect
+        LTRIM(lips.VBELN,'0') AS LIPS_DELIVERY,
+        LTRIM(lips.POSNR,'0') AS DELIVERY_ITEM_POSNR,
+        lips.PSTYV as item_cat,
+        LTRIM(lips.VGBEL,'0') as REFERENCE,
+        LTRIM(lips.VGPOS,'0') as REFERENCE_ITEM,
+        lips.MATNR AS MATERIAL_NUMBER,
+        lips.LGORT AS STORAGE_LOCATION,
+        lips.CHARG AS SAP_BATCH_NUMBER,
+        lips.LICHN AS SUPPLIER_BATCH_NUMBER,
+        lips.LFIMG AS ACTUAL_QUANTITY_DELIVERED,
+        likp.ERDAT AS LIKP_DELIVERY_CREATE_DATE,
+        LIKP.KUNNR AS SHIP_TO_PARTY,----ADDED SHIP TO PARTY
+        likp.LFART AS DELIVERY_TYPE,
+        LIPS.VRKME as UNIT,
+        case when mara.XCHPF = 'true' then 'BATCH' else 'NO_BATCH' end as SAP_Batch_Flag,
+          case when SUBSTR(REFERENCE,0,1) = '4' then 'INBOUND' 
+         when SUBSTR(REFERENCE,0,1) = '1' then 'OUTBOUND'  
+         else 'OTHERS' end as INDICATOR
+        FROM
+        {{ ref('BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU013_LIPS') }} lips--delivery item data
+        INNER JOIN {{ ref('BRONZE__TEA_LOGISTICS__ZCDV_T_CMTU012_LIKP') }} likp ON try_to_number(lips.VBELN) = try_to_number(likp.VBELN)
+       inner join  {{ ref('BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU017_MARA') }}  as mara on mara.Matnr = lips.matnr
+       where ACTUAL_QUANTITY_DELIVERED > 0  AND LIPS.IS_DELETED = 'No'  AND likp.IS_DELETED = 'No'),
+
+ DELIVERY_AGG as ( 
+ select  LIPS_DELIVERY as DOCUMENT_NUMBER,
+        DELIVERY_ITEM_POSNR as LINE_NUMBER,
+        DELIVERY_TYPE,
+        item_cat,
+        REFERENCE,
+        REFERENCE_ITEM,
+        MATERIAL_NUMBER,
+        SAP_BATCH_NUMBER,
+        STORAGE_LOCATION,
+        SAP_Batch_Flag,
+        SHIP_TO_PARTY,
+        UNIT,
+        INDICATOR,
+        sum(ACTUAL_QUANTITY_DELIVERED) as ACTUAL_QUANTITY,
+         case when item_cat in ('ZS11','ZS12','ZS10')
+         then LTRIM(REFERENCE_ITEM,'0')
+         else LTRIM(DELIVERY_ITEM_POSNR,'0')  end as REF_LINE,
+         case when item_cat in ('ZS11','ZS12','ZS10')
+         then LTRIM(REFERENCE,'0')
+         else LTRIM(LIPS_DELIVERY,'0')  end as REF_DOC    
+    from DELIVERY 
+         group by 
+        LIPS_DELIVERY ,DELIVERY_ITEM_POSNR ,DELIVERY_TYPE, MATERIAL_NUMBER,INDICATOR,
+        SAP_BATCH_NUMBER,STORAGE_LOCATION,item_cat,REFERENCE_ITEM,REFERENCE,SAP_Batch_Flag,UNIT,SHIP_TO_PARTY
+),
+
+
+MOVEMENT as (
+    select distinct
+        GJAHR as MATERIAL_DOCUMENT_YEAR,
+        MBLNR as MATERIAL_DOCUMENT,
+        ZEILE as LINE,
+        case when SHKZG = 'S' then menge else menge * -1 end AS qty,
+        CASE when BWART in ('101','102') then QTY else 0 end as  GR,
+        case when BWART in ('647','648','641','642' ) then QTY else 0 end as  PGI,
+        case when BWART in ( '601','602' ) then QTY else 0 end as  CONSUMPTION,
+        case when BWART in ( '161','162' ) then QTY else 0 end as  VENDOR_RETURNS,
+        case when BWART in ('653','632','654','631') then QTY else 0 end as OTHERS,
+        MATDOC.MATNR as MATERIAL_NUMBER,
+        MATDOC.BKTXT AS DOCUMENT_HEADER_TEXT,
+        LGORT as STORAGE_LOCATION,
+        BUDAT as POSTING_DATE,
+        CHARG as BATCH_NUMBER,
+        BWART as MOV_Type,
+        EBELN as REF_DOC,
+        EBELP as REF_LINE,
+TRIM(case when VBELN_IM is null and LE_VBELN is not null  then LTRIM(LE_VBELN,'0')
+when VBELN_IM is not null and LE_VBELN is null then LTRIM(VBELN_IM,'0') 
+else ltrim(XBLNR,'0')
+end )as delivery,
+case when VBELP_IM = '000000'  then '0'  else LTRIM(VBELP_IM,'0') end as DELIVERY_LINE,
+MATDOC.MEINS as UNIT,
+case when mara.XCHPF = 'true' then 'BATCH' else 'NO_BATCH' end as SAP_Batch_Flag
+from {{ ref('BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU025_MATDOC') }}  as MATDOC                                  --Store material document information
+inner join  {{ ref('BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU017_MARA') }}  as mara on mara.Matnr = MATDOC.matnr
+where BWART in ('601','602','631','641','642','101','102','647','653','632','654','648','161','162')
+),
+
+
+MOV_AGG AS(
+SELECT 
+LISTAGG( MOV_Type,'|') WITHIN GROUP (ORDER BY POSTING_DATE)  AS MOV_Type,
+listagg(concat( MATERIAL_DOCUMENT,'-',LINE ),'|') within group (order by POSTING_DATE,concat( MATERIAL_DOCUMENT,'-',LINE ) ) as MOV_DOC,
+STORAGE_LOCATION,
+case when Sum(GR) < 0 then sum(GR) * -1 else sum(GR) end as GR,
+case when SUM(PGI) < 0 then SUM(PGI) * -1 else SUM(PGI) end as PGI,
+case when SUM(CONSUMPTION) < 0 then SUM(CONSUMPTION) * -1 else SUM(CONSUMPTION) end as CONSUMPTION,
+case when SUM(VENDOR_RETURNS) < 0 then SUM(VENDOR_RETURNS)* -1 else SUM(VENDOR_RETURNS) end as VENDOR_RETURNS,
+case when SUM(OTHERS) < 0 then SUM(OTHERS) * -1 else SUM(OTHERS) end as OTHERS,
+DELIVERY,
+LTRIM(DELIVERY_LINE,'0') as DELIVERY_LINE, 
+MATERIAL_NUMBER,
+BATCH_NUMBER,
+LTRIM(REF_DOC,'0') as REF_DOC,
+LTRIM(REF_LINE,'0') as REF_LINE,
+SAP_Batch_Flag,
+UNIT,
+DOCUMENT_HEADER_TEXT
+FROM MOVEMENT
+WHERE BATCH_NUMBER <> ''
+GROUP BY delivery,delivery,MATERIAL_NUMBER,BATCH_NUMBER,DELIVERY_LINE,REF_DOC,REF_LINE,SAP_Batch_Flag,UNIT,STORAGE_LOCATION,DOCUMENT_HEADER_TEXT
+),
+MOV_DEL as (
+select 
+    MOV.MATERIAL_NUMBER,
+    MOV.BATCH_NUMBER,
+    MOV.STORAGE_LOCATION,
+    --case when DEL.DOCUMENT_NUMBER = '' then moV.DELIVERY else DEL.DOCUMENT_NUMBER end as DELIVERY,
+    --case when DEL.LINE_NUMBER = '' then MOV.DELIVERY_LINE else DEL.LINE_NUMBER  end as DELIVERY_LINE,
+    DEL.DOCUMENT_NUMBER  as DELIVERY,
+    DEL.LINE_NUMBER  as DELIVERY_LINE,
+    to_number(DEL.ACTUAL_QUANTITY) as DEL_QTY,
+    MOV.REF_DOC as SO_PO,
+    MOV.REF_LINE as SO_PO_line,
+    DEL.SHIP_TO_PARTY,
+    MOV_Type,
+    MOV_DOC,
+    GR,
+    PGI,
+    VENDOR_RETURNS,
+    CONSUMPTION,
+    OTHERS,
+    MOV.DOCUMENT_HEADER_TEXT
+from MOV_AGG as mov 
+left join DELIVERY_AGG as del
+on DEL.DOCUMENT_NUMBER = moV.DELIVERY
+and  DEL.MATERIAL_NUMBER = MOV.MATERIAL_NUMBER
+and DEL.SAP_BATCH_NUMBER = MOV.BATCH_NUMBER 
+and DEL.REFERENCE = MOV.REF_DOC
+and  DEL.REFERENCE_ITEM = MOV.REF_LINE
+where GR > 0 or PGI > 0 or VENDOR_RETURNS > 0 
+union all 
+select MOV.MATERIAL_NUMBER,
+MOV.BATCH_NUMBER,
+MOV.STORAGE_LOCATION,
+--case when DEL.DOCUMENT_NUMBER = '' then moV.DELIVERY else DEL.DOCUMENT_NUMBER end as DELIVERY,
+--case when DEL.LINE_NUMBER = '' then MOV.DELIVERY_LINE else DEL.LINE_NUMBER  end as DELIVERY_LINE,
+DEL.DOCUMENT_NUMBER  as DELIVERY,
+DEL.LINE_NUMBER as DELIVERY_LINE,
+DEL.ACTUAL_QUANTITY as DEL_QTY,
+DEL.REFERENCE as SO_PO,
+DEL.REFERENCE_ITEM as SO_PO_line,
+DEL.SHIP_TO_PARTY,
+MOV_Type,
+MOV_DOC,
+GR,
+PGI,
+VENDOR_RETURNS,
+CONSUMPTION,
+OTHERS,
+MOV.DOCUMENT_HEADER_TEXT
+from MOV_AGG as mov 
+left join DELIVERY_AGG as del
+on DEL.DOCUMENT_NUMBER = moV.DELIVERY
+and  DEL.MATERIAL_NUMBER = MOV.MATERIAL_NUMBER
+and DEL.SAP_BATCH_NUMBER = MOV.BATCH_NUMBER 
+where  CONSUMPTION > 0 or  OTHERS > 0 
+),
+
+source_data as (
+select 
+    MOV.MATERIAL_NUMBER,
+    MOV.BATCH_NUMBER,
+    MOV.STORAGE_LOCATION,
+    MOV.DELIVERY,
+    MOV.DELIVERY_LINE,
+    sum(MOV.DEL_QTY) as DELiVERY_QTY,
+    MOV.SO_PO as SALES_OR_PURCHASE_ORDER,
+    MOV.SO_PO_line as SALES_OR_PURCHASE_ORDER_LINE,
+    MOV_Type as MOVEMENT_TYPE,
+    MOV_DOC as MOVEMENT_DOCUMENT,
+    sum(GR) as GOODS_RECEIVE,
+    sum(PGI) as POST_GOOD_ISSUE,
+    sum(VENDOR_RETURNS) as VENDOR_RETURNS,
+    sum(CONSUMPTION) as CONSUMPTION,
+    sum(OTHERS) as OTHERS ,
+    ADVICE_SHIP.WMS_BATCH_NUMBER,
+    ADVICE_SHIP.SHIP_ID,
+    MOV.SHIP_TO_PARTY,
+    sum(ADVICE_SHIP.PICKING_QUANTITY) AS PICKING_QUANTITY,
+    ADVICE_SHIP.ADVICE_ID,
+    sum(ADVICE_SHIP.ADVICE_QUANTITY) AS ADVICE_QUANTITY,
+    ADVICE_SHIP.TPL_ORDER_NUMBER AS TPL_ORDER_NUMBER,
+    MOV.DOCUMENT_HEADER_TEXT
+from MOV_DEL as MOV
+left join ADVICE_SHIP_AGG as ADVICE_SHIP 
+on MOV.DELIVERY = ADVICE_SHIP.DOCUMENT_NUMBER
+and MOV.DELIVERY_LINE = ADVICE_SHIP.LINE_NUMBER
+and MOV.MATERIAL_NUMBER = ADVICE_SHIP.MATERIAL_NUMBER
+group by all
+)
+,
+transform_data as (
+SELECT 
+    '{{ invocation_id }}' as _AUDIT_LOG_ID,
+    SHA2('hash_me') as _ROW_HASH,
+    MATERIAL_NUMBER,
+    BATCH_NUMBER,
+    STORAGE_LOCATION,
+    DELIVERY,
+    DELIVERY_LINE,
+    DELIVERY_QTY ,
+    SALES_OR_PURCHASE_ORDER,
+    SALES_OR_PURCHASE_ORDER_LINE,
+    MOVEMENT_TYPE,
+    MOVEMENT_DOCUMENT,
+    GOODS_RECEIVE ,
+    POST_GOOD_ISSUE ,
+    VENDOR_RETURNS ,
+    CONSUMPTION ,
+    OTHERS ,
+    WMS_BATCH_NUMBER,
+    SHIP_ID,
+    SHIP_TO_PARTY,
+    PICKING_QUANTITY ,
+    ADVICE_ID,
+    ADVICE_QUANTITY ,
+    TPL_ORDER_NUMBER,
+    DOCUMENT_HEADER_TEXT
+FROM SOURCE_DATA
+),
+TYPE_DATA AS (
+SELECT 
+    CAST(_AUDIT_LOG_ID as VARCHAR(128)) as _AUDIT_LOG_ID,
+	CAST(_ROW_HASH AS VARCHAR(128)) AS _ROW_HASH,
+    MATERIAL_NUMBER,
+    BATCH_NUMBER,
+    STORAGE_LOCATION,
+    DELIVERY,
+    DELIVERY_LINE,
+    DELIVERY_QTY ,
+    SALES_OR_PURCHASE_ORDER,
+    SALES_OR_PURCHASE_ORDER_LINE,
+    MOVEMENT_TYPE,
+    MOVEMENT_DOCUMENT,
+    GOODS_RECEIVE ,
+    POST_GOOD_ISSUE ,
+    VENDOR_RETURNS ,
+    CONSUMPTION ,
+    OTHERS ,
+    WMS_BATCH_NUMBER,
+    SHIP_ID,
+    SHIP_TO_PARTY,
+    PICKING_QUANTITY ,
+    ADVICE_ID,
+    ADVICE_QUANTITY ,
+    TPL_ORDER_NUMBER,
+    DOCUMENT_HEADER_TEXT
+FROM TRANSFORM_DATA
+)
+SELECT * FROM TYPE_DATA

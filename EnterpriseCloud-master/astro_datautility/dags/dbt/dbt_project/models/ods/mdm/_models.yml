@@ -1,0 +1,94 @@
+version: 2
+models:
+- name: ODS__MDM__ARIBASECURITY
+  description: Model MDM AribaSecurity file.
+- name: ODS__MDM__BAANORDERSERIES
+  description: Model MDM BaanOrderSeries file.
+- name: ODS__MDM__COMPANY
+  description: Model MDM Company file.
+- name: ODS__MDM__CONTRACTBUNDLETERMS
+  description: Model MDM ContractBundleTerms file.
+- name: ODS__MDM__CONTRACT_FLXTSR
+  description: Model MDM Contract_FLXTSR file.
+- name: ODS__MDM__CONTRACT_FLX_TRANSITIONHRS
+  description: Model MDM Contract_FLX_TransitionHRs file.
+- name: ODS__MDM__COSTCENTERWITHBUDGETCOORDINATOR
+  description: Model MDM CostCenterwithBudgetCoordinator file.
+- name: ODS__MDM__CUSTOMER
+  description: Model MDM Customer file.
+- name: ODS__MDM__CUSTOMER_GROUP_MAPPING
+  description: Model MDM Customer_Group_Mapping file.
+- name: ODS__MDM__EMPLOYEES_JOB_TITLE_MAPPING
+  description: Model MDM Employees_Job_Title_Mapping file.
+- name: ODS__MDM__EMPLOYEE_ADP_CODE_MAPPING
+  description: Model MDM Employee_ADP_Code_Mapping file.
+- name: ODS__MDM__EMPLOYEE_GROUP_MAPPING
+  description: Model MDM Employee_Group_Mapping file.
+- name: ODS__MDM__EMPLOYEE_TYPE
+  description: Model MDM Employee_Type file.
+- name: ODS__MDM__FINANCIALACCOUNT
+  description: Model MDM FinancialAccount file.
+- name: ODS__MDM__FINANCIALCOSTCENTER
+  description: Model MDM FinancialCostCenter file.
+- name: ODS__MDM__FINANCIALDEPARTMENT
+  description: Model MDM FinancialDepartment file.
+- name: ODS__MDM__FINANCIALPRODUCTTYPE
+  description: Model MDM FinancialProductType file.
+- name: ODS__MDM__FINANCIALSEGMENT
+  description: Model MDM FinancialSegment file.
+- name: ODS__MDM__FST_STARTUP_SUPERVISORS
+  description: Model MDM FST_Startup_Supervisors file.
+- name: ODS__MDM__KRONOS_SHIFT_TABLE
+  description: Model MDM Kronos_Shift_Table file.
+- name: ODS__MDM__KRONOS_TYPE_OF_WORK_GROUP
+  description: Model MDM Kronos_Type_Of_Work_Group file.
+- name: ODS__MDM__MACHINEBU
+  description: Model MDM MachineBU file.
+- name: ODS__MDM__MACHINE_CHAMBER_EXCEPTION_LIST
+  description: Model MDM Machine_Chamber_Exception_List file.
+- name: ODS__MDM__MACHINE_MODEL_GROUP
+  description: Model MDM Machine_Model_Group file.
+- name: ODS__MDM__MACHINE_STATUS_MAPPING
+  description: Model MDM Machine_Status_Mapping file.
+- name: ODS__MDM__MACHINE_WAFER_SIZE
+  description: Model MDM Machine_Wafer_Size file.
+- name: ODS__MDM__MANAGERSERVICEGROUP
+  description: Model MDM ManagerServiceGroup file.
+- name: ODS__MDM__MANAGER_EMPLOYEE_GROUP
+  description: Model MDM Manager_Employee_Group file.
+- name: ODS__MDM__OFFICE
+  description: Model MDM Office file.
+- name: ODS__MDM__ORACLEEPBCSACCOUNT
+  description: Model MDM OracleEPBCSAccount file.
+- name: ODS__MDM__PAID_SERVICE_CUSTOMER_PO
+  description: Model MDM Paid_Service_Customer_PO file.
+- name: ODS__MDM__PAID_SERVICE_EXCEPTION_PRICING
+  description: Model MDM Paid_Service_Exception_Pricing file.
+- name: ODS__MDM__PAID_SERVICE_SO_REQUEST
+  description: Model MDM Paid_Service_SO_Request file.
+- name: ODS__MDM__PDS_HOURLY_RATE
+  description: Model MDM PDS_Hourly_Rate file.
+- name: ODS__MDM__PDS_QUOTE_REQUEST
+  description: Model MDM PDS_Quote_Request file.
+- name: ODS__MDM__SALESACCOUNTREGION
+  description: Model MDM SalesAccountRegion file.
+- name: ODS__MDM__SEGMENTBRIDGE
+  description: Model MDM SegmentBridge file.
+- name: ODS__MDM__SEGMENTMAPPING
+  description: Model MDM SegmentMapping file.
+- name: ODS__MDM__TASTASK
+  description: Model MDM TASTask file.
+- name: ODS__MDM__TASTYPEOFWORK
+  description: Model MDM TASTypeOfWork file.
+- name: ODS__MDM__TEACPPPARTS
+  description: Model MDM TEACPPParts file.
+- name: ODS__MDM__TEAITEMS
+  description: Model MDM TEAItems file.
+- name: ODS__MDM__TIMECARDPAYCODE
+  description: Model MDM TimecardPaycode file.
+- name: ODS__MDM__TYPEOFWORKBRIDGE
+  description: Model MDM TypeOfWorkBridge file.
+- name: ODS__MDM__WAREHOUSE
+  description: Model MDM Warehouse file.
+- name: ODS__MDM__FST_KRONOS_WRENCH_TIME_MAPPING
+  description: Model MDM FST_Kronos_Wrench_Time_Mapping file.

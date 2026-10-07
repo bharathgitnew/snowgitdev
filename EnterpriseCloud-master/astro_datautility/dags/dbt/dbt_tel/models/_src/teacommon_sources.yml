@@ -1,0 +1,30 @@
+version: 2
+sources:
+- name: TEACOMMON
+  description: Landing Zone - TEACOMMON Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: TEACOMMON
+  tables:
+  - name: EMPLOYEE
+    identifier: Employee
+    description: Landing table for Employee file.
+  - name: EMPLOYEE_JSON
+    identifier: Employee_JSON
+    description: Landing table for Employee_JSON file.
+  - name: LOCATIONS
+    identifier: LOCATIONS
+    description: Landing table for LOCATIONS file.
+  - name: PRODUCTLINES
+    identifier: PRODUCTLINES
+    description: Landing table for PRODUCTLINES file.
+  - name: DEPARTMENTS
+    identifier: DEPARTMENTS
+    description: Landing table for DEPARTMENTS file.
+- name: LEGACY93
+  description: Landing Zone - LEGACY93 Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: LEGACY93
+  tables:
+  - name: FST_EMPLOYEES_HISTORY
+    identifier: FST_EMPLOYEES_HISTORY
+    description: Landing table for FST_EMPLOYEES_HISTORY file.

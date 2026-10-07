@@ -1,0 +1,70 @@
+{{ config(
+    materialized='incremental',
+    incremental_strategy='insert_overwrite',
+    alias='SAP_DEPARTMENT'
+) }}
+
+with source_data as
+(
+    SELECT
+		_FILENAME,
+		_FILEDATE,
+		ORACLE_CODE,
+		ORACLE_NAME,
+		SAP_CODE,
+		SAP_NAME,
+        BAAN.DEPARTMENT_ID AS BAAN_CODE,    
+        BAAN.DEPARTMENT_NAME AS BAAN_DESCRIPTION,
+        CREATED,
+        MODIFIED,
+        CREATEDBY,
+        MODIFIEDBY
+    FROM {{ ref('ODS__SHAREPOINT__ORACLE_DEPARTMENT') }} AS DEP
+    LEFT JOIN (SELECT ORACLE_DEPT_ID,DEPARTMENT_ID,DEPARTMENT_NAME FROM {{ source('EDW__DE', 'D_DEPARTMENT') }} 
+    WHERE DW_CURRENT_INDICATOR='Y') BAAN
+        ON DEP.ORACLE_CODE = BAAN.ORACLE_DEPT_ID
+  QUALIFY (ROW_NUMBER() OVER (PARTITION BY SAP_CODE  ORDER BY MODIFIED DESC)) = 1
+
+   
+)
+
+,transform_data as
+(
+    SELECT
+		_FILENAME,
+		_FILEDATE,
+		ORACLE_CODE,
+		ORACLE_NAME AS ORACLE_DESCRIPTION,
+		SAP_CODE,
+		SAP_NAME AS SAP_DESCRIPTION,
+        BAAN_CODE,
+        BAAN_DESCRIPTION,
+        '{{ invocation_id }}' AS _AUDIT_LOG_ID,
+        SHA2('hash_me') as _ROW_HASH,
+        CREATED,
+        MODIFIED,
+        CREATEDBY,
+        MODIFIEDBY
+        FROM source_data
+)
+
+,type_data as
+(
+    select
+        CAST(_FILENAME AS VARCHAR(16777216)) AS _FILENAME,
+        CAST(_FILEDATE AS TIMESTAMP_NTZ(9)) AS _FILEDATE,
+        CAST(_AUDIT_LOG_ID AS VARCHAR(128)) AS _AUDIT_LOG_ID,
+        CAST(_ROW_HASH AS VARCHAR(128)) AS _ROW_HASH,
+        CAST(ORACLE_CODE AS VARCHAR(16777216)) AS ORACLE_CODE,
+        CAST(ORACLE_DESCRIPTION AS VARCHAR(16777216)) AS ORACLE_DESCRIPTION,
+        CAST(SAP_CODE AS VARCHAR(16777216)) AS SAP_CODE,
+        CAST(SAP_DESCRIPTION AS VARCHAR(16777216)) AS SAP_DESCRIPTION,
+        BAAN_CODE,
+        BAAN_DESCRIPTION,
+        CREATED,
+        MODIFIED,
+        CREATEDBY,
+        MODIFIEDBY
+    from transform_data
+    )
+select * from type_data

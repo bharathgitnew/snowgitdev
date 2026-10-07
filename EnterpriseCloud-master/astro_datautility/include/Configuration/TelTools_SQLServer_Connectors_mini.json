@@ -1,0 +1,280 @@
+{
+  "TIRS": {
+    "connections": "tirs",
+    "servername": "telissafety12.asia.tel.com",
+    "database": "SafetyVics",
+    "username": "TIRS-USERNAME",
+    "password": "TIRS-PASSWORD",
+    "outputfolder": "Tirs"
+  },
+  "TELQS": {
+    "connections": "telqs",
+    "servername": "teloutdbp001.asia.tel.com",
+    "database": "outsystems",
+    "username": "TELQuoteSystem-Username",
+    "password": "TELQuoteSystem-Password",
+    "outputfolder": "TELQS"
+  },
+  "MDM": {
+    "connections": "mdm",
+    "servername": "TELUSDW",
+    "database": "MDS",
+    "outputfolder": "MDM"
+  },
+  "REDGATE": {
+    "connections": "Redgate",
+    "servername": "TELUSDWBuild1",
+    "database": "RedGateMonitor2",
+    "outputfolder": "Redgate"
+  },
+  "LEGACY93": {
+    "connections": "LEGACY93",
+    "servername": "teaaus0093",
+    "database": "TELReporting",
+    "outputfolder": "LEGACY93"
+  },
+  "GEM": {
+    "connections": "gem",
+    "servername": "TELGEMDBT001.asia.tel.com",
+    "database": "GEM",
+    "username": "GEMReference_Snowflake",
+    "password": "GEMSNOWFLAKE",
+    "outputfolder": "GEM"
+  },
+  "CARMA": {
+    "connections": "Carma",
+    "servername": "teaaus0021.us.tel.com",
+    "database": "Carma",
+    "username": "carma_user",
+    "password": "CARMAUSER",
+    "outputfolder": "Carma"
+  },
+  "CSDPRO": {
+    "connections": "csdpro",
+    "servername": "TEHAUS0164\\SQL2017",
+    "database": "CSDPro2",
+    "username": "TELUSDW",
+    "password": "CSDPro-Password",
+    "outputfolder": "CSDPRO"
+  },
+  "ROSETTA": {
+    "connections": "rosetta",
+    "servername": "TEHAUS0164",
+    "database": "RosettaNet",
+    "username": "rosetta_rpt",
+    "password": "Rosetta-Password",
+    "outputfolder": "Rosetta"
+  },
+  "TEACOMMON": {
+    "connections": "teacommon",
+    "servername": "TEAAUS0021",
+    "database": "TEACommon",
+    "username": "bietl",
+    "password": "TEACommon-bietl",
+    "outputfolder": "TEACommon"
+  },
+  "MYSKILLS": {
+    "connections": "myskills",
+    "servername": "TELUSDW",
+    "database": "MySkills",
+    "outputfolder": "MySkills"
+  },
+  "LANSWEEPER": {
+    "connections": "lansweeper",
+    "servername": "tehis0511.us.tel.com",
+    "database": "lansweeperdb",
+    "username": "dataxlansweeper",
+    "password": "USDATAXLANSWEEPER",
+    "outputfolder": "Lansweeper"
+  },
+  "TELCUSTOMER": {
+    "connections": "telcustomer",
+    "servername": "telausb2b2223.telcustomer.prod",
+    "database": "TELCUSTOMER_REPORTING",
+    "username": "snowflake.service",
+    "password": "TELCustomer",
+    "outputfolder": "telcustomer"
+  },
+  "TGIS": {
+    "connections": "tgis",
+    "servername": "teloutdbp001.asia.tel.com",
+    "database": "GSD",
+    "username": "TGIS-USERNAME",
+    "password": "TGIS-PASSWORD",
+    "outputfolder": "tgis"
+  },
+  "TELCUSTOMER-GSINTEL": {
+    "connections": "gsintel",
+    "servername": "TELUSDW",
+    "database": "ENTERPRISE_REPORTING",
+    "outputfolder": "gsintel"
+  },
+  "SUPPLIER": {
+    "connections": "supplier",
+    "servername": "telausb2b2223.telcustomer.prod",
+    "database": "TELCUSTOMER_REPORTING",
+    "username": "snowflake.service",
+    "password": "TELCustomer",
+    "outputfolder": "supplier"
+  },
+  "CRMHELPDESK": {
+    "connections": "crmhelpdesk",
+    "servername": "tehhelpdeskdb.database.windows.net",
+    "database": "HELPDESK01",
+    "username": "CRMHELPDESK-USERNAME",
+    "password": "CRMHELPDESK-PASSWORD",
+    "outputfolder": "CRMHelpdesk"
+  },
+  "RTISS": {
+    "connections": "rtiss",
+    "servername": "telisdvics23.asia.tel.com",
+    "database": "RTISS_TPS",
+    "username": "RTISS-USERNAME",
+    "password": "RTISS-PASSWORD",
+    "outputfolder": "rtiss"
+  },
+  "LEGACY93-TEALogistics": {
+    "connections": "LEGACY93",
+    "servername": "teaaus0021",
+    "database": "TEA_Logistics",
+    "username": "TEALogistics-USERNAME",
+    "password": "TEALogistics-PASSWORD",
+    "outputfolder": "LEGACY93"
+  },
+  "LEGACY93-FSTDEPARTMENTAL": {
+    "connections": "FST_DEPARTMENTAL",
+    "servername": "teaaus0093",
+    "database": "FST_DEPARTMENTAL",
+    "outputfolder": "FST_DEPARTMENTAL"
+  },
+  "LEGACY93-TELReporting": {
+    "connections": "TELReporting",
+    "servername": "teaaus0093",
+    "database": "TELReporting",
+    "outputfolder": "TELReporting"
+  },
+  "BAAN-PROD1": {
+    "connections": "shiptoday",
+    "servername": "TELUSDWPROD1",
+    "database": "File_Extract",
+    "outputfolder": "shiptoday"
+  },
+  "LEGACY93-ODSArchive": {
+    "connections": "ODS_Archive",
+    "servername": "teaaus0093",
+    "database": "ODS_Archive",
+    "outputfolder": "ODS_Archive"
+  },
+  "QVICS": {
+    "connections": "QVICS",
+    "servername": "TELISCFSN16.asia.tel.com",
+    "database": "QVICS_c_Portal",
+    "username": "QVICKS-USERNAME",
+    "password": "QVICKS-PASSWORD",
+    "outputfolder": "QVICS"
+  },
+  "QVICS-TMEA": {
+    "connections": "QVICS",
+    "servername": "TELISCFSN16.asia.tel.com",
+    "database": "QVICS_c_TMEA",
+    "username": "QVICKS-USERNAME",
+    "password": "QVICKS-PASSWORD",
+    "outputfolder": "QVICS"
+  },
+  "ThreePL": {
+    "connections": "ThreePL",
+    "servername": "tehaus0164.us.tel.com",
+    "database": "RosettaNet",
+    "username": "tpl_report",
+    "password": "TPLREPORT",
+    "outputfolder": "ThreePL"
+  },
+  "OPT-SALES": {
+    "connections": "OPT",
+    "servername": "teloutdbp002.asia.tel.com",
+    "database": "us_opt",
+    "username": "OPT-USERNAME",
+    "password": "OPT-PASSWORD",
+    "outputfolder": "OPT"
+  },
+  "ADS-MADataSilver": {
+    "connections": "ads-madatasilver",
+    "servername": "TEHAUSTELSQL1\\TELAPPSSQLSVR",
+    "database": "MAData_Silver",
+    "username": "ADS-USER",
+    "password": "ADS-PASSWORD",
+    "outputfolder": "ads-madatasilver"
+  },
+  "ADS-TFFanalytics": {
+    "connections": "ads-tffanalytics",
+    "servername": "TEHAUSTELSQL1\\TELAPPSSQLSVR",
+    "database": "TFF_analytics_prod",
+    "username": "ADS-USER",
+    "password": "ADS-PASSWORD",
+    "outputfolder": "ads-tffanalytics"
+  },
+  "ADS-MADataOutputProduction": {
+    "connections": "ads-madataoutputproduction",
+    "servername": "TEHAUSTELSQL1\\TELAPPSSQLSVR",
+    "database": "MAData_Output_Production",
+    "username": "ADS-USER",
+    "password": "ADS-PASSWORD",
+    "outputfolder": "ads-madataoutputproduction"
+  },
+  "OUTSYSTEMS-ISID": {
+    "connections": "outsystems-isid",
+    "servername": "teloutdbp001.asia.tel.com",
+    "database": "tel_sap_order_workflow",
+    "username": "sap_order_workflow_bulkblist",
+    "password": "OUTSYSTEMS-TEL-SAP-ORDER-WORKFLOW-PASSWORD",
+    "outputfolder": "outsystems-isid"
+  },
+  "TELCUSTOMER-DIVERSESYSTEMS": {
+    "connections": "telcustomer-diversesystems",
+    "servername": "telausb2b2223.telcustomer.prod",
+    "database": "TELCUSTOMER_REPORTING",
+    "username": "snowflake.service",
+    "password": "TELCustomer",
+    "outputfolder": "telcustomer-diversesystems"
+  },
+  "QVICS-NEW": {
+    "connections": "qvics-new",
+    "servername": "telisqvics39.asia.tel.com",
+    "database": "QVICS_c",
+    "username": "TEHUser",
+    "password": "QVICS-NEW-PWD",
+    "outputfolder": "qvics-new"
+  },
+  "GWS": {
+    "connections": "gws",
+    "servername": "teloutdbp002.asia.tel.com",
+    "database": "TEL_GWS",
+    "username": "DevOpsUser-TEH-Sel-DB2",
+    "password": "GWS-DATABASE-PASSWORD",
+    "outputfolder": "gws"
+  },
+  "TELCUSTOMER-MINI": {
+    "connections": "telcustomer",
+    "servername": "telausb2b2223.telcustomer.prod",
+    "database": "TELCUSTOMER_REPORTING",
+    "username": "snowflake.service",
+    "password": "TELCustomer",
+    "outputfolder": "telcustomer"
+  },
+  "QVICS-Trouble": {
+    "connections": "qvics-trouble",
+    "servername": "telissftvicsprdpvsql01sv.database.windows.net",
+    "database": "QVICS",
+    "username": "TEHUser",
+    "password": "QVICS-AZURE-SQL-PROD-PASSWORD",
+    "outputfolder": "qvics-trouble"
+  },
+  "TELCUSTOMER-Adhoc": {
+    "connections": "telcustomer-adhoc",
+    "servername": "telausb2b2223.telcustomer.prod",
+    "database": "TELCUSTOMER_REPORTING",
+    "username": "snowflake.service",
+    "password": "TELCustomer",
+    "outputfolder": "telcustomer-adhoc"
+  }
+}

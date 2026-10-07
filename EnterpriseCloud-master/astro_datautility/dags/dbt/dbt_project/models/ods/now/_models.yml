@@ -1,0 +1,10 @@
+version: 2
+models:
+- name: ODS__NOW__DEFECTIVE_PORTION_TYPES
+  description: Model NOW DEFECTIVE_PORTION_TYPES file.
+- name: ODS__NOW__NCDR_PARTS
+  description: Model NOW NCDR_PARTS file.
+- name: ODS__NOW__NOWDATA
+  description: Model NOW NOWDATA file.
+- name: ODS__NOW__SERIAL_NUMBERS
+  description: Model NOW SERIAL_NUMBERS file.

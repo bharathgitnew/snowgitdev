@@ -1,0 +1,52 @@
+{ 
+    "SAPAPI": {
+        "PROD": {
+            "APP_ID": "0b9a4baf",
+            "URL": "http://172.26.95.57/v1/odata/",
+            "CLIENT": "client100",
+            "METHOD": "/sap/opu/odata/sap/",
+            "CONFIG_FILE_PATH": "/usr/local/airflow/include/Configuration",
+            "INCREMENTAL_FILE_PATH": "/usr/local/airflow/include/Python/RuntimeConfig",
+            "FILE_OUT": "/usr/local/airflow/include/",
+            "USER_NAME": "IF_API_SNOWF",
+            "SAP_API_KEY": "SAP-API-KEY",
+            "THREADS": "20"
+        },
+        "DEV": {
+            "APP_ID": "f507a79b",
+            "URL": "http://172.26.95.57/v1/odata/",
+            "CLIENT": "client210",
+            "METHOD": "/sap/opu/odata/sap/",
+            "CONFIG_FILE_PATH": "/usr/local/airflow/include/Configuration",
+            "INCREMENTAL_FILE_PATH": "/usr/local/airflow/include/Python/RuntimeConfig",
+            "FILE_OUT": "/usr/local/airflow/include/",
+            "USER_NAME": "IF_API_SNOWF",
+            "SAP_API_KEY": "SAP-API-KEY-QA",
+            "THREADS": "8"
+        },
+        "SIT": {
+            "APP_ID": "f507a79b",
+            "URL": "http://172.26.95.57/v1/odata/",
+            "CLIENT": "client210",
+            "METHOD": "/sap/opu/odata/sap/",
+            "CONFIG_FILE_PATH": "/usr/local/airflow/include/Configuration",
+            "INCREMENTAL_FILE_PATH": "/usr/local/airflow/include/Python/RuntimeConfig",
+            "FILE_OUT": "/usr/local/airflow/include/",
+            "USER_NAME": "IF_API_SNOWF",
+            "SAP_API_KEY": "SAP-API-KEY-QA",
+            "THREADS": "8"
+        },
+        "QA": {
+            "APP_ID": "f507a79b",
+            "URL": "http://172.26.95.57/v1/odata/",
+            "CLIENT": "client210",
+            "METHOD": "/sap/opu/odata/sap/",
+            "CONFIG_FILE_PATH": "/usr/local/airflow/include/Configuration",
+            "INCREMENTAL_FILE_PATH": "/usr/local/airflow/include/Python/RuntimeConfig",
+            "FILE_OUT": "/usr/local/airflow/include/",
+            "USER_NAME": "IF_API_SNOWF",
+            "SAP_API_KEY": "SAP-API-KEY-QA",
+            "THREADS": "8"
+        }
+    }
+}

@@ -1,0 +1,10 @@
+USE ROLE SYSADMIN;
+SHOW Streams In DATABASE LZ_PROD;
+CREATE OR REPLACE TABLE Admin.Control.Current_Streams AS
+	SELECT * FROM TABLE(RESULT_SCAN(Last_Query_ID()));
+SHOW Streams In DATABASE ODS;
+INSERT INTO Admin.Control.Current_Streams
+	SELECT * FROM TABLE(RESULT_SCAN(Last_Query_ID()));
+SHOW Streams In DATABASE COMMON;
+INSERT INTO Admin.Control.Current_Streams
+SELECT * FROM TABLE(RESULT_SCAN(Last_Query_ID()));

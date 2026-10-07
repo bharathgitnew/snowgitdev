@@ -1,0 +1,10 @@
+version: 2
+models:
+- name: ODS__LEGACYPROD1__FACTFINANCIALSUMMARY
+  description: Landing table for FACTFINANCIALSUMMARY file.
+- name: ODS__LEGACYPROD1__FACTFINANCIALTRANSACTIONS
+  description: Landing table for FACTFINANCIALTRANSACTIONS file.
+- name: ODS__LEGACYPROD1__REVENUEANDCOGSDETAILS
+  description: Landing table for REVENUEANDCOGSDETAILS file.
+- name: ODS__LEGACYPROD1__FINANCIALTRANSACTIONS
+  description: Landing table for FINANCIALTRANSACTIONS file.

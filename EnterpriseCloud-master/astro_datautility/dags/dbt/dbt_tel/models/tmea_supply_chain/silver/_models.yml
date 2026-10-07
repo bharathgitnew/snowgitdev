@@ -1,0 +1,438 @@
+version: 2
+models:
+- name: SILVER__TMEA_SUPPLY_CHAIN__CHANGE_MANAGEMENT_DASHBOARD
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__ACCOUNTING_DOCUMENT_HEADER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__ACCOUNTING_DOCUMENT_SEGMENT
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__ASSIGNMENT_IM_STORAGE_LOCATION_TO_WM_WAREHOUSE_NUMBER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__ASSIGNMENT_TASK_LISTS_MATERIALS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__BILLING_DOCUMENT_HEADER_DATA
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__BOMS_ITEM_SELECTION
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__BOM_HEADER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__BOM_ITEM
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__CHANGE_DOCUMENT_HEADER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__CHANGE_DOCUMENT_ITEMS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__CODE_TEXTS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__DOCUMENT_SEGMENT_MATERIAL
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__ENGINEERING_ACTION_REQUEST
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__EQUIPMENT_MASTER_DATA
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__GENERAL_DATA_IN_CUSTOMER_MASTER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__GENERAL_MATERIAL_DATA
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__GOOD_RECEIPT_RECEIVABLES
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__HEADER_DATA_FOR_MRP_DOCUMENT
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__HEADER_MATERIAL_DOCUMENT
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__HISTORY_PER_PURCHASING_DOCUMENT
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__INDEPENDENT_REQUIREMENTS_DATA
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__INDEPENDENT_REQUIREMENTS_FOR_MATERIAL
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__INDIVIDUAL_OBJECT_STATUS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__INSPECTION_LOT_RECORD
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__INVENTORY_DATA_PER_QUANT
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__LEGAL_CONTROL_DESTINATION_COUNTRIES_FOR_LICENSE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__LEGAL_CONTROL_EXPORT_CONTROL_CLASSES_FOR_LICENSE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__LEGAL_CONTROL_LICENSE_MASTER_HEADER_DATA
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__MASTER_WARRANTY_OBJECT_ASSIGNMENT
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__MATERIAL_DESCRIPTIONS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__MATERIAL_DOCUMENT_LIST
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__MATERIAL_GROUP_DESCRIPTIONS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__MATERIAL_MASTER_LEGAL_CONTROL
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__MATERIAL_TO_BOM_LINK
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__MATERIAL_VALUATION
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__MRB_STOCK
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__MRP_CONTROLLERS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__MRP_TABLE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__OBJECT_MANAGEMENT_RECORD
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__ORDER_HEADER_DATA_PP_ORDERS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__ORDER_ITEM
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__ORDER_MASTER_DATA
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__PLANNED_ORDER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__PLANTS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__PLANT_DATA_FOR_MATERIAL
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__PLANT_MAINTENANCE_OBJECT_LIST
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__PRODUCTION_VALUE_STREAM
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__PROFIT_CENTER_DESCRIPTION
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__PROFIT_CENTER_MASTER_DATA
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__PURCHASE_REQUISITION
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__PURCHASING_DOCUMENT_HEADER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__PURCHASING_DOCUMENT_ITEM
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__PURCHASING_GROUPS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__PURCHASING_INFO_RECORD_GENERAL_DATA
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__PURCHASING_INFO_RECORD_PURCHASING_ORGANIZATION_DATA
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__PURCHASING_SOURCE_LIST
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__QUALITY_NOTIFICATION
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__QUALITY_NOTIFICATION_TASKS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__QUANTS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__RESERVATIONDEPENDENT_REQUIREMENTS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__ROUTES_TEXTS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__SALES_DISTRIBUTION_DOCUMENT_EXPORT_CONTROL_ITEM_DATA
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__SALES_DOCUMENT_BUSINESS_DATA
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__SALES_DOCUMENT_FLOW
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__SALES_DOCUMENT_HEADER_DATA
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__SALES_DOCUMENT_HEADER_STATUS_AND_ADMINISTRATIVE_DATA
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__SALES_DOCUMENT_ITEM_DATA
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__SALES_DOCUMENT_PARTNER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__SALES_DOCUMENT_SCHEDULE_LINE_DATA
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__SALES_ORDER_STOCK
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__SAPO_TMEA_PLANNING_BOM_SHORTAGE_REPORT
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__SCHEDULING_AGREEMENT_SCHEDULE_LINES
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__SD_DOCUMENT_DELIVERY_HEADER_DATA
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__SD_DOCUMENT_DELIVERY_ITEM_DATA
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__SHAREPOINT_PURCHASING_MANUFACTURING_READINESS_KPI
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__SHORTAGE_REPORT_DATA_WAREHOUSE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__SPECIAL_STOCKS_WITH_CUSTOMER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__SPECIAL_STOCKS_WITH_VENDOR
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__STATISTICS_CURRENT_STOCK_AND_GROUPING_TERMS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__STATUS_CONTROL_FOR_OBJECT_TYPE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__STATUS_OBJECT_INFORMATION
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__STORAGE_BINS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__STORAGE_LOCATION_DATA_FOR_MATERIAL
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__STORAGE_TYPE_DESCRIPTIONS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__SUPPLIER_DETAILS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__SUPPLIER_QUALITY_NOTIFICATIONS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__SUPPL_ACTION_DESCR
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__SUPPL_BUSINESS_PARTNER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__SUPPL_CHANGE_REQUEST
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__SUPPL_CHG_REQUEST_APPROVAL
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__SUPPL_CHG_REQUEST_APPROVER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__SUPPL_CHG_REQUEST_FACTORY
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__SUPPL_CHG_REQUEST_TRACKER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__SUPPL_FACTORY
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__SUPPL_ROLE_DESCR
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__SUPPL_STATUS_DESCR
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__SUPPL_USER_INFO
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__SYSTEM_STATUS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__SYSTEM_STATUS_TEXTS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__TOTAL_CUSTOMER_ORDERS_ON_HAND
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__TRANSFER_ORDER_ITEM
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__VENDOR_CONFIRMATIONS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__VENDOR_MASTER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__WM_TRANSFER_ORDER_HEADER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__METRICS_RESULTS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__TMEA_WORK_CALENDAR
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_SUPPLY_CHAIN__SALES_ORDER_STOCK_VALUATION
+  tests:
+  - has_data
+  - recently_run  
+- name: SILVER__TMEA_SUPPLY_CHAIN__STANDARD_ACCOUNTS
+  tests:
+  - has_data
+  - recently_run    

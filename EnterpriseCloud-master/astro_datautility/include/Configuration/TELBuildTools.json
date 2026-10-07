@@ -1,0 +1,15 @@
+{
+	"Snowflake":{
+        "FileIngestion":{
+            "SQLScriptDirectory":"C:\\Temp\\TemporaryRootDirectory\\SnowflakeSQLScripts\\",
+            "PythonScriptDirectory":"C:\\Temp\\TemporaryRootDirectory\\SnowflakePythonScripts\\",
+            "PrefectScriptDirectory":"C:\\Temp\\TemporaryRootDirectory\\SnowflakePrefectScripts\\"
+        },
+        "Account":"telus-global.privatelink",
+        "Warehouse":"PROCESS_WH",
+        "Role":"SYSADMIN_DEV",
+        "Username":"svc_prefect@us.tel.com",
+        "Password":"svc_prefect",
+        "Database":"LZ_DEV"
+    }
+}

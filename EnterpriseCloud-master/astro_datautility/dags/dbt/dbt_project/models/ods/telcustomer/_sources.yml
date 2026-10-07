@@ -1,0 +1,459 @@
+version: 2
+sources:
+- name: TELCUSTOMER
+  description: Landing Zone - telcustomer Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: TELCUSTOMER
+  tables:
+  - name: EQUIPMENT_QUOTE_TRACKING
+    identifier: EQUIPMENT_QUOTE_TRACKING
+    description: Landing table for EQUIPMENT_QUOTE_TRACKING.
+  - name: CAPITAL_PO_HEADER_MAX_DATE_TEST
+    identifier: Capital_PO_Header_Max_Date_Test
+    description: Landing table for Capital_PO_Header_Max_Date_Test.
+  - name: CAPITAL_PO_CHANGE_LOG
+    identifier: Capital_PO_Change_Log
+    description: Landing table for Capital_PO_Change_Log file.
+    columns:
+    - name: _filename
+      description: The name of the file.
+      tests:
+      - not_null
+    - name: _filedate
+      description: The date of the file.
+      tests:
+      - not_null
+    - name: _uploaddate
+      description: The date that the file was uploaded into the LZ.
+      tests:
+      - not_null
+    - name: jsonfield
+      description: The contents that the file was uploaded into the LZ.
+      tests:
+      - not_null
+  - name: CAPITAL_PO_CHANGE_TYPE
+    identifier: Capital_PO_Change_Type
+    description: Landing table for Capital_PO_Change_Type file.
+    columns:
+    - name: _filename
+      description: The name of the file.
+      tests:
+      - not_null
+    - name: _filedate
+      description: The date of the file.
+      tests:
+      - not_null
+    - name: _uploaddate
+      description: The date that the file was uploaded into the LZ.
+      tests:
+      - not_null
+    - name: jsonfield
+      description: The contents that the file was uploaded into the LZ.
+      tests:
+      - not_null
+  - name: CAPITAL_PO_COMMENTS
+    identifier: Capital_PO_Comments
+    description: Landing table for Capital_PO_Comments file.
+    columns:
+    - name: _filename
+      description: The name of the file.
+      tests:
+      - not_null
+    - name: _filedate
+      description: The date of the file.
+      tests:
+      - not_null
+    - name: _uploaddate
+      description: The date that the file was uploaded into the LZ.
+      tests:
+      - not_null
+    - name: jsonfield
+      description: The contents that the file was uploaded into the LZ.
+      tests:
+      - not_null
+  - name: CAPITAL_PO_EVENT_TRACKING
+    identifier: Capital_PO_Event_Tracking
+    description: Landing table for Capital_PO_Event_Tracking file.
+    columns:
+    - name: _filename
+      description: The name of the file.
+      tests:
+      - not_null
+    - name: _filedate
+      description: The date of the file.
+      tests:
+      - not_null
+    - name: _uploaddate
+      description: The date that the file was uploaded into the LZ.
+      tests:
+      - not_null
+    - name: jsonfield
+      description: The contents that the file was uploaded into the LZ.
+      tests:
+      - not_null
+  - name: CAPITAL_PO_HEADER
+    identifier: Capital_PO_Header
+    description: Landing table for Capital_PO_Header file.
+    columns:
+    - name: _filename
+      description: The name of the file.
+      tests:
+      - not_null
+    - name: _filedate
+      description: The date of the file.
+      tests:
+      - not_null
+    - name: _uploaddate
+      description: The date that the file was uploaded into the LZ.
+      tests:
+      - not_null
+    - name: jsonfield
+      description: The contents that the file was uploaded into the LZ.
+      tests:
+      - not_null
+  - name: CAPITAL_PO_LINE
+    identifier: Capital_PO_Line
+    description: Landing table for Capital_PO_Line file.
+    columns:
+    - name: _filename
+      description: The name of the file.
+      tests:
+      - not_null
+    - name: _filedate
+      description: The date of the file.
+      tests:
+      - not_null
+    - name: _uploaddate
+      description: The date that the file was uploaded into the LZ.
+      tests:
+      - not_null
+    - name: jsonfield
+      description: The contents that the file was uploaded into the LZ.
+      tests:
+      - not_null
+  - name: CAPITAL_PO_QUOTE_MAP
+    identifier: Capital_PO_Quote_Map
+    description: Landing table for Capital_PO_Quote_Map file.
+    columns:
+    - name: _filename
+      description: The name of the file.
+      tests:
+      - not_null
+    - name: _filedate
+      description: The date of the file.
+      tests:
+      - not_null
+    - name: _uploaddate
+      description: The date that the file was uploaded into the LZ.
+      tests:
+      - not_null
+    - name: jsonfield
+      description: The contents that the file was uploaded into the LZ.
+      tests:
+      - not_null
+  - name: CAPITAL_PO_REASON_CODE
+    identifier: Capital_PO_Reason_Code
+    description: Landing table for Capital_PO_Reason_Code file.
+    columns:
+    - name: _filename
+      description: The name of the file.
+      tests:
+      - not_null
+    - name: _filedate
+      description: The date of the file.
+      tests:
+      - not_null
+    - name: _uploaddate
+      description: The date that the file was uploaded into the LZ.
+      tests:
+      - not_null
+    - name: jsonfield
+      description: The contents that the file was uploaded into the LZ.
+      tests:
+      - not_null
+  - name: CAPITAL_PO_SHIP_TO_DESCR
+    identifier: Capital_PO_Ship_To_Descr
+    description: Landing table for Capital_PO_Ship_To_Descr file.
+    columns:
+    - name: _filename
+      description: The name of the file.
+      tests:
+      - not_null
+    - name: _filedate
+      description: The date of the file.
+      tests:
+      - not_null
+    - name: _uploaddate
+      description: The date that the file was uploaded into the LZ.
+      tests:
+      - not_null
+    - name: jsonfield
+      description: The contents that the file was uploaded into the LZ.
+      tests:
+      - not_null
+  - name: CAPITAL_PO_SHIP_TO_LOCATION
+    identifier: Capital_PO_Ship_To_Location
+    description: Landing table for Capital_PO_Ship_To_Location file.
+    columns:
+    - name: _filename
+      description: The name of the file.
+      tests:
+      - not_null
+    - name: _filedate
+      description: The date of the file.
+      tests:
+      - not_null
+    - name: _uploaddate
+      description: The date that the file was uploaded into the LZ.
+      tests:
+      - not_null
+    - name: jsonfield
+      description: The contents that the file was uploaded into the LZ.
+      tests:
+      - not_null
+  - name: CAPITAL_PO_VALIDATION_LOG
+    identifier: Capital_PO_Validation_Log
+    description: Landing table for Capital_PO_Validation_Log file.
+    columns:
+    - name: _filename
+      description: The name of the file.
+      tests:
+      - not_null
+    - name: _filedate
+      description: The date of the file.
+      tests:
+      - not_null
+    - name: _uploaddate
+      description: The date that the file was uploaded into the LZ.
+      tests:
+      - not_null
+    - name: jsonfield
+      description: The contents that the file was uploaded into the LZ.
+      tests:
+      - not_null
+  - name: SHIPPING_ADVICE
+    identifier: Shipping_Advice
+    description: Landing table for Shipping_Advice file.
+    columns:
+    - name: _filename
+      description: The name of the file.
+      tests:
+      - not_null
+    - name: _filedate
+      description: The date of the file.
+      tests:
+      - not_null
+    - name: _uploaddate
+      description: The date that the file was uploaded into the LZ.
+      tests:
+      - not_null
+    - name: jsonfield
+      description: The contents that the file was uploaded into the LZ.
+      tests:
+      - not_null
+  - name: TELCUST_ARF_NEW_QUOTE
+    identifier: TelCust_Arf_New_Quote
+    description: Landing table for TelCust_Arf_New_Quote file.
+    columns:
+    - name: _filename
+      description: The name of the file.
+      tests:
+      - not_null
+    - name: _filedate
+      description: The date of the file.
+      tests:
+      - not_null
+    - name: _uploaddate
+      description: The date that the file was uploaded into the LZ.
+      tests:
+      - not_null
+    - name: jsonfield
+      description: The contents that the file was uploaded into the LZ.
+      tests:
+      - not_null
+  - name: TELCUST_ARF_QRF_DATA
+    identifier: TelCust_ARF_QRF_Data
+    description: Landing table for TelCust_ARF_QRF_Data file.
+    columns:
+    - name: _filename
+      description: The name of the file.
+      tests:
+      - not_null
+    - name: _filedate
+      description: The date of the file.
+      tests:
+      - not_null
+    - name: _uploaddate
+      description: The date that the file was uploaded into the LZ.
+      tests:
+      - not_null
+    - name: jsonfield
+      description: The contents that the file was uploaded into the LZ.
+      tests:
+      - not_null
+  - name: USER_INFO
+    identifier: USER_INFO
+    description: Landing table for USER_INFO file.
+    columns:
+    - name: _filename
+      description: The name of the file.
+      tests:
+      - not_null
+    - name: _filedate
+      description: The date of the file.
+      tests:
+      - not_null
+    - name: _uploaddate
+      description: The date that the file was uploaded into the LZ.
+      tests:
+      - not_null
+    - name: jsonfield
+      description: The contents that the file was uploaded into the LZ.
+      tests:
+      - not_null
+  - name: BUSINESS_PARTNER
+    identifier: BUSINESS_PARTNER
+    description: Landing table for BUSINESS_PARTNER file.
+    columns:
+    - name: _filename
+      description: The name of the file.
+      tests:
+      - not_null
+    - name: _filedate
+      description: The date of the file.
+      tests:
+      - not_null
+    - name: _uploaddate
+      description: The date that the file was uploaded into the LZ.
+      tests:
+      - not_null
+    - name: jsonfield
+      description: The contents that the file was uploaded into the LZ.
+      tests:
+      - not_null
+  - name: UGK
+    identifier: UGK
+    description: Landing table for UGK file.
+    columns:
+    - name: _filename
+      description: The name of the file.
+      tests:
+      - not_null
+    - name: _filedate
+      description: The date of the file.
+      tests:
+      - not_null
+    - name: _uploaddate
+      description: The date that the file was uploaded into the LZ.
+      tests:
+      - not_null
+    - name: jsonfield
+      description: The contents that the file was uploaded into the LZ.
+      tests:
+      - not_null
+  - name: PRODUCT
+    identifier: PRODUCT
+    description: Landing table for PRODUCT file.
+    columns:
+    - name: _filename
+      description: The name of the file.
+      tests:
+      - not_null
+    - name: _filedate
+      description: The date of the file.
+      tests:
+      - not_null
+    - name: _uploaddate
+      description: The date that the file was uploaded into the LZ.
+      tests:
+      - not_null
+    - name: jsonfield
+      description: The contents that the file was uploaded into the LZ.
+      tests:
+      - not_null
+  - name: CONTACT
+    identifier: CONTACT
+    description: Landing table for CONTACT file.
+    columns:
+    - name: _filename
+      description: The name of the file.
+      tests:
+      - not_null
+    - name: _filedate
+      description: The date of the file.
+      tests:
+      - not_null
+    - name: _uploaddate
+      description: The date that the file was uploaded into the LZ.
+      tests:
+      - not_null
+    - name: jsonfield
+      description: The contents that the file was uploaded into the LZ.
+      tests:
+      - not_null
+  - name: CDI_VISIT
+    identifier: CDI_VISIT
+    description: Landing table for CDI_VISIT file.
+    columns:
+    - name: _filename
+      description: The name of the file.
+      tests:
+      - not_null
+    - name: _filedate
+      description: The date of the file.
+      tests:
+      - not_null
+    - name: _uploaddate
+      description: The date that the file was uploaded into the LZ.
+      tests:
+      - not_null
+    - name: jsonfield
+      description: The contents that the file was uploaded into the LZ.
+      tests:
+      - not_null
+  - name: EQUIPMENT_QUOTE_TQ_AUDIT
+    identifier: EQUIPMENT_QUOTE_TQ_AUDIT
+    description: Landing table for EQUIPMENT_QUOTE_TQ_AUDIT file.
+    columns:
+    - name: _filename
+      description: The name of the file.
+      tests:
+      - not_null
+    - name: _filedate
+      description: The date of the file.
+      tests:
+      - not_null
+    - name: _uploaddate
+      description: The date that the file was uploaded into the LZ.
+      tests:
+      - not_null
+    - name: jsonfield
+      description: The contents that the file was uploaded into the LZ.
+      tests:
+      - not_null
+  - name: CDI_PAGEVIEW
+    identifier: CDI_PAGEVIEW
+    description: Landing table for CDI_PAGEVIEW file.
+    columns:
+    - name: _filename
+      description: The name of the file.
+      tests:
+      - not_null
+    - name: _filedate
+      description: The date of the file.
+      tests:
+      - not_null
+    - name: _uploaddate
+      description: The date that the file was uploaded into the LZ.
+      tests:
+      - not_null
+    - name: jsonfield
+      description: The contents that the file was uploaded into the LZ.
+      tests:
+      - not_null
+  - name: GSINTELSALESDETAILS
+    identifier: GSINTELSALESDETAILS
+    description: Landing table for GSINTELSALESDETAILS file.
+  - name: GSINTELBOOKINGDETAILS
+    identifier: GSINTELBOOKINGDETAILS
+    description: Landing table for GSINTELBOOKINGDETAILS file.

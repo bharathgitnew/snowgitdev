@@ -1,0 +1,6 @@
+version: 2
+models:
+  - name: COMMON__QVICS__ALLTROUBLE
+    description: Model ALLTROUBLE file
+  - name: COMMON__QVICS__ALL_TROUBLE_NEW
+    description: Model ALL_TROUBLE_NEW file

@@ -1,0 +1,76 @@
+/************
+Model file generated from Python utility
+*************/
+
+{{ config(
+	materialized='tel_incremental',
+	incremental_strategy='insert_overwrite',
+	alias='IPR_NON_US_EMPLOYEE',
+	transient=false,
+	tags=["IPR"]
+) }}
+
+with source_data as (
+	SELECT
+		_FILEDATE,
+		_FILENAME,
+		_UPLOADDATE,
+		JSONFIELD:"employeeid"::VARCHAR AS EMPLOYEEID,
+		JSONFIELD:"firstname"::VARCHAR AS FIRSTNAME,
+		JSONFIELD:"lastname"::VARCHAR AS LASTNAME,
+		JSONFIELD:"email"::VARCHAR AS EMAIL,
+		JSONFIELD:"deptcode"::VARCHAR AS DEPTCODE,
+		JSONFIELD:"prodlinecode"::VARCHAR AS PRODLINECODE,
+		JSONFIELD:"locationcode"::VARCHAR AS LOCATIONCODE,
+		JSONFIELD:"OffcPhone"::VARCHAR AS OFFCPHONE,
+		JSONFIELD:"Active"::BOOLEAN AS ACTIVE,
+		REGEXP_REPLACE(JSONFIELD:"LastUpdated", '\/Date\\(|\\)\/', '')::TIMESTAMP_NTZ AS LASTUPDATED,
+		JSONFIELD:"company_code"::VARCHAR AS COMPANY_CODE
+	FROM {{ source("IPR", "NON_US_EMPLOYEE") }}
+WHERE
+	_FILEDATE = (SELECT MAX(RUN_TIME) FROM {{ source('IPR', 'CONTROLTABLE') }} WHERE TABLE_NAME = 'NON_US_EMPLOYEE' ) 
+),
+
+transform_data as (
+	SELECT
+		_FILEDATE AS _FILEDATE,
+		_FILENAME AS _FILENAME,
+		_UPLOADDATE AS _UPLOADDATE,
+		'{{ invocation_id }}' AS _AUDIT_LOG_ID,
+		SHA2('hash_me') AS _ROW_HASH,
+		EMPLOYEEID,
+		FIRSTNAME,
+		LASTNAME,
+		EMAIL,
+		DEPTCODE,
+		PRODLINECODE,
+		LOCATIONCODE,
+		OFFCPHONE,
+		ACTIVE,
+		LASTUPDATED,
+		COMPANY_CODE
+	FROM source_data
+),
+
+type_data as (
+	SELECT
+		CAST(_FILEDATE AS TIMESTAMP_NTZ(9)) AS _FILEDATE,
+		_FILENAME,
+		_UPLOADDATE,
+		CAST(_AUDIT_LOG_ID AS VARCHAR(128)) AS _AUDIT_LOG_ID,
+		CAST(_ROW_HASH AS VARCHAR(128)) AS _ROW_HASH,
+		EMPLOYEEID,
+		FIRSTNAME,
+		LASTNAME,
+		EMAIL,
+		DEPTCODE,
+		PRODLINECODE,
+		LOCATIONCODE,
+		OFFCPHONE,
+		CAST(ACTIVE AS BOOLEAN) AS ACTIVE,
+		CAST(LASTUPDATED AS TIMESTAMP_NTZ) AS LASTUPDATED,
+		COMPANY_CODE
+	FROM transform_data
+)
+
+SELECT * FROM type_data

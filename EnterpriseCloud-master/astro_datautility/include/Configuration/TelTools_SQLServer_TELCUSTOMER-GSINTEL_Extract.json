@@ -1,0 +1,18 @@
+{
+    "TELCUSTOMER-GSINTEL": {
+        "DataSet1": {
+            "schema": "C",
+            "table": "GSIntelSalesDetails",
+            "Incremental": "NULL",
+            "sftablename": "GSINTELSALESDETAILS",
+            "filter": ""
+        },
+        "DataSet2": {
+            "schema": "C",
+            "table": "GSIntelBookingDetails",
+            "Incremental": "NULL",
+            "sftablename": "GSINTELBOOKINGDETAILS",
+            "filter": ""
+        }
+    }
+}

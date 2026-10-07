@@ -1,0 +1,208 @@
+{{ config(
+    materialized='tel_incremental',
+    incremental_strategy = 'insert_overwrite',
+    alias='Demand_Live',
+    unique_key = []
+) }}
+
+
+with source_data as
+(
+    SELECT
+         Demand.ItemId,
+         Demand.RegionId,
+         Demand.InventorySourceSystem,
+         Demand.OrderQuantity,
+         Demand.OrderDate,
+         Demand.OrderTime,
+         Demand.DeliveredQuantity,
+         Demand.DeliveryDate,
+         Demand.DeliveredTime,
+         Demand.RequiredDate,
+         Demand.RequiredTime,
+         Demand.ReceivedDate,
+         Demand.ReceivedTime,
+         Demand.SourceSystemTransactionID,
+         Demand.CustomerOrderID,
+         Demand.SerialNumber,
+         Demand.DeliveryPostalCode,
+         Demand.DeliveryCountryCode,
+         Demand.DeliveryCity,
+         Demand.DeliveryStateProvince,
+         Demand.DeliveryName,
+         Demand.OrderType,
+         Demand.OrderPriority,
+         Demand.CoverageDays,
+         Demand.CoverageHours,
+         Demand.CustomerID,
+         Demand.CustomerPriority,
+         Demand.ProductCode,
+         Demand.WarehouseRegion,
+         Demand.WarehouseId,
+         Demand.FIELD30,
+         Demand.FIELD31,
+         Demand.FIELD32,
+         Demand.FIELD33,
+         Demand.FIELD34,
+         Demand.FIELD35,
+         _FILENAME,
+         try_to_timestamp(replace(split_part(_filename,'_',2)||split_part(_filename,'_',3),'.feed.gz',''),'yyyymmddHH24MIss') AS FileDate
+        FROM {{ ref('BRONZE__TEE_SPARES_SUPPORT__PROPHET_DEMAND') }} Demand
+)
+
+,transform_data as
+(
+    SELECT
+        '{{ invocation_id }}' AS _AUDIT_LOG_ID,
+        SHA2('hash_me') as _ROW_HASH,
+        FileDate,
+        ItemId,
+        RegionId,
+        InventorySourceSystem,
+        OrderQuantity,
+        OrderDate,
+        OrderTime,
+        DeliveredQuantity,
+        DeliveryDate,
+        DeliveredTime,
+        RequiredDate,
+        RequiredTime,
+        ReceivedDate,
+        ReceivedTime,
+        SourceSystemTransactionID,
+        CustomerOrderID,
+        SerialNumber,
+        DeliveryPostalCode,
+        DeliveryCountryCode,
+        DeliveryCity,
+        DeliveryStateProvince,
+        DeliveryName,
+        OrderType,
+        OrderPriority,
+        CoverageDays,
+        CoverageHours,
+        CustomerID,
+        CustomerPriority,
+        ProductCode,
+        WarehouseRegion,
+        WarehouseId,
+        FIELD30,
+        FIELD31,
+        FIELD32,
+        FIELD33,
+        FIELD34,
+        FIELD35,
+		REPLACE(LEFT(_FILENAME,CHARINDEX('_',_FILENAME)-1),'DEMAND/DEMAND','') AS OriginatingSubsidiary,
+		LEFT(RegionId,CHARINDEX('-',RegionId)-1) AS WarehouseSubsidiary,
+		SUBSTRING(RegionId,CHARINDEX('-',RegionId)+1) AS WarehouseType
+        --_FILENAME,
+        FROM source_data
+        )
+,Demand_Max as
+(
+    SELECT
+        OriginatingSubsidiary,
+        MAX(FileDate) AS FileDate
+    FROM transform_data
+    GROUP BY OriginatingSubsidiary
+)
+,transform_data_max as
+(
+    SELECT
+        _AUDIT_LOG_ID,
+        _ROW_HASH,
+        transform_data.FileDate as FILEDATE,
+        ItemId,
+        RegionId,
+        InventorySourceSystem,
+        OrderQuantity,
+        OrderDate,
+        OrderTime,
+        DeliveredQuantity,
+        DeliveryDate,
+        DeliveredTime,
+        RequiredDate,
+        RequiredTime,
+        ReceivedDate,
+        ReceivedTime,
+        SourceSystemTransactionID,
+        CustomerOrderID,
+        SerialNumber,
+        DeliveryPostalCode,
+        DeliveryCountryCode,
+        DeliveryCity,
+        DeliveryStateProvince,
+        DeliveryName,
+        OrderType,
+        OrderPriority,
+        CoverageDays,
+        CoverageHours,
+        CustomerID,
+        CustomerPriority,
+        ProductCode,
+        WarehouseRegion,
+        WarehouseId,
+        FIELD30,
+        FIELD31,
+        FIELD32,
+        FIELD33,
+        FIELD34,
+        FIELD35,
+        transform_data.OriginatingSubsidiary,
+        WarehouseSubsidiary,
+        WarehouseType
+        --_FileName,
+    FROM transform_data
+    INNER JOIN Demand_Max
+    ON transform_data.OriginatingSubsidiary = Demand_Max.OriginatingSubsidiary AND transform_data.FileDate = Demand_Max.FileDate
+)
+
+,type_data as
+(
+    select
+         CAST(_AUDIT_LOG_ID as VARCHAR(128)) as _AUDIT_LOG_ID,
+         CAST(_ROW_HASH as VARCHAR(128)) as _ROW_HASH,
+         CAST(FILEDATE AS TIMESTAMP_NTZ(9)) AS _FILEDATE,
+         CAST(ItemId AS VARCHAR(16777216)) AS ItemId,
+         CAST(RegionId AS VARCHAR(16777216)) AS RegionId,
+         CAST(InventorySourceSystem AS VARCHAR(16777216)) AS InventorySourceSystem,
+         CAST(OrderQuantity AS NUMBER(38,0)) AS OrderQuantity,
+         CAST(OrderDate AS VARCHAR(16777216)) AS OrderDate,
+         CAST(OrderTime AS VARCHAR(16777216)) AS OrderTime,
+         CAST(DeliveredQuantity AS NUMBER(38,0)) AS DeliveredQuantity,
+         CAST(DeliveryDate AS VARCHAR(16777216)) AS DeliveryDate,
+         CAST(DeliveredTime AS VARCHAR(16777216)) AS DeliveredTime,
+         CAST(RequiredDate AS VARCHAR(16777216)) AS RequiredDate,
+         CAST(RequiredTime AS VARCHAR(16777216)) AS RequiredTime,
+         CAST(ReceivedDate AS VARCHAR(16777216)) AS ReceivedDate,
+         CAST(ReceivedTime AS VARCHAR(16777216)) AS ReceivedTime,
+         CAST(SourceSystemTransactionID AS VARCHAR(16777216)) AS SourceSystemTransactionID,
+         CAST(CustomerOrderID AS VARCHAR(16777216)) AS CustomerOrderID,
+         CAST(SerialNumber AS VARCHAR(16777216)) AS SerialNumber,
+         CAST(DeliveryPostalCode AS VARCHAR(16777216)) AS DeliveryPostalCode,
+         CAST(DeliveryCountryCode AS VARCHAR(16777216)) AS DeliveryCountryCode,
+         CAST(DeliveryCity AS VARCHAR(16777216)) AS DeliveryCity,
+         CAST(DeliveryStateProvince AS VARCHAR(16777216)) AS DeliveryStateProvince,
+         CAST(DeliveryName AS VARCHAR(16777216)) AS DeliveryName,
+         CAST(OrderType AS VARCHAR(16777216)) AS OrderType,
+         CAST(OrderPriority AS NUMBER(38,0)) AS OrderPriority,
+         CAST(CoverageDays AS NUMBER(38,0)) AS CoverageDays,
+         CAST(CoverageHours AS VARCHAR(16777216)) AS CoverageHours,
+         CAST(CustomerID AS NUMBER(38,0)) AS CustomerID,
+         CAST(CustomerPriority AS VARCHAR(16777216)) AS CustomerPriority,
+         CAST(ProductCode AS NUMBER(38,0)) AS ProductCode,
+         CAST(WarehouseRegion AS VARCHAR(16777216)) AS WarehouseRegion,
+         CAST(WarehouseId AS VARCHAR(16777216)) AS WarehouseId,
+         CAST(Field30 AS VARCHAR(16777216)) AS Field30,
+         CAST(Field31 AS VARCHAR(16777216)) AS Field31,
+         CAST(Field32 AS VARCHAR(16777216)) AS Field32,
+         CAST(Field33 AS VARCHAR(16777216)) AS Field33,
+         CAST(Field34 AS VARCHAR(16777216)) AS Field34,
+         CAST(Field35 AS VARCHAR(16777216)) AS Field35,
+		 CAST (OriginatingSubsidiary AS VARCHAR(16777216)) AS OriginatingSubsidiary,
+		 CAST (WarehouseSubsidiary AS VARCHAR(16777216)) AS WarehouseSubsidiary,
+		 CAST (WarehouseType AS VARCHAR(16777216)) AS WarehouseType
+         --CAST(_FILENAME AS VARCHAR(16777216)) AS _FILENAME,
+    from transform_data_max
+    )
+select * from type_data

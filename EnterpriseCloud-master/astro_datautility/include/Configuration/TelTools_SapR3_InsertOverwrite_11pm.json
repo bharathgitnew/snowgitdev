@@ -1,0 +1,175 @@
+{
+    "connection": {
+        "DEV": {
+            "host": "telsapqasdb.us.tel.com",
+            "user": "ORACLE-ERP-HVR-<<ENV>>-USER",
+            "secret": "ORACLE-ERP-HVR-<<ENV>>-SECRET",
+            "port": 1527,
+            "database": "erq",
+            "retry_count": 5,
+            "retry_delay": 30,
+            "tcp_connect_timeout": 180
+        },
+        "QA": {
+            "host": "172.26.95.62",
+            "user": "ORACLE-ERP-HVR-<<ENV>>-USER",
+            "secret": "ORACLE-ERP-HVR-<<ENV>>-SECRET",
+            "port": 1527,
+            "database": "erq",
+            "retry_count": 5,
+            "retry_delay": 30,
+            "tcp_connect_timeout": 180
+        },
+        "PROD": {
+            "host": "172.26.95.63",
+            "user": "ORACLE-ERP-HVR-<<ENV>>-USER",
+            "secret": "ORACLE-ERP-HVR-<<ENV>>-SECRET",
+            "port": 1521,
+            "database": "ERP",
+            "retry_count": 5,
+            "retry_delay": 30,
+            "tcp_connect_timeout": 180
+        }
+    },
+    "extraction": {
+        "LTAP": {
+            "is_active": true,
+            "chunk_size": 100000,
+            "table": "LTAP",
+            "schema": "SAPR3",
+            "incremental_strategy": "insert_overwrite",
+            "use_safe_string_fallback": true,
+            "snowflake_table": "LTAP",
+            "snowflake_schema": "SAP_ORACLE_LIVE",
+            "primary_key": ""
+        },
+        "COSS": {
+            "is_active": true,
+            "chunk_size": 100000,
+            "table": "COSS",
+            "schema": "SAPR3",
+            "incremental_strategy": "insert_overwrite",
+            "use_safe_string_fallback": true,
+            "snowflake_table": "COSS",
+            "snowflake_schema": "SAP_ORACLE_LIVE",
+            "primary_key": "",
+            "query_filter_function": "get_gjahr_filter",
+            "query_filter_column": "GJAHR"
+        },
+        "MSEG": {
+            "is_active": true,
+            "chunk_size": 100000,
+            "table": "MSEG",
+            "schema": "SAPR3",
+            "incremental_strategy": "insert_overwrite",
+            "use_safe_string_fallback": true,
+            "snowflake_table": "MSEG",
+            "snowflake_schema": "SAP_ORACLE_LIVE",
+            "primary_key": ""
+        },
+        "COEP": {
+            "is_active": true,
+            "chunk_size": 150000,
+            "table": "COEP",
+            "schema": "SAPR3",
+            "incremental_strategy": "insert_overwrite",
+            "use_safe_string_fallback": true,
+            "snowflake_table": "COEP",
+            "snowflake_schema": "SAP_ORACLE_LIVE",
+            "primary_key": ""
+        },
+        "JEST": {
+            "is_active": true,
+            "chunk_size": 300000,
+            "table": "JEST",
+            "schema": "SAPR3",
+            "incremental_strategy": "insert_overwrite",
+            "use_safe_string_fallback": true,
+            "snowflake_table": "JEST",
+            "snowflake_schema": "SAP_ORACLE_LIVE",
+            "primary_key": ""
+        },
+        "KEPH": {
+            "is_active": true,
+            "chunk_size": 300000,
+            "table": "KEPH",
+            "schema": "SAPR3",
+            "incremental_strategy": "insert_overwrite",
+            "snowflake_table": "KEPH",
+            "snowflake_schema": "SAP_ORACLE_LIVE",
+            "primary_key": "MANDT,BZOBJ,KALNR,KALKA,KADKY,TVERS,BWVAR,KKZMA,PATNR,KEART,LOSFX,KKZST,KKZMM,DIPA",
+            "query_filter_function": "get_kadky_filter",
+            "query_filter_column": "KADKY"
+        },
+        "KEKO": {
+            "is_active": true,
+            "chunk_size": 300000,
+            "table": "KEKO",
+            "schema": "SAPR3",
+            "incremental_strategy": "insert_overwrite",
+            "snowflake_table": "KEKO",
+            "snowflake_schema": "SAP_ORACLE_LIVE",
+            "primary_key": "MANDT,BZOBJ,KALNR,KALKA,KADKY,TVERS,BWVAR,KKZMA",
+            "query_filter_function": "get_kadky_filter",
+            "query_filter_column": "KADKY"
+        },
+        "BSEG": {
+            "is_active": true,
+            "chunk_size": 200000,
+            "table": "BSEG",
+            "schema": "SAPR3",
+            "incremental_strategy": "insert_overwrite",
+            "snowflake_table": "BSEG",
+            "snowflake_schema": "SAP_ORACLE_LIVE",
+            "primary_key": "MANDT,BUKRS,BELNR,GJAHR,BUZEI",
+            "query_filter_function": "get_gjahr_filter",
+            "query_filter_column": "GJAHR"
+        },
+        "COSP": {
+            "is_active": true,
+            "chunk_size": 200000,
+            "table": "COSP",
+            "schema": "SAPR3",
+            "incremental_strategy": "insert_overwrite",
+            "snowflake_table": "COSP",
+            "snowflake_schema": "SAP_ORACLE_LIVE",
+            "primary_key": "",
+            "query_filter_function": "get_gjahr_filter",
+            "query_filter_column": "GJAHR"
+        },
+        "MARC": {
+            "is_active": true,
+            "table": "MARC",
+            "schema": "SAPR3",
+            "incremental_strategy": "insert_overwrite",
+            "use_safe_string_fallback": true,
+            "snowflake_table": "MARC",
+            "snowflake_schema": "SAP_ORACLE_LIVE",
+            "primary_key": "",
+            "chunk_size": 100000
+        },
+        "COVP": {
+            "is_active": true,
+            "chunk_size": 100000,
+            "table": "COVP",
+            "schema": "SAPR3",
+            "incremental_strategy": "insert_overwrite",
+            "use_safe_string_fallback": true,
+            "snowflake_table": "COVP",
+            "snowflake_schema": "SAP_ORACLE_LIVE",
+            "primary_key": "MANDT,KOKRS,BELNR,BUZEI"
+        },
+        "RESB": {
+            "is_active": true,
+            "table": "RESB",
+            "schema": "SAPR3",
+            "incremental_strategy": "insert_overwrite",
+            "use_safe_string_fallback": true,
+            "normalize_object_none_and_numeric_nan": true,
+            "snowflake_table": "RESB",
+            "snowflake_schema": "SAP_ORACLE_LIVE",
+            "primary_key": "",
+            "chunk_size": 100000
+        }
+    }
+}

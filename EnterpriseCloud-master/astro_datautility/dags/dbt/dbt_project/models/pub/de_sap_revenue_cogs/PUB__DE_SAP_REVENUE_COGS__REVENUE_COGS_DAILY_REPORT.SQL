@@ -1,0 +1,13 @@
+{{ config(
+        materialized='view',
+         alias='REVENUE_COGS_DAILY_REPORT',
+         transient=false
+) }}
+
+with SOURCE_DATA AS (
+    SELECT 
+        * exclude (OFFSETTING_ACCOUNT_NUMBER,OFFSETTING_ACCOUNT_NAME,COMPANY_ID_OF_TRADING_PARTNER,INTERCOMPANY_FLAG,_AUDIT_LOG_ID,_ROW_HASH)
+    FROM {{ ref('COMMON__SAPH__DAILY_ACTUALS_SALES_LINE_ENHANCED') }}
+)
+
+SELECT * FROM SOURCE_DATA

@@ -1,0 +1,167 @@
+{{ config(
+    materialized='tel_incremental',
+    incremental_strategy='insert_overwrite',
+    alias='SR_SALESORDER'
+) }}
+
+with sales_order_ref as (
+  select 
+    SALES_ORDER_NO,
+    POSITION_NO,
+    SEQUENCE_NO,
+    ORDER_LINE_TYPE,
+    INVOICE_NO,
+    STATUS,
+    WAREHOUSE,
+    CURRENT_ACTIVITY_SESSION,
+    INVOICETO_BPID,
+    INVOICETO_BP,
+    SOLDTO_BPID,
+    SOLDTO_BP,
+    ITEM,
+    ITEM_DESCRIPTION,
+    ORDER_TYPE,
+    COST_PRICE_COMPONENT,
+    UNIT_OF_MEASURE,
+    ORDERED_QTY,
+    DELIVERED_QTY,
+    BACK_ORDER_QTY,
+    ORDER_DATE,
+    ORDER_DT,
+    CUSTOMER_REQUEST_DATE,
+    CUSTOMER_REQUEST_DT,
+    PLAN_DELIVERY_DATE,
+    PLAN_DELIVERY_DT,
+    DELIVERY_DATE,
+    DELIVERY_DT,
+    INVOICE_DATE,
+    INVOICE_DT,
+    ORIGINAL_COMMIT_DATE,
+    ORIGINAL_COMMIT_DT,
+    STANDARD_COST_PRICE,
+    PRICE,
+    PRICE_SOURCE,
+    ORDER_AMOUNT,
+    INVOICE_AMOUNT,
+    DISCOUNT_PERCENT,
+    CUSTOMER_PO_NO,
+    REFERENCEA,
+    REFERENCEB,
+    SALES_REP,
+    DIRECT_DELIVERY,
+    PURCHASE_ORDER_NO,
+    AREA,
+    TRANSACTION_TYPE,
+    INVOICE_STATUS,
+    WAREHOUSE_STATUS,
+    CANCELLED,
+    CANCELLED_DATE,
+    ORDER_PRIORITY,
+    TAX_CODE,
+    CUSTOMER_ORDER_POSITION,
+    ROUTE,
+    CURRENCY,
+    CHANNEL,
+    SERIAL_NO,
+    INVOICE_BY_INSTALLMENT
+  from {{ ref('SILVER__TEA_SPARES_REVENUE__SALESORDER') }}
+)
+
+,source_data as (
+    SELECT 
+    SALES_ORDER_NO||'_'||POSITION_NO AS SLSLINE, 
+    SALESORDER.ITEM, 
+    SALESORDER.ITEM_DESCRIPTION, 
+    SALESORDER.SOLDTO_BPID, 
+    SALESORDER.SOLDTO_BP, 
+    SALESORDER.DELIVERED_QTY,
+    SALESORDER.ORDER_DATE, 
+    SALESORDER.INVOICE_DATE, 
+    SALESORDER.INVOICE_AMOUNT, 
+    SALESORDER.REFERENCEA, 
+    SALESORDER.REFERENCEB, 
+    SALESORDER.INVOICE_NO, 
+    SALESORDER.CUSTOMER_PO_NO,
+    ORDERED_QTY,
+    BACK_ORDER_QTY,
+    PLAN_DELIVERY_DATE,
+    DELIVERY_DATE,
+    ORDER_PRIORITY
+    FROM sales_order_ref AS SALESORDER
+    WHERE (((SALESORDER.ITEM) ilike 'c%' 
+    Or (SALESORDER.ITEM) ilike 'e%' 
+    Or (SALESORDER.ITEM) ilike 'd%' 
+    Or (SALESORDER.ITEM) ilike 't%'
+    Or (SALESORDER.ITEM) ilike 'h%' 
+    Or (SALESORDER.ITEM) ilike 'l1%' 
+    Or (SALESORDER.ITEM) ilike 'm%' 
+    Or (SALESORDER.ITEM) ilike 'S%' 
+    Or (SALESORDER.ITEM) ilike 'r%' 
+    Or (SALESORDER.ITEM) ilike 'p%' 
+    Or (SALESORDER.ITEM) ilike 'j%' 
+    Or (SALESORDER.ITEM) ilike 'g7%' 
+    Or (SALESORDER.ITEM) ilike 'vd%' 
+    Or (SALESORDER.ITEM) ilike 'm%' 
+    Or (SALESORDER.ITEM) ilike 'n%')
+    AND ((SALESORDER.ORDER_DATE)>'2014-01-01')
+    AND ((SALESORDER.CANCELLED) ilike 'No'))
+    OR (((SALES_ORDER_NO || '_' || POSITION_NO ilike 'r%')
+    AND ((SALESORDER.ORDER_DATE)>'2014-01-01')
+    AND ((SALESORDER.CANCELLED) ilike 'No')))
+    OR (((SALES_ORDER_NO || '_' || POSITION_NO ilike 'ip%')
+    AND ((SALESORDER.ORDER_DATE)>'2014-01-01')
+    AND ((SALESORDER.CANCELLED) ilike 'No')))
+    ORDER BY SALES_ORDER_NO || '_' || POSITION_NO, SALESORDER.ORDER_DATE
+)
+
+,transform_data as (
+  select 
+    '{{ invocation_id }}' AS _AUDIT_LOG_ID,
+    SHA2('hash_me') as _ROW_HASH,
+    SLSLINE,
+    ITEM,
+    ITEM_DESCRIPTION,
+    SOLDTO_BPID,
+    SOLDTO_BP,
+    DELIVERED_QTY,
+    ORDER_DATE,
+    INVOICE_DATE,
+    INVOICE_AMOUNT,
+    REFERENCEA,
+    REFERENCEB,
+    INVOICE_NO,
+    CUSTOMER_PO_NO,
+    ORDERED_QTY,
+    BACK_ORDER_QTY,
+    PLAN_DELIVERY_DATE,
+    DELIVERY_DATE,
+    ORDER_PRIORITY
+  from source_data
+)
+
+,type_data as 
+(
+    select
+        _AUDIT_LOG_ID,
+        _ROW_HASH,
+        SLSLINE,
+        ITEM,
+        ITEM_DESCRIPTION,
+        SOLDTO_BPID,
+        SOLDTO_BP,
+        cast(DELIVERED_QTY as NUMBER(15,2)) as DELIVERED_QTY,
+        cast(ORDER_DATE as TIMESTAMP_NTZ(9)) as ORDER_DATE,
+        cast(INVOICE_DATE as TIMESTAMP_NTZ(9)) as INVOICE_DATE,
+        cast(INVOICE_AMOUNT as NUMBER(15,2)) as INVOICE_AMOUNT,
+        REFERENCEA,
+        REFERENCEB,
+        cast(INVOICE_NO as NUMBER(38,0)) as INVOICE_NO,
+        CUSTOMER_PO_NO,
+        cast(ORDERED_QTY as NUMBER(15,2)) as ORDERED_QTY,
+        cast(BACK_ORDER_QTY as NUMBER(15,2)) as BACK_ORDER_QTY,
+        cast(PLAN_DELIVERY_DATE as TIMESTAMP_NTZ(9)) as PLAN_DELIVERY_DATE,
+        cast(DELIVERY_DATE as TIMESTAMP_NTZ(9)) as DELIVERY_DATE,
+        ORDER_PRIORITY
+    from transform_data
+    )
+select * from type_data

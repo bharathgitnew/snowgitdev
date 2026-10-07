@@ -1,0 +1,12 @@
+version: 2
+models:
+- name: COMMON__PREFECT__FLOW
+  description: Model Prefect_Flow_Ingestion file.
+- name: COMMON__PREFECT__FLOW_RUN
+  description: Model Prefect_FlowRun_Ingestion file.
+- name: COMMON__PREFECT__LOGS
+  description: Model Prefect_Logs_Ingestion file.
+- name: COMMON__PREFECT__DETAILED_LOGS
+  description: Model Prefect_Detailed_Logs_Ingestion file.
+- name: COMMON__PREFECT__DASHBOARD_REPORTING
+  description: Model DASHBOARD_REPORTING data.

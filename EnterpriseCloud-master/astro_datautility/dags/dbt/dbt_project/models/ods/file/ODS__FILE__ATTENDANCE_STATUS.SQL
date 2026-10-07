@@ -1,0 +1,99 @@
+
+{{ config(
+    alias = 'ATTENDANCE_STATUS',
+    materialized = 'incremental',
+    incremental_strategy = 'merge',
+    unique_key = ['ENROLLMENT_ID'],
+    tags = ['workday'],
+) }}
+
+with source_data as (
+    select
+        _FILENAME,
+        _FILEDATE,
+        _UPLOADDATE,
+        "ENROLLMENT ID" as ENROLLMENT_ID,
+        "EMPLOYEE ID" as EMPLOYEE_ID,
+        "NAME" as NAME,
+        "COMPANY CODE" as COMPANY_CODE,
+        "COMPANY" as COMPANY,
+        "COST CENTER CODE" as COST_CENTER_CODE,
+        "COST CENTER NAME" as COST_CENTER_NAME,
+        "LOCATION CODE" as LOCATION_CODE,
+        "LOCATION" as LOCATION,
+        "EMPLOYEE TYPE / CONTINGENT WORKER TYPE" as EMPLOYEE_TYPE,
+        "MANAGER ID" as MANAGER_ID,
+        "MANAGER NAME" as MANAGER_NAME,
+        "TERMINATION STATUS" as TERMINATION_STATUS,
+        "JOB FAMILY GROUP" as JOB_FAMILY_GROUP,
+        "JOB FAMILY" as JOB_FAMILY,
+        "CAREER BAND" as CAREER_BAND,
+        "POSITION TITLE" as POSITION_TITLE,
+        "HIRE DATE" as HIRE_DATE,
+        "SENIORITY DATE" as SENIORITY_DATE,
+        "CONTINGENT HIRE DATE" as CONTINGENT_HIRE_DATE,
+        "TERMINATION DATE" as TERMINATION_DATE,
+        "COURSE NUMBER" as COURSE_NUMBER,
+        "COURSE TITLE" as COURSE_TITLE,
+        "COURSE DURATION" as COURSE_DURATION,
+        "TOPIC" as TOPIC,
+        "REGISTRATION STATUS" as REGISTRATION_STATUS,
+        "COMPLETION DATE" as COMPLETION_DATE,
+        "SCORE" as SCORE,
+        "SUCCESS" as SUCCESS,
+        "COMPLETION STATUS" as COMPLETION_STATUS,
+        "COURSE ATTENDANCE STATUS" as COURSE_ATTENDANCE_STATUS,
+    from {{ source('FILE', 'ATTENDANCE_STATUS') }}
+    qualify row_number() over(partition by ENROLLMENT_ID order by _FILEDATE desc, _UPLOADDATE desc) = 1
+),
+
+transform_data as (
+    select 
+        '{{ invocation_id }}' AS _AUDIT_LOG_ID,
+        SHA2('hash_me') AS _ROW_HASH, -- Adds column to table on full refresh.
+        *,
+    from source_data
+),
+
+type_data as (
+    select 
+        _AUDIT_LOG_ID,
+        _ROW_HASH,
+        _FILENAME,
+        _FILEDATE,
+        _UPLOADDATE,
+        ENROLLMENT_ID,
+        EMPLOYEE_ID,
+        NAME,
+        COMPANY_CODE,
+        COMPANY,
+        COST_CENTER_CODE,
+        COST_CENTER_NAME,
+        LOCATION_CODE,
+        LOCATION,
+        EMPLOYEE_TYPE,
+        MANAGER_ID,
+        MANAGER_NAME,
+        TERMINATION_STATUS,
+        JOB_FAMILY_GROUP,
+        JOB_FAMILY,
+        CAREER_BAND,
+        POSITION_TITLE,
+        HIRE_DATE,
+        SENIORITY_DATE,
+        CONTINGENT_HIRE_DATE,
+        to_varchar(to_date(try_to_timestamp_tz(TERMINATION_DATE, 'YYYY-MM-DDTZH:TZM')), 'MM/DD/YYYY') as TERMINATION_DATE,
+        COURSE_NUMBER,
+        COURSE_TITLE,
+        COURSE_DURATION,
+        TOPIC,
+        REGISTRATION_STATUS,
+        try_to_timestamp_tz(COMPLETION_DATE) as COMPLETION_DATE,
+        SCORE,
+        SUCCESS,
+        COMPLETION_STATUS,
+        COURSE_ATTENDANCE_STATUS,
+    from transform_data
+)
+
+select * from type_data

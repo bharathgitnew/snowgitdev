@@ -1,0 +1,124 @@
+/**********************************
+File built from dbtConvert.ps1
+parameters: 
+-filename C:\Sources\Repos\EnterpriseCloud\Snowflake\LZ_HVR-BAAN_2_ODS-BAAN\BAANFINANCEGENERALLEDGER_PERIODSTATUS.SQL 
+-newFile C:\Sources\Repos\EnterpriseCloud\dbt\lz_to_ods\models\baan\BAANFINANCEGENERALLEDGER_PERIODSTATUS.SQL 
+-materialized incremental
+-alias BAANFINANCEGENERALLEDGER_PERIODSTATUS 
+-incremental_strategy merge
+-envVariable <<LZ>> 
+-sourceSchema BAAN_ORACLE_LIVE
+-sourceDatabase LZ_DEV
+-useDistinct no 
+model file generated on: 1/17/2022 12:52:54 PM
+***********************************/
+{{ config(
+    materialized='incremental',
+    incremental_strategy='merge',
+    alias='BAANFINANCEGENERALLEDGER_PERIODSTATUS',
+    unique_key = ['FISCALYEAR',
+    'PERIODNUMBER',
+    'PERIODTYPEID']
+) }}
+
+
+with source_data as 
+(
+    SELECT 
+             SOURCETABLE._CAPTUREDATETIME AS _CAPTUREDATETIME 
+            ,201                            AS _COMPANYID 
+            ,CAST(T$YEAR AS INT)          AS FISCALYEAR 
+            ,CAST(T$PRNO AS INT)          AS PERIODNUMBER 
+            ,T$PTYP.CONSTANTDESCRIPTION   AS PERIODTYPEDESCRIPTION 
+            ,CAST(T$PTYP AS INT)          AS PERIODTYPEID 
+            ,T$SACP.CONSTANTDESCRIPTION   AS STATUSOFACPDESCRIPTION 
+            ,CAST(T$SACP AS INT)          AS STATUSOFACPID 
+            ,T$SACR.CONSTANTDESCRIPTION   AS STATUSOFACRMODULEDESCRIPTION 
+            ,CAST(T$SACR AS INT)          AS STATUSOFACRMODULEID 
+            ,T$SCMG.CONSTANTDESCRIPTION   AS STATUSOFCMGMODULEDESCRIPTION 
+            ,CAST(T$SCMG AS INT)          AS STATUSOFCMGMODULEID 
+            ,T$SGLD.CONSTANTDESCRIPTION   AS STATUSOFGLDDESCRIPTION 
+            ,CAST(T$SGLD AS INT)          AS STATUSOFGLDID 
+            ,T$SINT.CONSTANTDESCRIPTION   AS STATUSOFINTEGRATIONDESCRIPTION 
+            ,CAST(T$SINT AS INT)          AS STATUSOFINTEGRATIONID 
+         
+        FROM {{ source("BAAN_ORACLE_LIVE", "TTFGLD007201") }} AS SOURCETABLE  
+            /*PERIODTYPE*/ 
+            LEFT OUTER JOIN {{ source("BAAN", "ENUMERATIONS") }} AS T$PTYP 
+             ON   T$PTYP.TABLENAME  = 'TFGLD007' 
+              AND T$PTYP.COLUMNNAME = 'T$PTYP' 
+              AND T$PTYP.CONSTANT   = SOURCETABLE.T$PTYP 
+            /*STATUSOFACP*/ 
+            LEFT OUTER JOIN {{ source("BAAN", "ENUMERATIONS") }} AS T$SACP 
+             ON   T$SACP.TABLENAME  = 'TFGLD007' 
+              AND T$SACP.COLUMNNAME = 'T$SACP' 
+              AND T$SACP.CONSTANT   = SOURCETABLE.T$SACP 
+            /*STATUSOFACRMODULE*/ 
+            LEFT OUTER JOIN {{ source("BAAN", "ENUMERATIONS") }} AS T$SACR 
+             ON   T$SACR.TABLENAME  = 'TFGLD007' 
+              AND T$SACR.COLUMNNAME = 'T$SACR' 
+              AND T$SACR.CONSTANT   = SOURCETABLE.T$SACR 
+            /*STATUSOFCMGMODULE*/ 
+            LEFT OUTER JOIN {{ source("BAAN", "ENUMERATIONS") }} AS T$SCMG 
+             ON   T$SCMG.TABLENAME  = 'TFGLD007' 
+              AND T$SCMG.COLUMNNAME = 'T$SCMG' 
+              AND T$SCMG.CONSTANT   = SOURCETABLE.T$SCMG 
+            /*STATUSOFGLD*/ 
+            LEFT OUTER JOIN {{ source("BAAN", "ENUMERATIONS") }} AS T$SGLD 
+             ON   T$SGLD.TABLENAME  = 'TFGLD007' 
+              AND T$SGLD.COLUMNNAME = 'T$SGLD' 
+              AND T$SGLD.CONSTANT   = SOURCETABLE.T$SGLD 
+            /*STATUSOFINTEGRATION*/ 
+            LEFT OUTER JOIN {{ source("BAAN", "ENUMERATIONS") }} AS T$SINT 
+             ON   T$SINT.TABLENAME  = 'TFGLD007' 
+              AND T$SINT.COLUMNNAME = 'T$SINT' 
+              AND T$SINT.CONSTANT   = SOURCETABLE.T$SINT 
+        {% if is_incremental() %} WHERE FALSE AND SOURCETABLE._CAPTUREDATETIME >= (SELECT MAX(_CAPTUREDATETIME) FROM {{ this }}) {% endif %} 
+        )
+,transform_data as
+(
+    SELECT 
+        source_data._CAPTUREDATETIME AS _CAPTUREDATETIME, 
+        source_data._COMPANYID AS _COMPANYID, 
+        source_data.FISCALYEAR AS FISCALYEAR, 
+        source_data.PERIODNUMBER AS PERIODNUMBER, 
+        source_data.PERIODTYPEDESCRIPTION AS PERIODTYPEDESCRIPTION, 
+        source_data.PERIODTYPEID AS PERIODTYPEID, 
+        source_data.STATUSOFACPDESCRIPTION AS STATUSOFACPDESCRIPTION, 
+        source_data.STATUSOFACPID AS STATUSOFACPID, 
+        source_data.STATUSOFACRMODULEDESCRIPTION AS STATUSOFACRMODULEDESCRIPTION, 
+        source_data.STATUSOFACRMODULEID AS STATUSOFACRMODULEID, 
+        source_data.STATUSOFCMGMODULEDESCRIPTION AS STATUSOFCMGMODULEDESCRIPTION, 
+        source_data.STATUSOFCMGMODULEID AS STATUSOFCMGMODULEID, 
+        source_data.STATUSOFGLDDESCRIPTION AS STATUSOFGLDDESCRIPTION, 
+        source_data.STATUSOFGLDID AS STATUSOFGLDID, 
+        source_data.STATUSOFINTEGRATIONDESCRIPTION AS STATUSOFINTEGRATIONDESCRIPTION, 
+        source_data.STATUSOFINTEGRATIONID AS STATUSOFINTEGRATIONID
+        ,'{{ invocation_id }}' AS AUDIT_LOG_ID
+        ,SHA2('hash_me') as _ROW_HASH -- Adds column to table on full refresh.  
+        FROM source_data
+        )
+,type_data as 
+(
+    select
+        cast(_CAPTUREDATETIME as TIMESTAMP_LTZ(9)) as _CAPTUREDATETIME,
+        cast(_COMPANYID as NUMBER(3,0)) as _COMPANYID,
+        cast(FISCALYEAR as NUMBER(38,0)) as FISCALYEAR,
+        cast(PERIODNUMBER as NUMBER(38,0)) as PERIODNUMBER,
+        cast(PERIODTYPEDESCRIPTION as VARCHAR(16777216)) as PERIODTYPEDESCRIPTION,
+        cast(PERIODTYPEID as NUMBER(38,0)) as PERIODTYPEID,
+        cast(STATUSOFACPDESCRIPTION as VARCHAR(16777216)) as STATUSOFACPDESCRIPTION,
+        cast(STATUSOFACPID as NUMBER(38,0)) as STATUSOFACPID,
+        cast(STATUSOFACRMODULEDESCRIPTION as VARCHAR(16777216)) as STATUSOFACRMODULEDESCRIPTION,
+        cast(STATUSOFACRMODULEID as NUMBER(38,0)) as STATUSOFACRMODULEID,
+        cast(STATUSOFCMGMODULEDESCRIPTION as VARCHAR(16777216)) as STATUSOFCMGMODULEDESCRIPTION,
+        cast(STATUSOFCMGMODULEID as NUMBER(38,0)) as STATUSOFCMGMODULEID,
+        cast(STATUSOFGLDDESCRIPTION as VARCHAR(16777216)) as STATUSOFGLDDESCRIPTION,
+        cast(STATUSOFGLDID as NUMBER(38,0)) as STATUSOFGLDID,
+        cast(STATUSOFINTEGRATIONDESCRIPTION as VARCHAR(16777216)) as STATUSOFINTEGRATIONDESCRIPTION,
+        cast(STATUSOFINTEGRATIONID as NUMBER(38,0)) as STATUSOFINTEGRATIONID,
+        cast(AUDIT_LOG_ID as varchar(128)) as AUDIT_LOG_ID,
+        cast(_ROW_HASH as varchar(128)) as _ROW_HASH
+    from transform_data
+    )
+select * from type_data

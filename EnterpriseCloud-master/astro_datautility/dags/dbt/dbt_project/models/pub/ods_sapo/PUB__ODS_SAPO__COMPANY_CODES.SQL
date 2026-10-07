@@ -1,0 +1,102 @@
+/************
+Model file generated from dbtGeneratePubViews: 08.28.2023.08.32.43"
+*************/
+
+{{ config(
+      materialized='view',
+      alias='COMPANY_CODES',
+      transient=false
+) }}
+
+with source_data as (
+    SELECT
+        MANDT,
+        BUKRS,
+        BUTXT,
+        ORT01,
+        LAND1,
+        WAERS,
+        SPRAS,
+        KTOPL,
+        WAABW,
+        PERIV,
+        KOKFI,
+        RCOMP,
+        ADRNR,
+        STCEG,
+        FIKRS,
+        XFMCO,
+        XFMCB,
+        XFMCA,
+        TXJCD,
+        FMHRDATE,
+        BUVAR,
+        FDBUK,
+        XFDIS,
+        XVALV,
+        XSKFN,
+        KKBER,
+        XMWSN,
+        MREGL,
+        XGSBE,
+        XGJRV,
+        XKDFT,
+        XPROD,
+        XEINK,
+        XJVAA,
+        XVVWA,
+        XSLTA,
+        XFDMM,
+        XFDSD,
+        XEXTB,
+        EBUKR,
+        KTOP2,
+        UMKRS,
+        BUKRS_GLOB,
+        FSTVA,
+        OPVAR,
+        XCOVR,
+        TXKRS,
+        WFVAR,
+        XBBBF,
+        XBBBE,
+        XBBBA,
+        XBBKO,
+        XSTDT,
+        MWSKV,
+        MWSKA,
+        IMPDA,
+        XNEGP,
+        XKKBI,
+        WT_NEWWT,
+        PP_PDATE,
+        INFMT,
+        F_OBSOLETE,
+        FSTVARE,
+        KOPIM,
+        DKWEG,
+        OFFSACCT,
+        BAPOVAR,
+        XCOS,
+        XCESSION,
+        XSPLT,
+        SURCCM,
+        DTPROV,
+        DTAMTC,
+        DTTAXC,
+        DTTDSP,
+        DTAXR,
+        XVATDATE,
+        PST_PER_VAR,
+        XBBSC,
+        FM_DERIVE_ACC,
+        _CAPTUREDATETIME
+    from {{ ref('ODS__SAPO__COMPANY_CODES') }}
+),
+
+transform_data AS
+(
+    select * from source_data
+)
+
+    select * from transform_data

@@ -1,0 +1,82 @@
+{{ config(
+      materialized='view',
+      alias='EMPLOYEE_TEA',
+      transient=false
+) }}
+
+with source_data as (
+    SELECT
+        COMPANYID,
+        EMPLOYEEID,
+        ADPCOMPANY,
+        ADP_PERSON_ID,
+        ACTIVE,
+        EMPLOYEETYPE,
+        FIRSTNAME,
+        LASTNAME,
+        NAMEUSED,
+        ADP_POSN_ID,
+        JOBCODE,
+        JOBTITLE,
+        EMAIL,
+        SUPERVISORID,
+        DEPTCODE,
+        PRODLINECODE,
+        LOCATIONCODE,
+        STATE,
+        MAILSTOP,
+        OFFCPHONE,
+        OFFCEXT,
+        OFFCPAGERMODEL,
+        OFFCPAGER,
+        OFFCPIN,
+        OFFCPAGECOVAREA,
+        OFFCDISPATCH,
+        OFFCFAX,
+        OFFCPAGEREMAIL,
+        CUSTLOCALPAGER,
+        CUSTLOCALPIN,
+        MOBILEPHONE,
+        SENIORITY_DATE,
+        FTE,
+        DATEHIRE,
+        DATETERM,
+        SALARYEXEMPT,
+        PREFERREDLANGUAGE,
+        FLEETAUTO,
+        KRONOS_ACCRUAL_CODE,
+        KRONOS_PAY_RULE,
+        KRONOS_WORK_RULE,
+        KRONOS_ACCESS_CODE,
+        KRONOS_LABOR_LEVEL,
+        KRONOS_PAY_CODE_DATA_ACCESS,
+        KRONOS_DISPLAY_PROFILE,
+        NTDOMAIN,
+        NTLOGIN,
+        PROJECT,
+        LASTUPDATED,
+        LASTUPDATEDBY,
+        MIDDLE_INITIAL,
+        SUFFIX,
+        REHIREDATE,
+        ISMANAGER,
+        STATUS_CODE,
+        HRREP,
+        WORKGROUP,
+        BUMGR,
+        EETYPE,
+        WFH,
+        INACTIVE,
+        VENDORNAME,
+        JOB_FAMILY,
+        SUPERVISORY_ORG,
+        FUNCTION1
+    from {{ ref('ODS__TEACOMMON__EMPLOYEE_TEA') }}
+),
+
+transform_data AS
+(
+    select * from source_data
+)
+
+    select * from transform_data

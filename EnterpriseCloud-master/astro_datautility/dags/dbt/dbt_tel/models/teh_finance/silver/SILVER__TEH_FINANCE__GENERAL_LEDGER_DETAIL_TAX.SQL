@@ -1,0 +1,102 @@
+{{ config(
+      materialized='tel_incremental',
+      alias='GENERAL_LEDGER_DETAIL_TAX',
+      transient=false
+) }}
+
+WITH SOURCE_DATA AS (
+    -- grain for this report (COMPANY_CODE, FISCAL_YEAR, ACCOUNTING_DOCUMENT, SIX_CHARACTER_POSTING_ITEM_FOR_LEDGER)
+    -- is higher than source model which has additional tax columns
+    SELECT DISTINCT
+        COMPANY_CODE
+        , FISCAL_YEAR
+        , FISCAL_PERIOD
+        , VENDOR_NUMBER
+        , VENDOR_NAME
+        , ACCOUNT_NUMBER
+        , ACCOUNT_NAME
+        , ACCOUNTING_DOCUMENT
+        , SIX_CHARACTER_POSTING_ITEM_FOR_LEDGER
+        , POSTING_DATE
+        , DOCUMENT_DATE
+        , DEBIT_CREDIT_INDICATOR_DRCRK
+        , POSTING_KEY
+        , DOCUMENT_TYPE
+        , DOCUMENT_HEADER_TEXT_BKPF
+        , ITEM_TEXT
+        , OFFSETTING_ACCOUNT_NUMBER
+        , REFERENCE_BKPF
+        , OFFICE
+        , TAX_JURISDICTION
+        , TAX_CODE
+        , SHIP_TO_CITY
+        , SHIP_TO_REGION
+        , AMOUNT_IN_COMPANY_CODE_CURRENCY
+    FROM {{ ref('SILVER__TEH_FINANCE__TAX_MASTER') }}
+    WHERE LEFT(ACCOUNT_NUMBER, 1) IN ('6', '7', '8', '9')
+)
+
+, TRANSFORM_DATA AS (
+    SELECT
+        '{{ invocation_id }}' AS _AUDIT_LOG_ID
+        , SHA2('hash_me') AS _ROW_HASH
+        , COMPANY_CODE
+        , FISCAL_YEAR
+        , FISCAL_PERIOD
+        , VENDOR_NUMBER
+        , VENDOR_NAME
+        , ACCOUNT_NUMBER
+        , ACCOUNT_NAME
+        , ACCOUNTING_DOCUMENT
+        , SIX_CHARACTER_POSTING_ITEM_FOR_LEDGER
+        , POSTING_DATE
+        , DOCUMENT_DATE
+        , DEBIT_CREDIT_INDICATOR_DRCRK AS DEBIT_CREDIT_INDICATOR
+        , POSTING_KEY
+        , DOCUMENT_TYPE
+        , DOCUMENT_HEADER_TEXT_BKPF
+        , ITEM_TEXT
+        , OFFSETTING_ACCOUNT_NUMBER
+        , REFERENCE_BKPF
+        , OFFICE
+        , TAX_JURISDICTION
+        , TAX_CODE
+        , SHIP_TO_CITY
+        , SHIP_TO_REGION
+        , AMOUNT_IN_COMPANY_CODE_CURRENCY
+    FROM SOURCE_DATA
+)
+
+, TYPE_DATA AS (
+    SELECT
+        CAST(_AUDIT_LOG_ID AS VARCHAR(128)) AS _AUDIT_LOG_ID
+        , CAST(_ROW_HASH AS VARCHAR(128)) AS _ROW_HASH
+        , COMPANY_CODE
+        , FISCAL_YEAR
+        , FISCAL_PERIOD
+        , VENDOR_NUMBER
+        , VENDOR_NAME
+        , ACCOUNT_NUMBER
+        , ACCOUNT_NAME
+        , ACCOUNTING_DOCUMENT
+        , SIX_CHARACTER_POSTING_ITEM_FOR_LEDGER
+        , CAST(POSTING_DATE as DATE) as POSTING_DATE
+        , CAST(DOCUMENT_DATE as DATE) as DOCUMENT_DATE
+        , DEBIT_CREDIT_INDICATOR
+        , POSTING_KEY
+        , DOCUMENT_TYPE
+        , DOCUMENT_HEADER_TEXT_BKPF
+        , ITEM_TEXT
+        , OFFSETTING_ACCOUNT_NUMBER
+        , REFERENCE_BKPF
+        , OFFICE
+        , TAX_JURISDICTION
+        , TAX_CODE
+        , SHIP_TO_CITY
+        , SHIP_TO_REGION
+        , CAST(AMOUNT_IN_COMPANY_CODE_CURRENCY as number(38,2)) as AMOUNT_IN_COMPANY_CODE_CURRENCY
+    FROM TRANSFORM_DATA
+)
+
+SELECT * FROM TYPE_DATA
+

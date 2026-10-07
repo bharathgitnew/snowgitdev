@@ -1,0 +1,163 @@
+	{{ config(
+    	  materialized='tel_incremental',
+    	  incremental_strategy='merge',
+    	  alias='SAPAPI_ZCDV_T_CMTU110_MSKU',
+    	  unique_key = ['MATNR','WERKS','CHARG','SOBKZ', 'KUNNR'],
+    	  transient=false
+) }}
+
+	with source_data as (
+    SELECT
+        _FILEDATE,
+        _FILENAME,
+		JSONFIELD:"Mandt"::STRING AS MANDT, -- No Mapping in GMX
+		JSONFIELD:"MATNR"::STRING AS MATNR,
+		JSONFIELD:"WERKS"::STRING AS WERKS,
+		LPAD(coalesce(JSONFIELD:"CHARG"::STRING,''),10,'0') as "CHARG",
+		JSONFIELD:"SOBKZ"::STRING AS SOBKZ,
+		JSONFIELD:"KUNNR"::STRING AS KUNNR,
+		JSONFIELD:"LFGJA"::STRING AS LFGJA,
+		JSONFIELD:"LFMON"::STRING AS LFMON,
+		JSONFIELD:"Kuspr"::STRING AS KUSPR, -- No Mapping in GMX
+		JSONFIELD:"KULAB"::STRING AS KULAB,
+		JSONFIELD:"KUINS"::STRING AS KUINS,
+		JSONFIELD:"Kuvla"::STRING AS KUVLA, -- No Mapping in GMX
+		JSONFIELD:"Kuvin"::STRING AS KUVIN, -- No Mapping in GMX
+		JSONFIELD:"Kuill"::STRING AS KUILL, -- No Mapping in GMX
+		JSONFIELD:"Kuilq"::STRING AS KUILQ, -- No Mapping in GMX
+		JSONFIELD:"Kuvll"::STRING AS KUVLL, -- No Mapping in GMX
+		JSONFIELD:"Kuvlq"::STRING AS KUVLQ, -- No Mapping in GMX
+		JSONFIELD:"Kufll"::STRING AS KUFLL, -- No Mapping in GMX
+		JSONFIELD:"Kuflq"::STRING AS KUFLQ, -- No Mapping in GMX
+		JSONFIELD:"Kudll"::STRING AS KUDLL, -- No Mapping in GMX
+		JSONFIELD:"KUEIN"::STRING AS KUEIN,
+		JSONFIELD:"Kuvei"::STRING AS KUVEI, -- No Mapping in GMX
+		JSONFIELD:"Ersda"::STRING AS ERSDA, -- No Mapping in GMX
+		JSONFIELD:"Kujin"::STRING AS KUJIN, -- No Mapping in GMX
+		JSONFIELD:"Kurue"::STRING AS KURUE, -- No Mapping in GMX
+		JSONFIELD:"Kuuml"::STRING AS KUUML, -- No Mapping in GMX
+		JSONFIELD:"SgtScat"::STRING AS SGTSCAT, -- No Mapping in GMX
+		JSONFIELD:"FshSeasonYear"::STRING AS FSHSEASONYEAR, -- No Mapping in GMX
+		JSONFIELD:"FshSeason"::STRING AS FSHSEASON, -- No Mapping in GMX
+		JSONFIELD:"FshCollection"::STRING AS FSHCOLLECTION, -- No Mapping in GMX
+		JSONFIELD:"FshTheme"::STRING AS FSHTHEME, -- No Mapping in GMX
+		JSONFIELD:"FshSallocQty"::STRING AS FSHSALLOCQTY, -- No Mapping in GMX
+		JSONFIELD:"Cwm_Kulab"::STRING AS CWM_KULAB, -- No Mapping in GMX
+		JSONFIELD:"Cwm_Kuins"::STRING AS CWM_KUINS, -- No Mapping in GMX
+		JSONFIELD:"Cwm_Kuein"::STRING AS CWM_KUEIN, -- No Mapping in GMX
+		JSONFIELD:"Cwm_Kuuml"::STRING AS CWM_KUUML, -- No Mapping in GMX
+		JSONFIELD:"Cwm_Kuvla"::STRING AS CWM_KUVLA, -- No Mapping in GMX
+		JSONFIELD:"Cwm_Kuvin"::STRING AS CWM_KUVIN, -- No Mapping in GMX
+		JSONFIELD:"Cwm_Kuvei"::STRING AS CWM_KUVEI, -- No Mapping in GMX
+		JSONFIELD:"update_date"::STRING AS UPDATE_DATE -- No Mapping in GMX
+	from {{ source('SAPH','SAP_US_MMT_EV_MSKU') }}
+	{% if is_tel_incremental() %}
+		WHERE  _FILEDATE >= IFNULL((SELECT MAX(_FILEDATE) FROM {{ this }}),'1970-01-01')
+	{% endif %}
+        QUALIFY (ROW_NUMBER() OVER (
+			PARTITION BY JSONFIELD:"MATNR"::STRING,
+				JSONFIELD:"WERKS"::STRING,
+				LPAD(coalesce(JSONFIELD:"CHARG"::STRING,''),10,'0'),
+				JSONFIELD:"SOBKZ"::STRING,
+				JSONFIELD:"KUNNR"::STRING
+			ORDER BY _FILEDATE DESC )) = 1
+	),
+
+	transform_data as (
+    SELECT
+        _FILEDATE AS _FILEDATE,
+        _FILENAME AS _FILENAME,
+        '{{ invocation_id }}' AS _AUDIT_LOG_ID,
+        SHA2('hash_me') AS _ROW_HASH,
+		MANDT as MANDT,
+		MATNR as MATNR,
+		WERKS as WERKS,
+		LPAD(coalesce("CHARG",''),10,'0') as "CHARG",
+		SOBKZ as SOBKZ,
+		KUNNR as KUNNR,
+		LFGJA as LFGJA,
+		LPAD(coalesce("LFMON",''),2,'0') as "LFMON",
+		KUSPR as KUSPR,
+		KULAB as KULAB,
+		KUINS as KUINS,
+		KUVLA as KUVLA,
+		KUVIN as KUVIN,
+		KUILL as KUILL,
+		KUILQ as KUILQ,
+		KUVLL as KUVLL,
+		KUVLQ as KUVLQ,
+		KUFLL as KUFLL,
+		KUFLQ as KUFLQ,
+		KUDLL as KUDLL,
+		KUEIN as KUEIN,
+		KUVEI as KUVEI,
+		ERSDA as ERSDA,
+		KUJIN as KUJIN,
+		KURUE as KURUE,
+		KUUML as KUUML,
+		SGTSCAT as SGTSCAT,
+		FSHSEASONYEAR as FSHSEASONYEAR,
+		FSHSEASON as FSHSEASON,
+		FSHCOLLECTION as FSHCOLLECTION,
+		FSHTHEME as FSHTHEME,
+		FSHSALLOCQTY as FSHSALLOCQTY,
+		CWM_KULAB as CWM_KULAB,
+		CWM_KUINS as CWM_KUINS,
+		CWM_KUEIN as CWM_KUEIN,
+		CWM_KUUML as CWM_KUUML,
+		CWM_KUVLA as CWM_KUVLA,
+		CWM_KUVIN as CWM_KUVIN,
+		CWM_KUVEI as CWM_KUVEI,
+		UPDATE_DATE as UPDATE_DATE
+    FROM source_data
+),
+
+type_data as (
+    SELECT
+        _FILEDATE,
+        _FILENAME,
+        _AUDIT_LOG_ID,
+        _ROW_HASH,
+		MATNR,
+		WERKS,
+		CHARG,
+		SOBKZ,
+		KUNNR,
+		LFGJA,
+		LFMON,
+		KUSPR,
+		KULAB,
+		KUINS,
+		KUVLA,
+		KUVIN,
+		KUILL,
+		KUILQ,
+		KUVLL,
+		KUVLQ,
+		KUFLL,
+		KUFLQ,
+		KUDLL,
+		KUEIN,
+		KUVEI,
+		ERSDA,
+		KUJIN,
+		KURUE,
+		KUUML,
+		SGTSCAT,
+		FSHSEASONYEAR,
+		FSHSEASON,
+		FSHCOLLECTION,
+		FSHTHEME,
+		FSHSALLOCQTY,
+		CWM_KULAB,
+		CWM_KUINS,
+		CWM_KUEIN,
+		CWM_KUUML,
+		CWM_KUVLA,
+		CWM_KUVIN,
+		CWM_KUVEI,
+		UPDATE_DATE
+    FROM transform_data
+)
+
+	select * from type_data

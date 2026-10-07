@@ -1,0 +1,22 @@
+models:
+- name: SILVER__TEE_SPARES_SUPPORT__DEMAND_LIVE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEE_SPARES_SUPPORT__DEMANDRETURN_LIVE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEE_SPARES_SUPPORT__INVENTORY_LIVE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEE_SPARES_SUPPORT__ORDERS_LIVE
+  tests:
+  - has_data
+  - recently_run   
+- name: SILVER__TEE_SPARES_SUPPORT__PARTS_EXPORTIMPORT_CONTROL
+  tests:
+  - has_data
+  - recently_run    
+

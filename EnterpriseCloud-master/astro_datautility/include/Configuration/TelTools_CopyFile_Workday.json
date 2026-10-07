@@ -1,0 +1,20 @@
+{
+    "CopyFile": {
+        "Workday-WorkdayCompanyList": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\Workday",
+            "table": "WORKERCOMPANYLIST",
+            "schema": "WORKDAY",
+            "file_pattern": "TEH_CR_Worker_List*.csv",
+            "is_incremental": false,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        }
+    }
+}

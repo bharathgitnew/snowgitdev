@@ -1,0 +1,170 @@
+/************
+Model file generated from dbtGeneratePubViews: 03.16.2022.09.47.36"
+*************/
+
+{{ config(
+      materialized='tel_incremental',
+      incremental_strategy='insert_overwrite',
+      alias='FORECAST_HISTORY_TMEA',
+      transient=false
+) }}
+
+
+with source_data as (
+    SELECT
+        ID,
+        _APPENDEDDATE,
+        IS_PURCHASE_ORDER,
+        BUSINESS_UNIT,
+        PURCHASE_ORDER_NUMBER,
+        PURCHASE_ORDER_LINE_NUMBER,
+        PURCHASE_ORDER_KEY,
+        IS_CRITICAL,
+        STATE,
+        TRANSIT_TIME,
+        SITE,
+        CATEGORY,
+        MODEL,
+        COPY_EXACT_ID,
+        ENTITY,
+        PROCESS,
+        DESCRIPTION,
+        QUANTITY,
+        BUILD_TIME,
+        SERIAL_NUMBER,
+        READ_ONLY,
+        SUPPLIER_MAP,
+        CONVERSION_LOCATION,
+        INTEL_RELEASED_DATE,
+        REQUESTED_DELIVERY_DATE,
+        CONTRACTUAL_TENDER_DATE,
+        REQUESTED_TENDER_DATE,
+        SUPPLIER_TENDER_DATE,
+        LAST_SUPPLIER_TENDER_DATE,
+        EXPECTED_SUPPLIER_DELIVERY_DATE,
+        PRICE_KEY,
+        BUSINESS_UNIT_SHORT_TEXT,
+        UEID,
+        PRIMARY_SUPPLIER_TENDER_DATE,
+        IS_PART_ORDER,
+		SET_START_DATE,
+        REUSE_PROCESS,
+        REUSE_ENTITY,
+        REUSE_CEID,
+        REUSE_SITE,
+        Revision_Desc_Order
+    FROM {{ ref('SILVER__TEH_SALES_TO_INSTALLATION__SIRFIS_FORECAST_BASE') }} as SIRFIS_FORECAST_BASE,
+    -- added to ensure pulling one row per each Appendeddate & ID
+   (SELECT ID as SIRFISID,
+                    _APPENDEDDATE as ADATE,
+                    MIN(Revision_Desc_Order) as MAX_REV 
+                    FROM {{ ref('SILVER__TEH_SALES_TO_INSTALLATION__SIRFIS_FORECAST_BASE') }}
+                    GROUP BY SIRFISID,ADATE) as MAX_APPENDDATE_PER_ID 
+    WHERE SIRFIS_FORECAST_BASE.ID=MAX_APPENDDATE_PER_ID.SIRFISID 
+            and SIRFIS_FORECAST_BASE._appendeddate=MAX_APPENDDATE_PER_ID.ADATE 
+            and SIRFIS_FORECAST_BASE.Revision_Desc_Order=MAX_APPENDDATE_PER_ID.MAX_REV 
+            and SIRFIS_FORECAST_BASE.SUPPLIER_NUMBER = 1000013881
+),
+
+transform_data AS
+(
+    SELECT
+        '{{ invocation_id }}'  AS _AUDIT_LOG_ID,
+		SHA2('hash_me') AS _ROW_HASH,
+        SourceData.ID,
+        SourceData.IS_PURCHASE_ORDER,
+        SourceData.BUSINESS_UNIT,
+        SourceData.PURCHASE_ORDER_NUMBER,
+        SourceData.PURCHASE_ORDER_LINE_NUMBER,
+        SourceData.PURCHASE_ORDER_KEY,
+        SourceData.IS_CRITICAL,
+        SourceData.STATE,
+        SourceData.TRANSIT_TIME,
+        SourceData.SITE,
+        SourceData.CATEGORY,
+        SourceData.MODEL,
+        SourceData.COPY_EXACT_ID,
+        SourceData.ENTITY,
+        SourceData.PROCESS,
+        SourceData.DESCRIPTION,
+        SourceData.QUANTITY,
+        SourceData.BUILD_TIME,
+        SourceData.SERIAL_NUMBER,
+        SourceData.READ_ONLY,
+        SourceData.SUPPLIER_MAP,
+        SourceData.CONVERSION_LOCATION,
+        TO_DATE(SourceData.INTEL_RELEASED_DATE) AS INTEL_RELEASED_DATE,
+        TO_DATE(SourceData.REQUESTED_DELIVERY_DATE) AS REQUESTED_DELIVERY_DATE,
+        TO_DATE(SourceData.CONTRACTUAL_TENDER_DATE) AS CONTRACTUAL_TENDER_DATE,
+        TO_DATE(SourceData.REQUESTED_TENDER_DATE) AS REQUESTED_TENDER_DATE,
+        TO_DATE(SourceData.SUPPLIER_TENDER_DATE) AS SUPPLIER_TENDER_DATE,
+        TO_DATE(SourceData.LAST_SUPPLIER_TENDER_DATE) AS LAST_SUPPLIER_TENDER_DATE,
+        TO_DATE(SourceData.EXPECTED_SUPPLIER_DELIVERY_DATE) AS EXPECTED_SUPPLIER_DELIVERY_DATE,
+        SourceData.PRICE_KEY,
+        SourceData.BUSINESS_UNIT_SHORT_TEXT,
+        SourceData.UEID,
+        TO_DATE(SourceData.PRIMARY_SUPPLIER_TENDER_DATE) AS PRIMARY_SUPPLIER_TENDER_DATE,
+        SourceData.IS_PART_ORDER,
+		TO_DATE(SourceData.SET_START_DATE) AS SET_START_DATE,
+        SourceData.REUSE_PROCESS,
+        SourceData.REUSE_ENTITY,
+        SourceData.REUSE_CEID,
+        SourceData.REUSE_SITE,
+        TO_DATE(SourceData._APPENDEDDATE) AS _APPENDEDDATE,
+        SourceData.ID || '-' || SourceData._APPENDEDDATE AS STATUS_KEY,
+        SourceData.REVISION_DESC_ORDER, 
+        row_number() over(partition by sourcedata.ID order by _AppendedDate asc) as REVISION_ASC_ORDER
+    FROM source_data SourceData
+),
+
+type_data as (
+    SELECT
+        CAST(_AUDIT_LOG_ID AS VARCHAR(128)) AS _AUDIT_LOG_ID,
+        CAST(_ROW_HASH AS VARCHAR(128)) AS _ROW_HASH,
+        ID,
+        CAST(_APPENDEDDATE AS DATE) AS _APPENDEDDATE,
+        STATUS_KEY,
+        IS_PURCHASE_ORDER,
+        BUSINESS_UNIT,
+        BUSINESS_UNIT_SHORT_TEXT,
+        UEID,
+        PURCHASE_ORDER_NUMBER,
+        PURCHASE_ORDER_LINE_NUMBER,
+        PURCHASE_ORDER_KEY,
+        IS_CRITICAL,
+        STATE,
+        CAST(TRANSIT_TIME AS NUMBER(38,0)) AS TRANSIT_TIME,
+        SITE,
+        CATEGORY,
+        MODEL,
+        COPY_EXACT_ID,
+        ENTITY,
+        PROCESS,
+        DESCRIPTION,
+        CAST(QUANTITY AS NUMBER(38,0)) AS QUANTITY,
+        BUILD_TIME,
+        SERIAL_NUMBER,
+        READ_ONLY,
+        SUPPLIER_MAP,
+        CONVERSION_LOCATION,
+        PRICE_KEY,
+        CAST(INTEL_RELEASED_DATE AS DATE) AS INTEL_RELEASED_DATE,
+        CAST(REQUESTED_DELIVERY_DATE AS DATE) AS REQUESTED_DELIVERY_DATE,
+        CAST(CONTRACTUAL_TENDER_DATE AS DATE) AS CONTRACTUAL_TENDER_DATE,
+        CAST(REQUESTED_TENDER_DATE AS DATE) AS REQUESTED_TENDER_DATE,
+        CAST(SUPPLIER_TENDER_DATE AS DATE) AS SUPPLIER_TENDER_DATE,
+        CAST(LAST_SUPPLIER_TENDER_DATE AS DATE) AS LAST_SUPPLIER_TENDER_DATE,
+        CAST(EXPECTED_SUPPLIER_DELIVERY_DATE AS DATE) AS EXPECTED_SUPPLIER_DELIVERY_DATE,
+        CAST(PRIMARY_SUPPLIER_TENDER_DATE AS DATE) AS PRIMARY_SUPPLIER_TENDER_DATE,
+        CAST(SET_START_DATE AS DATE) AS SET_START_DATE,
+        IS_PART_ORDER,
+        REUSE_PROCESS,
+        REUSE_ENTITY,
+        REUSE_CEID,
+        REUSE_SITE,
+        CAST(REVISION_DESC_ORDER AS NUMBER(38,0)) AS REVISION_DESC_ORDER,
+        CAST(REVISION_ASC_ORDER AS NUMBER(38,0)) AS REVISION_ASC_ORDER        
+    FROM transform_data
+)
+
+SELECT * from type_data

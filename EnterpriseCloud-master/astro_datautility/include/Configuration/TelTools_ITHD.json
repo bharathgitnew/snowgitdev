@@ -1,0 +1,142 @@
+{
+    "Machines": {
+        "PROD": {
+            "THREADS": "8",
+            "RUN_FILE": "/usr/local/airflow/include/Python/RuntimeConfig/ithd.FILE_EXTRACTS.json"
+        },
+        "DEV": {
+            "THREADS": "8",
+            "RUN_FILE": "/usr/local/airflow/include/Python/RuntimeConfig/ithd.FILE_EXTRACTS.json"
+        },
+        "SIT": {
+            "THREADS": "8",
+            "RUN_FILE": "/usr/local/airflow/include/Python/RuntimeConfig/ithd.FILE_EXTRACTS.json"
+        },
+        "QA": {
+            "THREADS": "8",
+            "RUN_FILE": "/usr/local/airflow/include/Python/RuntimeConfig/ithd.FILE_EXTRACTS.json"
+        }
+    }, 
+    "DataSets": {
+        "ADX_PORTALCOMMENT": {
+            "SNOWFLAKE_SCHEMA_NAME": "ITHD",
+            "SNOWFLAKE_DATABASE_NAME": "<<LZ>>",
+            "SNOWFLAKE_TABLE_NAME": "ADX_PORTALCOMMENT"
+        },
+        "ANNOTATION": {
+            "SNOWFLAKE_SCHEMA_NAME": "ITHD",
+            "SNOWFLAKE_DATABASE_NAME": "<<LZ>>",
+            "SNOWFLAKE_TABLE_NAME": "ANNOTATION"
+        },
+        "BUSINESSUNIT": {
+            "SNOWFLAKE_SCHEMA_NAME": "ITHD",
+            "SNOWFLAKE_DATABASE_NAME": "<<LZ>>",
+            "SNOWFLAKE_TABLE_NAME": "BUSINESSUNIT"
+        },
+        "CATEGORY": {
+            "SNOWFLAKE_SCHEMA_NAME": "ITHD",
+            "SNOWFLAKE_DATABASE_NAME": "<<LZ>>",
+            "SNOWFLAKE_TABLE_NAME": "CATEGORY"
+        },
+        "CONTACT": {
+            "SNOWFLAKE_SCHEMA_NAME": "ITHD",
+            "SNOWFLAKE_DATABASE_NAME": "<<LZ>>",
+            "SNOWFLAKE_TABLE_NAME": "CONTACT"
+        },
+        "INCIDENT": {
+            "SNOWFLAKE_SCHEMA_NAME": "ITHD",
+            "SNOWFLAKE_DATABASE_NAME": "<<LZ>>",
+            "SNOWFLAKE_TABLE_NAME": "INCIDENT"
+        },
+        "MCA_EXTERNALCASESUBTYPE": {
+            "SNOWFLAKE_SCHEMA_NAME": "ITHD",
+            "SNOWFLAKE_DATABASE_NAME": "<<LZ>>",
+            "SNOWFLAKE_TABLE_NAME": "MCA_EXTERNALCASESUBTYPE"
+        },
+        "MCA_EXTERNALCASETYPE": {
+            "SNOWFLAKE_SCHEMA_NAME": "ITHD",
+            "SNOWFLAKE_DATABASE_NAME": "<<LZ>>",
+            "SNOWFLAKE_TABLE_NAME": "MCA_EXTERNALCASETYPE"
+        },
+        "MCA_INTERNALCASETYPE": {
+            "SNOWFLAKE_SCHEMA_NAME": "ITHD",
+            "SNOWFLAKE_DATABASE_NAME": "<<LZ>>",
+            "SNOWFLAKE_TABLE_NAME": "MCA_INTERNALCASETYPE"
+        },
+        "MCA_INTERNALSYSTEMMODULE": {
+            "SNOWFLAKE_SCHEMA_NAME": "ITHD",
+            "SNOWFLAKE_DATABASE_NAME": "<<LZ>>",
+            "SNOWFLAKE_TABLE_NAME": "MCA_INTERNALSYSTEMMODULE"
+        },
+        "MCA_INTERNALSYSTEMNAME": {
+            "SNOWFLAKE_SCHEMA_NAME": "ITHD",
+            "SNOWFLAKE_DATABASE_NAME": "<<LZ>>",
+            "SNOWFLAKE_TABLE_NAME": "MCA_INTERNALSYSTEMNAME"
+        },
+        "MCA_LOCATION": {
+            "SNOWFLAKE_SCHEMA_NAME": "ITHD",
+            "SNOWFLAKE_DATABASE_NAME": "<<LZ>>",
+            "SNOWFLAKE_TABLE_NAME": "MCA_LOCATION"
+        },
+        "MCA_REGION": {
+            "SNOWFLAKE_SCHEMA_NAME": "ITHD",
+            "SNOWFLAKE_DATABASE_NAME": "<<LZ>>",
+            "SNOWFLAKE_TABLE_NAME": "MCA_REGION"
+        },
+        "MCA_SUBSIDIARY": {
+            "SNOWFLAKE_SCHEMA_NAME": "ITHD",
+            "SNOWFLAKE_DATABASE_NAME": "<<LZ>>",
+            "SNOWFLAKE_TABLE_NAME": "MCA_SUBSIDIARY"
+        },
+        "QUEUE": {
+            "SNOWFLAKE_SCHEMA_NAME": "ITHD",
+            "SNOWFLAKE_DATABASE_NAME": "<<LZ>>",
+            "SNOWFLAKE_TABLE_NAME": "QUEUE"
+        },
+        "QUEUEITEM": {
+            "SNOWFLAKE_SCHEMA_NAME": "ITHD",
+            "SNOWFLAKE_DATABASE_NAME": "<<LZ>>",
+            "SNOWFLAKE_TABLE_NAME": "QUEUEITEM"
+        },
+        "SLAKPIINSTANCE": {
+            "SNOWFLAKE_SCHEMA_NAME": "ITHD",
+            "SNOWFLAKE_DATABASE_NAME": "<<LZ>>",
+            "SNOWFLAKE_TABLE_NAME": "SLAKPIINSTANCE"
+        },
+        "SYSTEMUSER": {
+            "SNOWFLAKE_SCHEMA_NAME": "ITHD",
+            "SNOWFLAKE_DATABASE_NAME": "<<LZ>>",
+            "SNOWFLAKE_TABLE_NAME": "SYSTEMUSER"
+        },
+        "ATTRIBUTEMETADATA": {
+            "SNOWFLAKE_SCHEMA_NAME": "ITHD",
+            "SNOWFLAKE_DATABASE_NAME": "<<LZ>>",
+            "SNOWFLAKE_TABLE_NAME": "ATTRIBUTEMETADATA"
+        },
+        "GLOBALOPTIONSETMETADATA": {
+            "SNOWFLAKE_SCHEMA_NAME": "ITHD",
+            "SNOWFLAKE_DATABASE_NAME": "<<LZ>>",
+            "SNOWFLAKE_TABLE_NAME": "GLOBALOPTIONSETMETADATA"
+        },
+        "OPTIONSETMETADATA": {
+            "SNOWFLAKE_SCHEMA_NAME": "ITHD",
+            "SNOWFLAKE_DATABASE_NAME": "<<LZ>>",
+            "SNOWFLAKE_TABLE_NAME": "OPTIONSETMETADATA"
+        },
+        "STATEMETADATA": {
+            "SNOWFLAKE_SCHEMA_NAME": "ITHD",
+            "SNOWFLAKE_DATABASE_NAME": "<<LZ>>",
+            "SNOWFLAKE_TABLE_NAME": "STATEMETADATA"
+        },
+        "STATUSMETADATA": {
+            "SNOWFLAKE_SCHEMA_NAME": "ITHD",
+            "SNOWFLAKE_DATABASE_NAME": "<<LZ>>",
+            "SNOWFLAKE_TABLE_NAME": "STATUSMETADATA"
+        },
+        "TARGETMETADATA": {
+            "SNOWFLAKE_SCHEMA_NAME": "ITHD",
+            "SNOWFLAKE_DATABASE_NAME": "<<LZ>>",
+            "SNOWFLAKE_TABLE_NAME": "TARGETMETADATA"
+        }
+    }
+}

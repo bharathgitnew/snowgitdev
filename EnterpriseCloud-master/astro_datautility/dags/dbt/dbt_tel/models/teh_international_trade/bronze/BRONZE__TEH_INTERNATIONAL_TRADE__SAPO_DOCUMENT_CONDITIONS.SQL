@@ -1,0 +1,98 @@
+{{ config(
+    alias = 'SAPO_DOCUMENT_CONDITIONS',
+    materialized = 'tel_incremental',
+    incremental_strategy = 'insert_overwrite',
+    unique_key = ['MANDT', 'KNUMV', 'KPOSN', 'STUNR', 'ZAEHK']
+) }}
+
+with source_data as (
+	select 
+        *,
+	from {{ source('SAP_ORACLE_LIVE', 'KONV') }}
+),
+
+transform_data as (
+    select
+        '{{ invocation_id }}' as _AUDIT_LOG_ID,
+        SHA2('hash_me') as _ROW_HASH,
+        *,
+	from source_data
+), 
+
+type_data as (
+    select 
+        _AUDIT_LOG_ID::varchar(128) as _AUDIT_LOG_ID,
+        _ROW_HASH::varchar(128) as _ROW_HASH,
+        _CAPTUREDATETIME::timestamp_ltz(9) as _CAPTUREDATETIME,
+        MANDT,
+        KNUMV,
+        KPOSN,
+        STUNR,
+        ZAEHK,
+        KAPPL,
+        KSCHL,
+        KDATU,
+        KRECH,
+        KAWRT,
+        KBETR,
+        WAERS,
+        KKURS,
+        KPEIN,
+        KMEIN,
+        KUMZA,
+        KUMNE,
+        KNTYP,
+        KSTAT,
+        KNPRS,
+        KRUEK,
+        KRELI,
+        KHERK,
+        KGRPE,
+        KOUPD,
+        KOLNR,
+        KNUMH,
+        KOPOS,
+        KVSL1,
+        SAKN1,
+        MWSK1,
+        KVSL2,
+        SAKN2,
+        MWSK2,
+        LIFNR,
+        KUNNR,
+        KDIFF,
+        KWERT,
+        KSTEU,
+        KINAK,
+        KOAID,
+        ZAEKO,
+        KMXAW,
+        KMXWR,
+        KFAKTOR,
+        KDUPL,
+        KFAKTOR1,
+        KZBZG,
+        KSTBS,
+        KONMS,
+        KONWS,
+        KAWRT_K,
+        KWAEH,
+        KWERT_K,
+        KFKIV,
+        KVARC,
+        KMPRS,
+        PRSQU,
+        VARCOND,
+        STUFE,
+        WEGXX,
+        KTREL,
+        MDFLG,
+        TXJLV,
+        KBFLAG,
+        KOLNR3,
+        CPF_GUID,
+        KAQTY,
+    from transform_data
+)
+ 
+select * from type_data
