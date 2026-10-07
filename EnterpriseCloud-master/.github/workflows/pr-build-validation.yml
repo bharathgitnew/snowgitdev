@@ -1,0 +1,110 @@
+name: PR Build Validations
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+    branches:
+      - sit
+
+run-name: "${{ github.workflow }} | ${{ github.event_name }} | ${{ github.ref_name }} | ${{ github.run_id }}-${{ github.run_attempt }}"
+
+jobs:
+  validate-all:
+    name: PR Validations (PR)
+    runs-on: [self-hosted, windows, build3]
+    environment: build
+    if: ${{ github.head_ref != 'master' }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha }}
+          sparse-checkout: |
+            Snow/
+            astro_datautility/
+            .github/scripts/
+          sparse-checkout-cone-mode: true
+
+
+      - name: Get changed files - Snow
+        id: snow-extractor
+        shell: pwsh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          INPUT_GRAB_ON: "Snow/"
+          INPUT_SQL_ONLY: "true"
+        run: python .github/scripts/get_diff_files.py
+
+      - name: Run changed files - Snow
+        if: ${{ steps.snow-extractor.outputs.has_changes == 'true' }}
+        shell: python
+        env:
+          SNOWFLAKE_ACCOUNT: ${{ vars.SNOWFLAKE_ACCOUNT }}
+          SNOWFLAKE_USER: ${{ vars.SNOWFLAKE_USER }}
+          SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_SECRET }}
+          SNOWFLAKE_WAREHOUSE: ${{ vars.SNOWFLAKE_WAREHOUSE }}
+          SNOWFLAKE_ROLE: ${{ vars.SNOWFLAKE_ROLE }}
+          SNOWFLAKE_SYSADMIN_ROLE: ${{ vars.SNOWFLAKE_SYSADMIN_ROLE }}
+          DEPLOYMENT_BRANCH_TEMPLATE: 'build'
+        run: |
+          import subprocess
+          files = "${{ steps.snow-extractor.outputs.changed_files }}".replace("||", " ").split()
+          print("Deploying files:", files)
+          for file in files:
+              print(f"Deploying {file}...")
+              subprocess.check_call(
+                  ["python", ".github\scripts\deploy_snowfiles.py", file]
+              )
+
+
+      - name: Get changed files - dbt
+        id: dbt-extractor
+        shell: pwsh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          INPUT_GRAB_ON: "astro_datautility/dags/dbt/dbt_tel/"
+          INPUT_SQL_ONLY: "true"
+        run: python .github/scripts/get_diff_files.py
+
+      - name: Write changed files to temp file - Dbt
+        shell: pwsh
+        if: ${{ steps.dbt-extractor.outputs.has_changes == 'true' }}
+        run: |
+          "${{ steps.dbt-extractor.outputs.changed_files }}" | Out-File -FilePath changed_files.txt -Encoding utf8
+
+      - name: Run dbt compile
+        shell: pwsh
+        if: ${{ steps.dbt-extractor.outputs.has_changes == 'true' }}
+        env:
+          ALL_VARS: ${{ toJson(vars) }}
+          SNOWFLAKE_SECRET: ${{ secrets.SNOWFLAKE_SECRET }}
+        run: python .github\scripts\run_dbt_compile.py --changed-files changed_files.txt
+
+
+      - name: Get changed config files
+        id: config-extractor
+        shell: pwsh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          INPUT_GRAB_ON: "astro_datautility/"
+          INPUT_SQL_ONLY: "false"
+        run: python .github/scripts/get_diff_files.py
+      
+      - name: Write changed files to temp file - Config
+        shell: pwsh
+        if: ${{ steps.config-extractor.outputs.has_changes == 'true' }}
+        run: |
+          "${{ steps.config-extractor.outputs.changed_files }}" | Out-File -FilePath changed_files_config.txt -Encoding utf8
+
+      - name: Run config validation
+        shell: pwsh
+        if: ${{ steps.config-extractor.outputs.has_changes == 'true' }}
+        run: python .github\scripts\run_json_yml_compile.py --changed-files changed_files_config.txt

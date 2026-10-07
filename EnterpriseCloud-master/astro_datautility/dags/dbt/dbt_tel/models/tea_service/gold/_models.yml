@@ -1,0 +1,122 @@
+version: 2
+models:
+  - name: GOLD__TEA_SERVICE__ACTIVE_BOH_CONTRACTS
+    tests:
+      - has_data
+      - recently_run
+  - name: GOLD__TEA_SERVICE__CONTRACT_AND_PAID_SERVICE_SAP_REV_COGS
+    tests:
+      - has_data
+      - recently_run
+  - name: GOLD__TEA_SERVICE__CONTRACT_BACKLOG
+    tests:
+      - has_data
+      - recently_run
+  - name: GOLD__TEA_SERVICE__CONTRACT_INSTALLMENTS
+    tests:
+      - has_data
+      - recently_run
+  - name: GOLD__TEA_SERVICE__CONTRACT_SUMMARY_BILLING_PLAN
+    tests:
+      - has_data
+      - recently_run
+  - name: GOLD__TEA_SERVICE__CONTRACT_TELQS_QUOTES
+    tests:
+      - has_data
+      - recently_run
+  - name: GOLD__TEA_SERVICE__CONTRACT_ZC11_DOWN_PAYMENT_STATUS
+    tests:
+      - has_data
+      - recently_run
+  - name: GOLD__TEA_SERVICE__CONTRACT_ZC11_REV_REC_STATUS
+    tests:
+      - has_data
+      - recently_run
+  - name: GOLD__TEA_SERVICE__CONTRACT_ZC11_ZS11_REVENUE_SUMMARY
+    tests:
+      - has_data
+      - recently_run
+  - name: GOLD__TEA_SERVICE__GCE_TIRS_TCIR_RECORDABLE_TEA
+    tests:
+      - has_data
+      - recently_run
+  - name: GOLD__TEA_SERVICE__GLOBAL_MACHINES
+    tests:
+      - has_data
+      - recently_run
+  - name: GOLD__TEA_SERVICE__MACHINES_ON_CONTRACTS
+    tests:
+      - has_data
+      - recently_run
+  - name: GOLD__TEA_SERVICE__PAIDSERVICE_ZS10_ORDER_LINE_DETAILS
+    tests:
+      - has_data
+      - recently_run
+  - name: GOLD__TEA_SERVICE__PAIDSERVICE_ZS10_REVENUE_SUMMARY
+    tests:
+      - has_data
+      - recently_run
+  - name: GOLD__TEA_SERVICE__PAID_SERVICE_TELQS_PURCHASE_ORDERS
+    tests:
+      - has_data
+      - recently_run
+  - name: GOLD__TEA_SERVICE__PAID_SERVICE_TELQS_QUOTES
+    tests:
+      - has_data
+      - recently_run
+  - name: GOLD__TEA_SERVICE__PROJECT_OPERATIONS_SUMMARY
+    tests:
+      - has_data
+      - recently_run
+  - name: GOLD__TEA_SERVICE__SALES_ORDER_DELIVERY_LINE
+    tests:
+      - has_data
+      - recently_run
+  - name: GOLD__TEA_SERVICE__SERVICE_EMPLOYEE_ROSTER
+    tests:
+      - has_data
+      - recently_run
+  - name: GOLD__TEA_SERVICE__SERVICE_EMPLOYEE_ROSTER_HISTORY
+    tests:
+      - has_data
+      - recently_run
+  - name: GOLD__TEA_SERVICE__SERVICE_OPEN_BILLABLE
+    tests:
+      - has_data
+      - recently_run
+  - name: GOLD__TEA_SERVICE__SERVICE_ORDER_OPERATION_SUMMARY
+    tests:
+      - has_data
+      - recently_run
+  - name: GOLD__TEA_SERVICE__STARTUP_SPOTTER_AUDIT
+    tests:
+      - has_data
+      - recently_run
+  - name: GOLD__TEA_SERVICE__TIMESHEET_PAYPERIOD_SUMMARY
+    tests:
+      - has_data
+      - recently_run
+  - name: GOLD__TEA_SERVICE__TSR_BASED_REVENUE_REPORT
+    tests:
+      - has_data
+      - recently_run
+  - name: GOLD__TEA_SERVICE__TSR_STATUS
+    tests:
+      - has_data
+      - recently_run
+  - name: GOLD__TEA_SERVICE__US_MACHINES
+    tests:
+      - has_data
+      - recently_run
+  - name: GOLD__TEA_SERVICE__US_MACHINES_INSTALL_MILESTONE_HOURS
+    tests:
+      - has_data
+      - recently_run
+  - name: GOLD__TEA_SERVICE__US_MACHINES_MONTHLY_SNAPSHOT
+    tests:
+      - has_data
+      - recently_run
+  - name: GOLD__TEA_SERVICE__WO_SO_AUDIT
+    tests:
+      - has_data
+      - recently_run

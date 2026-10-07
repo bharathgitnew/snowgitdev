@@ -1,0 +1,16 @@
+{
+    "DataSets": {
+        "FLOW": {
+            "SCHEMA": "PREFECT",
+            "TABLE": "FLOW"
+        },
+        "FLOW_RUN": {
+            "SCHEMA": "PREFECT",
+            "TABLE": "FLOW_RUN"
+        },
+        "LOGS": {
+            "SCHEMA": "PREFECT",
+            "TABLE": "LOGS"
+        }
+    }
+}

@@ -1,0 +1,77 @@
+/************
+Model file generated from dbtGeneratePubViews: 04.05.2022.12.33.11"
+*************/
+
+{{ config(
+      materialized='view',
+      alias='CONSUMPTION',
+      transient=false
+) }}
+
+with source_data as (
+    SELECT
+        NCDR,
+        SERVICE_ORDER,
+        SO_ACTIVITY_LINE,
+        SO_LINE,
+        PART_NUMBER,
+        QTY_ORDERED,
+        QTY_REMAINING,
+        OP_CMTS,
+        SERIAL_NUMBER,
+        CORE_SERIAL_NUMBER,
+        SERIAL_NUMBER_POST_CONSUMPTION,
+        SERIAL_NUMBER_CORE_POST_CONSUMPTION,
+        CREATED_DT,
+        CREATED_USER_ID,
+        LAST_UPDATED_DT,
+        LAST_UPDATED_USER_ID,
+        PROCESS_STATUS,
+        PROCESS_ERROR,
+        PROCESS_ERROR_MESSAGE,
+        PROCESS_DT,
+        QTY_CONSUMED,
+        CONSUMPTION_CMTS,
+        PLANNED_CONSUMPTION_DT,
+        FCN_WAREHOUSE_RETURN,
+        FCN_WAREHOUSE_RETURN2,
+        RMA,
+        QTY_RETURNED,
+        RETURN_REASON,
+        IS_PACKAGE_OPEN,
+        IS_EXPOSED_TO_COPPER,
+        RETURN_CMTS,
+        RMA_GEN_USER_ID,
+        RMA_GEN_DT,
+        PART_RETURNED_POST_CONSUMPTION,
+        POST_CONSUMPTION_RMA,
+        QTY_RETURNED_POST_CONSUMPTION,
+        POST_CONSUMPTION_RETURN_REASON,
+        IS_PACKAGE_OPEN_POST_CONSUMPTION,
+        IS_EXPOSED_TO_COPPER_POST_CONSUMPTION,
+        POST_CONSUMPTION_RETURN_CMTS,
+        RMA_GEN_USER_ID_POST_CONSUMPTION,
+        RMA_GEN_DT_POST_CONSUMPTION,
+        CORES_RETURNED,
+        CORE_RMA,
+        QTY_RETURNED_CORES,
+        CORE_RETURN_REASON,
+        IS_CORE_EXPOSED_TO_COPPER,
+        CORE_RETURN_CMTS,
+        CORE_RETURNED_POST_CONSUMPTION,
+        CORE_RMA_POST_CONSUMPTION,
+        QTY_RETURNED_CORES_POST_CONSUMPTION,
+        CORE_RETURN_REASON_POST_CONSUMPTION,
+        IS_CORE_EXPOSED_TO_COPPER_POST_CONSUMPTION,
+        CORE_RETURN_CMTS_POST_CONSUMPTION,
+        CORE_RMA_GEN_USER_ID_POST_CONSUMPTION,
+        CORE_RMA_GEN_DT_POST_CONSUMPTION
+    from {{ ref('COMMON__CARMA__CONSUMPTION') }}
+),
+
+transform_data AS
+(
+    select * from source_data
+)
+
+    select * from transform_data

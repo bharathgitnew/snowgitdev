@@ -1,0 +1,55 @@
+version: 2
+models:
+- name: COMMON__CRM__ACCOUNT
+  description: Model CRM CRM_ACCOUNT file.
+  columns:
+  - name: ID
+    tests:
+    - dbt_expectations.expect_column_values_to_be_unique:
+        config:
+          alias: CRM_ACCOUNT_ID_UNIQUE
+    - dbt_expectations.expect_column_values_to_not_be_null:
+        config:
+          alias: CRM_ACCOUNT_ID_NOTNULL
+- name: COMMON__CRM__CONTRACT_SUMMARY_DETAILS
+  description: Model CRM CONTRACT_SUMMARY_DETAILS file.
+- name: COMMON__CRM__OPPORTUNITY
+  description: Model CRM CRM_OPPORTUNITY file.
+  columns:
+  - name: OPPORTUNITY_ID
+    tests:
+    - dbt_expectations.expect_column_values_to_be_unique:
+        config:
+          alias: CRM_OPPORTUNITY_OPPORTUNITY_ID_UNIQUE
+    - dbt_expectations.expect_column_values_to_not_be_null:
+        config:
+          alias: CRM_OPPORTUNITY_OPPORTUNITY_ID_NOTNULL
+  - name: MODIFIEDON
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: day
+        interval: 1
+        config:
+          alias: CRM_OPPORTUNITY_MODIFIEDON
+- name: COMMON__CRM__CHAMBER
+  description: Model CRM CRM_CHAMBER file.
+- name: COMMON__CRM__COST_CENTER_GROUP
+  description: Model CRM CRM_COST_CENTER_GROUP file.
+- name: COMMON__CRM__FAB_LINE
+  description: Model CRM CRM_FAB_LINE file.
+- name: COMMON__CRM__MODEL
+  description: Model CRM CRM_MODEL file.
+- name: COMMON__CRM__ORDER_TYPE
+  description: Model CRM CRM_ORDER_TYPE file.
+- name: COMMON__CRM__SALES_DISTRICT
+  description: Model CRM CRM_SALES_DISTRICT file.
+- name: COMMON__CRM__SALES_ORGANIZATION
+  description: Model CRM CRM_SALES_ORGANIZATION file.
+- name: COMMON__CRM__TRANSACTIONCURRENCY
+  description: Model CRM CRM_TRANSACTION_CURRENCY file.
+- name: COMMON__CRM__WORKORDER
+  description: Model CRM CRM_WORKORDER file.
+- name: COMMON__CRM__SALES_DOCUMENT
+  description: Model CRM CRM_SALES_DOCUMENT file.
+- name: COMMON__CRM__WORKORDER_ESCALATION
+  description: Model CRM CRM_WORKORDER_ESCALATION file.

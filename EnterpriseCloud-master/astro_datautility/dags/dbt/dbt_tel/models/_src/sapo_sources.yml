@@ -1,0 +1,163 @@
+version: 2
+sources:
+- name: SAP_ORACLE_LIVE
+  description: Landing Zone - SAP_ORACLE_LIVE Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ_HVR'') }}'
+  schema: SAP_ORACLE_LIVE
+  tables:
+  - name: MARDH
+    identifier: MARDH
+    description: Landing table for MARDH file.
+  - name: MBEWH
+    identifier: MBEWH
+    description: Landing table for MBEWH file.
+  - name: S022
+    identifier: S022
+    description: Landing table for S022 file.
+  - name: S023
+    identifier: S023
+    description: Landing table for S023 file.
+  - name: CDHDR
+    identifier: CDHDR
+    description: Landing table for CDHDR file.
+  - name: CDPOS
+    identifier: CDPOS
+    description: Landing table for CDPOS file.
+  - name: EQUK
+    identifier: EQUK
+    description: Landing table for EQUK file.
+  - name: HRP1001
+    identifier: HRP1001
+    description: Landing table for HRP1001 file.
+  - name: MDFDDB
+    identifier: MDFDDB
+    description: Landing table for MDFDDB file.
+  - name: MSSL
+    identifier: MSSL
+    description: Landing table for MSSL file.
+  - name: PLOG
+    identifier: PLOG
+    description: Landing table for PLOG file.
+  - name: PLSC
+    identifier: PLSC
+    description: Landing table for PLSC file.
+  - name: RSDB
+    identifier: RSDB
+    description: Landing table for RSDB file.
+  - name: STXH
+    identifier: STXH
+    description: Landing table for STXH file.
+  - name: STXL
+    identifier: STXL
+    description: Landing table for STXL file.
+  - name: T001
+    identifier: T001
+    description: Landing table for T001 file.
+  - name: T001K
+    identifier: T001K
+    description: Landing table for T001K file.
+  - name: T399D
+    identifier: T399D
+    description: Landing table for T399D file.
+  - name: T438A
+    identifier: T438A
+    description: Landing table for T438A file.
+  - name: T458B
+    identifier: T458B
+    description: Landing table for T458B file.
+  - name: T462
+    identifier: T462
+    description: Landing table for T462 file.
+  - name: T464
+    identifier: T464
+    description: Landing table for T464 file.
+  - name: T513A
+    identifier: T513A
+    description: Landing table for T513A file.
+  - name: T555A
+    identifier: T555A
+    description: Landing table for T555A file.
+  - name: T778T
+    identifier: T778T
+    description: Landing table for T778T file.
+  - name: T77AW
+    identifier: T77AW
+    description: Landing table for T77AW file.
+  - name: T77EO
+    identifier: T77EO
+    description: Landing table for T77EO file.
+  - name: T77S3
+    identifier: T77S3
+    description: Landing table for T77S3 file.
+  - name: USR11
+    identifier: USR11
+    description: Landing table for USR11 file.
+  - name: VARI
+    identifier: VARI
+    description: Landing table for VARI file.
+  - name: EBKN
+    identifier: EBKN
+    description: Landing table for EBKN file.
+  - name: KNB1
+    identifier: KNB1
+    description: Landing table for KNB1 file.
+  - name: TSPAT
+    identifier: TSPAT
+    description: Landing table for TSPAT file.
+  - name: ZRHST
+    identifier: ZRHST
+    description: Landing table for ZRHST file.
+  - name: TQ15T
+    identifier: TQ15T
+    description: Landing table for TQ15T file.
+  - name: QMIH
+    identifier: QMIH
+    description: Landing table for QMIH file.
+  - name: T156
+    identifier: T156
+    description: Landing table for T156 file.
+  - name: QMAT
+    identifier: QMAT
+    description: Landing table for QMAT file.
+  - name: TVAKT
+    identifier: TVAKT
+    description: Landing table for TVAKT file.
+  - name: ILOA
+    identifier: ILOA
+    description: Landing table for ILOA file.
+  - name: QPCD
+    identifier: QPCD
+    description: Landing table for QPCD file.
+  - name: QPGR
+    identifier: QPGR
+    description: Landing table for QPGR file.
+  - name: LL01
+    identifier: LL01
+    description: Landing table for LL01 file.
+  - name: CSKU
+    identifier: CSKU
+    description: Landing table for CSKU file.
+  - name: S031
+    identifier: S031
+    description: Landing table for S031 file.
+  - name: CSKA
+    identifier: CSKA
+    description: Landing table for CSKA file.
+  - name: PMCO
+    identifier: PMCO
+    description: Landing table for PMCO file.
+  - name: CE20010
+    identifier: CE20010
+    description: Landing table for CE20010 file.
+  - name: CE30010
+    identifier: CE30010
+    description: Landing table for CE30010 file.
+  - name: IHPA
+    identifier: IHPA
+    description: Landing table for IHPA file.
+  - name: CSLA
+    identifier: CSLA
+    description: Landing table for CSLA file.
+  - name: CSLT
+    identifier: CSLT
+    description: Landing table for CSLT file.

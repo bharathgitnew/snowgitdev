@@ -1,0 +1,72 @@
+/************
+Model file generated from Python utility
+*************/
+
+{{ config(
+	materialized='tel_incremental',
+	incremental_strategy='insert_overwrite',
+	alias='MADATA_SILVER_DATE_MODULEDATAES',
+	transient=false
+) }}
+
+with source_data as (
+	SELECT
+		_FILEDATE,
+		_FILENAME,
+		_UPLOADDATE,
+		JSONFIELD:"ENTITY"::VARCHAR AS ENTITY,
+		JSONFIELD:"CEID"::VARCHAR AS CEID,
+		JSONFIELD:"Process Node"::VARCHAR AS PROCESS_NODE,
+		JSONFIELD:"Location"::VARCHAR AS LOCATION,
+		JSONFIELD:"Type"::VARCHAR AS TYPE,
+		JSONFIELD:"Cu/Non-Cu"::VARCHAR AS CU_NON_CU,
+		JSONFIELD:"Fab"::VARCHAR AS FAB,
+		JSONFIELD:"Include"::BOOLEAN AS INCLUDE,
+		REGEXP_REPLACE(JSONFIELD:"Updated", '\/Date\\(|\\)\/', '')::TIMESTAMP_NTZ AS UPDATED,
+		JSONFIELD:"comment"::VARCHAR AS COMMENT
+	FROM {{ source("ADS", "MADATA_SILVER_DATE_MODULEDATAES") }}
+WHERE
+	_FILEDATE = (SELECT MAX(_FILEDATE) FROM {{ source('ADS', 'MADATA_SILVER_DATE_MODULEDATAES') }} ) 
+),
+
+transform_data as (
+	SELECT
+		_FILEDATE AS _FILEDATE,
+		_FILENAME AS _FILENAME,
+		_UPLOADDATE AS _UPLOADDATE,
+		'{{ invocation_id }}' AS _AUDIT_LOG_ID,
+		SHA2('hash_me') AS _ROW_HASH,
+		ENTITY,
+		CEID,
+		PROCESS_NODE,
+		LOCATION,
+		TYPE,
+		CU_NON_CU,
+		FAB,
+		INCLUDE,
+		UPDATED,
+		COMMENT
+	FROM source_data
+),
+
+type_data as (
+	SELECT
+		CAST(_FILEDATE AS TIMESTAMP_NTZ(9)) AS _FILEDATE,
+		_FILENAME,
+		_UPLOADDATE,
+		CAST(_AUDIT_LOG_ID AS VARCHAR(128)) AS _AUDIT_LOG_ID,
+		CAST(_ROW_HASH AS VARCHAR(128)) AS _ROW_HASH,
+		ENTITY,
+		CEID,
+		PROCESS_NODE,
+		LOCATION,
+		TYPE,
+		CU_NON_CU,
+		FAB,
+		CAST(INCLUDE AS BOOLEAN) AS INCLUDE,
+		CAST(UPDATED AS TIMESTAMP_NTZ) AS UPDATED,
+		COMMENT
+	FROM transform_data
+)
+
+SELECT * FROM type_data

@@ -1,0 +1,182 @@
+{{ config(
+    materialized='incremental',
+    incremental_strategy='insert_overwrite',
+    alias='CONTRACT_DISTINCT',
+    unique_key = [],
+    enabled=true
+) }}
+
+with source_data as
+(
+       SELECT
+            CONTRACTNUMBER
+            ,DESCRIPTION
+            ,SEARCHARGUMENT
+            ,INVOICETOCUSTOMERID
+            ,CONFIGURATIONID
+            ,FSTCUSTOMERGROUP
+            ,CUSTOMERPONUMBER
+            ,STATUS
+            ,EFFECTIVEDATE
+            ,EXPIRATIONDATE
+            ,SERVICETYPE
+            ,COSTTYPE
+            ,CONTRACTTYPE
+            ,CONTRACTTYPEDESCRIPTION
+            ,RENEWALTYPE
+            ,CURRENCY
+            ,SALESPRICELIST
+            ,TERMSOFPAYMENT
+            ,LATEPAYMENTSURCHARGE
+            ,TAXCODE
+            ,REFERENCEB
+            ,TERMID
+            ,TERMIDTYPE
+            ,COSTCOVERAGEMETHOD
+            ,COSTCOVERAGECEILING
+            ,COSTCOVERATEDISCOUNTPERCENTAGE
+            ,CHANGEEFFECTIVEDATE
+            ,SALESEMPLOYEEID
+            ,SERVICECENTER
+            ,BACKFILL
+            ,CANCELLEDDATE
+            ,ISTOPCONTRACT
+            ,CONTRACTCONFIGURATIONCOUNT
+            ,CONTRACTCONFIGURATIONLIST
+            ,CONTRACTCONFIGURATIONLISTSHORT
+            ,CONTRACTBUCOUNT
+            ,CONTRACTBULIST
+            ,CONTRACTBULISTSHORT
+            ,CONTRACTFABCOUNT
+            ,CONTRACTFABLIST
+            ,CONTRACTFABLISTSHORT
+            ,AMOUNT
+            ,COVEREDTIME
+            ,ISDEFAULT
+            ,BundleTermsDescription
+            ,HasFlexTransitionHours
+            ,ContractServiceOrderList_Flex
+            ,IsContractServiceOrder_Flex_Open
+            ,ContractServiceOrderList_FlexCOUNT
+            ,ContractFlexHours
+            ,IsFlexContract
+        FROM {{ ref('COMMON__BAAN__CONTRACT') }}
+        WHERE  ISDEFAULT='Yes'
+
+),
+
+transform_data as
+(
+    SELECT
+        source_data.AMOUNT,
+        source_data.BACKFILL,
+        source_data.BUNDLETERMSDESCRIPTION,
+        source_data.CANCELLEDDATE,
+        source_data.CHANGEEFFECTIVEDATE,
+        source_data.CONFIGURATIONID,
+        source_data.CONTRACTNUMBER,
+        source_data.CONTRACTTYPE,
+        source_data.CONTRACTTYPEDESCRIPTION,
+        source_data.COSTCOVERAGECEILING,
+        source_data.COSTCOVERAGEMETHOD,
+        source_data.COSTCOVERATEDISCOUNTPERCENTAGE,
+        source_data.COSTTYPE,
+        source_data.COVEREDTIME,
+        source_data.CURRENCY,
+        source_data.CUSTOMERPONUMBER,
+        source_data.CONTRACTBUCOUNT,
+        source_data.CONTRACTBULIST,
+        source_data.CONTRACTBULISTSHORT,
+        source_data.CONTRACTCONFIGURATIONCOUNT,
+        source_data.CONTRACTCONFIGURATIONLIST,
+        source_data.CONTRACTCONFIGURATIONLISTSHORT,
+        source_data.CONTRACTFABCOUNT,
+        source_data.CONTRACTFABLIST,
+        source_data.CONTRACTFABLISTSHORT,
+        source_data.CONTRACTFLEXHOURS,
+        source_data.CONTRACTSERVICEORDERLIST_FLEX,
+        source_data.CONTRACTSERVICEORDERLIST_FLEXCOUNT,
+        source_data.DESCRIPTION,
+        source_data.EFFECTIVEDATE,
+        source_data.EXPIRATIONDATE,
+        source_data.FSTCUSTOMERGROUP,
+        source_data.HASFLEXTRANSITIONHOURS,
+        source_data.INVOICETOCUSTOMERID,
+        source_data.ISTOPCONTRACT,
+        source_data.ISCONTRACTSERVICEORDER_FLEX_OPEN,
+        source_data.ISDEFAULT,
+        source_data.ISFLEXCONTRACT,
+        source_data.LATEPAYMENTSURCHARGE,
+        source_data.REFERENCEB,
+        source_data.RENEWALTYPE,
+        source_data.SALESEMPLOYEEID,
+        source_data.SALESPRICELIST,
+        source_data.SEARCHARGUMENT,
+        source_data.SERVICECENTER,
+        source_data.SERVICETYPE,
+        source_data.STATUS,
+        source_data.TAXCODE,
+        source_data.TERMID,
+        source_data.TERMIDTYPE,
+        source_data.TERMSOFPAYMENT,
+        '{{ invocation_id }}' AS AUDIT_LOG_ID
+        FROM source_data
+        )
+,type_data as
+(
+    select
+        cast(CONTRACTNUMBER as VARCHAR(16777216)) as CONTRACTNUMBER,
+        cast(DESCRIPTION as VARCHAR(16777216)) as DESCRIPTION,
+        cast(SEARCHARGUMENT as VARCHAR(16777216)) as SEARCHARGUMENT,
+        cast(INVOICETOCUSTOMERID as VARCHAR(16777216)) as INVOICETOCUSTOMERID,
+        cast(CONFIGURATIONID as VARCHAR(16777216)) as CONFIGURATIONID,
+        cast(FSTCUSTOMERGROUP as VARCHAR(16777216)) as FSTCUSTOMERGROUP,
+        cast(CUSTOMERPONUMBER as VARCHAR(16777216)) as CUSTOMERPONUMBER,
+        cast(STATUS as VARCHAR(16777216)) as STATUS,
+        cast(EFFECTIVEDATE as TIMESTAMP_NTZ(9)) as EFFECTIVEDATE,
+        cast(EXPIRATIONDATE as TIMESTAMP_NTZ(9)) as EXPIRATIONDATE,
+        cast(SERVICETYPE as VARCHAR(16777216)) as SERVICETYPE,
+        cast(COSTTYPE as VARCHAR(16777216)) as COSTTYPE,
+        cast(CONTRACTTYPE as VARCHAR(16777216)) as CONTRACTTYPE,
+        cast(CONTRACTTYPEDESCRIPTION as VARCHAR(16777216)) as CONTRACTTYPEDESCRIPTION,
+        cast(RENEWALTYPE as VARCHAR(16777216)) as RENEWALTYPE,
+        cast(CURRENCY as VARCHAR(16777216)) as CURRENCY,
+        cast(SALESPRICELIST as VARCHAR(16777216)) as SALESPRICELIST,
+        cast(TERMSOFPAYMENT as VARCHAR(16777216)) as TERMSOFPAYMENT,
+        cast(LATEPAYMENTSURCHARGE as VARCHAR(16777216)) as LATEPAYMENTSURCHARGE,
+        cast(TAXCODE as VARCHAR(16777216)) as TAXCODE,
+        cast(REFERENCEB as VARCHAR(16777216)) as REFERENCEB,
+        cast(TERMID as NUMBER(38,0)) as TERMID,
+        cast(TERMIDTYPE as VARCHAR(16777216)) as TERMIDTYPE,
+        cast(COSTCOVERAGEMETHOD as VARCHAR(16777216)) as COSTCOVERAGEMETHOD,
+        cast(COSTCOVERAGECEILING as NUMBER(38,10)) as COSTCOVERAGECEILING,
+        cast(COSTCOVERATEDISCOUNTPERCENTAGE as NUMBER(38,10)) as COSTCOVERATEDISCOUNTPERCENTAGE,
+        cast(CHANGEEFFECTIVEDATE as TIMESTAMP_NTZ(9)) as CHANGEEFFECTIVEDATE,
+        cast(SALESEMPLOYEEID as VARCHAR(16777216)) as SALESEMPLOYEEID,
+        cast(SERVICECENTER as VARCHAR(16777216)) as SERVICECENTER,
+        cast(BACKFILL as VARCHAR(16777216)) as BACKFILL,
+        cast(CANCELLEDDATE as TIMESTAMP_NTZ(9)) as CANCELLEDDATE,
+        cast(ISTOPCONTRACT as VARCHAR(16777216)) as ISTOPCONTRACT,
+        cast(CONTRACTCONFIGURATIONCOUNT as NUMBER(38,0)) as CONTRACTCONFIGURATIONCOUNT,
+        cast(CONTRACTCONFIGURATIONLIST as VARCHAR(16777216)) as CONTRACTCONFIGURATIONLIST,
+        cast(CONTRACTCONFIGURATIONLISTSHORT as VARCHAR(16777216)) as CONTRACTCONFIGURATIONLISTSHORT,
+        cast(CONTRACTBUCOUNT as NUMBER(38,0)) as CONTRACTBUCOUNT,
+        cast(CONTRACTBULIST as VARCHAR(16777216)) as CONTRACTBULIST,
+        cast(CONTRACTBULISTSHORT as VARCHAR(16777216)) as CONTRACTBULISTSHORT,
+        cast(CONTRACTFABCOUNT as NUMBER(38,0)) as CONTRACTFABCOUNT,
+        cast(CONTRACTFABLIST as VARCHAR(16777216)) as CONTRACTFABLIST,
+        cast(CONTRACTFABLISTSHORT as VARCHAR(16777216)) as CONTRACTFABLISTSHORT,
+        cast(AMOUNT as NUMBER(38,10)) as AMOUNT,
+        cast(COVEREDTIME as NUMBER(38,10)) as COVEREDTIME,
+        cast(ISDEFAULT as VARCHAR(16777216)) as ISDEFAULT,
+        cast(BUNDLETERMSDESCRIPTION as VARCHAR(16777216)) as BUNDLETERMSDESCRIPTION,
+        cast(HASFLEXTRANSITIONHOURS as VARCHAR(16777216)) as HASFLEXTRANSITIONHOURS,
+        cast(CONTRACTSERVICEORDERLIST_FLEX as VARCHAR(16777216)) as CONTRACTSERVICEORDERLIST_FLEX,
+        cast(ISCONTRACTSERVICEORDER_FLEX_OPEN as VARCHAR(16777216)) as ISCONTRACTSERVICEORDER_FLEX_OPEN,
+        cast(CONTRACTSERVICEORDERLIST_FLEXCOUNT as NUMBER(38,0)) as CONTRACTSERVICEORDERLIST_FLEXCOUNT,
+        cast(CONTRACTFLEXHOURS as NUMBER(38,0)) as CONTRACTFLEXHOURS,
+        cast(ISFLEXCONTRACT as VARCHAR(16777216)) as ISFLEXCONTRACT,
+        cast(AUDIT_LOG_ID as varchar(128)) as AUDIT_LOG_ID
+    from transform_data
+    )
+select * from type_data

@@ -1,0 +1,23 @@
+version: 2
+models:
+- name: PUB__COMMON_SAPO__DOCUMENT_TYPE_TEXTS
+  description: Model SAPO DOCUMENT_TYPE_TEXTS file.
+  columns:
+  - name: CLIENT
+    description: Client
+  - name: LANGUAGE_KEY
+    description: Language
+  - name: DOCUMENT_TYPE
+    description: Document_type
+  - name: DOCUMENT_TYPE_DESCRIPTION
+    description: DOCUMENT_TYPE_DESCRIPTION
+- name: PUB__COMMON_SAPO__LEGAL_CONTROL_LICENSE_MASTER_HEADER_DATA
+  description: Model SAPO LEGAL_CONTROL_LICENSE_MASTER_HEADER_DATA file.
+- name: PUB__COMMON_SAPO__PUBLIC_HOLIDAY_TEXTS
+  description: Model SAPO PUBLIC_HOLIDAY_TEXTS file.
+- name: PUB__COMON_SAPO__PUBLIC_HOLIDAY_CALENDAR
+  description: Model SAPO PUBLIC_HOLIDAY_CALENDAR file.
+- name: PUB__COMMON_SAPO__SALES_DISTRIBUTION_DOCUMENT_EXPORT_CONTROL_ITEM_DATA
+  description: Model SAPO SALES_DISTRIBUTION_DOCUMENT_EXPORT_CONTROL_ITEM_DATA file.
+- name: PUB__COMMON_SAPO__PERSONNEL_AREAS
+  description: Model SAPO PERSONNEL_AREAS file.

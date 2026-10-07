@@ -1,0 +1,53 @@
+/************
+	Model file generated from SAPAPIUtility 
+	*************/
+
+	
+	{{ config(
+    	  materialized='tel_incremental',
+    	  incremental_strategy='insert_overwrite',
+    	  alias='SAPAPI_ZCDV_T_CMTU010_VBAP_SECT',
+    	  tags=["finance"],
+    	  unique_key = [''],
+    	  transient=false	
+) }} 
+
+
+	with source_data as ( 
+    SELECT
+        _FILEDATE,
+        _FILENAME,
+		JSONFIELD:item::STRING AS POSNR,
+		JSONFIELD:overalldt::STRING AS GBSTA,
+		JSONFIELD:sales_doc::STRING AS VBELN
+    FROM {{ source('SAPAPI','ZCDV_CM0610_01_VBAP_SECT') }}	
+    where _FILEDATE = (select ifnull(try_to_timestamp_ntz(max(MAX_FILE_DATE), 'YYYY-MM-DD_hh_mi_ss_ff6'), '1970-01-01') from {{ source('SAPAPI', 'CONTROLTABLE') }} where TABLE_NAME = 'ZCDV_CM0610_01_SECT')
+	QUALIFY (ROW_NUMBER() OVER (PARTITION BY VBELN,POSNR ORDER BY _FILEDATE DESC,_UPLOADDATE DESC )) = 1
+
+	),
+	
+	transform_data as (
+    SELECT
+        _Filename AS _Filename,
+        _Filedate AS _Filedate,
+        '{{ invocation_id }}' AS _AUDIT_LOG_ID,
+        SHA2('hash_me') AS _ROW_HASH,
+        VBELN as VBELN,
+        POSNR as POSNR,
+        GBSTA as GBSTA
+FROM source_data 
+),
+
+type_data as (
+    SELECT
+        _Filename AS _Filename,
+        _Filedate AS _Filedate,
+        cast(_AUDIT_LOG_ID as varchar(128)) as _AUDIT_LOG_ID,
+        cast(_ROW_HASH as varchar(128)) as _ROW_HASH,
+        VBELN,
+        POSNR,
+        GBSTA
+FROM transform_data 
+)
+
+	select * from type_data

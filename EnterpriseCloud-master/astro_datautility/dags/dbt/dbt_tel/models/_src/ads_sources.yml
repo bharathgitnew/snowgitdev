@@ -1,0 +1,568 @@
+sources:
+- name: ADS
+  description: Landing Zone - For ADS Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: ADS
+  tables:
+  - name: MADATA_SILVER_CEID_SPS
+    identifier: MADATA_SILVER_CEID_SPS
+    description: Landing table for MADATA_SILVER_CEID_SPS from SQLServer [MAData_Silver].[dbo].[CEID_SPS]
+  - name: MADATA_SILVER_CEID_TFF
+    identifier: MADATA_SILVER_CEID_TFF
+    description: Landing table for MADATA_SILVER_CEID_TFF from SQLServer [MAData_Silver].[dbo].[CEID_TFF]
+  - name: MADATA_SILVER_COMMENTS
+    identifier: MADATA_SILVER_COMMENTS
+    description: Landing table for MADATA_SILVER_COMMENTS from SQLServer [MAData_Silver].[dbo].[Comments]
+  - name: MADATA_SILVER_COMMENTSCT
+    identifier: MADATA_SILVER_COMMENTSCT
+    description: Landing table for MADATA_SILVER_COMMENTSCT from SQLServer [MAData_Silver].[dbo].[CommentsCT]
+  - name: MADATA_SILVER_COMMENTSSPS
+    identifier: MADATA_SILVER_COMMENTSSPS
+    description: Landing table for MADATA_SILVER_COMMENTSSPS from SQLServer [MAData_Silver].[dbo].[CommentsSPS]
+  - name: MADATA_SILVER_COMMENTSTFF
+    identifier: MADATA_SILVER_COMMENTSTFF
+    description: Landing table for MADATA_SILVER_COMMENTSTFF from SQLServer [MAData_Silver].[dbo].[CommentsTFF]
+  - name: MADATA_SILVER_CONTROL
+    identifier: MADATA_SILVER_CONTROL
+    description: Landing table for MADATA_SILVER_CONTROL from SQLServer [MAData_Silver].[dbo].[Control]
+  - name: MADATA_SILVER_CONTROLCT
+    identifier: MADATA_SILVER_CONTROLCT
+    description: Landing table for MADATA_SILVER_CONTROLCT from SQLServer [MAData_Silver].[dbo].[ControlCT]
+  - name: MADATA_SILVER_CONTROLES
+    identifier: MADATA_SILVER_CONTROLES
+    description: Landing table for MADATA_SILVER_CONTROLES from SQLServer [MAData_Silver].[dbo].[ControlES]
+  - name: MADATA_SILVER_CONTROLSPS
+    identifier: MADATA_SILVER_CONTROLSPS
+    description: Landing table for MADATA_SILVER_CONTROLSPS from SQLServer [MAData_Silver].[dbo].[ControlSPS]
+  - name: MADATA_SILVER_CONTROLTFF
+    identifier: MADATA_SILVER_CONTROLTFF
+    description: Landing table for MADATA_SILVER_CONTROLTFF from SQLServer [MAData_Silver].[dbo].[ControlTFF]
+  - name: MADATA_SILVER_DATE_MODULEDATAES
+    identifier: MADATA_SILVER_DATE_MODULEDATAES
+    description: Landing table for MADATA_SILVER_DATE_MODULEDATAES from SQLServer
+      [MAData_Silver].[dbo].[Date_ModuleDataES]
+  - name: MADATA_SILVER_DATE_MODULEDATASPS
+    identifier: MADATA_SILVER_DATE_MODULEDATASPS
+    description: Landing table for MADATA_SILVER_DATE_MODULEDATASPS from SQLServer
+      [MAData_Silver].[dbo].[Date_ModuleDataSPS]
+  - name: MADATA_SILVER_DOWN_LP_CAB_SPS
+    identifier: MADATA_SILVER_DOWN_LP_CAB_SPS
+    description: Landing table for MADATA_SILVER_DOWN_LP_CAB_SPS from SQLServer [MAData_Silver].[dbo].[Down_LP_CAB_SPS]
+  - name: MADATA_SILVER_ALARM_LIST_TFF
+    identifier: MADATA_SILVER_ALARM_LIST_TFF
+    description: Landing table for MADATA_SILVER_ALARM_LIST_TFF from SQLServer [MAData_Silver].[dbo].[Alarm_List_TFF]
+  - name: MADATA_SILVER_DOWN_LP_ES
+    identifier: MADATA_SILVER_DOWN_LP_ES
+    description: Landing table for MADATA_SILVER_DOWN_LP_ES from SQLServer [MAData_Silver].[dbo].[Down_LP_ES]
+  - name: MADATA_SILVER_DOWNCHANGES
+    identifier: MADATA_SILVER_DOWNCHANGES
+    description: Landing table for MADATA_SILVER_DOWNCHANGES from SQLServer [MAData_Silver].[dbo].[DownChanges]
+  - name: MADATA_SILVER_DOWNCHANGESCT
+    identifier: MADATA_SILVER_DOWNCHANGESCT
+    description: Landing table for MADATA_SILVER_DOWNCHANGESCT from SQLServer [MAData_Silver].[dbo].[DownChangesCT]
+  - name: MADATA_SILVER_DOWNCHANGESETCH
+    identifier: MADATA_SILVER_DOWNCHANGESETCH
+    description: Landing table for MADATA_SILVER_DOWNCHANGESETCH from SQLServer [MAData_Silver].[dbo].[DownChangesEtch]
+  - name: MADATA_SILVER_CEID_CT
+    identifier: MADATA_SILVER_CEID_CT
+    description: Landing table for MADATA_SILVER_CEID_CT from SQLServer [MAData_Silver].[dbo].[CEID_CT]
+  - name: MADATA_SILVER_DOWNCHANGESSPS
+    identifier: MADATA_SILVER_DOWNCHANGESSPS
+    description: Landing table for MADATA_SILVER_DOWNCHANGESSPS from SQLServer [MAData_Silver].[dbo].[DownChangesSPS]
+  - name: MADATA_SILVER_DOWNCHANGESTFF
+    identifier: MADATA_SILVER_DOWNCHANGESTFF
+    description: Landing table for MADATA_SILVER_DOWNCHANGESTFF from SQLServer [MAData_Silver].[dbo].[DownChangesTFF]
+  - name: MADATA_SILVER_DOWNCOMMENTSCT
+    identifier: MADATA_SILVER_DOWNCOMMENTSCT
+    description: Landing table for MADATA_SILVER_DOWNCOMMENTSCT from SQLServer [MAData_Silver].[dbo].[DownCommentsCT]
+  - name: MADATA_SILVER_DOWNCOMMENTSETCH
+    identifier: MADATA_SILVER_DOWNCOMMENTSETCH
+    description: Landing table for MADATA_SILVER_DOWNCOMMENTSETCH from SQLServer [MAData_Silver].[dbo].[DownCommentsEtch]
+  - name: MADATA_SILVER_DOWNCOMMENTSSPS
+    identifier: MADATA_SILVER_DOWNCOMMENTSSPS
+    description: Landing table for MADATA_SILVER_DOWNCOMMENTSSPS from SQLServer [MAData_Silver].[dbo].[DownCommentsSPS]
+  - name: MADATA_SILVER_DOWNCOMMENTSTFF
+    identifier: MADATA_SILVER_DOWNCOMMENTSTFF
+    description: Landing table for MADATA_SILVER_DOWNCOMMENTSTFF from SQLServer [MAData_Silver].[dbo].[DownCommentsTFF]
+  - name: MADATA_SILVER_DOWNTODOWN_TOOLS_SPS
+    identifier: MADATA_SILVER_DOWNTODOWN_TOOLS_SPS
+    description: Landing table for MADATA_SILVER_DOWNTODOWN_TOOLS_SPS from SQLServer
+      [MAData_Silver].[dbo].[downtodown_tools_SPS]
+  - name: MADATA_SILVER_ENTITY_ES
+    identifier: MADATA_SILVER_ENTITY_ES
+    description: Landing table for MADATA_SILVER_ENTITY_ES from SQLServer [MAData_Silver].[dbo].[ENTITY_ES]
+  - name: MADATA_SILVER_ENTITY_SPS
+    identifier: MADATA_SILVER_ENTITY_SPS
+    description: Landing table for MADATA_SILVER_ENTITY_SPS from SQLServer [MAData_Silver].[dbo].[ENTITY_SPS]
+  - name: MADATA_SILVER_ENTITYSTATESCT
+    identifier: MADATA_SILVER_ENTITYSTATESCT
+    description: Landing table for MADATA_SILVER_ENTITYSTATESCT from SQLServer [MAData_Silver].[dbo].[EntityStatesCT]
+  - name: MADATA_SILVER_ENTITYSTATESSPS
+    identifier: MADATA_SILVER_ENTITYSTATESSPS
+    description: Landing table for MADATA_SILVER_ENTITYSTATESSPS from SQLServer [MAData_Silver].[dbo].[EntityStatesSPS]
+  - name: MADATA_SILVER_STAGE_AUTO_TOOL_LIST
+    identifier: MADATA_SILVER_STAGE_AUTO_TOOL_LIST
+    description: Landing table for MADATA_SILVER_STAGE_AUTO_TOOL_LIST from SQLServer
+      [MAData_Silver].[dbo].[Stage_Auto_Tool_List]
+  - name: MADATA_SILVER_ENTITYSTATESTFF
+    identifier: MADATA_SILVER_ENTITYSTATESTFF
+    description: Landing table for MADATA_SILVER_ENTITYSTATESTFF from SQLServer [MAData_Silver].[dbo].[EntityStatesTFF]
+  - name: MADATA_SILVER_ERRORSETCH
+    identifier: MADATA_SILVER_ERRORSETCH
+    description: Landing table for MADATA_SILVER_ERRORSETCH from SQLServer [MAData_Silver].[dbo].[errorsEtch]
+  - name: MADATA_SILVER_LONG_DOWN_ES
+    identifier: MADATA_SILVER_LONG_DOWN_ES
+    description: Landing table for MADATA_SILVER_LONG_DOWN_ES from SQLServer [MAData_Silver].[dbo].[long_down_ES]
+  - name: MADATA_SILVER_LONG_DOWN_SPS
+    identifier: MADATA_SILVER_LONG_DOWN_SPS
+    description: Landing table for MADATA_SILVER_LONG_DOWN_SPS from SQLServer [MAData_Silver].[dbo].[long_down_SPS]
+  - name: MADATA_SILVER_MA
+    identifier: MADATA_SILVER_MA
+    description: Landing table for MADATA_SILVER_MA from SQLServer [MAData_Silver].[dbo].[MA]
+  - name: MADATA_SILVER_MA_OUTPUTES
+    identifier: MADATA_SILVER_MA_OUTPUTES
+    description: Landing table for MADATA_SILVER_MA_OUTPUTES from SQLServer [MAData_Silver].[dbo].[MA_OutputES]
+  - name: MADATA_SILVER_MA_OUTPUTSPS
+    identifier: MADATA_SILVER_MA_OUTPUTSPS
+    description: Landing table for MADATA_SILVER_MA_OUTPUTSPS from SQLServer [MAData_Silver].[dbo].[MA_OutputSPS]
+  - name: MADATA_SILVER_MACT
+    identifier: MADATA_SILVER_MACT
+    description: Landing table for MADATA_SILVER_MACT from SQLServer [MAData_Silver].[dbo].[MACT]
+  - name: MADATA_SILVER_MASPS
+    identifier: MADATA_SILVER_MASPS
+    description: Landing table for MADATA_SILVER_MASPS from SQLServer [MAData_Silver].[dbo].[MASPS]
+  - name: MADATA_SILVER_ALARM_LIST_ES
+    identifier: MADATA_SILVER_ALARM_LIST_ES
+    description: Landing table for MADATA_SILVER_ALARM_LIST_ES from SQLServer [MAData_Silver].[dbo].[Alarm_List_ES]
+  - name: MADATA_SILVER_MATFF
+    identifier: MADATA_SILVER_MATFF
+    description: Landing table for MADATA_SILVER_MATFF from SQLServer [MAData_Silver].[dbo].[MATFF]
+  - name: MADATA_SILVER_PROD_WIIINGS_SITE_OUTPUT_ES
+    identifier: MADATA_SILVER_PROD_WIIINGS_SITE_OUTPUT_ES
+    description: Landing table for MADATA_SILVER_PROD_WIIINGS_SITE_OUTPUT_ES from
+      SQLServer [MAData_Silver].[dbo].[Prod_Wiiings_Site_Output_ES]
+  - name: MADATA_SILVER_MAWW31
+    identifier: MADATA_SILVER_MAWW31
+    description: Landing table for MADATA_SILVER_MAWW31 from SQLServer [MAData_Silver].[dbo].[MAWW31]
+  - name: MADATA_SILVER_PROD_WIIINGS_OUTPUT_ES
+    identifier: MADATA_SILVER_PROD_WIIINGS_OUTPUT_ES
+    description: Landing table for MADATA_SILVER_PROD_WIIINGS_OUTPUT_ES from SQLServer
+      [MAData_Silver].[dbo].[Prod_Wiiings_Output_ES]
+  - name: MADATA_SILVER_MODULEDATAES
+    identifier: MADATA_SILVER_MODULEDATAES
+    description: Landing table for MADATA_SILVER_MODULEDATAES from SQLServer [MAData_Silver].[dbo].[ModuleDataES]
+  - name: MADATA_SILVER_STAGING_WIIINGS_OUTPUT_ES
+    identifier: MADATA_SILVER_STAGING_WIIINGS_OUTPUT_ES
+    description: Landing table for MADATA_SILVER_STAGING_WIIINGS_OUTPUT_ES from SQLServer
+      [MAData_Silver].[dbo].[Staging_Wiiings_Output_ES]
+  - name: MADATA_SILVER_MTBI_ES
+    identifier: MADATA_SILVER_MTBI_ES
+    description: Landing table for MADATA_SILVER_MTBI_ES from SQLServer [MAData_Silver].[dbo].[MTBI_ES]
+  - name: MADATA_SILVER_MTBI_SPS
+    identifier: MADATA_SILVER_MTBI_SPS
+    description: Landing table for MADATA_SILVER_MTBI_SPS from SQLServer [MAData_Silver].[dbo].[MTBI_SPS]
+  - name: MADATA_SILVER_STAGING_WIIINGS_SITE_OUTPUT_ES
+    identifier: MADATA_SILVER_STAGING_WIIINGS_SITE_OUTPUT_ES
+    description: Landing table for MADATA_SILVER_STAGING_WIIINGS_SITE_OUTPUT_ES from
+      SQLServer [MAData_Silver].[dbo].[Staging_Wiiings_Site_Output_ES]
+  - name: MADATA_SILVER_NEW_CATEGORIESES
+    identifier: MADATA_SILVER_NEW_CATEGORIESES
+    description: Landing table for MADATA_SILVER_NEW_CATEGORIESES from SQLServer [MAData_Silver].[dbo].[New_CategoriesES]
+  - name: MADATA_SILVER_NEW_CATEGORIESTFF
+    identifier: MADATA_SILVER_NEW_CATEGORIESTFF
+    description: Landing table for MADATA_SILVER_NEW_CATEGORIESTFF from SQLServer
+      [MAData_Silver].[dbo].[New_CategoriesTFF]
+  - name: MADATA_SILVER_NEW_DOWN_TOTAL_ES
+    identifier: MADATA_SILVER_NEW_DOWN_TOTAL_ES
+    description: Landing table for MADATA_SILVER_NEW_DOWN_TOTAL_ES from SQLServer
+      [MAData_Silver].[dbo].[New_down_total_ES]
+  - name: MADATA_SILVER_NEW_DOWN_TOTAL_SPS
+    identifier: MADATA_SILVER_NEW_DOWN_TOTAL_SPS
+    description: Landing table for MADATA_SILVER_NEW_DOWN_TOTAL_SPS from SQLServer
+      [MAData_Silver].[dbo].[New_down_total_SPS]
+  - name: MADATA_SILVER_OUTSES
+    identifier: MADATA_SILVER_OUTSES
+    description: Landing table for MADATA_SILVER_OUTSES from SQLServer [MAData_Silver].[dbo].[outsES]
+  - name: MADATA_SILVER_OUTSSPS
+    identifier: MADATA_SILVER_OUTSSPS
+    description: Landing table for MADATA_SILVER_OUTSSPS from SQLServer [MAData_Silver].[dbo].[outsSPS]
+  - name: MADATA_SILVER_PM2
+    identifier: MADATA_SILVER_PM2
+    description: Landing table for MADATA_SILVER_PM2 from SQLServer [MAData_Silver].[dbo].[PM2]
+  - name: MADATA_SILVER_PM2_2
+    identifier: MADATA_SILVER_PM2_2
+    description: Landing table for MADATA_SILVER_PM2_2 from SQLServer [MAData_Silver].[dbo].[PM2_2]
+  - name: MADATA_SILVER_PM3
+    identifier: MADATA_SILVER_PM3
+    description: Landing table for MADATA_SILVER_PM3 from SQLServer [MAData_Silver].[dbo].[PM3]
+  - name: MADATA_SILVER_PM3_2
+    identifier: MADATA_SILVER_PM3_2
+    description: Landing table for MADATA_SILVER_PM3_2 from SQLServer [MAData_Silver].[dbo].[PM3_2]
+  - name: MADATA_SILVER_PMA_COUNTSES
+    identifier: MADATA_SILVER_PMA_COUNTSES
+    description: Landing table for MADATA_SILVER_PMA_COUNTSES from SQLServer [MAData_Silver].[dbo].[PMA_CountsES]
+  - name: MADATA_SILVER_PREFERREDPAIRLISTES
+    identifier: MADATA_SILVER_PREFERREDPAIRLISTES
+    description: Landing table for MADATA_SILVER_PREFERREDPAIRLISTES from SQLServer
+      [MAData_Silver].[dbo].[PreferredPairListES]
+  - name: MADATA_SILVER_STATES
+    identifier: MADATA_SILVER_STATES
+    description: Landing table for MADATA_SILVER_STATES from SQLServer [MAData_Silver].[dbo].[States]
+  - name: MADATA_SILVER_STATESSPS
+    identifier: MADATA_SILVER_STATESSPS
+    description: Landing table for MADATA_SILVER_STATESSPS from SQLServer [MAData_Silver].[dbo].[StatesSPS]
+  - name: MADATA_SILVER_SUBENT_MODULE_SPS
+    identifier: MADATA_SILVER_SUBENT_MODULE_SPS
+    description: Landing table for MADATA_SILVER_SUBENT_MODULE_SPS from SQLServer
+      [MAData_Silver].[dbo].[subent_module_sps]
+  - name: MADATA_SILVER_SYSTEM_E
+    identifier: MADATA_SILVER_SYSTEM_E
+    description: Landing table for MADATA_SILVER_SYSTEM_E from SQLServer [MAData_Silver].[dbo].[system_e]
+  - name: MADATA_SILVER_TALLI_ETCH
+    identifier: MADATA_SILVER_TALLI_ETCH
+    description: Landing table for MADATA_SILVER_TALLI_ETCH from SQLServer [MAData_Silver].[dbo].[TALLI_Etch]
+  - name: MADATA_SILVER_TELDEFINITIONS2023WW07
+    identifier: MADATA_SILVER_TELDEFINITIONS2023WW07
+    description: Landing table for MADATA_SILVER_TELDEFINITIONS2023WW07 from SQLServer
+      [MAData_Silver].[dbo].[TELDefinitions2023WW07]
+  - name: MADATA_SILVER_TEMPSPS
+    identifier: MADATA_SILVER_TEMPSPS
+    description: Landing table for MADATA_SILVER_TEMPSPS from SQLServer [MAData_Silver].[dbo].[TEMPSPS]
+  - name: MADATA_SILVER_TOOL_LIST_WW_ES
+    identifier: MADATA_SILVER_TOOL_LIST_WW_ES
+    description: Landing table for MADATA_SILVER_TOOL_LIST_WW_ES from SQLServer [MAData_Silver].[dbo].[tool_list_ww_ES]
+  - name: MADATA_SILVER_TOOL_LIST_WW_SPS
+    identifier: MADATA_SILVER_TOOL_LIST_WW_SPS
+    description: Landing table for MADATA_SILVER_TOOL_LIST_WW_SPS from SQLServer [MAData_Silver].[dbo].[tool_list_ww_SPS]
+  - name: MADATA_SILVER_TOTAL_ALARM_OUT_COUNT_ES
+    identifier: MADATA_SILVER_TOTAL_ALARM_OUT_COUNT_ES
+    description: Landing table for MADATA_SILVER_TOTAL_ALARM_OUT_COUNT_ES from SQLServer
+      [MAData_Silver].[dbo].[total_alarm_out_count_ES]
+  - name: MADATA_SILVER_UE_DEFINITIONS_ES
+    identifier: MADATA_SILVER_UE_DEFINITIONS_ES
+    description: Landing table for MADATA_SILVER_UE_DEFINITIONS_ES from SQLServer
+      [MAData_Silver].[dbo].[UE_Definitions_ES]
+  - name: MADATA_SILVER_UE_DEFINITIONS_SPS
+    identifier: MADATA_SILVER_UE_DEFINITIONS_SPS
+    description: Landing table for MADATA_SILVER_UE_DEFINITIONS_SPS from SQLServer
+      [MAData_Silver].[dbo].[UE_Definitions_SPS]
+  - name: MADATA_SILVER_UP_ERRORS_SPS
+    identifier: MADATA_SILVER_UP_ERRORS_SPS
+    description: Landing table for MADATA_SILVER_UP_ERRORS_SPS from SQLServer [MAData_Silver].[dbo].[up_errors_SPS]
+  - name: MADATA_SILVER_NEW_CATEGORIESCT
+    identifier: MADATA_SILVER_NEW_CATEGORIESCT
+    description: Landing table for MADATA_SILVER_NEW_CATEGORIESCT from SQLServer [MAData_Silver].[dbo].[New_CategoriesCT]
+  - name: MADATA_SILVER_UP_ERRORS_STAGING_ES
+    identifier: MADATA_SILVER_UP_ERRORS_STAGING_ES
+    description: Landing table for MADATA_SILVER_UP_ERRORS_STAGING_ES from SQLServer
+      [MAData_Silver].[dbo].[up_errors_staging_ES]
+  - name: MADATA_SILVER_PMA_LIMITSES
+    identifier: MADATA_SILVER_PMA_LIMITSES
+    description: Landing table for MADATA_SILVER_PMA_LIMITSES from SQLServer [MAData_Silver].[dbo].[PMA_LimitsES]
+  - name: MADATA_SILVER_UP_ERRORS_STAGING_SPS
+    identifier: MADATA_SILVER_UP_ERRORS_STAGING_SPS
+    description: Landing table for MADATA_SILVER_UP_ERRORS_STAGING_SPS from SQLServer
+      [MAData_Silver].[dbo].[up_errors_staging_SPS]
+  - name: MADATA_SILVER_UP_HOURS_ES
+    identifier: MADATA_SILVER_UP_HOURS_ES
+    description: Landing table for MADATA_SILVER_UP_HOURS_ES from SQLServer [MAData_Silver].[dbo].[Up_Hours_ES]
+  - name: MADATA_SILVER_UP_HOURS_SPS
+    identifier: MADATA_SILVER_UP_HOURS_SPS
+    description: Landing table for MADATA_SILVER_UP_HOURS_SPS from SQLServer [MAData_Silver].[dbo].[Up_Hours_SPS]
+  - name: MADATA_SILVER_UPTIME_ES
+    identifier: MADATA_SILVER_UPTIME_ES
+    description: Landing table for MADATA_SILVER_UPTIME_ES from SQLServer [MAData_Silver].[dbo].[uptime_ES]
+  - name: MADATA_SILVER_UPTIME_SPS
+    identifier: MADATA_SILVER_UPTIME_SPS
+    description: Landing table for MADATA_SILVER_UPTIME_SPS from SQLServer [MAData_Silver].[dbo].[uptime_SPS]
+  - name: MADATA_SILVER_WORK_ORDERS_ES
+    identifier: MADATA_SILVER_WORK_ORDERS_ES
+    description: Landing table for MADATA_SILVER_WORK_ORDERS_ES from SQLServer [MAData_Silver].[dbo].[work_orders_ES]
+  - name: MADATA_SILVER_WW_ES
+    identifier: MADATA_SILVER_WW_ES
+    description: Landing table for MADATA_SILVER_WW_ES from SQLServer [MAData_Silver].[dbo].[WW_ES]
+  - name: MADATA_SILVER_WW_MTB_ES
+    identifier: MADATA_SILVER_WW_MTB_ES
+    description: Landing table for MADATA_SILVER_WW_MTB_ES from SQLServer [MAData_Silver].[dbo].[WW_MTB_ES]
+  - name: MADATA_SILVER_WW_MTB_SPS
+    identifier: MADATA_SILVER_WW_MTB_SPS
+    description: Landing table for MADATA_SILVER_WW_MTB_SPS from SQLServer [MAData_Silver].[dbo].[WW_MTB_SPS]
+  - name: MADATA_SILVER_WW_SPS
+    identifier: MADATA_SILVER_WW_SPS
+    description: Landing table for MADATA_SILVER_WW_SPS from SQLServer [MAData_Silver].[dbo].[WW_SPS]
+  - name: MADATA_SILVER_ALARM_DATA_ES
+    identifier: MADATA_SILVER_ALARM_DATA_ES
+    description: Landing table for MADATA_SILVER_ALARM_DATA_ES from SQLServer [MAData_Silver].[dbo].[alarm_data_ES]
+  - name: MADATA_SILVER_ERRORSCT
+    identifier: MADATA_SILVER_ERRORSCT
+    description: Landing table for MADATA_SILVER_ERRORSCT from SQLServer [MAData_Silver].[dbo].[errorsCT]
+  - name: MADATA_SILVER_ALARM_DATA_SPS
+    identifier: MADATA_SILVER_ALARM_DATA_SPS
+    description: Landing table for MADATA_SILVER_ALARM_DATA_SPS from SQLServer [MAData_Silver].[dbo].[alarm_data_SPS]
+  - name: MADATA_SILVER_ERRORSSPS
+    identifier: MADATA_SILVER_ERRORSSPS
+    description: Landing table for MADATA_SILVER_ERRORSSPS from SQLServer [MAData_Silver].[dbo].[errorsSPS]
+  - name: MADATA_SILVER_ALARM_EXCLUSION_ES
+    identifier: MADATA_SILVER_ALARM_EXCLUSION_ES
+    description: Landing table for MADATA_SILVER_ALARM_EXCLUSION_ES from SQLServer
+      [MAData_Silver].[dbo].[Alarm_Exclusion_ES]
+  - name: MADATA_SILVER_ERRORSTFF
+    identifier: MADATA_SILVER_ERRORSTFF
+    description: Landing table for MADATA_SILVER_ERRORSTFF from SQLServer [MAData_Silver].[dbo].[errorsTFF]
+  - name: MADATA_SILVER_ALARM_INCLUSION_SPS
+    identifier: MADATA_SILVER_ALARM_INCLUSION_SPS
+    description: Landing table for MADATA_SILVER_ALARM_INCLUSION_SPS from SQLServer
+      [MAData_Silver].[dbo].[alarm_inclusion_SPS]
+  - name: MADATA_SILVER_CONTROLERRORS
+    identifier: MADATA_SILVER_CONTROLERRORS
+    description: Landing table for MADATA_SILVER_CONTROLERRORS from SQLServer [MAData_Silver].[dbo].[ControlErrors]
+  - name: MADATA_SILVER_ALARM_INCLUSION_TFF
+    identifier: MADATA_SILVER_ALARM_INCLUSION_TFF
+    description: Landing table for MADATA_SILVER_ALARM_INCLUSION_TFF from SQLServer
+      [MAData_Silver].[dbo].[alarm_inclusion_TFF]
+  - name: MADATA_SILVER_ALARM_LIST_SPS
+    identifier: MADATA_SILVER_ALARM_LIST_SPS
+    description: Landing table for MADATA_SILVER_ALARM_LIST_SPS from SQLServer [MAData_Silver].[dbo].[Alarm_List_SPS]
+  - name: MADATA_SILVER_ERRORSES3
+    identifier: MADATA_SILVER_ERRORSES3
+    description: Landing table for MADATA_SILVER_ERRORSES3 from SQLServer [MAData_Silver].[dbo].[errorsES3]
+  - name: MADATA_SILVER_ATTEMPT_DATA_ES
+    identifier: MADATA_SILVER_ATTEMPT_DATA_ES
+    description: Landing table for MADATA_SILVER_ATTEMPT_DATA_ES from SQLServer [MAData_Silver].[dbo].[Attempt_data_ES]
+  - name: MADATA_SILVER_ATTEMPT_DATA_SPS
+    identifier: MADATA_SILVER_ATTEMPT_DATA_SPS
+    description: Landing table for MADATA_SILVER_ATTEMPT_DATA_SPS from SQLServer [MAData_Silver].[dbo].[Attempt_data_SPS]
+  - name: MADATA_SILVER_ATTEMPT_GROUP_ES
+    identifier: MADATA_SILVER_ATTEMPT_GROUP_ES
+    description: Landing table for MADATA_SILVER_ATTEMPT_GROUP_ES from SQLServer [MAData_Silver].[dbo].[Attempt_group_ES]
+  - name: MADATA_SILVER_ATTEMPT_GROUP_SPS
+    identifier: MADATA_SILVER_ATTEMPT_GROUP_SPS
+    description: Landing table for MADATA_SILVER_ATTEMPT_GROUP_SPS from SQLServer
+      [MAData_Silver].[dbo].[Attempt_group_SPS]
+  - name: MADATA_SILVER_CEID_ES
+    identifier: MADATA_SILVER_CEID_ES
+    description: Landing table for MADATA_SILVER_CEID_ES from SQLServer [MAData_Silver].[dbo].[CEID_ES]
+  - name: TFF_ANALYTICS_ROX_DEFECT_DATA
+    identifier: TFF_ANALYTICS_ROX_DEFECT_DATA
+    description: Landing table for TFF_ANALYTICS_ROX_DEFECT_DATA from SQLServer [TFF_analytics_prod].[dbo].[ROX_defect_data]
+  - name: TFF_ANALYTICS_ROX_DEFECT_HEADER
+    identifier: TFF_ANALYTICS_ROX_DEFECT_HEADER
+    description: Landing table for TFF_ANALYTICS_ROX_DEFECT_HEADER from SQLServer
+      [TFF_analytics_prod].[dbo].[ROX_defect_header]
+  - name: TFF_ANALYTICS_TELINDY_PLUS_GBOM
+    identifier: TFF_ANALYTICS_TELINDY_PLUS_GBOM
+    description: Landing table for TFF_ANALYTICS_TELINDY_PLUS_GBOM from SQLServer
+      [TFF_analytics_prod].[dbo].[TELINDY_PLUS_GBOM]
+  - name: TFF_ANALYTICS_NT333_GBOM
+    identifier: TFF_ANALYTICS_NT333_GBOM
+    description: Landing table for TFF_ANALYTICS_NT333_GBOM from SQLServer [TFF_analytics_prod].[dbo].[NT333_GBOM]
+  - name: TFF_ANALYTICS_DATE
+    identifier: TFF_ANALYTICS_DATE
+    description: Landing table for TFF_ANALYTICS_DATE from SQLServer [TFF_analytics_prod].[dbo].[date]
+  - name: TFF_ANALYTICS_WW
+    identifier: TFF_ANALYTICS_WW
+    description: Landing table for TFF_ANALYTICS_WW from SQLServer [TFF_analytics_prod].[dbo].[ww]
+  - name: TFF_ANALYTICS_ENTITY_FUTURE
+    identifier: TFF_ANALYTICS_ENTITY_FUTURE
+    description: Landing table for TFF_ANALYTICS_ENTITY_FUTURE from SQLServer [TFF_analytics_prod].[dbo].[entity_future]
+  - name: TFF_ANALYTICS_WARRANTY_TRACKER_CEID
+    identifier: TFF_ANALYTICS_WARRANTY_TRACKER_CEID
+    description: Landing table for TFF_ANALYTICS_WARRANTY_TRACKER_CEID from SQLServer
+      [TFF_analytics_prod].[dbo].[warranty_tracker_CEID]
+  - name: TFF_ANALYTICS_WARRANTY_TRACKER_CUST
+    identifier: TFF_ANALYTICS_WARRANTY_TRACKER_CUST
+    description: Landing table for TFF_ANALYTICS_WARRANTY_TRACKER_CUST from SQLServer
+      [TFF_analytics_prod].[dbo].[warranty_tracker_cust]
+  - name: TFF_ANALYTICS_NCDR
+    identifier: TFF_ANALYTICS_NCDR
+    description: Landing table for TFF_ANALYTICS_NCDR from SQLServer [TFF_analytics_prod].[dbo].[ncdr]
+  - name: TFF_ANALYTICS_PARTS_ORDER_HISTORY
+    identifier: TFF_ANALYTICS_PARTS_ORDER_HISTORY
+    description: Landing table for TFF_ANALYTICS_PARTS_ORDER_HISTORY from SQLServer
+      [TFF_analytics_prod].[dbo].[parts_order_history]
+  - name: TFF_ANALYTICS_MATERIAL_MASTER
+    identifier: TFF_ANALYTICS_MATERIAL_MASTER
+    description: Landing table for TFF_ANALYTICS_MATERIAL_MASTER from SQLServer [TFF_analytics_prod].[dbo].[material_master]
+  - name: TFF_ANALYTICS_PART_STOCK_OVERVIEW
+    identifier: TFF_ANALYTICS_PART_STOCK_OVERVIEW
+    description: Landing table for TFF_ANALYTICS_PART_STOCK_OVERVIEW from SQLServer
+      [TFF_analytics_prod].[dbo].[part_stock_overview]
+  - name: TFF_ANALYTICS_DB_STATS
+    identifier: TFF_ANALYTICS_DB_STATS
+    description: Landing table for TFF_ANALYTICS_DB_STATS from SQLServer [TFF_analytics_prod].[dbo].[db_stats]
+  - name: TFF_ANALYTICS_TELINDY_PLUS_PM_PARTS
+    identifier: TFF_ANALYTICS_TELINDY_PLUS_PM_PARTS
+    description: Landing table for TFF_ANALYTICS_TELINDY_PLUS_PM_PARTS from SQLServer
+      [TFF_analytics_prod].[dbo].[TELINDY_PLUS_PM_parts]
+  - name: TFF_ANALYTICS_NT333_PM_PARTS
+    identifier: TFF_ANALYTICS_NT333_PM_PARTS
+    description: Landing table for TFF_ANALYTICS_NT333_PM_PARTS from SQLServer [TFF_analytics_prod].[dbo].[NT333_PM_parts]
+  - name: TFF_ANALYTICS_RAW_CEID_DEFINITIONS
+    identifier: TFF_ANALYTICS_RAW_CEID_DEFINITIONS
+    description: Landing table for TFF_ANALYTICS_RAW_CEID_DEFINITIONS from SQLServer
+      [TFF_analytics_prod].[dbo].[raw_CEID_Definitions]
+  - name: TFF_ANALYTICS_RAW_COMMENTS
+    identifier: TFF_ANALYTICS_RAW_COMMENTS
+    description: Landing table for TFF_ANALYTICS_RAW_COMMENTS from SQLServer [TFF_analytics_prod].[dbo].[raw_Comments]
+  - name: TFF_ANALYTICS_RAW_DOWNCHANGES
+    identifier: TFF_ANALYTICS_RAW_DOWNCHANGES
+    description: Landing table for TFF_ANALYTICS_RAW_DOWNCHANGES from SQLServer [TFF_analytics_prod].[dbo].[raw_DownChanges]
+  - name: TFF_ANALYTICS_ECN_KEY
+    identifier: TFF_ANALYTICS_ECN_KEY
+    description: Landing table for TFF_ANALYTICS_ECN_KEY from SQLServer [TFF_analytics_prod].[dbo].[ECN_key]
+  - name: TFF_ANALYTICS_RAW_DOWNCOMMENTS
+    identifier: TFF_ANALYTICS_RAW_DOWNCOMMENTS
+    description: Landing table for TFF_ANALYTICS_RAW_DOWNCOMMENTS from SQLServer [TFF_analytics_prod].[dbo].[raw_DownComments]
+  - name: TFF_ANALYTICS_RAW_DOWNWINDOWS
+    identifier: TFF_ANALYTICS_RAW_DOWNWINDOWS
+    description: Landing table for TFF_ANALYTICS_RAW_DOWNWINDOWS from SQLServer [TFF_analytics_prod].[dbo].[raw_DownWindows]
+  - name: TFF_ANALYTICS_RAW_ENTITYSTATES
+    identifier: TFF_ANALYTICS_RAW_ENTITYSTATES
+    description: Landing table for TFF_ANALYTICS_RAW_ENTITYSTATES from SQLServer [TFF_analytics_prod].[dbo].[raw_EntityStates]
+  - name: TFF_ANALYTICS_RAW_ERRORS
+    identifier: TFF_ANALYTICS_RAW_ERRORS
+    description: Landing table for TFF_ANALYTICS_RAW_ERRORS from SQLServer [TFF_analytics_prod].[dbo].[raw_errors]
+  - name: TFF_ANALYTICS_RAW_MA
+    identifier: TFF_ANALYTICS_RAW_MA
+    description: Landing table for TFF_ANALYTICS_RAW_MA from SQLServer [TFF_analytics_prod].[dbo].[raw_MA]
+  - name: TFF_ANALYTICS_ENTITY
+    identifier: TFF_ANALYTICS_ENTITY
+    description: Landing table for TFF_ANALYTICS_ENTITY from SQLServer [TFF_analytics_prod].[dbo].[entity]
+  - name: TFF_ANALYTICS_TELINDY_PLUS_ECN_TRACKER
+    identifier: TFF_ANALYTICS_TELINDY_PLUS_ECN_TRACKER
+    description: Landing table for TFF_ANALYTICS_TELINDY_PLUS_ECN_TRACKER from SQLServer
+      [TFF_analytics_prod].[dbo].[TELINDY_PLUS_ECN_tracker]
+  - name: TFF_ANALYTICS_ENTITY_NON_INTEL
+    identifier: TFF_ANALYTICS_ENTITY_NON_INTEL
+    description: Landing table for TFF_ANALYTICS_ENTITY_NON_INTEL from SQLServer [TFF_analytics_prod].[dbo].[entity_non_intel]
+  - name: TFF_ANALYTICS_NT333_ECN_TRACKER
+    identifier: TFF_ANALYTICS_NT333_ECN_TRACKER
+    description: Landing table for TFF_ANALYTICS_NT333_ECN_TRACKER from SQLServer
+      [TFF_analytics_prod].[dbo].[NT333_ECN_tracker]
+  - name: TFF_ANALYTICS_BUCKET_MAP
+    identifier: TFF_ANALYTICS_BUCKET_MAP
+    description: Landing table for TFF_ANALYTICS_BUCKET_MAP from SQLServer [TFF_analytics_prod].[dbo].[bucket_map]
+  - name: TFF_ANALYTICS_SIRFIS
+    identifier: TFF_ANALYTICS_SIRFIS
+    description: Landing table for TFF_ANALYTICS_SIRFIS from SQLServer [TFF_analytics_prod].[dbo].[SIRFIS]
+  - name: TFF_ANALYTICS_ROX_ECN_TRACKER
+    identifier: TFF_ANALYTICS_ROX_ECN_TRACKER
+    description: Landing table for TFF_ANALYTICS_ROX_ECN_TRACKER from SQLServer [TFF_analytics_prod].[dbo].[ROX_ECN_tracker]
+  - name: TFF_ANALYTICS_BUCKET
+    identifier: TFF_ANALYTICS_BUCKET
+    description: Landing table for TFF_ANALYTICS_BUCKET from SQLServer [TFF_analytics_prod].[dbo].[bucket]
+  - name: TFF_ANALYTICS_OPPORTUNITY
+    identifier: TFF_ANALYTICS_OPPORTUNITY
+    description: Landing table for TFF_ANALYTICS_OPPORTUNITY from SQLServer [TFF_analytics_prod].[dbo].[opportunity]
+  - name: TFF_ANALYTICS_SIRFIS_OPPORTUNITY
+    identifier: TFF_ANALYTICS_SIRFIS_OPPORTUNITY
+    description: Landing table for TFF_ANALYTICS_SIRFIS_OPPORTUNITY from SQLServer
+      [TFF_analytics_prod].[dbo].[sirfis_opportunity]
+  - name: TFF_ANALYTICS_RHO_ECN_TRACKER
+    identifier: TFF_ANALYTICS_RHO_ECN_TRACKER
+    description: Landing table for TFF_ANALYTICS_RHO_ECN_TRACKER from SQLServer [TFF_analytics_prod].[dbo].[RHO_ECN_tracker]
+  - name: TFF_ANALYTICS_SIRFIS_OPPORTUNITY_GANTT
+    identifier: TFF_ANALYTICS_SIRFIS_OPPORTUNITY_GANTT
+    description: Landing table for TFF_ANALYTICS_SIRFIS_OPPORTUNITY_GANTT from SQLServer
+      [TFF_analytics_prod].[dbo].[sirfis_opportunity_gantt]
+  - name: TFF_ANALYTICS_ENTITY_CONFIG
+    identifier: TFF_ANALYTICS_ENTITY_CONFIG
+    description: Landing table for TFF_ANALYTICS_ENTITY_CONFIG from SQLServer [TFF_analytics_prod].[dbo].[entity_config]
+  - name: TFF_ANALYTICS_TELINDY_PLUS_ECN_TOOL_TRACKER
+    identifier: TFF_ANALYTICS_TELINDY_PLUS_ECN_TOOL_TRACKER
+    description: Landing table for TFF_ANALYTICS_TELINDY_PLUS_ECN_TOOL_TRACKER from
+      SQLServer [TFF_analytics_prod].[dbo].[TELINDY_PLUS_ECN_tool_tracker]
+  - name: TFF_ANALYTICS_ENTITY_PROCESS_NODES
+    identifier: TFF_ANALYTICS_ENTITY_PROCESS_NODES
+    description: Landing table for TFF_ANALYTICS_ENTITY_PROCESS_NODES from SQLServer
+      [TFF_analytics_prod].[dbo].[entity_process_nodes]
+  - name: TFF_ANALYTICS_ENTITY_SOFTWARE
+    identifier: TFF_ANALYTICS_ENTITY_SOFTWARE
+    description: Landing table for TFF_ANALYTICS_ENTITY_SOFTWARE from SQLServer [TFF_analytics_prod].[dbo].[entity_software]
+  - name: TFF_ANALYTICS_ENTITY_WW
+    identifier: TFF_ANALYTICS_ENTITY_WW
+    description: Landing table for TFF_ANALYTICS_ENTITY_WW from SQLServer [TFF_analytics_prod].[dbo].[entity_ww]
+  - name: TFF_ANALYTICS_CEID
+    identifier: TFF_ANALYTICS_CEID
+    description: Landing table for TFF_ANALYTICS_CEID from SQLServer [TFF_analytics_prod].[dbo].[CEID]
+  - name: TFF_ANALYTICS_VFMFGID
+    identifier: TFF_ANALYTICS_VFMFGID
+    description: Landing table for TFF_ANALYTICS_VFMFGID from SQLServer [TFF_analytics_prod].[dbo].[VFMFGID]
+  - name: TFF_ANALYTICS_PROCESS_NODES
+    identifier: TFF_ANALYTICS_PROCESS_NODES
+    description: Landing table for TFF_ANALYTICS_PROCESS_NODES from SQLServer [TFF_analytics_prod].[dbo].[process_nodes]
+  - name: TFF_ANALYTICS_MA
+    identifier: TFF_ANALYTICS_MA
+    description: Landing table for TFF_ANALYTICS_MA from SQLServer [TFF_analytics_prod].[dbo].[ma]
+  - name: TFF_ANALYTICS_DOWN_STATES
+    identifier: TFF_ANALYTICS_DOWN_STATES
+    description: Landing table for TFF_ANALYTICS_DOWN_STATES from SQLServer [TFF_analytics_prod].[dbo].[down_states]
+  - name: TFF_ANALYTICS_COMMENTS
+    identifier: TFF_ANALYTICS_COMMENTS
+    description: Landing table for TFF_ANALYTICS_COMMENTS from SQLServer [TFF_analytics_prod].[dbo].[comments]
+  - name: TFF_ANALYTICS_DOWN_WINDOW
+    identifier: TFF_ANALYTICS_DOWN_WINDOW
+    description: Landing table for TFF_ANALYTICS_DOWN_WINDOW from SQLServer [TFF_analytics_prod].[dbo].[down_window]
+  - name: TFF_ANALYTICS_COMMENT_BUCKET
+    identifier: TFF_ANALYTICS_COMMENT_BUCKET
+    description: Landing table for TFF_ANALYTICS_COMMENT_BUCKET from SQLServer [TFF_analytics_prod].[dbo].[comment_bucket]
+  - name: TFF_ANALYTICS_DOWN_STATES_OUTPUT
+    identifier: TFF_ANALYTICS_DOWN_STATES_OUTPUT
+    description: Landing table for TFF_ANALYTICS_DOWN_STATES_OUTPUT from SQLServer
+      [TFF_analytics_prod].[dbo].[down_states_output]
+  - name: TFF_ANALYTICS_MA_OUTPUT
+    identifier: TFF_ANALYTICS_MA_OUTPUT
+    description: Landing table for TFF_ANALYTICS_MA_OUTPUT from SQLServer [TFF_analytics_prod].[dbo].[ma_output]
+  - name: TFF_ANALYTICS_DOWNTIME
+    identifier: TFF_ANALYTICS_DOWNTIME
+    description: Landing table for TFF_ANALYTICS_DOWNTIME from SQLServer [TFF_analytics_prod].[dbo].[downtime]
+  - name: TFF_ANALYTICS_ENTITY_ALARMS
+    identifier: TFF_ANALYTICS_ENTITY_ALARMS
+    description: Landing table for TFF_ANALYTICS_ENTITY_ALARMS from SQLServer [TFF_analytics_prod].[dbo].[entity_alarms]
+  - name: TFF_ANALYTICS_ALARM
+    identifier: TFF_ANALYTICS_ALARM
+    description: Landing table for TFF_ANALYTICS_ALARM from SQLServer [TFF_analytics_prod].[dbo].[alarm]
+  - name: TFF_ANALYTICS_ALARMS_COMPLETE
+    identifier: TFF_ANALYTICS_ALARMS_COMPLETE
+    description: Landing table for TFF_ANALYTICS_ALARMS_COMPLETE from SQLServer [TFF_analytics_prod].[dbo].[alarms_complete]
+  - name: TFF_ANALYTICS_RAW_THICKNESS
+    identifier: TFF_ANALYTICS_RAW_THICKNESS
+    description: Landing table for TFF_ANALYTICS_RAW_THICKNESS from SQLServer [TFF_analytics_prod].[dbo].[raw_Thickness]
+  - name: TFF_ANALYTICS_IMPACT_MAP
+    identifier: TFF_ANALYTICS_IMPACT_MAP
+    description: Landing table for TFF_ANALYTICS_IMPACT_MAP from SQLServer [TFF_analytics_prod].[dbo].[impact_map]
+  - name: GBOMREPORTS_CP
+    identifier: GBOMREPORTS_CP
+    description: Landing table for GBOMREPORTS_CP from File Share \\tml5348.asia.tel.com\\GBOMReports and File Name 01_CP.xlsx
+  - name: GBOMREPORTS_STATUS
+    identifier: GBOMREPORTS_STATUS
+    description: Landing table for GBOMREPORTS_STATUS from File Share \\tml5348.asia.tel.com\\GBOMReports and File Name 02_Status.xlsx
+  - name: GBOMREPORTS_PARTS
+    identifier: GBOMREPORTS_PARTS
+    description: Landing table for GBOMREPORTS_PARTS from File Share \\tml5348.asia.tel.com\\GBOMReports and File Name 03_Parts.xlsx
+  - name: GBOMREPORTS_MISC
+    identifier: GBOMREPORTS_MISC
+    description: Landing table for GBOMREPORTS_MISC from File Share \\tml5348.asia.tel.com\\GBOMReports and File Name 04_misc.xlsx
+  - name: GBOMREPORTS_USABLE
+    identifier: GBOMREPORTS_USABLE
+    description: Landing table for GBOMREPORTS_USABLE from File Share \\tml5348.asia.tel.com\\GBOMReports and File Name USABLE.xlsx
+  - name: PROD_ENTITY_RESET
+    identifier: PROD_ENTITY_RESET
+    description: Landing table for PROD_ENTITY_RESET from SQLServer [Parts_Counter_Production].[dbo].[Prod_Entity_Reset]
+  - name: PROD_PM_ALL
+    identifier: PROD_PM_ALL
+    description: Landing table for PROD_PM_ALL from SQLServer [Parts_Counter_Production].[dbo].[Prod_PM_all]
+  - name: PROD_PM_RESET
+    identifier: PROD_PM_RESET
+    description: Landing table for PROD_PM_RESET from SQLServer [Parts_Counter_Production].[dbo].[Prod_PM_Reset]
+  - name: CONTROLTABLE
+    identifier: CONTROLTABLE
+  - name: PROD_ENTITY_OUTPUT_ES
+    identifier: PROD_ENTITY_OUTPUT_ES
+    description: Landing table for PROD_ENTITY_OUTPUT_ES from SQLServer [MAData_Output_Production].[dbo].[Prod_ENTITY_Output_ES]
+  - name: PROD_TOOL_LIST_OUTPUT_ES
+    identifier: PROD_TOOL_LIST_OUTPUT_ES
+    description: Landing table for PROD_TOOL_LIST_OUTPUT_ES from SQLServer [MAData_Output_Production].[dbo].[Prod_Tool_List_Output_ES]
+  - name: PROD_WW_OUTPUT_ES
+    identifier: PROD_WW_OUTPUT_ES
+    description: Landing table for PROD_WW_OUTPUT_ES from SQLServer [MAData_Output_Production].[dbo].[Prod_WW_Output_ES]

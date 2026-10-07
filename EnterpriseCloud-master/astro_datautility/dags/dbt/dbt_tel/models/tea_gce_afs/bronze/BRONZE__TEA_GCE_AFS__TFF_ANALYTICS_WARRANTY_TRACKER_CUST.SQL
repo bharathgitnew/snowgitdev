@@ -1,0 +1,60 @@
+/************
+Model file generated from Python utility
+*************/
+
+{{ config(
+	materialized='tel_incremental',
+	incremental_strategy='insert_overwrite',
+	alias='TFF_ANALYTICS_WARRANTY_TRACKER_CUST',
+	transient=false
+) }}
+
+with source_data as (
+	SELECT
+		_FILEDATE,
+		_FILENAME,
+		_UPLOADDATE,
+		JSONFIELD:"fleet_count"::NUMBER(38,10) AS FLEET_COUNT,
+		JSONFIELD:"location"::VARCHAR AS LOCATION,
+		JSONFIELD:"customer_name"::VARCHAR AS CUSTOMER_NAME,
+		JSONFIELD:"warranty_count"::NUMBER(38,10) AS WARRANTY_COUNT,
+		JSONFIELD:"year"::NUMBER(38,10) AS YEAR,
+		JSONFIELD:"warranty_percent"::FLOAT AS WARRANTY_PERCENT
+	FROM {{ source("ADS", "TFF_ANALYTICS_WARRANTY_TRACKER_CUST") }}
+WHERE
+	_FILEDATE = (SELECT MAX(_FILEDATE) FROM {{ source('ADS', 'TFF_ANALYTICS_WARRANTY_TRACKER_CUST') }} ) 
+),
+
+transform_data as (
+	SELECT
+		_FILEDATE AS _FILEDATE,
+		_FILENAME AS _FILENAME,
+		_UPLOADDATE AS _UPLOADDATE,
+		'{{ invocation_id }}' AS _AUDIT_LOG_ID,
+		SHA2('hash_me') AS _ROW_HASH,
+		FLEET_COUNT,
+		LOCATION,
+		CUSTOMER_NAME,
+		WARRANTY_COUNT,
+		YEAR,
+		WARRANTY_PERCENT
+	FROM source_data
+),
+
+type_data as (
+	SELECT
+		CAST(_FILEDATE AS TIMESTAMP_NTZ(9)) AS _FILEDATE,
+		_FILENAME,
+		_UPLOADDATE,
+		CAST(_AUDIT_LOG_ID AS VARCHAR(128)) AS _AUDIT_LOG_ID,
+		CAST(_ROW_HASH AS VARCHAR(128)) AS _ROW_HASH,
+		CAST(FLEET_COUNT AS NUMBER(38,10)) AS FLEET_COUNT,
+		LOCATION,
+		CUSTOMER_NAME,
+		CAST(WARRANTY_COUNT AS NUMBER(38,10)) AS WARRANTY_COUNT,
+		CAST(YEAR AS NUMBER(38,10)) AS YEAR,
+		CAST(WARRANTY_PERCENT AS FLOAT) AS WARRANTY_PERCENT
+	FROM transform_data
+)
+
+SELECT * FROM type_data

@@ -1,0 +1,22 @@
+version: 2
+sources:
+- name: POWERBI
+  description: Landing Zone - POWERBI Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: POWERBI
+  tables:
+  - name: ACTIVITY
+    identifier: ACTIVITY
+    description: Landing table for POWERBI ACTIVITY file.
+  - name: DATASETS
+    identifier: DATASETS
+    description: Landing table for POWERBI DATASETS file.
+  - name: GATEWAYS
+    identifier: GATEWAYS
+    description: Landing table for POWERBI GATEWAYS file.
+  - name: DATASOURCES
+    identifier: DATASOURCES
+    description: Landing table for POWERBI DATASOURCES file.
+  - name: GROUPS
+    identifier: GROUPS
+    description: Landing table for POWERBI GROUPS file.

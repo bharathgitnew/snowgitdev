@@ -1,0 +1,11 @@
+{
+    "CRMHELPDESK": {
+        "DataSet1": {
+            "schema": "dbo",
+            "table": "view_helpdesk_cases",
+            "Incremental": "NULL",
+            "sftablename": "HELPDESK_CASE_DETAILS",
+            "filter": ""
+        }
+    }
+}

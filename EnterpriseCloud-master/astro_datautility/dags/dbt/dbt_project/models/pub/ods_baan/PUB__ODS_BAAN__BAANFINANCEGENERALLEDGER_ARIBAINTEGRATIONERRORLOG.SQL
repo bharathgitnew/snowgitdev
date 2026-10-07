@@ -1,0 +1,31 @@
+/************
+Model file generated from dbtGeneratePubViews: 03.10.2022.08.14.10"
+*************/
+
+{{ config(
+      materialized='view',
+      alias='BAANFINANCEGENERALLEDGER_ARIBAINTEGRATIONERRORLOG',
+      transient=false
+) }}
+
+with source_data as (
+    SELECT
+        _CAPTUREDATETIME,
+        _COMPANYID,
+        LINETYPEDESCRIPTION,
+        LINETYPEID,
+        MESSAGEDESCRIPTION,
+        MESSAGESEQUENCENUMBER,
+        PAYMENTID,
+        POSITIONNUMBER,
+        SEQUENCENUMBER,
+        TRANSACTIONDATE
+    from {{ ref('ODS__BAAN__BAANFINANCEGENERALLEDGER_ARIBAINTEGRATIONERRORLOG') }}
+),
+
+transform_data AS
+(
+    select * from source_data
+)
+
+    select * from transform_data

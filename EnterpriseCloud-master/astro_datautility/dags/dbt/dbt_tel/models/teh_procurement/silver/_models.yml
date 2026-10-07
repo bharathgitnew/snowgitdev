@@ -1,0 +1,144 @@
+models:
+- name: SILVER__TEH_PROCUREMENT__ADDRESS_DETAILS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_PROCUREMENT__BANK_DETAILS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_PROCUREMENT__BUSINESS_PARTNERS_GENERAL_DATA
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_PROCUREMENT__BUSINESS_PARTNER_FUNCTION
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_PROCUREMENT__INSTRUCTION_KEY_EXPLANATION
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_PROCUREMENT__INTERIM_PURCHASEORDER_HEADER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_PROCUREMENT__INTERIM_REQUISITION_HEADER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_PROCUREMENT__INVOICERECONCILIATION_APPROVALREQUEST
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_PROCUREMENT__INVOICERECONCILIATION_ATTACHMENT
+  tests:
+  - recently_run
+- name: SILVER__TEH_PROCUREMENT__INVOICERECONCILIATION_EXCEPTION
+  tests:
+  - recently_run
+- name: SILVER__TEH_PROCUREMENT__INVOICERECONCILIATION_HEADER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_PROCUREMENT__INVOICERECONCILIATION_LINEITEM
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_PROCUREMENT__INVOICERECONCILIATION_PAYMENT
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_PROCUREMENT__INVOICERECONCILIATION_SPLITACCOUNTING
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_PROCUREMENT__INVOICE_APPROVALRECORD
+  tests:
+  - recently_run
+- name: SILVER__TEH_PROCUREMENT__INVOICE_APPROVALREQUEST
+  tests:
+  - recently_run
+- name: SILVER__TEH_PROCUREMENT__INVOICE_HEADER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_PROCUREMENT__INVOICE_LINEITEM
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_PROCUREMENT__INVOICE_SPLITACCOUNTING
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_PROCUREMENT__OPENPURCHASEORDERS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_PROCUREMENT__PURCHASEORDER_HEADER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_PROCUREMENT__PURCHASEORDER_LINEITEM
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_PROCUREMENT__PURCHASEORDER_SPLITACCOUNTING
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_PROCUREMENT__PURCHASE_ORDER_AGREEMENT_SCHEDULE_LINE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_PROCUREMENT__RECEIPT_APPROVALREQUEST
+  tests:
+  - recently_run
+- name: SILVER__TEH_PROCUREMENT__RECEIPT_HEADER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_PROCUREMENT__RECEIPT_LINEITEM
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_PROCUREMENT__REQUISITION_APPROVALRECORD
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_PROCUREMENT__REQUISITION_APPROVALREQUEST
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_PROCUREMENT__REQUISITION_HEADER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_PROCUREMENT__REQUISITION_LINEITEM
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_PROCUREMENT__REQUISITION_SPLITACCOUNTING
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_PROCUREMENT__SAP_ACCOUNT
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_PROCUREMENT__TAX_DETAILS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_PROCUREMENT__UNIVERSAL_JOURNAL_ENTRY_LINE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_PROCUREMENT__VENDOR_SPEND_REPORT_INVOICE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_PROCUREMENT__VENDOR_SPEND_REPORT_PO
+  tests:
+  - has_data
+  - recently_run

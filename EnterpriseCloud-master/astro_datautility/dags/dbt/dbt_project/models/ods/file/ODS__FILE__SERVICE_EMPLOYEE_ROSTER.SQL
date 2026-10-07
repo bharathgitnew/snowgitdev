@@ -1,0 +1,75 @@
+{{ config(
+    materialized='incremental',
+    incremental_strategy='insert_overwrite',
+    alias='SERVICE_EMPLOYEE_ROSTER'
+) }}
+
+with source_data as (
+    SELECT
+    _FILEDATE,
+    _FILENAME,
+    _UPLOADDATE,
+    EMP_ID,
+    EMPLOYEE_NAME,
+    CURRENT_SUPERVISOR,
+    SUPERVISOR_ID,
+    EMPLOYEE_TYPE_CODE,
+    BU,
+    COST_CENTER,
+    CURRENT_DEPARTMENT,
+    EMPLOYEE_TYPE,
+    SEGMENT_ORACLE,
+    BU_LEADER,
+    SUPERVISOR_ID_NEW,
+    SUPERVISOR_NAME_NEW,
+    DOWNLOAD_DATE
+FROM {{ source('FILE', 'SERVICE_EMPLOYEE_ROSTER') }} AS SERVICE_EMPLOYEE_ROSTER
+where _UPLOADDATE = (select max(_UPLOADDATE) from {{ source("FILE", "SERVICE_EMPLOYEE_ROSTER") }}) AND EMP_ID IS NOT NULL
+),
+transform_data as (
+    SELECT
+    _FILEDATE,
+    _FILENAME,
+    _UPLOADDATE,
+    '{{ invocation_id }}' AS AUDIT_LOG_ID,
+	SHA2('hash_me') as _ROW_HASH,
+    EMP_ID,
+    EMPLOYEE_NAME,
+    CURRENT_SUPERVISOR,
+    SUPERVISOR_ID,
+    EMPLOYEE_TYPE_CODE,
+    BU,
+    COST_CENTER,
+    CURRENT_DEPARTMENT,
+    EMPLOYEE_TYPE,
+    SEGMENT_ORACLE,
+    BU_LEADER,
+    SUPERVISOR_ID_NEW,
+    SUPERVISOR_NAME_NEW,
+    DOWNLOAD_DATE
+FROM source_data
+    ),
+type_data as (
+    SELECT
+     _FILEDATE,
+    _FILENAME,
+    _UPLOADDATE,
+    AUDIT_LOG_ID,
+	_ROW_HASH,
+    EMP_ID,
+    EMPLOYEE_NAME,
+    CURRENT_SUPERVISOR,
+    SUPERVISOR_ID,
+    EMPLOYEE_TYPE_CODE,
+    BU,
+    COST_CENTER,
+    CURRENT_DEPARTMENT,
+    EMPLOYEE_TYPE,
+    SEGMENT_ORACLE,
+    BU_LEADER,
+    SUPERVISOR_ID_NEW,
+    SUPERVISOR_NAME_NEW,
+    DOWNLOAD_DATE
+    FROM transform_data
+    )
+SELECT * FROM type_data

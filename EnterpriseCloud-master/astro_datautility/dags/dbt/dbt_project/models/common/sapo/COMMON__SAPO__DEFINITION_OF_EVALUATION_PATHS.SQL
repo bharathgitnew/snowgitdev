@@ -1,0 +1,59 @@
+{{ config(
+        materialized='incremental',
+        incremental_strategy='merge',
+        alias='DEFINITION_OF_EVALUATION_PATHS',
+        unique_key = ['CLIENT',
+    'EVALUATION_PATH',
+    'SEQUENCE_NUMBER'],
+        transient=false
+) }}
+
+with source_data as (
+    select
+        MANDT as CLIENT,
+		WEGID as EVALUATION_PATH,
+		WEGNR as SEQUENCE_NUMBER,
+		OTYPE as OBJECT_TYPE,
+		RSIGN as RELATIONSHIP_SPECIFICATION,
+		RELAT as RELATIONSHIP_BETWEEN_OBJECTS,
+		PRIOX as PRIORITY,
+		SCLAS as TYPE_OF_RELATED_OBJECT,
+		SKIPF as SKIP_FLAG,
+		_CAPTUREDATETIME
+    from {{ ref('ODS__SAPO__DEFINITION_OF_EVALUATION_PATHS') }}
+),
+
+transform_data as (
+    select
+        CLIENT,
+		EVALUATION_PATH,
+		SEQUENCE_NUMBER,
+		OBJECT_TYPE,
+		RELATIONSHIP_SPECIFICATION,
+		RELATIONSHIP_BETWEEN_OBJECTS,
+		PRIORITY,
+		TYPE_OF_RELATED_OBJECT,
+		SKIP_FLAG,
+		_CAPTUREDATETIME,
+		'{{ invocation_id }}' AS AUDIT_LOG_ID,
+		SHA2('hash_me') as _ROW_HASH
+    from source_data
+),
+
+type_data as (
+    select
+        cast(CLIENT as VARCHAR) as CLIENT,
+		cast(EVALUATION_PATH as VARCHAR) as EVALUATION_PATH,
+		cast(SEQUENCE_NUMBER as VARCHAR) as SEQUENCE_NUMBER,
+		cast(OBJECT_TYPE as VARCHAR) as OBJECT_TYPE,
+		cast(RELATIONSHIP_SPECIFICATION as VARCHAR) as RELATIONSHIP_SPECIFICATION,
+		cast(RELATIONSHIP_BETWEEN_OBJECTS as VARCHAR) as RELATIONSHIP_BETWEEN_OBJECTS,
+		cast(PRIORITY as VARCHAR) as PRIORITY,
+		cast(TYPE_OF_RELATED_OBJECT as VARCHAR) as TYPE_OF_RELATED_OBJECT,
+		cast(SKIP_FLAG as VARCHAR) as SKIP_FLAG,
+		cast(_CAPTUREDATETIME as TIMESTAMP_LTZ(9)) as _CAPTUREDATETIME,
+		cast(AUDIT_LOG_ID as varchar(128)) as AUDIT_LOG_ID,
+		cast(_ROW_HASH as varchar(128)) as _ROW_HASH
+    from transform_data
+)
+select * from type_data

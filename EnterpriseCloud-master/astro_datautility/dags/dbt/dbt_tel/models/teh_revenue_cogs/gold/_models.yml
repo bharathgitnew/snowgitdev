@@ -1,0 +1,257 @@
+models:
+- name: GOLD__TEH_REVENUE_COGS__ACTUAL_BUDGET_FORECAST_MASTER
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_REVENUE_COGS__ACTUAL_BUDGET_FORECAST_PNL
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_REVENUE_COGS__COMPANY
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_REVENUE_COGS__CONTRACTS_MASTER
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_REVENUE_COGS__CONTRACT_AND_PAID_SERVICE_SAP_REV_COGS
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_REVENUE_COGS__CONTRACT_SUMMARY_PURCHASE_ORDER_DETAILS
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_REVENUE_COGS__CRM_WORK_ORDER_RECENT_SUMMARY
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_REVENUE_COGS__CUSTOMER_MAPPING
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_REVENUE_COGS__CUSTOMER_PAID_REPAIR_REVENUE_COGS_REPORT
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_REVENUE_COGS__DAILY_ACTUALS
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_REVENUE_COGS__DAILY_ACTUALS_HISTORICAL_PNL
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_REVENUE_COGS__DAILY_ACTUALS_SALES_LINE
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_REVENUE_COGS__EMPLOYEE
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_REVENUE_COGS__EMPLOYEE_MONTHLY_SNAPSHOT
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_REVENUE_COGS__EMPLOYEE_TEACOMMON_HISTORICAL_MONTHLY_SNAPSHOT
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_REVENUE_COGS__FORECASTBUDGET
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_REVENUE_COGS__GLOBAL_EMPLOYEE
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_REVENUE_COGS__GLOBAL_MACHINES
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_REVENUE_COGS__KRONOS_TIMESHEET
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_REVENUE_COGS__MACHINE
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_REVENUE_COGS__MACHINE_DISTINCT
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_REVENUE_COGS__MASTER_MATERIAL_REPORT
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_REVENUE_COGS__PARENT_PART_MARGIN_ANALYSIS
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_REVENUE_COGS__PNL_ACCOUNTS_SALES_CATEGORY
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_REVENUE_COGS__REPORTS_TIMESHEET
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_REVENUE_COGS__REVENUE_COGS_DAILY_REPORT
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_REVENUE_COGS__REVENUE_COGS_FAB_DETAIL
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_REVENUE_COGS__SALES_CRM_ACCOUNT
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_REVENUE_COGS__SALES_CRM_BUSINESS_UNIT
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_REVENUE_COGS__SALES_CRM_SALES_REGION
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_REVENUE_COGS__SALES_ORDER_LINE_MASTER
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_REVENUE_COGS__SALES_ORDER_MASTER
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_REVENUE_COGS__SAP_BUSINESS_UNIT
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_REVENUE_COGS__SAP_CUSTOMER
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_REVENUE_COGS__SAP_SALES_ACCOUNT_REGION
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_REVENUE_COGS__SERVICEORDER_DISTINCT
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_REVENUE_COGS__SERVICE_OPEN_BILLABLE
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_REVENUE_COGS__SERVICE_ORDER_OPERATION_SUMMARY
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_REVENUE_COGS__SPARES_REVENUE
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_REVENUE_COGS__TEA_EXTERNAL_SERVICE_REVENUE_ACTUAL
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_REVENUE_COGS__TEA_EXTERNAL_SERVICE_REVENUE_ACTUAL_ACCOUNT
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_REVENUE_COGS__TEA_EXTERNAL_SERVICE_REVENUE_ACTUAL_BU
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_REVENUE_COGS__TEA_EXTERNAL_SERVICE_REVENUE_FORECAST_TO_BUDGET
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_REVENUE_COGS__TEA_EXTERNAL_SERVICE_REVENUE_MARGIN
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_REVENUE_COGS__TEA_EXTERNAL_SERVICE_REVENUE_MARGIN_ACCOUNT
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_REVENUE_COGS__TEA_EXTERNAL_SERVICE_REVENUE_MARGIN_BU
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_REVENUE_COGS__TEA_EXTERNAL_SPARES_REVENUE_ACTUAL
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_REVENUE_COGS__TEA_EXTERNAL_SPARES_REVENUE_ACTUAL_ACCOUNT
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_REVENUE_COGS__TEA_EXTERNAL_SPARES_REVENUE_ACTUAL_BU
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_REVENUE_COGS__TEA_EXTERNAL_SPARES_REVENUE_FORECAST_TO_BUDGET
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_REVENUE_COGS__TSR_BASED_REVENUE_REPORT
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_REVENUE_COGS__UNIVERSAL_ACTUAL_SETTLEMENT
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_REVENUE_COGS__UNIVERSAL_BILLING_DOCUMENT
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_REVENUE_COGS__UNIVERSAL_FI_POSTINGS
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_REVENUE_COGS__UNIVERSAL_GOODS_MOVEMENT
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_REVENUE_COGS__UNIVERSAL_GOODS_RECEIPT_PO
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_REVENUE_COGS__UNIVERSAL_INCOMING_INVOICE
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_REVENUE_COGS__UNIVERSAL_INVENTORY_DIFFERENCE
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_REVENUE_COGS__UNIVERSAL_PL_ACCOUNT_TYPE
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_REVENUE_COGS__UNIVERSAL_POST_CLOSING_MATERIAL_LEDGER
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_REVENUE_COGS__UNIVERSAL_PPV_TRANSACTIONS
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_REVENUE_COGS__US_MACHINES
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_REVENUE_COGS__WIP_SERVICE_DETAILS
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_REVENUE_COGS__WIP_SERVICE_NCDR_REPAIR
+  tests:
+  - has_data
+  - recently_run

@@ -1,0 +1,46 @@
+version: 2
+models:
+- name: ODS__KRONOS__ACTIVITIESTOTAL
+  description: Model kronos ActivitiesTotal file.
+  tests:
+    - dbt_expectations.expect_row_values_to_have_data_for_every_n_datepart:
+        date_col: APPLYDATE
+        date_part: month
+        row_condition: "IS_SOFTDELETED = 'No'"
+  columns:
+  - name: _FILEDATE
+    description: Date of the ingestion run time.
+    tests:
+      - not_null
+      - dbt_expectations.expect_row_values_to_have_recent_data:
+          datepart: hours
+          interval: 36
+  - name: HomeBS2Region
+    description: The pk of the ActivitiesTotal Record.
+  - name: TransactionId
+    description: The pk of the ActivitiesTotal Record.
+  - name: PayCode
+    description: The pk of the ActivitiesTotal Record.
+  - name: ApplyDate
+    description: The pk of the ActivitiesTotal Record.
+- name: ODS__KRONOS__ACTIVITIESTOTAL_TEE
+  description: Model kronos ActivitiesTotal file.
+  columns:
+  - name: HomeBS2Region
+    description: The pk of the ActivitiesTotal Record.
+  - name: TransactionId
+    description: The pk of the ActivitiesTotal Record.
+  - name: PayCode
+    description: The pk of the ActivitiesTotal Record.
+  - name: ApplyDate
+    description: The pk of the ActivitiesTotal Record.
+- name: ODS__KRONOS__TIMECARD
+  description: Model kronos Timecard file.
+  columns:
+  - name: RecordId
+    description: The pk of the Timecard Record.
+- name: ODS__KRONOS__TIMECARD_TEE
+  description: Model kronos Timecard file.
+  columns:
+  - name: RecordId
+    description: The pk of the HomeBS2Region Record.

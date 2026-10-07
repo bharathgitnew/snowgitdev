@@ -1,0 +1,60 @@
+version: 2
+models:
+- name: COMMON__BAAN__ADDRESS
+  description: Model BAAN ADDRESS file.
+- name: COMMON__BAAN__BUCODEMAPPING
+  description: Model BAAN BUCODEMAPPING file.
+- name: COMMON__BAAN__CONFIGURATION
+  description: Model BAAN CONFIGURATION file.
+- name: COMMON__BAAN__CONTRACT
+  description: Model BAAN CONTRACT file.
+- name: COMMON__BAAN__CONTRACTDETAIL
+  description: Model BAAN CONTRACTDETAIL file.
+- name: COMMON__BAAN__CONTRACTINSTALLMENTS
+  description: Model BAAN CONTRACTINSTALLMENTS file.
+- name: COMMON__BAAN__CONTRACT_DISTINCT
+  description: Model BAAN CONTRACT_DISTINCT file.
+- name: COMMON__BAAN__CUSTOMER
+  description: Model BAAN CUSTOMER file.
+- name: COMMON__BAAN__DIMENSION
+  description: Model BAAN DIMENSION file.
+- name: COMMON__BAAN__EMPLOYEE
+  description: Model BAAN EMPLOYEE file.
+- name: COMMON__BAAN__FAB
+  description: Model BAAN FAB file.
+- name: COMMON__BAAN__FIRSTFREENUMBERS
+  description: Model BAAN FIRSTFREENUMBERS file.
+- name: COMMON__BAAN__ITEM
+  description: Model BAAN ITEM file.
+- name: COMMON__BAAN__MACHINE
+  description: Model BAAN MACHINE file.
+- name: COMMON__BAAN__MACHINE_DISTINCT
+  description: Model BAAN MACHINE_DISTINCT file.
+- name: COMMON__BAAN__OBJECTSONCONTRACTS
+  description: Model BAAN OBJECTSONCONTRACTS file.
+- name: COMMON__BAAN__OFFICE
+  description: Model BAAN OFFICE file.
+- name: COMMON__BAAN__SERVICEORDEROPENINVOICETOTALS
+  description: Model BAAN SERVICEORDEROPENINVOICETOTALS file.
+- name: COMMON__BAAN__TEA_OBJECTS
+  description: Model BAAN TEA_OBJECTS file.
+- name: COMMON__BAAN__INBOUNDORDERLINE
+  description: Model BAAN INBOUNDORDERLINE file.
+- name: COMMON__BAAN__OUTBOUNDORDERLINE
+  description: Model BAAN OUTBOUNDORDERLINE file.
+- name: COMMON__BAAN__PURCHASEORDER
+  description: Model BAAN PURCHASEORDER file.
+- name: COMMON__BAAN__PURCHASEORDERLINE
+  description: Model BAAN PURCHASEORDERLINE file.
+- name: COMMON__BAAN__SALESORDERLINE
+  description: Model BAAN SALESORDERLINE file.
+- name: COMMON__BAAN__REPLENISHMENTORDER
+  description: Model BAAN REPLENISHMENTORDER file.
+- name: COMMON__BAAN__SALESORDER
+  description: Model BAAN SALESORDER file.
+- name: COMMON__BAAN__SUPPLIERS
+  description: Model BAAN SUPPLIERS file.
+- name: COMMON__BAAN__SERVICEORDER
+  description: Model BAAN SERVICEORDER file.
+- name: COMMON__BAAN__TEA_BAAN_SALES_SERVICES_ORDERS_BY_MONTH_CUSTOMER
+  description: Model BAAN TEA_BAAN_SALES_SERVICES_ORDERS_BY_MONTH_CUSTOMER file.

@@ -1,0 +1,151 @@
+{
+    "CSDPRO": {
+        "DataSet1": {
+            "schema": "dbo",
+            "table": "INCIDENTS",
+            "Incremental": "NULL",
+            "sftablename": "INCIDENTS",
+            "filter": ""
+        },
+        "DataSet2": {
+            "schema": "dbo",
+            "table": "BU",
+            "Incremental": "NULL",
+            "sftablename": "BU",
+            "filter": ""
+        },
+        "DataSet3": {
+            "schema": "dbo",
+            "table": "INCIDENT_CLASSIFICATION",
+            "Incremental": "NULL",
+            "sftablename": "INCIDENT_CLASSIFICATION",
+            "filter": ""
+        },
+        "DataSet4": {
+            "schema": "dbo",
+            "table": "INCIDENT_STATUS",
+            "Incremental": "NULL",
+            "sftablename": "INCIDENT_STATUS",
+            "filter": ""
+        },
+        "DataSet5": {
+            "schema": "dbo",
+            "table": "LOCATION_DESCRIPTION",
+            "Incremental": "NULL",
+            "sftablename": "LOCATION_DESCRIPTION",
+            "filter": ""
+        },
+        "DataSet6": {
+            "schema": "dbo",
+            "table": "LOCATION_TYPE",
+            "Incremental": "NULL",
+            "sftablename": "LOCATION_TYPE",
+            "filter": ""
+        },
+        "DataSet7": {
+            "schema": "dbo",
+            "table": "PERSON",
+            "Incremental": "NULL",
+            "sftablename": "PERSON",
+            "filter": ""
+        },
+        "DataSet8": {
+            "schema": "dbo",
+            "table": "PERSON_CLASSIFICATION",
+            "Incremental": "NULL",
+            "sftablename": "PERSON_CLASSIFICATION",
+            "filter": ""
+        },
+        "DataSet9": {
+            "schema": "dbo",
+            "table": "PERSON_FUNCTION",
+            "Incremental": "NULL",
+            "sftablename": "PERSON_FUNCTION",
+            "filter": ""
+        },
+        "DataSet10": {
+            "schema": "dbo",
+            "table": "SMBWA_A",
+            "Incremental": "NULL",
+            "sftablename": "SMBWA_A",
+            "filter": ""
+        },
+        "DataSet11": {
+            "schema": "dbo",
+            "table": "SMBWA_Q",
+            "Incremental": "NULL",
+            "sftablename": "SMBWA_Q",
+            "filter": ""
+        },
+        "DataSet12": {
+            "schema": "dbo",
+            "table": "STATUS_HISTORY",
+            "Incremental": "NULL",
+            "sftablename": "STATUS_HISTORY",
+            "filter": ""
+        },
+        "DataSet13": {
+            "schema": "dbo",
+            "table": "TEL_OFFICE",
+            "Incremental": "NULL",
+            "sftablename": "TEL_OFFICE",
+            "filter": ""
+        },
+        "DataSet14": {
+            "schema": "dbo",
+            "table": "TEL_SUBSIDIARY",
+            "Incremental": "NULL",
+            "sftablename": "TEL_SUBSIDIARY",
+            "filter": ""
+        },
+        "DataSet15": {
+            "schema": "dbo",
+            "table": "BAAN_BP",
+            "Incremental": "NULL",
+            "sftablename": "BAAN_BP",
+            "filter": ""
+        },
+        "DataSet16": {
+            "schema": "dbo",
+            "table": "BAAN_FAB",
+            "Incremental": "NULL",
+            "sftablename": "BAAN_FAB",
+            "filter": ""
+        },
+        "DataSet17": {
+            "schema": "dbo",
+            "table": "DW_SMBWA",
+            "Incremental": "NULL",
+            "sftablename": "DW_SMBWA",
+            "filter": ""
+        },
+        "DataSet18": {
+            "schema": "dbo",
+            "table": "DW_Action_Items",
+            "Incremental": "NULL",
+            "sftablename": "SAFETY_ACTION_ITEMS",
+            "filter": ""
+        },
+        "DataSet19": {
+            "schema": "dbo",
+            "table": "DW_Incidents",
+            "Incremental": "NULL",
+            "sftablename": "SAFETY_INCIDENTS_SECURE",
+            "filter": ""
+        },
+        "DataSet20": {
+            "schema": "dbo",
+            "table": "DW_Investigation",
+            "Incremental": "NULL",
+            "sftablename": "SAFETY_INVESTIGATION",
+            "filter": ""
+        },
+        "DataSet21": {
+            "schema": "dbo",
+            "table": "DW_HFACS",
+            "Incremental": "NULL",
+            "sftablename": "SAFETY_HFACS",
+            "filter": ""
+        }
+    }
+}

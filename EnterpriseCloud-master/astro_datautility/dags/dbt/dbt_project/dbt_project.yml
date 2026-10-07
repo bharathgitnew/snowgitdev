@@ -1,0 +1,640 @@
+
+name: 'dbt_project'
+version: '1.0.0'
+config-version: 2
+
+
+profile: 'dbt_project'
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+clean-targets:         # directories to be removed by `dbt clean`
+  - "target"
+  - "dbt_packages"
+
+on-run-end:
+  - "{{ dbt_artifacts.upload_results(results) }}"
+
+# Configuring models
+# Full documentation: https://docs.getdbt.com/docs/configuring-models
+
+models:
+  dbt_project:
+    +transient: false
+    +on_schema_change: 'fail'
+    +persist_docs:
+      relation: true
+      columns: true
+
+
+    ods:
+      +database: '{{ env_var(''SNOWFLAKE_ODS'') }}'
+      +materialized: table
+      sapapi_gmx:
+        +schema: SAPAPI_GMX
+        +tags: sapapi_gmx
+      activedirectory:
+        +schema: ACTIVEDIRECTORY
+        +tags: activedirectory
+      ariba:
+        +schema: ARIBA
+        +tags: ariba
+      azure_devops:
+        +schema: AZURE_DEVOPS
+        +tags: azure_devops
+      baan:
+        +schema: BAAN
+        +tags: baan
+      baan_tee:
+        +schema: BAAN_TEE
+        +tags: baan_tee
+      carma:
+        +schema: CARMA
+        +tags: carma
+      crm_file:
+        +schema: CRM_FILE
+        +tags: crm_file
+      csdpro:
+        +schema: CSDPRO
+        +tags: csdpro
+      file:
+        +schema: FILE
+        +tags: file
+      gem:
+        +schema: GEM
+        +tags: gem
+      ithd:
+        +schema: ITHD
+        +tags: ithd
+      knowbe4:
+        +schema: KNOWBE4
+        +tags: knowbe4
+      kronos:
+        +schema: KRONOS
+        +tags: kronos
+      lansweeper:
+        +schema: LANSWEEPER
+        +tags: lansweeper
+      legacy93:
+        +schema: LEGACY93
+        +tags: legacy93
+      legacyprod1:
+        +schema: LEGACYPROD1
+        +tags: legacyprod1
+      mdm:
+        +schema: MDM
+        +tags: mdm
+      monday:
+        +schema: MONDAY
+        +tags: monday
+      msdynamics:
+        +schema: MSDYNAMICS
+        +tags: msdynamics
+      myskills:
+        +schema: MYSKILLS
+        +tags: myskills
+      now:
+        +schema: NOW
+        +tags: now
+      now_uat:
+        +schema: NOW_UAT
+        +tags: now_uat
+      prefect:
+        +schema: PREFECT
+        +tags: prefect
+      powerbi:
+        +schema: POWERBI
+        +tags: powerbi
+      prophet:
+        +schema: PROPHET
+        +tags: prophet
+      qvics:
+        +schema: QVICS
+        +tags: qvics
+      qvics_c_tmea:
+        +schema: QVICS_C_TMEA
+        +tags: qvics
+      redgate:
+        +schema: REDGATE
+        +tags: redgate
+      rosetta:
+        +schema: ROSETTA
+        +tags: rosetta
+      rtiss:
+        +schema: RTISS
+        +tags: rtiss
+      sales_operations:
+        +schema: SALES_OPERATIONS
+        +tags: sales_operations
+      sapapi:
+        +schema: SAPAPI
+        +tags: sapapi
+      saph:
+        +schema: SAPH
+        +tags: gmx
+      sapo:
+        +schema: SAPO
+        +tags: sapo
+      sharepoint:
+        +schema: SHAREPOINT
+        +tags: sharepoint
+      sirfis:
+        +schema: SIRFIS
+        +tags: sirfis
+      supplier:
+        +schema: SUPPLIER
+        +tags: supplier
+      tea93fst_department:
+        +schema: TEA93FST_DEPARTMENT
+        +tags: tea93fst_department
+      tea93tel_reporting:
+        +schema: TEA93TEL_REPORTING
+        +tags: tea93tel_reporting
+      teacommon:
+        +schema: TEACOMMON
+        +tags: teacommon
+      telcustomer:
+        +schema: TELCUSTOMER
+        +tags: telcustomer
+      telqs:
+        +schema: TELQS
+        +tags: telqs
+      telusdwprod1:
+        +schema: TELUSDWPROD1
+        +tags: telusdwprod1
+      tgis:
+        +schema: TGIS
+        +tags: tgis
+      threepl:
+        +schema: THREEPL
+        +tags: threepl
+      tirs:
+        +schema: TIRS
+        +tags: tirs
+      wisdom:
+        +schema: WISDOM
+        +tags: wisdom
+      workday:
+        +schema: WORKDAY
+        +tags: workday
+      tmea_azure_devops:
+        +schema: TMEA_AZURE_DEVOPS
+        +tags: tmea_azure_devops
+      opt:
+        +schema: OPT
+        +tags: opt
+      outsystems:
+        +schema: OUTSYSTEMS
+        +tags: outsystems
+    common:
+      +database: '{{ env_var(''SNOWFLAKE_COMMON'') }}'
+      +materialized: table
+      de_wisdom_gmx:
+        +schema: DE_WISDOM_GMX
+        +tags: de_wisdom_gmx
+      kronos_gmx:
+        +schema: KRONOS_GMX
+        +tags: kronos_gmx
+      now_gmx:
+        +schema: NOW_GMX
+        +tags: now_gmx
+      reports_gmx:
+        +schema: REPORTS_GMX
+        +tags: reports_gmx
+      saph_gmx:
+        +schema: SAPH_GMX
+        +tags: saph_gmx
+      saph_new_acdoca:
+        +schema: SAPH_NEW_ACDOCA
+        +tags: saph_new_acdoca
+      shared_datasets_gmx:
+        +schema: SHARED_DATASETS_GMX
+        +tags: shared_datasets_gmx
+      activedirectory:
+        +schema: ACTIVEDIRECTORY
+        +tags: activedirectory
+      ariba:
+        +schema: ARIBA
+        +tags: ariba
+      azure_devops:
+        +schema: AZURE_DEVOPS
+        +tags: azure_devops
+      baan:
+        +schema: BAAN
+        +tags: baan
+      baan_tee:
+        +schema: BAAN_TEE
+        +tags: baan_tee
+      carma:
+        +schema: CARMA
+        +tags: carma
+      crm:
+        +schema: CRM
+        +tags: crm
+      csdpro:
+        +schema: CSDPRO
+        +tags: csdpro
+      de_ehs:
+        +schema: DE_EHS
+      de_helpdesk:
+        +schema: DE_HELPDESK
+      de_sales_operations:
+        +schema: DE_SALES_OPERATIONS
+      de_tee_sales_service_admin:
+        +schema: DE_TEE_SALES_SERVICE_ADMIN
+      de_tee_spares_support:
+        +schema: DE_TEE_SPARES_SUPPORT
+      de_tel_reporting:
+        +schema: DE_TEL_REPORTING
+      de_threepl:
+        +schema: DE_THREEPL
+      de_wisdom:
+        +schema: DE_WISDOM
+      gem:
+        +schema: GEM
+        +tags: gem
+      kronos:
+        +schema: KRONOS
+        +tags: kronos
+      legacy93:
+        +schema: LEGACY93
+        +tags: legacy93
+      mdm:
+        +schema: MDM
+        +tags: mdm
+      monday:
+        +schema: MONDAY
+        +tags: monday
+      myskills:
+        +schema: MYSKILLS
+        +tags: myskills
+      now:
+        +schema: NOW
+        +tags: now
+      prefect:
+        +schema: PREFECT
+        +tags: prefect
+      prophet:
+        +schema: PROPHET
+        +tags: prophet
+      qvics:
+        +schema: QVICS
+        +tags: qvics
+      qvics_c_tmea:
+        +schema: QVICS_C_TMEA
+        +tags: qvics
+      reports:
+        +schema: REPORTS
+      rosetta:
+        +schema: ROSETTA
+        +tags: rosetta
+      rtiss:
+        +schema: RTISS
+        +tags: rtiss
+      saph:
+        +schema: SAPH
+        +tags: sapapi
+      sapo:
+        +schema: SAPO
+        +tags: sapo
+      shared_datasets:
+        +schema: SHARED_DATASETS
+        +tags: shared_datasets
+      sharepoint:
+        +schema: SHAREPOINT
+        +tags: sharepoint
+      sirfis:
+        +schema: SIRFIS
+        +tags: sirfis
+      supplier:
+        +schema: SUPPLIER
+        +tags: supplier
+      teacommon:
+        +schema: TEACOMMON
+        +tags: teacommon
+      telcustomer:
+        +schema: TELCUSTOMER
+        +tags: telcustomer
+      telqs:
+        +schema: TELQS
+        +tags: telqs
+      tgis:
+        +schema: TGIS
+        +tags: tgis
+      threepl:
+        +schema: THREEPL
+        +tags: threepl
+      tirs:
+        +schema: TIRS
+        +tags: tirs
+      wisdom:
+        +schema: WISDOM
+        +tags: wisdom
+      workday:
+        +schema: WORKDAY
+        +tags: workday
+      tmea_azure_devops:
+        +schema: TMEA_AZURE_DEVOPS
+        +tags: tmea_azure_devops
+      opt:
+        +schema: OPT
+        +tags: opt
+      outsystems:
+        +schema: OUTSYSTEMS
+        +tags: outsystems
+      de_sap_master_data:
+        +schema: DE_SAP_MASTER_DATA
+        +tags: de_sap_master_data
+      reports_fin01:
+        +schema: REPORTS_FIN01
+        +tags: reports_fin01
+
+    pub:
+      +database: '{{ env_var(''SNOWFLAKE_PUB'') }}'
+      +materialized: view
+      +copy_grants: true
+      de_finance_gmx:
+        +schema: DE_FINANCE_GMX
+        +tags: de_finance_gmx
+      common_activedirectory:
+        +schema: COMMON_ACTIVEDIRECTORY
+        +tags: activedirectory
+      common_baan:
+        +schema: COMMON_BAAN
+        +tags: baan
+      common_baan_tee:
+        +schema: COMMON_BAAN_TEE
+        +tags: baan_tee
+      common_carma:
+        +schema: COMMON_CARMA
+        +tags: carma
+      common_crm:
+        +schema: COMMON_CRM
+        +tags: crm
+      common_csdpro:
+        +schema: COMMON_CSDPRO
+        +tags: csdpro
+      common_kronos:
+        +schema: COMMON_KRONOS
+        +tags: kronos
+      common_legacy93:
+        +schema: COMMON_LEGACY93
+        +tags: legacy93
+      common_mdm:
+        +schema: COMMON_MDM
+        +tags: mdm
+      common_monday:
+        +schema: COMMON_MONDAY
+        +tags: monday
+      common_myskills:
+        +schema: COMMON_MYSKILLS
+        +tags: myskills
+      common_now:
+        +schema: COMMON_NOW
+        +tags: now
+      common_prefect:
+        +schema: COMMON_PREFECT
+        +tags: prefect
+      common_prophet:
+        +schema: COMMON_PROPHET
+        +tags: prophet
+      common_rosetta:
+        +schema: COMMON_ROSETTA
+        +tags: rosetta
+      common_saph:
+        +schema: COMMON_SAPH
+        +tags: sapapi
+      common_sapo:
+        +schema: COMMON_SAPO
+        +tags: sapo
+      common_sharepoint:
+        +schema: COMMON_SHAREPOINT
+        +tags: sharepoint
+      common_sirfis:
+        +schema: COMMON_SIRFIS
+        +tags: sirfis
+      common_supplier:
+        +schema: COMMON_SUPPLIER
+        +tags: supplier
+      common_system:
+        +schema: COMMON_SYSTEM
+        +tags: system
+      common_teacommon:
+        +schema: COMMON_TEACOMMON
+        +tags: teacommon
+      common_telcustomer:
+        +schema: COMMON_TELCUSTOMER
+        +tags: telcustomer
+      common_tgis:
+        +schema: COMMON_TGIS
+        +tags: tgis
+      common_threepl:
+        +schema: COMMON_THREEPL
+        +tags: threepl
+      common_wisdom:
+        +schema: COMMON_WISDOM
+        +tags: wisdom
+      common_workday:
+        +schema: COMMON_WORKDAY
+        +tags: workday
+      common_opt:
+        +schema: COMMON_OPT
+        +tags: opt
+      de_ads_alarm_analysis:
+        +schema: DE_ADS_ALARM_ANALYSIS
+      de_ads_etch_auto_tools:
+        +schema: DE_ADS_ETCH_AUTO_TOOLS
+      de_ads_parts_order_history:
+        +schema: DE_ADS_PARTS_ORDER_HISTORY
+      de_finance:
+        +schema: DE_FINANCE
+      de_helpdesk:
+        +schema: DE_HELPDESK
+      de_human_resources:
+        +schema: DE_HUMAN_RESOURCES
+      de_information_security:
+        +schema: DE_INFORMATION_SECURITY
+      de_intel_sms:
+        +schema: DE_INTEL_SMS
+      de_intel_sms_specialist:
+        +schema: DE_INTEL_SMS_SPECIALIST
+      de_manufacturing:
+        +schema: DE_MANUFACTURING
+      de_marketing:
+        +schema: DE_MARKETING
+      de_operations:
+        +schema: DE_OPERATIONS
+      de_planning:
+        +schema: DE_PLANNING
+      de_procurement_department:
+        +schema: DE_PROCUREMENT_DEPARTMENT
+      de_sales_operations:
+        +schema: DE_SALES_OPERATIONS
+      de_sap_master_data:
+        +schema: DE_SAP_MASTER_DATA
+      de_sap_revenue_cogs:
+        +schema: DE_SAP_REVENUE_COGS
+      de_spares_revenue:
+        +schema: DE_SPARES_REVENUE
+      de_service:
+        +schema: DE_SERVICE
+      de_service_field:
+        +schema: DE_SERVICE_FIELD
+      de_tee_sales_service_admin:
+        +schema: DE_TEE_SALES_SERVICE_ADMIN
+      de_tee_spares_support:
+        +schema: DE_TEE_SPARES_SUPPORT
+      de_tel_reporting:
+        +schema: DE_TEL_REPORTING
+      de_threepl:
+        +schema: DE_THREEPL
+      de_warehouse_operations:
+        +schema: DE_WAREHOUSE_OPERATIONS
+      ods_activedirectory:
+        +schema: ODS_ACTIVEDIRECTORY
+        +tags: activedirectory
+      de_finance_fin01:
+        +schema: DE_FINANCE_FIN01
+        +tags: de_finance_fin01
+      ods_ariba:
+        +schema: ODS_ARIBA
+        +tags: ariba
+      ods_baan:
+        +schema: ODS_BAAN
+        +tags: baan
+      ods_baan_tee:
+        +schema: ODS_BAAN_TEE
+        +tags: baan_tee
+      ods_carma:
+        +schema: ODS_CARMA
+        +tags: carma
+      ods_crm:
+        +schema: ODS_CRM
+        +tags: crm
+      ods_csdpro:
+        +schema: ODS_CSDPRO
+        +tags: csdpro
+      ods_file:
+        +schema: ODS_FILE
+        +tags: file
+      ods_gem:
+        +schema: ODS_GEM
+        +tags: gem
+      ods_ithd:
+        +schema: ODS_ITHD
+        +tags: ithd
+      ods_knowbe4:
+        +schema: ODS_KNOWBE4
+        +tags: knowbe4
+      ods_kronos:
+        +schema: ODS_KRONOS
+        +tags: kronos
+      ods_lansweeper:
+        +schema: ODS_LANSWEEPER
+        +tags: lansweeper
+      ods_legacy93:
+        +schema: ODS_LEGACY93
+        +tags: legacy93
+      ods_legacyprod1:
+        +schema: ODS_LEGACYPROD1
+        +tags: legacyprod1
+      ods_mdm:
+        +schema: ODS_MDM
+        +tags: mdm
+      ods_monday:
+        +schema: ODS_MONDAY
+        +tags: monday
+      ods_msdynamics:
+        +schema: ODS_MSDYNAMICS
+        +tags: msdynamics
+      ods_myskills:
+        +schema: ODS_MYSKILLS
+        +tags: myskills
+      ods_now:
+        +schema: ODS_NOW
+        +tags: now
+      ods_prefect:
+        +schema: ODS_PREFECT
+        +tags: prefect
+      ods_prophet:
+        +schema: ODS_PROPHET
+        +tags: prophet
+      ods_redgate:
+        +schema: ODS_REDGATE
+        +tags: redgate
+      ods_sales_operations:
+        +schema: ODS_SALES_OPERATIONS
+        +tags: sales_operations
+      ods_sapapi:
+        +schema: ODS_SAPAPI
+        +tags: sapapi
+      ods_saph:
+        +schema: ODS_SAPH
+        +tags: gmx
+      ods_sapo:
+        +schema: ODS_SAPO
+        +tags: sapo
+      ods_sharepoint:
+        +schema: ODS_SHAREPOINT
+        +tags: sharepoint
+      ods_tea93fst_department:
+        +schema: ODS_TEA93FST_DEPARTMENT
+        +tags: tea93fst_department
+      ods_tea93tel_reporting:
+        +schema: ODS_TEA93TEL_REPORTING
+        +tags: tea93tel_reporting
+      ods_teacommon:
+        +schema: ODS_TEACOMMON
+        +tags: teacommon
+      ods_telcustomer:
+        +schema: ODS_TELCUSTOMER
+        +tags: telcustomer
+      ods_telusdwprod1:
+        +schema: ODS_TELUSDWPROD1
+        +tags: telusdwprod1
+      ods_threepl:
+        +schema: ODS_THREEPL
+        +tags: threepl
+      ods_wisdom:
+        +schema: ODS_WISDOM
+        +tags: wisdom
+      ods_workday:
+        +schema: ODS_WORKDAY
+        +tags: workday
+
+
+  dbt_artifacts:
+    +database: '{{ env_var(''SNOWFLAKE_ADMIN'') }}'
+    +schema: DBT_ARTIFACTS
+    +threads: 1
+
+vars:
+  # global variables
+  dbt_artifacts_exclude_all_results: true
+  dbt_date:time_zone: 'America/Chicago'
+  NullTypeValues:
+    TEXT: '''NULLFIELDVALUE'''
+    STRING: '''NULLFIELDVALUE'''
+    DATE: CAST('19000101' AS DATE)
+    TIMESTAMP: CAST('19000101' AS TIMESTAMP)
+    TIMESTAMP_TZ: CAST('19000101' AS TIMESTAMP_TZ)
+    TIMESTAMP_NTZ: CAST('19000101' AS TIMESTAMP_NTZ)
+    TIMESTAMP_LTZ: CAST('19000101' AS TIMESTAMP_LTZ)
+    CHARACTER: ''''
+    CHAR: ''''
+    NUMBER: -99999999999999999999
+    character varying: '''NULLFIELDVALUE'''
+    BOOLEAN: false
+    VARIANT: '''NULLFIELDVALUE'''
+    FLOAT: .999999999999999
+    ARRAY: '[''NULLFIELDVALUE'']'
+    OBJECT: '{''NULLFIELDVALUE'': ''NULLFIELDVALUE''}'
+
+  # project variables
+  dbt_project:
+    kanban_num_sprints: 3

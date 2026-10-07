@@ -1,0 +1,709 @@
+version: 2
+sources:
+- name: BAAN
+  description: Landing Zone - BAAN Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: BAAN
+  tables:
+  - name: ENUMERATIONS
+    identifier: ENUMERATIONS
+    description: Landing table for ENUMERATIONS file.   
+  - name: SHIPTODAY
+    identifier: SHIPTODAY
+    description: Landing table for SHIPTODAY file.
+- name: BAAN_ODS_SRC_FOR_LZ_TO_ODS_CONV
+  description: BAAN Schema on ODS as a source for SERVICEORDERITEMS table
+  database: '{{ env_var(''SNOWFLAKE_ODS'') }}'
+  schema: BAAN
+  tables:
+  - name: BAANSERVICESERVICEORDERCONTROL_SERVICEORDERS
+    identifier: BAANSERVICESERVICEORDERCONTROL_SERVICEORDERS
+    description: Landing table for SERVICEORDERS file.
+  - name: BAANSERVICESERVICEORDERCONTROL_SERVICEORDERMATERIALCOSTS
+    identifier: BAANSERVICESERVICEORDERCONTROL_SERVICEORDERMATERIALCOSTS
+    description: Landing table for SERVICEORDERMATERIALCOSTS file.
+  - name: BAANSERVICESERVICEORDERCONTROL_SERVICEORDERACTIVITIES
+    identifier: BAANSERVICESERVICEORDERCONTROL_SERVICEORDERACTIVITIES
+    description: Landing table for SERVICEORDERACTIVITIES file.
+  - name: BAANSERVICECONFIGURATIONCONTROL_OBJECTS
+    identifier: BAANSERVICECONFIGURATIONCONTROL_OBJECTS
+    description: Landing table for OBJECTS file.
+  - name: BAANSERVICESERVICEORDERCONTROL_SERVICEORDEROTHERCOSTS
+    identifier: BAANSERVICESERVICEORDERCONTROL_SERVICEORDEROTHERCOSTS
+    description: Landing table for SERVICEORDEROTHERCOSTS file.
+- name: BAAN_ORACLE_LIVE
+  description: Landing Zone - BAAN_ORACLE_LIVE Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ_HVR'') }}'
+  schema: BAAN_ORACLE_LIVE
+  tables:
+  - name: TCISLI205200
+    identifier: TCISLI205200
+    description: Landing table for TCISLI205200 file.
+  - name: TCISLI205201
+    identifier: TCISLI205201
+    description: Landing table for TCISLI205201 file.
+  - name: TCISLI245200
+    identifier: TCISLI245200
+    description: Landing table for TCISLI245200 file.
+  - name: TCISLI245201
+    identifier: TCISLI245201
+    description: Landing table for TCISLI245201 file.
+  - name: TCISLI255201
+    identifier: TCISLI255201
+    description: Landing table for TCISLI255201 file.
+  - name: TCISLI907201
+    identifier: TCISLI907201
+    description: Landing table for TCISLI907201 file.
+  - name: TCISLI908201
+    identifier: TCISLI908201
+    description: Landing table for TCISLI908201 file.
+  - name: TCPRPD100201
+    identifier: TCPRPD100201
+    description: Landing table for TCPRPD100201 file.
+  - name: TTCCOM001200
+    identifier: TTCCOM001200
+    description: Landing table for TTCCOM001200 file.
+  - name: TTCCOM100200
+    identifier: TTCCOM100200
+    description: Landing table for TTCCOM100200 file.
+  - name: TTCCOM110200
+    identifier: TTCCOM110200
+    description: Landing table for TTCCOM110200 file.
+  - name: TTCCOM111200
+    identifier: TTCCOM111200
+    description: Landing table for TTCCOM110200 file.
+  - name: TTCCOM112200
+    identifier: TTCCOM112200
+    description: Landing table for TTCCOM112200 file.
+  - name: TTCCOM113200
+    identifier: TTCCOM113200
+    description: Landing table for TTCCOM113200 file.
+  - name: TTCCOM120200
+    identifier: TTCCOM120200
+    description: Landing table for TTCCOM120200 file.
+  - name: TTCCOM121200
+    identifier: TTCCOM121200
+    description: Landing table for TTCCOM121200 file.
+  - name: TTCCOM122200
+    identifier: TTCCOM122200
+    description: Landing table for TTCCOM122200 file.
+  - name: TTCCOM124200
+    identifier: TTCCOM124200
+    description: Landing table for TTCCOM124200 file.
+  - name: TTCCOM126200
+    identifier: TTCCOM126200
+    description: Landing table for TTCCOM126200 file.
+  - name: TTCCOM130200
+    identifier: TTCCOM130200
+    description: Landing table for TTCCOM130200 file.
+  - name: TTCCOM902201
+    identifier: TTCCOM902201
+    description: Landing table for TTCCOM902201 file.
+  - name: TTCCOM903201
+    identifier: TTCCOM903201
+    description: Landing table for TTCCOM903201 file.
+  - name: TTCCOM907200
+    identifier: TTCCOM907200
+    description: Landing table for TTCCOM907200 file.
+  - name: TTCCOM907201
+    identifier: TTCCOM907201
+    description: Landing table for TTCCOM907201 file.
+  - name: TTCCOM945201
+    identifier: TTCCOM945201
+    description: Landing table for TTCCOM945201 file.
+  - name: TTCCOM956200
+    identifier: TTCCOM956200
+    description: Landing table for TTCCOM956200 file.
+  - name: TTCCOM961201
+    identifier: TTCCOM961201
+    description: Landing table for TTCCOM961201 file.
+  - name: TTCCUS001201
+    identifier: TTCCUS001201
+    description: Landing table for TTCCUS001201 file.
+  - name: TTCCUS008201
+    identifier: TTCCUS008201
+    description: Landing table for TTCCUS008201 file.
+  - name: TTCEMM170200
+    identifier: TTCEMM170200
+    description: Landing table for TTCEMM170200 file.
+  - name: TTCIBD001200
+    identifier: TTCIBD001200
+    description: Landing table for TTCIBD001200 file.
+  - name: TTCIBD001201
+    identifier: TTCIBD001201
+    description: Landing table for TTCIBD001201 file.
+  - name: TTCIBD007200
+    identifier: TTCIBD007200
+    description: Landing table for TTCIBD007200 file.
+  - name: TTCIBD007201
+    identifier: TTCIBD007201
+    description: Landing table for TTCIBD007201 file.
+  - name: TTCIBD005201
+    identifier: TTCIBD005201
+    description: Landing table for TTCIBD005201 file.
+  - name: TTCIBD100200
+    identifier: TTCIBD100200
+    description: Landing table for TTCIBD100200 file.
+  - name: TTCIBD100201
+    identifier: TTCIBD100201
+    description: Landing table for TTCIBD100201 file.
+  - name: TTCIBD200201
+    identifier: TTCIBD200201
+    description: Landing table for TTCIBD200201 file.
+  - name: TTCIBD201200
+    identifier: TTCIBD201200
+    description: Landing table for TTCIBD201200 file.
+  - name: TTCIBD902201
+    identifier: TTCIBD902201
+    description: Landing table for TTCIBD902201 file.
+  - name: TTCIBD904201
+    identifier: TTCIBD904201
+    description: Landing table for TTCIBD904201 file.
+  - name: TTCMCS003200
+    identifier: TTCMCS003200
+    description: Landing table for TTCMCS003200 file.
+  - name: TTCMCS004200
+    identifier: TTCMCS004200
+    description: Landing table for TTCMCS004200 file.
+  - name: TTCMCS008200
+    identifier: TTCMCS008200
+    description: Landing table for TTCMCS008200 file.
+  - name: TTCMCS013200
+    identifier: TTCMCS013200
+    description: Landing table for TTCMCS013200 file.
+  - name: TTCMCS015201
+    identifier: TTCMCS015201
+    description: Landing table for TTCMCS015201 file.
+  - name: TTCMCS018201
+    identifier: TTCMCS018201
+    description: Landing table for TTCMCS018201 file.
+  - name: TTCMCS022201
+    identifier: TTCMCS022201
+    description: Landing table for TTCMCS022201 file.
+  - name: TTCMCS023201
+    identifier: TTCMCS023201
+    description: Landing table for TTCMCS023201 file.
+  - name: TTCMCS028201
+    identifier: TTCMCS028201
+    description: Landing table for TTCMCS028201 file.
+  - name: TTCMCS029200
+    identifier: TTCMCS029200
+    description: Landing table for TTCMCS029200 file.
+  - name: TTCMCS034200
+    identifier: TTCMCS034200
+    description: Landing table for TTCMCS034200 file.
+  - name: TTCMCS039200
+    identifier: TTCMCS039200
+    description: Landing table for TTCMCS039200 file.
+  - name: TTCMCS041200
+    identifier: TTCMCS041200
+    description: Landing table for TTCMCS041200 file.
+  - name: TTCMCS045200
+    identifier: TTCMCS045200
+    description: Landing table for TTCMCS045200 file.
+  - name: TTCMCS048200
+    identifier: TTCMCS048200
+    description: Landing table for TTCMCS048200 file.
+  - name: TTCMCS050201
+    identifier: TTCMCS050201
+    description: Landing table for TTCMCS050201 file.
+  - name: TTCMCS052201
+    identifier: TTCMCS052201
+    description: Landing table for TTCMCS052201 file.
+  - name: TTCMCS055200
+    identifier: TTCMCS055200
+    description: Landing table for TTCMCS055200 file.
+  - name: TTCMCS060200
+    identifier: TTCMCS060200
+    description: Landing table for TTCMCS060200 file.
+  - name: TTCMCS060201
+    identifier: TTCMCS060201
+    description: Landing table for TTCMCS060201 file.
+  - name: TTCMCS061201
+    identifier: TTCMCS061201
+    description: Landing table for TTCMCS061201 file.
+  - name: TTCMCS064200
+    identifier: TTCMCS064200
+    description: Landing table for TTCMCS064200 file.
+  - name: TTCMCS080200
+    identifier: TTCMCS080200
+    description: Landing table for TTCMCS080200 file.
+  - name: TTDCUS990201
+    identifier: TTDCUS990201
+    description: Landing table for TTDCUS990201 file.
+  - name: TTDIPU001200
+    identifier: TTDIPU001200
+    description: Landing table for TTDIPU001200 file.
+  - name: TTDIPU001201
+    identifier: TTDIPU001201
+    description: Landing table for TTDIPU001201 file.
+  - name: TTDIPU010201
+    identifier: TTDIPU010201
+    description: Landing table for TTDIPU010201 file.
+  - name: TTDISA001200
+    identifier: TTDISA001200
+    description: Landing table for TTDISA001200 file.
+  - name: TTDISA001201
+    identifier: TTDISA001201
+    description: Landing table for TTDISA001201 file.
+  - name: TTDPCG010201
+    identifier: TTDPCG010201
+    description: Landing table for TTDPCG010201 file.
+  - name: TTDPCG030201
+    identifier: TTDPCG030201
+    description: Landing table for TTDPCG030201 file.
+  - name: TTDPCG031201
+    identifier: TTDPCG031201
+    description: Landing table for TTDPCG031201 file.
+  - name: TTDPUR094201
+    identifier: TTDPUR094201
+    description: Landing table for TTDPUR094201 file.
+  - name: TTDPUR400201
+    identifier: TTDPUR400201
+    description: Landing table for TTDPUR400201 file.
+  - name: TTDPUR401201
+    identifier: TTDPUR401201
+    description: Landing table for TTDPUR401201 file.
+  - name: TTDPUR402201
+    identifier: TTDPUR402201
+    description: Landing table for TTDPUR402201 file.
+  - name: TTDPUR451201
+    identifier: TTDPUR451201
+    description: Landing table for TTDPUR451201 file.
+  - name: TTDPUR715200
+    identifier: TTDPUR715200
+    description: Landing table for TTDPUR715200 file.
+  - name: TTDPUR715201
+    identifier: TTDPUR715201
+    description: Landing table for TTDPUR715201 file.
+  - name: TTDPUR716200
+    identifier: TTDPUR716200
+    description: Landing table for TTDPUR716200 file.
+  - name: TTDPUR716201
+    identifier: TTDPUR716201
+    description: Landing table for TTDPUR716201 file.
+  - name: TTDSLS400200
+    identifier: TTDSLS400200
+    description: Landing table for TTDSLS400200 file.
+  - name: TTDSLS400201
+    identifier: TTDSLS400201
+    description: Landing table for TTDSLS400201 file.
+  - name: TTDSLS401200
+    identifier: TTDSLS401200
+    description: Landing table for TTDSLS401200 file.
+  - name: TTDSLS401201
+    identifier: TTDSLS401201
+    description: Landing table for TTDSLS401201 file.
+  - name: TTDSLS402200
+    identifier: TTDSLS402200
+    description: Landing table for TTDSLS402200 file.
+  - name: TTDSLS402201
+    identifier: TTDSLS402201
+    description: Landing table for TTDSLS402201 file.
+  - name: TTDSLS451200
+    identifier: TTDSLS451200
+    description: Landing table for TTDSLS451200 file.
+  - name: TTDSLS451201
+    identifier: TTDSLS451201
+    description: Landing table for TTDSLS451201 file.
+  - name: TTFACR001200
+    identifier: TTFACR001200
+    description: Landing table for TTFACR001200 file.
+  - name: TTFACR002200
+    identifier: TTFACR002200
+    description: Landing table for TTFACR002200 file.
+  - name: TTFACR200200
+    identifier: TTFACR200200
+    description: Landing table for TTFACR200200 file.
+  - name: TTFACR200201
+    identifier: TTFACR200201
+    description: Landing table for TTFACR200201 file.
+  - name: TTFCMG101200
+    identifier: TTFCMG101200
+    description: Landing table for TTFCMG101200 file.
+  - name: TTFCMG110200
+    identifier: TTFCMG110200
+    description: Landing table for TTFCMG110200 file.
+  - name: TTFFST100200
+    identifier: TTFFST100200
+    description: Landing table for TTFFST100200 file.
+  - name: TTFFST100201
+    identifier: TTFFST100201
+    description: Landing table for TTFFST100201 file.
+  - name: TTFFST120200
+    identifier: TTFFST120200
+    description: Landing table for TTFFST120200 file.
+  - name: TTFFST120201
+    identifier: TTFFST120201
+    description: Landing table for TTFFST120201 file.
+  - name: TTFFST121200
+    identifier: TTFFST121200
+    description: Landing table for TTFFST121200 file.
+  - name: TTFFST121201
+    identifier: TTFFST121201
+    description: Landing table for TTFFST121201 file.
+  - name: TTFFST300200
+    identifier: TTFFST300200
+    description: Landing table for TTFFST300200 file.
+  - name: TTFFST300201
+    identifier: TTFFST300201
+    description: Landing table for TTFFST300201 file.
+  - name: TTFFST305200
+    identifier: TTFFST305200
+    description: Landing table for TTFFST305200 file.
+  - name: TTFFST305201
+    identifier: TTFFST305201
+    description: Landing table for TTFFST305201 file.
+  - name: TTFFST310200
+    identifier: TTFFST310200
+    description: Landing table for TTFFST310200 file.
+  - name: TTFFST310201
+    identifier: TTFFST310201
+    description: Landing table for TTFFST310201 file.
+  - name: TTFGLD001200
+    identifier: TTFGLD001200
+    description: Landing table for TTFGLD001200 file.
+  - name: TTFGLD002200
+    identifier: TTFGLD002200
+    description: Landing table for TTFGLD002200 file.
+  - name: TTFGLD004201
+    identifier: TTFGLD004201
+    description: Landing table for TTFGLD004201 file.
+  - name: TTFGLD005200
+    identifier: TTFGLD005200
+    description: Landing table for TTFGLD005200 file.
+  - name: TTFGLD007201
+    identifier: TTFGLD007201
+    description: Landing table for TTFGLD007201 file.
+  - name: TTFGLD008200
+    identifier: TTFGLD008200
+    description: Landing table for TTFGLD008200 file.
+  - name: TTFGLD010200
+    identifier: TTFGLD010200
+    description: Landing table for TTFGLD010200 file.
+  - name: TTFGLD010201
+    identifier: TTFGLD010201
+    description: Landing table for TTFGLD010201 file.
+  - name: TTFGLD010203
+    identifier: TTFGLD010203
+    description: Landing table for TTFGLD010203 file.
+  - name: TTFGLD010204
+    identifier: TTFGLD010204
+    description: Landing table for TTFGLD010204 file.
+  - name: TTFGLD010260
+    identifier: TTFGLD010260
+    description: Landing table for TTFGLD010260 file.
+  - name: TTFGLD011200
+    identifier: TTFGLD011200
+    description: Landing table for TTFGLD011200 file.
+  - name: TTFGLD011201
+    identifier: TTFGLD011201
+    description: Landing table for TTFGLD011201 file.
+  - name: TTFGLD106200
+    identifier: TTFGLD106200
+    description: Landing table for TTFGLD106200 file.
+  - name: TTFGLD106201
+    identifier: TTFGLD106201
+    description: Landing table for TTFGLD106201 file.
+  - name: TTFGLD201200
+    identifier: TTFGLD201200
+    description: Landing table for TTFGLD201200 file.
+  - name: TTFGLD201201
+    identifier: TTFGLD201201
+    description: Landing table for TTFGLD201201 file.
+  - name: TTFGLD203200
+    identifier: TTFGLD203200
+    description: Landing table for TTFGLD203200 file.
+  - name: TTFGLD203201
+    identifier: TTFGLD203201
+    description: Landing table for TTFGLD203201 file.
+  - name: TTFGLD410200
+    identifier: TTFGLD410200
+    description: Landing table for TTFGLD410200 file.
+  - name: TTFGLD415200
+    identifier: TTFGLD415200
+    description: Landing table for TTFGLD415200 file.
+  - name: TTFGLD417200
+    identifier: TTFGLD417200
+    description: Landing table for TTFGLD417200 file.
+  - name: TTFGLD418200
+    identifier: TTFGLD418200
+    description: Landing table for TTFGLD418200 file.
+  - name: TTFGLD423201
+    identifier: TTFGLD423201
+    description: Landing table for TTFGLD423201 file.
+  - name: TTFGLD701200
+    identifier: TTFGLD701200
+    description: Landing table for TTFGLD701200 file.
+  - name: TTFGLD715200
+    identifier: TTFGLD715200
+    description: Landing table for TTFGLD715200 file.
+  - name: TTFGLD715201
+    identifier: TTFGLD715201
+    description: Landing table for TTFGLD715201 file.
+  - name: TTFGLD716200
+    identifier: TTFGLD716200
+    description: Landing table for TTFGLD716200 file.
+  - name: TTFGLD716201
+    identifier: TTFGLD716201
+    description: Landing table for TTFGLD716201 file.
+  - name: TTFGLD717200
+    identifier: TTFGLD717200
+    description: Landing table for TTFGLD717200 file.
+  - name: TTFGLD717201
+    identifier: TTFGLD717201
+    description: Landing table for TTFGLD717201 file.
+  - name: TTFGLD718200
+    identifier: TTFGLD718200
+    description: Landing table for TTFGLD718200 file.
+  - name: TTFGLD718201
+    identifier: TTFGLD718201
+    description: Landing table for TTFGLD718201 file.
+  - name: TTFGLD719200
+    identifier: TTFGLD719200
+    description: Landing table for TTFGLD719200 file.
+  - name: TTFGLD719201
+    identifier: TTFGLD719201
+    description: Landing table for TTFGLD719201 file.
+  - name: TTFGLD720200
+    identifier: TTFGLD720200
+    description: Landing table for TTFGLD720200 file.
+  - name: TTFGLD720201
+    identifier: TTFGLD720201
+    description: Landing table for TTFGLD720201 file.
+  - name: TTFGLD736200
+    identifier: TTFGLD736200
+    description: Landing table for TTFGLD736200 file.
+  - name: TTFGLD736201
+    identifier: TTFGLD736201
+    description: Landing table for TTFGLD736201 file.
+  - name: TTFGLD911200
+    identifier: TTFGLD911200
+    description: Landing table for TTFGLD911200 file.
+  - name: TTFGLD911201
+    identifier: TTFGLD911201
+    description: Landing table for TTFGLD911201 file.
+  - name: TTFGLD928201
+    identifier: TTFGLD928201
+    description: Landing table for TTFGLD928201 file.
+  - name: TTFGLD955201
+    identifier: TTFGLD955201
+    description: Landing table for TTFGLD955201 file.
+  - name: TTFGLD960200
+    identifier: TTFGLD960200
+    description: Landing table for TTFGLD960200 file.
+  - name: TTFGLD960201
+    identifier: TTFGLD960201
+    description: Landing table for TTFGLD960201 file.
+  - name: TTFGLD961200
+    identifier: TTFGLD961200
+    description: Landing table for TTFGLD961200 file.
+  - name: TTFGLD961201
+    identifier: TTFGLD961201
+    description: Landing table for TTFGLD961201 file.
+  - name: TTFGLD962200
+    identifier: TTFGLD962200
+    description: Landing table for TTFGLD962200 file.
+  - name: TTFGLD962201
+    identifier: TTFGLD962201
+    description: Landing table for TTFGLD962201 file.
+  - name: TTICPR300201
+    identifier: TTICPR300201
+    description: Landing table for TTICPR300201 file.
+  - name: TTICPR305201
+    identifier: TTICPR305201
+    description: Landing table for TTICPR305201 file.
+  - name: TTICPR340201
+    identifier: TTICPR340201
+    description: Landing table for TTICPR340201 file.
+  - name: TTIPCS020201
+    identifier: TTIPCS020201
+    description: Landing table for TTIPCS020201 file.
+  - name: TTISFC001201
+    identifier: TTISFC001201
+    description: Landing table for TTISFC001201 file.
+  - name: TTSCFG010201
+    identifier: TTSCFG010201
+    description: Landing table for TTSCFG010201 file.
+  - name: TTSCFG020201
+    identifier: TTSCFG020201
+    description: Landing table for TTSCFG020201 file.
+  - name: TTSCFG200201
+    identifier: TTSCFG200201
+    description: Landing table for TTSCFG200201 file.
+  - name: TTSCFG210201
+    identifier: TTSCFG210201
+    description: Landing table for TTSCFG210201 file.
+  - name: TTSCFG220201
+    identifier: TTSCFG220201
+    description: Landing table for TTSCFG220201 file.
+  - name: TTSCFG905201
+    identifier: TTSCFG905201
+    description: Landing table for TTSCFG905201 file.
+  - name: TTSCFG907201
+    identifier: TTSCFG907201
+    description: Landing table for TTSCFG907201 file.
+  - name: TTSCFG909201
+    identifier: TTSCFG909201
+    description: Landing table for TTSCFG909201 file.
+  - name: TTSCTM005201
+    identifier: TTSCTM005201
+    description: Landing table for TTSCTM005201 file.
+  - name: TTSCTM100201
+    identifier: TTSCTM100201
+    description: Landing table for TTSCTM100201 file.
+  - name: TTSCTM120201
+    identifier: TTSCTM120201
+    description: Landing table for TTSCTM120201 file.
+  - name: TTSCTM122201
+    identifier: TTSCTM122201
+    description: Landing table for TTSCTM122201 file.
+  - name: TTSCTM132201
+    identifier: TTSCTM132201
+    description: Landing table for TTSCTM132201 file.
+  - name: TTSCTM199201
+    identifier: TTSCTM199201
+    description: Landing table for TTSCTM199201 file.
+  - name: TTSCTM300201
+    identifier: TTSCTM300201
+    description: Landing table for TTSCTM300201 file.
+  - name: TTSCTM310201
+    identifier: TTSCTM310201
+    description: Landing table for TTSCTM310201 file.
+  - name: TTSCTM320201
+    identifier: TTSCTM320201
+    description: Landing table for TTSCTM320201 file.
+  - name: TTSCTM400201
+    identifier: TTSCTM400201
+    description: Landing table for TTSCTM400201 file.
+  - name: TTSCTM900201
+    identifier: TTSCTM900201
+    description: Landing table for TTSCTM900201 file.
+  - name: TTSMDM200200
+    identifier: TTSMDM200200
+    description: Landing table for TTSMDM200200 file.
+  - name: TTSMDM200201
+    identifier: TTSMDM200201
+    description: Landing table for TTSMDM200201 file.
+  - name: TTSSOC200200
+    identifier: TTSSOC200200
+    description: Landing table for TTSSOC200200 file.
+  - name: TTSSOC200201
+    identifier: TTSSOC200201
+    description: Landing table for TTSSOC200201 file.
+  - name: TTSSOC206200
+    identifier: TTSSOC206200
+    description: Landing table for TTSSOC206200 file.
+  - name: TTSSOC206201
+    identifier: TTSSOC206201
+    description: Landing table for TTSSOC206201 file.
+  - name: TTSSOC210200
+    identifier: TTSSOC210200
+    description: Landing table for TTSSOC210200 file.
+  - name: TTSSOC210201
+    identifier: TTSSOC210201
+    description: Landing table for TTSSOC210201 file.
+  - name: TTSSOC220200
+    identifier: TTSSOC220200
+    description: Landing table for TTSSOC220200 file.
+  - name: TTSSOC220201
+    identifier: TTSSOC220201
+    description: Landing table for TTSSOC220201 file.
+  - name: TTSSOC230200
+    identifier: TTSSOC230200
+    description: Landing table for TTSSOC230200 file.
+  - name: TTSSOC230201
+    identifier: TTSSOC230201
+    description: Landing table for TTSSOC230201 file.
+  - name: TTSSOC235201
+    identifier: TTSSOC235201
+    description: Landing table for TTSSOC235201 file.
+  - name: TTSSOC240200
+    identifier: TTSSOC240200
+    description: Landing table for TTSSOC240200 file.
+  - name: TTSSOC240201
+    identifier: TTSSOC240201
+    description: Landing table for TTSSOC240201 file.
+  - name: TTSSOC903201
+    identifier: TTSSOC903201
+    description: Landing table for TTSSOC903201 file.
+  - name: TTSSOC904200
+    identifier: TTSSOC904200
+    description: Landing table for TTSSOC904200 file.
+  - name: TTTTXT010201
+    identifier: TTTTXT010201
+    description: Landing table for TTTTXT010201 file.
+  - name: TWHEDI006201
+    identifier: TWHEDI006201
+    description: Landing table for TWHEDI006201 file.
+  - name: TWHEDI201201
+    identifier: TWHEDI201201
+    description: Landing table for TWHEDI201201 file.
+  - name: TWHEDI225201
+    identifier: TWHEDI225201
+    description: Landing table for TWHEDI225201 file.
+  - name: TWHINA988201
+    identifier: TWHINA988201
+    description: Landing table for TWHINA988201 file.
+  - name: TWHINA990201
+    identifier: TWHINA990201
+    description: Landing table for TWHINA990201 file.
+  - name: TWHINH200201
+    identifier: TWHINH200201
+    description: Landing table for TWHINH200201 file.
+  - name: TWHINH210201
+    identifier: TWHINH210201
+    description: Landing table for TWHINH210201 file.
+  - name: TWHINH220200
+    identifier: TWHINH220200
+    description: Landing table for TWHINH220200 file.
+  - name: TWHINH220201
+    identifier: TWHINH220201
+    description: Landing table for TWHINH220201 file.
+  - name: TWHINH225201
+    identifier: TWHINH225201
+    description: Landing table for TWHINH225201 file.
+  - name: TWHINH270201
+    identifier: TWHINH270201
+    description: Landing table for TWHINH270201 file.
+  - name: TWHINH431201
+    identifier: TWHINH431201
+    description: Landing table for TWHINH431201 file.
+  - name: TWHINH914201
+    identifier: TWHINH914201
+    description: Landing table for TWHINH914201 file.
+  - name: TWHINH915201
+    identifier: TWHINH915201
+    description: Landing table for TWHINH915201 file.
+  - name: TWHINR100201
+    identifier: TWHINR100201
+    description: Landing table for TWHINR100201 file.
+  - name: TWHINR110201
+    identifier: TWHINR110201
+    description: Landing table for TWHINR110201 file.
+  - name: TWHINR112201
+    identifier: TWHINR112201
+    description: Landing table for TWHINR112201 file.
+  - name: TWHINR113201
+    identifier: TWHINR113201
+    description: Landing table for TWHINR113201 file.
+  - name: TWHINR912201
+    identifier: TWHINR912201
+    description: Landing table for TWHINR912201 file.
+  - name: TWHLTC100201
+    identifier: TWHLTC100201
+    description: Landing table for TWHLTC100201 file.
+  - name: TWHWMD210201
+    identifier: TWHWMD210201
+    description: Landing table for TWHWMD210201 file.
+  - name: TWHWMD215201
+    identifier: TWHWMD215201
+    description: Landing table for TWHWMD215201 file.
+- name: LEGACY93
+  description: Landing Zone - LEGACY93 Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: LEGACY93
+  tables:
+  - name: XREFERENCE_MACHINES_S2B_INTEGRATION_LATEST_RECORD
+    identifier: XREFERENCE_MACHINES_S2B_INTEGRATION_LATEST_RECORD
+    description: Landing table for XREFERENCE_MACHINES_S2B_INTEGRATION_LATEST_RECORD file.

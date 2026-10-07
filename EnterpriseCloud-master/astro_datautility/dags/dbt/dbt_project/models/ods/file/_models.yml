@@ -1,0 +1,89 @@
+version: 2
+models:
+- name: ODS__SHAREPOINT__TASTYPEOFWORK
+  description: Model for TASTYPEOFWORK file.
+- name: ODS__FILE__WBS_CODE_DESCRIPTION
+  description: Model for WBS_CODE_DESCRIPTION file.
+- name: ODS__FILE__ACTIVEASSETREPORT
+  description: Model FILE ActiveAssetReport file.
+- name: ODS__FILE__FORECASTBUDGET
+  description: Model FILE ForecastBudget file.
+- name: ODS__FILE__GSUSBOOKINGHISTORY
+  description: Model FILE GSUSBookingHistory file.
+- name: ODS__FILE__GSUSSALESHISTORY
+  description: Model FILE GSUSSalesHistory file.
+- name: ODS__FILE__BUSINESSUNIT
+  description: Model FILE FILE_BUSINESSUNIT file.
+- name: ODS__FILE__COST_CENTER
+  description: Model FILE COST_CENTER file.
+- name: ODS__FILE__PROFIT_CENTER
+  description: Model FILE PROFIT_CENTER file.
+- name: ODS__FILE__SAP_USER_LIST
+  description: Model FILE SAP_USER_LIST file.
+- name: ODS__FILE__SAP_DE_REFERENCE
+  description: Model FILE SAP_DE_REFERENCE file.
+- name: ODS__FILE__SAP_SEGMENT
+  description: Landing table for SAP_SEGMENT file
+- name: ODS__FILE__SAP_SALES_CATEGORY
+  description: Landing table for SAP_SALES_CATEGORY file
+- name: ODS__FILE__SAP_REGION
+  description: Landing table for SAP_REGION file
+- name: ODS__FILE__SAP_DEPARTMENT
+  description: Landing table for SAP_DEPARTMENT file.
+- name: ODS__FILE__SAP_ACCOUNT
+  description: SAP_ACCOUNT Table
+- name: ODS__FILE__SAP_DOCUMENT_TYPE_DESCRIPTION
+  description: SAP_DOCUMENT_TYPE_DESCRIPTION Table
+- name: ODS__FILE__SAP_DOCUMENT_TYPE
+  description: SAP_DOCUMENT_TYPE Table
+- name: ODS__FILE__SAP_CUSTOMER_GROUP
+  description: SAP_CUSTOMER_GROUP Table
+- name: ODS__SHAREPOINT__SERVICE_B_CODE_MAPPING
+  description: Landing table for SERVICE_B_CODE_MAPPING file.
+  columns:
+  - name: B_CODE
+    tests:
+    - dbt_expectations.expect_column_values_to_be_unique:
+        config:
+          alias: FILE__SERVICE_B_CODE_MAPPING__B_CODE__UNIQUE
+    - dbt_expectations.expect_column_values_to_not_be_null:
+        config:
+          alias: FILE__SERVICE_B_CODE_MAPPING__B_CODE__NOTNULL
+- name: ODS__FILE__SALES_DOCUMENT_TYPE_MAPPING
+  description: Landing table for SALES_DOCUMENT_TYPE_MAPPING file.
+- name: ODS__FILE__INTEL_VFBOM
+  description: Model FILE INTEL_VFBOM file.
+- name: ODS__FILE__FST_EMPLOYEE_GROUP
+  description: Landing table for FST_EMPLOYEE_GROUP file.
+- name: ODS__FILE__STOCK_TEE_CRYSTAL
+  description: Landing table for STOCK_TEE_CRYSTAL file.
+- name: ODS__FILE__SAP_ACCOUNT_EXPENSE
+  description: Landing table for SAP_ACCOUNT_EXPENSE file.
+- name: ODS__FILE__ORACLE_STANDARD_DEPT_HIERARCHY
+  description: Landing table for ORACLE_STANDARD_DEPT_HIERARCHY file.
+- name: ODS__FILE__ORACLE_FUNCTIONAL_DEPT_HIERARCHY
+  description: Landing table for ORACLE_FUNCTIONAL_DEPT_HIERARCHY file.
+- name: ODS__FILE__ORACLE_DEPT_MGMT_HIERARCHY
+  description: Landing table for ORACLE_DEPT_MGMT_HIERARCHY.
+- name: ODS__FILE__INTEL_MSBI_FULL_ITEM_BOM
+  description: Landing table for INTEL_MSBI_FULL_ITEM_BOM.
+- name: ODS__FILE__STARTUP_SPOTTER_AUDIT
+  description: Landing table for STARTUP_SPOTTER_AUDIT.
+- name: ODS__FILE__DATA_KEY_STARTUP_SPOTTER_AUDIT
+  description: Landing table for DATA_KEY_STARTUP_SPOTTER_AUDIT.
+- name: ODS__FILE__ORACLE_PC_MGMT_HIERARCHY
+  description: Landing table for ORACLE_PC_MGMT_HIERARCHY.
+- name: ODS__FILE__TEA_PRICEBOOK
+  description: Landing table for TEA_PRICEBOOK.
+- name: ODS__SHAREPOINT__SERVICE_PRODUCT_TYPE_MAPPING
+  description: Landing table for SERVICE_PRODUCT_TYPE_MAPPING.
+- name: ODS__SHAREPOINT__SERVICE_SEGMENT_MAPPING
+  description: Landing table for SERVICE_SEGMENT_MAPPING.
+- name: ODS__SHAREPOINT__SERVICE_CUSTOMER_MAPPING
+  description: Landing table for SERVICE_CUSTOMER_MAPPING.
+- name: ODS__SHAREPOINT__MACHINE_MODEL_MAPPING
+  description: Landing table for MACHINE_MODEL_MAPPING.
+- name: ODS__FILE__MACHINE_BUSINESS_UNIT_MAPPING
+  description: Landing table for MACHINE_BUSINESS_UNIT_MAPPING.
+- name: ODS__SHAREPOINT__SERVICE_OFFICE_MAPPING
+  description: Landing table for SERVICE_OFFICE_MAPPING.

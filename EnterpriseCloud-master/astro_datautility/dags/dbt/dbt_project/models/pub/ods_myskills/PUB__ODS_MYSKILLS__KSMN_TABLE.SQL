@@ -1,0 +1,101 @@
+/************
+Model file generated from dbtGeneratePubViews: 03.17.2022.09.11.32"
+*************/
+
+{{ config(
+      materialized='view',
+      alias='KSMN_TABLE',
+      transient=false
+) }}
+
+with source_data as (
+    SELECT
+        GYOMUYMD,
+        TELKAICD,
+        SEISNM,
+        SEISNE,
+        SSRYNM,
+        SSRYNE,
+        FKINM,
+        FKINE,
+        KKBASCD,
+        KUNICD,
+        KSTUKACD,
+        SOSIKKBN,
+        TELSYMD,
+        TACSYMD,
+        ZSBSYMD,
+        ZSKSYMD,
+        ZSKSSYMD,
+        ZSKESYMD,
+        ZSK1YMD,
+        ZSK2YMD,
+        ZSNBYMD,
+        ZSYSYMD,
+        ZSTACYMD,
+        ZSSIZYMD,
+        ZSSPYMD,
+        ZSGSYMD,
+        ZSNPYMD,
+        ZSTKYMD,
+        ZSKKYMD,
+        ZSKTYMD,
+        ZSKHYMD,
+        ZSNHYMD,
+        ZSNSYMD,
+        TSBSYMD,
+        TSKSYMD,
+        TSKSSYMD,
+        TSKESYMD,
+        TSK1YMD,
+        TSK2YMD,
+        TSNBYMD,
+        TSYSYMD,
+        TSTACYMD,
+        TSSITYMD,
+        TSSPYMD,
+        TSGSYMD,
+        TSNPYMD,
+        TSTKYMD,
+        TSKKYMD,
+        TSKTYMD,
+        TSKHYMD,
+        TSNHYMD,
+        TSNSYMD,
+        NODSKBN,
+        KKKSSYMD,
+        KKMSTYMD,
+        KKKTIYMD,
+        KNMHTYMD,
+        KGMKTYMD,
+        KOGMKYMD,
+        KNAMTYMD,
+        KAGMKYMD,
+        KGTMYMD,
+        KKMSKYMD,
+        JKMSKYMD,
+        SCHEHYMD,
+        SOHAYMD,
+        BATSYMD,
+        BATSFLG,
+        OLRIFLG,
+        JYDHKBN,
+        GBRKKBN,
+        SKSDSKS,
+        SKSDSYKS,
+        GYMHDK,
+        TORIYMD,
+        HUKSKNS,
+        OLRKYMD,
+        BTRKYMD,
+        HMAKKBN,
+        TIMESP
+    from {{ ref('ODS__MYSKILLS__KSMN_TABLE') }}
+),
+
+transform_data AS
+(
+    select * from source_data
+)
+
+    select * from transform_data

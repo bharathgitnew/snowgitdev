@@ -1,0 +1,125 @@
+/************
+    Model file generated from SAPAPIUtility 
+    *************/
+    
+    
+    {{ config(
+          materialized='tel_incremental',
+          incremental_strategy='merge',
+          alias='CRM_FILE_TIMEZONEDEFINITION',
+          unique_key=['ID'],
+          transient=false    
+) }} 
+    
+    with source_data as (
+        SELECT
+        get_ignore_case(to_object(JSONFIELD),'Id')::STRING AS "ID", 
+ 	 	get_ignore_case(to_object(JSONFIELD),'SinkCreatedOn')::STRING AS "SINKCREATEDON", 
+ 	 	get_ignore_case(to_object(JSONFIELD),'SinkModifiedOn')::STRING AS "SINKMODIFIEDON", 
+ 	 	get_ignore_case(to_object(JSONFIELD),'organizationid')::STRING AS "ORGANIZATIONID", 
+ 	 	get_ignore_case(to_object(JSONFIELD),'organizationid_entitytype')::STRING AS "ORGANIZATIONID_ENTITYTYPE", 
+ 	 	get_ignore_case(to_object(JSONFIELD),'modifiedby')::STRING AS "MODIFIEDBY", 
+ 	 	get_ignore_case(to_object(JSONFIELD),'modifiedby_entitytype')::STRING AS "MODIFIEDBY_ENTITYTYPE", 
+ 	 	get_ignore_case(to_object(JSONFIELD),'createdonbehalfby')::STRING AS "CREATEDONBEHALFBY", 
+ 	 	get_ignore_case(to_object(JSONFIELD),'createdonbehalfby_entitytype')::STRING AS "CREATEDONBEHALFBY_ENTITYTYPE", 
+ 	 	get_ignore_case(to_object(JSONFIELD),'createdby')::STRING AS "CREATEDBY", 
+ 	 	get_ignore_case(to_object(JSONFIELD),'createdby_entitytype')::STRING AS "CREATEDBY_ENTITYTYPE", 
+ 	 	get_ignore_case(to_object(JSONFIELD),'modifiedonbehalfby')::STRING AS "MODIFIEDONBEHALFBY", 
+ 	 	get_ignore_case(to_object(JSONFIELD),'modifiedonbehalfby_entitytype')::STRING AS "MODIFIEDONBEHALFBY_ENTITYTYPE", 
+ 	 	get_ignore_case(to_object(JSONFIELD),'timezonedefinitionid')::STRING AS "TIMEZONEDEFINITIONID", 
+ 	 	get_ignore_case(to_object(JSONFIELD),'standardname')::STRING AS "STANDARDNAME", 
+ 	 	get_ignore_case(to_object(JSONFIELD),'modifiedon')::STRING AS "MODIFIEDON", 
+ 	 	get_ignore_case(to_object(JSONFIELD),'modifiedonbehalfbyyominame')::STRING AS "MODIFIEDONBEHALFBYYOMINAME", 
+ 	 	get_ignore_case(to_object(JSONFIELD),'versionnumber')::STRING AS "VERSIONNUMBER", 
+ 	 	get_ignore_case(to_object(JSONFIELD),'bias')::STRING AS "BIAS", 
+ 	 	get_ignore_case(to_object(JSONFIELD),'modifiedonbehalfbyname')::STRING AS "MODIFIEDONBEHALFBYNAME", 
+ 	 	get_ignore_case(to_object(JSONFIELD),'timezonecode')::STRING AS "TIMEZONECODE", 
+ 	 	get_ignore_case(to_object(JSONFIELD),'userinterfacename')::STRING AS "USERINTERFACENAME", 
+ 	 	get_ignore_case(to_object(JSONFIELD),'createdonbehalfbyname')::STRING AS "CREATEDONBEHALFBYNAME", 
+ 	 	get_ignore_case(to_object(JSONFIELD),'createdonbehalfbyyominame')::STRING AS "CREATEDONBEHALFBYYOMINAME", 
+ 	 	get_ignore_case(to_object(JSONFIELD),'daylightname')::STRING AS "DAYLIGHTNAME", 
+ 	 	get_ignore_case(to_object(JSONFIELD),'createdon')::STRING AS "CREATEDON", 
+ 	 	get_ignore_case(to_object(JSONFIELD),'retiredorder')::STRING AS "RETIREDORDER", 
+ 	 	get_ignore_case(to_object(JSONFIELD),'IsDelete')::STRING AS "ISDELETE",
+        _FILEDATE,
+		_FILENAME,
+        _UPLOADDATE
+        FROM {{ source('CRM_FILE', 'TIMEZONEDEFINITION') }} AS TIMEZONEDEFINITION
+        {% if is_tel_incremental() %}WHERE  _UPLOADDATE > IFNULL((SELECT MAX(_UPLOADDATE) FROM {{ this }}),'1970-01-01'){% endif %}
+        QUALIFY (ROW_NUMBER() OVER (PARTITION BY ID  ORDER BY _FILEDATE DESC, _UPLOADDATE DESC, VERSIONNUMBER DESC)) = 1
+    ),
+    transform_data as (
+        SELECT
+        "ID", 
+ 	 	TRY_TO_TIMESTAMP("SINKCREATEDON", 'MM/DD/YYYY HH:MI:SS PM') AS "SINKCREATEDON", 
+ 	 	TRY_TO_TIMESTAMP("SINKMODIFIEDON", 'MM/DD/YYYY HH:MI:SS PM') AS "SINKMODIFIEDON", 
+ 	 	"ORGANIZATIONID", 
+ 	 	"ORGANIZATIONID_ENTITYTYPE", 
+ 	 	"MODIFIEDBY", 
+ 	 	"MODIFIEDBY_ENTITYTYPE", 
+ 	 	"CREATEDONBEHALFBY", 
+ 	 	"CREATEDONBEHALFBY_ENTITYTYPE", 
+ 	 	"CREATEDBY", 
+ 	 	"CREATEDBY_ENTITYTYPE", 
+ 	 	"MODIFIEDONBEHALFBY", 
+ 	 	"MODIFIEDONBEHALFBY_ENTITYTYPE", 
+ 	 	"TIMEZONEDEFINITIONID", 
+ 	 	"STANDARDNAME", 
+ 	 	"MODIFIEDON", 
+ 	 	"MODIFIEDONBEHALFBYYOMINAME", 
+ 	 	"VERSIONNUMBER", 
+ 	 	"BIAS", 
+ 	 	"MODIFIEDONBEHALFBYNAME", 
+ 	 	"TIMEZONECODE", 
+ 	 	"USERINTERFACENAME", 
+ 	 	"CREATEDONBEHALFBYNAME", 
+ 	 	"CREATEDONBEHALFBYYOMINAME", 
+ 	 	"DAYLIGHTNAME", 
+ 	 	"CREATEDON", 
+ 	 	"RETIREDORDER", 
+ 	 	"ISDELETE",
+        _FILEDATE,
+		_FILENAME,
+        _UPLOADDATE,
+		'{{ invocation_id }}' AS AUDIT_LOG_ID,
+        SHA2('hash_me') as _ROW_HASH
+        FROM source_data
+    ),
+    type_data as (
+        SELECT
+        CAST("ID" AS VARCHAR(16777216)) AS "ID", 
+ 	 	CAST("SINKCREATEDON" AS TIMESTAMP_LTZ(9)) AS "SINKCREATEDON", 
+ 	 	CAST("SINKMODIFIEDON" AS TIMESTAMP_LTZ(9)) AS "SINKMODIFIEDON", 
+ 	 	CAST("ORGANIZATIONID" AS VARCHAR(16777216)) AS "ORGANIZATIONID", 
+ 	 	CAST("ORGANIZATIONID_ENTITYTYPE" AS VARCHAR(16777216)) AS "ORGANIZATIONID_ENTITYTYPE", 
+ 	 	CAST("MODIFIEDBY" AS VARCHAR(16777216)) AS "MODIFIEDBY", 
+ 	 	CAST("MODIFIEDBY_ENTITYTYPE" AS VARCHAR(16777216)) AS "MODIFIEDBY_ENTITYTYPE", 
+ 	 	CAST("CREATEDONBEHALFBY" AS VARCHAR(16777216)) AS "CREATEDONBEHALFBY", 
+ 	 	CAST("CREATEDONBEHALFBY_ENTITYTYPE" AS VARCHAR(16777216)) AS "CREATEDONBEHALFBY_ENTITYTYPE", 
+ 	 	CAST("CREATEDBY" AS VARCHAR(16777216)) AS "CREATEDBY", 
+ 	 	CAST("CREATEDBY_ENTITYTYPE" AS VARCHAR(16777216)) AS "CREATEDBY_ENTITYTYPE", 
+ 	 	CAST("MODIFIEDONBEHALFBY" AS VARCHAR(16777216)) AS "MODIFIEDONBEHALFBY", 
+ 	 	CAST("MODIFIEDONBEHALFBY_ENTITYTYPE" AS VARCHAR(16777216)) AS "MODIFIEDONBEHALFBY_ENTITYTYPE", 
+ 	 	CAST("TIMEZONEDEFINITIONID" AS VARCHAR(16777216)) AS "TIMEZONEDEFINITIONID", 
+ 	 	CAST("STANDARDNAME" AS VARCHAR(16777216)) AS "STANDARDNAME", 
+ 	 	CAST("MODIFIEDON" AS TIMESTAMP_LTZ(9)) AS "MODIFIEDON", 
+ 	 	CAST("MODIFIEDONBEHALFBYYOMINAME" AS VARCHAR(16777216)) AS "MODIFIEDONBEHALFBYYOMINAME", 
+ 	 	CAST("VERSIONNUMBER" AS NUMBER(38,0)) AS "VERSIONNUMBER", 
+ 	 	CAST("BIAS" AS NUMBER(38,0)) AS "BIAS", 
+ 	 	CAST("MODIFIEDONBEHALFBYNAME" AS VARCHAR(16777216)) AS "MODIFIEDONBEHALFBYNAME", 
+ 	 	CAST("TIMEZONECODE" AS NUMBER(38,0)) AS "TIMEZONECODE", 
+ 	 	CAST("USERINTERFACENAME" AS VARCHAR(16777216)) AS "USERINTERFACENAME", 
+ 	 	CAST("CREATEDONBEHALFBYNAME" AS VARCHAR(16777216)) AS "CREATEDONBEHALFBYNAME", 
+ 	 	CAST("CREATEDONBEHALFBYYOMINAME" AS VARCHAR(16777216)) AS "CREATEDONBEHALFBYYOMINAME", 
+ 	 	CAST("DAYLIGHTNAME" AS VARCHAR(16777216)) AS "DAYLIGHTNAME", 
+ 	 	CAST("CREATEDON" AS TIMESTAMP_LTZ(9)) AS "CREATEDON", 
+ 	 	CAST("RETIREDORDER" AS NUMBER(38,0)) AS "RETIREDORDER", 
+ 	 	CAST("ISDELETE" AS BOOLEAN) AS "ISDELETE",
+        cast(_FILEDATE AS TIMESTAMP_NTZ(9)) AS _FILEDATE,
+		cast(_FILENAME as varchar(128)) as _FILENAME,
+        cast(_UPLOADDATE as TIMESTAMP_NTZ(9)) as _UPLOADDATE,
+        cast(AUDIT_LOG_ID as varchar(128)) as AUDIT_LOG_ID,
+        cast(_ROW_HASH as varchar(128)) as _ROW_HASH
+        FROM transform_data
+    )
+    SELECT * FROM type_data

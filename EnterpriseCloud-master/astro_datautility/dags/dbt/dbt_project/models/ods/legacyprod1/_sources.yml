@@ -1,0 +1,19 @@
+version: 2
+sources:
+- name: LEGACYPROD1
+  description: Landing Zone - LEGACYPROD1 Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: LEGACYPROD1
+  tables:
+  - name: FACTFINANCIALSUMMARY
+    identifier: FACTFINANCIALSUMMARY
+    description: Landing table for FACTFINANCIALSUMMARY file.
+  - name: FACTFINANCIALTRANSACTIONS
+    identifier: FACTFINANCIALTRANSACTIONS
+    description: Landing table for FACTFINANCIALTRANSACTIONS file.
+  - name: REVENUEANDCOGSDETAILS
+    identifier: REVENUEANDCOGSDETAILS
+    description: Landing table for REVENUEANDCOGSDETAILS file.
+  - name: FINANCIALTRANSACTIONS
+    identifier: FINANCIALTRANSACTIONS
+    description: Landing table for FINANCIALTRANSACTIONS file.

@@ -1,0 +1,355 @@
+{
+    "Machines": {
+      "LocalhostC": {
+        "MachineName": "localhost",
+        "RootFileDirectory": "C:\\Temp\\SnowflakeRootDirectory\\",
+        "TemporaryFileDirectory": "C:\\Temp\\SnowflakeRootDirectory\\Temp\\",
+        "ExecutionLogFileDirectory": "C:\\Temp\\SnowflakeRootDirectory\\TokyoElectron\\Powershell\\Logfiles\\",
+        "Logging": false
+      },
+      "TELUSDWAPPDEV": {
+        "MachineName": "TELUSDWAPPDEV",
+        "RootFileDirectory": "F:\\Shares\\Files\\",
+        "TemporaryFileDirectory": "F:\\Shares\\Files\\Temp\\",
+        "ExecutionLogFileDirectory": "F:\\Shares\\Files\\TokyoElectron\\Powershell\\Logfiles\\",
+        "Logging": false
+      },
+      "TELUSDWAPPQA": {
+        "MachineName": "TELUSDWAPPQA",
+        "RootFileDirectory": "F:\\Shares\\Files\\",
+        "TemporaryFileDirectory": "F:\\Shares\\Files\\Temp\\",
+        "ExecutionLogFileDirectory": "F:\\Shares\\Files\\TokyoElectron\\Powershell\\Logfiles\\",
+        "Logging": false
+      },
+      "TELUSDWAPPSIT": {
+        "MachineName": "TELUSDWAPPSIT",
+        "RootFileDirectory": "F:\\Shares\\Files\\",
+        "TemporaryFileDirectory": "F:\\Shares\\Files\\Temp\\",
+        "ExecutionLogFileDirectory": "F:\\Shares\\Files\\TokyoElectron\\Powershell\\Logfiles\\",
+        "Logging": false
+      },
+      "TELUSDWAPPPROD": {
+        "MachineName": "TELUSDWAPPPROD",
+        "RootFileDirectory": "F:\\Shares\\Files\\",
+        "TemporaryFileDirectory": "F:\\Shares\\Files\\Temp\\",
+        "ExecutionLogFileDirectory": "F:\\Shares\\Files\\TokyoElectron\\Powershell\\Logfiles\\",
+        "Logging": false
+      }
+    },
+    "AzActiveDirectory": {
+      "ConnectionInformation": {
+        "CertPath": "Cert:\\LocalMachine\\My",
+        "CertSubject": "SPNTestPowerShell",
+        "TenantId": "8c433003-a081-4dfb-a631-100526250b1a",
+        "ApplicationId": "fc5941f1-3052-4ec6-ad3a-cc19d35818a2",
+        "SubscriptionId": "dc3d1711-490f-4c8f-8e88-a8650c88819e"
+      },
+      "VaultInformation": {
+        "VaultName": "TELUSSNOWFLAKEDEV"
+      },
+      "ModuleInfo": {
+        "ModuleConnect": "Connect-AzureActiveDirectory",
+        "ModuleDisconnect": "Disconnect-AzAccount"
+      }
+    },
+    "SQLStatements": {
+      "ModuleInfo": {
+        "PowershellModule": "SqlServer"
+      },
+      "DataSets":
+      {
+        "FunctionName": "Invoke-Sqlcmd",
+        "ThreePL-TPL_ASN": {
+            "CacheDataSet": "No",
+            "AuthenticationType": "SQLServer",
+            "Source": "ThreePL",
+            "Securables": {
+            "UserName": "tpl_report",
+            "PasswordName": "TPLREPORT"
+              },
+              "Parameters": [
+                [
+                  {
+                    "Query": "SELECT ASN_Id,Document_Number,Line_Number,Material_Number,Part_Description,WMS_Batch,Expected_Quantity,Serial_Number,Storage_Location,Ship_Dt,Repair_Material_Number,Dual_Use,ASN_Number,Trading_Partner,Load_Dt,Processed,Process_Dt,Error,Error_Message,Process_ID,Load_ID,Purchase_Order_Number,Purchase_Order_Line_Number from dbo.TPL_ASN;"
+                  },
+                  {
+                    "ServerInstance": "tehaus0164.us.tel.com"
+                  },
+                  {
+                    "Database": "RosettaNet"
+                  }
+                ]
+              ],
+              "OutputFile": {
+                "FileDirectoryExtension": "3PL\\",
+                "FileName": "TPL_ASN",
+                "Format": "json",
+                "JSonDepth": "1"
+              }
+            },
+            "ThreePL-TPL_Receiving_Advice": {
+            "CacheDataSet": "No",
+            "AuthenticationType": "SQLServer",
+            "Source": "ThreePL",
+            "Securables": {
+            "UserName": "tpl_report",
+            "PasswordName": "TPLREPORT"
+              },
+              "Parameters": [
+                [
+                  {
+                    "Query": "SELECT Receiving_Advice_Id,Trading_Partner,ASN_Number,Document_Number,Line_Number,Material_Number,WMS_Batch,Receipt_Quantity,Serial_Number,Bill_of_Lading,Tracking_number,TPL_Reference,Storage_Location,Goods_Receipt_Dt,Shelf_Life_Expiration_Dt,Country_Of_Origin,Manufacture_Dt,Repair_Material_Number,Load_Dt,Processed,Process_Dt,Error,Error_Message,Process_Id from dbo.TPL_Receiving_Advice;"
+                  },
+                  {
+                    "ServerInstance": "tehaus0164.us.tel.com"
+                  },
+                  {
+                    "Database": "RosettaNet"
+                  }
+                ]
+              ],
+              "OutputFile": {
+                "FileDirectoryExtension": "3PL\\",
+                "FileName": "TPL_Receiving_Advice",
+                "Format": "json",
+                "JSonDepth": "1"
+              }
+            },
+            "ThreePL-TPL_ASN_Supplier": {
+            "CacheDataSet": "No",
+            "AuthenticationType": "SQLServer",
+            "Source": "ThreePL",
+            "Securables": {
+            "UserName": "tpl_report",
+            "PasswordName": "TPLREPORT"
+              },
+              "Parameters": [
+                [
+                  {
+                    "Query": "SELECT Supplier, ASN_Enabled from dbo.TPL_ASN_Supplier;"
+                  },
+                  {
+                    "ServerInstance": "tehaus0164.us.tel.com"
+                  },
+                  {
+                    "Database": "RosettaNet"
+                  }
+                ]
+              ],
+              "OutputFile": {
+                "FileDirectoryExtension": "3PL\\",
+                "FileName": "TPL_ASN_Supplier",
+                "Format": "json",
+                "JSonDepth": "1"
+              }
+            },
+            "ThreePL-TPL_Storage_Location": {
+            "CacheDataSet": "No",
+            "AuthenticationType": "SQLServer",
+            "Source": "ThreePL",
+            "Securables": {
+            "UserName": "tpl_report",
+            "PasswordName": "TPLREPORT"
+              },
+              "Parameters": [
+                [
+                  {
+                    "Query": "SELECT Storage_Location,Location_Code,Plant,Description,Trading_Partner,TPL_Account_Number,TPL_Warehouse,Enabled_For_EDI,Active,Last_Updated,Last_Updated_By,Consignment,Address_Id,Sold_To_Bcode,Bill_To_Bcode,Ship_To_Ccode,Country_Code from dbo.TPL_Storage_Location;"
+                  },
+                  {
+                    "ServerInstance": "tehaus0164.us.tel.com"
+                  },
+                  {
+                    "Database": "RosettaNet"
+                  }
+                ]
+              ],
+              "OutputFile": {
+                "FileDirectoryExtension": "3PL\\",
+                "FileName": "TPL_Storage_Location",
+                "Format": "json",
+                "JSonDepth": "1"
+              }
+            },
+            "ThreePL-TPL_Delivery_Type": {
+            "CacheDataSet": "No",
+            "AuthenticationType": "SQLServer",
+            "Source": "ThreePL",
+            "Securables": {
+            "UserName": "tpl_report",
+            "PasswordName": "TPLREPORT"
+              },
+              "Parameters": [
+                [
+                  {
+                    "Query": "SELECT Delivery_Type, Description, Direction, Max_Lines_Per_Shipment, Requires_CI from dbo.TPL_Delivery_Type;"
+                  },
+                  {
+                    "ServerInstance": "tehaus0164.us.tel.com"
+                  }
+                ]
+              ],
+              "OutputFile": {
+                "FileDirectoryExtension": "3PL\\",
+                "FileName": "TPL_Delivery_Type",
+                "Format": "json",
+                "JSonDepth": "1"
+              }
+            },
+            "ThreePL-TPL_Shipment_Line_Detail": {
+            "CacheDataSet": "No",
+            "AuthenticationType": "SQLServer",
+            "Source": "ThreePL",
+            "Securables": {
+            "UserName": "tpl_report",
+            "PasswordName": "TPLREPORT"
+              },
+              "Parameters": [
+                [
+                  {
+                    "Query": "SELECT Document_Number,Line_Number,Sequence_Number,TPL_Order_Number,Material_Number,Quantity,Serial_Number,WMS_Batch_Number,Bill_of_Lading,Tracking_Number,Storage_Location,Repair_Material_Number,Last_Updated_Dt,Processed,Process_Dt,Error,Error_Message,Process_Id FROM dbo.TPL_Shipment_Line_Detail;"
+                  },
+                  {
+                    "ServerInstance": "tehaus0164.us.tel.com"
+                  },
+                  {
+                    "Database": "RosettaNet"
+                  }
+                ]
+              ],
+              "OutputFile": {
+                "FileDirectoryExtension": "3PL\\",
+                "FileName": "TPL_Shipment_Line_Detail",
+                "Format": "json",
+                "JSonDepth": "1"
+              }
+            },
+            "ThreePL-TPL_Shipment_Status": {
+            "CacheDataSet": "No",
+            "AuthenticationType": "SQLServer",
+            "Source": "ThreePL",
+            "Securables": {
+            "UserName": "tpl_report",
+            "PasswordName": "TPLREPORT"
+              },
+              "Parameters": [
+                [
+                  {
+                    "Query": "SELECT Document_Number,Line_Number,TPL_Order_Number,Current_Status,EDI_Generated_Dt,Order_Created_Dt,Order_Accepted_Dt,Ready_For_Shipment_Dt,Order_Delivered_Dt,Proof_of_Delivery,Order_Canceled_Dt,Shipment_Delayed_Dt,Shipment_Note_Text,Last_Updated_Dt,Processed,Process_Dt,Error,Error_Message,Process_Id FROM dbo.TPL_Shipment_Status;"
+                  },
+                  {
+                    "ServerInstance": "tehaus0164.us.tel.com"
+                  },
+                  {
+                    "Database": "RosettaNet"
+                  }
+                ]
+              ],
+              "OutputFile": {
+                "FileDirectoryExtension": "3PL\\",
+                "FileName": "TPL_Shipment_Status",
+                "Format": "json",
+                "JSonDepth": "1"
+              }
+            },
+            "ThreePL-TPL_Ship_Request": {
+            "CacheDataSet": "No",
+            "AuthenticationType": "SQLServer",
+            "Source": "ThreePL",
+            "Securables": {
+            "UserName": "tpl_report",
+            "PasswordName": "TPLREPORT"
+              },
+              "Parameters": [
+                [
+                  {
+                    "Query": "SELECT Document_Number,Line_Number,Bill_To_Address_Name_1,Bill_To_Address_Name_2,Bill_To_Address_Street_1,Bill_To_Address_Street_2,Bill_To_Address_City,Bill_To_Address_State,Bill_To_Address_ZIP,Bill_To_Address_Country,Ship_To_Address_Name_1,Ship_To_Address_Name_2,Ship_To_Address_Street_1,Ship_To_Address_Street_2,Ship_To_Address_City,Ship_To_Address_State,Ship_To_Address_ZIP,Ship_To_Address_Country,Customer_Contact,Customer_Contact_Phone,Customer_Tax_Code,Customer_VAT_Registration_Number,Order_Number,Order_Line_Number,Customer_PO_Number,Customer_PO_Line_Number,Material_number,Part_Description,Price,Currency,Ship_Quantity,Shipment_Carrier,Shipment_Route,Order_Priority,Storage_Location,Ship_Date,Header_Text,Line_Text,Commercial_Invoice_Number,Customer_Part_Number,Country_of_Origin,Dual_Use,ECCN_Number,Shippers_HTS_Code,Receivers_HTS_Code,Hazardous_Goods,Chemical_Flag,UN_Number,Incoterms,License_Number,AES_Citation,AES_Filing_Date,AES_Special_Instructions,Trading_Partner,Load_Dt,Processed,Process_Dt,Error,Error_Message,Process_Id,Delivery_Type,Receiving_Storage_Location,Schedule_Line_Number FROM dbo.TPL_Ship_Request;"
+                  },
+                  {
+                    "ServerInstance": "tehaus0164.us.tel.com"
+                  },
+                  {
+                    "Database": "RosettaNet"
+                  }
+                ]
+              ],
+              "OutputFile": {
+                "FileDirectoryExtension": "3PL\\",
+                "FileName": "TPL_Ship_Request",
+                "Format": "json",
+                "JSonDepth": "1"
+              }
+            },
+            "ThreePL-TPL_Shipment_Confirmation": {
+            "CacheDataSet": "No",
+            "AuthenticationType": "SQLServer",
+            "Source": "ThreePL",
+            "Securables": {
+            "UserName": "tpl_report",
+            "PasswordName": "TPLREPORT"
+              },
+              "Parameters": [
+                [
+                  {
+                    "Query": "SELECT Shipment_Confirmation_Id,Document_Number,Line_Number,Material_Number,WMS_Batch_Number,Picking_Quantity,Serial_Number,House_Airway_Bill_Number,Tracking_Number,Shipment_Carrier,TPL_Order_Number,TPL_Account_Number,TPL_Warehouse,Storage_Location,Goods_Issue_Date,Goods_Issue_Time,Repair_Material_Number,Service_Level,Processed,Process_Dt,Process_ID,Error,Error_Message FROM dbo.TPL_Shipment_Confirmation;"
+                  },
+                  {
+                    "ServerInstance": "tehaus0164.us.tel.com"
+                  },
+                  {
+                    "Database": "RosettaNet"
+                  }
+                ]
+              ],
+              "OutputFile": {
+                "FileDirectoryExtension": "3PL\\",
+                "FileName": "TPL_Shipment_Confirmation",
+                "Format": "json",
+                "JSonDepth": "1"
+              }
+            },
+            "ThreePL-TPL_Shipping_Information": {
+            "CacheDataSet": "No",
+            "AuthenticationType": "SQLServer",
+            "Source": "ThreePL",
+            "Securables": {
+            "UserName": "tpl_report",
+            "PasswordName": "TPLREPORT"
+              },
+              "Parameters": [
+                [
+                  {
+                    "Query": "SELECT Shipping_Information_Id,Document_Number,Master_Airway_Bill_Number,House_Airway_Bill_Number,Shipment_Carrier,Customs_Clearance_Date,BL_Issue_Date,ETD,ETA,Flight_Number_1,Flight_Number_2,Flight_Number_3,C_WT,Tracking_Number,Point_Of_Lading,Point_Of_Discharge,Export_Shipping_Type,Processed,Process_Dt,Error,Error_Message,Process_ID FROM dbo.TPL_Shipping_Information;"
+                  },
+                  {
+                    "ServerInstance": "tehaus0164.us.tel.com"
+                  },
+                  {
+                    "Database": "RosettaNet"
+                  }
+                ]
+              ],
+              "OutputFile": {
+                "FileDirectoryExtension": "3PL\\",
+                "FileName": "TPL_Shipping_Information",
+                "Format": "json",
+                "JSonDepth": "1"
+              }
+            }
+      }
+    },
+    "FetchFiles": {
+      "DataSets": {
+        "ThreePL-UPS-Inventory-File-US": {
+          "Status": "Active",
+          "FileDirectoryExtension": "3PL\\",
+          "SourceLocation": "\\\\telausb2b2254.telcustomer.prod\\BIData\\US",
+          "Securables": {
+            "UserName": "telcustomerprod\\svc_bidata",
+            "PasswordName": "ThreePLInventory"
+          },
+          "FilePattern": "TEA_INV_*.csv"
+        }
+      }
+    }
+}

@@ -1,0 +1,108 @@
+
+
+	/************
+	Model file generated from gmxDbtTemplateUtility.ipynb
+	*************/
+
+
+	{{ config(
+	  materialized='incremental',
+	  incremental_strategy='insert_overwrite',
+	  alias='SAP_MMM_EV_LFA1',
+	  transient=false
+	) }}
+
+	with source_data as (
+	SELECT
+    	_FILEDATE,
+		_FILENAME,
+		JSONFIELD:"LIFNR"::STRING AS "LIFNR",
+ 	 	JSONFIELD:"NAME1"::STRING AS "NAME1",
+ 	 	JSONFIELD:"NAME2"::STRING AS "NAME2",
+ 	 	JSONFIELD:"NAME3"::STRING AS "NAME3",
+ 	 	JSONFIELD:"NAME4"::STRING AS "NAME4",
+ 	 	JSONFIELD:"ADRNR"::STRING AS "ADRNR",
+ 	 	JSONFIELD:"MCOD1"::STRING AS "MCOD1",
+ 	 	JSONFIELD:"MCOD2"::STRING AS "MCOD2",
+ 	 	JSONFIELD:"MCOD3"::STRING AS "MCOD3",
+ 	 	JSONFIELD:"LAND1"::STRING AS "LAND1",
+ 	 	JSONFIELD:"ORT01"::STRING AS "ORT01",
+ 	 	JSONFIELD:"PSTLZ"::STRING AS "PSTLZ",
+ 	 	JSONFIELD:"REGIO"::STRING AS "REGIO",
+ 	 	JSONFIELD:"KTOKK"::STRING AS "KTOKK",
+ 	 	JSONFIELD:"KUNNR"::STRING AS "KUNNR",
+ 	 	JSONFIELD:"DTAWS"::STRING AS "DTAWS",
+ 	 	JSONFIELD:"SPERQ"::STRING AS "SPERQ",
+ 	 	JSONFIELD:"SPERM"::STRING AS "SPERM",
+ 	 	JSONFIELD:"DELFLAG"::STRING AS "DELFLAG",
+ 	 	JSONFIELD:"CDCHANGENR"::STRING AS "CDCHANGENR",
+ 	 	JSONFIELD:"PSL_INSDATE"::STRING AS "PSL_INSDATE",
+ 	 	JSONFIELD:"PSL_UPDDATE"::STRING AS "PSL_UPDDATE"
+	from {{ source('SAPH','SAP_MMM_EV_LFA1') }}
+	    WHERE REGEXP_SUBSTR(_FILENAME,'\\d{14}') = (SELECT MAX(REGEXP_SUBSTR(_filename,'\\d{14}')) from {{ source('SAPH', 'SAP_MMM_EV_LFA1') }})
+	),
+
+	transform_data as (
+	SELECT
+		_FILEDATE,
+		_FILENAME,
+		'{{ invocation_id }}' AS _AUDIT_LOG_ID,
+        SHA2('hash_me') as _ROW_HASH,
+		"LIFNR",
+ 	 	"NAME1",
+ 	 	"NAME2",
+ 	 	"NAME3",
+ 	 	"NAME4",
+ 	 	"ADRNR",
+ 	 	"MCOD1",
+ 	 	"MCOD2",
+ 	 	"MCOD3",
+ 	 	"LAND1",
+ 	 	"ORT01",
+ 	 	"PSTLZ",
+ 	 	"REGIO",
+ 	 	"KTOKK",
+ 	 	"KUNNR",
+ 	 	"DTAWS",
+ 	 	"SPERQ",
+ 	 	"SPERM",
+ 	 	"DELFLAG",
+ 	 	"CDCHANGENR",
+ 	 	"PSL_INSDATE",
+ 	 	"PSL_UPDDATE"
+	from source_data
+	),
+
+	type_data as (
+	SELECT
+		cast(_FILEDATE AS TIMESTAMP_NTZ(9)) AS _FILEDATE,
+		cast(_FILENAME as varchar(128)) as _FILENAME,
+        cast(_AUDIT_LOG_ID as varchar(128)) as _AUDIT_LOG_ID,
+        cast(_ROW_HASH as varchar(128)) as _ROW_HASH,
+		CAST("LIFNR" AS NVARCHAR) AS "LIFNR",
+ 	 	CAST("NAME1" AS NVARCHAR) AS "NAME1",
+ 	 	CAST("NAME2" AS NVARCHAR) AS "NAME2",
+ 	 	CAST("NAME3" AS NVARCHAR) AS "NAME3",
+ 	 	CAST("NAME4" AS NVARCHAR) AS "NAME4",
+ 	 	CAST("ADRNR" AS NVARCHAR) AS "ADRNR",
+ 	 	CAST("MCOD1" AS NVARCHAR) AS "MCOD1",
+ 	 	CAST("MCOD2" AS NVARCHAR) AS "MCOD2",
+ 	 	CAST("MCOD3" AS NVARCHAR) AS "MCOD3",
+ 	 	CAST("LAND1" AS NVARCHAR) AS "LAND1",
+ 	 	CAST("ORT01" AS NVARCHAR) AS "ORT01",
+ 	 	CAST("PSTLZ" AS NVARCHAR) AS "PSTLZ",
+ 	 	CAST("REGIO" AS NVARCHAR) AS "REGIO",
+ 	 	CAST("KTOKK" AS NVARCHAR) AS "KTOKK",
+ 	 	CAST("KUNNR" AS NVARCHAR) AS "KUNNR",
+ 	 	CAST("DTAWS" AS NVARCHAR) AS "DTAWS",
+ 	 	CAST("SPERQ" AS NVARCHAR) AS "SPERQ",
+ 	 	CAST("SPERM" AS NVARCHAR) AS "SPERM",
+ 	 	CAST("DELFLAG" AS BOOLEAN) AS "DELFLAG",
+ 	 	CAST("CDCHANGENR" AS NVARCHAR) AS "CDCHANGENR",
+ 	 	CAST("PSL_INSDATE" AS TIMESTAMP) AS "PSL_INSDATE",
+ 	 	CAST("PSL_UPDDATE" AS TIMESTAMP) AS "PSL_UPDDATE"
+	from transform_data
+	)
+
+	select * from type_data
+

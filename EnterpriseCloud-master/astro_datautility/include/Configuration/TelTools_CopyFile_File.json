@@ -1,0 +1,1413 @@
+{
+    "CopyFile": {
+        "NOW_SALES_CAT_CROSSWALK": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\File",
+            "table": "NOW_SALES_CAT_CROSSWALK",
+            "schema": "FILE",
+            "file_pattern": "NOW_SALES_CAT_CROSSWALK.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "force_str" : true,
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "WORLDCITIES_DB": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\File",
+            "table": "WORLDCITIES_DB",
+            "schema": "FILE",
+            "file_pattern": "worldcities.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "OPENDATASOFT_POSTALCODE_GEODATA": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\File",
+            "table": "OPENDATASOFT_POSTALCODE_GEODATA",
+            "schema": "FILE",
+            "file_pattern": "OPENDATASOFT_POSTALCODE_GEODATA.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "force_str" : true,
+            "file_format": "csv",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "Baan-Tee-Sales": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\Baan-Tee",
+            "table": "BAAN_TEE_SALES",
+            "schema": "FILE",
+            "file_pattern": "tbl_tee_sales.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "force_str" : true,
+            "is_active": true,
+            "file_format": "csv",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "ForecastBudget": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\TokyoElectron\\ForecastBudget",
+            "table": "FORECASTBUDGET",
+            "schema": "FILE",
+            "file_pattern": "FinDataExport_*.txt",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": "|",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "force_str" : true,
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "ForecastBudget_EPBCS": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\TokyoElectron\\ForecastBudget",
+            "table": "FORECASTBUDGET_EPBCS",
+            "schema": "FILE",
+            "file_pattern": "FinDataExportEPBCS*.txt",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": "|",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "OpenPO-file": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\Baan\\OpenPO",
+            "table": "OpenPO",
+            "schema": "FILE",
+            "file_pattern": "open_po_tea.txt",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "txt",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "Dfs_ActiveAssetReport": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\DFS",
+            "table": "ACTIVEASSETREPORT",
+            "schema": "FILE",
+            "file_pattern": "ACTIVEASSETREPORT.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "force_str" : true,
+            "file_format": "csv",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "File-Paid_Service_Exception_Pricing": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\File",
+            "table": "Paid_Service_Exceptipn_Pricing",
+            "schema": "FILE",
+            "file_pattern": "Paid_Service_Exceptipn_Pricing*.json",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "json",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "File-Contract_FLX_TransitionHrs": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\File",
+            "table": "Contract_FLX_TransitionHrs",
+            "schema": "FILE",
+            "file_pattern": "Contract_FLX_TransitionHrs*.json",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "json",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "File-Wrench_Time_Mapping": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\File",
+            "table": "Wrench_Time_Mapping",
+            "schema": "FILE",
+            "file_pattern": "Wrench_Time_Mapping*.json",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "json",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "GSUS-ACCUSREVENUEBUDGET": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\TokyoElectron\\GSUS",
+            "table": "TEL_ACC_REVENUE_BUDGET_FORECAST",
+            "schema": "FILE",
+            "file_pattern": "TEL_ACC_Revenue*.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "force_str" : true,
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "GSUS-TELBUDGETFORECAST": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\TokyoElectron\\GSUS",
+            "table": "TEL_GS_REVENUE_BUDGET_FORECAST",
+            "schema": "FILE",
+            "file_pattern": "USA Sales Latest*.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "force_str" : true,
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "GSUS-BOOKINGDETAILS": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\TokyoElectron\\GSUS",
+            "table": "TEL_GS_BOOKING_BUDGET_FORECAST",
+            "schema": "FILE",
+            "file_pattern": "USA Booking*.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "force_str" : true,
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "Security-CRMSALES_SECURITY_INTEL_SALES_SOLUTIONS": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\Security\\CRMSALES",
+            "table": "CRMSALES_SECURITY",
+            "schema": "FILE",
+            "file_pattern": "CRMSALES_SECURITY_INTEL_SALES_SOLUTIONS*.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "Security-CRMSALES_SECURITY_SALES_OPERATIONS": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\Security\\CRMSALES",
+            "table": "CRMSALES_SECURITY",
+            "schema": "FILE",
+            "file_pattern": "CRMSALES_SECURITY_SALES_OPERATIONS*.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "Security-CRMSALES_SECURITY_TEE_SALES_SERVICE_ADMIN": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\Security\\CRMSALES",
+            "table": "CRMSALES_SECURITY",
+            "schema": "FILE",
+            "file_pattern": "CRMSALES_SECURITY_TEE_SALES_SERVICE_ADMIN*.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "FILE-BUSINESSUNIT": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\SparesRevenue",
+            "table": "BUSINESSUNIT",
+            "schema": "FILE",
+            "file_pattern": "BUSINESSUNIT*.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "force_str" : true,
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "IntelSales-SIRFISAREA": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\IntelSales",
+            "table": "SIRFIS_AREA",
+            "schema": "FILE",
+            "file_pattern": "SIRFIS_AREA*.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "FILE-COST_CENTER": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\File",
+            "table": "COST_CENTER",
+            "schema": "FILE",
+            "file_pattern": "Cost_Center*.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "force_str" : true,
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "FILE-PROFIT_CENTER": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\File",
+            "table": "PROFIT_CENTER",
+            "schema": "FILE",
+            "file_pattern": "Profit_Center*.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "force_str" : true,
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "FILE-ORACLE_CUSTOMER_MAP": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\File",
+            "table": "ORACLE_CUSTOMER_MAP",
+            "schema": "FILE",
+            "file_pattern": "ORACLE_CUSTOMER_MAP.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "force_str" : true,
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "FILE-SAP_ACCOUNT_EXPENSE": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\File",
+            "table": "SAP_ACCOUNT_EXPENSE",
+            "schema": "FILE",
+            "file_pattern": "SAP_ACCOUNT_EXPENSE.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "FILE-SAP_DEPARTMENT": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\File",
+            "table": "SAP_DEPARTMENT",
+            "schema": "FILE",
+            "file_pattern": "SAP_DEPARTMENT*.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "FILE-SAP_MATERIAL_MASTER": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\File",
+            "table": "SAP_MATERIAL_CLASSIFICATIONS",
+            "schema": "FILE",
+            "file_pattern": "SAP Material Classifications.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "FILE-SAP_REGION": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\File",
+            "table": "SAP_REGION",
+            "schema": "FILE",
+            "file_pattern": "SAP_REGION*.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "FILE-SAP_SALES_CATEGORY": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\File",
+            "table": "SAP_SALES_CATEGORY",
+            "schema": "FILE",
+            "file_pattern": "SAP_SALES_CATEGORY*.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "FILE-SAP_SEGMENT": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\File",
+            "table": "SAP_SEGMENT",
+            "schema": "FILE",
+            "file_pattern": "SAP_SEGMENT*.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "FILE-SAP_ACCOUNT": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\File",
+            "table": "SAP_ACCOUNT",
+            "schema": "FILE",
+            "file_pattern": "SAP_ACCOUNT.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "FILE-SAP_DOCUMENT_TYPE": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\File",
+            "table": "SAP_DOCUMENT_TYPE",
+            "schema": "FILE",
+            "file_pattern": "SAP_DOCUMENT_TYPE.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "FILE-SAP_DOCUMENT_TYPE_DESCRIPTION": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\File",
+            "table": "SAP_DOCUMENT_TYPE_DESCRIPTION",
+            "schema": "FILE",
+            "file_pattern": "SAP_DOCUMENT_TYPE_DESCRIPTION.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "FILE-SAP_CUSTOMER_GROUP": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\File",
+            "table": "SAP_CUSTOMER_GROUP",
+            "schema": "FILE",
+            "file_pattern": "SAP_CUSTOMER_GROUP.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "FILE-SERVICE_B_CODE_MAPPING": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\TEA_FS",
+            "table": "SERVICE_B_CODE_MAPPING",
+            "schema": "FILE",
+            "file_pattern": "SERVICE_B_CODE_MAPPING.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "force_str" : true,
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "FILE-PAID_SERVICE_LEGACY_BAAN_BACKLOG": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\File",
+            "table": "PAID_SERVICE_LEGACY_BAAN_BACKLOG",
+            "schema": "FILE",
+            "file_pattern": "Paid_Service_Legacy_Baan_Backlog.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "FILE-SALES_DOCUMENT_TYPE_MAPPING": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\File",
+            "table": "SALES_DOCUMENT_TYPE_MAPPING",
+            "schema": "FILE",
+            "file_pattern": "SALES_DOCUMENT_TYPE_MAPPING.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "FILE-SAP_USER_LIST": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\File",
+            "table": "SAP_USER_LIST",
+            "schema": "FILE",
+            "file_pattern": "SAP_User_List*.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "FILE-SAP_DE_REFERENCE": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\File",
+            "table": "SAP_DE_REFERENCE",
+            "schema": "FILE",
+            "file_pattern": "SAP_DE_Reference*.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "FILE-FST_EMPLOYEE_GROUP": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\File",
+            "table": "FST_EMPLOYEE_GROUP",
+            "schema": "FILE",
+            "file_pattern": "FST_EMPLOYEE_GROUP*.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "FILE-WBS_CODE_DESCRIPTION": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\File",
+            "table": "WBS_CODE_DESCRIPTION",
+            "schema": "FILE",
+            "file_pattern": "WBS_CODE_DESCRIPTION*.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "FILE-FINANCE_ADJ_MAPPINGS": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\File",
+            "table": "FINANCE_ADJ_MAPPINGS",
+            "schema": "FILE",
+            "file_pattern": "FINANCE_ADJ_MAPPINGS*.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "INTEL_VFBOM": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\Intel-VFBOM",
+            "table": "INTEL_VFBOM",
+            "schema": "FILE",
+            "file_pattern": "IntelVF*.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "force_str" : true,
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "STOCK_TEE_CRYSTAL-file": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\File",
+            "table": "STOCK_TEE_CRYSTAL",
+            "schema": "FILE",
+            "file_pattern": "TEEInv*.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "FILE-ORACLE_ACCOUNT_MAP": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\File",
+            "table": "ORACLE_ACCOUNT_MAP",
+            "schema": "FILE",
+            "file_pattern": "ORACLE_ACCOUNT_MAP.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "FILE-ORACLE_DEPARTMENT_MAP": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\File",
+            "table": "ORACLE_DEPARTMENT_MAP",
+            "schema": "FILE",
+            "file_pattern": "ORACLE_DEPARTMENT_MAP.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "FILE-ORACLE_REGION_MAP": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\File",
+            "table": "ORACLE_REGION_MAP",
+            "schema": "FILE",
+            "file_pattern": "ORACLE_REGION_MAP.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "FILE-ORACLE_SALES_CATEGORY_MAP": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\File",
+            "table": "ORACLE_SALES_CATEGORY_MAP",
+            "schema": "FILE",
+            "file_pattern": "ORACLE_SALES_CATEGORY_MAP.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "FILE-ORACLE_STANDARD_DEPT_HIERARCHY": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\File",
+            "table": "ORACLE_STANDARD_DEPT_HIERARCHY",
+            "schema": "FILE",
+            "file_pattern": "ORACLE_STANDARD_DEPT_HIERARCHY.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "FILE-ORACLE_FUNCTIONAL_DEPT_HIERARCHY": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\File",
+            "table": "ORACLE_FUNCTIONAL_DEPT_HIERARCHY",
+            "schema": "FILE",
+            "file_pattern": "ORACLE_FUNCTIONAL_DEPT_HIERARCHY.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "FILE-ORACLE_SEGMENT_MAP": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\File",
+            "table": "ORACLE_SEGMENT_MAP",
+            "schema": "FILE",
+            "file_pattern": "ORACLE_SEGMENT_MAP.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "FILE-SAP_STORAGE_LOCATION_MASTER": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\File",
+            "table": "SAP_STORAGE_LOCATION_MASTER",
+            "schema": "FILE",
+            "file_pattern": "SAP_STORAGE_LOCATION_MASTER.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "DEMAND_CAPACITY_LIST": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\File",
+            "table": "DEMAND_CAPACITY_LIST",
+            "schema": "FILE",
+            "file_pattern": "DEMAND_CAPACITY_LIST*.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "FILE-PRODUCT_TYPE_MAP": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\File",
+            "table": "PRODUCT_TYPE_MAP",
+            "schema": "FILE",
+            "file_pattern": "PRODUCT_TYPE_MAP.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "FILE-ORACLE_DEPT_MGMT_HIERARCHY": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\File",
+            "table": "ORACLE_DEPT_MGMT_HIERARCHY",
+            "schema": "FILE",
+            "file_pattern": "Oracle_Department_Hierarchy.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "FILE-ORACLE_PC_MGMT_HIERARCHY": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\File",
+            "table": "ORACLE_PC_MGMT_HIERARCHY",
+            "schema": "FILE",
+            "file_pattern": "ORACLE_PC_MGMT_HIERARCHY.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "FILE-INTEL_MSBI_FULL_ITEM_BOM": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\Intel-MSBI",
+            "table": "INTEL_MSBI_FULL_ITEM_BOM",
+            "schema": "FILE",
+            "file_pattern": "All Sites MSBI BOM *.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "force_str" : true,
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "FILE-STARTUP_SPOTTER_AUDIT": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\Startup-Audit",
+            "table": "STARTUP_SPOTTER_AUDIT",
+            "schema": "FILE",
+            "file_pattern": "Spotter Audit Summary*.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "FILE-DATA_KEY_STARTUP_SPOTTER_AUDIT": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\Startup-Audit",
+            "table": "DATA_KEY_STARTUP_SPOTTER_AUDIT",
+            "schema": "FILE",
+            "file_pattern": "Data key*.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "FILE-SERVICE_EMPLOYEE_ROSTER": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\TEA_FS",
+            "table": "SERVICE_EMPLOYEE_ROSTER",
+            "schema": "FILE",
+            "file_pattern": "SERVICE_EMPLOYEE*.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "FILE-VBAP_BLANK_PROFIT_CENTER": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\File",
+            "table": "VBAP_BLANK_PROFIT_CENTER",
+            "schema": "FILE",
+            "file_pattern": "vbap*.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "FILE-CUSTOMER_GROUP_MAPPING": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\TEA_FS",
+            "table": "CUSTOMER_GROUP_MAPPING",
+            "schema": "FILE",
+            "file_pattern": "CUSTOMER_GROUP_MAPPING*.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "FILE-INTP": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\TEA_Planning",
+            "table": "INTP",
+            "schema": "FILE",
+            "file_pattern": "INTP*.tsv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": "|",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "FILE-SERVICE_BUSINESS_UNIT_MAPPING": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\TEA_FS",
+            "table": "SERVICE_BUSINESS_UNIT_MAPPING",
+            "schema": "FILE",
+            "file_pattern": "SERVICE_BUSINESS_UNIT_MAPPING*.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "FILE-TEA_PRICEBOOK": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\File",
+            "table": "TEA_PRICEBOOK",
+            "schema": "FILE",
+            "file_pattern": "TEA_PRICEBOOK*.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "FILE-TEL_PRICING_ACTUAL": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\File",
+            "table": "TEL_PRICING_ACTUAL",
+            "schema": "FILE",
+            "file_pattern": "TEL_PRICING_ACTUAL*.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "FILE-OS_USER_PROFILE": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\File",
+            "table": "OS_USER_PROFILE",
+            "schema": "TELQS",
+            "file_pattern": "OS_USER_PROFILE*.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "INTEL-GLOBAL_BOOKING_INTEL": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\IntelSales",
+            "table": "GLOBAL_BOOKING_INTEL",
+            "schema": "FILE",
+            "file_pattern": "Intel Booking Latest*.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "force_str" : true,
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "INTEL-GLOBAL_SALES_INTEL": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\IntelSales",
+            "table": "GLOBAL_SALES_INTEL",
+            "schema": "FILE",
+            "file_pattern": "Intel Sales Latest*.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "force_str" : true,
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "FILE-TYPEOFWORK_MAPPING": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\TEA_FS",
+            "table": "TASTYPEOFWORK",
+            "schema": "FILE",
+            "file_pattern": "TYPEOFWORK_MAPPING*.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "FILE-MACHINE_BUSINESS_UNIT_MAPPING": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\TEA_FS",
+            "table": "MACHINE_BUSINESS_UNIT_MAPPING",
+            "schema": "FILE",
+            "file_pattern": "MACHINE_BUSINESS_UNIT_MAPPING*.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "FILE-MACHINE_MODEL_MAPPING": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\TEA_FS",
+            "table": "MACHINE_MODEL_MAPPING",
+            "schema": "FILE",
+            "file_pattern": "MACHINE_MODEL_MAPPING*.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "FILE-SERVICE_CUSTOMER_MAPPING": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\TEA_FS",
+            "table": "SERVICE_CUSTOMER_MAPPING",
+            "schema": "FILE",
+            "file_pattern": "SERVICE_CUSTOMER_MAPPING*.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "FILE-PRODUCT_TYPECODE_MAPPING": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\TEA_FS",
+            "table": "SERVICE_PRODUCT_TYPECODE_MAPPING",
+            "schema": "FILE",
+            "file_pattern": "SERVICE_PRODUCT_TYPECODE_MAPPING*.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "FILE-SERVICE_SEGMENT_MAPPING": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\TEA_FS",
+            "table": "SERVICE_SEGMENT_MAPPING",
+            "schema": "FILE",
+            "file_pattern": "SERVICE_SEGMENT_MAPPING*.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "FILE-SERVICE_OFFICE_MAPPING": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\TEA_FS",
+            "table": "SERVICE_OFFICE_MAPPING",
+            "schema": "FILE",
+            "file_pattern": "SERVICE_OFFICE_MAPPING*.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "Security-SALES_OPERATIONS_SECURITY": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\Security\\SALES_OPERATIONS",
+            "table": "SALES_OPERATIONS_SECURITY",
+            "schema": "FILE",
+            "file_pattern": "SALES_OPERATIONS_SECURITY*.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "ZMMT1013": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\File",
+            "table": "ZMMT1013",
+            "schema": "SAPAPI",
+            "file_pattern": "ZMMT1013*.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "force_str" : true,
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "ZSDT0060": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\File",
+            "table": "ZSDT0060",
+            "schema": "SAPAPI",
+            "file_pattern": "ZSDT0060*.csv",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "force_str" : true,
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "SAPO_A004": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\UPS_Data\\ERP",
+            "table": "SAPO_A004",
+            "schema": "FILE",
+            "file_pattern": "*_A004.CSV",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "force_str" : true,
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            },
+            "header_row" : 1
+        },
+        "SAPO_A005": {
+            "fileshare": "<<FILE_SHARE>>\\Shares\\Files\\UPS_Data\\ERP",
+            "table": "SAPO_A005",
+            "schema": "FILE",
+            "file_pattern": "*_A005.CSV",
+            "is_incremental": false,
+            "delete_after" : true,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "force_str" : true,
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            },
+            "header_row" : 1
+        },
+        "Baan_Tee_Sales": {
+            "fileshare": "\\\\172.26.95.17\\SparesPrograms\\Intel Global Reporting Package\\Support_Tables\\TEE Data",
+            "table": "BAAN_TEE_SALES",
+            "schema": "FILE",
+            "file_pattern": "tbl_tee_sales.csv",
+            "is_incremental": true,
+            "delimiter": ",",
+            "skip_header": false,
+            "is_active": true,
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "STOCK_TEE_CRYSTAL": {
+            "fileshare": "\\\\172.26.95.17\\SparesPrograms\\Intel Global Reporting Package\\Support_Tables\\TEE Data",
+            "table": "STOCK_TEE_CRYSTAL",
+            "schema": "FILE",
+            "file_pattern": "TEEInv.csv",
+            "is_incremental": true,
+            "delimiter": ",",
+            "skip_header": false,
+            "is_active": true,
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "OpenPO": {
+            "fileshare": "\\\\172.26.95.18\\open-po",
+            "table": "OPENPO",
+            "schema": "FILE",
+            "securables": {
+                "username": "us\\DWIntegration",
+                "password-name": "USDWIntegration"
+            },
+            "file_pattern": "open_po_tea.txt",
+            "is_incremental": true,
+            "delimiter": "|",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true
+        }
+    }
+}

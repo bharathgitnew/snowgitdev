@@ -1,0 +1,4 @@
+version: 2
+models:
+- name: ODS__QVICS_C_TMEA__QVICS
+  identifier: QVICS

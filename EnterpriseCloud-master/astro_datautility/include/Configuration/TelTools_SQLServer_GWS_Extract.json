@@ -1,0 +1,991 @@
+{
+  "GWS": {
+    "DataSet1": {
+      "schema": "dbo",
+      "table": "BK_gws_order_lot_line",
+      "Incremental": "NULL",
+      "sftablename": "BK_GWS_ORDER_LOT_LINE",
+      "filter": ""
+    },
+    "DataSet2": {
+      "schema": "dbo",
+      "table": "gws_audit_documents",
+      "Incremental": "NULL",
+      "sftablename": "GWS_AUDIT_DOCUMENTS",
+      "filter": ""
+    },
+    "DataSet3": {
+      "schema": "dbo",
+      "table": "gws_AUDIT_ENTITY_DOCUMENTS",
+      "Incremental": "NULL",
+      "sftablename": "GWS_AUDIT_ENTITY_DOCUMENTS",
+      "filter": ""
+    },
+    "DataSet4": {
+      "schema": "dbo",
+      "table": "gws_AUDIT_ENTITY_IMEC",
+      "Incremental": "NULL",
+      "sftablename": "GWS_AUDIT_ENTITY_IMEC",
+      "filter": ""
+    },
+    "DataSet5": {
+      "schema": "dbo",
+      "table": "gws_AUDIT_ENTITY_ORDERS",
+      "Incremental": "NULL",
+      "sftablename": "GWS_AUDIT_ENTITY_ORDERS",
+      "filter": ""
+    },
+    "DataSet6": {
+      "schema": "dbo",
+      "table": "gws_AUDIT_ENTITY_REFERENCE_DATA",
+      "Incremental": "NULL",
+      "sftablename": "GWS_AUDIT_ENTITY_REFERENCE_DATA",
+      "filter": ""
+    },
+    "DataSet7": {
+      "schema": "dbo",
+      "table": "gws_AUDIT_ENTITY_REQUESTS",
+      "Incremental": "NULL",
+      "sftablename": "GWS_AUDIT_ENTITY_REQUESTS",
+      "filter": ""
+    },
+    "DataSet8": {
+      "schema": "dbo",
+      "table": "gws_audit_imec",
+      "Incremental": "NULL",
+      "sftablename": "GWS_AUDIT_IMEC",
+      "filter": ""
+    },
+    "DataSet9": {
+      "schema": "dbo",
+      "table": "gws_audit_messages",
+      "Incremental": "NULL",
+      "sftablename": "GWS_AUDIT_MESSAGES",
+      "filter": ""
+    },
+    "DataSet10": {
+      "schema": "dbo",
+      "table": "gws_audit_orders",
+      "Incremental": "NULL",
+      "sftablename": "GWS_AUDIT_ORDERS",
+      "filter": ""
+    },
+    "DataSet11": {
+      "schema": "dbo",
+      "table": "gws_audit_reference_data",
+      "Incremental": "NULL",
+      "sftablename": "GWS_AUDIT_REFERENCE_DATA",
+      "filter": ""
+    },
+    "DataSet12": {
+      "schema": "dbo",
+      "table": "gws_audit_requests",
+      "Incremental": "NULL",
+      "sftablename": "GWS_AUDIT_REQUESTS",
+      "filter": ""
+    },
+    "DataSet13": {
+      "schema": "dbo",
+      "table": "gws_business_unit",
+      "Incremental": "NULL",
+      "sftablename": "GWS_BUSINESS_UNIT",
+      "filter": ""
+    },
+    "DataSet14": {
+      "schema": "dbo",
+      "table": "gws_category",
+      "Incremental": "NULL",
+      "sftablename": "GWS_CATEGORY",
+      "filter": ""
+    },
+    "DataSet15": {
+      "schema": "dbo",
+      "table": "gws_category_site",
+      "Incremental": "NULL",
+      "sftablename": "GWS_CATEGORY_SITE",
+      "filter": ""
+    },
+    "DataSet16": {
+      "schema": "dbo",
+      "table": "gws_CONFIDENCIAL_LEVEL",
+      "Incremental": "NULL",
+      "sftablename": "GWS_CONFIDENCIAL_LEVEL",
+      "filter": ""
+    },
+    "DataSet17": {
+      "schema": "dbo",
+      "table": "gws_COST_FORMULA",
+      "Incremental": "NULL",
+      "sftablename": "GWS_COST_FORMULA",
+      "filter": ""
+    },
+    "DataSet18": {
+      "schema": "dbo",
+      "table": "gws_COUNTRIES",
+      "Incremental": "NULL",
+      "sftablename": "GWS_COUNTRIES",
+      "filter": ""
+    },
+    "DataSet19": {
+      "schema": "dbo",
+      "table": "gws_currency",
+      "Incremental": "NULL",
+      "sftablename": "GWS_CURRENCY",
+      "filter": ""
+    },
+    "DataSet20": {
+      "schema": "dbo",
+      "table": "gws_department",
+      "Incremental": "NULL",
+      "sftablename": "GWS_DEPARTMENT",
+      "filter": ""
+    },
+    "DataSet21": {
+      "schema": "dbo",
+      "table": "gws_department_gem_mapping",
+      "Incremental": "NULL",
+      "sftablename": "GWS_DEPARTMENT_GEM_MAPPING",
+      "filter": ""
+    },
+    "DataSet22": {
+      "schema": "dbo",
+      "table": "gws_document",
+      "Incremental": "NULL",
+      "sftablename": "GWS_DOCUMENT",
+      "filter": ""
+    },
+    "DataSet23": {
+      "schema": "dbo",
+      "table": "gws_document_category",
+      "Incremental": "NULL",
+      "sftablename": "GWS_DOCUMENT_CATEGORY",
+      "filter": ""
+    },
+    "DataSet24": {
+      "schema": "dbo",
+      "table": "gws_document_type",
+      "Incremental": "NULL",
+      "sftablename": "GWS_DOCUMENT_TYPE",
+      "filter": ""
+    },
+    "DataSet25": {
+      "schema": "dbo",
+      "table": "gws_document_type_order_status",
+      "Incremental": "NULL",
+      "sftablename": "GWS_DOCUMENT_TYPE_ORDER_STATUS",
+      "filter": ""
+    },
+    "DataSet26": {
+      "schema": "dbo",
+      "table": "gws_document_type_request_status",
+      "Incremental": "NULL",
+      "sftablename": "GWS_DOCUMENT_TYPE_REQUEST_STATUS",
+      "filter": ""
+    },
+    "DataSet27": {
+      "schema": "dbo",
+      "table": "gws_document_type_role",
+      "Incremental": "NULL",
+      "sftablename": "GWS_DOCUMENT_TYPE_ROLE",
+      "filter": ""
+    },
+    "DataSet28": {
+      "schema": "dbo",
+      "table": "gws_kpi",
+      "Incremental": "NULL",
+      "sftablename": "GWS_KPI",
+      "filter": ""
+    },
+    "DataSet29": {
+      "schema": "dbo",
+      "table": "gws_message",
+      "Incremental": "NULL",
+      "sftablename": "GWS_MESSAGE",
+      "filter": ""
+    },
+    "DataSet30": {
+      "schema": "dbo",
+      "table": "gws_message_center",
+      "Incremental": "NULL",
+      "sftablename": "GWS_MESSAGE_CENTER",
+      "filter": ""
+    },
+    "DataSet31": {
+      "schema": "dbo",
+      "table": "gws_MESSAGE_FUNCTIONALITY",
+      "Incremental": "NULL",
+      "sftablename": "GWS_MESSAGE_FUNCTIONALITY",
+      "filter": ""
+    },
+    "DataSet32": {
+      "schema": "dbo",
+      "table": "gws_news",
+      "Incremental": "NULL",
+      "sftablename": "GWS_NEWS",
+      "filter": ""
+    },
+    "DataSet33": {
+      "schema": "dbo",
+      "table": "gws_news_log",
+      "Incremental": "NULL",
+      "sftablename": "GWS_NEWS_LOG",
+      "filter": ""
+    },
+    "DataSet34": {
+      "schema": "dbo",
+      "table": "gws_order",
+      "Incremental": "NULL",
+      "sftablename": "GWS_ORDER",
+      "filter": ""
+    },
+    "DataSet35": {
+      "schema": "dbo",
+      "table": "gws_order_assign_lot",
+      "Incremental": "NULL",
+      "sftablename": "GWS_ORDER_ASSIGN_LOT",
+      "filter": ""
+    },
+    "DataSet36": {
+      "schema": "dbo",
+      "table": "gws_ORDER_ASSIGN_LOT_STATUS",
+      "Incremental": "NULL",
+      "sftablename": "GWS_ORDER_ASSIGN_LOT_STATUS",
+      "filter": ""
+    },
+    "DataSet37": {
+      "schema": "dbo",
+      "table": "gws_order_assign_lot_versions",
+      "Incremental": "NULL",
+      "sftablename": "GWS_ORDER_ASSIGN_LOT_VERSIONS",
+      "filter": ""
+    },
+    "DataSet38": {
+      "schema": "dbo",
+      "table": "gws_order_document",
+      "Incremental": "NULL",
+      "sftablename": "GWS_ORDER_DOCUMENT",
+      "filter": ""
+    },
+    "DataSet39": {
+      "schema": "dbo",
+      "table": "gws_ORDER_DOCUMENT_TYPE",
+      "Incremental": "NULL",
+      "sftablename": "GWS_ORDER_DOCUMENT_TYPE",
+      "filter": ""
+    },
+    "DataSet40": {
+      "schema": "dbo",
+      "table": "gws_order_document_versions",
+      "Incremental": "NULL",
+      "sftablename": "GWS_ORDER_DOCUMENT_VERSIONS",
+      "filter": ""
+    },
+    "DataSet41": {
+      "schema": "dbo",
+      "table": "gws_order_format_id_management",
+      "Incremental": "NULL",
+      "sftablename": "GWS_ORDER_FORMAT_ID_MANAGEMENT",
+      "filter": ""
+    },
+    "DataSet42": {
+      "schema": "dbo",
+      "table": "gws_order_lot",
+      "Incremental": "NULL",
+      "sftablename": "GWS_ORDER_LOT",
+      "filter": ""
+    },
+    "DataSet43": {
+      "schema": "dbo",
+      "table": "gws_order_lot_line",
+      "Incremental": "NULL",
+      "sftablename": "GWS_ORDER_LOT_LINE",
+      "filter": ""
+    },
+    "DataSet44": {
+      "schema": "dbo",
+      "table": "gws_order_lot_line_checkbox",
+      "Incremental": "NULL",
+      "sftablename": "GWS_ORDER_LOT_LINE_CHECKBOX",
+      "filter": ""
+    },
+    "DataSet45": {
+      "schema": "dbo",
+      "table": "gws_order_lot_line_checkbox_versions",
+      "Incremental": "NULL",
+      "sftablename": "GWS_ORDER_LOT_LINE_CHECKBOX_VERSIONS",
+      "filter": ""
+    },
+    "DataSet46": {
+      "schema": "dbo",
+      "table": "gws_order_lot_line_versions",
+      "Incremental": "NULL",
+      "sftablename": "GWS_ORDER_LOT_LINE_VERSIONS",
+      "filter": ""
+    },
+    "DataSet47": {
+      "schema": "dbo",
+      "table": "gws_order_lot_line_wafer",
+      "Incremental": "NULL",
+      "sftablename": "GWS_ORDER_LOT_LINE_WAFER",
+      "filter": ""
+    },
+    "DataSet48": {
+      "schema": "dbo",
+      "table": "gws_order_lot_line_wafer_versions",
+      "Incremental": "NULL",
+      "sftablename": "GWS_ORDER_LOT_LINE_WAFER_VERSIONS",
+      "filter": ""
+    },
+    "DataSet49": {
+      "schema": "dbo",
+      "table": "gws_order_lot_versions",
+      "Incremental": "NULL",
+      "sftablename": "GWS_ORDER_LOT_VERSIONS",
+      "filter": ""
+    },
+    "DataSet50": {
+      "schema": "dbo",
+      "table": "gws_order_notes",
+      "Incremental": "NULL",
+      "sftablename": "GWS_ORDER_NOTES",
+      "filter": ""
+    },
+    "DataSet51": {
+      "schema": "dbo",
+      "table": "gws_order_shipping_feedback",
+      "Incremental": "NULL",
+      "sftablename": "GWS_ORDER_SHIPPING_FEEDBACK",
+      "filter": ""
+    },
+    "DataSet52": {
+      "schema": "dbo",
+      "table": "gws_order_stakeholders",
+      "Incremental": "NULL",
+      "sftablename": "GWS_ORDER_STAKEHOLDERS",
+      "filter": ""
+    },
+    "DataSet53": {
+      "schema": "dbo",
+      "table": "gws_order_stakeholders_versions",
+      "Incremental": "NULL",
+      "sftablename": "GWS_ORDER_STAKEHOLDERS_VERSIONS",
+      "filter": ""
+    },
+    "DataSet54": {
+      "schema": "dbo",
+      "table": "gws_ORDER_STATUS",
+      "Incremental": "NULL",
+      "sftablename": "GWS_ORDER_STATUS",
+      "filter": ""
+    },
+    "DataSet55": {
+      "schema": "dbo",
+      "table": "gws_order_tag",
+      "Incremental": "NULL",
+      "sftablename": "GWS_ORDER_TAG",
+      "filter": ""
+    },
+    "DataSet56": {
+      "schema": "dbo",
+      "table": "gws_order_tag_versions",
+      "Incremental": "NULL",
+      "sftablename": "GWS_ORDER_TAG_VERSIONS",
+      "filter": ""
+    },
+    "DataSet57": {
+      "schema": "dbo",
+      "table": "gws_ORDER_USING_BONDED_WAFER_TYPE",
+      "Incremental": "NULL",
+      "sftablename": "GWS_ORDER_USING_BONDED_WAFER_TYPE",
+      "filter": ""
+    },
+    "DataSet58": {
+      "schema": "dbo",
+      "table": "gws_order_versions",
+      "Incremental": "NULL",
+      "sftablename": "GWS_ORDER_VERSIONS",
+      "filter": ""
+    },
+    "DataSet59": {
+      "schema": "dbo",
+      "table": "gws_organization",
+      "Incremental": "NULL",
+      "sftablename": "GWS_ORGANIZATION",
+      "filter": ""
+    },
+    "DataSet60": {
+      "schema": "dbo",
+      "table": "gws_organization_gem_mapping",
+      "Incremental": "NULL",
+      "sftablename": "GWS_ORGANIZATION_GEM_MAPPING",
+      "filter": ""
+    },
+    "DataSet61": {
+      "schema": "dbo",
+      "table": "gws_process_areas",
+      "Incremental": "NULL",
+      "sftablename": "GWS_PROCESS_AREAS",
+      "filter": ""
+    },
+    "DataSet62": {
+      "schema": "dbo",
+      "table": "gws_process_parameter",
+      "Incremental": "NULL",
+      "sftablename": "GWS_PROCESS_PARAMETER",
+      "filter": ""
+    },
+    "DataSet63": {
+      "schema": "dbo",
+      "table": "gws_process_parameter_value",
+      "Incremental": "NULL",
+      "sftablename": "GWS_PROCESS_PARAMETER_VALUE",
+      "filter": ""
+    },
+    "DataSet64": {
+      "schema": "dbo",
+      "table": "gws_project",
+      "Incremental": "NULL",
+      "sftablename": "GWS_PROJECT",
+      "filter": ""
+    },
+    "DataSet65": {
+      "schema": "dbo",
+      "table": "gws_questinior",
+      "Incremental": "NULL",
+      "sftablename": "GWS_QUESTINIOR",
+      "filter": ""
+    },
+    "DataSet66": {
+      "schema": "dbo",
+      "table": "gws_recipe",
+      "Incremental": "NULL",
+      "sftablename": "GWS_RECIPE",
+      "filter": ""
+    },
+    "DataSet67": {
+      "schema": "dbo",
+      "table": "gws_recipe_needed",
+      "Incremental": "NULL",
+      "sftablename": "GWS_RECIPE_NEEDED",
+      "filter": ""
+    },
+    "DataSet68": {
+      "schema": "dbo",
+      "table": "gws_recipe_parameter_value",
+      "Incremental": "NULL",
+      "sftablename": "GWS_RECIPE_PARAMETER_VALUE",
+      "filter": ""
+    },
+    "DataSet69": {
+      "schema": "dbo",
+      "table": "gws_RECIPE_TYPE",
+      "Incremental": "NULL",
+      "sftablename": "GWS_RECIPE_TYPE",
+      "filter": ""
+    },
+    "DataSet70": {
+      "schema": "dbo",
+      "table": "gws_request",
+      "Incremental": "NULL",
+      "sftablename": "GWS_REQUEST",
+      "filter": ""
+    },
+    "DataSet71": {
+      "schema": "dbo",
+      "table": "gws_request_document",
+      "Incremental": "NULL",
+      "sftablename": "GWS_REQUEST_DOCUMENT",
+      "filter": ""
+    },
+    "DataSet72": {
+      "schema": "dbo",
+      "table": "gws_REQUEST_DOCUMENT_TYPE",
+      "Incremental": "NULL",
+      "sftablename": "GWS_REQUEST_DOCUMENT_TYPE",
+      "filter": ""
+    },
+    "DataSet73": {
+      "schema": "dbo",
+      "table": "gws_request_format_id_management",
+      "Incremental": "NULL",
+      "sftablename": "GWS_REQUEST_FORMAT_ID_MANAGEMENT",
+      "filter": ""
+    },
+    "DataSet74": {
+      "schema": "dbo",
+      "table": "gws_REQUEST_PRIORITY",
+      "Incremental": "NULL",
+      "sftablename": "GWS_REQUEST_PRIORITY",
+      "filter": ""
+    },
+    "DataSet75": {
+      "schema": "dbo",
+      "table": "gws_request_shipping_wafer_feedback",
+      "Incremental": "NULL",
+      "sftablename": "GWS_REQUEST_SHIPPING_WAFER_FEEDBACK",
+      "filter": ""
+    },
+    "DataSet76": {
+      "schema": "dbo",
+      "table": "gws_request_shipping_wafers",
+      "Incremental": "NULL",
+      "sftablename": "GWS_REQUEST_SHIPPING_WAFERS",
+      "filter": ""
+    },
+    "DataSet77": {
+      "schema": "dbo",
+      "table": "gws_request_stakeholders",
+      "Incremental": "NULL",
+      "sftablename": "GWS_REQUEST_STAKEHOLDERS",
+      "filter": ""
+    },
+    "DataSet78": {
+      "schema": "dbo",
+      "table": "gws_request_update_log",
+      "Incremental": "NULL",
+      "sftablename": "GWS_REQUEST_UPDATE_LOG",
+      "filter": ""
+    },
+    "DataSet79": {
+      "schema": "dbo",
+      "table": "gws_request_update_log_user",
+      "Incremental": "NULL",
+      "sftablename": "GWS_REQUEST_UPDATE_LOG_USER",
+      "filter": ""
+    },
+    "DataSet80": {
+      "schema": "dbo",
+      "table": "gws_REQUESTSTATUS",
+      "Incremental": "NULL",
+      "sftablename": "GWS_REQUESTSTATUS",
+      "filter": ""
+    },
+    "DataSet81": {
+      "schema": "dbo",
+      "table": "gws_role",
+      "Incremental": "NULL",
+      "sftablename": "GWS_ROLE",
+      "filter": ""
+    },
+    "DataSet82": {
+      "schema": "dbo",
+      "table": "gws_route",
+      "Incremental": "NULL",
+      "sftablename": "GWS_ROUTE",
+      "filter": ""
+    },
+    "DataSet83": {
+      "schema": "dbo",
+      "table": "gws_route_document",
+      "Incremental": "NULL",
+      "sftablename": "GWS_ROUTE_DOCUMENT",
+      "filter": ""
+    },
+    "DataSet84": {
+      "schema": "dbo",
+      "table": "gws_shipping_address",
+      "Incremental": "NULL",
+      "sftablename": "GWS_SHIPPING_ADDRESS",
+      "filter": ""
+    },
+    "DataSet85": {
+      "schema": "dbo",
+      "table": "gws_site",
+      "Incremental": "NULL",
+      "sftablename": "GWS_SITE",
+      "filter": ""
+    },
+    "DataSet86": {
+      "schema": "dbo",
+      "table": "gws_site_cost",
+      "Incremental": "NULL",
+      "sftablename": "GWS_SITE_COST",
+      "filter": ""
+    },
+    "DataSet87": {
+      "schema": "dbo",
+      "table": "gws_tag",
+      "Incremental": "NULL",
+      "sftablename": "GWS_TAG",
+      "filter": ""
+    },
+    "DataSet88": {
+      "schema": "dbo",
+      "table": "gws_tool",
+      "Incremental": "NULL",
+      "sftablename": "GWS_TOOL",
+      "filter": ""
+    },
+    "DataSet89": {
+      "schema": "dbo",
+      "table": "gws_tool_area",
+      "Incremental": "NULL",
+      "sftablename": "GWS_TOOL_AREA",
+      "filter": ""
+    },
+    "DataSet90": {
+      "schema": "dbo",
+      "table": "gws_tool_cost",
+      "Incremental": "NULL",
+      "sftablename": "GWS_TOOL_COST",
+      "filter": ""
+    },
+    "DataSet91": {
+      "schema": "dbo",
+      "table": "gws_tool_process_areas",
+      "Incremental": "NULL",
+      "sftablename": "GWS_TOOL_PROCESS_AREAS",
+      "filter": ""
+    },
+    "DataSet92": {
+      "schema": "dbo",
+      "table": "gws_tool_tags",
+      "Incremental": "NULL",
+      "sftablename": "GWS_TOOL_TAGS",
+      "filter": ""
+    },
+    "DataSet93": {
+      "schema": "dbo",
+      "table": "gws_TOOL_TYPE",
+      "Incremental": "NULL",
+      "sftablename": "GWS_TOOL_TYPE",
+      "filter": ""
+    },
+    "DataSet94": {
+      "schema": "dbo",
+      "table": "gws_user",
+      "Incremental": "NULL",
+      "sftablename": "GWS_USER",
+      "filter": ""
+    },
+    "DataSet95": {
+      "schema": "dbo",
+      "table": "gws_user_configuration",
+      "Incremental": "NULL",
+      "sftablename": "GWS_USER_CONFIGURATION",
+      "filter": ""
+    },
+    "DataSet96": {
+      "schema": "dbo",
+      "table": "gws_user_email",
+      "Incremental": "NULL",
+      "sftablename": "GWS_USER_EMAIL",
+      "filter": ""
+    },
+    "DataSet97": {
+      "schema": "dbo",
+      "table": "gws_USER_EMAIL_NOTIFICATIONS",
+      "Incremental": "NULL",
+      "sftablename": "GWS_USER_EMAIL_NOTIFICATIONS",
+      "filter": ""
+    },
+    "DataSet98": {
+      "schema": "dbo",
+      "table": "gws_user_email_site",
+      "Incremental": "NULL",
+      "sftablename": "GWS_USER_EMAIL_SITE",
+      "filter": ""
+    },
+    "DataSet99": {
+      "schema": "dbo",
+      "table": "gws_user_role",
+      "Incremental": "NULL",
+      "sftablename": "GWS_USER_ROLE",
+      "filter": ""
+    },
+    "DataSet100": {
+      "schema": "dbo",
+      "table": "gws_user_V3",
+      "Incremental": "NULL",
+      "sftablename": "GWS_USER_V3",
+      "filter": ""
+    },
+    "DataSet101": {
+      "schema": "dbo",
+      "table": "gws_wafer_type",
+      "Incremental": "NULL",
+      "sftablename": "GWS_WAFER_TYPE",
+      "filter": ""
+    },
+    "DataSet102": {
+      "schema": "dbo",
+      "table": "gws_wafer_type_cost",
+      "Incremental": "NULL",
+      "sftablename": "GWS_WAFER_TYPE_COST",
+      "filter": ""
+    },
+    "DataSet103": {
+      "schema": "dbo",
+      "table": "BK_gws_COST_FORMULA",
+      "Incremental": "NULL",
+      "sftablename": "BK_GWS_COST_FORMULA",
+      "filter": ""
+    },
+    "DataSet104": {
+      "schema": "dbo",
+      "table": "BK_gws_site",
+      "Incremental": "NULL",
+      "sftablename": "BK_GWS_SITE",
+      "filter": ""
+    },
+    "DataSet105": {
+      "schema": "dbo",
+      "table": "BK_gws_user_UV",
+      "Incremental": "NULL",
+      "sftablename": "BK_GWS_USER_UV",
+      "filter": ""
+    },
+    "DataSet106": {
+      "schema": "dbo",
+      "table": "BKR_gws_order_lot_line",
+      "Incremental": "NULL",
+      "sftablename": "BKR_GWS_ORDER_LOT_LINE",
+      "filter": ""
+    },
+    "DataSet107": {
+      "schema": "dbo",
+      "table": "gem_employee_gws",
+      "Incremental": "NULL",
+      "sftablename": "GEM_EMPLOYEE_GWS",
+      "filter": ""
+    },
+    "DataSet108": {
+      "schema": "dbo",
+      "table": "imec_budget",
+      "Incremental": "NULL",
+      "sftablename": "IMEC_BUDGET",
+      "filter": ""
+    },
+    "DataSet109": {
+      "schema": "dbo",
+      "table": "imec_company_address",
+      "Incremental": "NULL",
+      "sftablename": "IMEC_COMPANY_ADDRESS",
+      "filter": ""
+    },
+    "DataSet110": {
+      "schema": "dbo",
+      "table": "imec_CONFIDENCIAL_LEVEL",
+      "Incremental": "NULL",
+      "sftablename": "IMEC_CONFIDENCIAL_LEVEL",
+      "filter": ""
+    },
+    "DataSet111": {
+      "schema": "dbo",
+      "table": "imec_factory_bu_department",
+      "Incremental": "NULL",
+      "sftablename": "IMEC_FACTORY_BU_DEPARTMENT",
+      "filter": ""
+    },
+    "DataSet112": {
+      "schema": "dbo",
+      "table": "imec_IMEC_DOCUMENT_TYPE",
+      "Incremental": "NULL",
+      "sftablename": "IMEC_IMEC_DOCUMENT_TYPE",
+      "filter": ""
+    },
+    "DataSet113": {
+      "schema": "dbo",
+      "table": "imec_IMEC_STATUS",
+      "Incremental": "NULL",
+      "sftablename": "IMEC_IMEC_STATUS",
+      "filter": ""
+    },
+    "DataSet114": {
+      "schema": "dbo",
+      "table": "imec_integrator",
+      "Incremental": "NULL",
+      "sftablename": "IMEC_INTEGRATOR",
+      "filter": ""
+    },
+    "DataSet115": {
+      "schema": "dbo",
+      "table": "imec_litho_maskset",
+      "Incremental": "NULL",
+      "sftablename": "IMEC_LITHO_MASKSET",
+      "filter": ""
+    },
+    "DataSet116": {
+      "schema": "dbo",
+      "table": "imec_no_of_wafer",
+      "Incremental": "NULL",
+      "sftablename": "IMEC_NO_OF_WAFER",
+      "filter": ""
+    },
+    "DataSet117": {
+      "schema": "dbo",
+      "table": "imec_order",
+      "Incremental": "NULL",
+      "sftablename": "IMEC_ORDER",
+      "filter": ""
+    },
+    "DataSet118": {
+      "schema": "dbo",
+      "table": "imec_order_assign_lot",
+      "Incremental": "NULL",
+      "sftablename": "IMEC_ORDER_ASSIGN_LOT",
+      "filter": ""
+    },
+    "DataSet119": {
+      "schema": "dbo",
+      "table": "imec_order_assign_lot_versions",
+      "Incremental": "NULL",
+      "sftablename": "IMEC_ORDER_ASSIGN_LOT_VERSIONS",
+      "filter": ""
+    },
+    "DataSet120": {
+      "schema": "dbo",
+      "table": "imec_order_document",
+      "Incremental": "NULL",
+      "sftablename": "IMEC_ORDER_DOCUMENT",
+      "filter": ""
+    },
+    "DataSet121": {
+      "schema": "dbo",
+      "table": "imec_order_document_versions",
+      "Incremental": "NULL",
+      "sftablename": "IMEC_ORDER_DOCUMENT_VERSIONS",
+      "filter": ""
+    },
+    "DataSet122": {
+      "schema": "dbo",
+      "table": "imec_order_format_id_management",
+      "Incremental": "NULL",
+      "sftablename": "IMEC_ORDER_FORMAT_ID_MANAGEMENT",
+      "filter": ""
+    },
+    "DataSet123": {
+      "schema": "dbo",
+      "table": "imec_order_lot",
+      "Incremental": "NULL",
+      "sftablename": "IMEC_ORDER_LOT",
+      "filter": ""
+    },
+    "DataSet124": {
+      "schema": "dbo",
+      "table": "imec_order_lot_line",
+      "Incremental": "NULL",
+      "sftablename": "IMEC_ORDER_LOT_LINE",
+      "filter": ""
+    },
+    "DataSet125": {
+      "schema": "dbo",
+      "table": "imec_order_lot_line_versions",
+      "Incremental": "NULL",
+      "sftablename": "IMEC_ORDER_LOT_LINE_VERSIONS",
+      "filter": ""
+    },
+    "DataSet126": {
+      "schema": "dbo",
+      "table": "imec_order_lot_versions",
+      "Incremental": "NULL",
+      "sftablename": "IMEC_ORDER_LOT_VERSIONS",
+      "filter": ""
+    },
+    "DataSet127": {
+      "schema": "dbo",
+      "table": "imec_order_notes",
+      "Incremental": "NULL",
+      "sftablename": "IMEC_ORDER_NOTES",
+      "filter": ""
+    },
+    "DataSet128": {
+      "schema": "dbo",
+      "table": "imec_order_notes_versions",
+      "Incremental": "NULL",
+      "sftablename": "IMEC_ORDER_NOTES_VERSIONS",
+      "filter": ""
+    },
+    "DataSet129": {
+      "schema": "dbo",
+      "table": "imec_order_shipping_feedback",
+      "Incremental": "NULL",
+      "sftablename": "IMEC_ORDER_SHIPPING_FEEDBACK",
+      "filter": ""
+    },
+    "DataSet130": {
+      "schema": "dbo",
+      "table": "imec_order_stakeholders",
+      "Incremental": "NULL",
+      "sftablename": "IMEC_ORDER_STAKEHOLDERS",
+      "filter": ""
+    },
+    "DataSet131": {
+      "schema": "dbo",
+      "table": "imec_order_stakeholders_versions",
+      "Incremental": "NULL",
+      "sftablename": "IMEC_ORDER_STAKEHOLDERS_VERSIONS",
+      "filter": ""
+    },
+    "DataSet132": {
+      "schema": "dbo",
+      "table": "imec_order_tag",
+      "Incremental": "NULL",
+      "sftablename": "IMEC_ORDER_TAG",
+      "filter": ""
+    },
+    "DataSet133": {
+      "schema": "dbo",
+      "table": "imec_order_tag_versions",
+      "Incremental": "NULL",
+      "sftablename": "IMEC_ORDER_TAG_VERSIONS",
+      "filter": ""
+    },
+    "DataSet134": {
+      "schema": "dbo",
+      "table": "imec_order_versions",
+      "Incremental": "NULL",
+      "sftablename": "IMEC_ORDER_VERSIONS",
+      "filter": ""
+    },
+    "DataSet135": {
+      "schema": "dbo",
+      "table": "imec_project",
+      "Incremental": "NULL",
+      "sftablename": "IMEC_PROJECT",
+      "filter": ""
+    },
+    "DataSet136": {
+      "schema": "dbo",
+      "table": "imec_report_data",
+      "Incremental": "NULL",
+      "sftablename": "IMEC_REPORT_DATA",
+      "filter": ""
+    },
+    "DataSet137": {
+      "schema": "dbo",
+      "table": "imec_request_type",
+      "Incremental": "NULL",
+      "sftablename": "IMEC_REQUEST_TYPE",
+      "filter": ""
+    },
+    "DataSet138": {
+      "schema": "dbo",
+      "table": "imec_shipper",
+      "Incremental": "NULL",
+      "sftablename": "IMEC_SHIPPER",
+      "filter": ""
+    },
+    "DataSet139": {
+      "schema": "dbo",
+      "table": "imec_wafer_type",
+      "Incremental": "NULL",
+      "sftablename": "IMEC_WAFER_TYPE",
+      "filter": ""
+    },
+    "DataSet140": {
+      "schema": "dbo",
+      "table": "OLD_Users",
+      "Incremental": "NULL",
+      "sftablename": "OLD_USERS",
+      "filter": ""
+    },
+    "DataSet141": {
+      "schema": "dbo",
+      "table": "v_gem_employee_gws",
+      "Incremental": "NULL",
+      "sftablename": "V_GEM_EMPLOYEE_GWS",
+      "filter": ""
+    }
+  }
+}

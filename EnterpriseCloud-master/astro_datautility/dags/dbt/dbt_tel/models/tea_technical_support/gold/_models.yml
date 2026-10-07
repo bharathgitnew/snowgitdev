@@ -1,0 +1,29 @@
+models:
+- name: GOLD__TEA_TECHNICAL_SUPPORT__WISDOM_GLOBAL_MACHINES
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_TECHNICAL_SUPPORT__WISDOM_GLOBAL_MACHINES_MONTHLY_SNAPSHOT
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_TECHNICAL_SUPPORT__BAAN_PURCHASEORDER
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_TECHNICAL_SUPPORT__BAAN_SERVICEORDER
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_TECHNICAL_SUPPORT__TIRS_ACCIDENT
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_TECHNICAL_SUPPORT__WISDOM_MACHINE_DETAILS
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_TECHNICAL_SUPPORT__WISDOM_MACHINE_FCNS
+  tests:
+  - has_data
+  - recently_run

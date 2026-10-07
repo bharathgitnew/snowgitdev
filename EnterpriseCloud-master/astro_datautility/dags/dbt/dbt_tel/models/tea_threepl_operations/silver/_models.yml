@@ -1,0 +1,13 @@
+models:
+- name: SILVER__TEA_THREEPL_OPERATIONS__INVENTORY_PLANT_MATERIAL
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_THREEPL_OPERATIONS__STORAGE_LOCATION_BATCH_CHARACTERISTICS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_THREEPL_OPERATIONS__TPL_UPS_INVENTORY_FILE_US
+  tests:
+  - has_data
+  - recently_run

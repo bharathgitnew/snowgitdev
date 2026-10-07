@@ -1,0 +1,105 @@
+/************
+	Model file generated from gmxDbtTemplateUtility.ipynb 
+	*************/
+
+	
+	{{ config(
+    	  materialized='incremental',
+    	  incremental_strategy='merge',
+    	  alias='SAP_US_FIT_EV_FAAT_YDDA',
+    	  unique_key = ['BUKRS',
+    'ANLN1',
+    'ANLN2',
+    'GJAHR',
+    'AFABE'],
+    	  transient=false	
+) }} 
+
+	with source_data as (
+	SELECT
+		JSONFIELD:"BUKRS"::STRING AS "BUKRS", 
+ 	 	JSONFIELD:"ANLN1"::STRING AS "ANLN1", 
+ 	 	JSONFIELD:"ANLN2"::STRING AS "ANLN2", 
+ 	 	JSONFIELD:"GJAHR"::STRING AS "GJAHR", 
+ 	 	JSONFIELD:"AFABE"::STRING AS "AFABE", 
+ 	 	JSONFIELD:"XAFAR"::STRING AS "XAFAR", 
+ 	 	JSONFIELD:"NDABJ"::STRING AS "NDABJ", 
+ 	 	JSONFIELD:"NDABP"::STRING AS "NDABP", 
+ 	 	JSONFIELD:"ANDSJ"::STRING AS "ANDSJ", 
+ 	 	JSONFIELD:"ANDSP"::STRING AS "ANDSP", 
+ 	 	JSONFIELD:"RSTCK"::STRING AS "RSTCK", 
+ 	 	JSONFIELD:"MIG_SOURCE"::STRING AS "MIG_SOURCE", 
+ 	 	JSONFIELD:"PERFY_IN_FY"::STRING AS "PERFY_IN_FY", 
+ 	 	JSONFIELD:"NDABP_IN_FY"::STRING AS "NDABP_IN_FY", 
+ 	 	JSONFIELD:"ANDSP_IN_FY"::STRING AS "ANDSP_IN_FY", 
+ 	 	JSONFIELD:"UNITS_IN_FY"::STRING AS "UNITS_IN_FY", 
+ 	 	JSONFIELD:"DELFLAG"::STRING AS "DELFLAG", 
+ 	 	JSONFIELD:"CDCHANGENR"::STRING AS "CDCHANGENR", 
+ 	 	JSONFIELD:"PSL_INSDATE"::STRING AS "PSL_INSDATE", 
+ 	 	JSONFIELD:"PSL_UPDDATE"::STRING AS "PSL_UPDDATE",
+		_FILEDATE,
+		_FILENAME
+	from {{ source('SAPH','SAP_US_FIT_EV_FAAT_YDDA') }}
+	{% if is_incremental() %}WHERE  _FILENAME > IFNULL((SELECT MAX(_FILENAME) FROM {{ this }}),'1970-01-01'){% endif %}
+        QUALIFY (ROW_NUMBER() OVER (PARTITION BY JSONFIELD:"BUKRS"::STRING,JSONFIELD:"ANLN1"::STRING,JSONFIELD:"ANLN2"::STRING,JSONFIELD:"GJAHR"::STRING,JSONFIELD:"AFABE"::STRING  ORDER BY _FILEDATE DESC )) = 1
+	),
+	
+	transform_data as (
+	SELECT 
+		"BUKRS", 
+ 	 	"ANLN1", 
+ 	 	"ANLN2", 
+ 	 	"GJAHR", 
+ 	 	"AFABE", 
+ 	 	"XAFAR", 
+ 	 	"NDABJ", 
+ 	 	"NDABP", 
+ 	 	"ANDSJ", 
+ 	 	"ANDSP", 
+ 	 	"RSTCK", 
+ 	 	"MIG_SOURCE", 
+ 	 	"PERFY_IN_FY", 
+ 	 	"NDABP_IN_FY", 
+ 	 	"ANDSP_IN_FY", 
+ 	 	"UNITS_IN_FY", 
+ 	 	"DELFLAG", 
+ 	 	"CDCHANGENR", 
+ 	 	"PSL_INSDATE", 
+ 	 	"PSL_UPDDATE",
+		_FILEDATE,
+		_FILENAME,
+		'{{ invocation_id }}' AS AUDIT_LOG_ID,
+        SHA2('hash_me') as _ROW_HASH -- Adds column to table on full refresh.
+	from source_data
+	),
+	
+	type_data as (
+	SELECT
+		CAST("BUKRS" AS NVARCHAR) AS "BUKRS", 
+ 	 	CAST("ANLN1" AS NVARCHAR) AS "ANLN1", 
+ 	 	CAST("ANLN2" AS NVARCHAR) AS "ANLN2", 
+ 	 	CAST("GJAHR" AS VARCHAR) AS "GJAHR", 
+ 	 	CAST("AFABE" AS VARCHAR) AS "AFABE", 
+ 	 	CAST("XAFAR" AS VARCHAR) AS "XAFAR", 
+ 	 	CAST("NDABJ" AS VARCHAR) AS "NDABJ", 
+ 	 	CAST("NDABP" AS VARCHAR) AS "NDABP", 
+ 	 	CAST("ANDSJ" AS VARCHAR) AS "ANDSJ", 
+ 	 	CAST("ANDSP" AS VARCHAR) AS "ANDSP", 
+ 	 	CAST("RSTCK" AS FLOAT) AS "RSTCK", 
+ 	 	CAST("MIG_SOURCE" AS NVARCHAR) AS "MIG_SOURCE", 
+ 	 	CAST("PERFY_IN_FY" AS VARCHAR) AS "PERFY_IN_FY", 
+ 	 	CAST("NDABP_IN_FY" AS VARCHAR) AS "NDABP_IN_FY", 
+ 	 	CAST("ANDSP_IN_FY" AS VARCHAR) AS "ANDSP_IN_FY", 
+ 	 	CAST("UNITS_IN_FY" AS FLOAT) AS "UNITS_IN_FY", 
+ 	 	CAST("DELFLAG" AS BOOLEAN) AS "DELFLAG", 
+ 	 	CAST("CDCHANGENR" AS NVARCHAR) AS "CDCHANGENR", 
+ 	 	CAST("PSL_INSDATE" AS TIMESTAMP) AS "PSL_INSDATE", 
+ 	 	CAST("PSL_UPDDATE" AS TIMESTAMP) AS "PSL_UPDDATE",
+		cast(_FILEDATE AS TIMESTAMP_NTZ(9)) AS _FILEDATE,
+		cast(_FILENAME as varchar(128)) as _FILENAME,
+        cast(AUDIT_LOG_ID as varchar(128)) as AUDIT_LOG_ID,
+        cast(_ROW_HASH as varchar(128)) as _ROW_HASH
+	from transform_data
+	)
+
+	select * from type_data

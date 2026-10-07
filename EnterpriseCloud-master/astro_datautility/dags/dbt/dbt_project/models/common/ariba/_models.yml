@@ -1,0 +1,439 @@
+version: 2
+models:
+- name: COMMON__ARIBA__INTERIM_PURCHASEORDER_HEADER
+  description: Model Ariba Interim_PurchaseOrder_Header file.
+  columns:
+  - name: RealmName
+    tests:
+    - dbt_expectations.expect_column_values_to_not_be_null:
+        config:
+          alias: Ariba__Interim_PurchaseOrder_Header__RealmName__NotNull
+    - dbt_expectations.expect_column_values_to_be_in_set:
+        value_set:
+        - tel-BAAN-T
+        - tel-BAAN
+        - tel-ECC-T
+        - tel-ECC
+        - tel-S4-T
+        - tel-S4
+        config:
+          alias: Ariba__Interim_PurchaseOrder_Header__RealmName__ValidValues
+  - name: PurchaseOrderIdKey
+    tests:
+    - dbt_expectations.expect_column_values_to_not_be_null:
+        config:
+          alias: Ariba__Interim_PurchaseOrder_Header__PurchaseOrderIdKey__NotNull
+  - name: PurchaseOrderVersionKey
+    tests:
+    - dbt_expectations.expect_column_values_to_not_be_null:
+        config:
+          alias: Ariba__Interim_PurchaseOrder_Header__PurchaseOrderVersionKey__NotNull
+  - name: LastUpdated
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: day
+        interval: 1
+        row_condition: RealmName = 'tel-S4'
+        config:
+          alias: Ariba__Interim_PurchaseOrder_Header__LastUpdated__Recent
+  tests:
+  - dbt_expectations.expect_compound_columns_to_be_unique:
+      column_list:
+      - RealmName
+      - PurchaseOrderIdKey
+      - PurchaseOrderVersionKey
+      config:
+        alias: Ariba__Interim_PurchaseOrder_Header__Primary_Key__Unique
+- name: COMMON__ARIBA__INTERIM_REQUISITION_HEADER
+  description: Model Ariba Interim_Requisition_Header file.
+  columns:
+  - name: RealmName
+    tests:
+    - dbt_expectations.expect_column_values_to_not_be_null:
+        config:
+          alias: Ariba__Interim_Requisition_Header__RealmName__NotNull
+    - dbt_expectations.expect_column_values_to_be_in_set:
+        value_set:
+        - tel-BAAN-T
+        - tel-BAAN
+        - tel-ECC-T
+        - tel-ECC
+        - tel-S4-T
+        - tel-S4
+        config:
+          alias: Ariba__Interim_Requisition_Header__RealmName__ValidValues
+  - name: RequisitionIdKey
+    tests:
+    - dbt_expectations.expect_column_values_to_not_be_null:
+        config:
+          alias: Ariba__Interim_Requisition_Header__RequisitionIdKey__NotNull
+  - name: RequisitionVersionKey
+    tests:
+    - dbt_expectations.expect_column_values_to_not_be_null:
+        config:
+          alias: Ariba__Interim_Requisition_Header__RequisitionVersionKey__NotNull
+  - name: LastUpdated
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: day
+        interval: 1
+        row_condition: RealmName = 'tel-S4'
+        config:
+          alias: Ariba__Interim_Requisition_Header__LastUpdated__Recent
+  tests:
+  - dbt_expectations.expect_compound_columns_to_be_unique:
+      column_list:
+      - RealmName
+      - RequisitionIdKey
+      - RequisitionVersionKey
+      config:
+        alias: Ariba__Interim_Requisition_Header__Primary_Key__Unique
+
+- name: COMMON__ARIBA__INVOICE_HEADER
+  description: Model Ariba Invoice_Header file.
+  columns:
+  - name: RealmName
+    tests:
+    - dbt_expectations.expect_column_values_to_not_be_null:
+        config:
+          alias: Ariba__Invoice_Header__RealmName__NotNull
+    - dbt_expectations.expect_column_values_to_be_in_set:
+        value_set:
+        - tel-BAAN-T
+        - tel-BAAN
+        - tel-ECC-T
+        - tel-ECC
+        - tel-S4-T
+        - tel-S4
+        config:
+          alias: Ariba__Invoice_Header__RealmName__ValidValues
+  - name: InvoiceIdKey
+    tests:
+    - dbt_expectations.expect_column_values_to_not_be_null:
+        config:
+          alias: Ariba__Invoice_Header__InvoiceIdKey__NotNull
+  - name: InvoiceVersionKey
+    tests:
+    - dbt_expectations.expect_column_values_to_not_be_null:
+        config:
+          alias: Ariba__Invoice_Header__InvoiceVersionKey__NotNull
+  - name: LastUpdated
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: day
+        interval: 1
+        row_condition: RealmName = 'tel-S4'
+        config:
+          alias: Ariba__Invoice_Header__LastUpdated__Recent
+  tests:
+  - dbt_expectations.expect_compound_columns_to_be_unique:
+      column_list:
+      - RealmName
+      - InvoiceIdKey
+      - InvoiceVersionKey
+      config:
+        alias: Ariba__Invoice_Header__Primary_Key__Unique
+- name: COMMON__ARIBA__INVOICE_LINEITEM
+  description: Model Ariba Invoice_LineItem file.
+  columns:
+  - name: RealmName
+    tests:
+    - dbt_expectations.expect_column_values_to_not_be_null:
+        config:
+          alias: Ariba__Invoice_LineItem__RealmName__NotNull
+    - dbt_expectations.expect_column_values_to_be_in_set:
+        value_set:
+        - tel-BAAN-T
+        - tel-BAAN
+        - tel-ECC-T
+        - tel-ECC
+        - tel-S4-T
+        - tel-S4
+        config:
+          alias: Ariba__Invoice_LineItem__RealmName__ValidValues
+  - name: InvoiceIdKey
+    tests:
+    - dbt_expectations.expect_column_values_to_not_be_null:
+        config:
+          alias: Ariba__Invoice_LineItem__InvoiceIdKey__NotNull
+  - name: InvoiceVersionKey
+    tests:
+    - dbt_expectations.expect_column_values_to_not_be_null:
+        config:
+          alias: Ariba__Invoice_LineItem__InvoiceVersionKey__NotNull
+  - name: InvoiceLineItemKey
+    tests:
+    - dbt_expectations.expect_column_values_to_not_be_null:
+        config:
+          alias: Ariba__Invoice_LineItem__InvoiceLineItemKey__NotNull
+  tests:
+  - dbt_expectations.expect_compound_columns_to_be_unique:
+      column_list:
+      - RealmName
+      - InvoiceIdKey
+      - InvoiceVersionKey
+      - InvoiceLineItemKey
+      config:
+        alias: Ariba__Invoice_LineItem__Primary_Key__Unique
+- name: COMMON__ARIBA__PURCHASEORDER_HEADER
+  description: Model Ariba PurchaseOrder_Header file.
+  columns:
+  - name: RealmName
+    tests:
+    - dbt_expectations.expect_column_values_to_not_be_null:
+        config:
+          alias: Ariba__PurchaseOrder_Header__RealmName__NotNull
+    - dbt_expectations.expect_column_values_to_be_in_set:
+        value_set:
+        - tel-BAAN-T
+        - tel-BAAN
+        - tel-ECC-T
+        - tel-ECC
+        - tel-S4-T
+        - tel-S4
+        config:
+          alias: Ariba__PurchaseOrder_Header__RealmName__ValidValues
+  - name: PurchaseOrderIdKey
+    tests:
+    - dbt_expectations.expect_column_values_to_not_be_null:
+        config:
+          alias: Ariba__PurchaseOrder_Header__PurchaseOrderIdKey__NotNull
+  - name: PurchaseOrderVersionKey
+    tests:
+    - dbt_expectations.expect_column_values_to_not_be_null:
+        config:
+          alias: Ariba__PurchaseOrder_Header__PurchaseOrderVersionKey__NotNull
+  - name: LastUpdated
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: day
+        interval: 1
+        row_condition: RealmName = 'tel-S4'
+        config:
+          alias: Ariba__PurchaseOrder_Header__LastUpdated__Recent
+  tests:
+  - dbt_expectations.expect_compound_columns_to_be_unique:
+      column_list:
+      - RealmName
+      - PurchaseOrderIdKey
+      - PurchaseOrderVersionKey
+      config:
+        alias: Ariba__PurchaseOrder_Header__Primary_Key__Unique
+- name: COMMON__ARIBA__PURCHASEORDER_LINEITEM
+  description: Model Ariba PurchaseOrder_LineItem file.
+  columns:
+  - name: RealmName
+    tests:
+    - dbt_expectations.expect_column_values_to_not_be_null:
+        config:
+          alias: Ariba__PurchaseOrder_LineItem__RealmName__NotNull
+    - dbt_expectations.expect_column_values_to_be_in_set:
+        value_set:
+        - tel-BAAN-T
+        - tel-BAAN
+        - tel-ECC-T
+        - tel-ECC
+        - tel-S4-T
+        - tel-S4
+        config:
+          alias: Ariba__PurchaseOrder_LineItem__RealmName__ValidValues
+  - name: PurchaseOrderIdKey
+    tests:
+    - dbt_expectations.expect_column_values_to_not_be_null:
+        config:
+          alias: Ariba__PurchaseOrder_LineItem__PurchaseOrderIdKey__NotNull
+  - name: PurchaseOrderVersionKey
+    tests:
+    - dbt_expectations.expect_column_values_to_not_be_null:
+        config:
+          alias: Ariba__PurchaseOrder_LineItem__PurchaseOrderVersionKey__NotNull
+  - name: PurchaseOrderLineItemKey
+    tests:
+    - dbt_expectations.expect_column_values_to_not_be_null:
+        config:
+          alias: Ariba__PurchaseOrder_LineItem__PurchaseOrderLineItemKey__NotNull
+  tests:
+  - dbt_expectations.expect_compound_columns_to_be_unique:
+      column_list:
+      - RealmName
+      - PurchaseOrderIdKey
+      - PurchaseOrderVersionKey
+      - PurchaseOrderLineItemKey
+      config:
+        alias: Ariba__PurchaseOrder_LineItem__Primary_Key__Unique
+- name: COMMON__ARIBA__PURCHASEORDER_SPLITACCOUNTING
+  description: Model Ariba PurchaseOrder_SplitAccounting file.
+  columns:
+  - name: RealmName
+    tests:
+    - dbt_expectations.expect_column_values_to_not_be_null:
+        config:
+          alias: Ariba__PurchaseOrder_SplitAccounting__RealmName__NotNull
+    - dbt_expectations.expect_column_values_to_be_in_set:
+        value_set:
+        - tel-BAAN-T
+        - tel-BAAN
+        - tel-ECC-T
+        - tel-ECC
+        - tel-S4-T
+        - tel-S4
+        config:
+          alias: Ariba__PurchaseOrder_SplitAccounting__RealmName__ValidValues
+  - name: PurchaseOrderIdKey
+    tests:
+    - dbt_expectations.expect_column_values_to_not_be_null:
+        config:
+          alias: Ariba__PurchaseOrder_SplitAccounting__PurchaseOrderIdKey__NotNull
+  - name: PurchaseOrderVersionKey
+    tests:
+    - dbt_expectations.expect_column_values_to_not_be_null:
+        config:
+          alias: Ariba__PurchaseOrder_SplitAccounting__PurchaseOrderVersionKey__NotNull
+  - name: PurchaseOrderLineItemKey
+    tests:
+    - dbt_expectations.expect_column_values_to_not_be_null:
+        config:
+          alias: Ariba__PurchaseOrder_SplitAccounting__PurchaseOrderLineItemKey__NotNull
+  - name: PurchaseOrderSplitAccountingKey
+    tests:
+    - dbt_expectations.expect_column_values_to_not_be_null:
+        config:
+          alias: Ariba__PurchaseOrder_SplitAccounting__PurchaseOrderSplitAccountingKey__NotNull
+  tests:
+  - dbt_expectations.expect_compound_columns_to_be_unique:
+      column_list:
+      - RealmName
+      - PurchaseOrderIdKey
+      - PurchaseOrderVersionKey
+      - PurchaseOrderLineItemKey
+      - PurchaseOrderSplitAccountingKey
+      config:
+        alias: Ariba__PurchaseOrder_SplitAccounting__Primary_Key__Unique
+- name: COMMON__ARIBA__RECEIPT_LINEITEM
+  description: Model Ariba Receipt_LineItem file.
+  columns:
+  - name: RealmName
+    tests:
+    - dbt_expectations.expect_column_values_to_not_be_null:
+        config:
+          alias: Ariba__Receipt_LineItem__RealmName__NotNull
+    - dbt_expectations.expect_column_values_to_be_in_set:
+        value_set:
+        - tel-BAAN-T
+        - tel-BAAN
+        - tel-ECC-T
+        - tel-ECC
+        - tel-S4-T
+        - tel-S4
+        config:
+          alias: Ariba__Receipt_LineItem__RealmName__ValidValues
+  - name: ReceiptIDKey
+    tests:
+    - dbt_expectations.expect_column_values_to_not_be_null:
+        config:
+          alias: Ariba__Receipt_LineItem__ReceiptIDKey__NotNull
+  - name: ReceiptVersionKey
+    tests:
+    - dbt_expectations.expect_column_values_to_not_be_null:
+        config:
+          alias: Ariba__Receipt_LineItem__ReceiptVersionKey__NotNull
+  - name: ReceiptLineItemKey
+    tests:
+    - dbt_expectations.expect_column_values_to_not_be_null:
+        config:
+          alias: Ariba__Receipt_LineItem__ReceiptLineItemKey__NotNull
+  tests:
+  - dbt_expectations.expect_compound_columns_to_be_unique:
+      column_list:
+      - RealmName
+      - ReceiptIDKey
+      - ReceiptVersionKey
+      - ReceiptLineItemKey
+      config:
+        alias: Ariba__Receipt_LineItem__Primary_Key__Unique
+- name: COMMON__ARIBA__REQUISITION_HEADER
+  description: Model Ariba Requisition_Header file.
+  columns:
+  - name: RealmName
+    tests:
+    - dbt_expectations.expect_column_values_to_not_be_null:
+        config:
+          alias: Ariba__Requisition_Header__RealmName__NotNull
+    - dbt_expectations.expect_column_values_to_be_in_set:
+        value_set:
+        - tel-BAAN-T
+        - tel-BAAN
+        - tel-ECC-T
+        - tel-ECC
+        - tel-S4-T
+        - tel-S4
+        config:
+          alias: Ariba__Requisition_Header__RealmName__ValidValues
+  - name: RequisitionIdKey
+    tests:
+    - dbt_expectations.expect_column_values_to_not_be_null:
+        config:
+          alias: Ariba__Requisition_Header__RequisitionIdKey__NotNull
+  - name: RequisitionVersionKey
+    tests:
+    - dbt_expectations.expect_column_values_to_not_be_null:
+        config:
+          alias: Ariba__Requisition_Header__RequisitionVersionKey__NotNull
+  - name: LastUpdated
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: day
+        interval: 1
+        row_condition: RealmName = 'tel-S4'
+        config:
+          alias: Ariba__Requisition_Header__LastUpdated__Recent
+  tests:
+  - dbt_expectations.expect_compound_columns_to_be_unique:
+      column_list:
+      - RealmName
+      - RequisitionIdKey
+      - RequisitionVersionKey
+      config:
+        alias: Ariba__Requisition_Header__Primary_Key__Unique
+- name: COMMON__ARIBA__REQUISITION_LINEITEM
+  description: Model Ariba Requisition_LineItem file.
+  columns:
+  - name: RealmName
+    tests:
+    - dbt_expectations.expect_column_values_to_not_be_null:
+        config:
+          alias: Ariba__Requisition_LineItem__RealmName__NotNull
+    - dbt_expectations.expect_column_values_to_be_in_set:
+        value_set:
+        - tel-BAAN-T
+        - tel-BAAN
+        - tel-ECC-T
+        - tel-ECC
+        - tel-S4-T
+        - tel-S4
+        config:
+          alias: Ariba__Requisition_LineItem__RealmName__ValidValues
+  - name: RequisitionIDKey
+    tests:
+    - dbt_expectations.expect_column_values_to_not_be_null:
+        config:
+          alias: Ariba__Requisition_LineItem__RequisitionIDKey__NotNull
+  - name: RequisitionVersionKey
+    tests:
+    - dbt_expectations.expect_column_values_to_not_be_null:
+        config:
+          alias: Ariba__Requisition_LineItem__RequisitionVersionKey__NotNull
+  - name: RequisitionLineItemKey
+    tests:
+    - dbt_expectations.expect_column_values_to_not_be_null:
+        config:
+          alias: Ariba__Requisition_LineItem__RequisitionLineItemKey__NotNull
+  tests:
+  - dbt_expectations.expect_compound_columns_to_be_unique:
+      column_list:
+      - RealmName
+      - RequisitionIDKey
+      - RequisitionVersionKey
+      - RequisitionLineItemKey
+      config:
+        alias: Ariba__Requisition_LineItem__Primary_Key__Unique

@@ -1,0 +1,53 @@
+/************
+Model file generated from csdproDbtTemplateUtility.ipynb 
+*************/
+
+
+{{ config(
+    	materialized='incremental',
+    	incremental_strategy='merge',
+    	alias='STATUS_HISTORY',
+    	unique_key = ['STATUS_HISTORY_ID'],
+    	transient=false
+) }} 
+
+with source_data as (
+	SELECT
+		JSONFIELD:"STATUS_HISTORY_ID"::STRING AS "STATUS_HISTORY_ID", 
+ 	 	JSONFIELD:"INCIDENT_ID"::STRING AS "INCIDENT_ID", 
+ 	 	JSONFIELD:"INCIDENT_STATUS_ID"::STRING AS "INCIDENT_STATUS_ID", 
+ 	 	JSONFIELD:"IS_CURRENT_STATUS"::STRING AS "IS_CURRENT_STATUS", 
+ 	 	REGEXP_REPLACE(JSONFIELD:"MODIFIED_DATETIME", '\/Date\\(|\\)\/', '')::TIMESTAMP AS MODIFIED_DATETIME, 
+ 	 	JSONFIELD:"MODIFIED_BY"::STRING AS "MODIFIED_BY"
+	FROM {{ source('CSDPRO','STATUS_HISTORY') }}
+	{% if is_incremental() %}WHERE  _FILEDATE > IFNULL((SELECT MAX(Hist._FILEDATE) FROM {{ source('CSDPRO','STATUS_HISTORY') }} Hist),'1970-01-01'){% endif %}
+    QUALIFY (ROW_NUMBER() OVER (PARTITION BY JSONFIELD:"STATUS_HISTORY_ID"::STRING  ORDER BY _FILENAME DESC,_FILEDATE DESC )) = 1
+),
+
+transform_data as (
+	SELECT 
+		"STATUS_HISTORY_ID", 
+ 	 	"INCIDENT_ID", 
+ 	 	"INCIDENT_STATUS_ID", 
+ 	 	"IS_CURRENT_STATUS", 
+ 	 	"MODIFIED_DATETIME", 
+ 	 	"MODIFIED_BY",
+		'{{ invocation_id }}' AS AUDIT_LOG_ID,
+		SHA2('hash_me') AS _ROW_HASH -- Adds column to table on full refresh.
+	FROM source_data
+),
+
+type_data as (
+	SELECT
+		CAST("STATUS_HISTORY_ID" AS NUMBER(38,0)) AS "STATUS_HISTORY_ID", 
+ 	 	CAST("INCIDENT_ID" AS NUMBER(38,0)) AS "INCIDENT_ID", 
+ 	 	CAST("INCIDENT_STATUS_ID" AS NUMBER(38,0)) AS "INCIDENT_STATUS_ID", 
+ 	 	CAST("IS_CURRENT_STATUS" AS NUMBER(38,0)) AS "IS_CURRENT_STATUS", 
+ 	 	CAST("MODIFIED_DATETIME" AS TIMESTAMP_LTZ(9)) AS "MODIFIED_DATETIME", 
+ 	 	CAST("MODIFIED_BY" AS NUMBER(38,0)) AS "MODIFIED_BY",
+		CAST(AUDIT_LOG_ID AS VARCHAR(128)) AS AUDIT_LOG_ID,
+		CAST(_ROW_HASH AS VARCHAR(128)) AS _ROW_HASH
+	FROM transform_data
+)
+
+SELECT * FROM type_data

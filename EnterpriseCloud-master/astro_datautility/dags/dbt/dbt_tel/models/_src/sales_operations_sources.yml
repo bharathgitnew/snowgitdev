@@ -1,0 +1,49 @@
+version: 2
+sources:
+- name: CRM
+  description: Landing Zone - CRM Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: CRM
+  tables:
+  - name: SALES_BU_BOOKING_BUDGET_HISTORY
+    identifier: SALES_BU_BOOKING_BUDGET_HISTORY
+    description: Landing table for SALES_BU_BOOKING_BUDGET_HISTORY file.
+  - name: SALES_BU_BOOKING_FORECAST_HISTORY
+    identifier: SALES_BU_BOOKING_FORECAST_HISTORY
+    description: Landing table for SALES_BU_BOOKING_FORECAST_HISTORY file.
+  - name: SALES_BU_REVENUE_BUDGET_HISTORY
+    identifier: SALES_BU_REVENUE_BUDGET_HISTORY
+    description: Landing table for SALES_BU_REVENUE_BUDGET_HISTORY file.
+  - name: SALES_BU_REVENUE_FORECAST_HISTORY
+    identifier: SALES_BU_REVENUE_FORECAST_HISTORY
+    description: Landing table for SALES_BU_REVENUE_FORECAST_HISTORY file.
+  - name: SALES_GS_BOOKING_BUDGET_HISTORY
+    identifier: SALES_GS_BOOKING_BUDGET_HISTORY
+    description: Landing table for SALES_GS_BOOKING_BUDGET_HISTORY file.
+  - name: SALES_GS_BOOKING_FORECAST_HISTORY
+    identifier: SALES_GS_BOOKING_FORECAST_HISTORY
+    description: Landing table for SALES_GS_BOOKING_FORECAST_HISTORY file.
+  - name: SALES_GS_REVENUE_BUDGET_HISTORY
+    identifier: SALES_GS_REVENUE_BUDGET_HISTORY
+    description: Landing table for SALES_GS_REVENUE_BUDGET_HISTORY file.
+  - name: SALES_GS_REVENUE_FORECAST_HISTORY
+    identifier: SALES_GS_REVENUE_FORECAST_HISTORY
+    description: Landing table for SALES_GS_REVENUE_FORECAST_HISTORY file.
+- name: FILE
+  description: Landing Zone - FILE Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: FILE  
+  tables:
+  - name: TEL_ACC_REVENUE_BUDGET_FORECAST
+    identifier: TEL_ACC_REVENUE_BUDGET_FORECAST
+    description: Landing table for TEL_ACC_REVENUE_BUDGET_FORECAST file.
+  - name: TEL_GS_REVENUE_BUDGET_FORECAST
+    identifier: TEL_GS_REVENUE_BUDGET_FORECAST
+    description: Landing table for TEL_GS_REVENUE_BUDGET_FORECAST file.
+  - name: TEL_GS_BOOKING_BUDGET_FORECAST
+    identifier: TEL_GS_BOOKING_BUDGET_FORECAST
+    description: Landing table for TEL_GS_BOOKING_BUDGET_FORECAST file.
+  - name: CRMSALES_SECURITY
+    identifier: CRMSALES_SECURITY
+    description: Landing table for CRMSALES_SECURITY file.
+

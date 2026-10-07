@@ -1,0 +1,119 @@
+models:
+- name: BRONZE__TEH_HUMAN_RESOURCES__FILE_ATTENDANCE_STATUS
+  description: |
+    PURPOSE: Workday learning attendance status feed for employee enrollment records and course completion outcomes.
+    GRAIN: One row = one enrollment id.
+  tests:
+  - has_data
+  columns:
+  - name: _FILEDATE
+    description: Check the _FILEDATE column in the BRONZE.TEH_HR.FILE_ATTENDANCE_STATUS
+      table to ensure it falls within the last 24-hour interval.
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 24
+        enabled: false
+  - name: ENROLLMENT_ID
+    description: Unique enrollment record for an employee training registration. Text identifier from Workday export. Only the latest snapshot for each enrollment id is kept in bronze.
+  - name: EMPLOYEE_ID
+    description: Employee identifier tied to the training enrollment. Text identifier from Workday export. May differ from conformed employee keys used in curated reporting layers.
+  - name: NAME
+    description: Employee name shown on the enrollment record. Free-text name value from HR export. Names can change over time as employee profiles are updated.
+  - name: COMPANY_CODE
+    description: Company code assigned to the enrolled employee. Organizational code text from HR source. Meaning can shift when legal entities are reorganized.
+  - name: COMPANY
+    description: Company name associated with the enrolled employee. Free-text organizational label from HR source. Naming may not exactly match standardized legal-entity names used downstream.
+  - name: COST_CENTER_CODE
+    description: Cost center code on the employee enrollment. Organizational code text from HR source. Codes may be reassigned during reorganization cycles.
+  - name: COST_CENTER_NAME
+    description: Cost center name on the employee enrollment. Free-text organizational label from HR source. Naming can change without back-updating historical file extracts.
+  - name: LOCATION_CODE
+    description: Work location code for the enrolled employee. Location code text from HR source. Mapping to location names can change as site master data is updated.
+  - name: LOCATION
+    description: Work location name for the enrolled employee. Free-text location label from HR source. May include local aliases instead of standardized facility names.
+  - name: EMPLOYEE_TYPE
+    description: Worker type on the enrollment record. Category text from Workday classifications. Includes both employee and contingent-worker terminology.
+  - name: MANAGER_ID
+    description: Manager identifier for the enrolled employee. Text identifier from HR source. Assignment reflects snapshot timing and can lag organization changes.
+  - name: MANAGER_NAME
+    description: Manager name associated with the enrolled employee. Free-text name from HR source. Display format may differ from enterprise directory standards.
+  - name: TERMINATION_STATUS
+    description: Employment termination status at the time of extract. Status text from HR source. Can appear inconsistent with training activity while HR records are being reconciled.
+  - name: JOB_FAMILY_GROUP
+    description: High-level job family grouping for the employee role. Category text from Workday taxonomy. Definitions can change when HR role frameworks are revised.
+  - name: JOB_FAMILY
+    description: Job family assigned to the employee role. Category text from Workday taxonomy. Not normalized in bronze, so spelling and granularity can vary.
+  - name: CAREER_BAND
+    description: Career band associated with the employee role. Career-level category from HR source. Labels may vary across operating companies.
+  - name: POSITION_TITLE
+    description: Position title held by the enrolled employee. Free-text role title from HR source. Small wording changes can create near-duplicate titles in reporting.
+  - name: HIRE_DATE
+    description: Original employee hire date. Date value from HR source. Legacy records may contain placeholder or partial dates.
+  - name: SENIORITY_DATE
+    description: Seniority date used for tenure and service calculations. Date value from HR source. Can differ from hire date due to policy-based adjustments.
+  - name: CONTINGENT_HIRE_DATE
+    description: Start date for contingent worker assignments. Date value from HR source. Usually blank for regular employees.
+  - name: TERMINATION_DATE
+    description: Employee termination date. Formatted as MM/DD/YYYY text during bronze transformation. Blank when the employee is active or no termination is recorded.
+  - name: COURSE_NUMBER
+    description: Course identifier linked to the enrollment. Text course code from learning source. Same code can be reused across course revisions.
+  - name: COURSE_TITLE
+    description: Course title linked to the enrollment. Free-text title from learning source. Titles can change while the course number remains the same.
+  - name: COURSE_DURATION
+    description: Duration recorded for the assigned course. Unit and format follow the learning feed configuration. Values can be blank or inconsistent across course catalogs.
+  - name: TOPIC
+    description: Learning topic category for the course. Category text from learning source. Topic taxonomy can change during curriculum updates.
+  - name: REGISTRATION_STATUS
+    description: Registration status for the employee course enrollment. Status text from learning source. Status changes may lag completion updates between file drops.
+  - name: COMPLETION_DATE
+    description: Timestamp when the learner completed the course. Parsed as timestamp with time zone. Null when training is still in progress or not started.
+  - name: SCORE
+    description: Assessment score captured for the enrollment. Score value from learning source. Scoring scales vary by course and are not standardized in bronze.
+  - name: SUCCESS
+    description: Outcome indicator for course success or failure. Flag/status text from learning source. Values may be boolean-like or descriptive pass/fail labels.
+  - name: COMPLETION_STATUS
+    description: Completion status reported for the course enrollment. Status text from learning source. Semantics can overlap with registration status values.
+  - name: COURSE_ATTENDANCE_STATUS
+    description: Attendance status recorded for the enrolled course activity. Status text from the learning source. It can differ from completion status for waived, self-paced, or partially attended training.
+- name: BRONZE__TEH_HUMAN_RESOURCES__FILE_CAMPAIGN
+  description: |
+    PURPOSE: Workday learning campaign assignment feed showing employee course requirements and campaign dates.
+    GRAIN: One row = one employee and course number.
+  tests:
+  - has_data
+  columns:
+  - name: _FILEDATE
+    description: Check the _FILEDATE column in the BRONZE.TEH_HR.FILE_CAMPAIGN
+      table to ensure it falls within the last 24-hour interval.
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 24
+        enabled: false
+  - name: EMPLOYEE_ID
+    description: Employee identifier tied to the campaign requirement. Text identifier from Workday export. May differ from conformed workforce keys used in curated layers.
+  - name: NAME
+    description: Employee name shown in the campaign extract. Free-text name value from HR source. Name can change across snapshots as profiles are updated.
+  - name: COURSE_NUMBER
+    description: Course identifier assigned by the campaign. Text course code from learning source. Code reuse can occur across campaign refreshes.
+  - name: COURSE_TITLE
+    description: Course title assigned by the campaign. Free-text title from learning source. Title may change while the same course number remains active.
+  - name: ASSIGNED_DATE
+    description: Timestamp when the campaign course was assigned to the employee. Parsed as timestamp with time zone. Invalid source timestamp formats are converted to null.
+  - name: DUE_DATE
+    description: Due date for the assigned campaign course. Formatted as MM/DD/YYYY text during bronze transformation. Blank when no due date is configured in the campaign.
+  - name: COMPLETION_DATE
+    description: Completion timestamp for the assigned campaign course. Parsed as timestamp with time zone. Null when the requirement is incomplete.
+  - name: EXPIRATION_DATE
+    description: Expiration date for campaign requirement validity. Formatted as MM/DD/YYYY text during bronze transformation. Blank when no expiration policy is configured.
+  - name: REQUIREMENT_STATUS
+    description: Requirement status recorded for the campaign assignment. Status text from the learning source. Status wording can change between campaign cycles or program updates.
+  - name: CAMPAIGN_START_DATE
+    description: Start date of the campaign window. Formatted as MM/DD/YYYY text during bronze transformation. Can predate individual assignments when standard campaign setups are reused.
+  - name: CAMPAIGN_END_DATE
+    description: End date of the campaign window. Formatted as MM/DD/YYYY text during bronze transformation. May be blank or extended without historical backfill.
+  - name: WAIVED
+    description: Manual-waiver indicator for the campaign requirement. Flag text from the MANUALLY WAIVED source field. Source values can appear as labels rather than strict true or false values.
+  - name: TOPIC
+    description: Learning topic associated with the campaign course. Category text from the learning source. It can be blank when the course is uncategorized or loosely maintained.

@@ -1,0 +1,84 @@
+{
+    "CopyFile": {
+        "GBOMREPORTS_CP": {
+            "fileshare": "\\\\172.26.95.19\\GBOMReports",
+            "table": "GBOMREPORTS_CP",
+            "schema": "ADS",
+            "file_pattern": "01_CP.xlsx",
+            "is_incremental": false,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": false,
+            "file_format": "xlsx",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "GBOMREPORTS_STATUS": {
+            "fileshare": "\\\\172.26.95.19\\GBOMReports",
+            "table": "GBOMREPORTS_STATUS",
+            "schema": "ADS",
+            "file_pattern": "02_Status.xlsx",
+            "is_incremental": false,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "xlsx",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "GBOMREPORTS_PARTS": {
+            "fileshare": "\\\\172.26.95.19\\GBOMReports",
+            "table": "GBOMREPORTS_PARTS",
+            "schema": "ADS",
+            "file_pattern": "03_Parts.xlsx",
+            "is_incremental": false,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "xlsx",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "GBOMREPORTS_MISC": {
+            "fileshare": "\\\\172.26.95.19\\GBOMReports",
+            "table": "GBOMREPORTS_MISC",
+            "schema": "ADS",
+            "file_pattern": "04_misc.xlsx",          
+            "is_incremental": false,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "xlsx",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "GBOMREPORTS_USABLE": {
+            "fileshare": "\\\\172.26.95.19\\GBOMReports",
+            "table": "GBOMREPORTS_USABLE",
+            "schema": "ADS",
+            "file_pattern": "USABLE.xlsx",
+            "is_incremental": false,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "xlsx",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        }
+    }
+}

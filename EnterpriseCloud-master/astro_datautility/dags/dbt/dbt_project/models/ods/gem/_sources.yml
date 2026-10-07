@@ -1,0 +1,10 @@
+version: 2
+sources:
+- name: GEM
+  description: Landing Zone - GEM Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: GEM
+  tables:
+  - name: REFERENCE_STANDARD_USERS
+    identifier: REFERENCE_STANDARD_USERS
+    description: Landing table for REFERENCE_STANDARD_USERS file.

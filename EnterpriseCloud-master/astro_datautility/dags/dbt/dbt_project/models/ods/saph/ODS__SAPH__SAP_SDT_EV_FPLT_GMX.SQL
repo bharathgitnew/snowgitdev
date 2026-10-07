@@ -1,0 +1,139 @@
+
+
+	/************
+	Model file generated from gmxDbtTemplateUtility.ipynb
+	*************/
+
+
+	{{ config(
+	  materialized='incremental',
+	  incremental_strategy='insert_overwrite',
+	  alias='SAP_SDT_EV_FPLT_GMX',
+	  enabled=false,
+	  transient=false
+	) }}
+
+	with source_data as (
+	SELECT
+    	_FILEDATE,
+		_FILENAME,
+		JSONFIELD:"FPLNR"::STRING AS "FPLNR",
+ 	 	JSONFIELD:"FPLTR"::STRING AS "FPLTR",
+ 	 	JSONFIELD:"FPTTP"::STRING AS "FPTTP",
+ 	 	JSONFIELD:"TETXT"::STRING AS "TETXT",
+ 	 	JSONFIELD:"FKDAT"::STRING AS "FKDAT",
+ 	 	JSONFIELD:"FAREG"::STRING AS "FAREG",
+ 	 	JSONFIELD:"FPROZ"::STRING AS "FPROZ",
+ 	 	JSONFIELD:"WAERS"::STRING AS "WAERS",
+ 	 	JSONFIELD:"FAKWR"::STRING AS "FAKWR",
+ 	 	JSONFIELD:"FAKSP"::STRING AS "FAKSP",
+ 	 	JSONFIELD:"FKARV"::STRING AS "FKARV",
+ 	 	JSONFIELD:"FKSAF"::STRING AS "FKSAF",
+ 	 	JSONFIELD:"PERIO"::STRING AS "PERIO",
+ 	 	JSONFIELD:"ZTERM"::STRING AS "ZTERM",
+ 	 	JSONFIELD:"NFDAT"::STRING AS "NFDAT",
+ 	 	JSONFIELD:"TEMAN"::STRING AS "TEMAN",
+ 	 	JSONFIELD:"AFDAT"::STRING AS "AFDAT",
+ 	 	JSONFIELD:"NETWR"::STRING AS "NETWR",
+ 	 	JSONFIELD:"NETPR"::STRING AS "NETPR",
+ 	 	JSONFIELD:"KZWI1"::STRING AS "KZWI1",
+ 	 	JSONFIELD:"CMPRE"::STRING AS "CMPRE",
+ 	 	JSONFIELD:"PRSOK"::STRING AS "PRSOK",
+ 	 	JSONFIELD:"CMPRE_FLT"::STRING AS "CMPRE_FLT",
+ 	 	JSONFIELD:"OFKDAT"::STRING AS "OFKDAT",
+ 	 	JSONFIELD:"SET_BY_FINAL"::STRING AS "SET_BY_FINAL",
+ 	 	JSONFIELD:"DB_KEY"::STRING AS "DB_KEY",
+ 	 	JSONFIELD:"PARENT_KEY"::STRING AS "PARENT_KEY",
+ 	 	JSONFIELD:"VKORG"::STRING AS "VKORG",
+ 	 	JSONFIELD:"DELFLAG"::STRING AS "DELFLAG",
+ 	 	JSONFIELD:"CDCHANGENR"::STRING AS "CDCHANGENR",
+ 	 	JSONFIELD:"PSL_INSDATE"::STRING AS "PSL_INSDATE",
+ 	 	JSONFIELD:"PSL_UPDDATE"::STRING AS "PSL_UPDDATE"
+	from {{ source('SAPH','SAP_SDT_EV_FPLT_GMX') }}
+	    WHERE REGEXP_SUBSTR(_FILENAME,'\\d{14}') = (SELECT MAX(REGEXP_SUBSTR(_filename,'\\d{14}')) from {{ source('SAPH', 'SAP_SDT_EV_FPLT_GMX') }})
+	),
+
+	transform_data as (
+	SELECT
+		_FILEDATE,
+		_FILENAME,
+		'{{ invocation_id }}' AS _AUDIT_LOG_ID,
+        SHA2('hash_me') as _ROW_HASH,
+		LPAD(coalesce("FPLNR",''),10,'0') as "FPLNR",
+		LPAD(coalesce("FPLTR",''),6,'0') as "FPLTR",
+		coalesce("FPTTP",'') as "FPTTP",
+		coalesce("TETXT",'') as "TETXT",
+		COALESCE(REGEXP_REPLACE(TRY_TO_DATE("FKDAT"),'-',''),'') as "FKDAT",
+		coalesce("FAREG",'') as "FAREG",
+		coalesce("FPROZ",'') as "FPROZ",
+		coalesce("WAERS",'') as "WAERS",
+		coalesce("FAKWR",'') as "FAKWR",
+		coalesce("FAKSP",'') as "FAKSP",
+		coalesce("FKARV",'') as "FKARV",
+ 	 	coalesce("FKSAF",'') as "FKSAF",
+		coalesce("PERIO",'') as "PERIO",
+ 	 	coalesce("ZTERM",'') as "ZTERM",
+		COALESCE(REGEXP_REPLACE(TRY_TO_DATE("NFDAT"),'-',''),'') as "NFDAT",
+ 	 	coalesce("TEMAN",'') as "TEMAN",
+		COALESCE(REGEXP_REPLACE(TRY_TO_DATE("AFDAT"),'-',''),'') as "AFDAT",
+		coalesce("NETWR",'') as "NETWR",
+		coalesce("NETPR",'') as "NETPR",
+		coalesce("KZWI1",'') as "KZWI1",
+		coalesce("CMPRE",'') as "CMPRE",
+		Case when "PRSOK"='X' then 'true' else 'false' end as "PRSOK",
+		coalesce("CMPRE_FLT",'') as "CMPRE_FLT",
+		COALESCE(REGEXP_REPLACE(TRY_TO_DATE("OFKDAT"),'-',''),'') as "OFKDAT",
+		Case when "SET_BY_FINAL"='X' then 'true' else 'false' end as "SET_BY_FINAL",
+ 	 	"DB_KEY",
+ 	 	"PARENT_KEY",
+ 	 	"VKORG",
+ 	 	"DELFLAG",
+ 	 	"CDCHANGENR",
+ 	 	"PSL_INSDATE",
+ 	 	"PSL_UPDDATE"
+	from source_data
+	),
+
+	type_data as (
+	SELECT
+		cast(_FILEDATE AS TIMESTAMP_NTZ(9)) AS _FILEDATE,
+		cast(_FILENAME as varchar(128)) as _FILENAME,
+        cast(_AUDIT_LOG_ID as varchar(128)) as _AUDIT_LOG_ID,
+        cast(_ROW_HASH as varchar(128)) as _ROW_HASH,
+		CAST("FPLNR" AS VARCHAR) AS "FPLNR",
+ 	 	CAST("FPLTR" AS VARCHAR) AS "FPLTR",
+ 	 	CAST("FPTTP" AS VARCHAR) AS "FPTTP",
+ 	 	CAST("TETXT" AS VARCHAR) AS "TETXT",
+ 	 	CAST("FKDAT" AS VARCHAR) AS "FKDAT",
+ 	 	CAST("FAREG" AS VARCHAR) AS "FAREG",
+ 	 	CAST("FPROZ" AS VARCHAR) AS "FPROZ",
+ 	 	CAST("WAERS" AS VARCHAR) AS "WAERS",
+ 	 	CAST("FAKWR" AS VARCHAR) AS "FAKWR",
+ 	 	CAST("FAKSP" AS VARCHAR) AS "FAKSP",
+ 	 	CAST("FKARV" AS VARCHAR) AS "FKARV",
+ 	 	CAST("FKSAF" AS VARCHAR) AS "FKSAF",
+ 	 	CAST("PERIO" AS VARCHAR) AS "PERIO",
+ 	 	CAST("ZTERM" AS VARCHAR) AS "ZTERM",
+ 	 	CAST("NFDAT" AS VARCHAR) AS "NFDAT",
+ 	 	CAST("TEMAN" AS VARCHAR) AS "TEMAN",
+ 	 	CAST("AFDAT" AS VARCHAR) AS "AFDAT",
+ 	 	CAST("NETWR" AS VARCHAR) AS "NETWR",
+ 	 	CAST("NETPR" AS VARCHAR) AS "NETPR",
+ 	 	CAST("KZWI1" AS VARCHAR) AS "KZWI1",
+ 	 	CAST("CMPRE" AS VARCHAR) AS "CMPRE",
+ 	 	CAST("PRSOK" AS VARCHAR) AS "PRSOK",
+ 	 	CAST("CMPRE_FLT" AS VARCHAR) AS "CMPRE_FLT",
+ 	 	CAST("OFKDAT" AS VARCHAR) AS "OFKDAT",
+ 	 	CAST("SET_BY_FINAL" AS VARCHAR) AS "SET_BY_FINAL",
+ 	 	CAST("DB_KEY" AS VARCHAR) AS "DB_KEY",
+ 	 	CAST("PARENT_KEY" AS VARCHAR) AS "PARENT_KEY",
+ 	 	CAST("VKORG" AS VARCHAR) AS "VKORG",
+ 	 	CAST("DELFLAG" AS BOOLEAN) AS "DELFLAG",
+ 	 	CAST("CDCHANGENR" AS VARCHAR) AS "CDCHANGENR",
+ 	 	CAST("PSL_INSDATE" AS TIMESTAMP) AS "PSL_INSDATE",
+ 	 	CAST("PSL_UPDDATE" AS TIMESTAMP) AS "PSL_UPDDATE"
+	from transform_data
+	)
+
+	select * from type_data
+

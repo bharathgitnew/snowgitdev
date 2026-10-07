@@ -1,0 +1,5 @@
+models:
+- name: GOLD__TEA_TECHNICAL_TRAINING__TEMP_TO_RFT_EMPLOYEES
+  tests:
+  - has_data
+  - recently_run

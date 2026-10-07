@@ -1,0 +1,133 @@
+/************
+	Model file generated from gmxDbtTemplateUtility.ipynb 
+	*************/
+
+	
+	{{ config(
+    	  materialized='incremental',
+    	  incremental_strategy='insert_overwrite',
+    	  alias='SAP_MMM_EV_T161',
+    	  unique_key = [''],
+    	  transient=false	
+) }} 
+
+	with source_data as (
+	SELECT
+		JSONFIELD:"BSTYP"::STRING AS "BSTYP", 
+ 	 	JSONFIELD:"BSART"::STRING AS "BSART", 
+ 	 	JSONFIELD:"BSAKZ"::STRING AS "BSAKZ", 
+ 	 	JSONFIELD:"PINCR"::STRING AS "PINCR", 
+ 	 	JSONFIELD:"NUMKI"::STRING AS "NUMKI", 
+ 	 	JSONFIELD:"NUMKE"::STRING AS "NUMKE", 
+ 	 	JSONFIELD:"BREFN"::STRING AS "BREFN", 
+ 	 	JSONFIELD:"REFBA"::STRING AS "REFBA", 
+ 	 	JSONFIELD:"ABVOR"::STRING AS "ABVOR", 
+ 	 	JSONFIELD:"STAFO"::STRING AS "STAFO", 
+ 	 	JSONFIELD:"UPINC"::STRING AS "UPINC", 
+ 	 	JSONFIELD:"STAKO"::STRING AS "STAKO", 
+ 	 	JSONFIELD:"PARGR"::STRING AS "PARGR", 
+ 	 	JSONFIELD:"NUMKA"::STRING AS "NUMKA", 
+ 	 	JSONFIELD:"HITYP"::STRING AS "HITYP", 
+ 	 	JSONFIELD:"LPHIS"::STRING AS "LPHIS", 
+ 	 	JSONFIELD:"GSFRG"::STRING AS "GSFRG", 
+ 	 	JSONFIELD:"VARIANTE"::STRING AS "VARIANTE", 
+ 	 	JSONFIELD:"SHENQ"::STRING AS "SHENQ", 
+ 	 	JSONFIELD:"KZALE"::STRING AS "KZALE", 
+ 	 	JSONFIELD:"ABGEBOT"::STRING AS "ABGEBOT", 
+ 	 	JSONFIELD:"KORNR"::STRING AS "KORNR", 
+ 	 	JSONFIELD:"UMLIF"::STRING AS "UMLIF", 
+ 	 	JSONFIELD:"KOETT"::STRING AS "KOETT", 
+ 	 	JSONFIELD:"AR_OBJECT"::STRING AS "AR_OBJECT", 
+ 	 	JSONFIELD:"KOAKO"::STRING AS "KOAKO", 
+ 	 	JSONFIELD:"TOLSL"::STRING AS "TOLSL", 
+ 	 	JSONFIELD:"DELFLAG"::STRING AS "DELFLAG", 
+ 	 	JSONFIELD:"CDCHANGENR"::STRING AS "CDCHANGENR", 
+ 	 	JSONFIELD:"PSL_INSDATE"::STRING AS "PSL_INSDATE", 
+ 	 	JSONFIELD:"PSL_UPDDATE"::STRING AS "PSL_UPDDATE",
+		_FILEDATE,
+		_FILENAME
+	from {{ source('SAPH','SAP_MMM_EV_T161') }}
+	WHERE REGEXP_SUBSTR(_FILENAME,'\\d{14}') = (SELECT MAX(REGEXP_SUBSTR(_filename,'\\d{14}')) from {{ source('SAPH', 'SAP_MMM_EV_T161') }})
+	),
+	
+	transform_data as (
+	SELECT 
+		"BSTYP", 
+ 	 	"BSART", 
+ 	 	"BSAKZ", 
+ 	 	"PINCR", 
+ 	 	"NUMKI", 
+ 	 	"NUMKE", 
+ 	 	"BREFN", 
+ 	 	"REFBA", 
+ 	 	"ABVOR", 
+ 	 	"STAFO", 
+ 	 	"UPINC", 
+ 	 	"STAKO", 
+ 	 	"PARGR", 
+ 	 	"NUMKA", 
+ 	 	"HITYP", 
+ 	 	"LPHIS", 
+ 	 	"GSFRG", 
+ 	 	"VARIANTE", 
+ 	 	"SHENQ", 
+ 	 	"KZALE", 
+ 	 	"ABGEBOT", 
+ 	 	"KORNR", 
+ 	 	"UMLIF", 
+ 	 	"KOETT", 
+ 	 	"AR_OBJECT", 
+ 	 	"KOAKO", 
+ 	 	"TOLSL", 
+ 	 	"DELFLAG", 
+ 	 	"CDCHANGENR", 
+ 	 	"PSL_INSDATE", 
+ 	 	"PSL_UPDDATE",
+		_FILEDATE,
+		_FILENAME,
+		'{{ invocation_id }}' AS AUDIT_LOG_ID,
+        SHA2('hash_me') as _ROW_HASH -- Adds column to table on full refresh.
+	from source_data
+	),
+	
+	type_data as (
+	SELECT
+		CAST("BSTYP" AS NVARCHAR) AS "BSTYP", 
+ 	 	CAST("BSART" AS NVARCHAR) AS "BSART", 
+ 	 	CAST("BSAKZ" AS NVARCHAR) AS "BSAKZ", 
+ 	 	CAST("PINCR" AS VARCHAR) AS "PINCR", 
+ 	 	CAST("NUMKI" AS NVARCHAR) AS "NUMKI", 
+ 	 	CAST("NUMKE" AS NVARCHAR) AS "NUMKE", 
+ 	 	CAST("BREFN" AS NVARCHAR) AS "BREFN", 
+ 	 	CAST("REFBA" AS NVARCHAR) AS "REFBA", 
+ 	 	CAST("ABVOR" AS NVARCHAR) AS "ABVOR", 
+ 	 	CAST("STAFO" AS NVARCHAR) AS "STAFO", 
+ 	 	CAST("UPINC" AS VARCHAR) AS "UPINC", 
+ 	 	CAST("STAKO" AS NVARCHAR) AS "STAKO", 
+ 	 	CAST("PARGR" AS NVARCHAR) AS "PARGR", 
+ 	 	CAST("NUMKA" AS NVARCHAR) AS "NUMKA", 
+ 	 	CAST("HITYP" AS NVARCHAR) AS "HITYP", 
+ 	 	CAST("LPHIS" AS NVARCHAR) AS "LPHIS", 
+ 	 	CAST("GSFRG" AS NVARCHAR) AS "GSFRG", 
+ 	 	CAST("VARIANTE" AS NVARCHAR) AS "VARIANTE", 
+ 	 	CAST("SHENQ" AS NVARCHAR) AS "SHENQ", 
+ 	 	CAST("KZALE" AS NVARCHAR) AS "KZALE", 
+ 	 	CAST("ABGEBOT" AS NVARCHAR) AS "ABGEBOT", 
+ 	 	CAST("KORNR" AS NVARCHAR) AS "KORNR", 
+ 	 	CAST("UMLIF" AS NVARCHAR) AS "UMLIF", 
+ 	 	CAST("KOETT" AS NVARCHAR) AS "KOETT", 
+ 	 	CAST("AR_OBJECT" AS NVARCHAR) AS "AR_OBJECT", 
+ 	 	CAST("KOAKO" AS NVARCHAR) AS "KOAKO", 
+ 	 	CAST("TOLSL" AS NVARCHAR) AS "TOLSL", 
+ 	 	CAST("DELFLAG" AS BOOLEAN) AS "DELFLAG", 
+ 	 	CAST("CDCHANGENR" AS NVARCHAR) AS "CDCHANGENR", 
+ 	 	CAST("PSL_INSDATE" AS TIMESTAMP) AS "PSL_INSDATE", 
+ 	 	CAST("PSL_UPDDATE" AS TIMESTAMP) AS "PSL_UPDDATE",
+		cast(_FILEDATE AS TIMESTAMP_NTZ(9)) AS _FILEDATE,
+		cast(_FILENAME as varchar(128)) as _FILENAME,
+        cast(AUDIT_LOG_ID as varchar(128)) as AUDIT_LOG_ID,
+        cast(_ROW_HASH as varchar(128)) as _ROW_HASH
+	from transform_data
+	)
+
+	select * from type_data

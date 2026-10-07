@@ -1,0 +1,43 @@
+{{ config(
+        materialized='view',
+         alias='INFOTYPE_1001_DB_TABLE',
+         transient=false
+) }}
+
+with source_data as (
+    select
+        CLIENT,
+		OBJECT_TYPE,
+		OBJECT_ID,
+		PLAN_VERSION,
+		RELATIONSHIP_SPECIFICATION,
+		RELATIONSHIP_BETWEEN_OBJECTS,
+		PLANNING_STATUS,
+		PRIORITY,
+		START_DATE,
+		END_DATE,
+		VARIATION_FIELD_FOR_FILE_PLOG,
+		NUMBER_OF_INFOTYPE_RECORD_WITH_SAME_KEY,
+		INFOTYPE,
+		CONCATENATION_OF_OBJECT_TYPE_AND_OBJECT_ID,
+		SUBTYPE,
+		CHANGED_ON,
+		USER_NAME,
+		REASON,
+		HISTORICAL_RECORD_FLAG,
+		TEXT_MODULE_FOR_INFOTYPE,
+		TYPE_OF_RELATED_OBJECT,
+		ID_OF_RELATED_OBJECT,
+		WEIGHTING_PERCENTAGE,
+		ADATA_NUMBER,
+		_CAPTUREDATETIME
+    from {{ ref('COMMON__SAPO__INFOTYPE_1001_DB_TABLE') }}
+),
+
+transform_data as (
+    select
+        *
+    from source_data
+)
+    
+select * from transform_data

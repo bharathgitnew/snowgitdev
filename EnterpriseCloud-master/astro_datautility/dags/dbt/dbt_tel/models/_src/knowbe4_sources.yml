@@ -1,0 +1,28 @@
+version: 2
+sources:
+- name: KNOWBE4
+  description: Landing Zone - KNOWBE4 Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: KNOWBE4
+  tables:
+  - name: REPORTING_ACCOUNT
+    identifier: REPORTING_ACCOUNT
+    description: Landing table for REPORTING_ACCOUNT file.
+  - name: REPORTING_ACCCOUNT_RISK_SCORE_HISTORY
+    identifier: REPORTING_ACCCOUNT_RISK_SCORE_HISTORY
+    description: Landing table for REPORTING_ACCCOUNT_RISK_SCORE_HISTORY file.
+  - name: REPORTING_USERS
+    identifier: REPORTING_USERS
+    description: Landing table for REPORTING_USERS file.
+  - name: REPORTING_GROUPS
+    identifier: REPORTING_GROUPS
+    description: Landing table for REPORTING_GROUPS file.
+  - name: REPORTING_PHISHING_CAMPAIGNS
+    identifier: REPORTING_PHISHING_CAMPAIGNS
+    description: Landing table for REPORTING_PHISHING_CAMPAIGNS file.
+  - name: REPORTING_PHISHING_SECURITY_TESTS
+    identifier: REPORTING_PHISHING_SECURITY_TESTS
+    description: Landing table for REPORTING_PHISHING_SECURITY_TESTS file.
+  - name: REPORTING_PHISHING_SECURITY_TESTS_RECIPIENTS
+    identifier: REPORTING_PHISHING_SECURITY_TESTS_RECIPIENTS
+    description: Landing table for REPORTING_PHISHING_SECURITY_TESTS_RECIPIENTS file.

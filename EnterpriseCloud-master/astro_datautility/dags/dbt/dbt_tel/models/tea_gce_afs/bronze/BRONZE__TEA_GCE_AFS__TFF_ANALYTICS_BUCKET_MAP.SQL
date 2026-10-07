@@ -1,0 +1,72 @@
+/************
+Model file generated from Python utility
+*************/
+
+{{ config(
+	materialized='tel_incremental',
+	incremental_strategy='insert_overwrite',
+	alias='TFF_ANALYTICS_BUCKET_MAP',
+	transient=false
+) }}
+
+with source_data as (
+	SELECT
+		_FILEDATE,
+		_FILENAME,
+		_UPLOADDATE,
+		JSONFIELD:"id"::NUMBER(38,10) AS ID,
+		JSONFIELD:"bucket_id"::NUMBER(38,10) AS BUCKET_ID,
+		JSONFIELD:"comment_string"::VARCHAR AS COMMENT_STRING,
+		JSONFIELD:"is_exact_match"::BOOLEAN AS IS_EXACT_MATCH,
+		JSONFIELD:"tool_model"::VARCHAR AS TOOL_MODEL,
+		JSONFIELD:"mom_impact"::VARCHAR AS MOM_IMPACT,
+		JSONFIELD:"response_team"::VARCHAR AS RESPONSE_TEAM,
+		JSONFIELD:"owner"::VARCHAR AS OWNER,
+		JSONFIELD:"updated_by"::VARCHAR AS UPDATED_BY,
+		JSONFIELD:"updated_date"::VARCHAR AS UPDATED_DATE
+	FROM {{ source("ADS", "TFF_ANALYTICS_BUCKET_MAP") }}
+WHERE
+	_FILEDATE = (SELECT MAX(_FILEDATE) FROM {{ source('ADS', 'TFF_ANALYTICS_BUCKET_MAP') }} ) 
+),
+
+transform_data as (
+	SELECT
+		_FILEDATE AS _FILEDATE,
+		_FILENAME AS _FILENAME,
+		_UPLOADDATE AS _UPLOADDATE,
+		'{{ invocation_id }}' AS _AUDIT_LOG_ID,
+		SHA2('hash_me') AS _ROW_HASH,
+		ID,
+		BUCKET_ID,
+		COMMENT_STRING,
+		IS_EXACT_MATCH,
+		TOOL_MODEL,
+		MOM_IMPACT,
+		RESPONSE_TEAM,
+		OWNER,
+		UPDATED_BY,
+		UPDATED_DATE
+	FROM source_data
+),
+
+type_data as (
+	SELECT
+		CAST(_FILEDATE AS TIMESTAMP_NTZ(9)) AS _FILEDATE,
+		_FILENAME,
+		_UPLOADDATE,
+		CAST(_AUDIT_LOG_ID AS VARCHAR(128)) AS _AUDIT_LOG_ID,
+		CAST(_ROW_HASH AS VARCHAR(128)) AS _ROW_HASH,
+		CAST(ID AS NUMBER(38,10)) AS ID,
+		CAST(BUCKET_ID AS NUMBER(38,10)) AS BUCKET_ID,
+		COMMENT_STRING,
+		CAST(IS_EXACT_MATCH AS BOOLEAN) AS IS_EXACT_MATCH,
+		TOOL_MODEL,
+		MOM_IMPACT,
+		RESPONSE_TEAM,
+		OWNER,
+		UPDATED_BY,
+		UPDATED_DATE
+	FROM transform_data
+)
+
+SELECT * FROM type_data

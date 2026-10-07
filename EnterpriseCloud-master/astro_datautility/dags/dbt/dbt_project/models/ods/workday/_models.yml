@@ -1,0 +1,4 @@
+version: 2
+models:
+- name: ODS__WORKDAY__WORKERCOMPANYLIST
+  description: Model Workday WorkerCompanyList file.

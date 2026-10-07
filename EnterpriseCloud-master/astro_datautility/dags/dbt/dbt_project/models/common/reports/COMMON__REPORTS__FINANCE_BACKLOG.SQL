@@ -1,0 +1,391 @@
+{{ config(
+    materialized='incremental',
+        incremental_strategy='insert_overwrite',
+        alias='FINANCE_BACKLOG',
+        transient=false
+
+) }}
+--Contract backlog CTE
+with CON_BACK as (
+    SELECT 
+        'TEA' AS COMPANY,
+        CB.AS_OF_DATE AS BACKLOG_MONTH, --MAKE SURE THIS ARE DATES
+        CB.CONTRACT_CREATE_DATE AS ORDER_BOOKING_DATE, -- MAKE SURE THIS IS DATE
+        abs(DATEDIFF(MONTH,TO_DATE(AS_OF_DATE),TO_DATE(CONTRACT_CREATE_DATE))) AS AGE,
+        CASE 
+            WHEN AGE >= 12 THEN '1'
+            ELSE '0'
+        END AS AGE_FLAG,
+        'SPE' AS SEGMENT,        
+        CASE
+            WHEN CB.BU_CRM_SCOPE = 'N/A' OR CB.BU_CRM_SCOPE IS NULL OR CB.BU_CRM_SCOPE = '(null)' OR CB.BU_CRM_SCOPE = 'blank' OR CB.BU_CRM_SCOPE = '' OR CB.BU_CRM_SCOPE = 'NO SCOPE' OR CB.BU_CRM_SCOPE = '(null)' THEN CB.BU_BILLING
+            ELSE CB.BU_CRM_SCOPE
+        END AS PRODUCT_FS_CODE,
+        'FS' AS BU_TEL,
+        CONCAT(BU_TEL,'-',PRODUCT_FS_CODE) AS BU_COMPANY,
+        CASE 
+            WHEN PRODUCT_FS_CODE = 'CT' THEN '4110'
+            WHEN PRODUCT_FS_CODE = '3DI-Bonder' OR PRODUCT_FS_CODE = '3DI Bonder' then '4111'
+            WHEN PRODUCT_FS_CODE = 'TPS' THEN '4120'
+            WHEN PRODUCT_FS_CODE = 'ES' THEN '4130'
+            WHEN PRODUCT_FS_CODE ILIKE '%Certas%' THEN '4131'
+            WHEN PRODUCT_FS_CODE = 'SPS' THEN '4140'
+            WHEN PRODUCT_FS_CODE = 'TS' THEN '4150'
+            WHEN PRODUCT_FS_CODE = 'SD' THEN '4160'
+            WHEN PRODUCT_FS_CODE = 'FSI' THEN '4175'
+            WHEN PRODUCT_FS_CODE = 'Sic epi' THEN '4195'
+            WHEN PRODUCT_FS_CODE = 'Epion' THEN '5000'
+            WHEN PRODUCT_FS_CODE = 'PVD' THEN '5800'
+            WHEN PRODUCT_FS_CODE = 'NEXX' THEN '5970'
+            WHEN PRODUCT_FS_CODE = 'SMS' THEN '9977'
+            ELSE '4130'
+        END AS BU_CODE_COMPANY,
+        CB.SALES_DOCUMENT AS SONUM,
+        CG.CUSTOMER_GROUP AS CUSTOMER_GROUP,
+        CB.SOLD_TO AS ORDER_BILL_TO_CUSTOMER_CODE,
+        CB.SOLD_TO_NAME AS ORDER_BILL_TO_CUSTOMER_NAME,
+        CB.END_USER AS END_USER_SHIP_TO_CUSTOMER_CODE,
+        CB.END_USER_NAME AS END_USER_SHIP_TO_CUSTOMER_NAME,
+        CB.END_USER AS FAB,
+        KNA.LAND1 AS REGION_END_USER,
+        NULL AS APPLICATION_SPE_ONLY,
+        NULL AS PRODUCT_CODE,
+        'N/A' AS PRODUCT_NAME,
+        CASE
+            WHEN CB.SCOPE_CONSUMPTION_TYPE = 'BOH' THEN 'CONFLX'
+            ELSE 'CONTRA'
+        END AS SALES_TYPE_COMPANY,
+        'Service Contracts' AS SALES_TYPE_Lv3,
+        'Contracts' AS SALES_TYPE_Lv2,
+        'Service' AS SALES_TYPE_Lv1,
+        NULL AS UNIT,
+        NULL AS UNIT_PRICE_CONTRACT_CURRENCY,
+        'USD' AS CONTRACT_CURRENCY,
+        CB.BACKLOG_AMT AS SELLING_PRICE_CONTRACT_CURRENCY,
+        'USD' AS REPORTING_CURRENCY,
+        CB.BACKLOG_AMT AS SELLING_PRICE_REPORTING_CURRENCY,
+        NULL AS NA,
+        NULL AS NA2,
+        NULL AS NA3,
+        NULL AS NA4,
+        NULL AS NA5,
+        NULL AS NA6,
+        NULL AS NA7,
+        NULL AS TOOL_COUNT,
+        NULL AS INTERNAL_FLAG,
+        NULL AS SHIPPING_SCHEDULE_DATE,
+        NULL AS REVENUE_SHEDULE_DATE,
+        NULL AS SERIAL_NUMBER
+    FROM {{ ref('COMMON__REPORTS__CONTRACT_BACKLOG') }} CB
+        LEFT JOIN {{ ref('ODS__FILE__CUSTOMER_GROUP_MAPPING') }} CG 
+            ON CB.END_USER = CG.ACCOUNT_NUMBER
+        LEFT JOIN {{ ref('ODS__SAPAPI__ZCDV_T_CMTU020_KNA1') }} KNA
+            ON CB.END_USER = KNA.KUNNR
+),
+--Booking billinng backlog CTE
+BOOK_BACK as(
+    SELECT 
+        'TEA' AS COMPANY,
+        BBB.AS_OF_DATE AS BACKLOG_MONTH, --MAKE SURE THIS ARE DATES
+        BBB.SALES_DOCUMENT_DATE AS ORDER_BOOKING_DATE, -- MAKE SURE THIS IS DATE
+        abs(DATEDIFF(MONTH,TO_DATE(AS_OF_DATE),TO_DATE(BBB.SALES_DOCUMENT_DATE))) AS AGE,
+        CASE 
+            WHEN AGE >= 12 THEN '1'
+            ELSE '0'
+        END AS AGE_FLAG,
+        'SPE' AS SEGMENT,        
+        CASE
+            WHEN LEFT(BBB.BU,2) = 'FS' THEN 'FS'
+            WHEN LEFT(BBB.BU,3) = 'epi' THEN 'EPI'
+            ELSE 'FS'
+        END AS BU_TEL,
+        CASE
+            WHEN BBB.BU = 'FS - Certas' THEN 'FS-Certas'
+            WHEN BBB.BU = 'FS - SiC' THEN 'FS-SiC'
+            WHEN BBB.BU = 'Epion' THEN 'GCIB'
+            WHEN BBB.BU = 'FSI' THEN 'CCS'
+            WHEN BBB.BU = 'FS-3DI Bonder' THEN 'FS-3DI'
+            ELSE BBB.BU
+        END AS BU_COMPANY,
+        SUBSTRING(BU_COMPANY,CHARINDEX('-',BU_COMPANY)+1,LEN(BU_COMPANY)) AS PRODUCT_FS_CODE,
+        CASE 
+            WHEN PRODUCT_FS_CODE = 'CT' THEN '4110'
+            WHEN PRODUCT_FS_CODE = '3DI-Bonder' OR PRODUCT_FS_CODE = '3DI Bonder' then '4111'
+            WHEN PRODUCT_FS_CODE = 'TPS' THEN '4120'
+            WHEN PRODUCT_FS_CODE = 'ES' THEN '4130'
+            WHEN PRODUCT_FS_CODE ILIKE '%Certas%' THEN '4131'
+            WHEN PRODUCT_FS_CODE = 'SPS' THEN '4140'
+            WHEN PRODUCT_FS_CODE = 'TS' THEN '4150'
+            WHEN PRODUCT_FS_CODE = 'SD' THEN '4160'
+            WHEN PRODUCT_FS_CODE = 'FSI' THEN '4175'
+            WHEN PRODUCT_FS_CODE = 'Sic epi' THEN '4195'
+            WHEN PRODUCT_FS_CODE = 'Epion' THEN '5000'
+            WHEN PRODUCT_FS_CODE = 'PVD' THEN '5800'
+            WHEN PRODUCT_FS_CODE = 'NEXX' THEN '5970'
+            WHEN PRODUCT_FS_CODE = 'SMS' THEN '9977'
+            ELSE '4130'
+        END AS BU_CODE_COMPANY,
+        BBB.SALES_DOCUMENT AS SONUM,
+        CG.CUSTOMER_GROUP AS CUSTOMER_GROUP,
+        BBB.SOLD_TO_PARTY AS ORDER_BILL_TO_CUSTOMER_CODE,
+        BBB.CUSTOMER_NAME AS ORDER_BILL_TO_CUSTOMER_NAME,
+        BBB.END_USER AS END_USER_SHIP_TO_CUSTOMER_CODE,
+        BBB.CUSTOMER_NAME AS END_USER_SHIP_TO_CUSTOMER_NAME,
+        BBB.END_USER AS FAB,
+        KNA.LAND1 AS REGION_END_USER,
+        NULL AS APPLICATION_SPE_ONLY,
+        NULL AS PRODUCT_CODE,
+        'N/A' AS PRODUCT_NAME,
+        CASE 
+            WHEN BBB.SALES_CATEGORY = '10' THEN 'New Equipment'
+            WHEN BBB.SALES_CATEGORY in ('11', '12', '13') THEN 'Used/FRF'
+            WHEN BBB.SALES_CATEGORY = '14' THEN 'New Equipment'
+            WHEN BBB.SALES_CATEGORY = '15' THEN 'Chamber'
+            WHEN BBB.SALES_CATEGORY = '16' THEN 'New Equipment/Used/Chamber'
+            WHEN BBB.SALES_CATEGORY in ('21','22') THEN 'Modifications'
+            WHEN BBB.SALES_CATEGORY = '30' THEN 'Option'
+            WHEN BBB.SALES_CATEGORY in ('40', '41', '42', '43', '44', '45', '46', '47')  THEN 'Contracts'
+            WHEN BBB.SALES_CATEGORY in ('50', '51', '52', '53', '54', '55', '56', '57', '58', '59',  '5A', '5B') THEN 'Paid Service'
+            WHEN BBB.SALES_CATEGORY in ('40', '41', '42', '43', '44', '45', '46', '47')  THEN 'Contracts'
+            WHEN BBB.SALES_CATEGORY in ('5C', '60', '61', '63')  then 'Transactional(Parts)'
+            WHEN BBB.SALES_CATEGORY in ('70', '71', '72', '73') then 'Repair'
+            WHEN BBB.SALES_CATEGORY in ('98', '99') then 'Other'
+            ELSE NULL
+        END AS SALES_TYPE_Lv2,
+        CASE
+            WHEN SALES_TYPE_Lv2 = 'Transactional(Parts)' THEN 'PARTS'
+            WHEN SALES_TYPE_Lv2 = 'Repair' THEN 'Repair'
+            ELSE NULL
+        END AS SALES_TYPE_Lv3,
+        CASE
+            WHEN SALES_TYPE_Lv2 in ('New Equipment', 'Used/FRF') THEN 'Systems'
+            WHEN SALES_TYPE_Lv2 in ('Modifications', 'Chamber', 'Option') THEN SALES_TYPE_Lv2
+            WHEN SALES_TYPE_Lv2 = 'Paid Service' THEN 'Service' 
+            WHEN SALES_TYPE_Lv2 in ('Transactional(Parts)', 'Repair', 'Other') then 'Spares'
+            ELSE NULL
+        END AS SALES_TYPE_Lv1,
+        CASE
+            WHEN SALES_TYPE_Lv2 = 'Transactional(Parts)' THEN 'SPARE'
+            WHEN SALES_TYPE_Lv2 = 'Repair' THEN 'RPRPRT'
+            ELSE NULL
+        END AS SALES_TYPE_COMPANY,
+        NULL AS UNIT,
+        NULL AS UNIT_PRICE_CONTRACT_CURRENCY,
+        'USD' AS CONTRACT_CURRENCY,
+        BBB.BACKLOG_AMOUNT AS SELLING_PRICE_CONTRACT_CURRENCY,
+        'USD' AS REPORTING_CURRENCY,
+        BBB.BACKLOG_AMOUNT AS SELLING_PRICE_REPORTING_CURRENCY,
+        NULL AS NA,
+        NULL AS NA2,
+        NULL AS NA3,
+        NULL AS NA4,
+        NULL AS NA5,
+        NULL AS NA6,
+        NULL AS NA7,
+        '1' AS TOOL_COUNT,
+        NULL AS INTERNAL_FLAG,
+        NULL AS SHIPPING_SCHEDULE_DATE,
+        NULL AS REVENUE_SHEDULE_DATE,
+        NULL AS SERIAL_NUMBER
+    FROM {{ ref('COMMON__REPORTS__BOOKING_BILLING_BACKLOG') }} BBB
+        LEFT JOIN {{ ref('ODS__FILE__CUSTOMER_GROUP_MAPPING') }} CG 
+            ON BBB.END_USER = CG.ACCOUNT_NUMBER
+        LEFT JOIN {{ ref('ODS__SAPAPI__ZCDV_T_CMTU020_KNA1') }} KNA
+            ON BBB.END_USER = KNA.KUNNR
+
+), 
+
+SOURCE_DATA as (
+    SELECT
+        COMPANY,
+        BACKLOG_MONTH,
+        ORDER_BOOKING_DATE,
+        AGE,
+        AGE_FLAG,
+        SEGMENT,
+        BU_COMPANY,
+        BU_CODE_COMPANY,
+        BU_TEL,
+        PRODUCT_FS_CODE, 
+        SONUM,
+        CUSTOMER_GROUP,
+        ORDER_BILL_TO_CUSTOMER_CODE,
+        ORDER_BILL_TO_CUSTOMER_NAME,
+        END_USER_SHIP_TO_CUSTOMER_CODE,
+        END_USER_SHIP_TO_CUSTOMER_NAME,
+        FAB,
+        REGION_END_USER,
+        APPLICATION_SPE_ONLY,
+        PRODUCT_CODE,
+        PRODUCT_NAME,
+        SALES_TYPE_COMPANY,
+        SALES_TYPE_LV3,
+        SALES_TYPE_LV2,
+        SALES_TYPE_LV1,    
+        UNIT,
+        UNIT_PRICE_CONTRACT_CURRENCY,
+        CONTRACT_CURRENCY,
+        SELLING_PRICE_CONTRACT_CURRENCY,
+        REPORTING_CURRENCY,
+        SELLING_PRICE_REPORTING_CURRENCY,
+        NA,
+        NA2,
+        NA3,
+        NA4,
+        NA5,
+        NA6,
+        NA7,
+        TOOL_COUNT,
+        INTERNAL_FLAG,
+        SHIPPING_SCHEDULE_DATE,
+        REVENUE_SHEDULE_DATE,
+        SERIAL_NUMBER
+    FROM CON_BACK
+    UNION ALL
+    SELECT
+        COMPANY,
+        BACKLOG_MONTH,
+        ORDER_BOOKING_DATE,
+        AGE,
+        AGE_FLAG,
+        SEGMENT,
+        BU_COMPANY,
+        BU_CODE_COMPANY,
+        BU_TEL,
+        PRODUCT_FS_CODE, 
+        SONUM,
+        CUSTOMER_GROUP,
+        ORDER_BILL_TO_CUSTOMER_CODE,
+        ORDER_BILL_TO_CUSTOMER_NAME,
+        END_USER_SHIP_TO_CUSTOMER_CODE,
+        END_USER_SHIP_TO_CUSTOMER_NAME,
+        FAB,
+        REGION_END_USER,
+        APPLICATION_SPE_ONLY,
+        PRODUCT_CODE,
+        PRODUCT_NAME,
+        SALES_TYPE_COMPANY,
+        SALES_TYPE_LV3,
+        SALES_TYPE_LV2,
+        SALES_TYPE_LV1,    
+        UNIT,
+        UNIT_PRICE_CONTRACT_CURRENCY,
+        CONTRACT_CURRENCY,
+        SELLING_PRICE_CONTRACT_CURRENCY,
+        REPORTING_CURRENCY,
+        SELLING_PRICE_REPORTING_CURRENCY,
+        NA,
+        NA2,
+        NA3,
+        NA4,
+        NA5,
+        NA6,
+        NA7,
+        TOOL_COUNT,
+        INTERNAL_FLAG,
+        SHIPPING_SCHEDULE_DATE,
+        REVENUE_SHEDULE_DATE,
+        SERIAL_NUMBER
+    FROM BOOK_BACK
+),
+
+TRANSFORM_DATA AS (
+    SELECT
+        '{{ invocation_id }}' AS _AUDIT_LOG_ID,
+        SHA2('hash_me') AS _ROW_HASH,
+        COMPANY,
+        BACKLOG_MONTH,
+        ORDER_BOOKING_DATE,
+        AGE,
+        AGE_FLAG,
+        SEGMENT,
+        BU_COMPANY,
+        BU_CODE_COMPANY,
+        BU_TEL,
+        PRODUCT_FS_CODE, 
+        SONUM,
+        CUSTOMER_GROUP,
+        ORDER_BILL_TO_CUSTOMER_CODE,
+        ORDER_BILL_TO_CUSTOMER_NAME,
+        END_USER_SHIP_TO_CUSTOMER_CODE,
+        END_USER_SHIP_TO_CUSTOMER_NAME,
+        FAB,
+        REGION_END_USER,
+        APPLICATION_SPE_ONLY,
+        PRODUCT_CODE,
+        PRODUCT_NAME,
+        SALES_TYPE_COMPANY,
+        SALES_TYPE_LV3,
+        SALES_TYPE_LV2,
+        SALES_TYPE_LV1,    
+        UNIT,
+        UNIT_PRICE_CONTRACT_CURRENCY,
+        CONTRACT_CURRENCY,
+        SELLING_PRICE_CONTRACT_CURRENCY,
+        REPORTING_CURRENCY,
+        SELLING_PRICE_REPORTING_CURRENCY,
+        NA,
+        NA2,
+        NA3,
+        NA4,
+        NA5,
+        NA6,
+        NA7,
+        TOOL_COUNT,
+        INTERNAL_FLAG,
+        SHIPPING_SCHEDULE_DATE,
+        REVENUE_SHEDULE_DATE,
+        SERIAL_NUMBER
+    FROM SOURCE_DATA
+),
+TYPE_DATA AS (
+    SELECT
+        _AUDIT_LOG_ID,
+        _ROW_HASH,
+        COMPANY,
+        BACKLOG_MONTH,
+        ORDER_BOOKING_DATE,
+        AGE,
+        AGE_FLAG,
+        SEGMENT,
+        BU_COMPANY,
+        BU_CODE_COMPANY,
+        BU_TEL,
+        PRODUCT_FS_CODE, 
+        SONUM,
+        CUSTOMER_GROUP,
+        ORDER_BILL_TO_CUSTOMER_CODE,
+        ORDER_BILL_TO_CUSTOMER_NAME,
+        END_USER_SHIP_TO_CUSTOMER_CODE,
+        END_USER_SHIP_TO_CUSTOMER_NAME,
+        FAB,
+        REGION_END_USER,
+        APPLICATION_SPE_ONLY,
+        PRODUCT_CODE,
+        PRODUCT_NAME,
+        SALES_TYPE_COMPANY,
+        SALES_TYPE_LV3,
+        SALES_TYPE_LV2,
+        SALES_TYPE_LV1,    
+        UNIT,
+        UNIT_PRICE_CONTRACT_CURRENCY,
+        CONTRACT_CURRENCY,
+        SELLING_PRICE_CONTRACT_CURRENCY,
+        REPORTING_CURRENCY,
+        SELLING_PRICE_REPORTING_CURRENCY,
+        NA,
+        NA2,
+        NA3,
+        NA4,
+        NA5,
+        NA6,
+        NA7,
+        TOOL_COUNT,
+        INTERNAL_FLAG,
+        SHIPPING_SCHEDULE_DATE,
+        REVENUE_SHEDULE_DATE,
+        SERIAL_NUMBER
+FROM TRANSFORM_DATA
+)
+
+SELECT * FROM TYPE_DATA

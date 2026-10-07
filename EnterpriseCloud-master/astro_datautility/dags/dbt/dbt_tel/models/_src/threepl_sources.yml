@@ -1,0 +1,40 @@
+version: 2
+sources:
+- name: THREEPL
+  description: Landing Zone - THREEPL Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: THREEPL
+  tables:
+  - name: TPL_ASN_SUPPLIER
+    identifier: TPL_ASN_Supplier
+    description: Landing table for TPL_ASN_Supplier file.
+  - name: TPL_DELIVERY_TYPE
+    identifier: TPL_Delivery_Type
+    description: Landing table for TPL_Delivery_Type file.
+  - name: TPL_SHIPMENT_LINE_DETAIL
+    identifier: TPL_SHIPMENT_LINE_DETAIL
+    description: Landing table for TPL_SHIPMENT_LINE_DETAIL file.
+  - name: TPL_SHIPMENT_STATUS
+    identifier: TPL_SHIPMENT_STATUS
+    description: Landing table for TPL_SHIPMENT_STATUS file.
+  - name: TPL_SHIP_REQUEST
+    identifier: TPL_SHIP_REQUEST
+    description: Landing table for TPL_SHIP_REQUEST file.
+  - name: TPL_SHIPMENT_CONFIRMATION
+    identifier: TPL_SHIPMENT_CONFIRMATION
+    description: Landing table for TPL_SHIPMENT_CONFIRMATION file.
+  - name: TPL_STORAGE_LOCATION
+    identifier: TPL_Storage_Location
+    description: Landing table for TPL_Storage_Location file.
+  - name: TPL_ASN
+    identifier: TPL_ASN
+    description: Landing table for TPL_ASN file.
+  - name: TPL_RECEIVING_ADVICE
+    identifier: TPL_Receiving_Advice
+    description: Landing table for TPL_Receiving_Advice file.
+  - name: TPL_SHIPPING_INFORMATION
+    identifier: TPL_Shipping_Information
+    description: Landing table for TPL_Shipping_Information file.
+  - name: TPL_UPS_INVENTORY_FILE_US
+    identifier: TPL_UPS_Inventory_File_US
+    description: Landing table for TPL_UPS_Inventory_File_US file.

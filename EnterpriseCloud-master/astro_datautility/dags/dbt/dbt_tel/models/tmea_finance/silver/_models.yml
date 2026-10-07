@@ -1,0 +1,110 @@
+models:
+- name: SILVER__TMEA_FINANCE__ACTUAL_LINE_ITEMS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_FINANCE__BILLING_DOCUMENT_ITEM_DATA
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_FINANCE__COST_CENTER_MASTER_RECORD
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_FINANCE__COST_CENTER_TEXTS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_FINANCE__CO_OBJECT_COST_TOTALS_FOR_EXTERNAL_POSTINGS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_FINANCE__CO_OBJECT_COST_TOTALS_FOR_INTERNAL_POSTINGS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_FINANCE__CO_OBJECT_DOCUMENT_HEADER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_FINANCE__CO_OBJECT_LINE_ITEMS_BY_PERIOD
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_FINANCE__GENERAL_DATA_IN_CUSTOMER_MASTER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_FINANCE__GL_ACCOUNT_MASTER_RECORD
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_FINANCE__LOWER_LEVEL_SETS_IN_SETS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_FINANCE__PROFIT_CENTER_DESCRIPTION
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_FINANCE__SHORT_DESCRIPTION_OF_SETS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_FINANCE__VALUES_IN_SETS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_FINANCE__MAIN_ASSET_NUMBER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_FINANCE__ASSET_VALUE_FIELDS
+  tests:
+  - has_data
+  - recently_run  
+- name: SILVER__TMEA_FINANCE__DEPRECIATION_TERMS
+  tests:
+  - has_data
+  - recently_run    
+- name: SILVER__TMEA_FINANCE__ASSET_MASTER_RECORD_SEGMENT
+  tests:
+  - has_data
+  - recently_run    
+- name: SILVER__TMEA_FINANCE__ACCOUNTING_DOCUMENT_HEADER
+  tests:
+  - has_data
+  - recently_run    
+- name: SILVER__TMEA_FINANCE__ACCOUNTING_DOCUMENT_SEGMENT
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_FINANCE__ORACLE_TB_PERIOD_COMPARISON
+  tests:
+  - has_data
+  - recently_run
+  description: >
+      Generates a rolling two-period YTD trial balance comparison for the ECC6 system (TMEA),
+      sourced from the Silver layer G/L Account Master Record Transaction Figures model
+      which sits on top of the ECC6 GLT0 table.
+
+      The model derives the current fiscal period dynamically from today's date, based on
+      an April fiscal year start (April = Period 1, March = Period 12). It automatically
+      calculates the last two closed months — the Reporting Period (current month - 1) and
+      the Comparison Period (current month - 2).
+
+      Fiscal year convention follows ECC6 TMEA standards where the fiscal year is represented
+      by the ending year (e.g. April 2026 to March 2027 = FY2027).
+
+      The source table stores period amounts as 16 separate columns across three currency
+      types. This model uses Local Currency (HSL) columns only, unpivoting 12 period columns
+      into a row-per-period structure before aggregation. Periods 13-16 (special closing
+      periods) are intentionally excluded as they represent year-end audit and adjustment
+      postings not relevant for this report.
+
+      The opening carry forward balance (HSLVT) is included in both YTD figures to correctly
+      represent Balance Sheet account balances that accumulate across fiscal years. The
+      difference column is derived by subtracting YTD_COMPARISON from YTD_REPORTING, with
+      carry forward naturally cancelling out between the two periods.
+
+      Each row represents one GL account per company code for the current fiscal year

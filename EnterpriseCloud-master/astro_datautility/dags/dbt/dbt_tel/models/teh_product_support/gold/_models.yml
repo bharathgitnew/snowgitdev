@@ -1,0 +1,29 @@
+models:
+- name: GOLD__TEH_PRODUCT_SUPPORT__SIRFIS_AREA
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_PRODUCT_SUPPORT__SIRFIS_TIS_CURRENT_MILESTONES
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_PRODUCT_SUPPORT__SIRFIS_TIS_FACT
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_PRODUCT_SUPPORT__SIRFIS_TIS_ITEM_CONFIGURATION
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_PRODUCT_SUPPORT__SIRFIS_TIS_MILESTONES_CHANGE_HISTORY
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_PRODUCT_SUPPORT__SIRFIS_TIS_MILESTONES_HISTORY
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_PRODUCT_SUPPORT__SIRFIS_TIS_QUANTITY_HISTORY
+  tests:
+  - has_data
+  - recently_run

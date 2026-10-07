@@ -1,0 +1,102 @@
+    {{ config(
+          materialized='tel_incremental',
+          incremental_strategy='insert_overwrite',
+          alias='SO_PO_GMX_SHIPPING_ADVICE',
+          transient=false    
+) }} 
+WITH POLINK AS (
+
+    SELECT DISTINCT
+    SO_HDR
+    ,SO_LINE
+    ,PO_HDR
+    ,PO_SLOC
+    ,SLOC_DESC
+    ,SO_MATNR
+    ,PO_MATNR
+    FROM {{ source('DE_OPERATIONS', 'SAP_LINK_SO_PO') }}
+    WHERE 1=1
+    AND SO_DOC_TYPE IN ('ZS14', 'ZP11', 'ZP10', 'ZF11')
+    AND PO_SLOC = 'Z100' // Dropship
+)
+
+-- GMX Shipping advise 
+,GMX AS (
+    SELECT 
+    DISTINCT
+    LTRIM(GMX.CUSTOMER_PO_NO_INVOICE_EXPORT_HISTORY,'0') GMX_PO_NO
+    ,MATERIAL_CODE GMX_MATERIAL_CODE
+    ,ACTUAL_QUANTITY_DELIVERED_IN_SALES_UNITS GMX_QTY
+    ,HAWB GMX_HAWB
+    ,MAWB GMX_MAWB
+    ,TRACKING_NUMBER GMX_TRACKING_NUMBER
+    FROM {{ ref('BRONZE__TEA_TECHNICAL_SUPPORT__GMX_INVOICE_EXPORT_HISTORY') }} AS GMX
+    WHERE 1=1
+    -- AND SHIP_TO_PARTY_COUNTRY = 'US'
+    AND LENGTH(LTRIM(CUSTOMER_PO_NO_INVOICE_EXPORT_HISTORY,'0'))=9
+    AND NOT REGEXP_LIKE(CUSTOMER_PO_NO_INVOICE_EXPORT_HISTORY, '.*[a-zA-Z].*')
+)
+,FINTAB AS (
+    SELECT
+    SO_ID
+    ,SALES_ORDER_HEADER_NUMBER
+    ,SALES_ORDER_LINE_NUMBER
+    ,SALES_DOC_TYPE
+    ,SALES_DOC_TYPE_DESCRIPTION
+    ,SALES_ORDER_DATE
+    ,SALES_ORDER_DOCUMENT_DATE
+    ,MATERIAL_NUMBER
+    ,POLINK.PO_HDR
+    ,POLINK.SO_MATNR
+    ,POLINK.PO_MATNR
+    ,POLINK.PO_SLOC
+    ,POLINK.SLOC_DESC
+    FROM {{source('DE_OPERATIONS', 'SALES_ORDER_LINE_MASTER') }} AS SOBL
+    LEFT JOIN POLINK ON SALES_ORDER_HEADER_NUMBER = POLINK.SO_HDR AND SALES_ORDER_LINE_NUMBER = POLINK.SO_LINE
+    WHERE 1=1
+    AND SALES_ORDER_QUANTITY >0
+    AND REJECTED IN ('FALSE')
+    AND NOT (MATERIAL_NUMBER ILIKE ANY ('%labor%', '%travel%', '%other%'))
+    AND SALES_DOC_TYPE IN ('ZS14', 'ZP11', 'ZP10', 'ZF11')
+
+),
+source_data as ( 
+    SELECT 
+        FINTAB.*
+        ,GMX.GMX_PO_NO
+        ,GMX.GMX_MATERIAL_CODE
+        ,GMX.GMX_QTY
+        ,GMX.GMX_HAWB
+        ,GMX.GMX_MAWB
+        ,GMX.GMX_TRACKING_NUMBER
+        FROM FINTAB
+        LEFT JOIN GMX ON PO_HDR = GMX_PO_NO AND PO_MATNR = GMX_MATERIAL_CODE
+        WHERE 1=1
+        AND NULLIF (PO_HDR,'') IS NOT NULL 
+),
+transform_data as (
+    SELECT
+        '{{ invocation_id }}' AS _AUDIT_LOG_ID,
+        SHA2('hash_me') as _ROW_HASH,
+        SO_ID,
+        SALES_ORDER_HEADER_NUMBER,
+        SALES_ORDER_LINE_NUMBER,
+        SALES_DOC_TYPE,
+        SALES_DOC_TYPE_DESCRIPTION,
+        SALES_ORDER_DATE,
+        SALES_ORDER_DOCUMENT_DATE,
+        MATERIAL_NUMBER,
+        PO_HDR,
+        SO_MATNR,
+        PO_MATNR,
+        PO_SLOC,
+        SLOC_DESC,
+        GMX_PO_NO,
+        GMX_MATERIAL_CODE,
+        GMX_QTY,
+        GMX_HAWB,
+        GMX_MAWB,
+        GMX_TRACKING_NUMBER
+    FROM source_data
+) 
+select * from transform_data

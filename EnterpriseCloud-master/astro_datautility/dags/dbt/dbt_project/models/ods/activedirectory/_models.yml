@@ -1,0 +1,72 @@
+version: 2
+models:
+- name: ODS__ACTIVEDIRECTORY__GROUPLIST
+  description: Model activedirectory Group_List file.
+  columns:
+  - name: GroupID
+    description: The pk of the group.
+  - name: Displayname
+    description: Ack
+  - name: SecurityEnabled
+    description: Ack
+  - name: MailNickname
+    description: Ack
+  - name: ObjectType
+    description: Ack
+  - name: Description
+    description: Ack
+  - name: Type
+    description: Ack
+  - name: Audit_Log_Id
+    description: Ack
+  - name: _Row_Hash
+    description: Ack
+- name: ODS__ACTIVEDIRECTORY__USERLIST
+  description: Model activedirectory User_List file.
+  columns:
+  - name: UserID
+    description: The pk of the User.
+  - name: UserPrincipalName
+    description: The email address of the user.
+  - name: ObjectType
+    description: Ack
+  - name: UsageLocation
+    description: Ack
+  - name: GivenName
+    description: Ack
+  - name: Surname
+    description: Ack
+  - name: AccountEnabled
+    description: Ack
+  - name: MailNickname
+    description: The TEL EmployeeId of the user.
+  - name: Mail
+    description: Ack.
+  - name: DisplayName
+    description: Ack.
+  - name: UserType
+    description: Ack
+  - name: Audit_Log_Id
+    description: Ack
+  - name: _Row_Hash
+    description: Ack
+- name: ODS__ACTIVEDIRECTORY__GROUPMEMBERSHIPLIST
+  description: Model activedirectory Group_Membership_List file.
+  columns:
+  - name: GroupID
+    description: The pk of the group.
+  - name: MemberId
+    description: The pk of the user.
+  - name: MemberName
+    description: Ack
+  - name: Audit_Log_Id
+    description: Ack
+- name: ODS__ACTIVEDIRECTORY__GROUPOWNERSHIPLIST
+  description: List of Azure AD groups managed by Data Ops team and their corresponding owners.
+  columns:
+  - name: GROUPID
+    description: Unique identifier of the AD group. This can be used in a web browser to view group details ie https://myaccount.microsoft.com/groups/5b2117d7-dfd2-4443-827f-caecb8a5b630.
+  - name: OWNERID
+    description: Unique identifier of the AD owners.
+  - name: OWNERNAME
+    description: The name of the AD owners.

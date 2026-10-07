@@ -1,0 +1,61 @@
+{{ config(
+        materialized='tel_incremental',
+        incremental_strategy='merge',
+        alias='POSITION_TEXTS',
+        unique_key = ['CLIENT',
+    'LANGUAGE',
+    'OBJECT_TYPE',
+    'POSITION',
+    'END_DATE',],
+        transient=false
+) }}
+
+
+with source_data as (
+SELECT 
+    MANDT AS CLIENT,
+    SPRSL AS LANGUAGE,
+    OTYPE AS OBJECT_TYPE,
+    PLANS AS POSITION,
+    ENDDA AS END_DATE,
+    BEGDA AS START_DATE,
+    PLSTX AS POSITION_SHORT_TEXT,
+    MAINT AS OM,
+    _CAPTUREDATETIME
+FROM {{ ref('BRONZE__TMEA_ENGINEERING__SAPO_POSITION_TEXTS') }}
+),
+transform_data as 
+(
+SELECT
+    '{{ invocation_id }}' AS _AUDIT_LOG_ID,
+    SHA2('hash_me') as _ROW_HASH,
+	CLIENT,
+    LANGUAGE,
+    OBJECT_TYPE,
+    POSITION,
+    END_DATE,
+    START_DATE,
+    POSITION_SHORT_TEXT,
+    OM,
+    _CAPTUREDATETIME
+	FROM SOURCE_DATA
+), 
+
+type_data as 
+(
+SELECT 
+	_AUDIT_LOG_ID,
+	_ROW_HASH,
+	CLIENT,
+    LANGUAGE,
+    OBJECT_TYPE,
+    CAST(POSITION AS NUMBER(38,0)) AS POSITION,
+    CAST(END_DATE AS DATE) AS END_DATE,
+    CAST(START_DATE AS DATE) AS START_DATE,
+    POSITION_SHORT_TEXT,
+    OM,
+    CAST(_CAPTUREDATETIME AS TIMESTAMP_LTZ(9)) AS _CAPTUREDATETIME
+FROM TRANSFORM_DATA
+)
+ 
+SELECT * FROM TYPE_DATA

@@ -1,0 +1,125 @@
+{{ config(
+        materialized='incremental',
+        incremental_strategy='merge',
+        alias='WHSE_ACTIVITY_MONITOR_CRITICAL_TRANSFER_ORDER_ITEMS',
+        unique_key = ['MANDT',
+    'LGNUM',
+    'LOBID',
+    'TANUM',
+    'TAPOS'],
+        transient=false
+) }}
+
+with source_data as (
+	SELECT 
+	_CAPTUREDATETIME,
+	MANDT,
+	LGNUM,
+	LOBID,
+	TANUM,
+	TAPOS,
+	BWLVS,
+	VLTYP,
+	NLTYP,
+	EDATU,
+	EZEIT,
+	BNAME,
+	BDATU,
+	BZEIT,
+	STATU,
+	TEXT1,
+	TEXT2,
+	TEXT3,
+	TEXT4,
+	TEXT5,
+	AKT01,
+	AKT02,
+	AKT03,
+	AKT04,
+	AKT05,
+	AKT06,
+	AKT07,
+	AKT08,
+	AKT09,
+	AKT10
+	FROM {{source('SAP_ORACLE_LIVE', 'LL01')}}
+),
+
+
+transform_data as 
+(
+SELECT
+    _CAPTUREDATETIME,
+    '{{ invocation_id }}' AS _AUDIT_LOG_ID,
+    SHA2('hash_me') as _ROW_HASH,
+	MANDT as MANDT,
+	LGNUM as LGNUM,
+	LOBID as LOBID,
+	TANUM as TANUM,
+	TAPOS as TAPOS,
+	BWLVS as BWLVS,
+	VLTYP as VLTYP,
+	NLTYP as NLTYP,
+	EDATU as EDATU,
+	EZEIT as EZEIT,
+	BNAME as BNAME,
+	BDATU as BDATU,
+	BZEIT as BZEIT,
+	STATU as STATU,
+	TEXT1 as TEXT1,
+	TEXT2 as TEXT2,
+	TEXT3 as TEXT3,
+	TEXT4 as TEXT4,
+	TEXT5 as TEXT5,
+	AKT01 as AKT01,
+	AKT02 as AKT02,
+	AKT03 as AKT03,
+	AKT04 as AKT04,
+	AKT05 as AKT05,
+	AKT06 as AKT06,
+	AKT07 as AKT07,
+	AKT08 as AKT08,
+	AKT09 as AKT09,
+	AKT10 as AKT10
+	FROM SOURCE_DATA
+), 
+
+type_data as 
+(
+SELECT 
+	CAST(_CAPTUREDATETIME AS TIMESTAMP_LTZ(9)) AS _CAPTUREDATETIME,
+	CAST(_AUDIT_LOG_ID AS VARCHAR(128)) AS _AUDIT_LOG_ID,
+	CAST(_ROW_HASH AS VARCHAR(128)) AS _ROW_HASH,
+	MANDT,
+	LGNUM,
+	LOBID,
+	TANUM,
+	TAPOS,
+	BWLVS,
+	VLTYP,
+	NLTYP,
+	EDATU,
+	EZEIT,
+	BNAME,
+	BDATU,
+	BZEIT,
+	STATU,
+	TEXT1,
+	TEXT2,
+	TEXT3,
+	TEXT4,
+	TEXT5,
+	AKT01,
+	AKT02,
+	AKT03,
+	AKT04,
+	AKT05,
+	AKT06,
+	AKT07,
+	AKT08,
+	AKT09,
+	AKT10
+FROM TRANSFORM_DATA
+)
+ 
+SELECT * FROM TYPE_DATA

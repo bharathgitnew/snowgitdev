@@ -1,0 +1,181 @@
+/************
+	Model file generated from SAPAPIUtility
+	*************/
+
+
+{{ config(
+	materialized='incremental',
+	incremental_strategy='merge',
+	alias='ZCDV_T_CMTU196_AUAA',
+	unique_key = ['LFDNR','BELNR'],
+	tags=["finance_gmx"],
+	transient=false
+) }}
+
+	with source_data as (
+    SELECT
+        _FILEDATE,
+        _FILENAME,
+		JSONFIELD:Mandt::STRING AS MANDT,
+		JSONFIELD:Kostl::STRING AS KOSTL,
+		JSONFIELD:Pspnr_new::STRING AS PSPNR_NEW,
+		JSONFIELD:Vname::STRING AS VNAME,
+		JSONFIELD:Recid::STRING AS RECID,
+		JSONFIELD:Egrup::STRING AS EGRUP,
+		JSONFIELD:Copar::STRING AS COPAR,
+		JSONFIELD:Bwtar::STRING AS BWTAR,
+		JSONFIELD:Kstrg::STRING AS KSTRG,
+		JSONFIELD:Nplnr::STRING AS NPLNR,
+		JSONFIELD:Kdauf::STRING AS KDAUF,
+		JSONFIELD:Etype::STRING AS ETYPE,
+		JSONFIELD:Rifind::STRING AS RIFIND,
+		JSONFIELD:Prznr::STRING AS PRZNR,
+		JSONFIELD:Imkey::STRING AS IMKEY,
+		JSONFIELD:Dabrz::STRING AS DABRZ,
+		JSONFIELD:Geinh::STRING AS GEINH,
+		JSONFIELD:Anbwa::STRING AS ANBWA,
+		JSONFIELD:PAOBJNR::STRING AS PAOBJNR,
+		JSONFIELD:PSPNR::STRING AS PSPNR,
+		JSONFIELD:ANLN1::STRING AS ANLN1,
+		JSONFIELD:ANLN2::STRING AS ANLN2,
+		JSONFIELD:COOBJNR::STRING AS COOBJNR,
+		JSONFIELD:LFDNR::STRING AS LFDNR,
+		JSONFIELD:KDPOS::STRING AS KDPOS,
+		JSONFIELD:PRCTR::STRING AS PRCTR,
+		JSONFIELD:PSL_UPDDATE::STRING AS PSL_UPDDATE,
+		JSONFIELD:AUFNR::STRING AS AUFNR,
+		JSONFIELD:GMENG::STRING AS GMENG,
+		JSONFIELD:KOKRS::STRING AS KOKRS,
+		JSONFIELD:APLZL::STRING AS APLZL,
+		JSONFIELD:BELNR::STRING AS BELNR,
+		JSONFIELD:ERLKZ::STRING AS ERLKZ,
+		JSONFIELD:WERKS::STRING AS WERKS,
+		JSONFIELD:LSQTY::STRING AS LSQTY,
+		JSONFIELD:WAERS::STRING AS WAERS,
+		JSONFIELD:SAKNR::STRING AS SAKNR,
+		JSONFIELD:DELFLAG::STRING AS DELFLAG,
+		JSONFIELD:EMTYP::STRING AS EMTYP,
+		JSONFIELD:PSL_INSDATE::STRING AS PSL_INSDATE,
+		JSONFIELD:MATNR::STRING AS MATNR,
+		JSONFIELD:AUFPL::STRING AS AUFPL,
+		JSONFIELD:BUKRS::STRING AS BUKRS,
+		JSONFIELD:POSNR::STRING AS POSNR,
+		JSONFIELD:GSBER::STRING AS GSBER,
+		JSONFIELD:SCOPE::STRING AS SCOPE
+    FROM {{ source('SAPH','SAP_PPT_EV_AUAA') }}
+    {% if is_incremental() %}WHERE  _FILEDATE > IFNULL((SELECT MAX(_FILEDATE) FROM {{ this }}),'1970-01-01'){% endif %}
+        QUALIFY (ROW_NUMBER() OVER (PARTITION BY LFDNR,BELNR  ORDER BY _FILEDATE DESC )) = 1
+	),
+
+-- 	PRPS AS (   --tech debt of prps table
+--     SELECT
+--         PSPNR_NEW,
+--         POSKI
+--     FROM {{ ref('ODS__SAPAPI__ZCDV_T_CMTU040_PRPS') }} AS PRPS
+-- ),
+
+	transform_data as (
+    SELECT
+        _FILEDATE AS _FILEDATE,
+        _FILENAME AS _FILENAME,
+        '{{ invocation_id }}' AS AUDIT_LOG_ID,
+        SHA2('hash_me') AS _ROW_HASH,
+		BELNR as BELNR,
+		EMTYP as EMTYP,
+		BUKRS as BUKRS,
+		KOSTL as KOSTL,
+		VNAME as VNAME,
+		RECID as RECID,
+		EGRUP as EGRUP,
+		COPAR as COPAR,
+		BWTAR as BWTAR,
+		KSTRG as KSTRG,
+		NPLNR as NPLNR,
+		KDAUF as KDAUF,
+		ETYPE as ETYPE,
+		RIFIND as RIFIND,
+		PRZNR as PRZNR,
+		IMKEY as IMKEY,
+		DABRZ as DABRZ,
+		GMENG as GMENG,
+		GEINH as GEINH,
+		LSQTY as LSQTY,
+		ANBWA as ANBWA,
+		sd.PSPNR,
+    	--prps.PSPNR_NEW,  --tech debt of prps table
+    coalesce("PAOBJNR",'') as "PAOBJNR",
+		coalesce("ANLN1",'') as "ANLN1",
+    coalesce("ANLN2",'') as "ANLN2",
+		coalesce("COOBJNR",'') as "COOBJNR",
+		LPAD(coalesce("LFDNR",''),4,'0') as "LFDNR",
+		LPAD(coalesce("KDPOS",''),6,'0') as "KDPOS",
+		coalesce("PRCTR",'') as "PRCTR",
+		coalesce("AUFNR",'') as "AUFNR",
+		coalesce("KOKRS",'') as "KOKRS",
+		LPAD(coalesce("APLZL",''),8,'0') as "APLZL",
+		coalesce("ERLKZ",'') as "ERLKZ",
+		coalesce("WERKS",'') as "WERKS",
+		coalesce("WAERS",'') as "WAERS",
+		coalesce("SAKNR",'') as "SAKNR",
+		coalesce("MATNR",'') as "MATNR",
+		LPAD(coalesce("AUFPL",''),10,'0') as "AUFPL",
+		LPAD(coalesce("POSNR",''),4,'0') as "POSNR",
+		LPAD(coalesce("GSBER",''),4,'0') as "GSBER",
+    coalesce("SCOPE",'') as "SCOPE"
+    FROM SOURCE_DATA sd
+    -- left join prps prps  --tech debt of prps table
+    -- on sd.PSPNR = prps.POSKI
+),
+
+type_data as (
+    SELECT
+        _FILEDATE,
+        _FILENAME,
+        AUDIT_LOG_ID,
+        _ROW_HASH,
+		BELNR,
+		LFDNR,
+		EMTYP,
+		KOKRS,
+		BUKRS,
+		WERKS,
+		SAKNR,
+		KOSTL,
+		AUFNR,
+		PSPNR,
+		ANLN1,
+		ANLN2,
+		MATNR,
+		PAOBJNR,
+		PRCTR,
+		WAERS,
+		COOBJNR,
+		GSBER,
+		VNAME,
+		RECID,
+		EGRUP,
+		COPAR,
+		BWTAR,
+		KSTRG,
+		NPLNR,
+		AUFPL,
+		APLZL,
+		KDAUF,
+		KDPOS,
+		ETYPE,
+		RIFIND,
+		SCOPE,
+		POSNR,
+		ERLKZ,
+		PRZNR,
+		IMKEY,
+		DABRZ,
+		GMENG,
+		GEINH,
+		LSQTY,
+		ANBWA
+		--PSPNR_NEW   --tech debt of prps table
+    FROM transform_data
+)
+
+	select * from type_data

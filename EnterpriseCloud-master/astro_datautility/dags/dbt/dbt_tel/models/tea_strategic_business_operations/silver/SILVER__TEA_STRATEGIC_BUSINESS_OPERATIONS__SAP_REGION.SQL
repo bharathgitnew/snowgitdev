@@ -1,0 +1,65 @@
+{{ config(
+    materialized='tel_incremental',
+    incremental_strategy='insert_overwrite',
+    alias='SAP_REGION',
+    tags=["finance"]
+) }}
+
+with source_data as
+(
+    SELECT
+		ORACLE_CODE,
+		ORACLE_NAME AS ORACLE_DESCRIPTION,
+		SAP_CODE,
+		SAP_NAME AS SAP_DESCRIPTION,
+        BAAN.OFFICE_ID AS BAAN_CODE,    
+        BAAN.OFFICE_NAME AS BAAN_DESCRIPTION,
+        CREATED,
+        MODIFIED,
+        CREATEDBY,
+        MODIFIEDBY
+    FROM {{ ref('BRONZE__TEA_STRATEGIC_BUSINESS_OPERATIONS__SHAREPOINT_ORACLE_REGION') }} AS REG
+    LEFT JOIN (SELECT ORACLE_OFFICE_CODE,OFFICE_ID,OFFICE_NAME FROM {{ source('STATIC_OBJECTS', 'D_OFFICE') }} 
+    WHERE DW_CURRENT_INDICATOR='Y') BAAN
+        ON REG.ORACLE_CODE = BAAN.ORACLE_OFFICE_CODE
+ QUALIFY (ROW_NUMBER() OVER (PARTITION BY SAP_CODE  ORDER BY MODIFIED DESC)) = 1   
+  
+ 
+)
+
+,transform_data as
+(
+    select
+		ORACLE_CODE,
+		ORACLE_DESCRIPTION,
+		SAP_CODE,
+		SAP_DESCRIPTION,
+        BAAN_CODE,
+        BAAN_DESCRIPTION,
+        '{{ invocation_id }}' AS _AUDIT_LOG_ID,
+        SHA2('hash_me') as _ROW_HASH,
+        CREATED,
+        MODIFIED,
+        CREATEDBY,
+        MODIFIEDBY
+        FROM source_data
+)
+
+,type_data as
+(
+    select
+        CAST(_AUDIT_LOG_ID AS VARCHAR(128)) AS _AUDIT_LOG_ID,
+        CAST(_ROW_HASH AS VARCHAR(128)) AS _ROW_HASH,
+        CAST(ORACLE_CODE AS VARCHAR(16777216)) AS ORACLE_CODE,
+        CAST(ORACLE_DESCRIPTION AS VARCHAR(16777216)) AS ORACLE_DESCRIPTION,
+        CAST(SAP_CODE AS VARCHAR(16777216)) AS SAP_CODE,
+        CAST(SAP_DESCRIPTION AS VARCHAR(16777216)) AS SAP_DESCRIPTION,
+        CAST(BAAN_CODE AS VARCHAR(16777216)) AS BAAN_CODE,
+        CAST(BAAN_DESCRIPTION AS VARCHAR(16777216)) AS BAAN_DESCRIPTION,
+        CREATED,
+        MODIFIED,
+        CREATEDBY,
+        MODIFIEDBY
+    from transform_data
+    )
+select * from type_data

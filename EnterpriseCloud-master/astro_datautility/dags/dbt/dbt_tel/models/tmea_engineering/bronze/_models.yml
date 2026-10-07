@@ -1,0 +1,669 @@
+models:
+- name: BRONZE__TMEA_ENGINEERING__WISDOM_MAC_MAIN
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Timestamp of ingestion job start
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 24
+- name: BRONZE__TMEA_ENGINEERING__SAPO_PERSONNEL_AREAS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TMEA_ENGINEERING__SAPO_CATS_DATABASE_TABLE_FOR_TIME_SHEET
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _CAPTUREDATETIME
+    description: Check the _CAPTUREDATETIME column in the BRONZE.TMEA_ENGINEERING.SAPO_CATS_DATABASE_TABLE_FOR_TIME_SHEET
+      table to ensure it falls within the last 24-hour interval.
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 24
+  - name: AENAM
+    description: Name of person who changed object
+  - name: ALLDF
+    description: Record is for Full Day
+  - name: APDAT
+    description: Date of Approval
+  - name: APNAM
+    description: Name of person who approved data
+  - name: ARBID
+    description: Object ID
+  - name: AUERU
+    description: Partial/Final Confirmation
+  - name: AUFKZ
+    description: Extra Pay Indicator
+  - name: AUTYP
+    description: Order category
+  - name: AWART
+    description: Attendance or Absence Type
+  - name: BEGUZ
+    description: Start time
+  - name: BELNR
+    description: Document no.
+  - name: BEMOT
+    description: Accounting Indicator
+  - name: BUDGET_PD
+    description: 'FM: Receiver Budget Period'
+  - name: BUKRS
+    description: Company Code
+  - name: BWGRL
+    description: Valuation basis
+  - name: CATSAMOUNT
+    description: CATS Amount
+  - name: CATSHOURS
+    description: Hours
+  - name: CATSQUANTITY
+    description: 'Time Sheet: Number (Unit of Measure)'
+  - name: COUNTER
+    description: Counter for Records in Time Recording
+  - name: CPR_EXTID
+    description: External Project ID
+  - name: CPR_GUID
+    description: Project GUID
+  - name: CPR_OBJGEXTID
+    description: External ID of Project Subobject
+  - name: CPR_OBJGUID
+    description: Object ID
+  - name: CPR_OBJTYPE
+    description: cProjects Object Type
+  - name: ENDUZ
+    description: End time
+  - name: ERNAM
+    description: User Creating Record
+  - name: ERSDA
+    description: Created On
+  - name: ERSTM
+    description: Time of Entry
+  - name: ERUZU
+    description: 'Indicator: Partial confirmation'
+  - name: EXTAPPLICATION
+    description: External Application
+  - name: EXTDOCUMENTNO
+    description: Document number
+  - name: EXTSYSTEM
+    description: Logical system of source document
+  - name: FEVOR
+    description: Production Supervisor
+  - name: FUNC_AREA
+    description: Receiving Functional Area
+  - name: FUND
+    description: Receiver Fund
+  - name: GRANT_NBR
+    description: Receiver Grant
+  - name: HRBUDGET_PD
+    description: Master Budget Period
+  - name: HRCOSTASG
+    description: Cost Accounting Variants
+  - name: HRFUNC_AREA
+    description: Master Functional Area
+  - name: HRFUND
+    description: Master Fund
+  - name: HRGRANT_NBR
+    description: Master Grant
+  - name: HRKOSTL
+    description: Cost Center
+  - name: HRLSTAR
+    description: Activity Type
+  - name: KAPID
+    description: Capacity ID
+  - name: KOKRS
+    description: Controlling Area
+  - name: LAEDA
+    description: Date of Last Change
+  - name: LAETM
+    description: Last Changed At
+  - name: LGART
+    description: Wage Type
+  - name: LOGSYS
+    description: Logical System
+  - name: LONGTEXT
+    description: Long Text
+  - name: LSTAR
+    description: Activity Type
+  - name: LSTNR
+    description: Activity Number
+  - name: LTXA1
+    description: Short Text
+  - name: MANDT
+    description: Client
+  - name: MEINH
+    description: Unit of Measure for Display
+  - name: OFMNW
+    description: Remaining work
+  - name: OTYPE
+    description: Object Type
+  - name: PAOBJNR
+    description: Profitability Segment Number (CO-PA)
+  - name: PEDD
+    description: Forecast finish date of operation from confirmation
+  - name: PERNR
+    description: Personnel Number
+  - name: PLANS
+    description: Position
+  - name: PRAKN
+    description: Premium Number
+  - name: PRAKZ
+    description: Premium Indicator
+  - name: PRICE
+    description: Price in Transaction Currency
+  - name: RAPLZL
+    description: General counter for order
+  - name: RAUFNR
+    description: Receiver Order
+  - name: RAUFPL
+    description: Routing number of operations in the order
+  - name: REASON
+    description: Reason for rejection
+  - name: REFCOUNTER
+    description: Reference Counter for Record to be Changed
+  - name: REINR
+    description: Trip Number
+  - name: RKDAUF
+    description: Receiver sales order
+  - name: RKDPOS
+    description: Item number in receiver sales order
+  - name: RKOSTL
+    description: Receiver Cost Center
+  - name: RKSTR
+    description: Receiver cost object
+  - name: RNPLNR
+    description: Network number
+  - name: RPROJ
+    description: Receiver WBS element
+  - name: RPRZNR
+    description: Receiver business process
+  - name: S_FUNC_AREA
+    description: Sending Functional Area
+  - name: S_FUND
+    description: Sender fund
+  - name: S_GRANT_NBR
+    description: Sender Grant
+  - name: SBUDGET_PD
+    description: 'FM: Sender  Budget Period'
+  - name: SEBELN
+    description: Sending purchase order
+  - name: SEBELP
+    description: Sending purchase order item
+  - name: SKOSTL
+    description: Sender Cost Center
+  - name: SPLIT
+    description: Split number
+  - name: SPRZNR
+    description: Sender Business Process
+  - name: STATKEYFIG
+    description: Statistical key figure
+  - name: STATUS
+    description: Processing status
+  - name: TASKCOMPONENT
+    description: Task component
+  - name: TASKCOUNTER
+    description: 'CATS: Task Counter'
+  - name: TASKLEVEL
+    description: Task Level
+  - name: TASKTYPE
+    description: Task Type
+  - name: TCURR
+    description: Transaction Currency
+  - name: TRFGR
+    description: Pay Scale Group
+  - name: TRFST
+    description: Pay Scale Level
+  - name: UNIT
+    description: Unit of Measurement
+  - name: VERSL
+    description: Overtime Compensation Type
+  - name: VTKEN
+    description: Previous Day Indicator
+  - name: WABLNR
+    description: Number of Material Document
+  - name: WAERS
+    description: Currency Key
+  - name: WERKS
+    description: Plant
+  - name: WORKDATE
+    description: Date
+  - name: WORKITEMID
+    description: Work item ID
+  - name: WTART
+    description: Tax area work center
+  - name: ZNON_PROJ
+    description: MISC ATTENDANCE INPUTS
+- name: BRONZE__TMEA_ENGINEERING__SAPO_HR_MASTER_RECORD_INFOTYPE_0001
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: ABKRS
+    description: Payroll Area
+  - name: AEDTM
+    description: Date of Last Change
+  - name: ANSVH
+    description: Work Contract
+  - name: BEGDA
+    description: Start Date
+  - name: BTRTL
+    description: Personnel Subarea
+  - name: BUDGET_PD
+    description: 'FM: Budget Period'
+  - name: BUKRS
+    description: Company Code
+  - name: ENAME
+    description: Formatted Name of Employee or Applicant
+  - name: ENDDA
+    description: End Date
+  - name: FISTL
+    description: Funds Center
+  - name: FKBER
+    description: Functional Area
+  - name: FLAG1
+    description: Reserved Field/Unused Field
+  - name: FLAG2
+    description: Reserved Field/Unused Field
+  - name: FLAG3
+    description: Reserved Field/Unused Field
+  - name: FLAG4
+    description: Reserved Field/Unused Field
+  - name: GEBER
+    description: Fund
+  - name: GRANT_NBR
+    description: Grant
+  - name: GRPVL
+    description: Grouping Value for Personnel Assignments
+  - name: GSBER
+    description: Business Area
+  - name: HISTO
+    description: Historical Record Flag
+  - name: ITBLD
+    description: Infotype Screen Control
+  - name: ITXEX
+    description: Text Exists for Infotype
+  - name: JUPER
+    description: Legal Person
+  - name: KOKRS
+    description: Controlling Area
+  - name: KOSTL
+    description: Cost Center
+  - name: MANDT
+    description: Client
+  - name: MSTBR
+    description: Supervisor Area
+  - name: OBJPS
+    description: Object Identification
+  - name: ORDEX
+    description: Confirmation Fields Exist
+  - name: ORGEH
+    description: Organizational Unit
+  - name: OTYPE
+    description: Object Type
+  - name: PERNR
+    description: Personnel number
+  - name: PERSG
+    description: Employee Group
+  - name: PERSK
+    description: Employee Subgroup
+  - name: PLANS
+    description: Position
+  - name: PREAS
+    description: Reason for Changing Master Data
+  - name: REFEX
+    description: Reference Fields Exist (Primary/Secondary Costs)
+  - name: RESE1
+    description: Reserved Field/Unused Field of Length 2
+  - name: RESE2
+    description: Reserved Field/Unused Field of Length 2
+  - name: SACHA
+    description: Payroll Administrator
+  - name: SACHP
+    description: Administrator for HR Master Data
+  - name: SACHZ
+    description: Administrator for Time Recording
+  - name: SBMOD
+    description: Administrator Group
+  - name: SEQNR
+    description: Number of Infotype Record With Same Key
+  - name: SGMNT
+    description: Segment for Segmental Reporting
+  - name: SNAME
+    description: Employee's Name (Sortable by LAST NAME FIRST NAME)
+  - name: SPRPS
+    description: Lock Indicator for HR Master Data Record
+  - name: STELL
+    description: Job
+  - name: SUBTY
+    description: Subtype
+  - name: UNAME
+    description: Name of person who changed object
+  - name: VDSK1
+    description: Organizational Key
+  - name: WERKS
+    description: Personnel Area
+- name: BRONZE__TMEA_ENGINEERING__SAPO_ORDER_MASTER_DATA
+  tests:
+  - has_data
+  - recently_run
+  description: Order master data
+  columns:
+  - name: _CAPTUREDATETIME
+    description: Check the _CAPTUREDATETIME column in the BRONZE.TMEA_ENGINEERING.SAPO_ORDER_MASTER_DATA
+      table to ensure it falls within the last 24-hour interval.
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 24
+  - name: ABGSL
+    description: Results Analysis Key
+  - name: ABKRS
+    description: Processing group
+  - name: ABUKR
+    description: Requesting company code
+  - name: ADRNRA
+    description: Address Number
+  - name: AEDAT
+    description: Change date for Order Master
+  - name: AENAM
+    description: Last changed by
+  - name: AEZEIT
+    description: Changed at
+  - name: AKSTL
+    description: Requesting cost center
+  - name: ANFAUFNR
+    description: Requesting order
+  - name: ASTKZ
+    description: Identifier for statistical order
+  - name: ASTNR
+    description: Order status
+  - name: AUART
+    description: Order Type
+  - name: AUFEX
+    description: External order number
+  - name: AUFNR
+    description: Order Number
+  - name: AUTYP
+    description: Order category
+  - name: AWSLS
+    description: Variance Key
+  - name: BEMOT
+    description: Accounting Indicator
+  - name: BUKRS
+    description: Company Code
+  - name: CCKEY
+    description: Cost collector key
+  - name: CLAIM_CONTROL
+    description: Claim creation control indicator
+  - name: COSTESTNR
+    description: Cost Estimate Number for Cost Est. w/o Qty Structure
+  - name: CSTG_VRNT
+    description: Costing Variant
+  - name: CYCLE
+    description: Cost center to which costs are actually posted
+  - name: ERDAT
+    description: Created on
+  - name: ERFZEIT
+    description: Time created
+  - name: ERNAM
+    description: Entered by
+  - name: ESTNR
+    description: Status reached so far
+  - name: ETYPE
+    description: Equity type
+  - name: FERC_IND
+    description: Regulatory indicator
+  - name: FLG_MLTPS
+    description: Order with Multiple Items
+  - name: FUNC_AREA
+    description: Functional Area
+  - name: GSBER
+    description: Business Area
+  - name: IDAT1
+    description: Release date
+  - name: IDAT2
+    description: Technical completion date
+  - name: IDAT3
+    description: Close date
+  - name: IVPRO
+    description: Investment measure profile
+  - name: IZWEK
+    description: Reason for investment
+  - name: JV_JIBCL
+    description: JIB/JIBE Class
+  - name: JV_JIBSA
+    description: JIB/JIBE Subclass A
+  - name: JV_OCO
+    description: JV original cost object
+  - name: KALSM
+    description: Costing Sheet
+  - name: KAPPL
+    description: Application
+  - name: KDAUF
+    description: Sales Order Number
+  - name: KDPOS
+    description: Item number in Sales Order
+  - name: KOKRS
+    description: Controlling Area
+  - name: KOSTL
+    description: Cost center for basic settlement
+  - name: KOSTV
+    description: Responsible cost center
+  - name: KSTAR
+    description: Settlement cost element
+  - name: KSTEMPF
+    description: 'Indicator: Direct cost collector'
+  - name: KTEXT
+    description: Description
+  - name: KVEWE
+    description: Usage of the condition table
+  - name: LOEKZ
+    description: Deletion flag
+  - name: LOGSYSTEM
+    description: Logical System
+  - name: LTEXT
+    description: Long Text Exists
+  - name: MANDT
+    description: Client
+  - name: OBJID
+    description: Object ID
+  - name: OBJNR
+    description: Object number
+  - name: OTYPE
+    description: Joint Venture Object Type
+  - name: PDAT1
+    description: Planned release date
+  - name: PDAT2
+    description: Planned completion date
+  - name: PDAT3
+    description: Planned closing date
+  - name: PHAS0
+    description: Phase "Order created"
+  - name: PHAS1
+    description: Phase "Order released"
+  - name: PHAS2
+    description: Phase "order completed"
+  - name: PHAS3
+    description: Phase "order closed"
+  - name: PKOSA
+    description: Cost collector for production process PROCNR
+  - name: PLGKZ
+    description: Identifier for planning with line items
+  - name: PLINT
+    description: Indicator for Integrated Planning
+  - name: PRCTR
+    description: Profit Center
+  - name: PROCNR
+    description: Production Process
+  - name: PROTY
+    description: Process Category (Procurement/Consumption)
+  - name: PSPEL
+    description: Work breakdown structure element (WBS element)
+  - name: RECID
+    description: Recovery Indicator
+  - name: REFNR
+    description: Reference order number
+  - name: RSORD
+    description: Refurbishment order indicator (PM)
+  - name: SAKNR
+    description: G/L account for basic settlement
+  - name: SCOPE
+    description: Object Class
+  - name: SDATE
+    description: Start Date
+  - name: SEQNR
+    description: Sequence number
+  - name: SETNM
+    description: Allocation set
+  - name: SIZECL
+    description: Scale of investment objects
+  - name: SOWRK
+    description: Location plant
+  - name: STDAT
+    description: Date of last status change
+  - name: STORT
+    description: Location
+  - name: TXJCD
+    description: Tax Jurisdiction
+  - name: UMWKZ
+    description: Reason for environmental investment
+  - name: UPDATE_CONTROL
+    description: Claim update trigger point from service order
+  - name: UPDATE_NEEDED
+    description: Claim inconsistency with order indicator
+  - name: USER0
+    description: Applicant
+  - name: USER1
+    description: Applicant's telephone number
+  - name: USER2
+    description: Person Responsible
+  - name: USER3
+    description: Telephone number of person in charge
+  - name: USER4
+    description: Estimated total costs of order
+  - name: USER5
+    description: Application date
+  - name: USER6
+    description: Department
+  - name: USER7
+    description: Work Start
+  - name: USER8
+    description: End of Work
+  - name: USER9
+    description: Identifier for work permit issued
+  - name: VAPLZ
+    description: Main work center for maintenance tasks
+  - name: VERAA_USER
+    description: Person Responsible for CO Internal Order
+  - name: VNAME
+    description: Joint Venture
+  - name: VOGRP
+    description: Group of disallowed transactions
+  - name: WAERS
+    description: Order Currency
+  - name: WAWRK
+    description: Plant associated with main work center
+  - name: WERKS
+    description: Plant
+  - name: ZSCHL
+    description: Overhead key
+  - name: ZSCHM
+    description: Interest Profile for Project/Order Interest Calculation
+- name: BRONZE__TMEA_ENGINEERING__SAPO_POSITION_TEXTS
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: BEGDA
+    description: Start Date
+  - name: ENDDA
+    description: End Date
+  - name: MAINT
+    description: Maintenance of table entry in OM
+  - name: MANDT
+    description: Client
+  - name: OTYPE
+    description: Object Type
+  - name: PLANS
+    description: Position
+  - name: PLSTX
+    description: Short Text of Position
+  - name: SPRSL
+    description: Language Key
+- name: BRONZE__TMEA_ENGINEERING__SAPO_PRODUCTION_SUPERVISOR
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: FEVOR
+    description: Production Supervisor
+  - name: MANDT
+    description: Client
+  - name: SFCPF
+    description: Production Scheduling Profile
+  - name: TXT
+    description: Description of Production Supervisor
+  - name: WERKS
+    description: Plant
+- name: BRONZE__TMEA_ENGINEERING__SAPO_TABLE_WITH_DELETION_TIME_OF_DELETED_CATS_RECORDS
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _CAPTUREDATETIME
+    description: Check the _CAPTUREDATETIME column in the BRONZE.TMEA_ENGINEERING.SAPO_TABLE_WITH_DELETION_TIME_OF_DELETED_CATS_RECORDS
+      table to ensure it falls within the last 24-hour interval.
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 72
+- name: BRONZE__TMEA_ENGINEERING__WISDOM_SAP_SURB
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Timestamp of ingestion job start
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 24
+- name: BRONZE__TMEA_ENGINEERING__SHAREPOINT_ENGINEERING_ACTION_REQUEST
+  tests:
+  - has_data
+  - recently_run
+
+- name: BRONZE__TMEA_ENGINEERING__SHAREPOINT_ENGINEERING_ACTION_REQUEST_HIST
+  tests:
+  - has_data
+  - recently_run
+
+- name: BRONZE__TMEA_ENGINEERING__WISDOM_TEA_MAC_LIST
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Timestamp of ingestion job start
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 24
+- name: BRONZE__TMEA_ENGINEERING__TMEA_AZURE_DEVOPS_WORK_ITEM_DETAILS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TMEA_ENGINEERING__WISDOM_SURB_PROGRESS
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Timestamp of ingestion job start
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 24

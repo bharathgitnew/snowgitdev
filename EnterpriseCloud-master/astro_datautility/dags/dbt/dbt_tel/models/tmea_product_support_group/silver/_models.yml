@@ -1,0 +1,278 @@
+models:
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__DEPARTMENTS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__ACCESSLOGS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__ACCIDENTREPORTSFORUS_NOLOCK
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__ANNOUNCEMENTS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__APPROVALACTIVITIES
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__APPROVALLOGS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__APPROVALVERIFIERS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__ASSIGNEDPEOPLE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__ATTACHMENTS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__BUSINESS_PARTNERS_GENERAL_DATA
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__CLAIMSURVEYS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__CONTRACTS_MASTER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__CONTRACT_SUMMARY_DETAILS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__CONTRACT_SUMMARY_PURCHASE_ORDER_DETAILS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__CURRENTSTATUSES
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__EMERGENTMEASURES
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__EMERGENTMEASURE_APPROVALACTIVITIES
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__EMERGENTMEASURE_APPROVALLOGS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__EMERGENTMEASURE_ATTACHMENTS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__EQUIPMENT_MASTER_DATA
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__GLOBAL_MACHINES
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__INQUIRIES
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__INQUIRY_LOCKS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__JUDGEMENTS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__MACHINES
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__MAC_MAIN
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__MAILLOGS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__MATERIAL_PLANT_MASTER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__MESSAGES
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__MESSAGE_ADDRESSES
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__MESSAGE_ATTACHMENTS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__MYWATCHES
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__OPTIONS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__OPTIONSET_METADATA
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__PARMANENTMEASURES
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__PARMANENTMEASURE_APPROVALACTIVITIES
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__PARMANENTMEASURE_APPROVALLOGS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__PARMANENTMEASURE_ATTACHMENTS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__PARMANENTMEASURE_PROGRESSES
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__PARMANENTMEASURE_REPORTATTACHMENTS
+  tests:
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__PARTS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__PART_CONTROLS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__PROGRESS_STATUSES
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__PURCHASE_ORDER_DELIVERY_LINE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__SALES_ORDER_BILLING_LINE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__SALES_ORDER_BILLING_PLAN
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__SALES_ORDER_DELIVERY_LINE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__SALES_ORDER_MASTER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__SALES_ORDER_SCHEDULE_LINE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__SAP_SURB
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__SERVICE_B_CODE_MAPPING
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__TEA_MAC_LIST
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__TMEA_MANAGEMENT_KPI_GOALS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__TRANSLATIONS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__TROUBLEANALYSIS_KEYWORDS
+  tests:
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__TROUBLEFORTOTALIZATION_LISTCOLUMNS
+  tests:
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__TROUBLES
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__TROUBLE_ATTACHMENTS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__TROUBLE_COMPONENTS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__TROUBLE_LOCKS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__TROUBLE_MAILADDRESSES
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__TROUBLE_OWNERS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__TSC_US_CASE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__USEFULS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__WISDOM_MACHINE_DETAILS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__WISDOM_SURB_PROGRESS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__WORKORDER_ESCALATION
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__WORKORDER_ESCALATION_HISTORY
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__WORKORDER_R2
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_PRODUCT_SUPPORT_GROUP__QUALITY_NOTIFICATION
+  tests:
+  - has_data
+  - recently_run

@@ -1,0 +1,34 @@
+version: 2
+sources:
+- name: UPS
+  description: Landing Zone - UPS Data
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: UPS
+  tables:
+  - name: TEA_SEC_232
+    identifier: TEA_SEC_232
+    description: Landing table for TEA_SEC_232 file.
+  - name: INVOICE_EXPORT_HISTORY_BY_INVOICE
+    identifier: INVOICE_EXPORT_HISTORY_BY_INVOICE
+    description: Landing table for INVOICE_EXPORT_HISTORY_BY_INVOICE file.
+  - name: INVOICE_EXPORT_HISTORY_BY_BILLING_DATE
+    identifier: INVOICE_EXPORT_HISTORY_BY_BILLING_DATE
+    description: Landing table for INVOICE_EXPORT_HISTORY_BY_BILLING_DATE file.
+  - name: TEA_ORDERS
+    identifier: TEA_ORDERS
+    description: Landing table for TEA_ORDERS file.
+  - name: UPS_ALL_PARTS_ALL
+    identifier: UPS_ALL_PARTS_ALL
+    description: Landing table for UPS_ALL_PARTS_ALL file.
+  - name: UPS_ALL_PARTS_HTS
+    identifier: UPS_ALL_PARTS_HTS
+    description: Landing table for UPS_ALL_PARTS_HTS file.
+  - name: UPS_ALL_PARTS_MATERIAL
+    identifier: UPS_ALL_PARTS_MATERIAL
+    description: Landing table for UPS_ALL_PARTS_MATERIAL file.
+  - name: UPS_ALL_PARTS_OUT_OF_SCOPE
+    identifier: UPS_ALL_PARTS_OUT_OF_SCOPE
+    description: Landing table for UPS_ALL_PARTS_OUT_OF_SCOPE file.
+  - name: CONTROLTABLE
+    identifier: CONTROLTABLE
+    description: Landing table for CONTROLTABLE file.

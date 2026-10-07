@@ -1,0 +1,192 @@
+{"TTCA_BOX" :[
+  {
+    "folder_name": "FM Summary Data.xlsx",
+    "folder_id": "2123146384528",
+    "file_types": [".xlsx"],
+    "mode": "file"
+  },
+  {
+    "folder_name": "Formatted Data",
+    "folder_id": "364202432680",
+    "file_types": [
+      ".csv"
+    ],
+    "mode": "folder"
+  },
+  {
+    "folder_name": "Wafer Maps",
+    "folder_id": "364190013247",
+    "file_types": [
+      ".png"
+    ],
+    "mode": "folder"
+  },
+  {
+    "folder_name": "Defect_Lists",
+    "folder_id": "364221534264",
+    "file_types": [
+      ".txt"
+    ],
+    "mode": "folder"
+  },
+  {
+    "folder_name": "Images",
+    "folder_id": "364208704535",
+    "file_types": [
+      ".png"
+    ],
+    "mode": "folder"
+  },
+  {
+    "folder_name": "Qual_Timer_Summary.xlsx",
+    "folder_id": "2123530684204",
+    "file_types": [".xlsx"],
+    "mode": "file"
+  },
+  {
+    "folder_name": "Raw Data",
+    "folder_id": "370999986904",
+    "file_types": [
+      ".csv"
+    ],
+    "mode": "folder"
+  },
+  {
+    "folder_name": "Qual_Data",
+    "folder_id": "364253565232",
+    "file_types": [
+      ".csv"
+    ],
+    "mode": "folder"
+  },
+  {
+    "folder_name": "Raw Data",
+    "folder_id": "364251097332",
+    "file_types": [
+      ".csv"
+    ],
+    "mode": "folder"
+  },
+  {
+    "folder_name": "Qual_Timers_Combined.csv",
+    "folder_id": "2123517464702",
+    "file_types": [".csv"],
+    "mode": "file"
+  },
+  {
+    "folder_name": "NYC_Reports_Qual_Timers.xlsx",
+    "folder_id": "2123517462302",
+    "file_types": [".xlsx"],
+    "mode": "file"
+  },
+  {
+    "folder_name": "RunLists_ToolID",
+    "folder_id": "364189259397",
+    "file_types": [
+      ".csv"
+    ],
+    "mode": "folder"
+  },
+  {
+    "folder_name": "RunLists_ALL",
+    "folder_id": "364191462558",
+    "file_types": [
+      ".csv"
+    ],
+    "mode": "folder"
+  },
+  {
+    "folder_name": "RunLists_ToolID",
+    "folder_id": "364225684211",
+    "file_types": [
+      ".csv"
+    ],
+    "mode": "folder"
+  },
+  {
+    "folder_name": "RunLists_ALL",
+    "folder_id": "364221625944",
+    "file_types": [
+      ".csv"
+    ],
+    "mode": "folder"
+  },
+  {
+    "folder_name": "RunLists_ALL",
+    "folder_id": "368156361209",
+    "file_types": [
+      ".csv"
+    ],
+    "mode": "folder"
+  },
+  {
+    "folder_name": "RunLists_ToolID",
+    "folder_id": "368154345306",
+    "file_types": [
+      ".csv"
+    ],
+    "mode": "folder"
+  },
+  {
+    "folder_name": "RunLists_ALL",
+    "folder_id": "364252165657",
+    "file_types": [
+      ".csv"
+    ],
+    "mode": "folder"
+  },
+  {
+    "folder_name": "RunLists_ToolID",
+    "folder_id": "364251748283",
+    "file_types": [
+      ".csv"
+    ],
+    "mode": "folder"
+  },
+  {
+    "folder_name": "ER Summary Data.xlsx",
+    "folder_id": "2123316657478",
+    "file_types": [".xlsx"],
+    "mode": "file"
+  },
+  {
+    "folder_name": "Formatted_Data",
+    "folder_id": "364223166596",
+    "file_types": [
+      ".csv"
+    ],
+    "mode": "folder"
+  },
+  {
+    "folder_name": "Wafer_Maps",
+    "folder_id": "364221662027",
+    "file_types": [
+      ".png"
+    ],
+    "mode": "folder"
+  },
+  {
+    "folder_name": "Data_Tables",
+    "folder_id": "395811995415",
+    "file_types": [
+      ".csv"
+    ],
+    "mode": "folder"
+  },
+  {
+    "folder_name": "Formatted_Data",
+    "folder_id": "396262295776",
+    "file_types": [
+      ".csv"
+    ],
+    "mode": "folder"
+  },
+  {
+    "folder_name": "Wafer_Maps",
+    "folder_id": "409755177518",
+    "file_types": [
+      ".png"
+    ],
+    "mode": "folder"
+  }
+]}

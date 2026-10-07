@@ -1,0 +1,166 @@
+{
+    "SF_SAP_US_FIT_EV_ACDOCA": {
+        "FILE": "SF_SAP_US_FIT_EV_ACDOCA_*",
+        "SNOWFLAKE_DATABASE_NAME": "<<LZ>>",
+        "SNOWFLAKE_ROLE_NAME": "<<SYSADMIN>>",
+        "SNOWFLAKE_SCHEMA_NAME": "SAPH",
+        "SNOWFLAKE_TABLE_NAME": "SAP_US_FIT_EV_ACDOCA",
+        "SNOWFLAKE_WAREHOUSE_NAME": "Import_File_WH",
+        "SPLIT_FILE": false
+    },
+    "SF_SAP_US_SDT_EV_LIPS": {
+        "FILE": "SF_SAP_US_SDT_EV_LIPS*",
+        "SNOWFLAKE_DATABASE_NAME": "<<LZ>>",
+        "SNOWFLAKE_ROLE_NAME": "<<SYSADMIN>>",
+        "SNOWFLAKE_SCHEMA_NAME": "SAPH",
+        "SNOWFLAKE_TABLE_NAME": "SAP_US_SDT_EV_LIPS",
+        "SNOWFLAKE_WAREHOUSE_NAME": "Import_File_WH",
+        "SPLIT_FILE": false
+    },
+    "SF_SAP_COM_EV_PRPS": {
+        "FILE": "SF_SAP_COM_EV_PRPS_*",
+        "SNOWFLAKE_DATABASE_NAME": "<<LZ>>",
+        "SNOWFLAKE_ROLE_NAME": "<<SYSADMIN>>",
+        "SNOWFLAKE_SCHEMA_NAME": "SAPH",
+        "SNOWFLAKE_TABLE_NAME": "SAP_COM_EV_PRPS",
+        "SNOWFLAKE_WAREHOUSE_NAME": "Import_File_WH",
+        "SPLIT_FILE": false
+    },
+    "SF_SAP_US_SDT_EV_VBAK": {
+        "FILE": "SF_SAP_US_SDT_EV_VBAK*",
+        "SNOWFLAKE_DATABASE_NAME": "<<LZ>>",
+        "SNOWFLAKE_ROLE_NAME": "<<SYSADMIN>>",
+        "SNOWFLAKE_SCHEMA_NAME": "SAPH",
+        "SNOWFLAKE_TABLE_NAME": "SAP_US_SDT_EV_VBAK",
+        "SNOWFLAKE_WAREHOUSE_NAME": "Import_File_WH",
+        "SPLIT_FILE": false
+    },
+    "SF_SAP_US_SDT_EV_VBRK": {
+        "FILE": "SF_SAP_US_SDT_EV_VBRK_*",
+        "SNOWFLAKE_DATABASE_NAME": "<<LZ>>",
+        "SNOWFLAKE_ROLE_NAME": "<<SYSADMIN>>",
+        "SNOWFLAKE_SCHEMA_NAME": "SAPH",
+        "SNOWFLAKE_TABLE_NAME": "SAP_US_SDT_EV_VBRK",
+        "SNOWFLAKE_WAREHOUSE_NAME": "Import_File_WH",
+        "SPLIT_FILE": false
+    },
+    "SF_SAP_US_PPT_EV_AUAK": {
+        "FILE": "SF_SAP_US_PPT_EV_AUAK_*",
+        "SNOWFLAKE_DATABASE_NAME": "<<LZ>>",
+        "SNOWFLAKE_ROLE_NAME": "<<SYSADMIN>>",
+        "SNOWFLAKE_SCHEMA_NAME": "SAPH",
+        "SNOWFLAKE_TABLE_NAME": "SAP_US_PPT_EV_AUAK",
+        "SNOWFLAKE_WAREHOUSE_NAME": "Import_File_WH",
+        "SPLIT_FILE": false,
+        "DATA_TYPE_STRING" : true
+    },
+    "SF_SAP_US_FIT_EV_BKPFN": {
+        "FILE": "SF_SAP_US_FIT_EV_BKPFN_*",
+        "SNOWFLAKE_DATABASE_NAME": "<<LZ>>",
+        "SNOWFLAKE_ROLE_NAME": "<<SYSADMIN>>",
+        "SNOWFLAKE_SCHEMA_NAME": "SAPH",
+        "SNOWFLAKE_TABLE_NAME": "SAP_US_FIT_EV_BKPFN",
+        "SNOWFLAKE_WAREHOUSE_NAME": "Import_File_WH",
+        "SPLIT_FILE": false,
+        "DATA_TYPE_STRING" : true
+    },
+    "SF_SAP_US_PMT_EV_AFIH": {
+        "FILE": "SF_SAP_US_PMT_EV_AFIH_*",
+        "SNOWFLAKE_DATABASE_NAME": "<<LZ>>",
+        "SNOWFLAKE_ROLE_NAME": "<<SYSADMIN>>",
+        "SNOWFLAKE_SCHEMA_NAME": "SAPH",
+        "SNOWFLAKE_TABLE_NAME": "SAP_US_PMT_EV_AFIH",
+        "SNOWFLAKE_WAREHOUSE_NAME": "Import_File_WH",
+        "SPLIT_FILE": false
+    },
+    "FILELIST": {
+        "FILE": "FILELIST*",
+        "SNOWFLAKE_DATABASE_NAME": "<<LZ>>",
+        "SNOWFLAKE_ROLE_NAME": "<<SYSADMIN>>",
+        "SNOWFLAKE_SCHEMA_NAME": "SAPH",
+        "SNOWFLAKE_TABLE_NAME": "FILELIST",
+        "SNOWFLAKE_WAREHOUSE_NAME": "Import_File_WH",
+        "SPLIT_FILE": false
+    },
+    "SF_SAP_SDT_EV_ZSDT2004_GMX": {
+        "FILE": "SF_SAP_SDT_EV_ZSDT2004_GMX_*",
+        "SNOWFLAKE_DATABASE_NAME": "<<LZ>>",
+        "SNOWFLAKE_ROLE_NAME": "<<SYSADMIN>>",
+        "SNOWFLAKE_SCHEMA_NAME": "SAPH",
+        "SNOWFLAKE_TABLE_NAME": "SAP_SDT_EV_ZSDT2004_GMX",
+        "SNOWFLAKE_WAREHOUSE_NAME": "Import_File_WH",
+        "SPLIT_FILE": false
+    },
+    "SF_SAP_PPT_EV_AUAA_GMX": {
+        "FILE": "SF_SAP_PPT_EV_AUAA_GMX_*",
+        "SNOWFLAKE_DATABASE_NAME": "<<LZ>>",
+        "SNOWFLAKE_ROLE_NAME": "<<SYSADMIN>>",
+        "SNOWFLAKE_SCHEMA_NAME": "SAPH",
+        "SNOWFLAKE_TABLE_NAME": "SAP_PPT_EV_AUAA",
+        "SNOWFLAKE_WAREHOUSE_NAME": "Import_File_WH",
+        "SPLIT_FILE": false
+    },
+    "SF_SAP_US_FIT_EV_BSEG": {
+        "FILE": "SF_SAP_US_FIT_EV_BSEG_*",
+        "SNOWFLAKE_DATABASE_NAME": "<<LZ>>",
+        "SNOWFLAKE_ROLE_NAME": "<<SYSADMIN>>",
+        "SNOWFLAKE_SCHEMA_NAME": "SAPH",
+        "SNOWFLAKE_TABLE_NAME": "SAP_US_FIT_EV_BSEG",
+        "SNOWFLAKE_WAREHOUSE_NAME": "Import_File_WH",
+        "SPLIT_FILE": false
+    },
+    "SF_SAP_COM_EV_AUFK": {
+        "FILE": "SF_SAP_COM_EV_AUFK_*",
+        "SNOWFLAKE_DATABASE_NAME": "<<LZ>>",
+        "SNOWFLAKE_ROLE_NAME": "<<SYSADMIN>>",
+        "SNOWFLAKE_SCHEMA_NAME": "SAPH",
+        "SNOWFLAKE_TABLE_NAME": "SAP_COM_EV_AUFK",
+        "SNOWFLAKE_WAREHOUSE_NAME": "Import_File_WH",
+        "SPLIT_FILE": false
+    },
+    "SF_SAP_US_PPT_EV_AFVC": {
+        "FILE": "SF_SAP_US_PPT_EV_AFVC_*",
+        "SNOWFLAKE_DATABASE_NAME": "<<LZ>>",
+        "SNOWFLAKE_ROLE_NAME": "<<SYSADMIN>>",
+        "SNOWFLAKE_SCHEMA_NAME": "SAPH",
+        "SNOWFLAKE_TABLE_NAME": "SAP_US_PPT_EV_AFVC",
+        "SNOWFLAKE_WAREHOUSE_NAME": "Import_File_WH",
+        "SPLIT_FILE": false
+    },
+    "SF_SAP_US_SDT_EV_LIKP": {
+        "FILE": "SF_SAP_US_SDT_EV_LIKP_*",
+        "SNOWFLAKE_DATABASE_NAME": "<<LZ>>",
+        "SNOWFLAKE_ROLE_NAME": "<<SYSADMIN>>",
+        "SNOWFLAKE_SCHEMA_NAME": "SAPH",
+        "SNOWFLAKE_TABLE_NAME": "SAP_US_SDT_EV_LIKP",
+        "SNOWFLAKE_WAREHOUSE_NAME": "Import_File_WH",
+        "SPLIT_FILE": false
+    },
+    "SF_SAP_US_SDT_EV_VBPA_GMX": {
+        "FILE": "SF_SAP_US_SDT_EV_VBPA_GMX_*",
+        "SNOWFLAKE_DATABASE_NAME": "<<LZ>>",
+        "SNOWFLAKE_ROLE_NAME": "<<SYSADMIN>>",
+        "SNOWFLAKE_SCHEMA_NAME": "SAPH",
+        "SNOWFLAKE_TABLE_NAME": "SAP_US_SDT_EV_VBPA",
+        "SNOWFLAKE_WAREHOUSE_NAME": "Import_File_WH",
+        "SPLIT_FILE": false
+    },
+    "SF_SAP_US_SDT_EV_VBRP": {
+        "FILE": "SF_SAP_US_SDT_EV_VBRP_*",
+        "SNOWFLAKE_DATABASE_NAME": "<<LZ>>",
+        "SNOWFLAKE_ROLE_NAME": "<<SYSADMIN>>",
+        "SNOWFLAKE_SCHEMA_NAME": "SAPH",
+        "SNOWFLAKE_TABLE_NAME": "SAP_US_SDT_EV_VBRP",
+        "SNOWFLAKE_WAREHOUSE_NAME": "Import_File_WH",
+        "SPLIT_FILE": false
+    },
+    "SF_SAP_SDT_EV_VBFA_GMX": {
+        "FILE": "SF_SAP_SDT_EV_VBFA_GMX_*",
+        "SNOWFLAKE_DATABASE_NAME": "<<LZ>>",
+        "SNOWFLAKE_ROLE_NAME": "<<SYSADMIN>>",
+        "SNOWFLAKE_SCHEMA_NAME": "SAPH",
+        "SNOWFLAKE_TABLE_NAME": "SAP_SDT_EV_VBFA_GMX",
+        "SNOWFLAKE_WAREHOUSE_NAME": "Import_File_WH",
+        "SPLIT_FILE": false
+    }
+}

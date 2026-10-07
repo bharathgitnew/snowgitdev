@@ -1,0 +1,70 @@
+/************
+	Model file generated from gmxDbtTemplateUtility.ipynb 
+	*************/
+
+	
+	{{ config(
+    	  materialized='incremental',
+    	  incremental_strategy='insert_overwrite',
+    	  alias='SAP_COM_EV_TKA01',
+    	  unique_key = [''],
+    	  transient=false	
+) }} 
+
+	with source_data as (
+	SELECT
+		JSONFIELD:"KOKRS"::STRING AS "KOKRS", 
+ 	 	JSONFIELD:"BEZEI"::STRING AS "BEZEI", 
+ 	 	JSONFIELD:"WAERS"::STRING AS "WAERS", 
+ 	 	JSONFIELD:"KTOPL"::STRING AS "KTOPL", 
+ 	 	JSONFIELD:"LMONA"::STRING AS "LMONA", 
+ 	 	JSONFIELD:"DPRCT"::STRING AS "DPRCT", 
+ 	 	JSONFIELD:"DELFLAG"::STRING AS "DELFLAG", 
+ 	 	JSONFIELD:"CDCHANGENR"::STRING AS "CDCHANGENR", 
+ 	 	JSONFIELD:"PSL_INSDATE"::STRING AS "PSL_INSDATE", 
+ 	 	JSONFIELD:"PSL_UPDDATE"::STRING AS "PSL_UPDDATE",
+		_FILEDATE,
+		_FILENAME
+	from {{ source('SAPH','SAP_COM_EV_TKA01') }}
+	WHERE REGEXP_SUBSTR(_FILENAME,'\\d{14}') = (SELECT MAX(REGEXP_SUBSTR(_filename,'\\d{14}')) from {{ source('SAPH', 'SAP_COM_EV_TKA01') }})
+	),
+	
+	transform_data as (
+	SELECT 
+		"KOKRS", 
+ 	 	"BEZEI", 
+ 	 	"WAERS", 
+ 	 	"KTOPL", 
+ 	 	"LMONA", 
+ 	 	"DPRCT", 
+ 	 	"DELFLAG", 
+ 	 	"CDCHANGENR", 
+ 	 	"PSL_INSDATE", 
+ 	 	"PSL_UPDDATE",
+		_FILEDATE,
+		_FILENAME,
+		'{{ invocation_id }}' AS AUDIT_LOG_ID,
+        SHA2('hash_me') as _ROW_HASH -- Adds column to table on full refresh.
+	from source_data
+	),
+	
+	type_data as (
+	SELECT
+		CAST("KOKRS" AS NVARCHAR) AS "KOKRS", 
+ 	 	CAST("BEZEI" AS NVARCHAR) AS "BEZEI", 
+ 	 	CAST("WAERS" AS NVARCHAR) AS "WAERS", 
+ 	 	CAST("KTOPL" AS NVARCHAR) AS "KTOPL", 
+ 	 	CAST("LMONA" AS NVARCHAR) AS "LMONA", 
+ 	 	CAST("DPRCT" AS NVARCHAR) AS "DPRCT", 
+ 	 	CAST("DELFLAG" AS BOOLEAN) AS "DELFLAG", 
+ 	 	CAST("CDCHANGENR" AS NVARCHAR) AS "CDCHANGENR", 
+ 	 	CAST("PSL_INSDATE" AS TIMESTAMP) AS "PSL_INSDATE", 
+ 	 	CAST("PSL_UPDDATE" AS TIMESTAMP) AS "PSL_UPDDATE",
+		cast(_FILEDATE AS TIMESTAMP_NTZ(9)) AS _FILEDATE,
+		cast(_FILENAME as varchar(128)) as _FILENAME,
+        cast(AUDIT_LOG_ID as varchar(128)) as AUDIT_LOG_ID,
+        cast(_ROW_HASH as varchar(128)) as _ROW_HASH
+	from transform_data
+	)
+
+	select * from type_data

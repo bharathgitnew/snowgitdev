@@ -1,0 +1,46 @@
+version: 2
+sources:
+- name: ACTIVEDIRECTORY
+  description: Landing Zone - activedirectory Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: activedirectory
+  tables:
+  - name: GROUPLIST
+    identifier: GroupList
+    description: Landing table for Group file.
+    columns:
+    - name: _filename
+      description: The name of the file.
+    - name: _filedate
+      description: The date of the file.
+    - name: _uploaddate
+      description: The date that the file was uploaded into the LZ.
+    - name: jsonfield
+      description: The contents that the file was uploaded into the LZ.
+  - name: USERLIST
+    identifier: UserList
+    description: Landing table for User file.
+    columns:
+    - name: _filename
+      description: The name of the file.
+    - name: _filedate
+      description: The date of the file.
+    - name: _uploaddate
+      description: The date that the file was uploaded into the LZ.
+    - name: jsonfield
+      description: The contents that the file was uploaded into the LZ.
+  - name: GROUPMEMBERSHIP
+    identifier: GroupMembership
+    description: Landing table for GroupMembership file.
+    columns:
+    - name: _filename
+      description: The name of the file.
+    - name: _filedate
+      description: The date of the file.
+    - name: _uploaddate
+      description: The date that the file was uploaded into the LZ.
+    - name: jsonfield
+      description: The contents that the file was uploaded into the LZ.
+  - name: COMPUTERLIST
+    identifier: COMPUTERLIST
+    description: Landing table for COMPUTERLIST file.

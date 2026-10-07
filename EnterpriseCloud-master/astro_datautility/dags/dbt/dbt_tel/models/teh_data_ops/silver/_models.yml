@@ -1,0 +1,638 @@
+models:
+  - name: SILVER__TEH_DATA_OPS__CALENDAR_DATE
+    description: |
+      PURPOSE: Provides a shared calendar dimension for period-based reporting and fiscal alignment across TEH Data Ops models.
+      GRAIN: One row per calendar date.
+      KEY LOGIC: Copies the static calendar source and only increments dates at or above the current max date in the target. Audit fields are stamped during load.
+      CAVEAT: Earlier dates are not revisited on incremental runs, so retroactive source changes to historic dates will not be backfilled automatically.
+    tests:
+      - dbt_expectations.expect_table_row_count_to_be_between:
+          min_value: 1
+    columns:
+      - name: _AUDIT_LOG_ID
+      - name: _ROW_HASH
+      - name: _REFRESHDATE
+      - name: CALENDAR_DATE
+        description: Calendar date value serving as the primary key. Standard date format. One row exists for every date in the calendar range.
+      - name: IS_DECADE_FIRST_DAY
+        description: Boolean flag indicating whether this date is the first day of the decade period. True/false value. Used for period boundary detection in reporting.
+      - name: IS_DECADE_LAST_DAY
+        description: Boolean flag indicating whether this date is the last day of the decade period. True/false value. Used for period boundary detection in reporting.
+      - name: IS_YEAR_FIRST_DAY
+        description: Boolean flag indicating whether this date is the first day of the year period. True/false value. Used for period boundary detection in reporting.
+      - name: IS_YEAR_LAST_DAY
+        description: Boolean flag indicating whether this date is the last day of the year period. True/false value. Used for period boundary detection in reporting.
+      - name: IS_HALF_YEAR_FIRST_DAY
+        description: Boolean flag indicating whether this date is the first day of the half year period. True/false value. Used for period boundary detection in reporting.
+      - name: IS_HALF_YEAR_LAST_DAY
+        description: Boolean flag indicating whether this date is the last day of the half year period. True/false value. Used for period boundary detection in reporting.
+      - name: IS_QUARTER_FIRST_DAY
+        description: Boolean flag indicating whether this date is the first day of the quarter period. True/false value. Used for period boundary detection in reporting.
+      - name: IS_QUARTER_LAST_DAY
+        description: Boolean flag indicating whether this date is the last day of the quarter period. True/false value. Used for period boundary detection in reporting.
+      - name: IS_MONTH_FIRST_DAY
+        description: Boolean flag indicating whether this date is the first day of the month period. True/false value. Used for period boundary detection in reporting.
+      - name: IS_MONTH_LAST_DAY
+        description: Boolean flag indicating whether this date is the last day of the month period. True/false value. Used for period boundary detection in reporting.
+      - name: IS_WEEK_FIRST_DAY
+        description: Boolean flag indicating whether this date is the first day of the week period. True/false value. Used for period boundary detection in reporting.
+      - name: IS_WEEK_LAST_DAY
+        description: Boolean flag indicating whether this date is the last day of the week period. True/false value. Used for period boundary detection in reporting.
+      - name: IS_WEEK_DAY
+        description: Boolean flag indicating whether this date qualifies as week day. True/false value. Drives date-type filtering in downstream queries.
+      - name: IS_WEEKEND
+        description: Boolean flag indicating whether this date qualifies as weekend. True/false value. Drives date-type filtering in downstream queries.
+      - name: IS_WORKDAY
+        description: Boolean flag indicating whether this date qualifies as workday. True/false value. Drives date-type filtering in downstream queries.
+      - name: IS_WORK_WEEK_FIRST_DAY
+        description: Boolean flag indicating whether this date is the first day of the work week period. True/false value. Used for period boundary detection in reporting.
+      - name: IS_WORK_WEEK_LAST_DAY
+        description: Boolean flag indicating whether this date is the last day of the work week period. True/false value. Used for period boundary detection in reporting.
+      - name: IS_PAY_PERIOD_FIRST_DAY
+        description: Boolean flag indicating whether this date is the first day of the pay period period. True/false value. Used for period boundary detection in reporting.
+      - name: IS_PAY_PERIOD_LAST_DAY
+        description: Boolean flag indicating whether this date is the last day of the pay period period. True/false value. Used for period boundary detection in reporting.
+      - name: IS_FISCAL_YEAR_FIRST_DAY
+        description: Boolean flag indicating whether this date is the first day of the fiscal year period. True/false value. Used for period boundary detection in reporting.
+      - name: IS_FISCAL_YEAR_LAST_DAY
+        description: Boolean flag indicating whether this date is the last day of the fiscal year period. True/false value. Used for period boundary detection in reporting.
+      - name: IS_FISCAL_HALF_YEAR_FIRST_DAY
+        description: Boolean flag indicating whether this date is the first day of the fiscal half year period. True/false value. Used for period boundary detection in reporting.
+      - name: IS_FISCAL_HALF_YEAR_LAST_DAY
+        description: Boolean flag indicating whether this date is the last day of the fiscal half year period. True/false value. Used for period boundary detection in reporting.
+      - name: IS_FISCAL_QUARTER_FIRST_DAY
+        description: Boolean flag indicating whether this date is the first day of the fiscal quarter period. True/false value. Used for period boundary detection in reporting.
+      - name: IS_LEAP_YEAR
+        description: Boolean flag indicating whether this date qualifies as leap year. True/false value. Drives date-type filtering in downstream queries.
+      - name: IS_FISCAL_QUARTER_LAST_DAY
+        description: Boolean flag indicating whether this date is the last day of the fiscal quarter period. True/false value. Used for period boundary detection in reporting.
+      - name: IS_FISCAL_MONTH_FIRST_DAY
+        description: Boolean flag indicating whether this date is the first day of the fiscal month period. True/false value. Used for period boundary detection in reporting.
+      - name: IS_FISCAL_MONTH_LAST_DAY
+        description: Boolean flag indicating whether this date is the last day of the fiscal month period. True/false value. Used for period boundary detection in reporting.
+      - name: IS_FISCAL_WEEK_FIRST_DAY
+        description: Boolean flag indicating whether this date is the first day of the fiscal week period. True/false value. Used for period boundary detection in reporting.
+      - name: IS_FISCAL_WEEK_LAST_DAY
+        description: Boolean flag indicating whether this date is the last day of the fiscal week period. True/false value. Used for period boundary detection in reporting.
+      - name: IS_FISCAL_WORK_WEEK_FIRST_DAY
+        description: Boolean flag indicating whether this date is the first day of the fiscal work week period. True/false value. Used for period boundary detection in reporting.
+      - name: IS_FISCAL_WORK_WEEK_LAST_DAY
+        description: Boolean flag indicating whether this date is the last day of the fiscal work week period. True/false value. Used for period boundary detection in reporting.
+      - name: YEAR_NUMBER
+        description: Numeric position of this date within the year period. Integer value. Enables positional calculations and period-relative date math.
+      - name: HALF_OF_YEAR_NUMBER
+        description: Numeric position of this date within the half of year period. Integer value. Enables positional calculations and period-relative date math.
+      - name: QUARTER_OF_YEAR_NUMBER
+        description: Numeric position of this date within the quarter of year period. Integer value. Enables positional calculations and period-relative date math.
+      - name: MONTH_OF_YEAR_NUMBER
+        description: Numeric position of this date within the month of year period. Integer value. Enables positional calculations and period-relative date math.
+      - name: WEEK_OF_YEAR_NUMBER
+        description: Numeric position of this date within the week of year period. Integer value. Enables positional calculations and period-relative date math.
+      - name: WORK_WEEK_OF_YEAR_NUMBER
+        description: Numeric position of this date within the work week of year period. Integer value. Enables positional calculations and period-relative date math.
+      - name: DAY_OF_YEAR_NUMBER
+        description: Numeric position of this date within the day of year period. Integer value. Enables positional calculations and period-relative date math.
+      - name: MONTH_OF_QUARTER_NUMBER
+        description: Numeric position of this date within the month of quarter period. Integer value. Enables positional calculations and period-relative date math.
+      - name: WEEK_OF_QUARTER_NUMBER
+        description: Numeric position of this date within the week of quarter period. Integer value. Enables positional calculations and period-relative date math.
+      - name: WORK_WEEK_OF_QUARTER_NUMBER
+        description: Numeric position of this date within the work week of quarter period. Integer value. Enables positional calculations and period-relative date math.
+      - name: DAY_OF_QUARTER_NUMBER
+        description: Numeric position of this date within the day of quarter period. Integer value. Enables positional calculations and period-relative date math.
+      - name: WEEK_OF_MONTH_NUMBER
+        description: Numeric position of this date within the week of month period. Integer value. Enables positional calculations and period-relative date math.
+      - name: WORK_WEEK_OF_MONTH_NUMBER
+        description: Numeric position of this date within the work week of month period. Integer value. Enables positional calculations and period-relative date math.
+      - name: DAY_OF_MONTH_NUMBER
+        description: Numeric position of this date within the day of month period. Integer value. Enables positional calculations and period-relative date math.
+      - name: DAY_OF_WEEK_NUMBER
+        description: Numeric position of this date within the day of week period. Integer value. Enables positional calculations and period-relative date math.
+      - name: DAY_OF_WORK_WEEK_NUMBER
+        description: Numeric position of this date within the day of work week period. Integer value. Enables positional calculations and period-relative date math.
+      - name: FISCAL_YEAR_NUMBER
+        description: Numeric position of this date within the fiscal year period. Integer value. Enables positional calculations and period-relative date math.
+      - name: TEL_FISCAL_YEAR_NUMBER
+        description: Numeric position of this date within the tel fiscal year period. Integer value. Enables positional calculations and period-relative date math.
+      - name: HALF_OF_FISCAL_YEAR_NUMBER
+        description: Numeric position of this date within the half of fiscal year period. Integer value. Enables positional calculations and period-relative date math.
+      - name: QUARTER_OF_FISCAL_YEAR_NUMBER
+        description: Numeric position of this date within the quarter of fiscal year period. Integer value. Enables positional calculations and period-relative date math.
+      - name: MONTH_OF_FISCAL_YEAR_NUMBER
+        description: Numeric position of this date within the month of fiscal year period. Integer value. Enables positional calculations and period-relative date math.
+      - name: WEEK_OF_FISCAL_YEAR_NUMBER
+        description: Numeric position of this date within the week of fiscal year period. Integer value. Enables positional calculations and period-relative date math.
+      - name: WORK_WEEK_OF_FISCAL_YEAR_NUMBER
+        description: Numeric position of this date within the work week of fiscal year period. Integer value. Enables positional calculations and period-relative date math.
+      - name: DAY_OF_FISCAL_YEAR_NUMBER
+        description: Numeric position of this date within the day of fiscal year period. Integer value. Enables positional calculations and period-relative date math.
+      - name: QUARTER_OF_FISCAL_HALF_YEAR_NUMBER
+        description: Numeric position of this date within the quarter of fiscal half year period. Integer value. Enables positional calculations and period-relative date math.
+      - name: MONTH_OF_FISCAL_HALF_YEAR_NUMBER
+        description: Numeric position of this date within the month of fiscal half year period. Integer value. Enables positional calculations and period-relative date math.
+      - name: WEEK_OF_FISCAL_HALF_YEAR_NUMBER
+        description: Numeric position of this date within the week of fiscal half year period. Integer value. Enables positional calculations and period-relative date math.
+      - name: WORK_WEEK_OF_FISCAL_HALF_YEAR_NUMBER
+        description: Numeric position of this date within the work week of fiscal half year period. Integer value. Enables positional calculations and period-relative date math.
+      - name: DAY_OF_FISCAL_HALF_YEAR_NUMBER
+        description: Numeric position of this date within the day of fiscal half year period. Integer value. Enables positional calculations and period-relative date math.
+      - name: MONTH_OF_FISCAL_QUARTER_NUMBER
+        description: Numeric position of this date within the month of fiscal quarter period. Integer value. Enables positional calculations and period-relative date math.
+      - name: WEEK_OF_FISCAL_QUARTER_NUMBER
+        description: Numeric position of this date within the week of fiscal quarter period. Integer value. Enables positional calculations and period-relative date math.
+      - name: WORK_WEEK_OF_FISCAL_QUARTER_NUMBER
+        description: Numeric position of this date within the work week of fiscal quarter period. Integer value. Enables positional calculations and period-relative date math.
+      - name: DAY_OF_FISCAL_QUARTER_NUMBER
+        description: Numeric position of this date within the day of fiscal quarter period. Integer value. Enables positional calculations and period-relative date math.
+      - name: WEEK_OF_FISCAL_MONTH_NUMBER
+        description: Numeric position of this date within the week of fiscal month period. Integer value. Enables positional calculations and period-relative date math.
+      - name: WORK_WEEK_OF_FISCAL_MONTH_NUMBER
+        description: Numeric position of this date within the work week of fiscal month period. Integer value. Enables positional calculations and period-relative date math.
+      - name: DAY_OF_FISCAL_MONTH_NUMBER
+        description: Numeric position of this date within the day of fiscal month period. Integer value. Enables positional calculations and period-relative date math.
+      - name: DAY_OF_FISCAL_WEEK_NUMBER
+        description: Numeric position of this date within the day of fiscal week period. Integer value. Enables positional calculations and period-relative date math.
+      - name: DAY_OF_FISCAL_WORK_WEEK_NUMBER
+        description: Numeric position of this date within the day of fiscal work week period. Integer value. Enables positional calculations and period-relative date math.
+      - name: CALENDAR_DATE_TEXT
+        description: Formatted text label for the calendar date period. Human-readable string. Used for display in reports and dashboards.
+      - name: DECADE_TEXT
+        description: Formatted text label for the decade period. Human-readable string. Used for display in reports and dashboards.
+      - name: YEAR_TEXT
+        description: Formatted text label for the year period. Human-readable string. Used for display in reports and dashboards.
+      - name: YEAR_SHORT_TEXT
+        description: Formatted text label for the year period. Human-readable string. Used for display in reports and dashboards.
+      - name: HALF_YEAR_TEXT
+        description: Formatted text label for the half year period. Human-readable string. Used for display in reports and dashboards.
+      - name: HALF_YEAR_SHORT_TEXT
+        description: Formatted text label for the half year period. Human-readable string. Used for display in reports and dashboards.
+      - name: QUARTER_TEXT
+        description: Formatted text label for the quarter period. Human-readable string. Used for display in reports and dashboards.
+      - name: QUARTER_SHORT_TEXT
+        description: Formatted text label for the quarter period. Human-readable string. Used for display in reports and dashboards.
+      - name: MONTH_TEXT
+        description: Formatted text label for the month period. Human-readable string. Used for display in reports and dashboards.
+      - name: MONTH_ABBREVIATION_TEXT
+        description: Formatted text label for the month abbreviation period. Human-readable string. Used for display in reports and dashboards.
+      - name: MONTH_SHORT_TEXT
+        description: Formatted text label for the month period. Human-readable string. Used for display in reports and dashboards.
+      - name: WEEK_TEXT
+        description: Formatted text label for the week period. Human-readable string. Used for display in reports and dashboards.
+      - name: WEEK_SHORT_TEXT
+        description: Formatted text label for the week period. Human-readable string. Used for display in reports and dashboards.
+      - name: DAY_TEXT
+        description: Formatted text label for the day period. Human-readable string. Used for display in reports and dashboards.
+      - name: DAY_SHORT_TEXT
+        description: Formatted text label for the day period. Human-readable string. Used for display in reports and dashboards.
+      - name: YEAR_HALF_YEAR_TEXT
+        description: Formatted text label for the year half year period. Human-readable string. Used for display in reports and dashboards.
+      - name: YEAR_QUARTER_TEXT
+        description: Formatted text label for the year quarter period. Human-readable string. Used for display in reports and dashboards.
+      - name: QUARTER_YEAR_TEXT
+        description: Formatted text label for the quarter year period. Human-readable string. Used for display in reports and dashboards.
+      - name: QUARTER_YEAR_SHORT_TEXT
+        description: Formatted text label for the quarter year period. Human-readable string. Used for display in reports and dashboards.
+      - name: YEAR_MONTH_TEXT
+        description: Formatted text label for the year month period. Human-readable string. Used for display in reports and dashboards.
+      - name: YEAR_MONTH_SHORT_TEXT
+        description: Formatted text label for the year month period. Human-readable string. Used for display in reports and dashboards.
+      - name: MONTH_YEAR_TEXT
+        description: Formatted text label for the month year period. Human-readable string. Used for display in reports and dashboards.
+      - name: MONTH_YEAR_SHORT_TEXT
+        description: Formatted text label for the month year period. Human-readable string. Used for display in reports and dashboards.
+      - name: YEAR_WEEK_TEXT
+        description: Formatted text label for the year week period. Human-readable string. Used for display in reports and dashboards.
+      - name: YEAR_WEEK_SHORT_TEXT
+        description: Formatted text label for the year week period. Human-readable string. Used for display in reports and dashboards.
+      - name: YEAR_WORK_WEEK_TEXT
+        description: Formatted text label for the year work week period. Human-readable string. Used for display in reports and dashboards.
+      - name: FISCAL_YEAR_TEXT
+        description: Formatted text label for the fiscal year period. Human-readable string. Used for display in reports and dashboards.
+      - name: FISCAL_YEAR_SHORT_TEXT
+        description: Formatted text label for the fiscal year period. Human-readable string. Used for display in reports and dashboards.
+      - name: FISCAL_HALF_YEAR_TEXT
+        description: Formatted text label for the fiscal half year period. Human-readable string. Used for display in reports and dashboards.
+      - name: FISCAL_QUARTER_TEXT
+        description: Formatted text label for the fiscal quarter period. Human-readable string. Used for display in reports and dashboards.
+      - name: FISCAL_MONTH_TEXT
+        description: Formatted text label for the fiscal month period. Human-readable string. Used for display in reports and dashboards.
+      - name: FISCAL_WEEK_TEXT
+        description: Formatted text label for the fiscal week period. Human-readable string. Used for display in reports and dashboards.
+      - name: FISCAL_YEAR_HALF_YEAR_TEXT
+        description: Formatted text label for the fiscal year half year period. Human-readable string. Used for display in reports and dashboards.
+      - name: FISCAL_YEAR_HALF_YEAR_SHORT_TEXT
+        description: Formatted text label for the fiscal year half year period. Human-readable string. Used for display in reports and dashboards.
+      - name: FISCAL_YEAR_QUARTER_TEXT
+        description: Formatted text label for the fiscal year quarter period. Human-readable string. Used for display in reports and dashboards.
+      - name: FISCAL_YEAR_QUARTER_SHORT_TEXT
+        description: Formatted text label for the fiscal year quarter period. Human-readable string. Used for display in reports and dashboards.
+      - name: FISCAL_YEAR_MONTH_TEXT
+        description: Formatted text label for the fiscal year month period. Human-readable string. Used for display in reports and dashboards.
+      - name: FISCAL_YEAR_MONTH_SHORT_TEXT
+        description: Formatted text label for the fiscal year month period. Human-readable string. Used for display in reports and dashboards.
+      - name: FISCAL_YEAR_WEEK_TEXT
+        description: Formatted text label for the fiscal year week period. Human-readable string. Used for display in reports and dashboards.
+      - name: FISCAL_YEAR_WEEK_SHORT_TEXT
+        description: Formatted text label for the fiscal year week period. Human-readable string. Used for display in reports and dashboards.
+      - name: FISCAL_YEAR_WORK_WEEK_TEXT
+        description: Formatted text label for the fiscal year work week period. Human-readable string. Used for display in reports and dashboards.
+      - name: FISCAL_YEAR_WORK_WEEK_SHORT_TEXT
+        description: Formatted text label for the fiscal year work week period. Human-readable string. Used for display in reports and dashboards.
+      - name: TEL_FISCAL_YEAR_TEXT
+        description: Formatted text label for the tel fiscal year period. Human-readable string. Used for display in reports and dashboards.
+      - name: TEL_FISCAL_YEAR_HALF_YEAR_TEXT
+        description: Formatted text label for the tel fiscal year half year period. Human-readable string. Used for display in reports and dashboards.
+      - name: TEL_FISCAL_YEAR_QUARTER_TEXT
+        description: Formatted text label for the tel fiscal year quarter period. Human-readable string. Used for display in reports and dashboards.
+      - name: TEL_FISCAL_YEAR_MONTH_TEXT
+        description: Formatted text label for the tel fiscal year month period. Human-readable string. Used for display in reports and dashboards.
+      - name: DECADE_BEGINNING_DATE
+        description: Start date of the decade period to which this calendar date belongs. Standard date format. Enables period-start lookups without additional calculation.
+      - name: DECADE_ENDING_DATE
+        description: End date of the decade period to which this calendar date belongs. Standard date format. Enables period-end lookups without additional calculation.
+      - name: YEAR_BEGINNING_DATE
+        description: Start date of the year period to which this calendar date belongs. Standard date format. Enables period-start lookups without additional calculation.
+      - name: YEAR_ENDING_DATE
+        description: End date of the year period to which this calendar date belongs. Standard date format. Enables period-end lookups without additional calculation.
+      - name: HALF_YEAR_BEGINNING_DATE
+        description: Start date of the half year period to which this calendar date belongs. Standard date format. Enables period-start lookups without additional calculation.
+      - name: HALF_YEAR_ENDING_DATE
+        description: End date of the half year period to which this calendar date belongs. Standard date format. Enables period-end lookups without additional calculation.
+      - name: QUARTER_BEGINNING_DATE
+        description: Start date of the quarter period to which this calendar date belongs. Standard date format. Enables period-start lookups without additional calculation.
+      - name: QUARTER_ENDING_DATE
+        description: End date of the quarter period to which this calendar date belongs. Standard date format. Enables period-end lookups without additional calculation.
+      - name: MONTH_BEGINNING_DATE
+        description: Start date of the month period to which this calendar date belongs. Standard date format. Enables period-start lookups without additional calculation.
+      - name: MONTH_ENDING_DATE
+        description: End date of the month period to which this calendar date belongs. Standard date format. Enables period-end lookups without additional calculation.
+      - name: WEEK_BEGINNING_DATE
+        description: Start date of the week period to which this calendar date belongs. Standard date format. Enables period-start lookups without additional calculation.
+      - name: WEEK_ENDING_DATE
+        description: End date of the week period to which this calendar date belongs. Standard date format. Enables period-end lookups without additional calculation.
+      - name: WORK_WEEK_BEGINNING_DATE
+        description: Start date of the work week period to which this calendar date belongs. Standard date format. Enables period-start lookups without additional calculation.
+      - name: WORK_WEEK_ENDING_DATE
+        description: End date of the work week period to which this calendar date belongs. Standard date format. Enables period-end lookups without additional calculation.
+      - name: PAY_PERIOD_BEGIN_DATE
+        description: Start date of the pay period period to which this calendar date belongs. Standard date format. Enables period-start lookups without additional calculation.
+      - name: PAY_PERIOD_END_DATE
+        description: End date of the pay period period to which this calendar date belongs. Standard date format. Enables period-end lookups without additional calculation.
+      - name: FISCAL_YEAR_BEGINNING_DATE
+        description: Start date of the fiscal year period to which this calendar date belongs. Standard date format. Enables period-start lookups without additional calculation.
+      - name: FISCAL_YEAR_ENDING_DATE
+        description: End date of the fiscal year period to which this calendar date belongs. Standard date format. Enables period-end lookups without additional calculation.
+      - name: FISCAL_HALF_YEAR_BEGINNING_DATE
+        description: Start date of the fiscal half year period to which this calendar date belongs. Standard date format. Enables period-start lookups without additional calculation.
+      - name: FISCAL_HALF_YEAR_ENDING_DATE
+        description: End date of the fiscal half year period to which this calendar date belongs. Standard date format. Enables period-end lookups without additional calculation.
+      - name: FISCAL_QUARTER_BEGINNING_DATE
+        description: Start date of the fiscal quarter period to which this calendar date belongs. Standard date format. Enables period-start lookups without additional calculation.
+      - name: FISCAL_QUARTER_ENDING_DATE
+        description: End date of the fiscal quarter period to which this calendar date belongs. Standard date format. Enables period-end lookups without additional calculation.
+      - name: FISCAL_MONTH_BEGINNING_DATE
+        description: Start date of the fiscal month period to which this calendar date belongs. Standard date format. Enables period-start lookups without additional calculation.
+      - name: FISCAL_MONTH_ENDING_DATE
+        description: End date of the fiscal month period to which this calendar date belongs. Standard date format. Enables period-end lookups without additional calculation.
+      - name: FISCAL_WEEK_BEGINNING_DATE
+        description: Start date of the fiscal week period to which this calendar date belongs. Standard date format. Enables period-start lookups without additional calculation.
+      - name: FISCAL_WEEK_ENDING_DATE
+        description: End date of the fiscal week period to which this calendar date belongs. Standard date format. Enables period-end lookups without additional calculation.
+      - name: FISCAL_WORK_WEEK_BEGINNING_DATE
+        description: Start date of the fiscal work week period to which this calendar date belongs. Standard date format. Enables period-start lookups without additional calculation.
+      - name: FISCAL_WORK_WEEK_ENDING_DATE
+        description: End date of the fiscal work week period to which this calendar date belongs. Standard date format. Enables period-end lookups without additional calculation.
+      - name: CALENDAR_YEAR_PREVIOUS_HALF_BEGINNING_DATE
+        description: Start date of the calendar year previous half period to which this calendar date belongs. Standard date format. Enables period-start lookups without additional calculation.
+      - name: CALENDAR_YEAR_PREVIOUS_HALF_ENDING_DATE
+        description: End date of the calendar year previous half period to which this calendar date belongs. Standard date format. Enables period-end lookups without additional calculation.
+      - name: FISCAL_YEAR_HALF_YEAR_SHORT_TEXT_ALT
+        description: Business attribute recording the fiscal year half year short text alt value. Variable-length field. Refer to source system documentation for valid values and business rules.
+      - name: CALENDAR_DATE_KEY
+        description: Surrogate key for the calendar date period. Integer or encoded value. Used for efficient joins to period-level fact tables.
+      - name: YEAR_KEY
+        description: Surrogate key for the year period. Integer or encoded value. Used for efficient joins to period-level fact tables.
+      - name: QUARTER_KEY
+        description: Surrogate key for the quarter period. Integer or encoded value. Used for efficient joins to period-level fact tables.
+      - name: MONTH_KEY
+        description: Surrogate key for the month period. Integer or encoded value. Used for efficient joins to period-level fact tables.
+      - name: WEEK_KEY
+        description: Surrogate key for the week period. Integer or encoded value. Used for efficient joins to period-level fact tables.
+      - name: WORK_WEEK_KEY
+        description: Surrogate key for the work week period. Integer or encoded value. Used for efficient joins to period-level fact tables.
+      - name: DAY_KEY
+        description: Surrogate key for the day period. Integer or encoded value. Used for efficient joins to period-level fact tables.
+      - name: PAY_PERIOD_KEY
+        description: Surrogate key for the pay period period. Integer or encoded value. Used for efficient joins to period-level fact tables.
+      - name: DAY_OF_PAY_PERIOD
+        description: Business attribute recording the day of pay period value. Variable-length field. Refer to source system documentation for valid values and business rules.
+      - name: IS_PAY_DAY
+        description: Boolean flag indicating whether this date qualifies as pay day. True/false value. Drives date-type filtering in downstream queries.
+      - name: IS_EXPENSE_REPORT_DEADLINE_DAY
+        description: Boolean flag indicating whether this date qualifies as expense report deadline day. True/false value. Drives date-type filtering in downstream queries.
+      - name: SUBCONTRACTOR_WORK_WEEK_BEGINNING_DATE
+        description: Start date of the subcontractor work week period to which this calendar date belongs. Standard date format. Enables period-start lookups without additional calculation.
+      - name: SUBCONTRACTOR_WORK_WEEK_ENDING_DATE
+        description: End date of the subcontractor work week period to which this calendar date belongs. Standard date format. Enables period-end lookups without additional calculation.
+      - name: FISCAL_SUBCONTRACTOR_WORK_WEEK_BEGINNING_DATE
+        description: Start date of the fiscal subcontractor work week period to which this calendar date belongs. Standard date format. Enables period-start lookups without additional calculation.
+      - name: FISCAL_SUBCONTRACTOR_WORK_WEEK_ENDING_DATE
+        description: End date of the fiscal subcontractor work week period to which this calendar date belongs. Standard date format. Enables period-end lookups without additional calculation.
+      - name: IS_SUBCONTRACTOR_WORK_WEEK_FIRST_DAY
+        description: Boolean flag indicating whether this date is the first day of the subcontractor work week period. True/false value. Used for period boundary detection in reporting.
+      - name: IS_SUBCONTRACTOR_WORK_WEEK_LAST_DAY
+        description: Boolean flag indicating whether this date is the last day of the subcontractor work week period. True/false value. Used for period boundary detection in reporting.
+      - name: IS_FISCAL_SUBCONTRACTOR_WORK_WEEK_FIRST_DAY
+        description: Boolean flag indicating whether this date is the first day of the fiscal subcontractor work week period. True/false value. Used for period boundary detection in reporting.
+      - name: IS_FISCAL_SUBCONTRACTOR_WORK_WEEK_LAST_DAY
+        description: Boolean flag indicating whether this date is the last day of the fiscal subcontractor work week period. True/false value. Used for period boundary detection in reporting.
+      - name: SUBCONTRACTOR_DAY_OF_WORK_WEEK_NUMBER
+        description: Numeric position of this date within the subcontractor day of work week period. Integer value. Enables positional calculations and period-relative date math.
+      - name: SUBCONTRACTOR_DAY_OF_FISCAL_WORK_WEEK_NUMBER
+        description: Numeric position of this date within the subcontractor day of fiscal work week period. Integer value. Enables positional calculations and period-relative date math.
+      - name: NEXT_FISCAL_YEAR_BEGINNING_DATE
+        description: Start date of the next fiscal year period to which this calendar date belongs. Standard date format. Enables period-start lookups without additional calculation.
+      - name: NEXT_FISCAL_YEAR_ENDING_DATE
+        description: End date of the next fiscal year period to which this calendar date belongs. Standard date format. Enables period-end lookups without additional calculation.
+      - name: NEXT_FISCAL_HALF_YEAR_BEGINNING_DATE
+        description: Start date of the next fiscal half year period to which this calendar date belongs. Standard date format. Enables period-start lookups without additional calculation.
+      - name: NEXT_FISCAL_HALF_YEAR_ENDING_DATE
+        description: End date of the next fiscal half year period to which this calendar date belongs. Standard date format. Enables period-end lookups without additional calculation.
+      - name: NEXT_FISCAL_QUARTER_BEGINNING_DATE
+        description: Start date of the next fiscal quarter period to which this calendar date belongs. Standard date format. Enables period-start lookups without additional calculation.
+      - name: NEXT_FISCAL_QUARTER_ENDING_DATE
+        description: End date of the next fiscal quarter period to which this calendar date belongs. Standard date format. Enables period-end lookups without additional calculation.
+  - name: SILVER__TEH_DATA_OPS__DAILY_SNAPSHOTS
+    description: |
+      PURPOSE: Provides a daily snapshot of Kanbanize user stories for trend, throughput, and sprint reporting.
+      GRAIN: One row per sprint, snapshot date, and card id.
+      KEY LOGIC: Recasts the upstream user-story snapshot date to a calendar date and carries forward the card attributes needed for reporting. The model uses sprint, snapshot date, and card id as the merge key.
+      CAVEAT: Snapshot values reflect the latest loaded user-story state, so this table does not preserve the full change history within a day.
+    tests:
+      - dbt_expectations.expect_table_row_count_to_be_between:
+          min_value: 1
+    columns:
+      - name: SPRINT
+        description: Sprint identifier carried from the upstream user-story snapshot.
+      - name: SNAPSHOT_DATE
+        description: Date portion of the Kanbanize snapshot timestamp used for daily reporting.
+      - name: CARD_ID
+        description: Kanbanize card identifier.
+      - name: ASSIGNEE
+        description: Username of the current card owner.
+      - name: WORK_CATEGORY
+        description: Work category custom field copied from the source card.
+      - name: DOMAIN
+        description: Domain custom field copied from the source card.
+      - name: TITLE
+        description: Card title shown in Kanbanize.
+      - name: PRIORITY
+        description: Human-readable priority mapped from the Kanbanize priority code.
+      - name: IS_BLOCKED
+        description: Indicates whether the card is currently blocked.
+      - name: BLOCK_REASON
+        description: Block reason text extracted from the source card payload.
+      - name: CURRENT_BLOCK_TIME
+        description: Estimated number of days the card has been blocked at load time.
+      - name: COLUMN_NAME
+        description: Kanbanize workflow column name derived from the source column id.
+      - name: SIZE
+        description: Story size value from the card.
+      - name: CYCLE_TIME
+        description: Estimated number of days since the card entered its current cycle window at load time.
+      - name: CREATED_AT
+        description: Timestamp when the card was created.
+      - name: IN_CURRENT_POSITION_SINCE
+        description: Timestamp when the card entered its current column.
+      - name: TAG_LABELS
+        description: Array of tag labels attached to the card.
+      - name: TAG_LABELS_CSV
+        description: Comma-separated list of tag labels for reporting convenience.
+      - name: DATA_PRODUCT
+        description: Data product custom field copied from the source card.
+      - name: BUSINESS_CONTACT
+        description: Business contact custom field copied from the source card.
+      - name: DESCRIPTION
+        description: Card description text.
+      - name: LANE_ID
+        description: Kanbanize lane identifier from the source card.
+      - name: LAST_MODIFIED
+        description: Timestamp of the last source card update.
+      - name: STATE
+        description: Current card state from Kanbanize.
+      - name: SNAPSHOT_TIMESTAMP
+        description: Full snapshot timestamp copied from the upstream user-stories model.
+  - name: SILVER__TEH_DATA_OPS__TEL_DBT_LOG
+    description: |
+      PURPOSE: Surfaces the latest enabled dbt model and test status for operational monitoring.
+      GRAIN: One row per dbt model node from the most recent compile of the dbt_tel package.
+      KEY LOGIC: Uses the latest invocation per dbt command, the most recent compile for dbt_tel, and the matching model and test execution records to roll results up to the model level.
+      CAVEAT: The view only reflects the latest compile/run window, so historical model or test states are not retained here.
+    tests:
+      - dbt_expectations.expect_table_row_count_to_be_between:
+          min_value: 1
+      - dbt_expectations.expect_column_pair_values_to_be_equal:
+          column_A: NAME
+          column_B: EXPECTED_NAME
+          severity: warn
+    columns:
+      - name: COMMAND_INVOCATION_ID
+        description: Invocation id of the dbt command that produced the latest record.
+      - name: NODE_ID
+        description: Unique identifier of the dbt node being reported.
+      - name: INVOCATION_COMMAND
+        description: dbt command string used for the invocation.
+      - name: RUN_STARTED_AT
+        description: Timestamp when the dbt command started.
+      - name: DATABASE
+        description: Target database where the model is built.
+      - name: SCHEMA
+        description: Target schema where the model is built.
+      - name: ALIAS
+        description: Model alias used in the warehouse object name.
+      - name: NAME
+        description: Uppercase dbt node name for the model or test.
+      - name: MATERIALIZATION
+        description: Materialization type for the dbt model.
+        tests:
+          - dbt_expectations.expect_column_values_to_be_in_set:
+              value_set: ['tel_incremental', 'view']
+              severity: warn
+      - name: TAGS
+        description: dbt tags assigned to the model.
+      - name: PARENT_NODE
+        description: Upstream dbt node id used to roll up test results to the model level.
+      - name: COMPILE_STARTED_AT
+        description: Timestamp when the model or test execution began compiling.
+      - name: STATUS
+        description: Latest execution status for the model or test.
+      - name: TOTAL_NODE_RUNTIME
+        description: Total runtime in seconds for the node execution.
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              severity: warn
+              max_value: 3600 # one hour
+      - name: MESSAGE
+        description: Execution message or error text from dbt.
+      - name: TEST_INVOCATION_COMMANDS
+        description: Distinct dbt invocation commands associated with the latest tests for the model.
+      - name: TEST_RESULTS
+        description: Structured test result payloads for the model.
+      - name: EXPECTED_NAME
+        description: Expected warehouse object name built from database, schema, and alias.
+      - name: NUM_TESTS
+        description: Count of tests associated with the model in the latest compile.
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 1
+              severity: warn
+      - name: OVERALL_TEST_STATUS
+        description: Rollup of test statuses for the model.
+      - name: OVERALL_TEST_RUNTIME
+        description: Sum of runtimes for all tests attached to the model.
+  - name: SILVER__TEH_DATA_OPS__MDM_COMPANY
+    description: |
+      PURPOSE: Provides company master data from the MDM source for downstream reference and joins.
+      GRAIN: One row per company code.
+      KEY LOGIC: Renames the source company code and loads the company name, short name, and active flag from the latest bronze MDM extract.
+      CAVEAT: Source corrections to historical company codes are overwritten by the merge key, so this model reflects the latest ingested version of each company.
+    tests:
+      - dbt_expectations.expect_table_row_count_to_be_between:
+          min_value: 1
+    columns:
+      - name: _REFRESHDATE
+        description: Last sql run of the dbt model.
+        tests:
+          - dbt_expectations.expect_row_values_to_have_recent_data:
+              datepart: hours
+              interval: 12
+      - name: CompanyId
+        description: Source company code used as the business key.
+      - name: Name
+        description: Long-form company name from the MDM source.
+      - name: ShortName
+        description: Short company name from the MDM source.
+      - name: ActiveIndicator
+        description: Flag showing whether the company is active in the source system.
+  - name: SILVER__TEH_DATA_OPS__MYSKILLS_COMPANY
+    description: |
+      PURPOSE: Provides company master data from the MySkills source for downstream reference and joins.
+      GRAIN: One row per company code.
+      KEY LOGIC: Maps the source company id, name, short name, and country code from the latest bronze MySkills extract.
+      CAVEAT: The source table is treated as the authoritative current snapshot, so there is no retained historical versioning in this model.
+    tests:
+      - dbt_expectations.expect_table_row_count_to_be_between:
+          min_value: 1
+    columns:
+      - name: _REFRESHDATE
+        description: Last sql run of the dbt model.
+        tests:
+          - dbt_expectations.expect_row_values_to_have_recent_data:
+              datepart: hours
+              interval: 12
+      - name: CompanyId
+        description: Source company identifier from the MySkills master table.
+      - name: Name
+        description: Full company name from the source system.
+      - name: ShortName
+        description: Short company name from the source system.
+      - name: CountryCode
+        description: Country code associated with the company record.
+  - name: SILVER__TEH_DATA_OPS__PULL_REQUESTS
+    description: |
+      PURPOSE: Captures Azure DevOps pull request metadata for review tracking and completion analysis.
+      GRAIN: One row per pull request id from the latest ingested Azure DevOps snapshot.
+      KEY LOGIC: Loads the latest file date for each pull request and flattens the nested reviewer payload so reviewer fields are available alongside the pull request header information.
+      CAVEAT: Reviewer details come from a flattened nested payload, so a pull request with multiple reviewer records can produce repeated reviewer rows before merge deduplication.
+    tests:
+      - dbt_expectations.expect_table_row_count_to_be_between:
+          min_value: 1
+    columns:
+      - name: PULL_REQUEST_ID
+        description: Azure DevOps pull request identifier.
+      - name: TITLE
+        description: Pull request title.
+      - name: DESCRIPTION
+        description: Pull request description text.
+      - name: MERGE_COMMIT_MESSAGE
+        description: Merge commit message associated with the pull request completion.
+      - name: CREATOR_USER_NAME
+        description: Display name of the user who created the pull request.
+      - name: CREATION_DATE
+        description: Timestamp when the pull request was created.
+      - name: REVIEWER_USER_NAME
+        description: Display name of a reviewer from the nested reviewer payload.
+      - name: APPROVED_FLAG
+        description: Reviewer decline flag from the source payload; a declined review is not an approval.
+      - name: STATUS
+        description: Current pull request status in Azure DevOps.
+      - name: CLOSED_DATE
+        description: Timestamp when the pull request was closed.
+  - name: SILVER__TEH_DATA_OPS__USER_STORIES
+    description: |
+      PURPOSE: Provides a denormalized Kanbanize user-story snapshot for sprint planning, flow analysis, and work-item tracking.
+      GRAIN: One row per Kanbanize card in the BI-modernization user stories lane at the latest snapshot timestamp.
+      KEY LOGIC: Joins cards to users, tags, custom fields, case numbers, and comments; filters to board 66 and lane 981; and derives sprint timing from a fixed base sprint and the current snapshot date.
+      CAVEAT: Current block and cycle metrics are calculated from the load timestamp, so they change with each refresh rather than preserving the exact historical event time.
+    tests:
+      - dbt_expectations.expect_table_row_count_to_be_between:
+          min_value: 1
+    columns:
+      - name: CARD_ID
+        description: Kanbanize card identifier.
+      - name: ASSIGNEE
+        description: Username of the current card owner.
+      - name: WORK_CATEGORY
+        description: Work category custom field from the card.
+      - name: DOMAIN
+        description: Domain custom field from the card.
+      - name: TITLE
+        description: User story title.
+      - name: PRIORITY
+        description: Human-readable priority mapped from the Kanbanize code.
+      - name: IS_BLOCKED
+        description: Indicates whether the card is blocked.
+      - name: BLOCK_REASON
+        description: Block reason text from the card payload.
+      - name: CURRENT_BLOCK_TIME
+        description: Estimated number of days the card has been blocked, calculated from the current load timestamp.
+      - name: COLUMN_NAME
+        description: Kanbanize workflow column name derived from the source column id.
+      - name: SIZE
+        description: Story size value.
+      - name: CYCLE_TIME
+        description: Estimated number of days since the card entered its cycle window, calculated from the current load timestamp.
+      - name: CREATED_AT
+        description: Timestamp when the card was created.
+      - name: IN_CURRENT_POSITION_SINCE
+        description: Timestamp when the card entered its current position.
+      - name: KCARD_COLOR
+        description: Card color value from Kanbanize.
+      - name: TAG_LABELS
+        description: Array of tag labels attached to the card.
+      - name: SPRINT
+        description: Sprint label from the card custom fields.
+      - name: DATA_PRODUCT
+        description: Data product custom field from the card.
+      - name: BUSINESS_CONTACT
+        description: Business contact custom field from the card.
+      - name: CASE_NUMBER
+        description: Case number captured from custom field 98.
+      - name: DESCRIPTION
+        description: Card description text.
+      - name: LANE_ID
+        description: Kanbanize lane identifier.
+      - name: LAST_MODIFIED
+        description: Timestamp of the last card update.
+      - name: STATE
+        description: Current card state from Kanbanize.
+      - name: COMMENTS
+        description: Array of comment text and last modified timestamps for the card.
+      - name: ACTIVE_SPRINT
+        description: Sprint identifier derived from the fixed base sprint and the snapshot date.
+      - name: SNAPSHOT_DT
+        description: Snapshot timestamp captured from the latest card extract.
+      - name: COLUMN_NUM
+        description: Numeric ordering used to sort workflow columns.
+      - name: TAG_LABELS_CSV
+        description: Comma-separated tag labels for ad hoc reporting.

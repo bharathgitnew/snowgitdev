@@ -1,0 +1,137 @@
+﻿TABLE_CATALOG,TABLE_SCHEMA,TABLE_NAME,TABLE_TYPE
+TELReporting,dbo,BAANV_ALL_SUPPLIER_INFO,BASE TABLE
+TELReporting,dbo,BaanV_Dimensions,VIEW
+TELReporting,dbo,BaanV_Finalized_Transactions_BUOps,VIEW
+TELReporting,dbo,BaanV_Finalized_Transactions_SalesOps,VIEW
+TELReporting,dbo,BaanV_Installment_Schedules,BASE TABLE
+TELReporting,dbo,BaanV_Plan_Inv_Transactions,BASE TABLE
+TELReporting,dbo,BaanV_Service_Orders_Accrual,BASE TABLE
+TELReporting,dbo,BaanV_TEA_Addresses,BASE TABLE
+TELReporting,dbo,BaanV_TEA_Alternate_Suppliers_by_Item,BASE TABLE
+TELReporting,dbo,BaanV_TEA_Alternative_Items,BASE TABLE
+TELReporting,dbo,BaanV_TEA_AR_Open_Entries,BASE TABLE
+TELReporting,dbo,BaanV_TEA_BP_Sales_Invoice_Balance,BASE TABLE
+TELReporting,dbo,BaanV_TEA_BPCode_Map,BASE TABLE
+TELReporting,dbo,BaanV_TEA_BU_Mappings,BASE TABLE
+TELReporting,dbo,BaanV_TEA_Commercial_Invoices,BASE TABLE
+TELReporting,dbo,BaanV_TEA_Configurations,BASE TABLE
+TELReporting,dbo,BaanV_TEA_Contract_Installments,BASE TABLE
+TELReporting,dbo,BaanV_TEA_Contracts,BASE TABLE
+TELReporting,dbo,BaanV_TEA_CustomerCodes,VIEW
+TELReporting,dbo,BaanV_TEA_Customers,BASE TABLE
+TELReporting,dbo,BaanV_TEA_Dimensions,BASE TABLE
+TELReporting,dbo,BaanV_TEA_ECBPI100,BASE TABLE
+TELReporting,dbo,BaanV_TEA_ECBPI101,BASE TABLE
+TELReporting,dbo,BaanV_TEA_Event_Tracking,BASE TABLE
+TELReporting,dbo,BaanV_TEA_Finalized_Transactions,BASE TABLE
+TELReporting,dbo,BaanV_TEA_Finalized_Transactions_Contracts,VIEW
+TELReporting,dbo,BaanV_TEA_Finalized_Transactions_CSC,VIEW
+TELReporting,dbo,BaanV_TEA_Finalized_Transactions_CT,VIEW
+TELReporting,dbo,BaanV_TEA_Finalized_Transactions_Ext,BASE TABLE
+TELReporting,dbo,BaanV_TEA_Finalized_Transactions_FST,VIEW
+TELReporting,dbo,BaanV_TEA_Finalized_Transactions_hold,BASE TABLE
+TELReporting,dbo,BaanV_TEA_Finalized_Transactions_Rev_COGS,VIEW
+TELReporting,dbo,BaanV_TEA_Integration_Transactions,BASE TABLE
+TELReporting,dbo,BaanV_TEA_Integration_Transactions_CSC,VIEW
+TELReporting,dbo,BaanV_TEA_Integration_Transactions_CT,VIEW
+TELReporting,dbo,BaanV_TEA_Integration_Transactions_Rev_COGS,VIEW
+TELReporting,dbo,BaanV_TEA_Inv_By_Warehouse_Intel,BASE TABLE
+TELReporting,dbo,BaanV_TEA_Inv_By_Warehouse_Intel_FIFO,BASE TABLE
+TELReporting,dbo,BaanV_TEA_Inv_By_Warehouse_NonIntel,BASE TABLE
+TELReporting,dbo,BaanV_TEA_Inv_By_Warehouse_NonIntel_FIFO,BASE TABLE
+TELReporting,dbo,BaanV_TEA_Inventory_By_Warehouse,BASE TABLE
+TELReporting,dbo,BaanV_TEA_Inventory_By_Warehouse_and_Quantity,VIEW
+TELReporting,dbo,BaanV_TEA_Inventory_By_Warehouse_FIFO,BASE TABLE
+TELReporting,dbo,BaanV_TEA_Inventory_By_Warehouse_FIFO_Weekly,BASE TABLE
+TELReporting,dbo,BaanV_TEA_Inventory_Transactions_by_Item_and_Warehouse,BASE TABLE
+TELReporting,dbo,BaanV_TEA_Inventory_Val_By_Warehouse_FIFO,VIEW
+TELReporting,dbo,BaanV_TEA_Item_Transactions,BASE TABLE
+TELReporting,dbo,BaanV_TEA_Item_Transactions_FIFO,BASE TABLE
+TELReporting,dbo,BaanV_TEA_Items,BASE TABLE
+TELReporting,dbo,BaanV_TEA_MDM_HourlyLaborTypes,BASE TABLE
+TELReporting,dbo,BaanV_TEA_MDM_LaborRates,BASE TABLE
+TELReporting,dbo,BaanV_TEA_MDM_Tasks,BASE TABLE
+TELReporting,dbo,BaanV_TEA_Objects,BASE TABLE
+TELReporting,dbo,BaanV_TEA_Objects_on_Contracts,BASE TABLE
+TELReporting,dbo,BaanV_TEA_Open_Invoices,BASE TABLE
+TELReporting,dbo,BaanV_TEA_Open_Service_Invoices,VIEW
+TELReporting,dbo,BaanV_TEA_Price_Books,BASE TABLE
+TELReporting,dbo,BaanV_TEA_Purchase_Order_History,BASE TABLE
+TELReporting,dbo,BaanV_TEA_Purchase_Orders,BASE TABLE
+TELReporting,dbo,BaanV_TEA_Replenishment_Order_Users,BASE TABLE
+TELReporting,dbo,BaanV_TEA_Replenishment_Orders,BASE TABLE
+TELReporting,dbo,BaanV_TEA_Sales_Order_History,BASE TABLE
+TELReporting,dbo,BaanV_TEA_Sales_Orders,BASE TABLE
+TELReporting,dbo,BaanV_TEA_Sales_Quotes,BASE TABLE
+TELReporting,dbo,BaanV_TEA_Service_Orders,BASE TABLE
+TELReporting,dbo,BaanV_TEA_Ship_Tracking,BASE TABLE
+TELReporting,dbo,BaanV_TEA_Supplier_Item_Codes,BASE TABLE
+TELReporting,dbo,BaanV_TEA_Suppliers,BASE TABLE
+TELReporting,dbo,BaanV_TEA_SURB_ERRORS,BASE TABLE
+TELReporting,dbo,BaanV_TEA_SURB_Staging,BASE TABLE
+TELReporting,dbo,BaanV_TEA_TEH_AP,BASE TABLE
+TELReporting,dbo,BaanV_TEA_TEH_AP_Order_Related,BASE TABLE
+TELReporting,dbo,BaanV_TEA_TEH_Chart_of_Accounts,BASE TABLE
+TELReporting,dbo,BaanV_TEA_TEH_Finalized_Transactions,VIEW
+TELReporting,dbo,BaanV_TEA_UPS_EDI_214,BASE TABLE
+TELReporting,dbo,BaanV_TEA_Warehouse_Orders_Inbound,BASE TABLE
+TELReporting,dbo,BaanV_TEA_Warehouse_Orders_Outbound,BASE TABLE
+TELReporting,dbo,BaanV_TEH_AR_Open_Entries,BASE TABLE
+TELReporting,dbo,BaanV_TEH_Dimensions,BASE TABLE
+TELReporting,dbo,BaanV_TEH_Finalized_Transactions,BASE TABLE
+TELReporting,dbo,BaanV_TEH_Open_Invoices,BASE TABLE
+TELReporting,dbo,BaanV_TEI_AP,BASE TABLE
+TELReporting,dbo,BaanV_TEI_AR_Open_Entries,BASE TABLE
+TELReporting,dbo,BaanV_TEI_Cost_Price_Details,BASE TABLE
+TELReporting,dbo,BaanV_TEI_Customers,BASE TABLE
+TELReporting,dbo,BaanV_TEI_Dimensions,BASE TABLE
+TELReporting,dbo,BaanV_TEI_Employees,BASE TABLE
+TELReporting,dbo,BaanV_TEI_Engineering_BOMs,BASE TABLE
+TELReporting,dbo,BaanV_TEI_Finalized_Transactions,BASE TABLE
+TELReporting,dbo,BaanV_TEI_Integration_Transactions,BASE TABLE
+TELReporting,dbo,BaanV_TEI_Inventory_By_Warehouse,BASE TABLE
+TELReporting,dbo,BaanV_TEI_Items,BASE TABLE
+TELReporting,dbo,BaanV_TEI_Price_Books,BASE TABLE
+TELReporting,dbo,BaanV_TEI_Production_BOMS,BASE TABLE
+TELReporting,dbo,BaanV_TEI_Purchase_Order_Parameters,BASE TABLE
+TELReporting,dbo,BaanV_TEI_Purchase_Orders,BASE TABLE
+TELReporting,dbo,BaanV_TEI_Sales_Orders,BASE TABLE
+TELReporting,dbo,BaanV_TEI_Suppliers,BASE TABLE
+TELReporting,dbo,BaanV_TEI_Vendor_Ratings,BASE TABLE
+TELReporting,dbo,BaanV_TEI_Warehouse_Orders_Inbound,BASE TABLE
+TELReporting,dbo,BaanV_TEI_Warehouse_Orders_Outbound,BASE TABLE
+TELReporting,dbo,BaanV_Top_TEA_Contracts,BASE TABLE
+TELReporting,dbo,BaanV_TTCA_AP,BASE TABLE
+TELReporting,dbo,BaanV_TTCA_AR_Open_Entries,BASE TABLE
+TELReporting,dbo,BaanV_TTCA_Chart_of_Accounts,BASE TABLE
+TELReporting,dbo,BaanV_TTCA_Dim_Ledger_Comb_w_Budgets,BASE TABLE
+TELReporting,dbo,BaanV_TTCA_Dimensions,BASE TABLE
+TELReporting,dbo,BaanV_TTCA_Engineering_Items,BASE TABLE
+TELReporting,dbo,BaanV_TTCA_Finalized_Transactions,BASE TABLE
+TELReporting,dbo,BaanV_TTCA_Integration_Transactions,BASE TABLE
+TELReporting,dbo,BaanV_TTCA_Inventory_by_Warehouse,BASE TABLE
+TELReporting,dbo,BaanV_TTCA_Inventory_By_Whse_Loc_Lot,BASE TABLE
+TELReporting,dbo,BaanV_TTCA_Item_Transactions,BASE TABLE
+TELReporting,dbo,BaanV_TTCA_Items,BASE TABLE
+TELReporting,dbo,BaanV_TTCA_Projects,BASE TABLE
+TELReporting,dbo,BaanV_TTCA_Purchase_Orders,BASE TABLE
+TELReporting,dbo,BaanV_TTCA_Replenishment_Orders,BASE TABLE
+TELReporting,dbo,BaanV_TTCA_Sales_Orders,BASE TABLE
+TELReporting,dbo,BaanV_TTCA_Suppliers,BASE TABLE
+TELReporting,dbo,BaanV_TTI_Customers,BASE TABLE
+TELReporting,dbo,BaanV_TTI_Finalized_Transactions,BASE TABLE
+TELReporting,dbo,BaanV_TTI_Integration_Transactions,BASE TABLE
+TELReporting,dbo,BaanV_TTI_Inventory_by_Warehouse,BASE TABLE
+TELReporting,dbo,BaanV_TTI_Inventory_By_Warehouse_FIFO,BASE TABLE
+TELReporting,dbo,BaanV_TTI_Inventory_Trans_by_Item_and_Warehouse,BASE TABLE
+TELReporting,dbo,BaanV_TTI_Items,BASE TABLE
+TELReporting,dbo,BaanV_TTI_Production_BOMS,BASE TABLE
+TELReporting,dbo,BaanV_TTI_Production_Orders,BASE TABLE
+TELReporting,dbo,BaanV_TTI_Purchase_Orders,BASE TABLE
+TELReporting,dbo,BaanV_TTI_Replenishment_Orders,BASE TABLE
+TELReporting,dbo,BaanV_TTI_Sales_Orders,BASE TABLE
+TELReporting,dbo,BaanV_TTI_Service_Orders,BASE TABLE
+TELReporting,dbo,BaanV_TTI_Suppliers,BASE TABLE
+TELReporting,dbo,BaanV_TVC_Finalized_Transactions,BASE TABLE
+TELReporting,dbo,BaanV_TVC_Purchase_Orders,BASE TABLE
+TELReporting,dbo,BaanV_WhseType,BASE TABLE

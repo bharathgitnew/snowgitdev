@@ -1,0 +1,34 @@
+version: 2
+models:
+- name: ODS__CARMA__CORE_RETURN_REASON_TYPE
+  description: Model CARMA CORE_RETURN_REASON_TYPE file.
+- name: ODS__CARMA__CSO_LINE_ITEM
+  description: Model CARMA CSO_LINE_ITEM file.
+- name: ODS__CARMA__CSO
+  description: Model CARMA CSO file.
+- name: ODS__CARMA__DISPOSITION_TYPE
+  description: Model CARMA DISPOSITION_TYPE file.
+- name: ODS__CARMA__DMG_LIABILITY_DISP_TYPE
+  description: Model CARMA DMG_LIABILITY_DISP_TYPE file.
+- name: ODS__CARMA__NCDR_TYPE
+  description: Model CARMA NCDR_TYPE file.
+- name: ODS__CARMA__ORDER_TYPE
+  description: Model CARMA ORDER_TYPE file.
+- name: ODS__CARMA__PART_SCRAP_DISP_TYPE
+  description: Model CARMA PART_SCRAP_DISP_TYPE file.
+- name: ODS__CARMA__POST_CONSUME_PART_RETURN
+  description: Model CARMA POST_CONSUME_PART_RETURN file.
+- name: ODS__CARMA__PROCESS_SALES
+  description: Model CARMA PROCESS_SALES file.
+- name: ODS__CARMA__RECEIVE_REQUEST
+  description: Model CARMA RECEIVE_REQUEST file.
+- name: ODS__CARMA__REQUEST_SALES
+  description: Model CARMA REQUEST_SALES file.
+- name: ODS__CARMA__REQUEST_SERVICE
+  description: Model CARMA REQUEST_SERVICE file.
+- name: ODS__CARMA__RETURN_REASON_TYPE
+  description: Model CARMA RETURN_REASON_TYPE file.
+- name: ODS__CARMA__RMA_CONTACT
+  description: Model CARMA RMA_CONTACT file.
+- name: ODS__CARMA__RMA
+  description: Model CARMA RMA file.

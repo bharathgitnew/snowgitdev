@@ -1,0 +1,18 @@
+version: 2
+sources:
+
+- name: ADMIN__ACCESSCONTROL
+  database: '{{ env_var(''SNOWFLAKE_ADMIN'') }}'
+  schema: ACCESSCONTROL
+  tables:
+  - name: COLUMNMASKDEFINITION
+    identifier: COLUMNMASKDEFINITION
+  - name: SERVICEACCOUNTGRANTDEFINITION
+    identifier: SERVICEACCOUNTGRANTDEFINITION
+
+- name: ADMIN__SECURITY
+  database: '{{ env_var(''SNOWFLAKE_ADMIN'') }}'
+  schema: SECURITY
+  tables:
+  - name: COMPANYGROUPING
+    identifier: COMPANYGROUPING

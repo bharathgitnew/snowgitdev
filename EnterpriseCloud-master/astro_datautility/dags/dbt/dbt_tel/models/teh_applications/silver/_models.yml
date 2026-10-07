@@ -1,0 +1,25 @@
+models:
+- name: SILVER__TEH_APPLICATIONS__MATERIAL_MASTER_3PL
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_APPLICATIONS__MATERIAL_VALUATION_MASTER_CODED
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_APPLICATIONS__MDM_COMPANY
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_APPLICATIONS__MYSKILLS_COMPANY
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_APPLICATIONS__PRICE_MATRIX
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_APPLICATIONS__WORKERCOMPANYLIST
+  tests:
+  - has_data
+  - recently_run

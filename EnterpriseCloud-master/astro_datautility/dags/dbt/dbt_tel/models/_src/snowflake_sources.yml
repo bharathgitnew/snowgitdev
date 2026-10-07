@@ -1,0 +1,64 @@
+version: 2
+sources:
+- name: SF_ACCOUNTUSAGE
+  description: Snowflake System - Account Usage Schema. Up to 2 hour latency.
+  database: SNOWFLAKE
+  schema: Account_Usage
+  tables:
+  - name: COPY_HISTORY
+    identifier: Copy_History
+    description: System table for Copy_History file.
+  - name: DATABASE_STORAGE_USAGE_HISTORY
+    identifier: Database_Storage_Usage_History
+    description: System table for Database_Storage_Usage_History file.
+  - name: DATABASES
+    identifier: Databases
+    description: System table for Databases file.
+  - name: GRANTS_TO_ROLES
+    identifier: GRANTS_TO_ROLES
+    description: System table for GRANTS_TO_ROLES file.
+  - name: GRANTS_TO_USERS
+    identifier: GRANTS_TO_USERS
+    description: System table for GRANTS_TO_USERS file.
+  - name: LOAD_HISTORY
+    identifier: Load_History
+    description: System table for Load_History file.
+  - name: LOGIN_HISTORY
+    identifier: Login_History
+    description: System table for Login_History file.
+  - name: METERING_DAILY_HISTORY
+    identifier: Metering_Daily_History
+    description: System table for Metering_Daily_History file.
+  - name: METERING_HISTORY
+    identifier: Metering_History
+    description: System table for Metering_History file.
+  - name: PIPES
+    identifier: Pipes
+    description: System table for Pipes file.
+  - name: PIPE_USAGE_HISTORY
+    identifier: Pipe_Usage_History
+    description: System table for Pipe_Usage_History file.
+  - name: POLICY_REFERENCES
+    identifier: POLICY_REFERENCES
+    description: System table for POLICY_REFERENCES file.
+  - name: QUERY_HISTORY
+    identifier: Query_History
+    description: System table for Query_History file.
+  - name: STAGE_STORAGE_USAGE_HISTORY
+    identifier: Stage_Storage_Usage_History
+    description: System table for Stage_Storage_Usage_History file.
+  - name: STORAGE_USAGE
+    identifier: Storage_Usage
+    description: System table for Storage_Usage file.
+  - name: TABLES
+    identifier: Tables
+    description: System table for Tables file.
+  - name: USERS
+    identifier: Users
+    description: Users Listing Information.
+  - name: WAREHOUSE_LOAD_HISTORY
+    identifier: Warehouse_Load_History
+    description: Warehouse_Load_History Listing Information.
+  - name: WAREHOUSE_METERING_HISTORY
+    identifier: Warehouse_Metering_History
+    description: Warehouse_Metering_History Listing Information.

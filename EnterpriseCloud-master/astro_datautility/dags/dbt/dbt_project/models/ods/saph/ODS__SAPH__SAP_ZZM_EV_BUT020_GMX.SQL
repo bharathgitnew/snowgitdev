@@ -1,0 +1,82 @@
+
+
+	/************
+	Model file generated from gmxDbtTemplateUtility.ipynb
+	*************/
+
+
+	{{ config(
+	  materialized='incremental',
+	  incremental_strategy='insert_overwrite',
+	  alias='SAP_ZZM_EV_BUT020_GMX',
+	  transient=false,
+	  enabled=false
+	) }}
+
+	with source_data as (
+	SELECT
+    	_FILEDATE,
+		_FILENAME,
+		JSONFIELD:"PARTNER"::STRING AS "PARTNER",
+ 	 	JSONFIELD:"ADDRNUMBER"::STRING AS "ADDRNUMBER",
+ 	 	JSONFIELD:"XDFADR"::STRING AS "XDFADR",
+ 	 	JSONFIELD:"MOVE_ADDR"::STRING AS "MOVEADDR",
+ 	 	JSONFIELD:"DATE_FROM"::STRING AS "DATEFROM",
+ 	 	JSONFIELD:"ADDRESS_GUID"::STRING AS "ADDRESSGUID",
+ 	 	JSONFIELD:"ADDR_VALID_FROM"::STRING AS "ADDRVALIDFROM",
+ 	 	JSONFIELD:"ADDR_VALID_TO"::STRING AS "ADDRVALIDTO",
+ 	 	JSONFIELD:"ADDR_MOVE_DATE"::STRING AS "ADDRMOVEDATE",
+ 	 	JSONFIELD:"DELFLAG"::STRING AS "DELFLAG",
+ 	 	JSONFIELD:"CDCHANGENR"::STRING AS "CDCHANGENR",
+ 	 	JSONFIELD:"PSL_INSDATE"::STRING AS "PSL_INSDATE",
+ 	 	JSONFIELD:"PSL_UPDDATE"::STRING AS "PSL_UPDDATE"
+	from {{ source('SAPH','SAP_ZZM_EV_BUT020_GMX') }}
+	    WHERE REGEXP_SUBSTR(_FILENAME,'\\d{14}') = (SELECT MAX(REGEXP_SUBSTR(_filename,'\\d{14}')) from {{ source('SAPH', 'SAP_ZZM_EV_BUT020_GMX') }})
+	),
+
+	transform_data as (
+	SELECT
+		_FILEDATE,
+		_FILENAME,
+		'{{ invocation_id }}' AS _AUDIT_LOG_ID,
+        SHA2('hash_me') as _ROW_HASH,
+		"PARTNER",
+ 	 	"ADDRNUMBER",
+ 	 	CASE WHEN "XDFADR"='X' THEN 'true' ELSE 'false' END AS "XDFADR",
+ 	 	COALESCE("MOVEADDR",'') AS "MOVEADDR",
+ 	 	REGEXP_REPLACE(TRY_TO_DATE("DATEFROM"),'-','') AS "DATEFROM",
+ 	 	substr(lower("ADDRESSGUID"),1,8) || '-' || substr(lower("ADDRESSGUID"),9,4) || '-' || substr(lower("ADDRESSGUID"),13,4) || '-' || substr(lower("ADDRESSGUID"),17,4) || '-' || substr(lower("ADDRESSGUID"),21) as "ADDRESSGUID",
+ 	 	"ADDRVALIDFROM",
+ 	 	"ADDRVALIDTO",
+ 	 	"ADDRMOVEDATE",
+ 	 	"DELFLAG",
+ 	 	"CDCHANGENR",
+ 	 	"PSL_INSDATE",
+ 	 	"PSL_UPDDATE"
+	from source_data
+	),
+
+	type_data as (
+	SELECT
+		cast(_FILEDATE AS TIMESTAMP_NTZ(9)) AS _FILEDATE,
+		cast(_FILENAME as varchar(128)) as _FILENAME,
+        cast(_AUDIT_LOG_ID as varchar(128)) as _AUDIT_LOG_ID,
+        cast(_ROW_HASH as varchar(128)) as _ROW_HASH,
+		CAST("PARTNER" AS NVARCHAR) AS "PARTNER",
+ 	 	CAST("ADDRNUMBER" AS NVARCHAR) AS "ADDRNUMBER",
+ 	 	CAST("XDFADR" AS NVARCHAR) AS "XDFADR",
+ 	 	CAST("MOVEADDR" AS NVARCHAR) AS "MOVEADDR",
+ 	 	CAST("DATEFROM" AS NVARCHAR) AS "DATEFROM",
+ 	 	CAST("ADDRESSGUID" AS NVARCHAR) AS "ADDRESSGUID",
+ 	 	CAST("ADDRVALIDFROM" AS FLOAT) AS "ADDRVALIDFROM",
+ 	 	CAST("ADDRVALIDTO" AS FLOAT) AS "ADDRVALIDTO",
+ 	 	CAST("ADDRMOVEDATE" AS FLOAT) AS "ADDRMOVEDATE",
+ 	 	CAST("DELFLAG" AS BOOLEAN) AS "DELFLAG",
+ 	 	CAST("CDCHANGENR" AS NVARCHAR) AS "CDCHANGENR",
+ 	 	CAST("PSL_INSDATE" AS TIMESTAMP) AS "PSL_INSDATE",
+ 	 	CAST("PSL_UPDDATE" AS TIMESTAMP) AS "PSL_UPDDATE"
+	from transform_data
+	)
+
+	select * from type_data
+

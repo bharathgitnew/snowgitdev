@@ -1,0 +1,27 @@
+sources:
+- name: IPR
+  description: Landing Zone - For IPR Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: IPR
+  tables:
+  - name: V_ADDRESS
+    identifier: V_ADDRESS
+    description: Landing table for V_ADDRESS from SQLServer [IPR].[dbo].[v_address]
+  - name: V_COST_CENTER
+    identifier: V_COST_CENTER
+    description: Landing table for V_COST_CENTER from SQLServer [IPR].[dbo].[v_cost_center]
+  - name: V_EMPLOYEES
+    identifier: V_EMPLOYEES
+    description: Landing table for V_EMPLOYEES from SQLServer [IPR].[dbo].[v_employees]
+  - name: V_IPR_CRM
+    identifier: V_IPR_CRM
+    description: Landing table for V_IPR_CRM from SQLServer [IPR].[dbo].[v_ipr_crm]
+  - name: V_IPR_DATA
+    identifier: V_IPR_DATA
+    description: Landing table for V_IPR_DATA from SQLServer [IPR].[dbo].[v_IPR_DATA]
+  - name: V_PENDING_APPROVAL
+    identifier: V_PENDING_APPROVAL
+    description: Landing table for V_PENDING_APPROVAL from SQLServer [IPR].[dbo].[V_PENDING_APPROVAL]
+  - name: V_REASON
+    identifier: V_REASON
+    description: Landing table for V_REASON from SQLServer [IPR].[dbo].[v_reason]

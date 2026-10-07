@@ -1,0 +1,410 @@
+{
+  "ADS-TFFanalytics": {
+    "DataSet1": {
+      "schema": "dbo",
+      "table": "ROX_defect_data",
+      "Incremental": "NULL",
+      "sftablename": "TFF_ANALYTICS_ROX_DEFECT_DATA",
+      "filter": ""
+    },
+    "DataSet2": {
+      "schema": "dbo",
+      "table": "ROX_defect_header",
+      "Incremental": "NULL",
+      "sftablename": "TFF_ANALYTICS_ROX_DEFECT_HEADER",
+      "filter": ""
+    },
+    "DataSet3": {
+      "schema": "dbo",
+      "table": "TELINDY_PLUS_GBOM",
+      "Incremental": "NULL",
+      "sftablename": "TFF_ANALYTICS_TELINDY_PLUS_GBOM",
+      "filter": ""
+    },
+    "DataSet4": {
+      "schema": "dbo",
+      "table": "NT333_GBOM",
+      "Incremental": "NULL",
+      "sftablename": "TFF_ANALYTICS_NT333_GBOM",
+      "filter": ""
+    },
+    "DataSet5": {
+      "schema": "dbo",
+      "table": "date",
+      "Incremental": "NULL",
+      "sftablename": "TFF_ANALYTICS_DATE",
+      "filter": ""
+    },
+    "DataSet6": {
+      "schema": "dbo",
+      "table": "ww",
+      "Incremental": "NULL",
+      "sftablename": "TFF_ANALYTICS_WW",
+      "filter": ""
+    },
+    "DataSet7": {
+      "schema": "dbo",
+      "table": "entity_future",
+      "Incremental": "NULL",
+      "sftablename": "TFF_ANALYTICS_ENTITY_FUTURE",
+      "filter": ""
+    },
+    "DataSet8": {
+      "schema": "dbo",
+      "table": "warranty_tracker_CEID",
+      "Incremental": "NULL",
+      "sftablename": "TFF_ANALYTICS_WARRANTY_TRACKER_CEID",
+      "filter": ""
+    },
+    "DataSet9": {
+      "schema": "dbo",
+      "table": "warranty_tracker_cust",
+      "Incremental": "NULL",
+      "sftablename": "TFF_ANALYTICS_WARRANTY_TRACKER_CUST",
+      "filter": ""
+    },
+    "DataSet10": {
+      "schema": "dbo",
+      "table": "ncdr",
+      "Incremental": "NULL",
+      "sftablename": "TFF_ANALYTICS_NCDR",
+      "filter": ""
+    },
+    "DataSet11": {
+      "schema": "dbo",
+      "table": "parts_order_history",
+      "Incremental": "NULL",
+      "sftablename": "TFF_ANALYTICS_PARTS_ORDER_HISTORY",
+      "filter": ""
+    },
+    "DataSet12": {
+      "schema": "dbo",
+      "table": "material_master",
+      "Incremental": "NULL",
+      "sftablename": "TFF_ANALYTICS_MATERIAL_MASTER",
+      "filter": ""
+    },
+    "DataSet13": {
+      "schema": "dbo",
+      "table": "part_stock_overview",
+      "Incremental": "NULL",
+      "sftablename": "TFF_ANALYTICS_PART_STOCK_OVERVIEW",
+      "filter": ""
+    },
+    "DataSet14": {
+      "schema": "dbo",
+      "table": "db_stats",
+      "Incremental": "NULL",
+      "sftablename": "TFF_ANALYTICS_DB_STATS",
+      "filter": ""
+    },
+    "DataSet15": {
+      "schema": "dbo",
+      "table": "TELINDY_PLUS_PM_parts",
+      "Incremental": "NULL",
+      "sftablename": "TFF_ANALYTICS_TELINDY_PLUS_PM_PARTS",
+      "filter": ""
+    },
+    "DataSet16": {
+      "schema": "dbo",
+      "table": "NT333_PM_parts",
+      "Incremental": "NULL",
+      "sftablename": "TFF_ANALYTICS_NT333_PM_PARTS",
+      "filter": ""
+    },
+    "DataSet17": {
+      "schema": "dbo",
+      "table": "raw_CEID_Definitions",
+      "Incremental": "NULL",
+      "sftablename": "TFF_ANALYTICS_RAW_CEID_DEFINITIONS",
+      "filter": ""
+    },
+    "DataSet18": {
+      "schema": "dbo",
+      "table": "raw_Comments",
+      "Incremental": "NULL",
+      "sftablename": "TFF_ANALYTICS_RAW_COMMENTS",
+      "filter": ""
+    },
+    "DataSet19": {
+      "schema": "dbo",
+      "table": "raw_DownChanges",
+      "Incremental": "NULL",
+      "sftablename": "TFF_ANALYTICS_RAW_DOWNCHANGES",
+      "filter": ""
+    },
+    "DataSet20": {
+      "schema": "dbo",
+      "table": "ECN_key",
+      "Incremental": "NULL",
+      "sftablename": "TFF_ANALYTICS_ECN_KEY",
+      "filter": ""
+    },
+    "DataSet21": {
+      "schema": "dbo",
+      "table": "raw_DownComments",
+      "Incremental": "NULL",
+      "sftablename": "TFF_ANALYTICS_RAW_DOWNCOMMENTS",
+      "filter": ""
+    },
+    "DataSet22": {
+      "schema": "dbo",
+      "table": "raw_DownWindows",
+      "Incremental": "NULL",
+      "sftablename": "TFF_ANALYTICS_RAW_DOWNWINDOWS",
+      "filter": ""
+    },
+    "DataSet23": {
+      "schema": "dbo",
+      "table": "raw_EntityStates",
+      "Incremental": "NULL",
+      "sftablename": "TFF_ANALYTICS_RAW_ENTITYSTATES",
+      "filter": ""
+    },
+    "DataSet24": {
+      "schema": "dbo",
+      "table": "raw_errors",
+      "Incremental": "NULL",
+      "sftablename": "TFF_ANALYTICS_RAW_ERRORS",
+      "filter": ""
+    },
+    "DataSet25": {
+      "schema": "dbo",
+      "table": "raw_MA",
+      "Incremental": "NULL",
+      "sftablename": "TFF_ANALYTICS_RAW_MA",
+      "filter": ""
+    },
+    "DataSet26": {
+      "schema": "dbo",
+      "table": "entity",
+      "Incremental": "NULL",
+      "sftablename": "TFF_ANALYTICS_ENTITY",
+      "filter": ""
+    },
+    "DataSet27": {
+      "schema": "dbo",
+      "table": "TELINDY_PLUS_ECN_tracker",
+      "Incremental": "NULL",
+      "sftablename": "TFF_ANALYTICS_TELINDY_PLUS_ECN_TRACKER",
+      "filter": ""
+    },
+    "DataSet28": {
+      "schema": "dbo",
+      "table": "entity_non_intel",
+      "Incremental": "NULL",
+      "sftablename": "TFF_ANALYTICS_ENTITY_NON_INTEL",
+      "filter": ""
+    },
+    "DataSet29": {
+      "schema": "dbo",
+      "table": "NT333_ECN_tracker",
+      "Incremental": "NULL",
+      "sftablename": "TFF_ANALYTICS_NT333_ECN_TRACKER",
+      "filter": ""
+    },
+    "DataSet30": {
+      "schema": "dbo",
+      "table": "bucket_map",
+      "Incremental": "NULL",
+      "sftablename": "TFF_ANALYTICS_BUCKET_MAP",
+      "filter": ""
+    },
+    "DataSet31": {
+      "schema": "dbo",
+      "table": "SIRFIS",
+      "Incremental": "NULL",
+      "sftablename": "TFF_ANALYTICS_SIRFIS",
+      "filter": ""
+    },
+    "DataSet32": {
+      "schema": "dbo",
+      "table": "ROX_ECN_tracker",
+      "Incremental": "NULL",
+      "sftablename": "TFF_ANALYTICS_ROX_ECN_TRACKER",
+      "filter": ""
+    },
+    "DataSet33": {
+      "schema": "dbo",
+      "table": "bucket",
+      "Incremental": "NULL",
+      "sftablename": "TFF_ANALYTICS_BUCKET",
+      "filter": ""
+    },
+    "DataSet34": {
+      "schema": "dbo",
+      "table": "opportunity",
+      "Incremental": "NULL",
+      "sftablename": "TFF_ANALYTICS_OPPORTUNITY",
+      "filter": ""
+    },
+    "DataSet35": {
+      "schema": "dbo",
+      "table": "sirfis_opportunity",
+      "Incremental": "NULL",
+      "sftablename": "TFF_ANALYTICS_SIRFIS_OPPORTUNITY",
+      "filter": ""
+    },
+    "DataSet36": {
+      "schema": "dbo",
+      "table": "RHO_ECN_tracker",
+      "Incremental": "NULL",
+      "sftablename": "TFF_ANALYTICS_RHO_ECN_TRACKER",
+      "filter": ""
+    },
+    "DataSet37": {
+      "schema": "dbo",
+      "table": "sirfis_opportunity_gantt",
+      "Incremental": "NULL",
+      "sftablename": "TFF_ANALYTICS_SIRFIS_OPPORTUNITY_GANTT",
+      "filter": ""
+    },
+    "DataSet38": {
+      "schema": "dbo",
+      "table": "entity_config",
+      "Incremental": "NULL",
+      "sftablename": "TFF_ANALYTICS_ENTITY_CONFIG",
+      "filter": ""
+    },
+    "DataSet39": {
+      "schema": "dbo",
+      "table": "TELINDY_PLUS_ECN_tool_tracker",
+      "Incremental": "NULL",
+      "sftablename": "TFF_ANALYTICS_TELINDY_PLUS_ECN_TOOL_TRACKER",
+      "filter": ""
+    },
+    "DataSet40": {
+      "schema": "dbo",
+      "table": "entity_process_nodes",
+      "Incremental": "NULL",
+      "sftablename": "TFF_ANALYTICS_ENTITY_PROCESS_NODES",
+      "filter": ""
+    },
+    "DataSet41": {
+      "schema": "dbo",
+      "table": "entity_software",
+      "Incremental": "NULL",
+      "sftablename": "TFF_ANALYTICS_ENTITY_SOFTWARE",
+      "filter": ""
+    },
+    "DataSet42": {
+      "schema": "dbo",
+      "table": "entity_ww",
+      "Incremental": "NULL",
+      "sftablename": "TFF_ANALYTICS_ENTITY_WW",
+      "filter": ""
+    },
+    "DataSet43": {
+      "schema": "dbo",
+      "table": "CEID",
+      "Incremental": "NULL",
+      "sftablename": "TFF_ANALYTICS_CEID",
+      "filter": ""
+    },
+    "DataSet44": {
+      "schema": "dbo",
+      "table": "VFMFGID",
+      "Incremental": "NULL",
+      "sftablename": "TFF_ANALYTICS_VFMFGID",
+      "filter": ""
+    },
+    "DataSet45": {
+      "schema": "dbo",
+      "table": "process_nodes",
+      "Incremental": "NULL",
+      "sftablename": "TFF_ANALYTICS_PROCESS_NODES",
+      "filter": ""
+    },
+    "DataSet46": {
+      "schema": "dbo",
+      "table": "ma",
+      "Incremental": "NULL",
+      "sftablename": "TFF_ANALYTICS_MA",
+      "filter": ""
+    },
+    "DataSet47": {
+      "schema": "dbo",
+      "table": "down_states",
+      "Incremental": "NULL",
+      "sftablename": "TFF_ANALYTICS_DOWN_STATES",
+      "filter": ""
+    },
+    "DataSet48": {
+      "schema": "dbo",
+      "table": "comments",
+      "Incremental": "NULL",
+      "sftablename": "TFF_ANALYTICS_COMMENTS",
+      "filter": ""
+    },
+    "DataSet49": {
+      "schema": "dbo",
+      "table": "down_window",
+      "Incremental": "NULL",
+      "sftablename": "TFF_ANALYTICS_DOWN_WINDOW",
+      "filter": ""
+    },
+    "DataSet50": {
+      "schema": "dbo",
+      "table": "comment_bucket",
+      "Incremental": "NULL",
+      "sftablename": "TFF_ANALYTICS_COMMENT_BUCKET",
+      "filter": ""
+    },
+    "DataSet51": {
+      "schema": "dbo",
+      "table": "down_states_output",
+      "Incremental": "NULL",
+      "sftablename": "TFF_ANALYTICS_DOWN_STATES_OUTPUT",
+      "filter": ""
+    },
+    "DataSet52": {
+      "schema": "dbo",
+      "table": "ma_output",
+      "Incremental": "NULL",
+      "sftablename": "TFF_ANALYTICS_MA_OUTPUT",
+      "filter": ""
+    },
+    "DataSet53": {
+      "schema": "dbo",
+      "table": "downtime",
+      "Incremental": "NULL",
+      "sftablename": "TFF_ANALYTICS_DOWNTIME",
+      "filter": ""
+    },
+    "DataSet54": {
+      "schema": "dbo",
+      "table": "entity_alarms",
+      "Incremental": "NULL",
+      "sftablename": "TFF_ANALYTICS_ENTITY_ALARMS",
+      "filter": ""
+    },
+    "DataSet55": {
+      "schema": "dbo",
+      "table": "alarm",
+      "Incremental": "NULL",
+      "sftablename": "TFF_ANALYTICS_ALARM",
+      "filter": ""
+    },
+    "DataSet56": {
+      "schema": "dbo",
+      "table": "alarms_complete",
+      "Incremental": "NULL",
+      "sftablename": "TFF_ANALYTICS_ALARMS_COMPLETE",
+      "filter": ""
+    },
+    "DataSet57": {
+      "schema": "dbo",
+      "table": "raw_Thickness",
+      "Incremental": "NULL",
+      "sftablename": "TFF_ANALYTICS_RAW_THICKNESS",
+      "filter": ""
+    },
+    "DataSet58": {
+      "schema": "dbo",
+      "table": "impact_map",
+      "Incremental": "NULL",
+      "sftablename": "TFF_ANALYTICS_IMPACT_MAP",
+      "filter": ""
+    }
+  }
+}

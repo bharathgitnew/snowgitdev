@@ -1,0 +1,6 @@
+version: 2
+models:
+- name: ODS__QVICS__ALLTROUBLE
+  identifier: ALLTROUBLE
+- name: ODS__QVICS__ALLPART
+  identifier: ALLPART

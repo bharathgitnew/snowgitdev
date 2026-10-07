@@ -1,0 +1,78 @@
+/************
+Model file generated from Python utility
+*************/
+
+{{ config(
+	materialized='tel_incremental',
+	incremental_strategy='insert_overwrite',
+	alias='MADATA_SILVER_PREFERREDPAIRLISTES',
+	transient=false
+) }}
+
+with source_data as (
+	SELECT
+		_FILEDATE,
+		_FILENAME,
+		_UPLOADDATE,
+		JSONFIELD:"Bucket 1"::VARCHAR AS BUCKET_1,
+		JSONFIELD:"Bucket 2"::VARCHAR AS BUCKET_2,
+		JSONFIELD:"Bucket 3"::VARCHAR AS BUCKET_3,
+		JSONFIELD:"Bucket 4"::VARCHAR AS BUCKET_4,
+		JSONFIELD:"Bucket 5"::VARCHAR AS BUCKET_5,
+		JSONFIELD:"Bucket 6"::VARCHAR AS BUCKET_6,
+		JSONFIELD:"Prefered Choice"::VARCHAR AS PREFERED_CHOICE,
+		JSONFIELD:"Comment"::VARCHAR AS COMMENT,
+		JSONFIELD:"F9"::VARCHAR AS F9,
+		JSONFIELD:"F10"::VARCHAR AS F10,
+		JSONFIELD:"F11"::VARCHAR AS F11,
+		JSONFIELD:"F12"::VARCHAR AS F12
+	FROM {{ source("ADS", "MADATA_SILVER_PREFERREDPAIRLISTES") }}
+WHERE
+	_FILEDATE = (SELECT MAX(_FILEDATE) FROM {{ source('ADS', 'MADATA_SILVER_PREFERREDPAIRLISTES') }} ) 
+),
+
+transform_data as (
+	SELECT
+		_FILEDATE AS _FILEDATE,
+		_FILENAME AS _FILENAME,
+		_UPLOADDATE AS _UPLOADDATE,
+		'{{ invocation_id }}' AS _AUDIT_LOG_ID,
+		SHA2('hash_me') AS _ROW_HASH,
+		BUCKET_1,
+		BUCKET_2,
+		BUCKET_3,
+		BUCKET_4,
+		BUCKET_5,
+		BUCKET_6,
+		PREFERED_CHOICE,
+		COMMENT,
+		F9,
+		F10,
+		F11,
+		F12
+	FROM source_data
+),
+
+type_data as (
+	SELECT
+		CAST(_FILEDATE AS TIMESTAMP_NTZ(9)) AS _FILEDATE,
+		_FILENAME,
+		_UPLOADDATE,
+		CAST(_AUDIT_LOG_ID AS VARCHAR(128)) AS _AUDIT_LOG_ID,
+		CAST(_ROW_HASH AS VARCHAR(128)) AS _ROW_HASH,
+		BUCKET_1,
+		BUCKET_2,
+		BUCKET_3,
+		BUCKET_4,
+		BUCKET_5,
+		BUCKET_6,
+		PREFERED_CHOICE,
+		COMMENT,
+		F9,
+		F10,
+		F11,
+		F12
+	FROM transform_data
+)
+
+SELECT * FROM type_data

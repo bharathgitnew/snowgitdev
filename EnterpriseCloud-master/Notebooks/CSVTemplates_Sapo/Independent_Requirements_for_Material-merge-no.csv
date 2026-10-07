@@ -1,0 +1,36 @@
+Source.Name,CDS View,Technical Field Name(ODS),PK,Type,Field Name(Common),Comments
+PBIM,Independent Requirements for Material,MANDT,X,CLNT,CLIENT,Client
+PBIM,Independent Requirements for Material,MATNR,X,CHAR,MATERIAL_NUMBER,Material
+PBIM,Independent Requirements for Material,WERKS,X,CHAR,PLANT,Plant
+PBIM,Independent Requirements for Material,BEDAE,X,CHAR,REQUIREMENTS_TYPE,Reqmts type
+PBIM,Independent Requirements for Material,VERSB,X,CHAR,VERSION_NUMBER_FOR_INDEPENDENT_REQUIREMENTS,Version
+PBIM,Independent Requirements for Material,PBDNR,X,CHAR,REQUIREMENTS_PLAN_NUMBER,Reqmts Plan
+PBIM,Independent Requirements for Material,BDZEI,,NUMC,INDEPENDENT_REQUIREMENTS_POINTER,Reqmts pointer
+PBIM,Independent Requirements for Material,ZUVKZ,,CHAR,CONSUMPTION_INDICATOR,Consumption
+PBIM,Independent Requirements for Material,VERVS,,CHAR,INDICATOR_VERSION_ACTIVE,Active
+PBIM,Independent Requirements for Material,VERKZ,,CHAR,CONSUMPTION_INDICATOR_FOR_PLANNING_REQUIREMENTS,CInd.
+PBIM,Independent Requirements for Material,ZUOKR,,CHAR,CRITERION_FOR_ALLOCATION,Alloc.criterion
+PBIM,Independent Requirements for Material,PLNKZ,,CHAR,PLANNING_INDICATOR,Planning ind.
+PBIM,Independent Requirements for Material,TXTKZ,,CHAR,INDICATOR_LONG_TEXT_EXISTS,Long txt exists
+PBIM,Independent Requirements for Material,LOEVR,,CHAR,DELETION_INDICATOR,Deletion indicator
+PBIM,Independent Requirements for Material,UEBKZ,,CHAR,INDICATOR_DATA_COPIED,Copied
+PBIM,Independent Requirements for Material,DATLP,,DATS,DATE,Date
+PBIM,Independent Requirements for Material,UHRLP,,TIMS,TIME,Time
+PBIM,Independent Requirements for Material,AGGPB,,CHAR,AGGREGATION_INDICATOR_FOR_PLANNED_INDEPENDENT_REQUIREMENTS,Aggregation
+PBIM,Independent Requirements for Material,PLSCN,,NUMC,PLANNING_SCENARIO_OF_LONG-TERM_PLANNING,Plnng scenario
+PBIM,Independent Requirements for Material,VRSIO,,CHAR,VERSION_NUMBER_IN_THE_INFORMATION_STRUCTURE,Version
+PBIM,Independent Requirements for Material,MCINF,,CHAR,NAME_OF_INFORMATION_STRUCTURE,Info structure
+PBIM,Independent Requirements for Material,STFNA,,CHAR,FIELD_NAME_IN_THE_GENERATED_DDIC_STRUCTURE,Field name
+PBIM,Independent Requirements for Material,OPLKZ,,CHAR,WITH_NO_MRP,Without MRP
+PBIM,Independent Requirements for Material,MCINC,,CHAR,NAME_OF_INFO_STRUCTURE_-_CHARACTERISTIC_VALUES,Info structure
+PBIM,Independent Requirements for Material,VRSIC,,CHAR,VERSION_NUMBER_IN_THE_INFORMATION_STRUCTURE,Version
+PBIM,Independent Requirements for Material,KNTTP,,CHAR,ACCOUNT_ASSIGNMENT_CATEGORY,Acct Assgmt Cat
+PBIM,Independent Requirements for Material,SOBKZ,,CHAR,SPECIAL_STOCK_INDICATOR,Special Stock
+PBIM,Independent Requirements for Material,KZVBR,,CHAR,CONSUMPTION_POSTING,Consumption
+PBIM,Independent Requirements for Material,PSPEL,,NUMC,WORK_BREAKDOWN_STRUCTURE_ELEMENT_WBS_ELEMENT,WBS Element
+PBIM,Independent Requirements for Material,KDPOS,,NUMC,ITEM_NUMBER_IN_SALES_ORDER,Sales ord. item
+PBIM,Independent Requirements for Material,KDAUF,,CHAR,SALES_ORDER_NUMBER,Sales Order
+PBIM,Independent Requirements for Material,PROFILID,,NUMC,NAME_OF_PLANNING_PROFILE,Prof. name
+PBIM,Independent Requirements for Material,KZBWS,,CHAR,VALUATION_OF_SPECIAL_STOCK,Valuation
+PBIM,Independent Requirements for Material,PBDNR_EXT,,CHAR,EXTERNAL_REQUIREMENTS_PLAN_ID,Ext. Req. Plan
+PBIM,Independent Requirements for Material,SGT_RCAT,,CHAR,REQUIREMENT_SEGMENT,Reqmnt Segment

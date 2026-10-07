@@ -1,0 +1,273 @@
+models:
+- name: SILVER__TEA_TECHNICAL_SUPPORT__TIRS_ACCIDENTREPORTSFORUS_NOLOCK
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__TIRS_ACCIDENTWORKFLOWPROGRESSFORUS_NOLOCK
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__CRM_ACCOUNT
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__SAPH_BUSINESS_PARTNERS_GENERAL_DATA
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__CRM_CHAMBER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__ROSETTA_CONSIGNMENT_TRANSACTION
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__SAPH_CONTRACTS_MASTER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__CRM_CONTRACT_SUMMARY_DETAILS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__CRM_CONTRACT_SUMMARY_PURCHASE_ORDER_DETAILS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__CRM_COST_CENTER_GROUP
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__D_EMPLOYEE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__TEACOMMON_EMPLOYEE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__CRM_FAB_LINE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__GLOBAL_EMPLOYEE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__WISDOM_MACHINES_MONTHLY_INSTALL_BASE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__WISDOM_MAC_MAIN
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__SAPH_MATERIAL_PLANT_MASTER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__MDM_COMPANY
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__CRM_MODEL
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__MYSKILLS_COMPANY
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__CRM_OPPORTUNITY_LEGACY
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__CRM_OPPORTUNITY_ONPRE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__CRM_OPTIONSET_METADATA
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__CRM_ORDER_TYPE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__SAPH_PURCHASE_ORDER_DELIVERY_LINE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__CRM_SALES_COM_COUNTRYMASTER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__SALES_CRM_ACCOUNT
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__SALES_CRM_BUSINESS_UNIT
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__SALES_CRM_CONFIDENCE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__SALES_CRM_COUNTRY
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__SALES_CRM_FAB
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__SALES_CRM_MODEL
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__SALES_CRM_OPPORTUNITIES
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__SALES_CRM_ORDER_TYPE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__SALES_CRM_SALES_DISTRICT
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__SALES_CRM_SALES_ORGANIZATION
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__SALES_CRM_SALES_REGION
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__CRM_SALES_DISTRICT
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__CRM_SALES_GLOBALOPTIONSETMETADATA
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__CRM_SALES_OPTIONSETMETADATA
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__SAPH_SALES_ORDER_BILLING_LINE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__SAPH_SALES_ORDER_BILLING_PLAN
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__SAPH_SALES_ORDER_DELIVERY_LINE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__SAPH_SALES_ORDER_MASTER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__SAPH_SALES_ORDER_SCHEDULE_LINE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__CRM_SALES_ORGANIZATION
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__CRM_SALES_SM_INVESTMENT_MAP
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__CRM_SALES_SYSTEMUSER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__CRM_SALES_TEL_COM_SALESORDERHEADER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__CRM_SALES_TEL_SM_OPPORTUNITY_GROUP
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__CRM_SALES_TEL_SM_WAFER_SIZE_GENERATION
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__WISDOM_SAP_SURB
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__SAPH_SERVICE_B_CODE_MAPPING
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__SHARED_DATASETS_COMPANY
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__WISDOM_TEA_MAC_LIST
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__TEL_SALES_CRM_PRODUCT_SHIPMENT_FORECAST_NORTH_AMERICA
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__CRM_TRANSACTIONCURRENCY
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__CRM_TSC_US_CASE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__WISDOM_ES_MAC_US
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__WISDOM_SURB_PROGRESS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__WORKDAY_WORKERCOMPANYLIST
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__CRM_WORKORDER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__CRM_WORKORDER_ACTIVITY
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__CRM_WORKORDER_ESCALATION
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__CRM_WORKORDER_ESCALATION_HISTORY
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__CRM_WORKORDER_R2
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__CRM_WORKORDER_TIMEENTRY
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_TECHNICAL_SUPPORT__CRM_WO_SUMMARY_DETAILS
+  tests:
+  - has_data
+  - recently_run

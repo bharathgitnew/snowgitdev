@@ -1,0 +1,22 @@
+version: 2
+sources:
+- name: KANBANIZE
+  description: Landing Zone - KANBANIZE Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: KANBANIZE
+  tables:
+  - name: CARDS
+    identifier: CARDS
+    description: Landing table for card entities.
+  - name: CUSTOMFIELDS
+    identifier: CUSTOMFIELDS
+    description: Landing table for custom field entities.
+  - name: CUSTOMFIELDS_VALUES
+    identifier: CUSTOMFIELDS_VALUES
+    description: Landing table for values of custom field entities.
+  - name: USERS
+    identifier: USERS
+    description: Landing table for user entities.
+  - name: TAGS
+    identifier: TAGS
+    description: Landing table for tag entities.

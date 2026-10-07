@@ -1,0 +1,11 @@
+{
+  "OUTSYSTEMS-ISID": {
+    "DataSet1": {
+      "schema": "dbo",
+      "table": "v_bulkbilling_list",
+      "Incremental": "NULL",
+      "sftablename": "BULKBILLING_LIST",
+      "filter": ""
+    }
+  }
+}

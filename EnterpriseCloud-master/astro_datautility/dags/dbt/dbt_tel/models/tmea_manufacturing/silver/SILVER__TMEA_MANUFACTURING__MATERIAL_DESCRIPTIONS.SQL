@@ -1,0 +1,48 @@
+{{ config(
+    materialized='tel_incremental',
+    incremental_strategy='merge',
+    alias='MATERIAL_DESCRIPTIONS',
+    unique_key = ['CLIENT',
+    'MATERIAL_NUMBER',
+    'LANGUAGE_KEY']
+) }}
+
+with source_data as
+(
+    SELECT
+		MANDT  AS CLIENT ,
+		MATNR  AS MATERIAL_NUMBER ,
+		SPRAS  AS LANGUAGE_KEY ,
+		MAKTX  AS MATERIAL_DESCRIPTION ,
+		MAKTG  AS MATERIAL_DESCRIPTION_MATCHCODES ,
+        _CAPTUREDATETIME
+        FROM {{ ref('BRONZE__TMEA_MANUFACTURING__SAPO_MATERIAL_DESCRIPTIONS') }}
+        
+        )
+,transform_data as
+(
+    SELECT
+        '{{ invocation_id }}' AS _AUDIT_LOG_ID,
+        SHA2('hash_me') as _ROW_HASH,
+		_CAPTUREDATETIME,
+		CLIENT  AS CLIENT ,
+		MATERIAL_NUMBER  AS MATERIAL_NUMBER ,
+		LANGUAGE_KEY  AS LANGUAGE_KEY ,
+		MATERIAL_DESCRIPTION  AS MATERIAL_DESCRIPTION ,
+		MATERIAL_DESCRIPTION_MATCHCODES  AS MATERIAL_DESCRIPTION_MATCHCODES  -- Adds column to table on full refresh.
+        FROM source_data
+        )
+,type_data as 
+(
+    select
+        cast(_AUDIT_LOG_ID as varchar(128)) as _AUDIT_LOG_ID,
+		cast(_ROW_HASH as varchar(128)) as _ROW_HASH,
+		cast(_CAPTUREDATETIME as TIMESTAMP_LTZ(9)) as _CAPTUREDATETIME,
+		cast( CLIENT  AS VARCHAR(16777216))  AS CLIENT ,
+		cast( MATERIAL_NUMBER  AS VARCHAR(16777216))  AS MATERIAL_NUMBER ,
+		cast( LANGUAGE_KEY  AS VARCHAR(16777216))  AS LANGUAGE_KEY ,
+		cast( MATERIAL_DESCRIPTION  AS VARCHAR(16777216))  AS MATERIAL_DESCRIPTION ,
+		cast( MATERIAL_DESCRIPTION_MATCHCODES  AS VARCHAR(16777216))  AS MATERIAL_DESCRIPTION_MATCHCODES 
+    from transform_data
+    )
+select * from type_data

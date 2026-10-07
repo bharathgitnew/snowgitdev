@@ -1,0 +1,77 @@
+{{ config(
+        materialized='incremental',
+        incremental_strategy='merge',
+        alias='MATERIAL_MASTER_STORAGE_LOCATION_SEGMENT_HISTORY',
+        unique_key = ['Client',
+    'Material_Number',
+    'Plant',
+    'Storage_Location',
+    'Fiscal_Year_of_Current_Period',
+    'Current_period'],
+        transient=false
+) }} 
+
+with source_data as (
+    select
+        MANDT as CLIENT,
+        MATNR as MATERIAL_NUMBER,
+        WERKS as PLANT,
+        LGORT as STORAGE_LOCATION,
+        LFGJA as FISCAL_YEAR_OF_CURRENT_PERIOD,
+        LFMON as CURRENT_PERIOD,
+        LABST as VALUATED_UNRESTRICTED_USE_STOCK,
+        UMLME as STOCK_IN_TRANSFER,
+        INSME as STOCK_IN_QUALITY_INSPECTION,
+        EINME as TOTAL_STOCK_OF_ALL_RESTRICTED_BATCHES,
+        SPEME as BLOCKED_STOCK,
+        RETME as BLOCKED_STOCK_RETURNS,
+        VKLAB as STOCK_VALUE_OF_A_VALUE_ONLY_MATERIAL_AT_SALES_PRICE,
+        VKUML as SALES_VALUE_IN_STOCK_TRANSFER,
+        _CAPTUREDATETIME
+    FROM {{ ref('ODS__SAPO__MATERIAL_MASTER_STORAGE_LOCATION_SEGMENT_HISTORY') }}
+),
+
+transform_data as (
+    select
+        CLIENT,
+        MATERIAL_NUMBER,
+        PLANT,
+        STORAGE_LOCATION,
+        FISCAL_YEAR_OF_CURRENT_PERIOD,
+        CURRENT_PERIOD,
+        VALUATED_UNRESTRICTED_USE_STOCK,
+        STOCK_IN_TRANSFER,
+        STOCK_IN_QUALITY_INSPECTION,
+        TOTAL_STOCK_OF_ALL_RESTRICTED_BATCHES,
+        BLOCKED_STOCK,
+        BLOCKED_STOCK_RETURNS,
+        STOCK_VALUE_OF_A_VALUE_ONLY_MATERIAL_AT_SALES_PRICE,
+        SALES_VALUE_IN_STOCK_TRANSFER,
+        _CAPTUREDATETIME,
+        '{{ invocation_id }}' AS AUDIT_LOG_ID,
+        SHA2('hash_me') as _ROW_HASH
+    FROM source_data
+),
+
+type_data as (
+    select
+        cast(CLIENT as VARCHAR) as CLIENT,
+        cast(MATERIAL_NUMBER as VARCHAR) as MATERIAL_NUMBER,
+        cast(PLANT as VARCHAR) as PLANT,
+        cast(STORAGE_LOCATION as VARCHAR) as STORAGE_LOCATION,
+        cast(FISCAL_YEAR_OF_CURRENT_PERIOD as VARCHAR) as FISCAL_YEAR_OF_CURRENT_PERIOD,
+        cast(CURRENT_PERIOD as VARCHAR) as CURRENT_PERIOD,
+        cast(VALUATED_UNRESTRICTED_USE_STOCK as NUMBER(38,10)) as VALUATED_UNRESTRICTED_USE_STOCK,
+        cast(STOCK_IN_TRANSFER as NUMBER(38,10)) as STOCK_IN_TRANSFER,
+        cast(STOCK_IN_QUALITY_INSPECTION as NUMBER(38,10)) as STOCK_IN_QUALITY_INSPECTION,
+        cast(TOTAL_STOCK_OF_ALL_RESTRICTED_BATCHES as NUMBER(38,10)) as TOTAL_STOCK_OF_ALL_RESTRICTED_BATCHES,
+        cast(BLOCKED_STOCK as NUMBER(38,10)) as BLOCKED_STOCK,
+        cast(BLOCKED_STOCK_RETURNS as NUMBER(38,10)) as BLOCKED_STOCK_RETURNS,
+        cast(STOCK_VALUE_OF_A_VALUE_ONLY_MATERIAL_AT_SALES_PRICE as NUMBER(38,10)) as STOCK_VALUE_OF_A_VALUE_ONLY_MATERIAL_AT_SALES_PRICE,
+        cast(SALES_VALUE_IN_STOCK_TRANSFER as NUMBER(38,10)) as SALES_VALUE_IN_STOCK_TRANSFER,
+        cast(_CAPTUREDATETIME as TIMESTAMP_LTZ(9)) as _CAPTUREDATETIME,
+        cast(AUDIT_LOG_ID as varchar(128)) as AUDIT_LOG_ID,
+        cast(_ROW_HASH as varchar(128)) as _ROW_HASH
+    from transform_data
+)
+select * from type_data

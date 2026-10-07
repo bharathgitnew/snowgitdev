@@ -1,0 +1,37 @@
+models:
+- name: GOLD__TEH_PROCUREMENT__ARIBA_INDIRECT_PURCHASE_ORDER_INFORMATION
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_PROCUREMENT__DIVERSE_SUPPLIER
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_PROCUREMENT__RECEIPTS_COMPARISON_ARIBA_S4
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_PROCUREMENT__VENDOR_MASTER
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_PROCUREMENT__SUPPLIERS
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_PROCUREMENT__BLOCKED_INVOICES
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_PROCUREMENT__INDIRECT_PURCHASE_GR_NI_REPORT
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_PROCUREMENT__PURCHASE_ORDER_BASE
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_PROCUREMENT__PURCHASE_ORDERS
+  tests:
+  - has_data
+  - recently_run

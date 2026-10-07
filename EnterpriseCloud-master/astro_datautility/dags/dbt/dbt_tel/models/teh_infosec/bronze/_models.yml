@@ -1,0 +1,1113 @@
+﻿models:
+- name: BRONZE__TEH_INFOSEC__FILE_FST_EMPLOYEE_GROUP
+  description: |
+    PURPOSE: Captures the latest FST employee-group mapping file used for support routing and regional manager lookups.
+    GRAIN: One row per FST supervisor and employee-group mapping record.
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILENAME
+    description: Source file name captured from the inbound extract. Text file name. Used for lineage and load tracing.
+  - name: _FILEDATE
+    description: Source file date for the snapshot row. Date or timestamp format. Used to identify the reporting cut.
+  - name: _AUDIT_LOG_ID
+    description: dbt run identifier captured for lineage and troubleshooting. Text identifier format. Used to link rows to a specific execution.
+  - name: _ROW_HASH
+    description: Deterministic row hash used to detect changes between loads. Text hash format. Not intended for business reporting.
+  - name: _UPLOADDATE
+    description: Source upload timestamp captured with the file landing event. Timestamp format. Used to track when the extract arrived.
+  - name: FSTSUPERVISORID
+    description: FST supervisor identifier from the source mapping file. Text identifier format. Used to link the group assignment back to the manager.
+  - name: FSTSUPERVISORNAME
+    description: FST supervisor display name from the source mapping file. Text value. Used for human-readable routing and reporting.
+  - name: FSTEMPLOYEEGROUP
+    description: FST employee group label from the source mapping file. Text value. Used to map employees into the right support group.
+  - name: REGIONALSERVICEMANAGERID
+    description: Regional service manager identifier from the source mapping file. Text identifier format. Used to resolve the regional ownership chain.
+  - name: RSMFLAG
+    description: Regional service manager indicator from the source mapping file. Yes/no style flag. Used to distinguish manager-level rows.
+  - name: REGIONALSERVICEMANAGER
+    description: Regional service manager display name from the source mapping file. Text value. Used for human-readable ownership views.
+- name: BRONZE__TEH_INFOSEC__KNOWBE4_REPORTING_ACCCOUNT_RISK_SCORE_HISTORY
+  description: |
+    PURPOSE: Captures KnowBe4 account risk score history for phishing exposure trending.
+    GRAIN: One row per risk score observation date and score value.
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILENAME
+    description: Source file name captured from the inbound extract. Text file name. Used for lineage and load tracing.
+  - name: _FILEDATE
+    description: Source file date for the snapshot row. Date or timestamp format. Used to identify the reporting cut.
+  - name: _AUDIT_LOG_ID
+    description: dbt run identifier captured for lineage and troubleshooting. Text identifier format. Used to link rows to a specific execution.
+  - name: _ROW_HASH
+    description: Deterministic row hash used to detect changes between loads. Text hash format. Not intended for business reporting.
+  - name: RISK_SCORE_DATE
+    description: Date when the KnowBe4 account risk score was captured. DATE format. Used for trend analysis.
+  - name: RISK_SCORE
+    description: KnowBe4 account risk score. Numeric score. Higher values indicate greater phishing exposure.
+- name: BRONZE__TEH_INFOSEC__KNOWBE4_REPORTING_ACCOUNT
+  description: |
+    PURPOSE: Captures KnowBe4 account records with admin-level subscription details for security reporting.
+    GRAIN: One row per KnowBe4 account and admin user pairing in the export.
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILENAME
+    description: Source file name captured from the inbound extract. Text file name. Used for lineage and load tracing.
+  - name: _FILEDATE
+    description: Source file date for the snapshot row. Date or timestamp format. Used to identify the reporting cut.
+  - name: _AUDIT_LOG_ID
+    description: dbt run identifier captured for lineage and troubleshooting. Text identifier format. Used to link rows to a specific execution.
+  - name: _ROW_HASH
+    description: Deterministic row hash used to detect changes between loads. Text hash format. Not intended for business reporting.
+  - name: ACCOUNT_NAME
+    description: KnowBe4 account name from the reporting export. Text value. Used to identify the tenant subscription.
+  - name: NUMBER_OF_SEATS
+    description: Licensed seat count for the KnowBe4 account. Numeric value. Used to compare subscription size.
+  - name: SUBSCRIPTION_END_DATE
+    description: Subscription end date for the KnowBe4 account. DATE format. Used to spot expiring licenses.
+  - name: SUBSCRIPTION_LEVEL
+    description: Subscription tier assigned to the KnowBe4 account. Text value. Used to distinguish license packages.
+  - name: ACCOUNT_TYPE
+    description: KnowBe4 account type from the reporting export. Text value. Used to separate account classifications.
+  - name: ACCOUNT_DOMAINS
+    description: Domain list associated with the KnowBe4 account. Text value. Used to describe protected email domains.
+  - name: CURRENT_RISK_SCORE
+    description: Current KnowBe4 risk score for the account. Numeric score. Higher values indicate greater phishing exposure.
+  - name: EMAIL
+    description: Administrator email address tied to the account. Text email format. Used to identify the account contact.
+  - name: FIRST_NAME
+    description: Administrator first name from the account export. Text value. Used for display and contact matching.
+  - name: ID
+    description: Administrator identifier from the KnowBe4 account export. Text identifier format. Used as the row-level admin key.
+  - name: LAST_NAME
+    description: Administrator last name from the account export. Text value. Used for display and contact matching.
+- name: BRONZE__TEH_INFOSEC__KNOWBE4_REPORTING_GROUPS
+  description: |
+    PURPOSE: Captures KnowBe4 group records used for phish-prone and membership reporting.
+    GRAIN: One row per KnowBe4 group snapshot record.
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILENAME
+    description: Source file name captured from the inbound extract. Text file name. Used for lineage and load tracing.
+  - name: _FILEDATE
+    description: Source file date for the snapshot row. Date or timestamp format. Used to identify the reporting cut.
+  - name: _AUDIT_LOG_ID
+    description: dbt run identifier captured for lineage and troubleshooting. Text identifier format. Used to link rows to a specific execution.
+  - name: _ROW_HASH
+    description: Deterministic row hash used to detect changes between loads. Text hash format. Not intended for business reporting.
+  - name: ID
+    description: KnowBe4 group identifier from the reporting export. Text identifier format. Used as the row key.
+  - name: NAME
+    description: KnowBe4 group name from the reporting export. Text value. Used in reporting and user assignment views.
+  - name: STATUS
+    description: Current KnowBe4 group status. Status indicator. Used to distinguish active and inactive groups.
+  - name: GROUP_TYPE
+    description: KnowBe4 group type from the reporting export. Text value. Used to distinguish group classifications.
+  - name: CURRENT_RISK_SCORE
+    description: Current risk score for the group. Numeric score. Higher values indicate greater phishing exposure.
+- name: BRONZE__TEH_INFOSEC__KNOWBE4_REPORTING_PHISHING_CAMPAIGNS
+  description: |
+    PURPOSE: Captures KnowBe4 phishing campaign records expanded by group and PST context.
+    GRAIN: One row per phishing campaign, group, and PST combination.
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILENAME
+    description: Source file name captured from the inbound extract. Text file name. Used for lineage and load tracing.
+  - name: _FILEDATE
+    description: Source file date for the snapshot row. Date or timestamp format. Used to identify the reporting cut.
+  - name: _AUDIT_LOG_ID
+    description: dbt run identifier captured for lineage and troubleshooting. Text identifier format. Used to link rows to a specific execution.
+  - name: _ROW_HASH
+    description: Deterministic row hash used to detect changes between loads. Text hash format. Not intended for business reporting.
+  - name: CAMPAIGN_ID
+    description: KnowBe4 phishing campaign identifier. Text identifier format. Used to group the campaign events.
+  - name: NAME
+    description: Phishing campaign name from the reporting export. Text value. Used in dashboard labels.
+  - name: CREATE_DATE
+    description: Phishing campaign creation date. DATE format. Used to place the campaign on the timeline.
+  - name: DIFFICULTY_FILTER
+    description: Difficulty filter applied to the campaign. Text value. Used to describe targeting rules.
+  - name: FREQUENCY
+    description: Campaign sending frequency. Text value. Used to describe how often the campaign runs.
+  - name: HIDDEN
+    description: Hidden campaign indicator. Yes/no style flag. Used to show whether the campaign is visible in standard views.
+  - name: GROUP_ID
+    description: Target group identifier for the campaign. Text identifier format. Used to link the campaign to a user group.
+  - name: GROUP_NAME
+    description: Target group name for the campaign. Text value. Used in reporting and audience analysis.
+  - name: LAST_RUN
+    description: Last campaign run timestamp. Timestamp format. Used to show when the latest send occurred.
+  - name: LAST_PHISH_PRONE_PERCENTAGE
+    description: Last recorded phish-prone percentage for the campaign audience. Percentage value. Used to compare audience susceptibility.
+  - name: STATUS
+    description: Current campaign status. Status indicator. Used to show whether the campaign is active, completed, or paused.
+  - name: SEND_DURATION
+    description: Campaign send duration. Numeric duration value. Used to measure how long delivery took.
+  - name: TRACK_DURATION
+    description: Campaign tracking duration. Numeric duration value. Used to measure how long follow-up tracking stayed open.
+  - name: PST_ID
+    description: Phishing simulation test identifier linked to the campaign. Text identifier format. Used to trace the test instance.
+  - name: PST_START_DATE
+    description: Phishing simulation test start date. DATE format. Used to place the test on the timeline.
+  - name: PST_STATUS
+    description: Status of the phishing simulation test. Status indicator. Used to show test progression.
+  - name: PST_PHISH_PRONE_PERCENTAGE
+    description: Phish-prone percentage recorded for the test audience. Percentage value. Used to compare susceptibility across tests.
+  - name: PSTS_COUNT
+    description: Count of phishing simulation tests attached to the campaign. Numeric count. Used to show campaign coverage.
+- name: BRONZE__TEH_INFOSEC__KNOWBE4_REPORTING_PHISHING_SECURITY_TESTS
+  description: |
+    PURPOSE: Captures KnowBe4 phishing security test results with landing-page and category detail.
+    GRAIN: One row per security test, category, and group combination.
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILENAME
+    description: Source file name captured from the inbound extract. Text file name. Used for lineage and load tracing.
+  - name: _FILEDATE
+    description: Source file date for the snapshot row. Date or timestamp format. Used to identify the reporting cut.
+  - name: _AUDIT_LOG_ID
+    description: dbt run identifier captured for lineage and troubleshooting. Text identifier format. Used to link rows to a specific execution.
+  - name: _ROW_HASH
+    description: Deterministic row hash used to detect changes between loads. Text hash format. Not intended for business reporting.
+  - name: CAMPAIGN_ID
+    description: Campaign identifier linked to the security test. Text identifier format. Used to join the test back to the campaign.
+  - name: NAME
+    description: Security test name from the reporting export. Text value. Used as the display label.
+  - name: STARTED_AT
+    description: Test start timestamp. Timestamp format. Used to mark when the simulation began.
+  - name: STATUS
+    description: Current test status. Status indicator. Used to show whether the simulation is active or completed.
+  - name: TEMPLATE_DIFFICULTY
+    description: Template difficulty used for the test. Text value. Used to describe how hard the phish was to spot.
+  - name: TEMPLATE_ID
+    description: Template identifier used for the test. Text identifier format. Used to trace the message template.
+  - name: TEMPLATE_NAME
+    description: Template name used for the test. Text value. Used in reporting.
+  - name: TEMPLATE_TYPE
+    description: Template type used for the test. Text value. Used to classify the message format.
+  - name: LANDING_PAGE_ID
+    description: Landing page identifier used in the test. Text identifier format. Used to trace the simulated page.
+  - name: LANDING_PAGE_NAME
+    description: Landing page name used in the test. Text value. Used in reporting.
+  - name: CATEGORY_ID
+    description: Category identifier for the security test. Text identifier format. Used to group tests by category.
+  - name: CATEGORY_NAME
+    description: Category name for the security test. Text value. Used in security awareness reporting.
+  - name: GROUP_ID
+    description: Target group identifier for the test. Text identifier format. Used to link the test to the audience group.
+  - name: GROUP_NAME
+    description: Target group name for the test. Text value. Used in reporting and audience analysis.
+  - name: PST_ID
+    description: Phishing simulation test identifier. Text identifier format. Used as the test key.
+  - name: PHISH_PRONE_PERCENTAGE
+    description: Phish-prone percentage for the test audience. Percentage value. Used to measure susceptibility.
+  - name: ATTACHMENT_OPEN_COUNT
+    description: Attachment open count recorded for the test. Numeric count. Used to measure interaction with attached files.
+  - name: BOUNCED_COUNT
+    description: Bounced count for the test send. Numeric count. Used to show delivery failures.
+  - name: CLICKED_COUNT
+    description: Clicked count recorded for the test. Numeric count. Used to measure user interaction with the phishing email.
+  - name: DATA_ENTERED_COUNT
+    description: Data entered count recorded for the test. Numeric count. Used to measure form-submission responses.
+  - name: DELIVERED_COUNT
+    description: Delivered count recorded for the test. Numeric count. Used to show successful email delivery.
+  - name: DURATION
+    description: Test duration. Numeric duration value. Used to show how long the simulation stayed active.
+  - name: MACRO_ENABLED_COUNT
+    description: Macro enabled count recorded for the test. Numeric count. Used to measure macro-related responses.
+  - name: OPENED_COUNT
+    description: Opened count recorded for the test. Numeric count. Used to measure email opens.
+  - name: QR_CODE_SCANNED_COUNT
+    description: QR code scanned count recorded for the test. Numeric count. Used to measure QR-based interaction.
+  - name: REPLIED_COUNT
+    description: Replied count recorded for the test. Numeric count. Used to measure user replies.
+  - name: REPORTED_COUNT
+    description: Reported count recorded for the test. Numeric count. Used to measure user-reported phishing responses.
+  - name: SCHEDULED_COUNT
+    description: Scheduled count recorded for the test. Numeric count. Used to measure audience scheduling coverage.
+- name: BRONZE__TEH_INFOSEC__KNOWBE4_REPORTING_PHISHING_SECURITY_TESTS_RECIPIENTS
+  description: |
+    PURPOSE: Captures recipient-level KnowBe4 phishing test results for user response analysis.
+    GRAIN: One row per recipient interaction within a phishing test PST.
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILENAME
+    description: Source file name captured from the inbound extract. Text file name. Used for lineage and load tracing.
+  - name: _FILEDATE
+    description: Source file date for the snapshot row. Date or timestamp format. Used to identify the reporting cut.
+  - name: _AUDIT_LOG_ID
+    description: dbt run identifier captured for lineage and troubleshooting. Text identifier format. Used to link rows to a specific execution.
+  - name: _ROW_HASH
+    description: Deterministic row hash used to detect changes between loads. Text hash format. Not intended for business reporting.
+  - name: PST_ID
+    description: Phishing simulation test identifier. Text identifier format. Used to connect the recipient to the test.
+  - name: RECIPIENT_ID
+    description: Recipient identifier from the phishing export. Text identifier format. Used as the row key.
+  - name: TEMPLATE_ID
+    description: Template identifier used for the recipient test. Text identifier format. Used to trace the message template.
+  - name: TEMPLATE_NAME
+    description: Template name used for the recipient test. Text value. Used in reporting.
+  - name: TEMPLATE_TYPE
+    description: Template type used for the recipient test. Text value. Used to classify the message format.
+  - name: TEMPLATE_DIFFICULTY
+    description: Template difficulty used for the recipient test. Text value. Used to describe how hard the phish was to spot.
+  - name: SCHEDULED_AT
+    description: Timestamp when the test was scheduled for the recipient. Timestamp format. Used to show intended send timing.
+  - name: USER_PROVISIONING_GUID
+    description: Provisioning GUID for the recipient user. GUID format. Used to link the test record to identity provisioning.
+  - name: USER_ID
+    description: Recipient user identifier from the export. Text identifier format. Used as the user key.
+  - name: USER_FIRST_NAME
+    description: Recipient first name from the test export. Text value. Used for display and matching.
+  - name: USER_LAST_NAME
+    description: Recipient last name from the test export. Text value. Used for display and matching.
+  - name: USER_EMAIL
+    description: Recipient email address from the test export. Text email format. Used to identify the user.
+  - name: DELIVERED_AT
+    description: Timestamp when the phishing message was delivered to the recipient. Timestamp format. Used for response timing.
+  - name: OPENED_AT
+    description: Timestamp when the recipient opened the phishing message. Timestamp format. Used for engagement timing.
+  - name: REPORTED_AT
+    description: Timestamp when the recipient reported the message. Timestamp format. Used to measure reporting speed.
+  - name: BROWSER
+    description: Browser used by the recipient. Text value. Used for response analysis.
+  - name: BROWSER_VERSION
+    description: Browser version used by the recipient. Text value. Used for response analysis.
+  - name: CLICKED_AT
+    description: Timestamp when the recipient clicked the phishing content. Timestamp format. Used for response timing.
+  - name: IP
+    description: IP address observed for the recipient response. IP address format. Used for forensic tracing.
+  - name: IP_LOCATION
+    description: Geographic location inferred from the IP address. Text location value. Used for response analysis.
+  - name: OPERATING_SYSTEM
+    description: Operating system used by the recipient. Text value. Used for response analysis.
+- name: BRONZE__TEH_INFOSEC__KNOWBE4_REPORTING_USERS
+  description: |
+    PURPOSE: Captures KnowBe4 user records for account risk and awareness reporting.
+    GRAIN: One row per KnowBe4 user snapshot record.
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILENAME
+    description: Source file name captured from the inbound extract. Text file name. Used for lineage and load tracing.
+  - name: _FILEDATE
+    description: Source file date for the snapshot row. Date or timestamp format. Used to identify the reporting cut.
+  - name: _AUDIT_LOG_ID
+    description: dbt run identifier captured for lineage and troubleshooting. Text identifier format. Used to link rows to a specific execution.
+  - name: _ROW_HASH
+    description: Deterministic row hash used to detect changes between loads. Text hash format. Not intended for business reporting.
+  - name: ID
+    description: KnowBe4 user identifier. Text identifier format. Used as the row key.
+  - name: EMPLOYEE_NUMBER
+    description: Employee number from the KnowBe4 user export. Text identifier format. Used to match HR records.
+  - name: FIRST_NAME
+    description: User first name from the KnowBe4 export. Text value. Used for display and matching.
+  - name: LAST_NAME
+    description: User last name from the KnowBe4 export. Text value. Used for display and matching.
+  - name: EMAIL
+    description: User email address from the KnowBe4 export. Text email format. Used as the contact key.
+  - name: JOB_TITLE
+    description: User job title from the KnowBe4 export. Text value. Used for role reporting.
+  - name: DEPARTMENT
+    description: Department assigned to the KnowBe4 user. Text value. Used for organizational reporting.
+  - name: DIVISION
+    description: Division assigned to the KnowBe4 user. Text value. Used for organizational reporting.
+  - name: EMPLOYMENT_START_DATE
+    description: Employment start date for the KnowBe4 user. DATE format. Used for tenure reporting.
+  - name: ORGANIZATION
+    description: Organization assigned to the user. Text value. Used for company reporting.
+  - name: LOCATION
+    description: Location assigned to the user. Text value. Used for geographic reporting.
+  - name: MOBILE_PHONE_NUMBER
+    description: Mobile phone number from the KnowBe4 user export. Text phone format. Used for contact lookup.
+  - name: GROUPS
+    description: Group membership list for the user. Text value. Used to show KnowBe4 assignments.
+  - name: JOINED_ON
+    description: Date when the user joined KnowBe4. DATE format. Used for onboarding reporting.
+  - name: MANAGER_NAME
+    description: Manager name from the user export. Text value. Used for display and reporting.
+  - name: MANAGER_EMAIL
+    description: Manager email address from the user export. Text email format. Used for reporting chains.
+  - name: CURRENT_RISK_SCORE
+    description: Current KnowBe4 risk score for the user. Numeric score. Higher values indicate greater phishing exposure.
+  - name: COMMENT
+    description: Free-text comment attached to the KnowBe4 user record. Text note. Used for admin context.
+  - name: ARCHIVED_AT
+    description: Timestamp when the user record was archived. Timestamp format. Used to separate active and archived users.
+  - name: ALIASES
+    description: Alias list for the KnowBe4 user. Text value. Used to show alternate account names.
+  - name: PHISH_PRONE_PERCENTAGE
+    description: Phish-prone percentage for the user. Percentage value. Used to measure phishing susceptibility.
+  - name: PHONE_NUMBER
+    description: Phone number from the KnowBe4 user export. Text phone format. Used for contact lookup.
+  - name: PROVISIONING_GUID
+    description: Provisioning GUID for the user. GUID format. Used to link the record to identity provisioning.
+  - name: PROVISIONING_MANAGED
+    description: Provisioning-managed indicator for the user. Yes/no style flag. Used to show if the account is managed.
+  - name: STATUS
+    description: Current user status in KnowBe4. Status indicator. Used to distinguish active and archived users.
+  - name: CUSTOM_FIELD1
+    description: First custom field from the KnowBe4 user export. Text value. Used for tenant-specific tagging.
+  - name: CUSTOM_FIELD2
+    description: Second custom field from the KnowBe4 user export. Text value. Used for tenant-specific tagging.
+- name: BRONZE__TEH_INFOSEC__SHAREPOINT_ORACLE_DEPARTMENT
+  description: |
+    PURPOSE: Captures the SharePoint Oracle-to-SAP department mapping used by InfoSec reference joins.
+    GRAIN: One row per Oracle and SAP department mapping entry.
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILENAME
+    description: Source file name captured from the inbound extract. Text file name. Used for lineage and load tracing.
+  - name: _FILEDATE
+    description: Source file date for the snapshot row. Date or timestamp format. Used to identify the reporting cut.
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 24
+  - name: _AUDIT_LOG_ID
+    description: dbt run identifier captured for lineage and troubleshooting. Text identifier format. Used to link rows to a specific execution.
+  - name: _ROW_HASH
+    description: Deterministic row hash used to detect changes between loads. Text hash format. Not intended for business reporting.
+  - name: ORACLE_CODE
+    description: Oracle department code from the SharePoint mapping file. Text code format. Used as the source-side department key.
+  - name: ORACLE_NAME
+    description: Oracle department name from the SharePoint mapping file. Text value. Used to show the source department label.
+  - name: SAP_CODE
+    description: SAP department code from the SharePoint mapping file. Text code format. Used as the target-side department key.
+  - name: SAP_NAME
+    description: SAP department name from the SharePoint mapping file. Text value. Used to show the mapped SAP department label.
+  - name: CREATED
+    description: Creation timestamp from the SharePoint mapping file. Text timestamp format. Used to trace when the mapping was added.
+  - name: MODIFIED
+    description: Last modified timestamp from the SharePoint mapping file. Text timestamp format. Used to show when the mapping changed.
+  - name: CREATEDBY
+    description: Creator email address for the mapping record. Text email format. Used for audit traceability.
+  - name: MODIFIEDBY
+    description: Modifier email address for the mapping record. Text email format. Used for audit traceability.
+- name: BRONZE__TEH_INFOSEC__SHAREPOINT_SERVICE_BUSINESS_UNIT_MAPPING
+  description: |
+    PURPOSE: Captures the SharePoint business-unit mapping used to resolve service ownership and legacy BU labels.
+    GRAIN: One row per business-unit mapping entry from SharePoint.
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILENAME
+    description: Source file name captured from the inbound extract. Text file name. Used for lineage and load tracing.
+  - name: _FILEDATE
+    description: Source file date for the snapshot row. Date or timestamp format. Used to identify the reporting cut.
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 24
+  - name: _AUDIT_LOG_ID
+    description: dbt run identifier captured for lineage and troubleshooting. Text identifier format. Used to link rows to a specific execution.
+  - name: _ROW_HASH
+    description: Deterministic row hash used to detect changes between loads. Text hash format. Not intended for business reporting.
+  - name: _UPLOADDATE
+    description: Source upload timestamp captured with the file landing event. Timestamp format. Used to track when the extract arrived.
+  - name: BU_SOURCE_KEY
+    description: Business-unit source key from the SharePoint mapping file. Text identifier format. Used as the upstream mapping key.
+  - name: LEGACY_BU
+    description: Legacy business-unit label from the SharePoint mapping file. Text value. Used to preserve older naming.
+  - name: BU_GROUP
+    description: Business-unit group label from the SharePoint mapping file. Text value. Used for reporting rollups.
+  - name: BU_GROUP_LEADER
+    description: Business-unit group leader name from the SharePoint mapping file. Text value. Used for ownership reporting.
+  - name: BU_GROUP_LEADER_ID
+    description: Business-unit group leader identifier from the SharePoint mapping file. Text identifier format. Used to link to the owner record.
+  - name: SERVICE_SEGMENT_CODE_ORACLE
+    description: Oracle service-segment code from the SharePoint mapping file. Text code format. Used for source-system alignment.
+  - name: SERVICE_COST_CENTER
+    description: Service cost center from the SharePoint mapping file. Text code format. Used for financial grouping.
+  - name: BU_GROUP2
+    description: Secondary business-unit group label from the SharePoint mapping file. Text value. Used when the primary group label is not sufficient.
+- name: BRONZE__TEH_INFOSEC__TEACOMMON_DEPARTMENTS
+  description: |
+    PURPOSE: Captures the TEACommon department reference used for employee and location enrichment.
+    GRAIN: One row per department code in the TEACommon reference.
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILENAME
+    description: Source file name captured from the inbound extract. Text file name. Used for lineage and load tracing.
+  - name: _FILEDATE
+    description: Source file date for the snapshot row. Date or timestamp format. Used to identify the reporting cut.
+  - name: _AUDIT_LOG_ID
+    description: dbt run identifier captured for lineage and troubleshooting. Text identifier format. Used to link rows to a specific execution.
+  - name: _ROW_HASH
+    description: Deterministic row hash used to detect changes between loads. Text hash format. Not intended for business reporting.
+  - name: COMPANYID
+    description: Company identifier from the TEACommon department reference. Text code format. Used to group departments by legal entity.
+  - name: DEPTCODE
+    description: Department code from the TEACommon reference. Text code format. Used as the department key.
+  - name: DESCRIPTION
+    description: Department description from the TEACommon reference. Text value. Used as the readable department label.
+  - name: ABBREVIATION
+    description: Department abbreviation from the TEACommon reference. Text value. Used for compact display and reporting.
+- name: BRONZE__TEH_INFOSEC__TEACOMMON_EMPLOYEE
+  description: |
+    PURPOSE: Captures the TEACommon employee master snapshot used for workforce and identity reporting.
+    GRAIN: One row per employee record in the TEACommon source snapshot.
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILENAME
+    description: Source file name captured from the inbound extract. Text file name. Used for lineage and load tracing.
+  - name: _FILEDATE
+    description: Source file date for the snapshot row. Date or timestamp format. Used to identify the reporting cut.
+  - name: _AUDIT_LOG_ID
+    description: dbt run identifier captured for lineage and troubleshooting. Text identifier format. Used to link rows to a specific execution.
+  - name: _ROW_HASH
+    description: Deterministic row hash used to detect changes between loads. Text hash format. Not intended for business reporting.
+  - name: COMPANYID
+    description: Company identifier from the TEACommon employee snapshot. Text code format. Used to group employees by entity.
+  - name: EMPLOYEEID
+    description: Employee identifier from the TEACommon employee snapshot. Text identifier format. Used as the employee key.
+  - name: ADPCOMPANY
+    description: ADP company code carried on the employee record. Text code format. Used for payroll and HR alignment.
+  - name: ADP_PERSON_ID
+    description: ADP person identifier tied to the employee profile. Text identifier format. Used to reconcile TEACommon employee records with ADP data.
+  - name: ACTIVE
+    description: Active indicator from the employee snapshot. Yes/no style flag. Used to distinguish current employees.
+  - name: EMPLOYEETYPE
+    description: Employee type code from the TEACommon snapshot. Numeric code. Used for workforce classification.
+  - name: FIRSTNAME
+    description: Employee first name from the snapshot. Text value. Used for display and identity matching.
+  - name: LASTNAME
+    description: Employee last name from the snapshot. Text value. Used for display and identity matching.
+  - name: NAMEUSED
+    description: Preferred or used name from the employee snapshot. Text value. Used for display names.
+  - name: ADP_POSN_ID
+    description: ADP position identifier assigned to the employee. Text identifier format. Used for position-level reporting and ADP alignment.
+  - name: JOBCODE
+    description: Job code from the employee snapshot. Text code format. Used for role categorization.
+  - name: JOBTITLE
+    description: Job title from the employee snapshot. Text value. Used for reporting and reviews.
+  - name: EMAIL
+    description: Corporate email address from the employee snapshot. Text email format. Used for identity matching.
+  - name: SUPERVISORID
+    description: Supervisor employee identifier from the hierarchy snapshot. Text identifier format. Used to resolve the manager chain.
+  - name: DEPTCODE
+    description: Department code from the employee snapshot. Text code format. Used to map the employee to a department.
+  - name: PRODLINECODE
+    description: Product-line code from the employee snapshot. Text code format. Used to map the employee to a business unit.
+  - name: LOCATIONCODE
+    description: Location code from the employee snapshot. Text code format. Used to resolve the office location.
+  - name: STATE
+    description: State or region code from the employee snapshot. Text code format. Used for regional slicing.
+  - name: MAILSTOP
+    description: Mail-stop value from the employee snapshot. Text value. Used for office delivery routing.
+  - name: OFFCPHONE
+    description: Office phone number from the employee snapshot. Text phone format. Used for directory views.
+  - name: OFFCEXT
+    description: Office phone extension from the employee snapshot. Text value. Used with the office phone number.
+  - name: OFFCPAGERMODEL
+    description: Pager model from the employee snapshot. Text value. Legacy field retained for completeness.
+  - name: OFFCPAGER
+    description: Pager number from the employee snapshot. Text value. Legacy field retained for completeness.
+  - name: OFFCPIN
+    description: Paging PIN from the employee snapshot. Text value. Legacy field retained for completeness.
+  - name: OFFCPAGECOVAREA
+    description: Paging coverage area from the employee snapshot. Text value. Legacy field retained for completeness.
+  - name: OFFCDISPATCH
+    description: Dispatch contact detail from the employee snapshot. Text value. Used by legacy communication workflows.
+  - name: OFFCFAX
+    description: Fax number from the employee snapshot. Text phone format. Legacy contact field.
+  - name: OFFCPAGEREMAIL
+    description: Pager email gateway from the employee snapshot. Text email format. Legacy contact field.
+  - name: CUSTLOCALPAGER
+    description: Local pager identifier from the employee snapshot. Text value. Organization-specific legacy field.
+  - name: CUSTLOCALPIN
+    description: Local pager PIN from the employee snapshot. Text value. Organization-specific legacy field.
+  - name: MOBILEPHONE
+    description: Mobile phone number from the employee snapshot. Text phone format. Used for contact lookup.
+  - name: SENIORITY_DATE
+    description: Seniority date carried on the employee record. DATE format. Used for tenure and service-duration reporting.
+  - name: FTE
+    description: Full-time equivalent value from the employee snapshot. Numeric ratio. Used for capacity planning.
+  - name: DATEHIRE
+    description: Hire date from the employee snapshot. DATE format. Used for onboarding and tenure reporting.
+  - name: DATETERM
+    description: Termination date from the employee snapshot. DATE format. Used to identify inactive employees.
+  - name: SALARYEXEMPT
+    description: Salary exemption flag from the employee snapshot. Text value. Used for labor-policy segmentation.
+  - name: PREFERREDLANGUAGE
+    description: Preferred language from the employee snapshot. Text value. Used for localized messaging.
+  - name: FLEETAUTO
+    description: Fleet or auto assignment indicator from the employee snapshot. Text value. Used for transportation-related programs.
+  - name: KRONOS_ACCRUAL_CODE
+    description: Kronos accrual code assigned to the employee. Text code format. Used by timekeeping and leave-accrual processes.
+  - name: KRONOS_PAY_RULE
+    description: Kronos pay rule assigned to the employee. Text value. Used to determine payroll behavior in Kronos-connected processes.
+  - name: KRONOS_WORK_RULE
+    description: Kronos work rule linked to the employee. Text value. Used for scheduling and time-evaluation logic.
+  - name: KRONOS_ACCESS_CODE
+    description: Kronos access code tied to the employee profile. Text code format. Used to control Kronos access and permissions.
+  - name: KRONOS_LABOR_LEVEL
+    description: Kronos labor level assigned to the employee. Text value. Used for labor hierarchy and timekeeping rollups.
+  - name: KRONOS_PAY_CODE_DATA_ACCESS
+    description: Kronos pay-code data access setting for the employee. Text value. Used to control pay-code visibility in workforce tools.
+  - name: KRONOS_DISPLAY_PROFILE
+    description: Kronos display profile assigned to the employee. Text value. Used to control layout and visibility behavior in Kronos screens.
+  - name: NTDOMAIN
+    description: Network domain from the employee snapshot. Text value. Used for enterprise identity matching.
+  - name: NTLOGIN
+    description: Network login from the employee snapshot. Text value. Used for security and access lookups.
+  - name: PROJECT
+    description: Project assignment from the employee snapshot. Text value. Used for project-based staffing views.
+  - name: LASTUPDATED
+    description: Most recent source update timestamp for the employee record. Text timestamp format. Used for change monitoring.
+  - name: LASTUPDATEDBY
+    description: Source user or process that last updated the employee record. Text value. Used for audit tracing.
+  - name: MIDDLE_INITIAL
+    description: Middle initial from the employee profile. Text value. Used as a supplemental identity field in name matching.
+  - name: SUFFIX
+    description: Name suffix from the employee profile. Text value. Supplemental identity field.
+  - name: REHIREDATE
+    description: Rehire date from the employee snapshot. DATE format. Used for returning-worker reporting.
+  - name: ISMANAGER
+    description: Manager indicator from the employee snapshot. Yes/no style flag. Used for org-chart views.
+  - name: STATUS_CODE
+    description: Employment status code carried on the employee record. Text code format. Used to standardize active and inactive workforce reporting.
+  - name: HRREP
+    description: HR representative from the employee snapshot. Text value. Used for support ownership.
+  - name: WORKGROUP
+    description: Workgroup from the employee snapshot. Text value. Used for scheduling and segmentation.
+  - name: BUMGR
+    description: Business-unit manager from the employee snapshot. Text value. Used for BU ownership reporting.
+  - name: EETYPE
+    description: Employment type from the employee snapshot. Text value. Used for workforce classification.
+  - name: WFH
+    description: Work-from-home indicator from the employee snapshot. Text value. Used for remote-work reporting.
+  - name: INACTIVE
+    description: Inactive indicator from the employee snapshot. Yes/no style flag. Used alongside ACTIVE for status interpretation.
+  - name: VENDORNAME
+    description: Vendor name from the employee snapshot. Text value. Used for contingent worker reporting.
+  - name: JOB_FAMILY
+    description: Job family from the employee snapshot. Text value. Used for role taxonomy.
+  - name: SUPERVISORY_ORG
+    description: Supervisory organization from the employee snapshot. Text value. Used for hierarchy rollups.
+  - name: FUNCTION1
+    description: Functional classification from the employee snapshot. Text value. Used for organization-specific reporting.
+  - name: COSTCENTER
+    description: Cost center from the employee snapshot. Text code format. Used for finance-aligned workforce analysis.
+  - name: COCODE
+    description: Company code from the employee snapshot. Text code format. Used for organizational mapping.
+  - name: STDHIER
+    description: Standard hierarchy path from the employee snapshot. Text value. Used for hierarchy rollups.
+  - name: OLDDEPTCODE
+    description: Legacy department code derived from the employee snapshot. Text code format. Used for backward-compatible reporting.
+  - name: OLDPRODLINECODE
+    description: Legacy product-line code derived from the employee snapshot. Text code format. Used for backward-compatible reporting.
+- name: BRONZE__TEH_INFOSEC__TEACOMMON_LOCATIONS
+  description: |
+    PURPOSE: Captures the TEACommon location reference used for office and address lookups.
+    GRAIN: One row per location code in the TEACommon reference.
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILENAME
+    description: Source file name captured from the inbound extract. Text file name. Used for lineage and load tracing.
+  - name: _FILEDATE
+    description: Source file date for the snapshot row. Date or timestamp format. Used to identify the reporting cut.
+  - name: _AUDIT_LOG_ID
+    description: dbt run identifier captured for lineage and troubleshooting. Text identifier format. Used to link rows to a specific execution.
+  - name: _ROW_HASH
+    description: Deterministic row hash used to detect changes between loads. Text hash format. Not intended for business reporting.
+  - name: COMPANYID
+    description: Company identifier from the TEACommon location reference. Text code format. Used to group locations by entity.
+  - name: LOCATIONCODE
+    description: Location code from the TEACommon reference. Text code format. Used as the location key.
+  - name: DESCRIPTION
+    description: Location description from the TEACommon reference. Text value. Used as the readable location label.
+  - name: ADDRESS1
+    description: Primary street address from the TEACommon location reference. Text value. Used for office mailing.
+  - name: ADDRESS2
+    description: Secondary street address from the TEACommon location reference. Text value. Used when the location needs a second line.
+  - name: CITY
+    description: City from the TEACommon location reference. Text value. Used for geographic reporting.
+  - name: STATEPROV
+    description: State or province from the TEACommon location reference. Text value. Used for regional filtering.
+  - name: POSTALCODE
+    description: Postal code from the TEACommon location reference. Text code format. Used for address matching.
+  - name: ISREGION
+    description: Region indicator from the TEACommon location reference. Text value. Used to show regional grouping.
+  - name: LASTUPDATED
+    description: Last updated timestamp from the TEACommon location reference. Text timestamp format. Used to show when the location changed.
+  - name: LASTUPDATEDBY
+    description: User or process that last updated the TEACommon location record. Text value. Used for audit tracing.
+  - name: ADDRESSCODE
+    description: Address code from the TEACommon location reference. Text code format. Used for source-system alignment.
+- name: BRONZE__TEH_INFOSEC__TEACOMMON_PRODUCTLINES
+  description: |
+    PURPOSE: Captures the TEACommon product-line reference used for business-unit mapping.
+    GRAIN: One row per product-line code in the TEACommon reference.
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILENAME
+    description: Source file name captured from the inbound extract. Text file name. Used for lineage and load tracing.
+  - name: _FILEDATE
+    description: Source file date for the snapshot row. Date or timestamp format. Used to identify the reporting cut.
+  - name: _AUDIT_LOG_ID
+    description: dbt run identifier captured for lineage and troubleshooting. Text identifier format. Used to link rows to a specific execution.
+  - name: _ROW_HASH
+    description: Deterministic row hash used to detect changes between loads. Text hash format. Not intended for business reporting.
+  - name: COMPANYID
+    description: Company identifier from the TEACommon product-line reference. Text code format. Used to group product lines by entity.
+  - name: PRODLINECODE
+    description: Product-line code from the TEACommon reference. Text code format. Used as the product-line key.
+  - name: DESCRIPTION
+    description: Product-line description from the TEACommon reference. Text value. Used as the readable product-line label.
+- name: BRONZE__TEH_INFOSEC__MOBILEIRON_DEVICES_SEARCHRESULTS
+  description: |
+    PURPOSE: Captures the MobileIron device inventory and compliance search results used for endpoint security reporting.
+    GRAIN: One row per MobileIron device record returned by the search export.
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILENAME
+    description: Source file name captured from the inbound extract. Text file name. Used for lineage and load tracing.
+  - name: _FILEDATE
+    description: Source file date for the snapshot row. Date or timestamp format. Used to identify the reporting cut.
+  - name: _AUDIT_LOG_ID
+    description: dbt run identifier captured for lineage and troubleshooting. Text identifier format. Used to link rows to a specific execution.
+  - name: _ROW_HASH
+    description: Deterministic row hash used to detect changes between loads. Text hash format. Not intended for business reporting.
+  - name: SERIALNUMBER
+    description: Device serial number from the MobileIron search export. Text identifier format. Used as the hardware key.
+  - name: ACCESSBLOCKED
+    description: Access-blocked indicator from the device export. Yes/no style flag. Used to show whether access is restricted.
+  - name: ACTIONEXCEPTIONCODE
+    description: Action exception code from the MobileIron export. Text code format. Used to explain policy exceptions.
+  - name: AIASSISTENABLED
+    description: AI Assist enabled indicator from the device export. Yes/no style flag. Used to show whether the feature is active.
+  - name: ALTSERIALNUMBER
+    description: Alternate device serial number from the MobileIron export. Text identifier format. Used when the primary serial number is missing.
+  - name: ANDROIDAOSPDEVICEWITHOUTGMS
+    description: Android AOSP without GMS indicator. Yes/no style flag. Used to identify non-Google Android builds.
+  - name: ANDROIDBUILDFINGERPRINT
+    description: Android build fingerprint from the device export. Text build string. Used for device fingerprinting.
+  - name: ANDROIDBUILDID
+    description: Android build ID from the device export. Text build string. Used for device identification.
+  - name: ANDROIDDEVICEOWNERMODEENABLED
+    description: Android device-owner mode indicator. Yes/no style flag. Used to show managed-owner state.
+  - name: ANDROIDENROLLMENTSPECIFICID
+    description: Android enrollment-specific identifier. Text identifier format. Used for enrollment tracing.
+  - name: ANDROIDMANAGEDBYGOOGLE
+    description: Android managed-by-Google indicator. Yes/no style flag. Used for Android Enterprise classification.
+  - name: ANDROIDNETWORKSLICINGENABLED
+    description: Android network-slicing indicator. Yes/no style flag. Used to show supported connectivity features.
+  - name: ANDROIDREGSOURCE
+    description: Android registration source. Text value. Used to describe how the device enrolled.
+  - name: ANDROIDSECURITYPATCHLEVEL
+    description: Android security patch level. Text version or date string. Used to show patch currency.
+  - name: ANDROIDSYSTEMUPDATESTATUS
+    description: Android system update status. Text status value. Used to show OS update health.
+  - name: ANDROIDWORKCONTAINERENABLED
+    description: Android work-container indicator. Yes/no style flag. Used to show whether work apps are isolated.
+  - name: ANDROIDWORKDEVICEOWNERWITHWORKPROFILEENABLED
+    description: Android device-owner with work-profile indicator. Yes/no style flag. Used for managed-profile classification.
+  - name: ANDROIDWORKPROFILEENABLED
+    description: Android work-profile indicator. Yes/no style flag. Used to show whether a work profile exists.
+  - name: ANDROIDWORKPROFILEONCOMPANYOWNEDDEVICEENABLED
+    description: Android work-profile on company-owned device indicator. Yes/no style flag. Used for ownership classification.
+  - name: ANDROIDWORKUID
+    description: Android work user identifier. Text identifier format. Used to link work-profile identity.
+  - name: ANDROIDZEBRAPATCHLEVEL
+    description: Android Zebra patch level. Text version or date string. Used for device patch currency.
+  - name: ANTIPHISHINGGENERALSTATUS
+    description: Anti-phishing general status. Status indicator. Used to show whether the protection is active.
+  - name: ANTIPHISHINGPROTECTIONSTATUS
+    description: Anti-phishing protection status. Status indicator. Used to show device protection state.
+  - name: ANTIPHISHINGVPNGENERALSTATUS
+    description: Anti-phishing VPN status. Status indicator. Used to show VPN-related protection state.
+  - name: APPEASIDENTIFIER
+    description: App EAS identifier from the device export. Text identifier format. Used for application access tracking.
+  - name: APPLESILICON
+    description: Apple Silicon indicator from the device export. Yes/no style flag. Used to identify Apple Silicon hardware.
+  - name: ASSIGNEDPOLICIES
+    description: Assigned policy list for the device. Text value. Used to show policy coverage.
+  - name: AUTHONLY
+    description: Authentication-only indicator for the device. Yes/no style flag. Used to show limited access mode.
+  - name: AVAILABLECAPACITY
+    description: Available device capacity. Numeric storage value. Used for storage monitoring.
+  - name: AZURECLIENTSTATUSCODE
+    description: Azure client status code. Text code format. Used for Azure connection reporting.
+  - name: AZUREDEVICEID
+    description: Azure device identifier. Text identifier format. Used to link to Azure records.
+  - name: AZUREINTUNEDEVICESTATUS
+    description: Azure Intune device status. Status indicator. Used to show Intune compliance state.
+  - name: AZUREINTUNESTATUSUPDATEDAT
+    description: Timestamp when the Azure Intune status was last updated. Timestamp format. Used for status freshness.
+  - name: AZUREUSERUPN
+    description: Azure user principal name from the device export. Text email format. Used for identity matching.
+  - name: BATTERYCHARGECYCLES
+    description: Battery charge cycle count. Numeric count. Used to assess battery wear.
+  - name: BATTERYCHARGINGSTATUS
+    description: Battery charging status. Status indicator. Used to show power state.
+  - name: BATTERYHEALTHPERCENTAGE
+    description: Battery health percentage. Percentage value. Used to assess battery condition.
+  - name: BATTERYHEALTHSTATUS
+    description: Battery health status. Status indicator. Used to show battery condition.
+  - name: BATTERYLEVEL
+    description: Battery level. Percentage value. Used to show charge remaining.
+  - name: BATTERYMANUFACTUREDDATE
+    description: Battery manufactured date. DATE format. Used to age the battery.
+  - name: BETAENROLLMENT
+    description: Beta enrollment indicator. Yes/no style flag. Used to show pilot enrollment.
+  - name: BITLOCKERENCRYPTIONSTATUS
+    description: BitLocker encryption status. Status indicator. Used to show encryption state.
+  - name: BLOCKED
+    description: Blocked indicator. Yes/no style flag. Used to show access restrictions.
+  - name: BRIDGEDEVICEDATALASTCAPTUREDAT
+    description: Timestamp of the last MobileIron bridge data capture. Timestamp format. Used for freshness.
+  - name: BRIDGEVERSION
+    description: Bridge version from the device export. Text version string. Used for agent reporting.
+  - name: CELLULARTECHNOLOGY
+    description: Cellular technology in use. Text value. Used for connectivity reporting.
+  - name: CLIENTDEVICEIDENTIFIER
+    description: Client device identifier. Text identifier format. Used to link client records.
+  - name: CLIENTLASTCHECKIN
+    description: Client last check-in timestamp. Timestamp format. Used to track device freshness.
+  - name: CLIENTVERSION
+    description: Client version. Text version string. Used for agent reporting.
+  - name: CLUSTERIDENTIFIER
+    description: Cluster identifier. Text identifier format. Used to group devices by cluster.
+  - name: COMPLIANCEACTIONBLOCKED
+    description: Compliance action blocked indicator. Yes/no style flag. Used to show whether remediation was blocked.
+  - name: COMPLIANCESTATE
+    description: Compliance state. Status indicator. Used to show device compliance.
+  - name: CURRENTCARRIERNETWORK
+    description: Current carrier network. Text value. Used for network inventory.
+  - name: CURRENTCOUNTRYCODE
+    description: Current country code. Text code format. Used for geo-location reporting.
+  - name: CURRENTCOUNTRYNAME
+    description: Current country name. Text value. Used for geo-location reporting.
+  - name: CURRENTMCC
+    description: Current mobile country code. Numeric code. Used for cellular network identification.
+  - name: CURRENTMNC
+    description: Current mobile network code. Numeric code. Used for cellular network identification.
+  - name: DDMENABLED
+    description: DDM enabled indicator. Yes/no style flag. Used to show whether declarative device management is active.
+  - name: DEPELIGIBLE
+    description: Device enrollment program eligibility indicator. Yes/no style flag. Used for Apple enrollment reporting.
+  - name: DEPENROLLED
+    description: Device enrollment program enrollment indicator. Yes/no style flag. Used for Apple enrollment reporting.
+  - name: DEVICEMODEL
+    description: Device model from the inventory export. Text value. Used for hardware classification.
+  - name: DEVICENAME
+    description: Device name from the inventory export. Text value. Used for console display.
+  - name: DEVICESOURCE
+    description: Device source system. Text value. Used to show where the record originated.
+  - name: DISPLAYNAME
+    description: Device display name from the inventory export. Text value. Used for user-facing reporting.
+  - name: DMPARTITIONID
+    description: DM partition identifier. Text identifier format. Used to group devices by partition.
+  - name: DMPARTITIONNAME
+    description: DM partition name. Text value. Used to show the partition label.
+  - name: EASDEVICEIDENTIFIER
+    description: EAS device identifier. Text identifier format. Used for Exchange ActiveSync matching.
+  - name: EMAILADDRESS
+    description: Device user email address. Text email format. Used to link the device to a user.
+  - name: ENTITYNAME
+    description: Entity name from the inventory export. Text value. Used to identify the owning entity.
+  - name: ESIMIDENTIFIER
+    description: eSIM identifier. Text identifier format. Used for cellular inventory matching.
+  - name: FCMENABLED
+    description: FCM enabled indicator. Yes/no style flag. Used to show push-notification support.
+  - name: FIRMWAREVERSION
+    description: Firmware version. Text version string. Used for device patch reporting.
+  - name: FIRSTNAME
+    description: User first name on the device record. Text value. Used for identity display.
+  - name: GOOGLEBCDEVICECOMPLIANCEREPORTINGSTATUS
+    description: Google BC compliance reporting status. Status indicator. Used for Android enterprise reporting.
+  - name: GOOGLEBCDEVICECOMPLIANCESTATUS
+    description: Google BC compliance status. Status indicator. Used for Android enterprise reporting.
+  - name: GOOGLEBCDEVICESTATUSUPDATEDAT
+    description: Timestamp when the Google BC device status was updated. Timestamp format. Used for freshness.
+  - name: GOOGLEBCDEVICEURI
+    description: Google BC device URI. Text URI value. Used to link to the Google record.
+  - name: GOOGLEBCEMAIL
+    description: Google BC email address. Text email format. Used for identity matching.
+  - name: GUID
+    description: Device GUID. Text identifier format. Used as a persistent device key.
+  - name: HASBATTERY
+    description: Battery-present indicator. Yes/no style flag. Used to show whether the device has a battery.
+  - name: HOMECOUNTRYCODE
+    description: Home country code. Text code format. Used for geo-location reporting.
+  - name: HOMECOUNTRYNAME
+    description: Home country name. Text value. Used for geo-location reporting.
+  - name: ICCID
+    description: SIM ICCID. Text identifier format. Used for cellular inventory matching.
+  - name: ID
+    description: Device identifier from the MobileIron export. Text identifier format. Used as the row key.
+  - name: IMEI
+    description: Device IMEI. Text identifier format. Used for cellular hardware tracking.
+  - name: IMEI2
+    description: Secondary device IMEI. Text identifier format. Used for dual-SIM hardware tracking.
+  - name: IMSI
+    description: Device IMSI. Text identifier format. Used for cellular inventory tracking.
+  - name: IPADDRESS
+    description: Device IP address. IP address format. Used for network tracing.
+  - name: JAILBROKEN
+    description: Jailbroken indicator. Yes/no style flag. Used to show device integrity state.
+  - name: KIOSKMODE
+    description: Kiosk mode indicator. Yes/no style flag. Used to show kiosk lock-down state.
+  - name: KIOSKSECONDARYUSER
+    description: Kiosk secondary user. Text value. Used for kiosk configuration.
+  - name: KIOSKSTATE
+    description: Kiosk state. Status indicator. Used to show kiosk mode status.
+  - name: LASTCHECKIN
+    description: Last device check-in timestamp. Timestamp format. Used to show record freshness.
+  - name: LASTHOTFIXID
+    description: Last hotfix identifier. Text identifier format. Used for patch tracking.
+  - name: LASTHOTFIXINSTALLEDON
+    description: Source attribute for lasthotfixinstalledon in the Captures the MobileIron device inventory and compliance search results used for endpoint security reporting.. Text value. Used for reporting and joins.
+  - name: LASTNAME
+    description: User last name on the device record. Text value. Used for identity display.
+  - name: LASTREGISTRATIONTIME
+    description: Last registration timestamp. Timestamp format. Used for enrollment reporting.
+  - name: LATITUDE
+    description: Latitude from the device location feed. Coordinate value. Used for geo-location reporting.
+  - name: LEGALOWNEREMAILADDRESS
+    description: Legal owner email address. Text email format. Used for ownership tracking.
+  - name: LEGALOWNERID
+    description: Legal owner identifier. Text identifier format. Used for ownership tracking.
+  - name: LOCALE
+    description: Locale from the device export. Text value. Used for regional settings.
+  - name: LOCATIONLASTCAPTUREDAT
+    description: Timestamp when location was last captured. Timestamp format. Used for location freshness.
+  - name: LOCATIONSTATUSDETAIL_LOCATIONSTATUS
+    description: Location status from the MobileIron location detail. Status indicator. Used to show whether the location data is valid.
+  - name: LOCATIONSTATUSDETAIL_LASTUPDATEDAT
+    description: Timestamp when the location status detail was last updated. Timestamp format. Used for freshness.
+  - name: LOCATORSERVICEENABLED
+    description: Locator service enabled indicator. Yes/no style flag. Used to show whether location tracking is available.
+  - name: LONGITUDE
+    description: Longitude from the device location feed. Coordinate value. Used for geo-location reporting.
+  - name: LOSTMODEENABLED
+    description: Lost mode enabled indicator. Yes/no style flag. Used to show whether the device is in lost mode.
+  - name: MAMONLY
+    description: MAM-only indicator. Yes/no style flag. Used to show app-management-only enrollment.
+  - name: MANUFACTURER
+    description: Device manufacturer from the inventory export. Text value. Used for hardware classification.
+  - name: MAXRESIDENTUSERS
+    description: Maximum resident users supported by the device. Numeric count. Used for shared-device reporting.
+  - name: MDMCHANNELID
+    description: Source attribute for mdmchannelid in the Captures the MobileIron device inventory and compliance search results used for endpoint security reporting.. Text value. Used for reporting and joins.
+  - name: MEID
+    description: Device MEID. Text identifier format. Used for cellular hardware tracking.
+  - name: MINIMUMREQUIREDWIFISECURITYLEVEL
+    description: Minimum required Wi-Fi security level. Text value. Used for device policy reporting.
+  - name: MOBILETHREATDEFENSEGENERALSTATUS
+    description: Mobile threat defense status. Status indicator. Used to show threat-protection state.
+  - name: MODELNUMBER
+    description: Device model number. Text value. Used for hardware classification.
+  - name: MULTIUSER
+    description: Multi-user indicator. Yes/no style flag. Used to show whether the device supports multiple users.
+  - name: OSBUILDVERSION
+    description: OS build version. Text version string. Used for operating-system reporting.
+  - name: OSEDITION
+    description: OS edition. Text value. Used for operating-system reporting.
+  - name: OWNERID
+    description: Owner identifier from the inventory export. Text identifier format. Used for ownership tracking.
+  - name: OWNERSHIPTYPE
+    description: Ownership type. Text value. Used to distinguish company-owned and personal devices.
+  - name: PASSCODECOMPLIANT
+    description: Passcode compliant indicator. Yes/no style flag. Used to show passcode enforcement state.
+  - name: PASSCODECOMPLIANTWITHPROFILES
+    description: Passcode compliant with profiles indicator. Yes/no style flag. Used to show profile-level compliance.
+  - name: PENDINGOSBUILDVERSION
+    description: Pending OS build version. Text version string. Used to show the queued upgrade target.
+  - name: PENDINGOSVERSION
+    description: Pending OS version. Text version string. Used to show the queued upgrade target.
+  - name: PHONENUMBER
+    description: Device phone number. Text phone format. Used for user contact and inventory matching.
+  - name: PLATFORMTYPE
+    description: Device platform type. Text value. Used to classify the operating system family.
+  - name: PLATFORMVERSION
+    description: Platform version. Text version string. Used for operating-system reporting.
+  - name: PLAYSTOREFIELDSMAP
+    description: Play Store field map. Text value. Used to carry Android app-store metadata.
+  - name: POLICYVIOLATIONCOUNT
+    description: Policy violation count. Numeric count. Used to show compliance exceptions.
+  - name: PRETTYMODEL
+    description: Human-readable device model. Text value. Used for reporting.
+  - name: PRETTYMODELAPPLE
+    description: Human-readable Apple device model. Text value. Used for Apple-specific reporting.
+  - name: PUBLICIPADDRESS
+    description: Public IP address. IP address format. Used for network tracing.
+  - name: QUARANTINED
+    description: Quarantined indicator. Yes/no style flag. Used to show restricted device state.
+  - name: RECOVERYLOCKENABLED
+    description: Recovery lock enabled indicator. Yes/no style flag. Used to show whether recovery lock is active.
+  - name: REGISTRATIONSTATE
+    description: Registration state. Status indicator. Used to show enrollment progress.
+  - name: ROAMING
+    description: Roaming indicator. Yes/no style flag. Used to show whether the device is roaming.
+  - name: SALESCODE
+    description: Sales code from the device export. Text code format. Used for device classification.
+  - name: SAMSUNGEFOTACAPABLE
+    description: Samsung EFOTA capable indicator. Yes/no style flag. Used to show firmware-update capability.
+  - name: SECUREAPPSENCRYPTIONMODE
+    description: Secure apps encryption mode. Text value. Used to show app encryption setup.
+  - name: SECUREAPPSENCRYPTIONSTATUS
+    description: Secure apps encryption status. Status indicator. Used to show app encryption state.
+  - name: SECUREAPPSSTATUS
+    description: Secure apps status. Status indicator. Used to show app security state.
+  - name: SUBSCRIBERCARRIERNETWORK
+    description: Subscriber carrier network. Text value. Used for cellular network reporting.
+  - name: SUBSCRIBERMCC
+    description: Subscriber mobile country code. Numeric code. Used for cellular network identification.
+  - name: SUBSCRIBERMNC
+    description: Subscriber mobile network code. Numeric code. Used for cellular network identification.
+  - name: SUPERVISED
+    description: Supervised indicator. Yes/no style flag. Used to show whether the device is supervised.
+  - name: SUPPLEMENTALBUILDVERSION
+    description: Supplemental build version. Text version string. Used for OS patch reporting.
+  - name: SUPPLEMENTALOSVERSIONEXTRA
+    description: Supplemental OS version extra string. Text value. Used to carry OS build details.
+  - name: SUPPORTLOCKMESSAGE
+    description: Support lock message shown on the device. Text value. Used for lock-screen communication.
+  - name: SYSTEMUPDATEINFORMATION
+    description: System update information from the device export. Text value. Used for OS update reporting.
+  - name: TOTALCAPACITY
+    description: Total device storage capacity. Numeric capacity value. Used for storage monitoring.
+  - name: TOTALRAMMB
+    description: Total RAM in megabytes. Numeric value in MB. Used for device capacity reporting.
+  - name: TPMSPECIFICATIONVERSION
+    description: TPM specification version. Text value. Used for hardware security reporting.
+  - name: UDID
+    description: Device UDID. Text identifier format. Used as a persistent device identifier.
+  - name: UID
+    description: Device UID. Text identifier format. Used as a unique record key.
+  - name: UPTIME
+    description: Device uptime. Numeric duration value. Used to show how long the device has been running.
+  - name: USERENROLLED
+    description: User enrolled indicator. Yes/no style flag. Used to show whether user enrollment is active.
+  - name: USERPREFERENCECSVHEADER
+    description: User preference CSV header. Text value. Used to carry exported preference metadata.
+  - name: VIOLATEDPOLICY
+    description: Violated policy name from the device export. Text value. Used to show the triggered compliance policy.
+  - name: WIFIMACADDRESS
+    description: Wi-Fi MAC address. Text hardware identifier. Used for network inventory.
+  - name: WIFIMACADDRESSFORINVENTORY
+    description: Wi-Fi MAC address used for inventory tracking. Text hardware identifier. Used for asset inventory.
+  - name: WINDOWSDEVICETYPE
+    description: Windows device type. Text value. Used to classify Windows hardware.
+  - name: CUSTOMATTRIBUTESNAME
+    description: Custom attribute name from the MobileIron export. Text value. Used to carry tenant-specific metadata.
+  - name: CUSTOMATTRIBUTESVALUE
+    description: Custom attribute value from the MobileIron export. Text value. Used to carry tenant-specific metadata.
+  - name: SERVSUB_CARRIERSETTINGSVERSION
+    description: Service-subscription carrier settings version. Text value. Used for cellular configuration reporting.
+  - name: SERVSUB_CURRENTCARRIERNETWORK
+    description: Service-subscription current carrier network. Text value. Used for cellular configuration reporting.
+  - name: SERVSUB_CURRENTMCC
+    description: Service-subscription current mobile country code. Numeric code. Used for cellular configuration reporting.
+  - name: SERVSUB_CURRENTMNC
+    description: Service-subscription current mobile network code. Numeric code. Used for cellular configuration reporting.
+  - name: SERVSUB_ESIMIDENTIFIER
+    description: Service-subscription eSIM identifier. Text identifier format. Used for cellular configuration reporting.
+  - name: SERVSUB_ICCID
+    description: Service-subscription ICCID. Text identifier format. Used for cellular configuration reporting.
+  - name: SERVSUB_IMEI
+    description: Service-subscription IMEI. Text identifier format. Used for cellular configuration reporting.
+  - name: SERVSUB_ISDATAPREFERRED
+    description: Service-subscription data-preferred indicator. Yes/no style flag. Used to show the default cellular role.
+  - name: SERVSUB_ISROAMING
+    description: Service-subscription roaming indicator. Yes/no style flag. Used to show cellular roaming state.
+  - name: SERVSUB_ISVOICEPREFERRED
+    description: Service-subscription voice-preferred indicator. Yes/no style flag. Used to show the default cellular role.
+  - name: SERVSUB_LABELID
+    description: Service-subscription label identifier. Text identifier format. Used to tie the row to a label.
+  - name: SERVSUB_MEID
+    description: Service-subscription MEID. Text identifier format. Used for cellular configuration reporting.
+  - name: SERVSUB_PHONENUMBER
+    description: Service-subscription phone number. Text phone format. Used for cellular configuration reporting.
+  - name: SERVSUB_SLOT
+    description: Service-subscription slot identifier. Text value. Used to show the SIM slot.
+  - name: SERVSUB_SUBSCRIBERCARRIERNETWORK
+    description: Service-subscription carrier network. Text value. Used for cellular configuration reporting.
+  - name: SERVSUB_LABEL
+    description: Service-subscription label. Text value. Used to show the subscriber label.
+  - name: ACTIONS
+    description: Available actions for the device record. Text value. Used to show supported console actions.
+  - name: CLONEABLE
+    description: Cloneable indicator for the configuration record. Yes/no style flag. Used to show whether the record can be cloned.
+  - name: CLONEABLEACROSSSPACE
+    description: Cloneable-across-space indicator. Yes/no style flag. Used to show whether the record can be cloned across spaces.
+  - name: CLONEDFROMDEFAULTSPACE
+    description: Cloned-from-default-space indicator. Yes/no style flag. Used to show record origin.
+  - name: CONFIGURATIONMUTABLE
+    description: Configuration-mutable indicator. Yes/no style flag. Used to show whether the configuration can be changed.
+  - name: DELETABLE
+    description: Deletable indicator. Yes/no style flag. Used to show whether the record can be removed.
+  - name: DESCRIPTION
+    description: Configuration description from the MobileIron export. Text value. Used to explain the policy or record.
+  - name: DISTRIBUTIONMUTABLE
+    description: Distribution-mutable indicator. Yes/no style flag. Used to show whether distribution can be changed.
+  - name: DMPARTITIONDISTRIBUTIONTYPE
+    description: DM partition distribution type. Text value. Used to describe the partition distribution model.
+  - name: ACONFIG_DMPARTITIONID
+    description: Configuration DM partition identifier. Text identifier format. Used to link the configuration to its partition.
+  - name: ENABLED
+    description: Enabled indicator. Yes/no style flag. Used to show whether the configuration is active.
+  - name: ERROR
+    description: Error message or indicator from the MobileIron export. Text value. Used to show sync or policy issues.
+  - name: MODIFIEDAT
+    description: Timestamp when the configuration was last modified. Timestamp format. Used for change tracking.
+  - name: MODIFIEDBY
+    description: User or process that last modified the configuration. Text value. Used for audit tracing.
+  - name: NAME
+    description: Configuration name from the MobileIron export. Text value. Used as the display label.
+  - name: POLICYRULETYPE
+    description: Policy rule type. Text value. Used to classify the policy logic.
+  - name: POLICYTYPE
+    description: Policy type. Text value. Used to classify the policy record.
+  - name: PRIORITY
+    description: Policy priority. Numeric or text priority value. Used to show enforcement order.
+  - name: RESOURCE_SUPPORT_LINK
+    description: Resource support link. Text URL or URI. Used to point to supporting resources.
+  - name: INSTALLEDDEVICECOUNT
+    description: Installed device count for the configuration. Numeric count. Used for deployment reporting.
+  - name: UUID
+    description: Configuration UUID. Text identifier format. Used as the unique configuration key.
+  - name: VIOLATIONDEVICECOUNT
+    description: Violation device count for the configuration. Numeric count. Used to show compliance exceptions.
+  - name: SYSTEMDEFAULT
+    description: System default indicator. Yes/no style flag. Used to show whether the configuration is a default.
+  - name: ACONFIG_ID
+    description: Configuration identifier from the MobileIron export. Text identifier format. Used as the configuration key.
+  - name: PRIORITYMUTABLE
+    description: Priority-mutable indicator. Yes/no style flag. Used to show whether the priority can change.
+  - name: TOTALDEVICECOUNT
+    description: Total device count for the configuration. Numeric count. Used for deployment reporting.
+  - name: STATUS
+    description: Current configuration status. Status indicator. Used to show whether the record is active.
+  - name: SYSTEMNAME
+    description: System name associated with the configuration. Text value. Used to show the owning system.

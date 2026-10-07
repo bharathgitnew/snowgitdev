@@ -1,0 +1,210 @@
+version: 2
+models:
+- name: GOLD__TMEA_SUPPLY_CHAIN__BOM
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_SUPPLY_CHAIN__CYCLE_COUNT
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_SUPPLY_CHAIN__DISPLAY_LIST_OF_TASKS_LIST_OF_NOTIFICATIONS
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_SUPPLY_CHAIN__DISPLAY_WAREHOUSE_STOCKS_OF_MATERIALS
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_SUPPLY_CHAIN__EXCESS_INVENTORY
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_SUPPLY_CHAIN__INVENTORY_ON_HAND_ANALYSIS
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_SUPPLY_CHAIN__KEY_COMPONENTS_MAIN
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_SUPPLY_CHAIN__KEY_COMPONENTS_SUPPLY_DEMAND
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_SUPPLY_CHAIN__LEGAL_LICENSE_USAGE_REPORT
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_SUPPLY_CHAIN__LOGISTICS_INVENTORY_MANAGEMENT
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_SUPPLY_CHAIN__LOGISTICS_INVENTORY_MANAGEMENT_SUMMARIZED
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_SUPPLY_CHAIN__LOGISTICS_INVENTORY_MANAGEMENT_SUMMARIZED_HISTORICAL
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_SUPPLY_CHAIN__LOGISTICS_INVENTORY_PLANNER
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_SUPPLY_CHAIN__LOGISTICS_MATERIAL_VALUATION
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_SUPPLY_CHAIN__LOGISTICS_ON_HAND_INVENTORY_TOTALS
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_SUPPLY_CHAIN__LOGISTICS_WAREHOUSE_CAPACITY
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_SUPPLY_CHAIN__OPEN_SALES_ORDERS
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_SUPPLY_CHAIN__ORDER_INFO_SYSTEM_ORDER_HEADERS
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_SUPPLY_CHAIN__PLANNING_BOM_SHORTAGE_REPORT
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_SUPPLY_CHAIN__PLANNING_MATERIAL_PLAN
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_SUPPLY_CHAIN__PLANNING_OVERCOMMIT_INVENTORY
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_SUPPLY_CHAIN__PURCHASE_ORDER_CHANGE_HISTORY
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_SUPPLY_CHAIN__PURCHASE_PRICE_VARIANCE
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_SUPPLY_CHAIN__PURCHASING_CROSS_OVER_GRAPH_DATA
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_SUPPLY_CHAIN__PURCHASING_DISPLAY_WAREHOUSE_STOCKS_OF_MATERIALS
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_SUPPLY_CHAIN__PURCHASING_ECN_BY_COMMODITYCODE
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_SUPPLY_CHAIN__PURCHASING_GROUP_LIST
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_SUPPLY_CHAIN__PURCHASING_KEY_COMPONENTS_MAIN
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_SUPPLY_CHAIN__PURCHASING_MATERIAL_DOCUMENT_LIST
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_SUPPLY_CHAIN__PURCHASING_MATERIAL_PURCHASE_ITEMS
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_SUPPLY_CHAIN__PURCHASING_MATERIAL_REPORT
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_SUPPLY_CHAIN__PURCHASING_METRIC_LATE_PO
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_SUPPLY_CHAIN__PURCHASING_METRIC_REQ_TO_PO_TAT
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_SUPPLY_CHAIN__PURCHASING_MRB_STOCK
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_SUPPLY_CHAIN__PURCHASING_ORDER_METRIC_OPEN_AGING
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_SUPPLY_CHAIN__PURCHASING_PO_CREATED_BY_MONTH
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_SUPPLY_CHAIN__PURCHASING_PO_LINES_INVOICED
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_SUPPLY_CHAIN__PURCHASING_RTVS_STOCK
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_SUPPLY_CHAIN__PURCHASING_SAFETY_STOCK_DEMAND
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_SUPPLY_CHAIN__PURCHASING_VENDOR_PERFORMANCE
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_SUPPLY_CHAIN__SHAREPOINT_PURCHASING_MANUFACTURING_READINESS_KPI_HISTORICAL
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_SUPPLY_CHAIN__SHIPMENT_HISTORY_REPORT
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_SUPPLY_CHAIN__SHORTAGE_REPORT_DATA_WAREHOUSE_HISTORICAL
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_SUPPLY_CHAIN__SPARES_CUSTOMER_SAP
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_SUPPLY_CHAIN__SPARES_LINE_ITEM
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_SUPPLY_CHAIN__SPARES_PROFIT_CENTER
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_SUPPLY_CHAIN__SUPPLIER_CHANGE_REQUESTS
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_SUPPLY_CHAIN__SUPPLIER_CHANGE_REQUEST_HISTORY
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_SUPPLY_CHAIN__SUPPLIER_CHANGE_REQUEST_TAT_MILESTONES
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_SUPPLY_CHAIN__TMEA_ADVANCE_DEVIATION_AUTHORIZATION
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_SUPPLY_CHAIN__TMEA_MANUFACTURING_READINESS
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_SUPPLY_CHAIN__TMEA_SHORTAGE_REPORT_DATA_WAREHOUSE
+  tests:
+  - has_data
+  - recently_run

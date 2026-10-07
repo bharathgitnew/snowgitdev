@@ -1,0 +1,63 @@
+{
+    "DEV": {
+        "LZ": "LZ_DEV",
+        "LZ_EXT": "LZ_EXT_DEV",
+        "ODS": "ODS_DEV",
+        "COMMON": "COMMON_DEV",
+        "EDW": "EDW_DEV",
+        "PUB": "PUB_DEV",
+        "PREFECT_PROJECT_NAME": "DEV",
+        "LZ_HVR_STREAM_ENV": "_DEV",
+        "SYSADMIN": "SYSADMIN_DEV",
+        "NULLVALUE": "<<NULLVALUE>>"
+    },
+    "BUILD": {
+        "LZ": "LZ_Build",
+        "LZ_EXT": "LZ_EXT_Build",
+        "ODS": "ODS_Build",
+        "COMMON": "COMMON_Build",
+        "EDW": "EDW_Build",
+        "PUB": "PUB_Build",
+        "PREFECT_PROJECT_NAME": "Build",
+        "LZ_HVR_STREAM_ENV": "_Build",
+        "SYSADMIN": "SYSADMIN_SIT",
+        "NULLVALUE": "<<NULLVALUE>>"
+    },
+    "SIT": {
+        "LZ": "LZ_SIT",
+        "LZ_EXT": "LZ_EXT_SIT",
+        "ODS": "ODS_SIT",
+        "COMMON": "COMMON_SIT",
+        "EDW": "EDW_SIT",
+        "PUB": "PUB_SIT",
+        "PREFECT_PROJECT_NAME": "SIT",
+        "LZ_HVR_STREAM_ENV": "_SIT",
+        "SYSADMIN": "SYSADMIN_SIT",
+        "NULLVALUE": "<<NULLVALUE>>"
+    },
+    "QA": {
+        "LZ": "LZ_QA",
+        "LZ_EXT": "LZ_EXT_QA",
+        "ODS": "ODS_QA",
+        "COMMON": "COMMON_QA",
+        "EDW": "EDW_QA",
+        "PUB": "PUB_QA",
+        "PREFECT_PROJECT_NAME": "QA",
+        "LZ_HVR_STREAM_ENV": "_QA",
+        "SYSADMIN": "SYSADMIN_QA",
+        "NULLVALUE": "<<NULLVALUE>>"
+
+    },
+    "PROD": {
+        "LZ": "LZ_PROD",
+        "LZ_EXT": "LZ_EXT",
+        "ODS": "ODS",
+        "COMMON": "COMMON",
+        "EDW": "EDW",
+        "PUB": "PUB",
+        "PREFECT_PROJECT_NAME": "PROD",
+        "LZ_HVR_STREAM_ENV": "",
+        "SYSADMIN": "SYADMIN_PROD",
+        "NULLVALUE": "<<NULLVALUE>>"
+    }
+}

@@ -1,0 +1,326 @@
+{
+    "QVICS-TMEA": {
+      "DataSet1": {
+        "schema": "dbo",
+        "table": "AccessLogs",
+        "Incremental": "NULL",
+        "sftablename": "AccessLogs",
+        "filter": "DATALENGTH(Params) <= 16777216"
+      },
+      "DataSet2": {
+        "schema": "dbo",
+        "table": "Announcements",
+        "Incremental": "NULL",
+        "sftablename": "Announcements",
+        "filter": ""
+      },
+      "DataSet3": {
+        "schema": "dbo",
+        "table": "ApprovalActivities",
+        "Incremental": "NULL",
+        "sftablename": "ApprovalActivities",
+        "filter": ""
+      },
+      "DataSet4": {
+        "schema": "dbo",
+        "table": "ApprovalLogs",
+        "Incremental": "NULL",
+        "sftablename": "ApprovalLogs",
+        "filter": ""
+      },
+      "DataSet5": {
+        "schema": "dbo",
+        "table": "ApprovalVerifiers",
+        "Incremental": "NULL",
+        "sftablename": "ApprovalVerifiers",
+        "filter": ""
+      },
+      "DataSet6": {
+        "schema": "dbo",
+        "table": "AssignedPeople",
+        "Incremental": "NULL",
+        "sftablename": "AssignedPeople",
+        "filter": ""
+      },
+      "DataSet7": {
+        "schema": "dbo",
+        "table": "Attachments",
+        "Incremental": "NULL",
+        "sftablename": "Attachments",
+        "filter": ""
+      },
+      "DataSet8": {
+        "schema": "dbo",
+        "table": "ClaimSurveys",
+        "Incremental": "NULL",
+        "sftablename": "ClaimSurveys",
+        "filter": ""
+      },
+      "DataSet9": {
+        "schema": "dbo",
+        "table": "CurrentStatuses",
+        "Incremental": "NULL",
+        "sftablename": "CurrentStatuses",
+        "filter": ""
+      },
+      "DataSet10": {
+        "schema": "dbo",
+        "table": "EmergentMeasure_ApprovalActivities",
+        "Incremental": "NULL",
+        "sftablename": "EmergentMeasure_ApprovalActivities",
+        "filter": ""
+      },
+      "DataSet11": {
+        "schema": "dbo",
+        "table": "EmergentMeasure_ApprovalLogs",
+        "Incremental": "NULL",
+        "sftablename": "EmergentMeasure_ApprovalLogs",
+        "filter": ""
+      },
+      "DataSet12": {
+        "schema": "dbo",
+        "table": "EmergentMeasure_Attachments",
+        "Incremental": "NULL",
+        "sftablename": "EmergentMeasure_Attachments",
+        "filter": ""
+      },
+      "DataSet13": {
+        "schema": "dbo",
+        "table": "EmergentMeasures",
+        "Incremental": "NULL",
+        "sftablename": "EmergentMeasures",
+        "filter": ""
+      },
+      "DataSet14": {
+        "schema": "dbo",
+        "table": "Inquiries",
+        "Incremental": "NULL",
+        "sftablename": "Inquiries",
+        "filter": ""
+      },
+      "DataSet15": {
+        "schema": "dbo",
+        "table": "Inquiry_Locks",
+        "Incremental": "NULL",
+        "sftablename": "Inquiry_Locks",
+        "filter": ""
+      },
+      "DataSet16": {
+        "schema": "dbo",
+        "table": "Judgements",
+        "Incremental": "NULL",
+        "sftablename": "Judgements",
+        "filter": ""
+      },
+      "DataSet17": {
+        "schema": "dbo",
+        "table": "Machines",
+        "Incremental": "NULL",
+        "sftablename": "Machines",
+        "filter": ""
+      },
+      "DataSet18": {
+        "schema": "dbo",
+        "table": "MailLogs",
+        "Incremental": "NULL",
+        "sftablename": "MailLogs",
+        "filter": ""
+      },
+      "DataSet19": {
+        "schema": "dbo",
+        "table": "Message_Addresses",
+        "Incremental": "NULL",
+        "sftablename": "Message_Addresses",
+        "filter": ""
+      },
+      "DataSet20": {
+        "schema": "dbo",
+        "table": "Message_Attachments",
+        "Incremental": "NULL",
+        "sftablename": "Message_Attachments",
+        "filter": ""
+      },
+      "DataSet21": {
+        "schema": "dbo",
+        "table": "Messages",
+        "Incremental": "NULL",
+        "sftablename": "Messages",
+        "filter": "DATALENGTH(Message) <= 16777216"
+      },
+      "DataSet22": {
+        "schema": "dbo",
+        "table": "MyWatches",
+        "Incremental": "NULL",
+        "sftablename": "MyWatches",
+        "filter": ""
+      },
+      "DataSet23": {
+        "schema": "dbo",
+        "table": "Options",
+        "Incremental": "NULL",
+        "sftablename": "Options",
+        "filter": ""
+      },
+      "DataSet24": {
+        "schema": "dbo",
+        "table": "ParmanentMeasure_ApprovalActivities",
+        "Incremental": "NULL",
+        "sftablename": "ParmanentMeasure_ApprovalActivities",
+        "filter": ""
+      },
+      "DataSet25": {
+        "schema": "dbo",
+        "table": "ParmanentMeasure_ApprovalLogs",
+        "Incremental": "NULL",
+        "sftablename": "ParmanentMeasure_ApprovalLogs",
+        "filter": ""
+      },
+      "DataSet26": {
+        "schema": "dbo",
+        "table": "ParmanentMeasure_Attachments",
+        "Incremental": "NULL",
+        "sftablename": "ParmanentMeasure_Attachments",
+        "filter": ""
+      },
+      "DataSet27": {
+        "schema": "dbo",
+        "table": "ParmanentMeasure_Progresses",
+        "Incremental": "NULL",
+        "sftablename": "ParmanentMeasure_Progresses",
+        "filter": ""
+      },
+      "DataSet28": {
+        "schema": "dbo",
+        "table": "ParmanentMeasure_ReportAttachments",
+        "Incremental": "NULL",
+        "sftablename": "ParmanentMeasure_ReportAttachments",
+        "filter": ""
+      },
+      "DataSet29": {
+        "schema": "dbo",
+        "table": "ParmanentMeasures",
+        "Incremental": "NULL",
+        "sftablename": "ParmanentMeasures",
+        "filter": ""
+      },
+      "DataSet30": {
+        "schema": "dbo",
+        "table": "Part_Controls",
+        "Incremental": "NULL",
+        "sftablename": "Part_Controls",
+        "filter": ""
+      },
+      "DataSet31": {
+        "schema": "dbo",
+        "table": "Parts",
+        "Incremental": "NULL",
+        "sftablename": "Parts",
+        "filter": ""
+      },
+      "DataSet32": {
+        "schema": "dbo",
+        "table": "Progress_Statuses",
+        "Incremental": "NULL",
+        "sftablename": "Progress_Statuses",
+        "filter": ""
+      },
+      "DataSet33": {
+        "schema": "dbo",
+        "table": "QVICS",
+        "Incremental": "NULL",
+        "sftablename": "QVICS",
+        "filter": ""
+      },
+      "DataSet34": {
+        "schema": "dbo",
+        "table": "Translations",
+        "Incremental": "NULL",
+        "sftablename": "Translations",
+        "filter": ""
+      },
+      "DataSet35": {
+        "schema": "dbo",
+        "table": "Trouble_Attachments",
+        "Incremental": "NULL",
+        "sftablename": "Trouble_Attachments",
+        "filter": ""
+      },
+      "DataSet36": {
+        "schema": "dbo",
+        "table": "Trouble_Components",
+        "Incremental": "NULL",
+        "sftablename": "Trouble_Components",
+        "filter": ""
+      },
+      "DataSet37": {
+        "schema": "dbo",
+        "table": "Trouble_Locks",
+        "Incremental": "NULL",
+        "sftablename": "Trouble_Locks",
+        "filter": ""
+      },
+      "DataSet38": {
+        "schema": "dbo",
+        "table": "Trouble_MailAddresses",
+        "Incremental": "NULL",
+        "sftablename": "Trouble_MailAddresses",
+        "filter": ""
+      },
+      "DataSet39": {
+        "schema": "dbo",
+        "table": "Trouble_Owners",
+        "Incremental": "NULL",
+        "sftablename": "Trouble_Owners",
+        "filter": ""
+      },
+      "DataSet40": {
+        "schema": "dbo",
+        "table": "TroubleAnalysis_Keywords",
+        "Incremental": "NULL",
+        "sftablename": "TroubleAnalysis_Keywords",
+        "filter": ""
+      },
+      "DataSet41": {
+        "schema": "dbo",
+        "table": "TroubleForTotalization_ListColumns",
+        "Incremental": "NULL",
+        "sftablename": "TroubleForTotalization_ListColumns",
+        "filter": ""
+      },
+      "DataSet42": {
+        "schema": "dbo",
+        "table": "Troubles",
+        "Incremental": "NULL",
+        "sftablename": "Troubles",
+        "filter": "len([Phenomena]) <= 16777216"
+      },
+      "DataSet43": {
+        "schema": "dbo",
+        "table": "Usefuls",
+        "Incremental": "NULL",
+        "sftablename": "Usefuls",
+        "filter": ""
+      },
+      "DataSet44": {
+        "schema": "dbo",
+        "table": "v_troubles",
+        "Incremental": "NULL",
+        "sftablename": "v_troubles",
+        "filter": ""
+      },
+      "DataSet45": {
+        "schema": "dbo",
+        "table": "departments",
+        "Incremental": "NULL",
+        "sftablename": "DEPARTMENTS",
+        "filter": ""
+      },
+      "DataSet46": {
+        "schema": "dbo",
+        "table": "v_aLLSimpleTroubleLists",
+        "Incremental": "NULL",
+        "sftablename": "V_ALLSIMPLETROUBLELISTS",
+        "filter": ""
+      }
+    }
+}

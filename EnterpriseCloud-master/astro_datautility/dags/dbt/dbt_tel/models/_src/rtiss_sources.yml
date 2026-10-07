@@ -1,0 +1,15 @@
+version: 2
+sources:
+- name: RTISS
+  config:
+    meta:
+      owner:
+        primary: Frank Ayala
+        secondary: Gabriel Hallett
+  description: Landing Zone - RTISS Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: RTISS
+  tables:
+  - name: TPS
+    identifier: TPS
+    description: Landing table for TPS.

@@ -1,0 +1,57 @@
+/************
+Model file generated from dbtGeneratePubViews: 12.19.2022.19.11.44"
+*************/
+
+{{ config(
+      materialized='view',
+      alias='SALES_DISTRICT',
+      transient=false
+) }}
+
+with source_data as (
+    SELECT
+        SALES_DISTRICT_ID,
+        STATECODE,
+        STATUSCODE,
+        TEL_COM_WF_TARGET_AREA_FLAG,
+        MODIFIEDBY,
+        MODIFIEDBY_ENTITYTYPE,
+        MODIFIEDONBEHALFBY,
+        MODIFIEDONBEHALFBY_ENTITYTYPE,
+        CREATEDONBEHALFBY,
+        CREATEDONBEHALFBY_ENTITYTYPE,
+        ORGANIZATIONID,
+        ORGANIZATIONID_ENTITYTYPE,
+        CREATEDBY,
+        CREATEDBY_ENTITYTYPE,
+        TEL_COM_TERRITORY,
+        TEL_COM_TERRITORY_ENTITYTYPE,
+        CREATEDBYYOMINAME,
+        ORGANIZATIONIDNAME,
+        TEL_COM_SALES_DISTRICTID,
+        CREATEDONBEHALFBYYOMINAME,
+        MODIFIEDONBEHALFBYYOMINAME,
+        MODIFIEDBYYOMINAME,
+        CREATEDBYNAME,
+        VERSIONNUMBER,
+        TIMEZONERULEVERSIONNUMBER,
+        TEL_COM_TERRITORYNAME,
+        IMPORTSEQUENCENUMBER,
+        MODIFIEDONBEHALFBYNAME,
+        TEL_COM_SALES_DISTRICT_CODE,
+        MODIFIEDBYNAME,
+        MODIFIEDON,
+        OVERRIDDENCREATEDON,
+        TEL_COM_SALES_DISTRICT,
+        UTCCONVERSIONTIMEZONECODE,
+        CREATEDONBEHALFBYNAME,
+        CREATEDON
+    from {{ ref('COMMON__CRM__SALES_DISTRICT') }}
+),
+
+transform_data AS
+(
+    select * from source_data
+)
+
+    select * from transform_data

@@ -1,0 +1,40 @@
+{
+    "CopyFile": {
+        "Kronos-Timecard": {
+            "fileshare": "\\<<FILE_SHARE>>\\Shares\\Files\\Kronos",
+            "table": "TIMECARD",
+            "schema": "KRONOS",
+            "file_pattern": "DET_Timecard_*.csv",
+            "is_incremental": false,
+            "delimiter": "|",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "archive_files": true,
+            "securables": {
+                "username": "us\\svc_prefect",
+                "password-name": "SVC-PREFECT-AD-PASSWORD"
+            },
+            "force_str": "str"
+        },
+        "Kronos-ActivitiesTotal": {
+            "fileshare": "\\<<FILE_SHARE>>\\Shares\\Files\\Kronos",
+            "table": "ACTIVITIESTOTAL",
+            "schema": "KRONOS",
+            "file_pattern": "*activities_totals_*.csv",
+            "is_incremental": false,
+            "delimiter": "|",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "csv",
+            "archive_files": true,
+            "securables": {
+                "username": "us\\svc_prefect",
+                "password-name": "SVC-PREFECT-AD-PASSWORD"
+            },
+            "force_str": "str"
+        }
+    }
+}

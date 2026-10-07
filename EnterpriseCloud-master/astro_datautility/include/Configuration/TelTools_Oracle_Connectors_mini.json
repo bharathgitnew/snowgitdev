@@ -1,0 +1,38 @@
+{
+    "BAAN5": {
+		"connections":"baan5",
+        "servername": "ushp10.us.tel.com",
+        "port": "1521",
+        "database": "BAAN5",
+        "username": "BAANORACLE-USERNAME",
+        "password": "BAANORACLE-PASSWORD",
+		"outputfolder":"Wisdom"
+    },
+    "WISDOM": {
+		"connections":"wisdom",
+        "servername": "telracscan01.asia.tel.com",
+        "port": "1521",
+        "database": "srv_trac12",
+        "username": "WISDOM-USERNAME",
+        "password": "WISDOM-PASSWORD",
+		"outputfolder":"Wisdom"
+    },
+    "NOW": {
+		"connections":"NOW",
+        "servername": "telnowdbp011.asia.tel.com",
+        "port": "1521",
+        "database": "NOW",
+        "username": "NOW-USERNAME",
+        "password": "NOW-PASSWORD",
+		"outputfolder":"NOW"
+    },
+    "NOWUAT": {
+		"connections":"NOWUAT",
+        "servername": "telnowdbd001.asia.tel.com",
+        "port": "1521",
+        "database": "NOW",
+        "username": "NOW-UAT-USERNAME",
+        "password": "NOW-UAT-PASSWORD",
+		"outputfolder":"NOW_UAT"
+    }
+}

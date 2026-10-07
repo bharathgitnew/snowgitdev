@@ -1,0 +1,144 @@
+version: 2
+sources:
+- name: QVICS
+  description: Landing Zone - QVICS Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: QVICS
+  tables:
+  - name: AccessLogs
+    identifier: AccessLogs
+    description: Landing table for AccessLogs.
+  - name: Announcements
+    identifier: Announcements
+    description: Landing table for Announcements.
+  - name: ApprovalActivities
+    identifier: ApprovalActivities
+    description: Landing table for ApprovalActivities.
+  - name: ApprovalLogs
+    identifier: ApprovalLogs
+    description: Landing table for ApprovalLogs.
+  - name: ApprovalVerifiers
+    identifier: ApprovalVerifiers
+    description: Landing table for ApprovalVerifiers.
+  - name: AssignedPeople
+    identifier: AssignedPeople
+    description: Landing table for AssignedPeople.
+  - name: Attachments
+    identifier: Attachments
+    description: Landing table for Attachments.
+  - name: ClaimSurveys
+    identifier: ClaimSurveys
+    description: Landing table for ClaimSurveys.
+  - name: CurrentStatuses
+    identifier: CurrentStatuses
+    description: Landing table for CurrentStatuses.
+  - name: EmergentMeasure_ApprovalActivities
+    identifier: EmergentMeasure_ApprovalActivities
+    description: Landing table for EmergentMeasure_ApprovalActivities.
+  - name: EmergentMeasure_ApprovalLogs
+    identifier: EmergentMeasure_ApprovalLogs
+    description: Landing table for EmergentMeasure_ApprovalLogs.
+  - name: EmergentMeasure_Attachments
+    identifier: EmergentMeasure_Attachments
+    description: Landing table for EmergentMeasure_Attachments.
+  - name: EmergentMeasures
+    identifier: EmergentMeasures
+    description: Landing table for EmergentMeasures.
+  - name: Inquiries
+    identifier: Inquiries
+    description: Landing table for Inquiries.
+  - name: Inquiry_Locks
+    identifier: Inquiry_Locks
+    description: Landing table for Inquiry_Locks.
+  - name: Judgements
+    identifier: Judgements
+    description: Landing table for Judgements.
+  - name: Machines
+    identifier: Machines
+    description: Landing table for Machines.
+  - name: MailLogs
+    identifier: MailLogs
+    description: Landing table for MailLogs.
+  - name: Message_Addresses
+    identifier: Message_Addresses
+    description: Landing table for Message_Addresses.
+  - name: Message_Attachments
+    identifier: Message_Attachments
+    description: Landing table for Message_Attachments.
+  - name: Messages
+    identifier: Messages
+    description: Landing table for Messages.
+  - name: MyWatches
+    identifier: MyWatches
+    description: Landing table for MyWatches.
+  - name: Options
+    identifier: Options
+    description: Landing table for Options.
+  - name: ParmanentMeasure_ApprovalActivities
+    identifier: ParmanentMeasure_ApprovalActivities
+    description: Landing table for ParmanentMeasure_ApprovalActivities.
+  - name: ParmanentMeasure_ApprovalLogs
+    identifier: ParmanentMeasure_ApprovalLogs
+    description: Landing table for ParmanentMeasure_ApprovalLogs.
+  - name: ParmanentMeasure_Attachments
+    identifier: ParmanentMeasure_Attachments
+    description: Landing table for ParmanentMeasure_Attachments.
+  - name: ParmanentMeasure_Progresses
+    identifier: ParmanentMeasure_Progresses
+    description: Landing table for ParmanentMeasure_Progresses.
+  - name: ParmanentMeasure_ReportAttachments
+    identifier: ParmanentMeasure_ReportAttachments
+    description: Landing table for ParmanentMeasure_ReportAttachments.
+  - name: ParmanentMeasures
+    identifier: ParmanentMeasures
+    description: Landing table for ParmanentMeasures.
+  - name: Part_Controls
+    identifier: Part_Controls
+    description: Landing table for Part_Controls.
+  - name: Parts
+    identifier: Parts
+    description: Landing table for Parts.
+  - name: Progress_Statuses
+    identifier: Progress_Statuses
+    description: Landing table for Progress_Statuses.
+  - name: QVICS
+    identifier: QVICS
+    description: Landing table for QVICS.
+  - name: Translations
+    identifier: Translations
+    description: Landing table for Translations.
+  - name: Trouble_Attachments
+    identifier: Trouble_Attachments
+    description: Landing table for Trouble_Attachments.
+  - name: Trouble_Components
+    identifier: Trouble_Components
+    description: Landing table for Trouble_Components.
+  - name: Trouble_Locks
+    identifier: Trouble_Locks
+    description: Landing table for Trouble_Locks.
+  - name: Trouble_MailAddresses
+    identifier: Trouble_MailAddresses
+    description: Landing table for Trouble_MailAddresses.
+  - name: Trouble_Owners
+    identifier: Trouble_Owners
+    description: Landing table for Trouble_Owners.
+  - name: TroubleAnalysis_Keywords
+    identifier: TroubleAnalysis_Keywords
+    description: Landing table for TroubleAnalysis_Keywords.
+  - name: TroubleForTotalization_ListColumns
+    identifier: TroubleForTotalization_ListColumns
+    description: Landing table for TroubleForTotalization_ListColumns.
+  - name: Troubles
+    identifier: Troubles
+    description: Landing table for Troubles.
+  - name: Usefuls
+    identifier: Usefuls
+    description: Landing table for Usefuls.
+  - name: DEPARTMENTS
+    identifier: DEPARTMENTS
+    description: Landing table for DEPARTMENTS from SQLServer
+      [QVICS_c_TMEA].[dbo].[departments]
+  - name: V_ALLSIMPLETROUBLELISTS
+    identifier: V_ALLSIMPLETROUBLELISTS
+    description: Landing table for V_ALLSIMPLETROUBLELISTS from SQLServer 
+      [QVICS_c_TMEA].[dbo].[v_aLLSimpleTroubleLists]

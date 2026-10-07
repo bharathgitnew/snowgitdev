@@ -1,0 +1,201 @@
+models:
+- name: SILVER__TEA_LOGISTICS__BUSINESS_PARTNERS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_LOGISTICS__BUSINESS_PARTNERS_GENERAL_DATA
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_LOGISTICS__CONSIGNMENT_SHIPMENT_RECEIPT
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_LOGISTICS__CONSIGNMENT_TRANSACTION
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_LOGISTICS__CONSUMPTION
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_LOGISTICS__COST_CENTER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_LOGISTICS__CUSTOMERGROUP
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_LOGISTICS__DELIVERY_ORDER_LINE_MASTER_PUB
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_LOGISTICS__DROPSHIP_MODEL
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_LOGISTICS__FINANCE_ADJ_MAPPINGS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_LOGISTICS__INTEL_CONSUMED_VS_SAP_ORDERED
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_LOGISTICS__INVENTORY_GENERAL_MATERIAL
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_LOGISTICS__INVENTORY_PLANT_MATERIAL
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_LOGISTICS__INVENTORY_SALES_MATERIAL
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_LOGISTICS__MATERIAL_GROUP_DESCRIPTIONS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_LOGISTICS__MATERIAL_MASTER_3PL
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_LOGISTICS__MATERIAL_PLANT_MASTER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_LOGISTICS__MATERIAL_PRICING_GROUP1
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_LOGISTICS__MATERIAL_PRICING_GROUP2
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_LOGISTICS__MATERIAL_SALES_ORG_MASTER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_LOGISTICS__MATERIAL_TYPE_DESCRIPTIONS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_LOGISTICS__MATERIAL_VALUATION_MASTER_CODED
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_LOGISTICS__OPTIONSET_METADATA
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_LOGISTICS__PRICE_MATRIX
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_LOGISTICS__PROFIT_CENTER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_LOGISTICS__PURCHASE_INFORMATION_PURCHASE_ORDER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_LOGISTICS__PURCHASE_ORDER_DELIVERY_LINE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_LOGISTICS__RMA
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_LOGISTICS__RMA_SAPH
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_LOGISTICS__SALES_ORDER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_LOGISTICS__SALES_ORDER_BILLING_LINE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_LOGISTICS__SALES_ORDER_DELIVERY_LINE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_LOGISTICS__SAP_DEPARTMENT
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_LOGISTICS__SAP_REGION
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_LOGISTICS__SAP_SALES_CATEGORY
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_LOGISTICS__SAP_SDT_EV_DROPSHIPREPORT_GMX
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_LOGISTICS__SAP_SEGMENT
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_LOGISTICS__SERVICE_B_CODE_MAPPING
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_LOGISTICS__STORAGE_LOCATION_BATCH_CHARACTERISTICS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_LOGISTICS__TEA_UPS_TRANSCATION_HISTORY
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_LOGISTICS__TPL_SHIPMENT_LINE_DETAIL
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_LOGISTICS__TPL_UPS_INVENTORY_FILE_US
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_LOGISTICS__UNIVERSAL_ACTUAL_SETTLEMENT_EXTERNAL
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_LOGISTICS__UNIVERSAL_JOURNAL_ENTRY_LINE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_LOGISTICS__WBS_CODE_DESCRIPTION
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_LOGISTICS__WBS_MASTER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_LOGISTICS__GLOBAL_FOUNDRIES_ASN
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_LOGISITCS__STO_SITE_ORIGIN_AND_RECEIVING
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_LOGISTICS__SALES_ORDER_MASTER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_LOGISTICS__SALES_ORDER_SCHEDULE_LINE
+  tests:
+  - has_data
+  - recently_run

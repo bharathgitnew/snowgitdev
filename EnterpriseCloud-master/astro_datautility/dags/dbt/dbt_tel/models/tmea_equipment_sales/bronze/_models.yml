@@ -1,0 +1,2882 @@
+models:
+- name: BRONZE__TMEA_EQUIPMENT_SALES__CRM_FILE_ACCOUNT
+  description: Business that represents a customer or potential customer. The company
+    that is billed in business transactions.
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Check the _FILEDATE column in the BRONZE.TMEA_EQUIPMENT_SALES.CRM_FILE_ACCOUNT
+      table to ensure it falls within the last 24-hour interval.
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 24
+  - name: WEBSITEURL
+    description: Type the account's website URL to get quick details about the company
+      profile.
+  - name: TEL_COM_SUPPRESS_TECHINICAL_ACCEPTANCE
+    description: Control the conversion of Technical Acceptance to PDF in Project.
+  - name: INDUSTRYCODE
+    description: Select the account's primary industry for use in marketing segmentation
+      and demographic analysis.
+  - name: OWNINGUSER
+    description: Unique identifier of the user who owns the account.
+  - name: EXCHANGERATE
+    description: Shows the conversion rate of the record's currency. The exchange
+      rate is used to convert all money fields in the record from the local currency
+      to the system's default currency.
+  - name: STAGEID
+    description: Shows the ID of the stage.
+  - name: ADDRESS1_COUNTRY
+    description: Type the country or region for the primary address.
+  - name: MERGED
+    description: Shows whether the account has been merged with another account.
+  - name: CREDITONHOLD
+    description: Select whether the credit for the account is on hold. This is a useful
+      reference while addressing the invoice and accounting issues with the customer.
+  - name: ADDRESS2_TELEPHONE1
+    description: Type the main phone number associated with the secondary address.
+  - name: ADDRESS2_LINE2
+    description: Type the second line of the English address.
+  - name: CREATEDON
+    description: Shows the date and time when the record was created. The date and
+      time are displayed in the time zone selected in Microsoft Dynamics 365 options.
+  - name: SIC
+    description: Type the Standard Industrial Classification (SIC) code that indicates
+      the account's primary industry of business, for use in marketing segmentation
+      and demographic analysis.
+  - name: CREATEDBY
+    description: Shows who created the record.
+  - name: TELEPHONE3
+    description: Type a third phone number for this account.
+  - name: ONHOLDTIME
+    description: Shows how long, in minutes, that the record was on hold.
+  - name: MARKETCAP_BASE
+    description: Shows the market capitalization converted to the system's default
+      base currency.
+  - name: DONOTEMAIL
+    description: Select whether the account allows direct email sent from Microsoft
+      Dynamics 365.
+  - name: ADDRESS1_LONGITUDE
+    description: Type the longitude value for the primary address for use in mapping
+      and other applications.
+  - name: MSDYN_TAXEXEMPTNUMBER
+    description: Shows the government tax exempt number.
+  - name: TIMESPENTBYMEONEMAILANDMEETINGS
+    description: Total time spent for emails (read and write) and meetings by me in
+      relation to account record.
+  - name: ADDRESS2_PRIMARYCONTACTNAME
+    description: Type the name of the main contact at the account's secondary address.
+  - name: MASTERID
+    description: Shows the master account that the account was merged with.
+  - name: DONOTBULKPOSTALMAIL
+    description: Select whether the account allows bulk postal mail sent through marketing
+      campaigns or quick campaigns. If Do Not Allow is selected, the account can be
+      added to marketing lists, but will be excluded from the postal mail.
+  - name: LASTONHOLDTIME
+    description: Contains the date and time stamp of the last on hold time.
+  - name: COM_REGION
+    description: account 9
+  - name: OWNERID
+    description: Enter the user or team who is assigned to manage the record. This
+      field is updated every time the record is assigned to a different user.
+  - name: OVERRIDDENCREATEDON
+    description: Date and time that the record was migrated.
+  - name: MSDYN_BILLINGACCOUNT
+    description: Reference to an other account to be used for billing (only to be
+      used if billing account differs)
+  - name: ADDRESS2_TELEPHONE3
+    description: Type a third phone number associated with the secondary address.
+  - name: ADDRESS1_SHIPPINGMETHODCODE
+    description: Select a shipping method for deliveries sent to this address.
+  - name: DONOTBULKEMAIL
+    description: Select whether the account allows bulk email sent through campaigns.
+      If Do Not Allow is selected, the account can be added to marketing lists, but
+      is excluded from email.
+  - name: ADDRESS1_UPSZONE
+    description: Type the UPS zone of the primary address to make sure shipping charges
+      are calculated correctly and deliveries are made promptly, if shipped by UPS.
+  - name: ADDRESS1_LINE3
+    description: Type the third line of the Japanese address.
+  - name: TEL_COM_TEAM
+    description: The team to which the account belongs.
+  - name: EMAILADDRESS3
+    description: Type an alternate email address for the account.
+  - name: MODIFIEDBYEXTERNALPARTY
+    description: Shows the external party who modified the record.
+  - name: AGING60
+    description: For system use only.
+  - name: COM_CUSTOMER_CODE_6_DIGITS
+    description: account 9
+  - name: PREFERREDCONTACTMETHODCODE
+    description: Select the preferred method of contact.
+  - name: DONOTSENDMM
+    description: Select whether the account accepts marketing materials, such as brochures
+      or catalogs.
+  - name: STATECODE
+    description: Shows whether the account is active or inactive. Inactive accounts
+      are read-only and can't be edited unless they are reactivated.
+  - name: TEAMSFOLLOWED
+    description: Number of users or conversations followed the record
+  - name: EMAILADDRESS2
+    description: Type the secondary email address for the account.
+  - name: ADDRESS2_NAME
+    description: Type a descriptive name for the secondary address, such as Corporate
+      Headquarters.
+  - name: MSDYN_SERVICETERRITORY
+    description: The Service Territory this account belongs to. This is used to optimize
+      scheduling and routing
+  - name: PRIMARYCONTACTID
+    description: Choose the primary contact for the account to provide quick access
+      to contact details.
+  - name: MSDYN_SEGMENTID
+    description: Unique identifier for Segment associated with account.
+  - name: TICKERSYMBOL
+    description: Type the stock exchange symbol for the account to track financial
+      performance of the company. You can click the code entered in this field to
+      access the latest trading information from MSN Money.
+  - name: AGING90_BASE
+    description: The base currency equivalent of the aging 90 field.
+  - name: DEFAULTPRICELEVELID
+    description: Choose the default price list associated with the account to make
+      sure the correct product prices for this customer are applied in sales opportunities,
+      quotes, and orders.
+  - name: ADDRESS1_TELEPHONE1
+    description: Type the main phone number associated with the primary address.
+  - name: PREFERREDEQUIPMENTID
+    description: Choose the account's preferred service facility or equipment to make
+      sure services are scheduled correctly for the customer.
+  - name: PAYMENTTERMSCODE
+    description: Select the payment terms to indicate when the customer needs to pay
+      the total amount.
+  - name: ADDRESS2_POSTALCODE
+    description: Type the ZIP Code or postal code for the English address.
+  - name: AGING30
+    description: For system use only.
+  - name: AGING30_BASE
+    description: The base currency equivalent of the aging 30 field.
+  - name: ADDRESS2_LINE3
+    description: Type the third line of the secondary address.
+  - name: OPENREVENUE_BASE
+    description: Value of the Open Revenue in base currency.
+  - name: MODIFIEDONBEHALFBY
+    description: Shows who created the record on behalf of another user.
+  - name: REVENUE_BASE
+    description: Shows the annual revenue converted to the system's default base currency.
+      The calculations use the exchange rate specified in the Currencies area.
+  - name: PREFERREDAPPOINTMENTDAYCODE
+    description: Select the preferred day of the week for service appointments.
+  - name: ADDRESS2_COUNTY
+    description: Type the county for the secondary address.
+  - name: YOMINAME
+    description: Type the phonetic spelling of the company name, if specified in Japanese,
+      to make sure the name is pronounced correctly in phone calls and other communications.
+  - name: ADDRESS2_ADDRESSID
+    description: Unique identifier for address 2.
+  - name: AGING90
+    description: For system use only.
+  - name: ADDRESS2_TELEPHONE2
+    description: Type a second phone number associated with the secondary address.
+  - name: FTPSITEURL
+    description: Type the URL for the account's FTP site to enable users to access
+      data and share documents.
+  - name: ADDRESS2_FAX
+    description: Type the fax number associated with the secondary address.
+  - name: ADDRESS1_LATITUDE
+    description: Type the latitude value for the primary address for use in mapping
+      and other applications.
+  - name: TEL_COM_CUSTOMER_FLAG
+    description: Indicate whether account is defined as customer in SAP.
+  - name: ADDRESS2_CITY
+    description: Type the city for the English address.
+  - name: FAX
+    description: Type the fax number for the account.
+  - name: ADDRESS1_CITY
+    description: Type the city for the Japanese address.
+  - name: ADDRESS1_TELEPHONE3
+    description: Type a third phone number associated with the primary address.
+  - name: MSDYN_TRAVELCHARGETYPE
+    description: Specify how travel is charged for this account.
+  - name: TEA_SALESFORCE_ID
+    description: Unique ID from Salesforce migration.  Used in migration to match
+      related records
+  - name: TEA_TELSPARESMANAGER
+    description: Sales Account Manager
+  - name: PREFERREDSYSTEMUSERID
+    description: Choose the preferred service representative for reference when you
+      schedule service activities for the account.
+  - name: OPENREVENUE
+    description: Sum of open revenue against an account and its child accounts.
+  - name: OWNINGTEAM
+    description: Unique identifier of the team who owns the account.
+  - name: ADDRESS1_PRIMARYCONTACTNAME
+    description: Type the name of the main contact at the account's primary address.
+  - name: OPENDEALS_STATE
+    description: State of rollup field Open Deals.
+  - name: ENTITYIMAGEID
+    description: For internal use only.
+  - name: DONOTPOSTALMAIL
+    description: Select whether the account allows direct mail. If Do Not Allow is
+      selected, the account will be excluded from letter activities distributed in
+      marketing campaigns.
+  - name: ACCOUNTID
+    description: Unique identifier of the account.
+  - name: PRIMARYSATORIID
+    description: Primary Satori ID for Account
+  - name: COM_NIS_REGION_CD
+    description: account 9
+  - name: OPENDEALS
+    description: Number of open opportunities against an account and its child accounts.
+  - name: OWNINGBUSINESSUNIT
+    description: Shows the business unit that the record owner belongs to.
+  - name: MSDYN_EXTERNALACCOUNTID
+    description: External Account ID from other systems.
+  - name: PREFERREDSERVICEID
+    description: Choose the account's preferred service for reference when you schedule
+      service activities.
+  - name: AGING60_BASE
+    description: The base currency equivalent of the aging 60 field.
+  - name: ADDRESS1_TELEPHONE2
+    description: Type a second phone number associated with the primary address.
+  - name: ACCOUNTCATEGORYCODE
+    description: Select a category to indicate whether the customer account is standard
+      or preferred.
+  - name: TEL_COM_ALLOWESIGNATURE
+    description: Control the availability of E-Sign for each Account
+  - name: EMAILADDRESS1
+    description: Type the primary email address for the account.
+  - name: MSDYN_GDPROPTOUT
+    description: Describes whether account is opted out or not
+  - name: SHARESOUTSTANDING
+    description: Type the number of shares available to the public for the account.
+      This number is used as an indicator in financial performance analysis.
+  - name: MODIFIEDBY
+    description: Shows who last updated the record.
+  - name: ADDRESS1_COMPOSITE
+    description: Shows the complete primary address.
+  - name: TELEPHONE2
+    description: Type a second phone number for this account.
+  - name: ADDRESS2_POSTOFFICEBOX
+    description: Type the post office box number of the secondary address.
+  - name: NAME
+    description: Type the company or business name.
+  - name: COM_NIS_REGION
+    description: account 9
+  - name: ADDRESS2_SHIPPINGMETHODCODE
+    description: Select a shipping method for deliveries sent to this address.
+  - name: ACCOUNTCLASSIFICATIONCODE
+    description: Select a classification code to indicate the potential value of the
+      customer account based on the projected return on investment, cooperation level,
+      sales cycle length or other criteria.
+  - name: OPENREVENUE_DATE
+    description: Last Updated time of rollup field Open Revenue.
+  - name: MSDYN_TAXEXEMPT
+    description: Select whether the account is tax exempt.
+  - name: TIMEZONERULEVERSIONNUMBER
+    description: For internal use only.
+  - name: DONOTPHONE
+    description: Select whether the account allows phone calls. If Do Not Allow is
+      selected, the account will be excluded from phone call activities distributed
+      in marketing campaigns.
+  - name: NUMBEROFEMPLOYEES
+    description: Type the number of employees that work at the account for use in
+      marketing segmentation and demographic analysis.
+  - name: ADDRESS1_UTCOFFSET
+    description: Select the time zone, or UTC offset, for this address so that other
+      people can reference it when they contact someone at this address.
+  - name: ADDRESS1_NAME
+    description: Type a descriptive name for the primary address, such as Corporate
+      Headquarters.
+  - name: COM_HEADOFFICEFLAG
+    description: Classification if the customer is the head office.
+  - name: BUSINESSTYPECODE
+    description: Select the legal designation or other business type of the account
+      for contracts or reporting purposes.
+  - name: ADDRESS2_ADDRESSTYPECODE
+    description: Select the secondary address type.
+  - name: ADDRESS1_FAX
+    description: Type the fax number associated with the primary address.
+  - name: OWNERSHIPCODE
+    description: Select the account's ownership structure, such as public or private.
+  - name: MSDYN_TRAVELCHARGE
+    description: Enter the travel charge to include on work orders. This value will
+      be multiplied by the travel charge type.
+  - name: ORIGINATINGLEADID
+    description: Shows the lead that the account was created from if the account was
+      created by converting a lead in Microsoft Dynamics 365. This is used to relate
+      the account to data on the originating lead for use in reporting and analytics.
+  - name: UTCCONVERSIONTIMEZONECODE
+    description: Time zone code that was in use when the record was created.
+  - name: ADDRESS1_ADDRESSID
+    description: Unique identifier for address 1.
+  - name: MARKETCAP
+    description: Type the market capitalization of the account to identify the company's
+      equity, used as an indicator in financial performance analysis.
+  - name: PARTICIPATESINWORKFLOW
+    description: For system use only. Legacy Microsoft Dynamics CRM 3.0 workflow data.
+  - name: DESCRIPTION
+    description: Type additional information to describe the account, such as an excerpt
+      from the company's website.
+  - name: TEL_COM_SUPPLIER_FLAG
+    description: Indicate whether account is defined as supplier in SAP.
+  - name: PREFERREDAPPOINTMENTTIMECODE
+    description: Select the preferred time of day for service appointments.
+  - name: ADDRESS1_POSTOFFICEBOX
+    description: Type the post office box number of the primary address.
+  - name: SLAINVOKEDID
+    description: Last SLA that was applied to this case. This field is for internal
+      use only.
+  - name: TRAVERSEDPATH
+    description: For internal use only.
+  - name: ACCOUNTNUMBER
+    description: Type an ID number or code for the account to quickly search and identify
+      the account in system views.
+  - name: ADDRESS2_FREIGHTTERMSCODE
+    description: Select the freight terms for the secondary address to make sure shipping
+      orders are processed correctly.
+  - name: ADDRESS2_LATITUDE
+    description: Type the latitude value for the secondary address for use in mapping
+      and other applications.
+  - name: ADDRESS2_UTCOFFSET
+    description: Select the time zone, or UTC offset, for this address so that other
+      people can reference it when they contact someone at this address.
+  - name: ADDRESS2_LONGITUDE
+    description: Type the longitude value for the secondary address for use in mapping
+      and other applications.
+  - name: CUSTOMERSIZECODE
+    description: Select the size category or range of the account for segmentation
+      and reporting purposes.
+  - name: MODIFIEDON
+    description: Shows the date and time when the record was last updated. The date
+      and time are displayed in the time zone selected in Microsoft Dynamics 365 options.
+  - name: CUSTOMERTYPECODE
+    description: Select the category that best describes the relationship between
+      the account and your organization.
+  - name: COM_COUNTRY_MASTER_CD
+    description: account 9
+  - name: ADDRESS1_FREIGHTTERMSCODE
+    description: Select the freight terms for the primary address to make sure shipping
+      orders are processed correctly.
+  - name: MSDYN_SALESTAXCODE
+    description: Default Sales Tax Code
+  - name: STATUSCODE
+    description: Select the account's status.
+  - name: PRIMARYTWITTERID
+    description: Primary Twitter ID for Account
+  - name: TERRITORYCODE
+    description: Select a region or territory for the account for use in segmentation
+      and analysis.
+  - name: DONOTFAX
+    description: Select whether the account allows faxes. If Do Not Allow is selected,
+      the account will be excluded from fax activities distributed in marketing campaigns.
+  - name: ADDRESS1_STATEORPROVINCE
+    description: Type the state or province of the primary address.
+  - name: ADDRESS1_LINE1
+    description: Type the first line of the Japanese address.
+  - name: REVENUE
+    description: Type the annual revenue for the account, used as an indicator in
+      financial performance analysis.
+  - name: OPENDEALS_DATE
+    description: Last Updated time of rollup field Open Deals.
+  - name: ADDRESS2_COUNTRY
+    description: Type the country or region for the English address.
+  - name: LASTUSEDINCAMPAIGN
+    description: Shows the date when the account was last included in a marketing
+      campaign or quick campaign.
+  - name: VERSIONNUMBER
+    description: Version number of the account.
+  - name: ACCOUNTRATINGCODE
+    description: Select a rating to indicate the value of the customer account.
+  - name: ADDRESS1_POSTALCODE
+    description: Type the ZIP Code or postal code for the Japanese address.
+  - name: TERRITORYID
+    description: Choose the sales region or territory for the account to make sure
+      the account is assigned to the correct representative and for use in segmentation
+      and analysis.
+  - name: STOCKEXCHANGE
+    description: Type the stock exchange at which the account is listed to track their
+      stock and financial performance of the company.
+  - name: TRANSACTIONCURRENCYID
+    description: Choose the local currency for the record to make sure budgets are
+      reported in the correct currency.
+  - name: SLAID
+    description: Choose the service level agreement (SLA) that you want to apply to
+      the Account record.
+  - name: CREDITLIMIT_BASE
+    description: Shows the credit limit converted to the system's default base currency
+      for reporting purposes.
+  - name: MSDYN_SALESACCELERATIONINSIGHTID
+    description: Sales Acceleration Insights ID
+  - name: ADDRESS1_LINE2
+    description: Type the second line of the Japanese address.
+  - name: MSDYN_WORKORDERINSTRUCTIONS
+    description: Shows the default instructions to show on new work orders.
+  - name: OPENREVENUE_STATE
+    description: State of rollup field Open Revenue.
+  - name: SHIPPINGMETHODCODE
+    description: Select a shipping method for deliveries sent to the account's address
+      to designate the preferred carrier or other delivery option.
+  - name: IMPORTSEQUENCENUMBER
+    description: Unique identifier of the data import or data migration that created
+      this record.
+  - name: PROCESSID
+    description: Shows the ID of the process.
+  - name: ADDRESS2_STATEORPROVINCE
+    description: Type the state or province of the English address.
+  - name: TELEPHONE1
+    description: Type the main phone number for this account.
+  - name: ADDRESS1_ADDRESSTYPECODE
+    description: Select the primary address type.
+  - name: CREDITLIMIT
+    description: Type the credit limit of the account. This is a useful reference
+      when you address invoice and accounting issues with the customer.
+  - name: TEA_EIN
+    description: USA - federal tax ID number
+  - name: ADDRESS1_COUNTY
+    description: Type the county for the primary address.
+  - name: TEL_COM_TELGROUP_FLAG
+    description: Indicate whether account is defined as TEL Group company.
+  - name: CREATEDONBEHALFBY
+    description: Shows who created the record on behalf of another user.
+  - name: ADDRESS2_LINE1
+    description: Type the first line of the English address.
+  - name: FOLLOWEMAIL
+    description: Information about whether to allow following email activity like
+      opens, attachment views and link clicks for emails sent to the account.
+  - name: CREATEDBYEXTERNALPARTY
+    description: Shows the external party who created the record.
+  - name: MARKETINGONLY
+    description: Whether is only for marketing
+  - name: MSDYN_TRAVELCHARGE_BASE
+    description: Value of the Travel Charge in base currency.
+  - name: PARENTACCOUNTID
+    description: Choose the parent account associated with this account to show parent
+      and child businesses in reporting and analytics.
+  - name: ADDRESS2_COMPOSITE
+    description: Shows the complete secondary address.
+  - name: ADDRESS2_UPSZONE
+    description: Type the UPS zone of the secondary address to make sure shipping
+      charges are calculated correctly and deliveries are made promptly, if shipped
+      by UPS.
+- name: BRONZE__TMEA_EQUIPMENT_SALES__CRM_FILE_COM_COUNTRYMASTER
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: TEL_COM_SELECTABLE_TES
+    description: Indicates whether the country is seletable as shipping destination
+      country in Parts Order for TES.
+  - name: TEL_COM_SELECTABLE_TEA
+    description: Indicates whether the country is seletable as shipping destination
+      country in Parts Order for TEA.
+  - name: TEL_COM_BAAN_COUNTRYCODE_TEK
+    description: Country Code used in TEK BaaN. This will be used to integrate the
+      shipping information of Parts Order to ERP system.
+  - name: MODIFIEDBY
+    description: Unique identifier of the user who modified the record.
+  - name: COM_COUNTRYMASTERID
+    description: Unique identifier for entity instances
+  - name: MODIFIEDONBEHALFBY
+    description: Unique identifier of the delegate user who modified the record.
+  - name: TEL_COM_SELECTABLE_TSI
+    description: Indicates whether the country is seletable as shipping destination
+      country in Parts Order for TSI.
+  - name: STATECODE
+    description: Status of the Country Master
+  - name: TEL_COM_COUNTRYCODE_TEE
+    description: Country Code used in TEE BaaN. This will be used to integrate the
+      shipping information of Parts Order to ERP system.
+  - name: TEL_COM_BAAN_COUNTRYCODE_TSI
+    description: Country Code used in TSI BaaN. This will be used to integrate the
+      shipping information of Parts Order to ERP system.
+  - name: CREATEDONBEHALFBY
+    description: Unique identifier of the delegate user who created the record.
+  - name: TEL_COM_BAAN_COUNTRYCODE_TEA
+    description: Country Code used in TEA BaaN. This will be used to integrate the
+      shipping information of Parts Order to ERP system.
+  - name: TEL_COM_SELECTABLE_TET
+    description: Indicates whether the country is seletable as shipping destination
+      country in Parts Order for TET.
+  - name: COM_NAME
+    description: The name of the custom entity.
+  - name: STATUSCODE
+    description: Reason for the status of the Country Master
+  - name: CREATEDON
+    description: Date and time when the record was created.
+  - name: TEL_COM_WHITELISTCOUNTRY
+    description: Indicates whether the country is on the whitelist.
+  - name: TEL_COM_SELECTABLE_TEE
+    description: Indicates whether the country is seletable as shipping destination
+      country in Parts Order for TEE.
+  - name: OVERRIDDENCREATEDON
+    description: Date and time that the record was migrated.
+  - name: TEL_COM_SELECTABLE_TEK
+    description: Indicates whether the country is seletable as shipping destination
+      country in Parts Order for TEK.
+  - name: UTCCONVERSIONTIMEZONECODE
+    description: Time zone code that was in use when the record was created.
+  - name: TEL_COM_BAAN_COUNTRYCODE_TET
+    description: Country Code used in TET BaaN. This will be used to integrate the
+      shipping information of Parts Order to ERP system.
+  - name: TEL_COM_SELECTABLE_TEJ
+    description: Indicates whether the country is seletable as shipping destination
+      country in Parts Order for TEJ.
+  - name: IMPORTSEQUENCENUMBER
+    description: Sequence number of the import that created this record.
+  - name: TEL_COM_BAAN_COUNTRYCODE_TES
+    description: Country Code used in TES BaaN. This will be used to integrate the
+      shipping information of Parts Order to ERP system.
+  - name: TIMEZONERULEVERSIONNUMBER
+    description: For internal use only.
+  - name: MODIFIEDON
+    description: Date and time when the record was modified.
+  - name: CREATEDBY
+    description: Unique identifier of the user who created the record.
+  - name: VERSIONNUMBER
+    description: Version Number
+  - name: ORGANIZATIONID
+    description: Unique identifier for the organization
+- name: BRONZE__TMEA_EQUIPMENT_SALES__CRM_FILE_GLOBALOPTIONSETMETADATA
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Check the _FILEDATE column in the BRONZE.TMEA_EQUIPMENT_SALES.CRM_FILE_GLOBALOPTIONSETMETADATA
+      table to ensure it falls within the last 24-hour interval.
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 24
+- name: BRONZE__TMEA_EQUIPMENT_SALES__CRM_FILE_MSDYN_CUSTOMERASSET
+  description: Specify Eqipment.
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Check the _FILEDATE column in the BRONZE.TMEA_EQUIPMENT_SALES.CRM_FILE_MSDYN_CUSTOMERASSET
+      table to ensure it falls within the last 24-hour interval.
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 24
+  - name: CREATEDBY
+    description: Unique identifier of the user who created the record.
+  - name: MSDYN_CUSTOMERASSETID
+    description: Shows the entity instances.
+  - name: STATECODE
+    description: Status of the Equipment
+  - name: MSDYN_PRODUCT
+    description: Reference to Product associated with this Equipment
+  - name: OWNERIDNAME
+    description: Name of the owner
+  - name: OWNINGTEAM
+    description: Unique identifier for the team that owns the record.
+  - name: MSDYN_ALERTCOUNT
+    description: Count of parent alerts for this customer asset
+  - name: CREATEDONBEHALFBY
+    description: Shows who created the record on behalf of another user.
+  - name: OWNERIDTYPE
+    description: Owner Id Type
+  - name: OWNERIDYOMINAME
+    description: Yomi name of the owner
+  - name: MSDYN_CUSTOMERASSETCATEGORY
+    description: The category of the customer asset
+  - name: MSDYN_DEVICEID
+    description: Device ID used to register with the IoT provider. This will not be
+      used if there are two or more connected devices for this asset. This value will
+      be updated based on the connected devices.
+  - name: STATUSCODE
+    description: Reason for the status of the Equipment
+  - name: MSDYN_LASTALERTTIME_DATE
+    description: Last Updated time of rollup field Last active alert time.
+  - name: MSDYN_ALERTCOUNT_STATE
+    description: State of rollup field Alert Count.
+  - name: OWNINGBUSINESSUNIT
+    description: Unique identifier for the business unit that owns the record
+  - name: MSDYN_MASTERASSET
+    description: Top level Equipment, (if this Equipment is a sub Equipment)
+  - name: OWNINGUSER
+    description: Unique identifier for the user that owns the record.
+  - name: MSDYN_REGISTRATIONSTATUS
+    description: A status field that denotes whether all the devices connected to
+      this asset are registered with the IoT provider.
+  - name: MSDYN_LASTALERTTIME_STATE
+    description: State of rollup field Last active alert time.
+  - name: UTCCONVERSIONTIMEZONECODE
+    description: Shows the time zone code that was in use when the record was created.
+  - name: MSDYN_PARENTASSET
+    description: Parent Equipment
+  - name: MSDYN_WORKORDERPRODUCT
+    description: Indicates a link to the Work Order Product from where this Equipment
+      was auto created by the system.
+  - name: MSDYN_LASTCOMMANDSENT
+    description: The last command sent to any of the connected devices for this asset.
+  - name: OVERRIDDENCREATEDON
+    description: Shows the date and time that the record was migrated.
+  - name: OWNERID
+    description: Owner Id
+  - name: TIMEZONERULEVERSIONNUMBER
+    description: For internal use only.
+  - name: CREATEDON
+    description: Shows the date and time when the record was created. The date and
+      time are displayed in the time zone selected in Microsoft Dynamics CRM options.
+  - name: MSDYN_ALERT
+    description: If active parent alerts exist for the customer asset
+  - name: MSDYN_ALERTCOUNT_DATE
+    description: Last Updated time of rollup field Alert Count.
+  - name: MODIFIEDBY
+    description: Unique identifier of the user who modified the record.
+  - name: MODIFIEDONBEHALFBY
+    description: Shows who last updated the record on behalf of another user.
+  - name: IMPORTSEQUENCENUMBER
+    description: Shows the sequence number of the import that created this record.
+  - name: MSDYN_ACCOUNT
+    description: Parent Customer of this Equipment
+  - name: MSDYN_LASTCOMMANDSENTTIME
+    description: The timestamp of the last command sent for any of the connected devices
+      for this asset.
+  - name: VERSIONNUMBER
+    description: Version Number
+  - name: MODIFIEDON
+    description: Shows the date and time when the record was last updated. The date
+      and time are displayed in the time zone selected in Microsoft Dynamics CRM options.
+- name: BRONZE__TMEA_EQUIPMENT_SALES__CRM_FILE_MSDYN_WORKORDER
+  description: Work orders store all information about the job performed for an account.
+    Stores incident details, resource, expenses, tasks, communications, billing and
+    more
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Check the _FILEDATE column in the BRONZE.TMEA_EQUIPMENT_SALES.CRM_FILE_MSDYN_WORKORDER
+      table to ensure it falls within the last 24-hour interval.
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 24
+  - name: TEL_WO_WARRANTYSTARTISBLANK
+    description: Whether Installation Warranty Start Date is blank
+  - name: WO_REMARKS
+    description: Additional remarks to be shared with customer.
+  - name: TEL_WO_TARGETSOFTWAREVERSION
+    description: Target software version to be updated to.
+  - name: TEL_WO_TRIGGER_CREATE_NCDR_SO
+    description: Flag for I/F to identify when to send SO Creation request for Modification
+      Work
+  - name: MSDYN_TOTALESTIMATEDAFTERTAXPRICE_BASE
+    description: Value of the Total Estimated After Tax Price in base currency.
+  - name: TEL_WO_NOOFREOCCURRINGWO_DATE
+    description: Last Updated time of rollup field No. of Reoccurring WO.
+  - name: TEL_WO_SAPWOCHANGETYPE
+    description: Flag to represent the Type of change on CRM to SAP on CS0050
+  - name: OWNERID
+    description: Owner Id
+  - name: TEL_WO_CONCESSION_REASON
+    description: Concession Reason of this Work Order.
+  - name: TEL_WO_IFFIELD_MODIFIEDON_WISDOM
+    description: Automatically sets the date and time when the I / F field of TimeEntry
+      for Wisdom in WO was updated
+  - name: MSDYN_TOTALSALESTAX_BASE
+    description: Shows the value of the total sales tax in the base currency.
+  - name: TEL_WO_CMRCCUSTOMERSIGNOFF
+    description: Check this field if customer sign of the CMRC is received.
+  - name: TEL_WO_SUBCATEGORY_SOREQUEST
+    description: Type of work for the work order, such as start-up, installation,
+      Calibration, etc. Values of this field to be filtered depending on the value
+      of Main Category.
+  - name: WO_NOOFASSIGNEDFE
+    description: Number of FEs that are assigned to the work order.
+  - name: MSDYN_PRODUCTSSERVICESESTIMATEDCOST
+    description: The total estimated cost of the products and services
+  - name: WO_NOTIFYSERVICETASKCOMPLETION
+    description: Whether notification email is sent to user or not. Default value
+      is false. This is hidden.
+  - name: MSDYN_FUNCTIONALLOCATION
+    description: Workorder's functional location
+  - name: TEL_WO_SUGGESTED_CALC_METHOD
+    description: Suggested Calculation Method
+  - name: TEL_WO_DESTINATION
+    description: A flag to switch target address from team address to user address.
+  - name: WO_NOOFASSIGNEDFE_STATE
+    description: State of rollup field No. of Assigned FE.
+  - name: MSDYN_SERVICEACCOUNT
+    description: Customer Fab
+  - name: MSDYN_TRADE
+    description: Select the Trade that associated with the Work Order.
+  - name: MSDYN_COSTNTEPERCENT
+    description: Indicates the percentage proximity or overage of the work order cost
+      based on applied Cost not-to-exceed (rounded up to the nearest whole number).
+  - name: MSDYN_INSTRUCTIONS
+    description: Shows instructions for booked resources. By default, this information
+      is taken from the work order instructions field on the service account.
+  - name: TEL_WO_TMP_SO_NO_TEXT
+    description: SO No. manually input for TSI.
+  - name: WO_ANALYSISRESULT
+    description: Input the result of any additional analysis that was performed.
+  - name: MSDYN_SYSTEMSTATUS
+    description: Status of the work order. It is supposed to be system status of the
+      work order and can not be change manually. E.g. "Open - Unscheduled", "Open
+      - Scheduled", and "Closed - Posted".
+  - name: TEL_WO_SERVICEFROM_WHICHCREATED
+    description: Service From Which Created is set to RESCO when WO is created from
+      RESCO
+  - name: WO_COPYTOFIXEDPORTION
+    description: Copy work order data.
+  - name: MSDYN_TOTALSALESTAX
+    description: Enter the summary of total sales tax charged for this work order.
+  - name: WO_RESOURCEASSIGNED
+    description: Assignee Notified Flag
+  - name: WO_FCNSIID
+    description: FCN/SI ID
+  - name: WO_WORKDETAILMULTILINE
+    description: Detailed description
+  - name: MSDYN_CLOSEDBY
+    description: The user that last closed this work order
+  - name: WO_PROCESSERTEAM
+    description: Field Service Business team.
+  - name: WO_RECURRENCE
+    description: Flag for Reoccurrence * This field has been replaced by the "tel_wo_tel_wo_recurrence_calclated"
+      field.
+  - name: TEL_WO_TOOL_ID_TEXT
+    description: Item allow user to manual amendment tool ID.
+  - name: WO_REMARKSINTERNAL
+    description: Additional Internal Remarks
+  - name: MSDYN_PREFERREDRESOURCE
+    description: The customer Preferred Resource to work on this job. Should be taken
+      into consideration while scheduling resources
+  - name: WO_TSRPARTSTOTAL_BASE
+    description: Value of the [TSR]Total Parts Charge in base currency.
+  - name: TRANSACTIONCURRENCYID
+    description: Unique identifier of the currency associated with the entity.
+  - name: WO_URLFORRELATEDDOCUMENTS3
+    description: Follow the link for a folder with related documents.
+  - name: TEL_WO_SNCONFIRMED
+    description: Confirm with customer that the planned work is assigned to the correct
+      S/N.
+  - name: MSDYN_IOTALERT
+    description: The iot alert which initiated this work order.
+  - name: WO_TSREXPENSETOTAL_CALCULATED
+    description: Expense Subtotal
+  - name: WO_PROCESSISSUE
+    description: Flag for Process Data
+  - name: CREATEDONBEHALFBY
+    description: Shows who created the record on behalf of another user.
+  - name: WO_TOOLDOWNDATE
+    description: Date when tool down occurred.
+  - name: TEL_WO_CMRCESIGNATURE_STATUS
+    description: When the Envelope Status value of DocuSign Transaction　entity is
+      changed, it is automatically reflected.
+  - name: TEL_WO_QUOTATION_NO
+    description: TEL Quotation Number
+  - name: STAGEID
+    description: Shows the ID of the stage where the entity is located.
+  - name: WO_TOOLDOWNRECOVERYDATE
+    description: Date when recovered from tool down.
+  - name: WO_COMPLETIONTIME
+    description: Time when this Work Order changed to Completion Stage
+  - name: TEL_WO_INSTALLATION_ID
+    description: Installation information which is interfaced from BAAN.
+  - name: WO_SYMPTOMS
+    description: Troubleshooting Symptoms
+  - name: OVERRIDDENCREATEDON
+    description: Shows the date and time that the record was migrated.
+  - name: WO_TSRTOTALADJUSTMENTCALCULATED_BASE
+    description: Value of the Total Adjustment in base currency.
+  - name: TEL_WO_SIGNER_BY
+    description: Set the type of signer.
+  - name: TEL_WO_COMPANY1
+    description: Describe the Company1 of this Work Order.
+  - name: WO_LATESTPASSDOWNRESULT
+    description: Latest Passdown Result of this Work Order.
+  - name: TEL_WO_TSR_TITLE
+    description: TSR Title of the work order.
+  - name: TEL_WO_PAYMENTTYPE_CHANGEABLE
+    description: This is the field that tells you if you can change the payment type
+      from chargeable to non-chargeable. Set when Work Order Copy (All, Header) is
+      performed. Set to Yes until the first save occurs after
+  - name: TEL_WO_NEEDS_RECALCULATE_TSR_PRICE
+    description: Flag to prompt user to re-calc TSR if they updated any of following
+      screen items in each Tab of WO screen. - TSR Header.Additional Adjustment -
+      Labor.Adjustment - Expense.Adjustment - Parts.Adjustment
+  - name: TEL_WO_REPLACEMENTCHAMBERSN
+    description: Lookup to Chamber SN filtered based on the selected Replacement SN
+  - name: OWNERIDNAME
+    description: Name of the owner
+  - name: WO_URLFORRELATEDDOCUMENTS4
+    description: Follow the link for a folder with related documents.
+  - name: WO_PROCESSSTAGENAME
+    description: Current Process Stage Name of this Work Order.
+  - name: TEL_WO_REPLACEMENTSN
+    description: Use to change Machine Search
+  - name: MSDYN_ESTIMATESUBTOTALAMOUNT
+    description: Enter the summary of total estimated billing amount for this work
+      order
+  - name: WO_CUSTOMERREPORTEDSYMPTOMS
+    description: Symptoms reported from customer.
+  - name: WO_CHARGETO
+    description: For internal use only
+  - name: WO_REPORTNUMBERHISTORY
+    description: Report No. related to this work order. Set Report No. by comma separator.
+      Set in descending order from the top.
+  - name: WO_TROUBLEREOCCURRENCE
+    description: Trouble Reoccurence Flag
+  - name: WO_FIXEDCOUNTERMEASURE
+    description: Input steps taken for improvement.
+  - name: WO_TSRTOTALADJUSTMENTCALCULATED
+    description: Total Adjustment (re-calculation to be done when saved.)
+  - name: WO_PLANNEDEND
+    description: Planned End Date and Time
+  - name: TEL_WO_RECURRENCE_CALCLATED
+    description: Flag for Reoccurrence
+  - name: MSDYN_PRODUCTSSERVICESCOST_BASE
+    description: Value of the Total Cost in base currency.
+  - name: TEL_WO_URL_RTISSQVICS
+    description: Indicate RTISS/QVICS URL.
+  - name: WO_CURRENTTL
+    description: Leader of the work order.
+  - name: WO_ADDITIONALADJUSTMENT
+    description: Use this field for any additional adjustment needed for the TSR.
+  - name: WO_OPERATIONSTATUS
+    description: Overview of the operation status before the troubleshooting was needed.
+  - name: TEL_WO_SAPFIELDMODIFIEDON
+    description: Shows the date and time when the fields which will be integrated
+      to SAP were last updated.
+  - name: TEL_WO_CONTRACTGROUP
+    description: Related Contract Group of the work order.
+  - name: WO_REOCCURRENCETIME
+    description: Reoccurrence time of this record.
+  - name: WO_TSRPARTSTOTAL_CALCULATED
+    description: Parts Subtotal
+  - name: WO_ORIGINATINGWORKORDER
+    description: Display original Work Order Number if this work order is reopened
+      work order.
+  - name: TEL_WO_SECONDARY_SO
+    description: The corresponding free service order record created for Modification
+      work order.
+  - name: TEL_WO_DISPLAYPARENTSNONREPORT
+    description: Flag to specify whether display parent equipment S/N on report or
+      not.
+  - name: WO_ISREADYFORCLOSURE
+    description: Indicates the readiness for closure. Can be set from Resco.
+  - name: TEL_WO_STATUS_RTISSQVICS
+    description: Indicate RTISS/QVICS Status.
+  - name: MSDYN_TIMECLOSED
+    description: Enter the time this work order was last closed.
+  - name: MSDYN_WORKORDERRESOLUTIONKPIID
+    description: For internal use only.
+  - name: TEL_WO_LINK_TO_ENVELOPE
+    description: Contains a URL of the currently sent envelope signature request.  Clicking
+      on the icon on this field will open a new tab that will redirect the user to
+      the DocuSign website's envelope details page.
+  - name: TEL_WO_REVRECCRITERIA
+    description: Bring from Primary SO or Secondary SO. Set in the field "Rev Rec
+      Criteria" of the entity "Sales Order Item". This field is read-only.
+  - name: WO_TSRLABORTOTAL_CALCULATED
+    description: Subtotal
+  - name: MSDYN_PRIMARYINCIDENTDESCRIPTION
+    description: Incident description
+  - name: TEL_WO_REQUESTER
+    description: Indicates who requested the work order.
+  - name: OWNINGBUSINESSUNIT
+    description: Unique identifier for the business unit that owns the record
+  - name: WO_ORDEREDDATE
+    description: Ordered Date
+  - name: TEL_WO_PRIMARY_SO
+    description: The corresponding SO record created when the work order is created
+      in CRM first and then SO Request is sent to SAP. This field will be used only
+      for dashboards.
+  - name: TEL_WO_SUBCONTRACTOR_REQUEST_ID
+    description: Subcontractor's Request ID
+  - name: WO_TSRPARTSTOTAL
+    description: Parts Subtotal
+  - name: WO_DELAY
+    description: Delay flag to show if this work order is being delayed or not.
+  - name: TEL_WO_WO_SEARCH
+    description: This field is used to search Work Order which should be related to
+      this Order Group.
+  - name: WO_TIMEDUE
+    description: Due Date for Work
+  - name: WO_URLFORRELATEDDOCUMENTS2
+    description: Follow the link for a folder with related documents.
+  - name: PROCESSID
+    description: Shows the ID of the process associated with the entity.
+  - name: MSDYN_ESTIMATESUBTOTALAMOUNT_BASE
+    description: Shows the value of the estimate subtotal amount in the base currency.
+  - name: MSDYN_SUBTOTALAMOUNT
+    description: Enter the summary of subtotal billing amount excluding tax for this
+      work order.
+  - name: WO_TSRACTUALHOURS
+    description: Actual Hours
+  - name: WO_TSRLABORTOTAL
+    description: Subtotal
+  - name: WO_TSREXPENSETOTAL
+    description: Expense Subtotal
+  - name: TEL_WO_CMRCSERVICE_OPERATIONS_TEAM
+    description: Set recipient for the completed and signed pdf. Set as contact information
+      details for issues/concerns regarding sign documents amount figures in sign
+      request email.
+  - name: TEL_WO_UNLIMITED
+    description: To specify multiple devices with one WO, turn this setting ON.
+  - name: WO_TSRLABORTOTAL_BASE
+    description: Value of the [TSR]Total Labor Charge in base currency.
+  - name: MSDYN_PRICENTEPERCENT
+    description: Indicates the percentage proximity or overage of the work order price
+      based on applied Price not-to-exceed (rounded up to the nearest whole number).
+  - name: WO_TELSIGNERNAMEMANUALINPUT
+    description: Input the name of all TEL employees signing the TSR.
+  - name: TRAVERSEDPATH
+    description: Shows a comma-separated list of string values representing the unique
+      identifiers of stages in a business process flow instance in the order that
+      they occur.
+  - name: TEL_WO_CMRCCUSTOMERCONTACT
+    description: Select the name of customer signing the the CMRC.
+  - name: WO_TOOLLEVELSECURITYREQUIRED
+    description: This field is used for temporary security solution. If the WO is
+      for secure tool, check this flag.
+  - name: MSDYN_WORKORDERARRIVALTIMEKPIID
+    description: For internal use only.
+  - name: TEL_WO_USE_PCD
+    description: Indicates whether to use the PCD cooperation  function.  Note:See
+      remarks. (there is an explanation about migration.)
+  - name: TEL_WO_ORDER_NO
+    description: Order Number
+  - name: WO_CUSTOMERSIGNEES
+    description: Input the name of customer signing the TSR.
+  - name: STATECODE
+    description: Status of the Work Order
+  - name: WO_NOOFASSIGNEDFE_DATE
+    description: Last Updated time of rollup field No. of Assigned FE.
+  - name: TEL_WO_ISSUE_RTISSQVICS
+    description: Indicate RTISS/QVICS Issued date.
+  - name: TEL_WO_DOCUMENT_TYPE
+    description: Set the type of report to sign.
+  - name: WO_TSREXPENSETOTAL_CALCULATED_BASE
+    description: Value of the Total (expense)(Calculated) in base currency.
+  - name: TEL_WO_CMRCSIGNED_PDF_ATTACHED
+    description: Set whether or not a signed PDF is attached.
+  - name: TEL_WO_ESIGNATURE_STATUS
+    description: When the Envelope Status value of DocuSign Transaction　entity is
+      changed, it is automatically reflected.
+  - name: MSDYN_OPPORTUNITYID
+    description: Unique identifier for Opportunity associated with Work Order.
+  - name: WO_CUSTOMERREQUESTNO
+    description: Customer Request Number
+  - name: TEL_WO_SCHEDULEDCUSTOMSCLEARANCEDATE
+    description: Bring from Primary SO or Secondary SO. Set in the field "Scheduled
+      Customs Clearance Date" of the entity "Sales Order Item". This field is read-only.
+  - name: WO_PROCESSEDBY
+    description: User who process the SO request.
+  - name: TEL_WO_CMRCTELPRINTEDNAME
+    description: Input the name of all TEL employees signing the CMRC.
+  - name: WO_WORKRESULT
+    description: Result of service to be instructed by Work Order
+  - name: TEL_WO_APPROVALSTATUS
+    description: Aprproval Status
+  - name: WO_OCCURREDTIME
+    description: Start date of customer machine problem
+  - name: TEL_WO_CMRCDEPARTMENT
+    description: Input the title  of  customer for CMRC.
+  - name: MSDYN_WORKORDERTYPE
+    description: Work Order Type
+  - name: MSDYN_FIRSTARRIVEDON
+    description: When Bookings are used on a Work Order, this field is auto-populated
+      based on the earliest Actual Arrival Time from the related Bookings.
+  - name: WO_TSRPARTSADJUSTMENT_BASE
+    description: Value of the [TSR]Parts Adjustment Amount in base currency.
+  - name: WO_REQUESTSO
+    description: Checking there is Request SO or not.
+  - name: TEL_WO_MODIFICATION_ID
+    description: Modification ID used for issuing CMRC.
+  - name: MSDYN_PRICELIST
+    description: Price List that controls pricing for products / services added to
+      this work order. By default the system will use the Price List specified on
+      the account
+  - name: MSDYN_PRIMARYINCIDENTESTIMATEDDURATION
+    description: Shows the time estimated to resolve this incident.
+  - name: TEL_WO_TELSONO
+    description: TEL SO No. for modification type work order with Contract. This field
+      is only for Genpo users.
+  - name: MSDYN_NOTTOEXCEEDPRICEAMOUNT_BASE
+    description: Value of the Price not-to-exceed in base currency.
+  - name: TEL_WO_SERVICEORDERNO_3200
+    description: Service Order No. for TEA
+  - name: IMPORTSEQUENCENUMBER
+    description: Shows the sequence number of the import that created this record.
+  - name: WO_EXPLANATIONAFTERDEVICEHANDOVER
+    description: Indicate if machine settings and system status were explained to
+      the Customer.
+  - name: OWNINGTEAM
+    description: Unique identifier for the team that owns the record.
+  - name: WO_SOFTWARE_VERSION
+    description: Software Version
+  - name: MSDYN_TAXCODE
+    description: Tax Code to be used to calculate tax when Work Order is taxable.
+      By default the system will use the tax code specified on the service account
+  - name: WO_WORKHOURSEND
+    description: Input the work end date and time.
+  - name: WO_TROUBLECASECREATEDDATE
+    description: Date when Trouble Case is created.
+  - name: WO_FREQUENCY
+    description: 'How often the problem with the machine has occurred. '
+  - name: WO_CAUSINGFACTOR
+    description: Note the causing factor for the tool down.
+  - name: TEL_WO_COMPANY3
+    description: Describe the Company3 of this Work Order.
+  - name: WO_SOSEARCH
+    description: Service Order of the work order.
+  - name: TEL_WO_CUSTOMERBY9DIGITS
+    description: D code Customer Lookup. The value is set from the "Location Name
+      (com_customerby9digits)" of the "Equipment" entity.
+  - name: EXCHANGERATE
+    description: Shows the exchange rate for the currency associated with the entity
+      with respect to the base currency.
+  - name: WO_MAINASSISTANT
+    description: Main Assistant of this Work Order.
+  - name: MSDYN_SERVICEREQUEST
+    description: Case of which this work order originates from
+  - name: WO_TIMELAPSEFROMNOTIFY
+    description: Duration from when tool down is notified to when the work order is
+      closed.
+  - name: WO_ENGINEERHOURS_DATE
+    description: Last Updated time of rollup field Engineer Hours.
+  - name: MSDYN_SUPPORTCONTACT
+    description: A support contact can be specified so that the individual working
+      on the work order has someone to contact for assistance.
+  - name: WO_SUBASSISTANT
+    description: Sub Assistant of this Work Order.
+  - name: TEL_WO_SPECIFYFROM_NONREGISTERED_INWISDOM
+    description: This is a flag used for equipment or software which is not registered
+      in WISDOM. Select Yes if this WO is a non-registered Equipment or Software in
+      WISDOM.
+  - name: TEL_WO_MODIFICATIONLABORTYPE
+    description: Link with "CRM Opportunity ID" of "Sales Order Header" and "CRM Opportunity
+      ID" of "Opportunity", and set with "Modification Labor Type" of "Opportunity"
+      obtained. This field is read-only.
+  - name: WO_ENGINEERHOURS_STATE
+    description: State of rollup field Engineer Hours.
+  - name: WO_ENGINEERHOURS
+    description: Total Engineer Hours
+  - name: MSDYN_SUBTOTALAMOUNT_BASE
+    description: Shows the value of the subtotal amount in the base currency.
+  - name: WO_ADDITIONALADJUSTMENT_BASE
+    description: Value of the Additional Adjustment in base currency.
+  - name: WO_ESCALATIONCLOSEDDATE
+    description: Date when Escalation level is changed back to Standard or Extended
+      Down.
+  - name: TEL_WO_MAINCATEGORY_SOREQUEST
+    description: Main category of the current work order.
+  - name: WO_WOISSUEDATE
+    description: Date the work order was issued.
+  - name: MSDYN_WORKORDERSUMMARY
+    description: Type a summary description of the job.
+  - name: WO_TSREXPENSETOTAL_BASE
+    description: Value of the [TSR]Total Expense Charge in base currency.
+  - name: MSDYN_NOTTOEXCEEDCOSTAMOUNT_BASE
+    description: Value of the Cost not-to-exceed in base currency.
+  - name: MSDYN_PRIMARYINCIDENTTYPE
+    description: Template
+  - name: TEL_WO_TEAM_ADMINISTRATOR
+    description: Set recipient for the completed and signed pdf. Set Work Order Team's
+      Administrator as default.
+  - name: WO_FIXEDPURPOSE
+    description: Purpose of Work
+  - name: OWNERIDYOMINAME
+    description: Yomi name of the owner
+  - name: TEL_WO_TRIGGER_TSRDETAILS_INTEGRATION
+    description: Flag for I/F to identify when to send parts, labour and expence details
+      generated in TSR Rerport to SAP.
+  - name: OWNINGUSER
+    description: Unique identifier for the user that owns the record.
+  - name: TEL_WO_FACTORY_SUPPORT_REQUEST
+    description: Indicate TEL Factory Support Request.
+  - name: TEL_WO_REPLACEMENTWO
+    description: WO Lookup to select related WO based on Replacement SN
+  - name: WO_ESCALATIONLEVEL
+    description: Escalation level of this work order.
+  - name: WO_MACHINESTATUSLOG
+    description: Log data of machine status
+  - name: WO_TSRBILLABLEHOURS
+    description: Billable Hours
+  - name: WO_TIMEZONES
+    description: Time zone where the customer asset is located.
+  - name: TEL_WO_TRIGGER_ACTUALS_INTEGRATION
+    description: Flag for I/F to identify when to send actuals to SAP.
+  - name: WO_TSRISSUEDATE
+    description: TSR Issue Date
+  - name: MODIFIEDBY
+    description: Unique identifier of the user who modified the record.
+  - name: WO_DETAILSREASONGAP
+    description: Details Reason
+  - name: MSDYN_PRODUCTSSERVICESCOST
+    description: The total actual cost of the products and services
+  - name: TEL_WO_PRIMARYSO_DASHBOARD
+    description: The corresponding SO record created when the work order is created
+      in CRM first and then SO Request is sent to SAP. This field will be used only
+      for dashboards.
+  - name: WO_TYPEOFWORK_CUSTOMIZED
+    description: Subcategory
+  - name: MSDYN_INTERNALFLAGS
+    description: For internal use only.
+  - name: WO_PLANNEDSTART
+    description: Planned Start Date and Time
+  - name: TEL_WO_PROFITCENTERGROUP
+    description: Bring from Primary SO or Secondary SO. Set in the field "Profit Center"
+      of the entity "Sales Order Item". This field is read-only.
+  - name: MSDYN_NOTTOEXCEEDPRICEAMOUNT
+    description: The value of not-to-exceed price for the work order in base currency.
+  - name: MSDYN_SUBSTATUS
+    description: Work Order sub-status
+  - name: TEL_WO_TRIGGER_SIGNEDTSR_INTEGRATION
+    description: Flag for I/F to identify when to send signed TSR to xECM.
+  - name: TEL_WO_CMRCTEAM_ADMINISTRATOR
+    description: Set recipient for the completed and signed pdf. Set Work Order Team's
+      Administrator as default.
+  - name: TEL_WO_CHAMBERSN
+    description: Machine serial number of the chamber.
+  - name: TIMEZONERULEVERSIONNUMBER
+    description: For internal use only.
+  - name: TEL_WO_NOOFREOCCURRINGWO_STATE
+    description: State of rollup field No. of Reoccurring WO.
+  - name: MSDYN_BILLINGACCOUNT
+    description: Account to be billed. If a billing account has been set on service
+      account it will be populated by default. Otherwise, the billing account will
+      be the same as the service account.
+  - name: TEL_WO_SIGNED_PDF_ATTACHED
+    description: Set whether or not a signed PDF is attached.
+  - name: TEL_WO_CMRCCUSTOMER_SIGNATURE_TYPE
+    description: Set sign method.
+  - name: WO_TOOLDOWN
+    description: Check box to be checked when this work order is related to tool down.
+  - name: TEL_WO_SOW
+    description: Related Contract Scope of the work order.
+  - name: WO_SUCCESSCRITERIA
+    description: Troubleshooting Success Criteria
+  - name: TEL_WO_CMRCTELREPRESENTATIVE
+    description: Select the name of the TEL employee signing the CMRC.
+  - name: TEL_WO_COMMENT_FOR_TIMESHEET
+    description: Enter a default value for the Booking comment.
+  - name: WO_TSRGRANDTOTAL
+    description: Total Price
+  - name: WO_STANDARDOFFE
+    description: The number of FEs that are required for the work order.
+  - name: TEL_WO_MODKITCUSTOMERPO
+    description: Bring from Primary SO or Secondary SO. Set in the field "Customer
+      Reference" of the entity "Sales Order Item". This field is read-only.
+  - name: WO_CUSTOMERBU
+    description: Customer Department
+  - name: WO_URLFORRELATEDDOCUMENTS5
+    description: Follow the link for a folder with related documents.
+  - name: STATUSCODE
+    description: Reason for the status of the Work Order
+  - name: TEL_WO_COMPANY2
+    description: Describe the Company2 of this Work Order.
+  - name: TEL_WO_MIRRORMODSO
+    description: Mirror Mod SO of Work Order
+  - name: WO_RECORDTYPE
+    description: Indicates record type - normal work order / blank work order / work
+      order template
+  - name: UTCCONVERSIONTIMEZONECODE
+    description: Shows the time zone code that was in use when the record was created.
+  - name: TEL_WO_CUSTOMERCONTACT
+    description: Customer contact of the work order.
+  - name: WO_TRAVELHOURS
+    description: Input travel hours.
+  - name: WO_TSRLABORADJUSTMENT
+    description: Additional Labor Amount. A negative number indicates a discounted
+      amount.
+  - name: TEL_WO_SERVICE_OPERATIONS_TEAM
+    description: Set recipient for the completed and signed pdf. Set as contact information
+      details for issues/concerns regarding sign documents amount figures in sign
+      request email.
+  - name: WO_CUSTOMERSIGNERNAME
+    description: Input the name of the customer signing the TSR.
+  - name: MSDYN_PRODUCTSSERVICESESTIMATEDCOST_BASE
+    description: Value of the Total Estimated Cost in base currency.
+  - name: MSDYN_TOTALAMOUNT
+    description: Enter the summary of total billing amount for this work order.
+  - name: MSDYN_CUSTOMERASSET
+    description: Customer Asset related to this incident reported
+  - name: WO_TSRLABORADJUSTMENT_BASE
+    description: Value of the [TSR]Labor Adjustment Amount in base currency.
+  - name: WO_TELSIGNERNAME
+    description: Select the name of the TEL employee signing the TSR.
+  - name: MSDYN_FOLLOWUPREQUIRED
+    description: Allows indication if follow up work is required for a work order.
+  - name: WO_PRECAUTIONS
+    description: Note any precautions that should be taken before troubleshooting.
+  - name: TEL_WO_CMRCDOCUSIGN_URL
+    description: Contains a URL of the currently sent envelope signature request.  Clicking
+      on the icon on this field will open a new tab that will redirect the user to
+      the DocuSign website's envelope details page.
+  - name: MSDYN_TOTALESTIMATEDAFTERTAXPRICE
+    description: The estimated price after adding tax to the subtotal
+  - name: MSDYN_COMPLETEDON
+    description: When Bookings are used on a Work Order, this field is auto-populated
+      based on the latest End Time from the related Bookings. Otherwise, this field
+      is populated based on the change of System Status.
+  - name: WO_CUSTOMERFORTSR
+    description: Customer
+  - name: MSDYN_SERVICETERRITORY
+    description: The service territory this work order relates to. By default this
+      will be set to the Service Territory defined on the service account
+  - name: MSDYN_FOLLOWUPNOTE
+    description: Indicate the details of the follow up work
+  - name: WO_WOTITLE
+    description: Corresponding Work Order Title
+  - name: WO_INCLUDEMINIMUMLABORCHARGE
+    description: Flag to indicate if TSR Labor price is calculated including minimum
+      labor charge or not.
+  - name: TEL_WO_CMRCSEND_TO
+    description: A flag to switch target address from team address to user address.
+  - name: TEL_WO_DATEFIXEDWCUSTOMER
+    description: Indicates whether the planned time is fixed with customer. Can be
+      changed to "Yes" only when Planned Start & Planned End are not null. Will be
+      displayed only when WO Created from = Case.
+  - name: TEL_WO_WORK_CATEGORY_TEXT
+    description: Item allow user to manual amendment work category.
+  - name: MODIFIEDONBEHALFBY
+    description: Shows who last updated the record on behalf of another user.
+  - name: WO_LATESTPASSDOWNCREATEDDATE
+    description: Date when latest passdown related to the work order is created.
+  - name: MSDYN_REPORTEDBYCONTACT
+    description: The contact that reported this Work Order
+  - name: OWNERIDTYPE
+    description: Owner Id Type
+  - name: MSDYN_PRIORITY
+    description: Work Order Priority
+  - name: TEL_WO_ACTIVATED_ON
+    description: Shows the date and time when the record was created.
+  - name: TEL_WO_CMRCJOBTITLE
+    description: Input the title  of  customer for CMRC.
+  - name: WO_TSRTOTALHOURS
+    description: Input total work hours.
+  - name: TEL_WO_PCD_PRICE_REFLECTION_STATUS
+    description: Save the execution status of "PCD Price Reflection".
+  - name: TEL_WO_MODIFICATION_DESCRIPTION
+    description: Modification Description for CMRC Report.
+  - name: TEL_WO_SALESORGANIZATION
+    description: Sales Organization of the work order.
+  - name: MSDYN_WORKHOURTEMPLATE
+    description: The working hours for a requirement.
+  - name: TEL_WO_ORDER_NO_TEXT
+    description: Order Number Text
+  - name: MSDYN_NOTTOEXCEEDCOSTAMOUNT
+    description: The value of not-to-exceed cost for the work order in base currency.
+  - name: TEL_WO_NO_RTISSQVICS
+    description: Indicate RTISS/QVICS No.
+  - name: TEL_WO_MESSAGETOOP
+    description: Indicates message to operation.
+  - name: TEL_WO_SHIPDATE
+    description: Bring from Primary SO or Secondary SO. Set in the field "Ship Date"
+      of the entity "Sales Order Item". This field is read-only.
+  - name: WO_WORKHOURSSTART
+    description: Input the work start date and time.
+  - name: TEL_WO_TSRSUM_NO
+    description: This field is used to link the "TSR Summary No." from the PCD
+  - name: MODIFIEDON
+    description: Shows the date and time when the record was last updated. The date
+      and time are displayed in the time zone selected in Microsoft Dynamics 365 options.
+  - name: WO_TIMELAPSEFORESCALATION
+    description: Duration from Escalation Date to Escalation Closed Date. This is
+      a calculated duration field.
+  - name: MSDYN_BOOKINGSUMMARY
+    description: Shows a synopsis of the bookings on the work order. This field is
+      automatically updated by the system whenever a resource booking on the work
+      order is changed.
+  - name: WO_DISCOUNT
+    description: Flag to specify whether this Work Order is discount or not.
+  - name: TEL_WO_RETROFITFCNNO
+    description: Lookup for selecting FCN/SI ID
+  - name: WO_PRODUCTSN
+    description: Target customer machine
+  - name: TEL_WO_ACTUALTARGET_EQUIPMENTSOFTWARE
+    description: This field is used for input non-registered equipment or software
+      S/N which the WO is truly belong to.
+  - name: MSDYN_TOTALESTIMATEDDURATION
+    description: Calculated from the estimated duration of Work Order Incidents and
+      Work Order Service Tasks not related to a Work Order Incident on the Work Order.
+      Intended to be read-only.
+  - name: WO_TSRLABORTOTAL_CALCULATED_BASE
+    description: Value of the Total Labor Charge(Calculated) in base currency.
+  - name: MSDYN_WORKORDERID
+    description: Shows the entity instances.
+  - name: MSDYN_TAXABLE
+    description: Shows whether sales tax is to be charged for this work order.
+  - name: MSDYN_NAME
+    description: Work Order Number
+  - name: WO_MAINCATEGORY_OPTIONS
+    description: Main Category of Work
+  - name: MSDYN_TIMEFROMPROMISED
+    description: Enter the starting range of the time promised to the account that
+      incidents will be resolved.
+  - name: TEL_WO_PCD_PRICE_REFLECTION_DATE
+    description: Save the execution date/time of "PCD Price Reflection".
+  - name: TEL_WO_CMRCCUSTOMERPRINTEDNAME
+    description: Input the name of customer signing the CMRC.
+  - name: WO_TSRPARTSADJUSTMENT
+    description: Additional Parts Amount. A negative number indicates a discounted
+      amount.
+  - name: WO_TSRPARTSTOTAL_CALCULATED_BASE
+    description: Value of the Total (Parts)(Calculated) in base currency.
+  - name: WO_PRICECALCULATIONPARAMETER
+    description: JSON String to store Price Calculation Parameter User operated in
+      Wizard.
+  - name: CREATEDON
+    description: Shows the date and time when the record was created. The date and
+      time are displayed in the time zone selected in Microsoft Dynamics 365 options.
+  - name: CREATEDBY
+    description: Unique identifier of the user who created the record.
+  - name: WO_TSRNO
+    description: Automatically calculated report number for TSR or Status report
+  - name: TEL_WO_CLOSE_RTISSQVICS
+    description: Indicate RTISS/QVICS Closed Date.
+  - name: WO_TROUBLESHOOTING
+    description: Flag for troubleshooting
+  - name: WO_URLFORRELATEDDOCUMENTS
+    description: Follow the link for a folder with related documents.
+  - name: WO_TSRGRANDTOTAL_BASE
+    description: Value of the Grand Total in base currency.
+  - name: TEL_WO_NOTIFIED_FOR_CREATION
+    description: Indicates whether a WO Notified for Creation has already been sent.
+      Default value is false. This is hidden.
+  - name: TEL_WO_MODEL_TEXT
+    description: Item allow user to manual amendment model.
+  - name: WO_TSREXPENSEADJUSTMENT_BASE
+    description: Value of the [TSR]Expense Adjustment Amount in base currency.
+  - name: MSDYN_AUTONUMBERING
+    description: Internal field used to generate the next name upon entity creation.
+      It is optionally copied to the msdyn_name field.
+  - name: TEL_WO_TYPEOFPAYMENT
+    description: Payment type of the work order.
+  - name: TEL_WO_KITCHAMBERSN
+    description: Bring from Primary SO or Secondary SO. Set in the field "PM Serial
+      No. from SO Project" of the entity "Sales Order Header". This field is read-only.
+  - name: MSDYN_TOTALAMOUNT_BASE
+    description: Shows the value of the total amount in the base currency.
+  - name: WO_TSREXPENSEADJUSTMENT
+    description: Additional Expense Amount. A negative number indicates a discounted
+      amount.
+  - name: VERSIONNUMBER
+    description: Version Number
+  - name: TEL_WO_IFFIELD_MODIFIEDON_FOR_GEARS
+    description: Automatically sets the date and time when the I/F field of GEARs
+      in WO was updated.
+  - name: WO_IFFIELD_MODIFIEDON
+    description: Automatically sets the date and time when the I / F field of TimeEntry
+      in WO was updated
+  - name: TEL_WO_APPROVALSTATUSFCNSI
+    description: Aprproval Status
+  - name: WO_REQUESTER_COMPLETION
+    description: Requester for this Work Order's Completion Stage.
+  - name: TEL_WO_ORDERNOGROUP
+    description: Related Order No. Group of the work order.
+  - name: TEL_WO_TEAM_DESTINATION_OPTION
+    description: A flag to switch target address from team address to user address.
+  - name: MSDYN_TIMETOPROMISED
+    description: Enter the ending range of the time promised to the account that incidents
+      will be resolved.
+  - name: TEL_WO_QUOTATION_NO_TEXT
+    description: TEL Quotation Number Text
+  - name: WO_TOOLDOWNNOTIFIEDDATE
+    description: Date when tool down is notified.
+  - name: MSDYN_PARENTWORKORDER
+    description: Unique identifier for Work Order associated with Work Order.
+  - name: WO_ESCALATIONDATE
+    description: Date when Escalation level is changed to Escalatd.
+  - name: WO_TSRNOPAPER
+    description: Manually input the report number for printing on the TSR.
+  - name: MSDYN_AGREEMENT
+    description: Shows the agreement linked to this work order.
+  - name: WO_ASSISTANTCONFIRMATIONFLAG
+    description: Flag to specify whether to display this Work Order on Assistant's
+      DashBoard or not.It will be set to Yes by default.
+  - name: WO_CUSTOMERSIGNRECEIVEDPICKLIST
+    description: Check this field if customer sign of the work order is received.
+  - name: TEL_WO_KITTOOLSN
+    description: Bring from Primary SO or Secondary SO. Set in the field "Serial No.
+      from SO Project" of the entity "Sales Order Header". This field is read-only.
+- name: BRONZE__TMEA_EQUIPMENT_SALES__CRM_FILE_OPPORTUNITY
+  description: Potential revenue-generating event, or sale to an account, which needs
+    to be tracked through a sales process to completion.
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Check the _FILEDATE column in the BRONZE.TMEA_EQUIPMENT_SALES.CRM_FILE_OPPORTUNITY
+      table to ensure it falls within the last 24-hour interval.
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 24
+  - name: PRESENTFINALPROPOSAL
+    description: Select whether the final proposal has been presented to the account.
+  - name: OVERRIDDENCREATEDON
+    description: Date and time that the record was migrated.
+  - name: MSDYN_PREDICTIVESCOREID
+    description: Predictive score
+  - name: MSDYN_FORECASTCATEGORY
+    description: Categories used for forecasting.
+  - name: SM_ACCOUNT_GROUP_NAME
+    description: Search with keyword or 3 digit code
+  - name: MSDYN_ORDERTYPE
+    description: Whether the Opportunity is for an Item- based or a Work-based sale
+  - name: ACTUALCLOSEDATE
+    description: Shows the date and time when the opportunity was closed or canceled.
+  - name: RESOLVEFEEDBACK
+    description: Choose whether the proposal feedback has been captured and resolved
+      for the opportunity.
+  - name: TEL_SM_PUDT_PRCHSAMNT_FROM_FCTRY_ADJUST_AMNT_BASE
+    description: Value of the [Dummy]PuDt Purchase Amount from Factory Adj. Amt in
+      base currency.
+  - name: CONTACTID
+    description: Internal attribute for storing customerid. Do not use this attribute
+      directly; use parentcontactid instead.
+  - name: SCHEDULEPROPOSALMEETING
+    description: Enter the date and time of the proposal meeting for the opportunity.
+  - name: DISCOUNTAMOUNT
+    description: Type the discount amount for the opportunity if the customer is eligible
+      for special savings.
+  - name: PARENTACCOUNTID
+    description: Choose an account to connect this opportunity to, so that the relationship
+      is visible in reports and analytics, and to provide a quick link to additional
+      details, such as financial information and activities.
+  - name: OWNINGBUSINESSUNIT
+    description: Unique identifier for the business unit that owns the record
+  - name: ESTIMATEDCLOSEDATE
+    description: Enter the expected closing date of the opportunity to help make accurate
+      revenue forecasts.
+  - name: IDENTIFYCUSTOMERCONTACTS
+    description: Select whether the customer contacts for this opportunity have been
+      identified.
+  - name: OWNINGTEAM
+    description: Unique identifier for the team that owns the record.
+  - name: PARTICIPATESINWORKFLOW
+    description: Information about whether the opportunity participates in workflow
+      rules.
+  - name: PRIORITYCODE
+    description: Select the priority so that preferred customers or critical issues
+      are handled quickly.
+  - name: PRICINGERRORCODE
+    description: Pricing error for the opportunity.
+  - name: TOTALAMOUNTLESSFREIGHT_BASE
+    description: Value of the Total Pre-Freight Amount in base currency.
+  - name: CUSTOMERID
+    description: Select the customer account or contact to provide a quick link to
+      additional customer details, such as address, phone number, activities, and
+      orders.
+  - name: TOTALTAX_BASE
+    description: Value of the Total Tax in base currency.
+  - name: CUSTOMERNEED
+    description: Type some notes about the customer's requirements, to help the sales
+      team identify products and services that could meet their requirements.
+  - name: PURSUITDECISION
+    description: Select whether the decision about pursuing the opportunity has been
+      made.
+  - name: TIMELINE
+    description: Select when the opportunity is likely to be closed.
+  - name: ISPRIVATE
+    description: Indicates whether the opportunity is private or visible to the entire
+      organization.
+  - name: TEL_SM_CREDIT_INCENTIVE_CONTRIBUTION_BASE
+    description: Value of the Credit Incentive Contribution in base currency.
+  - name: ACCOUNTID
+    description: Internal attribute for storing customerid. Do not use this attribute
+      directly; use parentaccountid instead.
+  - name: STEPID
+    description: Shows the ID of the workflow step.
+  - name: DEVELOPPROPOSAL
+    description: Select whether a proposal has been developed for the opportunity.
+  - name: CREATEDON
+    description: Shows the date and time when the record was created. The date and
+      time are displayed in the time zone selected in Microsoft Dynamics 365 options.
+  - name: PRICELEVELID
+    description: Choose the price list associated with this record to make sure the
+      products associated with the campaign are offered at the correct prices.
+  - name: PARENTCONTACTID
+    description: Choose a contact to connect this opportunity to, so that the relationship
+      is visible in reports and analytics.
+  - name: BUDGETAMOUNT
+    description: Type a value between 0 and 1,000,000,000,000 to indicate the lead's
+      potential available budget.
+  - name: MSDYN_CONTRACTORGANIZATIONALUNITID
+    description: The organizational unit in charge of the opportunity.
+  - name: SALESSTAGE
+    description: Select the sales stage of this opportunity to aid the sales team
+      in their efforts to win this opportunity.
+  - name: SM_SYSTEM_COGS_BASE
+    description: Value of the System COGS in base currency.
+  - name: TOTALDISCOUNTAMOUNT_BASE
+    description: Value of the Total Discount Amount in base currency.
+  - name: ISREVENUESYSTEMCALCULATED
+    description: Select whether the estimated revenue for the opportunity is calculated
+      automatically based on the products entered or entered manually by a user.
+  - name: FREIGHTAMOUNT
+    description: Type the cost of freight or shipping for the products included in
+      the opportunity for use in calculating the Total Amount field.
+  - name: QUALIFICATIONCOMMENTS
+    description: Type comments about the qualification or scoring of the lead.
+  - name: SALESSTAGECODE
+    description: Select the sales process stage for the opportunity to indicate the
+      probability of closing the opportunity.
+  - name: IDENTIFYPURSUITTEAM
+    description: Choose whether you have recorded who will pursue the opportunity.
+  - name: STEPNAME
+    description: 'Shows the current phase in the sales pipeline for the opportunity. '
+  - name: OWNERIDYOMINAME
+    description: Yomi name of the owner
+  - name: TEL_SM_ESTIMATED_SALES_AMOUNT_BASE
+    description: Value of the Estimated Sales Amount in base currency.
+  - name: PRESENTPROPOSAL
+    description: Select whether a proposal for the opportunity has been presented
+      to the account.
+  - name: TEL_SM_SADT_ESTIMATED_SALES_AMOUNT_DETAIL_BASE
+    description: Value of the [Dummy]SaDt Estimated Sales Amount in base currency.
+  - name: TEL_SM_PRCHS_FRM_FCTRY_UNADJUST_DETAIL_BASE
+    description: Value of the Purchase Amount from Factory Unadjusted in base currency.
+  - name: TEL_SM_CREDIT_CONSUMPT_AMNT_BASE
+    description: Value of the Credit Consumption Amount in base currency.
+  - name: UTCCONVERSIONTIMEZONECODE
+    description: Time zone code that was in use when the record was created.
+  - name: STATUSCODE
+    description: Select the opportunity's status.
+  - name: SLAINVOKEDID
+    description: Last SLA that was applied to this opportunity. This field is for
+      internal use only.
+  - name: INITIALCOMMUNICATION
+    description: Choose whether someone from the sales team contacted this lead earlier.
+  - name: SKIPPRICECALCULATION
+    description: Skip Price Calculation (For Internal Use)
+  - name: TOTALDISCOUNTAMOUNT
+    description: Shows the total discount amount, based on the discount price and
+      rate entered on the opportunity.
+  - name: OWNERID
+    description: Enter the user or team who is assigned to manage the record. This
+      field is updated every time the record is assigned to a different user.
+  - name: QUOTECOMMENTS
+    description: Type comments about the quotes associated with the opportunity.
+  - name: ESTIMATEDVALUE
+    description: Type the estimated revenue amount to indicate the potential sale
+      or value of the opportunity for revenue forecasting. This field can be either
+      system-populated or editable based on the selection in the Revenue field.
+  - name: TOTALLINEITEMDISCOUNTAMOUNT_BASE
+    description: Value of the Total Line Item Discount Amount in base currency.
+  - name: MSDYN_SEGMENTID
+    description: Unique identifier for Segment associated with Opportunity.
+  - name: TOTALLINEITEMDISCOUNTAMOUNT
+    description: Shows the total of the Manual Discount amounts specified on all products
+      included in the opportunity. This value is reflected in the Total Detail Amount
+      field on the opportunity and is added to any discount amount or rate specified
+      on the opportunity.
+  - name: SCHEDULEFOLLOWUP_PROSPECT
+    description: Enter the date and time of the prospecting follow-up meeting with
+      the lead.
+  - name: MSDYN_OPPORTUNITYKPIID
+    description: Maps to opportunity KPI records
+  - name: STATECODE
+    description: Shows whether the opportunity is open, won, or lost. Won and lost
+      opportunities are read-only and can't be edited until they are reactivated.
+  - name: DESCRIPTION
+    description: Type additional information to describe the opportunity, such as
+      possible products to sell or past purchases from the customer.
+  - name: SM_ACCOUNT_NAME
+    description: Search with keyword or 7 digit code
+  - name: EXCHANGERATE
+    description: Shows the conversion rate of the record's currency. The exchange
+      rate is used to convert all money fields in the record from the local currency
+      to the system's default currency.
+  - name: TEL_SM_ESTIMATED_SALES_AMOUNT_DETAIL_BASE
+    description: Value of the Estimated Sales Amount in base currency.
+  - name: SM_FAB_LINE_NAME
+    description: Search with keyword or 4 digit code
+  - name: DISCOUNTAMOUNT_BASE
+    description: Value of the Opportunity Discount Amount in base currency.
+  - name: TOTALAMOUNT_BASE
+    description: Value of the Total Amount in base currency.
+  - name: COMPLETEINTERNALREVIEW
+    description: Select whether an internal review has been completed for this opportunity.
+  - name: SM_BOOKING_DATE
+    description: Field for locking other transactions.
+  - name: OPPORTUNITYID
+    description: Unique identifier of the opportunity.
+  - name: ACTUALVALUE_BASE
+    description: Value of the Actual Revenue in base currency.
+  - name: TEL_SM_SADT_BOOKINGAMNT_DETAIL_BASE
+    description: Value of the [Dummy]SaDt Booking Amount in base currency.
+  - name: PROCESSID
+    description: Contains the id of the process associated with the entity.
+  - name: MODIFIEDONBEHALFBY
+    description: Shows who last updated the record on behalf of another user.
+  - name: FINALDECISIONDATE
+    description: Enter the date and time when the final decision of the opportunity
+      was made.
+  - name: FILEDEBRIEF
+    description: Choose whether the sales team has recorded detailed notes on the
+      proposals and the account's responses.
+  - name: TRANSACTIONCURRENCYID
+    description: Unique identifier of the currency associated with the entity.
+  - name: SM_INVESTMENT_MAP_NAME
+    description: Search and select related investment map
+  - name: SM_MODIFIEDBY
+    description: Last updated user
+  - name: TOTALAMOUNTLESSFREIGHT
+    description: Shows the total product amount for the opportunity, minus any discounts.
+      This value is added to freight and tax amounts in the calculation for the total
+      amount of the opportunity.
+  - name: CAPTUREPROPOSALFEEDBACK
+    description: Choose whether the proposal feedback has been captured for the opportunity.
+  - name: CREATEDONBEHALFBY
+    description: Shows who created the record on behalf of another user.
+  - name: STAGEID
+    description: Contains the id of the stage where the entity is located.
+  - name: CREATEDBY
+    description: Shows who created the record.
+  - name: MODIFIEDON
+    description: Shows the date and time when the record was last updated. The date
+      and time are displayed in the time zone selected in Microsoft Dynamics 365 options.
+  - name: PROPOSEDSOLUTION
+    description: Type notes about the proposed solution for the opportunity.
+  - name: CLOSEPROBABILITY
+    description: Type a number from 0 to 100 that represents the likelihood of closing
+      the opportunity. This can aid the sales team in their efforts to convert the
+      opportunity in a sale.
+  - name: CURRENTSITUATION
+    description: Type notes about the company or organization associated with the
+      opportunity.
+  - name: EMAILADDRESS
+    description: The primary email address for the entity.
+  - name: MODIFIEDBY
+    description: Shows who last updated the record.
+  - name: TOTALLINEITEMAMOUNT
+    description: Shows the sum of all existing and write-in products included on the
+      opportunity, based on the specified price list and quantities.
+  - name: TIMEZONERULEVERSIONNUMBER
+    description: For internal use only.
+  - name: ONHOLDTIME
+    description: Shows the duration in minutes for which the opportunity was on hold.
+  - name: CUSTOMERPAINPOINTS
+    description: Type notes about the customer's pain points to help the sales team
+      identify products and services that could address these pain points.
+  - name: IDENTIFYCOMPETITORS
+    description: Select whether information about competitors is included.
+  - name: IMPORTSEQUENCENUMBER
+    description: Sequence number of the import that created this record.
+  - name: ESTIMATEDVALUE_BASE
+    description: Value of the Est. Revenue in base currency.
+  - name: PURCHASETIMEFRAME
+    description: Choose how long the lead will likely take to make the purchase.
+  - name: ACTUALVALUE
+    description: Type the actual revenue amount for the opportunity for reporting
+      and analysis of estimated versus actual sales. Field defaults to the Est. Revenue
+      value when an opportunity is won.
+  - name: MSDYN_ACCOUNTMANAGERID
+    description: The account manager responsible for the opportunity.
+  - name: DISCOUNTPERCENTAGE
+    description: Type the discount rate that should be applied to the Product Totals
+      field to include additional savings for the customer in the opportunity.
+  - name: CONFIRMINTEREST
+    description: Select whether the lead confirmed interest in your offerings. This
+      helps in determining the lead quality and the probability of it turning into
+      an opportunity.
+  - name: MSDYN_GDPROPTOUT
+    description: Describes whether opportunity is opted out or not
+  - name: TEL_SM_DRCR_AMOUNT_BASE
+    description: Value of the DRCR Amount in base currency.
+  - name: SM_CEID
+    description: '当フィールドは、R2リリース時には物理削除される予定のフィールドでしたが
+
+      TEL_PO_Flowsソリューション内のコンポーネントが依存しているがために
+
+      物理削除にいたっていません。
+
+      TEL_PO_FlowsではR2リリース以降に当フィールドの依存関係を解消するとのことで、
+
+      その処置が済んだところで、当フィールドも物理削除が可能となります。'
+  - name: BUDGETAMOUNT_BASE
+    description: Value of the Budget Amount in base currency.
+  - name: TOTALTAX
+    description: Shows the total of the Tax amounts specified on all products included
+      in the opportunity, included in the Total Amount field calculation for the opportunity.
+  - name: ORIGINATINGLEADID
+    description: Choose the lead that the opportunity was created from for reporting
+      and analytics. The field is read-only after the opportunity is created and defaults
+      to the correct lead when an opportunity is created from a converted lead.
+  - name: TRAVERSEDPATH
+    description: A comma separated list of string values representing the unique identifiers
+      of stages in a Business Process Flow Instance in the order that they occur.
+  - name: NEED
+    description: Choose how high the level of need is for the lead's company.
+  - name: MSDYN_WORKORDERTYPE
+    description: Unique identifier for Work Order Type associated with Opportunity.
+  - name: TEL_SM_PRCHS_FRM_FCTRY_ADJUST_AMNT_DETAIL_BASE
+    description: Value of the Purchase Amount from Factory Adjust Amount in base currency.
+  - name: LASTONHOLDTIME
+    description: Contains the date time stamp of the last on hold time.
+  - name: TEL_SM_BOOKINGAMNT_DETAIL_BASE
+    description: Value of the Booking Amount in base currency.
+  - name: SLAID
+    description: Choose the service level agreement (SLA) that you want to apply to
+      the opportunity record.
+  - name: EVALUATEFIT
+    description: Select whether the fit between the lead's requirements and your offerings
+      was evaluated.
+  - name: PURCHASEPROCESS
+    description: Choose whether an individual or a committee will be involved in the  purchase
+      process for the lead.
+  - name: CAMPAIGNID
+    description: Shows the campaign that the opportunity was created from. The ID
+      is used for tracking the success of the campaign.
+  - name: TEL_SM_SUSPENSE_RECEIVE_CONSUMPT_TAX_BASE
+    description: Value of the Suspense Received Consumption Tax in base currency.
+  - name: DECISIONMAKER
+    description: Select whether your notes include information about who makes the
+      purchase decisions at the lead's company.
+  - name: FREIGHTAMOUNT_BASE
+    description: Value of the Freight Amount in base currency.
+  - name: NAME
+    description: 'Standard: [Model Name]-[Freetext]'
+  - name: TEAMSFOLLOWED
+    description: Number of users or conversations followed the record
+  - name: OWNERIDNAME
+    description: Name of the owner
+  - name: COMPLETEFINALPROPOSAL
+    description: Select whether a final proposal has been completed for the opportunity.
+  - name: SENDTHANKYOUNOTE
+    description: Select whether a thank you note has been sent to the account for
+      considering the proposal.
+  - name: OWNINGUSER
+    description: Unique identifier for the user that owns the record.
+  - name: OWNERIDTYPE
+    description: Owner Id Type
+  - name: OPPORTUNITYRATINGCODE
+    description: Select the expected value or priority of the opportunity based on
+      revenue, customer status, or closing probability.
+  - name: TIMESPENTBYMEONEMAILANDMEETINGS
+    description: Total time spent for emails (read and write) and meetings by me in
+      relation to the opportunity record.
+  - name: SCHEDULEFOLLOWUP_QUALIFY
+    description: Enter the date and time of the qualifying follow-up meeting with
+      the lead.
+  - name: TOTALLINEITEMAMOUNT_BASE
+    description: Value of the Total Detail Amount in base currency.
+  - name: TOTALAMOUNT
+    description: Shows the total amount due, calculated as the sum of the products,
+      discounts, freight, and taxes for the opportunity.
+  - name: TEL_SM_PUDT_PRCHSAMNT_FROM_FCTRY_UNADJUST_BASE
+    description: Value of the [Dummy]PuDt Purchase Amount from Factory Unadj. in base
+      currency.
+  - name: BUDGETSTATUS
+    description: Select the likely budget status for the lead's company. This may
+      help determine the lead rating or your sales approach.
+  - name: VERSIONNUMBER
+    description: Version Number
+- name: BRONZE__TMEA_EQUIPMENT_SALES__CRM_FILE_OPTIONSETMETADATA
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Check the _FILEDATE column in the BRONZE.TMEA_EQUIPMENT_SALES.CRM_FILE_OPTIONSETMETADATA
+      table to ensure it falls within the last 24-hour interval.
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 24
+- name: BRONZE__TMEA_EQUIPMENT_SALES__CRM_FILE_SM_FAB_LINE
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: SM_INVEST_ALL_PRICE_BASE
+    description: Value of the Invest All Price in base currency.
+  - name: EXCHANGERATE
+    description: Exchange rate for the currency associated with the entity with respect
+      to the base currency.
+  - name: TRANSACTIONCURRENCYID
+    description: Unique identifier of the currency associated with the entity.
+  - name: OVERRIDDENCREATEDON
+    description: Date and time that the record was migrated.
+  - name: OWNERIDTYPE
+    description: Owner Id Type
+  - name: SM_ORDERS_PRICE_BASE
+    description: Value of the Orders Price in base currency.
+  - name: VERSIONNUMBER
+    description: Version Number
+  - name: OWNERID
+    description: Owner Id
+  - name: SM_NAME
+    description: The name of the custom entity.
+  - name: MODIFIEDON
+    description: Date and time when the record was modified.
+  - name: MODIFIEDONBEHALFBY
+    description: Unique identifier of the delegate user who modified the record.
+  - name: CREATEDONBEHALFBY
+    description: Unique identifier of the delegate user who created the record.
+  - name: UTCCONVERSIONTIMEZONECODE
+    description: Time zone code that was in use when the record was created.
+  - name: MODIFIEDBY
+    description: Unique identifier of the user who modified the record.
+  - name: STATECODE
+    description: Status of the FAB Line
+  - name: TIMEZONERULEVERSIONNUMBER
+    description: For internal use only.
+  - name: OWNINGTEAM
+    description: Unique identifier for the team that owns the record.
+  - name: CREATEDON
+    description: Date and time when the record was created.
+  - name: IMPORTSEQUENCENUMBER
+    description: Sequence number of the import that created this record.
+  - name: OWNINGBUSINESSUNIT
+    description: Unique identifier for the business unit that owns the record
+  - name: SM_FAB_LINEID
+    description: Unique identifier for entity instances
+  - name: CREATEDBY
+    description: Unique identifier of the user who created the record.
+  - name: SM_INVEST_EQUIPMENT_PRICE_BASE
+    description: Value of the Invest Equipment Price in base currency.
+  - name: OWNERIDYOMINAME
+    description: Yomi name of the owner
+  - name: STATUSCODE
+    description: Reason for the status of the FAB Line
+  - name: OWNERIDNAME
+    description: Name of the owner
+  - name: OWNINGUSER
+    description: Unique identifier for the user that owns the record.
+- name: BRONZE__TMEA_EQUIPMENT_SALES__CRM_FILE_SM_INVESTMENT_MAP
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Check the _FILEDATE column in the BRONZE.TMEA_EQUIPMENT_SALES.CRM_FILE_SM_INVESTMENT_MAP
+      table to ensure it falls within the last 24-hour interval.
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 24
+  - name: SM_INVESTMENT_START_MONTH
+    description: Select the first day of investment start month
+  - name: MODIFIEDONBEHALFBY
+    description: Unique identifier of the delegate user who modified the record.
+  - name: SM_INVESTMENT_AMOUNT
+    description: Enter the number up to one decimal place
+  - name: OWNERIDYOMINAME
+    description: Yomi name of the owner
+  - name: STATECODE
+    description: Status of the Investment Map
+  - name: STATUSCODE
+    description: Reason for the status of the Investment Map
+  - name: VERSIONNUMBER
+    description: Version Number
+  - name: OWNERID
+    description: Owner Id
+  - name: SM_MODIFIEDBY
+    description: Last updated user
+  - name: EXCHANGERATE
+    description: Exchange rate for the currency associated with the entity with respect
+      to the base currency.
+  - name: SM_WAFER_SIZE
+    description: Select SPE others for complexity wafer size
+  - name: SM_FAB_LINE_NAME
+    description: Search with keyword or 4 digit code
+  - name: SM_INVESTMENT_MAPID
+    description: Unique identifier for entity instances
+  - name: CREATEDBY
+    description: Unique identifier of the user who created the record.
+  - name: SM_WAFER
+    description: Enter increased amount in thousand
+  - name: OWNINGTEAM
+    description: Unique identifier for the team that owns the record.
+  - name: SM_ACCOUNT_NAME
+    description: Search with keyword or 7 digit code
+  - name: SM_TOTAL_BOOKING_FORECAST_BASE
+    description: Value of the Total Booking Forecast in base currency.
+  - name: TRANSACTIONCURRENCYID
+    description: Unique identifier of the currency associated with the entity.
+  - name: OWNERIDNAME
+    description: Name of the owner
+  - name: MODIFIEDON
+    description: Date and time when the record was modified.
+  - name: IMPORTSEQUENCENUMBER
+    description: Sequence number of the import that created this record.
+  - name: OVERRIDDENCREATEDON
+    description: Date and time that the record was migrated.
+  - name: CREATEDONBEHALFBY
+    description: Unique identifier of the delegate user who created the record.
+  - name: OWNERIDTYPE
+    description: Owner Id Type
+  - name: SM_NAME
+    description: '[Device Type]_[Investment Type]_[Node(Customer)]_[Actual Wafer (K/M)]/[Planned
+      Wafer (K/M)](K/M)'
+  - name: SM_TOTAL_BOOKING_FORECAST_STATE
+    description: State of rollup field Total Booking Forecast.
+  - name: UTCCONVERSIONTIMEZONECODE
+    description: Time zone code that was in use when the record was created.
+  - name: SM_ACCOUNT_GROUP_NAME
+    description: Search with keyword or 3 digit code
+  - name: SM_TOTAL_FORECAST_REVENUE_STATE
+    description: State of rollup field Total Revenue Forecast.
+  - name: TIMEZONERULEVERSIONNUMBER
+    description: For internal use only.
+  - name: SM_TOTAL_BOOKING_FORECAST_DATE
+    description: Last Updated time of rollup field Total Booking Forecast.
+  - name: CREATEDON
+    description: Date and time when the record was created.
+  - name: SM_TOTAL_FORECAST_REVENUE_DATE
+    description: Last Updated time of rollup field Total Revenue Forecast.
+  - name: SM_TOTAL_FORECAST_REVENUE_BASE
+    description: Value of the Total Revenue Forecast in base currency.
+  - name: OWNINGUSER
+    description: Unique identifier for the user that owns the record.
+  - name: SM_MODIFIEDON
+    description: Latest updated date
+  - name: MODIFIEDBY
+    description: Unique identifier of the user who modified the record.
+  - name: SM_INVESTMENT_END_MONTH
+    description: Select the last day of investment end month
+  - name: OWNINGBUSINESSUNIT
+    description: Unique identifier for the business unit that owns the record
+- name: BRONZE__TMEA_EQUIPMENT_SALES__CRM_FILE_SYSTEMUSER
+  description: Person with access to the Microsoft CRM system and who owns objects
+    in the Microsoft CRM database.
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Check the _FILEDATE column in the BRONZE.TMEA_EQUIPMENT_SALES.CRM_FILE_SYSTEMUSER
+      table to ensure it falls within the last 24-hour interval.
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 24
+  - name: ADDRESS1_TELEPHONE2
+    description: Second telephone number associated with address 1.
+  - name: MOBILEPHONE
+    description: Mobile phone number for the user.
+  - name: ADDRESS2_NAME
+    description: Name to enter for address 2.
+  - name: STAGEID
+    description: Shows the ID of the stage.
+  - name: ADDRESS2_UTCOFFSET
+    description: UTC offset for address 2. This is the difference between local time
+      and standard Coordinated Universal Time.
+  - name: YOMIFULLNAME
+    description: Pronunciation of the full name of the user, written in phonetic hiragana
+      or katakana characters.
+  - name: ADDRESS1_ADDRESSID
+    description: Unique identifier for address 1.
+  - name: PREFERREDPHONECODE
+    description: Preferred phone number for the user.
+  - name: ADDRESS1_TELEPHONE3
+    description: Third telephone number associated with address 1.
+  - name: DEFAULTMAILBOX
+    description: Select the mailbox associated with this user.
+  - name: QUEUEID
+    description: Unique identifier of the default queue for the user.
+  - name: YOMIMIDDLENAME
+    description: Pronunciation of the middle name of the user, written in phonetic
+      hiragana or katakana characters.
+  - name: TEL_COM_POCOLUMNSTODISPLAYTASKTABLE
+    description: Define columns to display in a task list. This is used for PO.
+  - name: DOMAINNAME
+    description: Active Directory domain of which the user is a member.
+  - name: ISINTEGRATIONUSER
+    description: Check if user is an integration user.
+  - name: EXCHANGERATE
+    description: Exchange rate for the currency associated with the systemuser with
+      respect to the base currency.
+  - name: USERLICENSETYPE
+    description: Shows the type of user license.
+  - name: IDENTITYID
+    description: For internal use only.
+  - name: ADDRESS1_CITY
+    description: City name for address 1.
+  - name: INVITESTATUSCODE
+    description: User invitation status.
+  - name: JOBTITLE
+    description: Job title of the user.
+  - name: CREATEDBY
+    description: Unique identifier of the user who created the user.
+  - name: ADDRESS1_UTCOFFSET
+    description: UTC offset for address 1. This is the difference between local time
+      and standard Coordinated Universal Time.
+  - name: MODIFIEDON
+    description: Date and time when the user was last modified.
+  - name: FULLNAME
+    description: Full name of the user.
+  - name: SHAREPOINTEMAILADDRESS
+    description: SharePoint Work Email Address
+  - name: OUTGOINGEMAILDELIVERYMETHOD
+    description: Outgoing email delivery method for the user.
+  - name: CREATEDONBEHALFBY
+    description: Unique identifier of the delegate user who created the systemuser.
+  - name: ADDRESS1_TELEPHONE1
+    description: First telephone number associated with address 1.
+  - name: ADDRESS1_LINE1
+    description: First line for entering address 1 information.
+  - name: DISPLAYINSERVICEVIEWS
+    description: Whether to display the user in service views.
+  - name: YOMIFIRSTNAME
+    description: Pronunciation of the first name of the user, written in phonetic
+      hiragana or katakana characters.
+  - name: ADDRESS2_UPSZONE
+    description: United Parcel Service (UPS) zone for address 2.
+  - name: YAMMERUSERID
+    description: User's Yammer ID
+  - name: PERSONALEMAILADDRESS
+    description: Personal email address of the user.
+  - name: TIMEZONERULEVERSIONNUMBER
+    description: For internal use only.
+  - name: DISABLEDREASON
+    description: Reason for disabling the user.
+  - name: ADDRESS2_COUNTRY
+    description: Country/region name in address 2.
+  - name: TRAVERSEDPATH
+    description: For internal use only.
+  - name: MOBILEALERTEMAIL
+    description: Mobile alert email address for the user.
+  - name: ADDRESS2_STATEORPROVINCE
+    description: State or province for address 2.
+  - name: ORGANIZATIONID
+    description: Unique identifier of the organization associated with the user.
+  - name: MSDYN_GRIDWRAPPERCONTROLFIELD
+    description: Field to bind grid wrapper control
+  - name: USERPUID
+    description: ' User PUID User Identifiable Information'
+  - name: INCOMINGEMAILDELIVERYMETHOD
+    description: Incoming email delivery method for the user.
+  - name: DEFAULTFILTERSPOPULATED
+    description: Indicates if default outlook filters have been populated.
+  - name: ADDRESS2_LINE1
+    description: First line for entering address 2 information.
+  - name: ADDRESS2_POSTALCODE
+    description: ZIP Code or postal code for address 2.
+  - name: BUSINESSUNITID
+    description: Unique identifier of the Security Unit with which the user is associated.
+  - name: SALUTATION
+    description: Salutation for correspondence with the user.
+  - name: MSDYN_BOTHANDLE
+    description: Bot handle
+  - name: ADDRESS1_COUNTY
+    description: County name for address 1.
+  - name: ADDRESS1_STATEORPROVINCE
+    description: State or province for address 1.
+  - name: ADDRESS1_SHIPPINGMETHODCODE
+    description: Method of shipment for address 1.
+  - name: MIDDLENAME
+    description: Middle name of the user.
+  - name: ADDRESS1_COUNTRY
+    description: Country/region name in address 1.
+  - name: TERRITORYID
+    description: Unique identifier of the territory to which the user is assigned.
+  - name: WINDOWSLIVEID
+    description: Windows Live ID
+  - name: GOVERNMENTID
+    description: Government identifier for the user.
+  - name: LASTNAME
+    description: Last name of the user.
+  - name: MSDYN_USERTYPE
+    description: Type of user - CRM or BOT user
+  - name: DELETEDSTATE
+    description: User delete state
+  - name: SITEID
+    description: Site at which the user is located.
+  - name: DEFAULTODBFOLDERNAME
+    description: Type a default folder name for the user's OneDrive For Business location.
+  - name: ADDRESS2_LINE2
+    description: Second line for entering address 2 information.
+  - name: ADDRESS2_LINE3
+    description: Third line for entering address 2 information.
+  - name: ISACTIVEDIRECTORYUSER
+    description: Information about whether the user is an AD user.
+  - name: APPLICATIONID
+    description: The identifier for the application. This is used to access data in
+      another application.
+  - name: ADDRESS1_ADDRESSTYPECODE
+    description: Type of address for address 1, such as billing, shipping, or primary
+      address.
+  - name: MSDYN_BOTENDPOINT
+    description: Bot User Endpoint
+  - name: ISEMAILADDRESSAPPROVEDBYO365ADMIN
+    description: Shows the status of approval of the email address by O365 Admin.
+  - name: MODIFIEDONBEHALFBY
+    description: Unique identifier of the delegate user who last modified the systemuser.
+  - name: ADDRESS1_POSTALCODE
+    description: ZIP Code or postal code for address 1.
+  - name: APPLICATIONIDURI
+    description: The URI used as a unique logical identifier for the external app.
+      This can be used to validate the application.
+  - name: ADDRESS1_LONGITUDE
+    description: Longitude for address 1.
+  - name: HOMEPHONE
+    description: Home phone number for the user.
+  - name: MSDYN_CAPACITY
+    description: Capacity associated with the User.
+  - name: INTERNALEMAILADDRESS
+    description: Internal email address for the user.
+  - name: CALTYPE
+    description: License type of user. This is used only in the on-premises version
+      of the product. Online licenses are managed through Microsoft 365 Office Portal
+  - name: ISDISABLED
+    description: Information about whether the user is enabled.
+  - name: ADDRESS1_UPSZONE
+    description: United Parcel Service (UPS) zone for address 1.
+  - name: YAMMEREMAILADDRESS
+    description: User's Yammer login email address
+  - name: VERSIONNUMBER
+    description: Version number of the user.
+  - name: UTCCONVERSIONTIMEZONECODE
+    description: Time zone code that was in use when the record was created.
+  - name: ADDRESS1_NAME
+    description: Name to enter for address 1.
+  - name: ADDRESS1_POSTOFFICEBOX
+    description: Post office box number for address 1.
+  - name: ADDRESS1_COMPOSITE
+    description: Shows the complete primary address.
+  - name: ADDRESS2_TELEPHONE3
+    description: Third telephone number associated with address 2.
+  - name: ADDRESS2_POSTOFFICEBOX
+    description: Post office box number for address 2.
+  - name: EMPLOYEEID
+    description: Employee identifier for the user.
+  - name: SKILLS
+    description: Skill set of the user.
+  - name: SETUPUSER
+    description: Check if user is a setup user.
+  - name: MSDYN_DEFAULTPRESENCEIDUSER
+    description: Unique identifier for Presence associated with User.
+  - name: AZUREACTIVEDIRECTORYOBJECTID
+    description: This is the application directory object Id.
+  - name: ADDRESS2_TELEPHONE2
+    description: Second telephone number associated with address 2.
+  - name: PARENTSYSTEMUSERID
+    description: Unique identifier of the manager of the user.
+  - name: PHOTOURL
+    description: URL for the Website on which a photo of the user is located.
+  - name: YOMILASTNAME
+    description: Pronunciation of the last name of the user, written in phonetic hiragana
+      or katakana characters.
+  - name: MSDYN_BOTDESCRIPTION
+    description: BOT User Description
+  - name: MSDYN_BOTAPPLICATIONID
+    description: Application ID of the bot.
+  - name: MSDYN_BOTSECRETKEYS
+    description: Bot User Secret Keys
+  - name: ADDRESS2_FAX
+    description: Fax number for address 2.
+  - name: ADDRESS2_CITY
+    description: City name for address 2.
+  - name: PREFERREDEMAILCODE
+    description: Preferred email address for the user.
+  - name: PROCESSID
+    description: Shows the ID of the process.
+  - name: ADDRESS2_COMPOSITE
+    description: Shows the complete secondary address.
+  - name: NICKNAME
+    description: Nickname of the user.
+  - name: ACTIVEDIRECTORYGUID
+    description: Active Directory object GUID for the system user.
+  - name: ADDRESS2_LONGITUDE
+    description: Longitude for address 2.
+  - name: ADDRESS2_TELEPHONE1
+    description: First telephone number associated with address 2.
+  - name: ADDRESS2_ADDRESSTYPECODE
+    description: Type of address for address 2, such as billing, shipping, or primary
+      address.
+  - name: ISLICENSED
+    description: Information about whether the user is licensed.
+  - name: OVERRIDDENCREATEDON
+    description: Date and time that the record was migrated.
+  - name: ADDRESS1_LATITUDE
+    description: Latitude for address 1.
+  - name: FIRSTNAME
+    description: First name of the user.
+  - name: ENTITYIMAGEID
+    description: For internal use only.
+  - name: ADDRESS2_SHIPPINGMETHODCODE
+    description: Method of shipment for address 2.
+  - name: MSDYN_OWNINGENVIRONMENTID
+    description: Environment Id of the CDS environment that owns the bot user.
+  - name: MOBILEOFFLINEPROFILEID
+    description: Items contained with a particular SystemUser.
+  - name: IMPORTSEQUENCENUMBER
+    description: Unique identifier of the data import or data migration that created
+      this record.
+  - name: ACCESSMODE
+    description: Type of user.
+  - name: ISSYNCWITHDIRECTORY
+    description: Information about whether the user is synced with the directory.
+  - name: LATESTUPDATETIME
+    description: Time stamp of the latest update for the user
+  - name: TEL_COM_SHOWPROJECTACCEPTANCE
+    description: Used to display the Project Acceptance Tab of the Project. This is
+      used for PO.
+  - name: CALENDARID
+    description: Fiscal calendar associated with the user.
+  - name: ADDRESS1_FAX
+    description: Fax number for address 1.
+  - name: TRANSACTIONCURRENCYID
+    description: Unique identifier of the currency associated with the systemuser.
+  - name: EMAILROUTERACCESSAPPROVAL
+    description: Shows the status of the primary email address.
+  - name: MODIFIEDBY
+    description: Unique identifier of the user who last modified the user.
+  - name: AZUREDELETEDON
+    description: Date and time when the user was set as soft deleted in Azure.
+  - name: PASSPORTHI
+    description: For internal use only.
+  - name: SYSTEMUSERID
+    description: Unique identifier for the user.
+  - name: MSDYN_BOTPROVIDER
+    description: Indicates the type of bot
+  - name: MSDYN_GDPROPTOUT
+    description: Describes whether user is opted out or not
+  - name: ADDRESS2_LATITUDE
+    description: Latitude for address 2.
+  - name: ADDRESS1_LINE2
+    description: Second line for entering address 1 information.
+  - name: CREATEDON
+    description: Date and time when the user was created.
+  - name: PASSPORTLO
+    description: For internal use only.
+  - name: ADDRESS2_COUNTY
+    description: County name for address 2.
+  - name: PREFERREDADDRESSCODE
+    description: Preferred address for the user.
+  - name: TITLE
+    description: Title of the user.
+  - name: MSDYN_ISEXPERTENABLEDFORSWARM
+    description: Check if swarm is enabled for the experts.
+  - name: AZURESTATE
+    description: Azure state of user
+  - name: TEL_COM_SPECIAL_USER_TYPE
+    description: Set the type of special user.
+  - name: ADDRESS1_LINE3
+    description: Third line for entering address 1 information.
+  - name: ADDRESS2_ADDRESSID
+    description: Unique identifier for address 2.
+  - name: POSITIONID
+    description: User's position in hierarchical security model.
+- name: BRONZE__TMEA_EQUIPMENT_SALES__CRM_FILE_TEL_COM_ORDER_TYPE
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: TEL_COM_ORDER_TYPE
+    description: The name of the custom entity.
+  - name: MODIFIEDONBEHALFBY
+    description: Unique identifier of the delegate user who modified the record.
+  - name: CREATEDONBEHALFBY
+    description: Unique identifier of the delegate user who created the record.
+  - name: UTCCONVERSIONTIMEZONECODE
+    description: Time zone code that was in use when the record was created.
+  - name: VERSIONNUMBER
+    description: Version Number
+  - name: OWNERID
+    description: Owner Id
+  - name: CREATEDON
+    description: Date and time when the record was created.
+  - name: CREATEDBY
+    description: Unique identifier of the user who created the record.
+  - name: OWNINGTEAM
+    description: Unique identifier for the team that owns the record.
+  - name: IMPORTSEQUENCENUMBER
+    description: Sequence number of the import that created this record.
+  - name: OWNINGBUSINESSUNIT
+    description: Unique identifier for the business unit that owns the record
+  - name: OVERRIDDENCREATEDON
+    description: Date and time that the record was migrated.
+  - name: OWNERIDTYPE
+    description: Owner Id Type
+  - name: TEL_COM_ORDER_TYPEID
+    description: Unique identifier for entity instances
+  - name: STATUSCODE
+    description: Reason for the status of the Order Type
+  - name: TIMEZONERULEVERSIONNUMBER
+    description: For internal use only.
+  - name: OWNINGUSER
+    description: Unique identifier for the user that owns the record.
+  - name: OWNERIDYOMINAME
+    description: Yomi name of the owner
+  - name: MODIFIEDON
+    description: Date and time when the record was modified.
+  - name: OWNERIDNAME
+    description: Name of the owner
+  - name: STATECODE
+    description: Status of the Order Type
+  - name: MODIFIEDBY
+    description: Unique identifier of the user who modified the record.
+- name: BRONZE__TMEA_EQUIPMENT_SALES__CRM_FILE_TEL_COM_SALES_DISTRICT
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: VERSIONNUMBER
+    description: Version Number
+  - name: STATUSCODE
+    description: Reason for the status of the Sales District
+  - name: ORGANIZATIONID
+    description: Unique identifier for the organization
+  - name: STATECODE
+    description: Status of the Sales District
+  - name: OVERRIDDENCREATEDON
+    description: Date and time that the record was migrated.
+  - name: UTCCONVERSIONTIMEZONECODE
+    description: Time zone code that was in use when the record was created.
+  - name: TIMEZONERULEVERSIONNUMBER
+    description: For internal use only.
+  - name: IMPORTSEQUENCENUMBER
+    description: Sequence number of the import that created this record.
+  - name: MODIFIEDBY
+    description: Unique identifier of the user who modified the record.
+  - name: TEL_COM_SALES_DISTRICTID
+    description: Unique identifier for entity instances
+  - name: MODIFIEDON
+    description: Date and time when the record was modified.
+  - name: TEL_COM_SALES_DISTRICT
+    description: The name of the custom entity.
+  - name: MODIFIEDONBEHALFBY
+    description: Unique identifier of the delegate user who modified the record.
+  - name: CREATEDON
+    description: Date and time when the record was created.
+  - name: CREATEDBY
+    description: Unique identifier of the user who created the record.
+  - name: CREATEDONBEHALFBY
+    description: Unique identifier of the delegate user who created the record.
+- name: BRONZE__TMEA_EQUIPMENT_SALES__CRM_FILE_TEL_COM_SALES_ORGANIZATION
+  tests:
+  - has_data
+  columns:
+  - name: ORGANIZATIONID
+    description: Unique identifier for the organization
+  - name: CREATEDONBEHALFBY
+    description: Unique identifier of the delegate user who created the record.
+  - name: UTCCONVERSIONTIMEZONECODE
+    description: Time zone code that was in use when the record was created.
+  - name: MODIFIEDBY
+    description: Unique identifier of the user who modified the record.
+  - name: TEL_COM_SALES_ORGANIZATION_NAME
+    description: The name of the custom entity.
+  - name: TIMEZONERULEVERSIONNUMBER
+    description: For internal use only.
+  - name: MODIFIEDONBEHALFBY
+    description: Unique identifier of the delegate user who modified the record.
+  - name: MODIFIEDON
+    description: Date and time when the record was modified.
+  - name: CREATEDBY
+    description: Unique identifier of the user who created the record.
+  - name: IMPORTSEQUENCENUMBER
+    description: Sequence number of the import that created this record.
+  - name: OVERRIDDENCREATEDON
+    description: Date and time that the record was migrated.
+  - name: CREATEDON
+    description: Date and time when the record was created.
+  - name: STATUSCODE
+    description: Reason for the status of the Sales Organization
+  - name: TEL_COM_SALES_ORGANIZATIONID
+    description: Unique identifier for entity instances
+  - name: VERSIONNUMBER
+    description: Version Number
+  - name: STATECODE
+    description: Status of the Sales Organization
+- name: BRONZE__TMEA_EQUIPMENT_SALES__CRM_FILE_TEL_SM_CHAMBER
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: IMPORTSEQUENCENUMBER
+    description: Sequence number of the import that created this record.
+  - name: CREATEDON
+    description: Date and time when the record was created.
+  - name: OWNERIDTYPE
+    description: Owner Id Type
+  - name: TEL_SM_CHAMBER
+    description: The name of the custom entity.
+  - name: UTCCONVERSIONTIMEZONECODE
+    description: Time zone code that was in use when the record was created.
+  - name: OWNERIDYOMINAME
+    description: Yomi name of the owner
+  - name: TEL_SM_CHAMBERID
+    description: Unique identifier for entity instances
+  - name: CREATEDONBEHALFBY
+    description: Unique identifier of the delegate user who created the record.
+  - name: TIMEZONERULEVERSIONNUMBER
+    description: For internal use only.
+  - name: MODIFIEDON
+    description: Date and time when the record was modified.
+  - name: MODIFIEDONBEHALFBY
+    description: Unique identifier of the delegate user who modified the record.
+  - name: OWNINGUSER
+    description: Unique identifier for the user that owns the record.
+  - name: MODIFIEDBY
+    description: Unique identifier of the user who modified the record.
+  - name: CREATEDBY
+    description: Unique identifier of the user who created the record.
+  - name: OWNERID
+    description: Owner Id
+  - name: STATUSCODE
+    description: Reason for the status of the Chamber
+  - name: OWNINGTEAM
+    description: Unique identifier for the team that owns the record.
+  - name: VERSIONNUMBER
+    description: Version Number
+  - name: OWNERIDNAME
+    description: Name of the owner
+  - name: OWNINGBUSINESSUNIT
+    description: Unique identifier for the business unit that owns the record
+  - name: STATECODE
+    description: Status of the Chamber
+  - name: OVERRIDDENCREATEDON
+    description: Date and time that the record was migrated.
+- name: BRONZE__TMEA_EQUIPMENT_SALES__CRM_FILE_TEL_SM_COST_CENTER_GROUP
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: OWNERIDTYPE
+    description: Owner Id Type
+  - name: OWNERIDYOMINAME
+    description: Yomi name of the owner
+  - name: OWNINGBUSINESSUNIT
+    description: Unique identifier for the business unit that owns the record
+  - name: IMPORTSEQUENCENUMBER
+    description: Sequence number of the import that created this record.
+  - name: OVERRIDDENCREATEDON
+    description: Date and time that the record was migrated.
+  - name: OWNINGUSER
+    description: Unique identifier for the user that owns the record.
+  - name: STATECODE
+    description: Status of the Cost Center Group
+  - name: CREATEDON
+    description: Date and time when the record was created.
+  - name: MODIFIEDONBEHALFBY
+    description: Unique identifier of the delegate user who modified the record.
+  - name: OWNINGTEAM
+    description: Unique identifier for the team that owns the record.
+  - name: TEL_SM_COST_CENTER_GROUP
+    description: The name of the custom entity.
+  - name: CREATEDBY
+    description: Unique identifier of the user who created the record.
+  - name: MODIFIEDBY
+    description: Unique identifier of the user who modified the record.
+  - name: TIMEZONERULEVERSIONNUMBER
+    description: For internal use only.
+  - name: TEL_SM_COST_CENTER_GROUPID
+    description: Unique identifier for entity instances
+  - name: CREATEDONBEHALFBY
+    description: Unique identifier of the delegate user who created the record.
+  - name: UTCCONVERSIONTIMEZONECODE
+    description: Time zone code that was in use when the record was created.
+  - name: STATUSCODE
+    description: Reason for the status of the Cost Center Group
+  - name: OWNERID
+    description: Owner Id
+  - name: MODIFIEDON
+    description: Date and time when the record was modified.
+  - name: VERSIONNUMBER
+    description: Version Number
+  - name: OWNERIDNAME
+    description: Name of the owner
+- name: BRONZE__TMEA_EQUIPMENT_SALES__CRM_FILE_TEL_SM_MODEL
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: OVERRIDDENCREATEDON
+    description: Date and time that the record was migrated.
+  - name: OWNERIDNAME
+    description: Name of the owner
+  - name: VERSIONNUMBER
+    description: Version Number
+  - name: CREATEDONBEHALFBY
+    description: Unique identifier of the delegate user who created the record.
+  - name: TEL_SM_MODEL
+    description: The name of the custom entity.
+  - name: MODIFIEDBY
+    description: Unique identifier of the user who modified the record.
+  - name: STATUSCODE
+    description: Reason for the status of the Model Master
+  - name: STATECODE
+    description: Status of the Model Master
+  - name: OWNERIDYOMINAME
+    description: Yomi name of the owner
+  - name: UTCCONVERSIONTIMEZONECODE
+    description: Time zone code that was in use when the record was created.
+  - name: OWNERIDTYPE
+    description: Owner Id Type
+  - name: OWNINGTEAM
+    description: Unique identifier for the team that owns the record.
+  - name: CREATEDBY
+    description: Unique identifier of the user who created the record.
+  - name: OWNINGBUSINESSUNIT
+    description: Unique identifier for the business unit that owns the record
+  - name: TEL_SM_MODELID
+    description: Unique identifier for entity instances
+  - name: CREATEDON
+    description: Date and time when the record was created.
+  - name: OWNERID
+    description: Owner Id
+  - name: TIMEZONERULEVERSIONNUMBER
+    description: For internal use only.
+  - name: IMPORTSEQUENCENUMBER
+    description: Sequence number of the import that created this record.
+  - name: MODIFIEDON
+    description: Date and time when the record was modified.
+  - name: OWNINGUSER
+    description: Unique identifier for the user that owns the record.
+  - name: MODIFIEDONBEHALFBY
+    description: Unique identifier of the delegate user who modified the record.
+- name: BRONZE__TMEA_EQUIPMENT_SALES__CRM_FILE_TEL_SM_REVENUE_RECOGNITION_CRITERIA
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: OWNERIDNAME
+    description: Name of the owner
+  - name: OVERRIDDENCREATEDON
+    description: Date and time that the record was migrated.
+  - name: IMPORTSEQUENCENUMBER
+    description: Sequence number of the import that created this record.
+  - name: OWNERIDYOMINAME
+    description: Yomi name of the owner
+  - name: TIMEZONERULEVERSIONNUMBER
+    description: For internal use only.
+  - name: CREATEDBY
+    description: Unique identifier of the user who created the record.
+  - name: CREATEDONBEHALFBY
+    description: Unique identifier of the delegate user who created the record.
+  - name: OWNERID
+    description: Owner Id
+  - name: TEL_SM_REV_REC_CRITERIA
+    description: The name of the custom entity.
+  - name: STATECODE
+    description: Status of the Revenue Recognition Criteria
+  - name: MODIFIEDON
+    description: Date and time when the record was modified.
+  - name: OWNINGUSER
+    description: Unique identifier for the user that owns the record.
+  - name: STATUSCODE
+    description: Reason for the status of the Revenue Recognition Criteria
+  - name: MODIFIEDBY
+    description: Unique identifier of the user who modified the record.
+  - name: OWNINGBUSINESSUNIT
+    description: Unique identifier for the business unit that owns the record
+  - name: MODIFIEDONBEHALFBY
+    description: Unique identifier of the delegate user who modified the record.
+  - name: OWNINGTEAM
+    description: Unique identifier for the team that owns the record.
+  - name: CREATEDON
+    description: Date and time when the record was created.
+  - name: VERSIONNUMBER
+    description: Version Number
+  - name: OWNERIDTYPE
+    description: Owner Id Type
+  - name: UTCCONVERSIONTIMEZONECODE
+    description: Time zone code that was in use when the record was created.
+  - name: TEL_SM_REVENUE_RECOGNITION_CRITERIAID
+    description: Unique identifier for entity instances
+- name: BRONZE__TMEA_EQUIPMENT_SALES__CRM_FILE_TEL_SM_SALES_DOCUMENT
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Check the _FILEDATE column in the BRONZE.TMEA_EQUIPMENT_SALES.CRM_FILE_TEL_SM_SALES_DOCUMENT
+      table to ensure it falls within the last 24-hour interval.
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 24
+  - name: TEL_SM_PRCHSAMNT_FROM_EX_VENDOR_BASE
+    description: Value of the Purchase Amount from External Vendor in base currency.
+  - name: TEL_SM_TOTAL_PRCHSAMNT_EST_FROM_FCTRY_BASE
+    description: Value of the Total Purchase Amount Estimate from Factory in base
+      currency.
+  - name: TEL_SM_CREDIT_CONSUMPT_AMNT_BASE
+    description: Value of the Credit Consumption Amount in base currency.
+  - name: OVERRIDDENCREATEDON
+    description: Date and time that the record was migrated.
+  - name: MODIFIEDBY
+    description: Unique identifier of the user who modified the record.
+  - name: OWNINGUSER
+    description: Unique identifier for the user that owns the record.
+  - name: IMPORTSEQUENCENUMBER
+    description: Sequence number of the import that created this record.
+  - name: TEL_SM_SALES_DOC_ITEM_NO
+    description: The name of the custom entity.
+  - name: TEL_SM_CREDIT_INCENTIVE_CONTRIBUTION_BASE
+    description: Value of the Credit Incentive Contribution in base currency.
+  - name: VERSIONNUMBER
+    description: Version Number
+  - name: CREATEDBY
+    description: Unique identifier of the user who created the record.
+  - name: EXCHANGERATE
+    description: Exchange rate for the currency associated with the entity with respect
+      to the base currency.
+  - name: UTCCONVERSIONTIMEZONECODE
+    description: Time zone code that was in use when the record was created.
+  - name: TIMEZONERULEVERSIONNUMBER
+    description: For internal use only.
+  - name: TEL_SM_ESTIMATED_SALES_AMOUNT_BASE
+    description: Value of the Estimated Sales Amount in base currency.
+  - name: OWNERIDYOMINAME
+    description: Yomi name of the owner
+  - name: OWNINGBUSINESSUNIT
+    description: Unique identifier for the business unit that owns the record
+  - name: OWNERIDTYPE
+    description: Owner Id Type
+  - name: TEL_SM_SALESAMNT_BASE
+    description: Value of the Sales Amount in base currency.
+  - name: OWNERID
+    description: Owner Id
+  - name: TEL_SM_BOOKINGAMNT_BASE
+    description: Value of the Booking Amount in base currency.
+  - name: CREATEDON
+    description: Date and time when the record was created.
+  - name: TEL_SM_TMEA_TEL_MS_SALESAMOUNT_BASE
+    description: Value of the TMEA/TEL MS Sales Amount in base currency.
+  - name: TEL_SM_SUSPENSE_RECEIVE_CONSUMPT_TAX_BASE
+    description: Value of the Suspense Received Consumption Tax in base currency.
+  - name: STATECODE
+    description: Status of the Sales Document
+  - name: TRANSACTIONCURRENCYID
+    description: Unique identifier of the currency associated with the entity.
+  - name: TEL_SM_DRCR_AMOUNT_BASE
+    description: Value of the DRCR Amount in base currency.
+  - name: OWNERIDNAME
+    description: Name of the owner
+  - name: CREATEDONBEHALFBY
+    description: Unique identifier of the delegate user who created the record.
+  - name: OWNINGTEAM
+    description: Unique identifier for the team that owns the record.
+  - name: TEL_SM_SALES_DOCUMENTID
+    description: Unique identifier for entity instances
+  - name: STATUSCODE
+    description: Reason for the status of the Sales Document
+  - name: MODIFIEDON
+    description: Date and time when the record was modified.
+  - name: MODIFIEDONBEHALFBY
+    description: Unique identifier of the delegate user who modified the record.
+- name: BRONZE__TMEA_EQUIPMENT_SALES__CRM_FILE_TEL_SM_WAFER_SIZE_GENERATION
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: CREATEDONBEHALFBY
+    description: Unique identifier of the delegate user who created the record.
+  - name: CREATEDBY
+    description: Unique identifier of the user who created the record.
+  - name: MODIFIEDONBEHALFBY
+    description: Unique identifier of the delegate user who modified the record.
+  - name: OVERRIDDENCREATEDON
+    description: Date and time that the record was migrated.
+  - name: OWNERIDNAME
+    description: Name of the owner
+  - name: STATECODE
+    description: Status of the Wafer Size(mm)/Generation
+  - name: OWNERIDTYPE
+    description: Owner Id Type
+  - name: TEL_SM_WAFER_SIZE_GENERATIONID
+    description: Unique identifier for entity instances
+  - name: VERSIONNUMBER
+    description: Version Number
+  - name: UTCCONVERSIONTIMEZONECODE
+    description: Time zone code that was in use when the record was created.
+  - name: IMPORTSEQUENCENUMBER
+    description: Sequence number of the import that created this record.
+  - name: TEL_SM_WAFER_SIZE_GENERATION
+    description: The name of the custom entity.
+  - name: STATUSCODE
+    description: Reason for the status of the Wafer Size(mm)/Generation
+  - name: CREATEDON
+    description: Date and time when the record was created.
+  - name: TIMEZONERULEVERSIONNUMBER
+    description: For internal use only.
+  - name: MODIFIEDBY
+    description: Unique identifier of the user who modified the record.
+  - name: OWNINGBUSINESSUNIT
+    description: Unique identifier for the business unit that owns the record
+  - name: OWNERID
+    description: Owner Id
+  - name: OWNERIDYOMINAME
+    description: Yomi name of the owner
+  - name: OWNINGTEAM
+    description: Unique identifier for the team that owns the record.
+  - name: MODIFIEDON
+    description: Date and time when the record was modified.
+  - name: OWNINGUSER
+    description: Unique identifier for the user that owns the record.
+- name: BRONZE__TMEA_EQUIPMENT_SALES__CRM_FILE_TRANSACTIONCURRENCY
+  description: Currency in which a financial transaction is carried out.
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: ENTITYIMAGEID
+    description: For internal use only.
+  - name: STATUSCODE
+    description: Reason for the status of the transaction currency.
+  - name: TRANSACTIONCURRENCYID
+    description: Unique identifier of the transaction currency.
+  - name: CREATEDONBEHALFBY
+    description: Unique identifier of the delegate user who created the transactioncurrency.
+  - name: VERSIONNUMBER
+    description: Version number of the transaction currency.
+  - name: ISOCURRENCYCODE
+    description: ISO currency code for the transaction currency.
+  - name: CREATEDON
+    description: Date and time when the transaction currency was created.
+  - name: IMPORTSEQUENCENUMBER
+    description: Unique identifier of the data import or data migration that created
+      this record.
+  - name: CURRENCYNAME
+    description: Name of the transaction currency.
+  - name: ORGANIZATIONID
+    description: Unique identifier of the organization associated with the transaction
+      currency.
+  - name: CREATEDBY
+    description: Unique identifier of the user who created the transaction currency.
+  - name: STATECODE
+    description: Status of the transaction currency.
+  - name: UNIQUEDSCID
+    description: For internal use only.
+  - name: EXCHANGERATE
+    description: Exchange rate between the transaction currency and the base currency.
+  - name: OVERRIDDENCREATEDON
+    description: Date and time that the record was migrated.
+  - name: CURRENCYPRECISION
+    description: Number of decimal places that can be used for currency.
+  - name: MODIFIEDBY
+    description: Unique identifier of the user who last modified the transaction currency.
+  - name: MODIFIEDON
+    description: Date and time when the transaction currency was last modified.
+  - name: CURRENCYSYMBOL
+    description: Symbol for the transaction currency.
+  - name: MODIFIEDONBEHALFBY
+    description: Unique identifier of the delegate user who last modified the transactioncurrency.
+- name: BRONZE__TMEA_EQUIPMENT_SALES__OPT_ORDER_PROCESS_TRACKING
+  tests:
+  - has_data
+
+- name: BRONZE__TMEA_EQUIPMENT_SALES__SHAREPOINT_COMMON_BUSINESS_UNIT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TMEA_EQUIPMENT_SALES__SHAREPOINT_COMMON_ORDER_TYPE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TMEA_EQUIPMENT_SALES__SHAREPOINT_COMMON_SALES_ACCOUNT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TMEA_EQUIPMENT_SALES__SHAREPOINT_CUSTOMER_GROUP_MAPPING
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TMEA_EQUIPMENT_SALES__SHAREPOINT_CUSTOMER_SITE_SERVICE_MANAGER_MAPPING
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TMEA_EQUIPMENT_SALES__SHAREPOINT_ORDER_PROCESS_TRACKING_LEGACY
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TMEA_EQUIPMENT_SALES__SHAREPOINT_SERVICE_BUSINESS_UNIT_MAPPING
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TMEA_EQUIPMENT_SALES__SHAREPOINT_SERVICE_B_CODE_MAPPING
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TMEA_EQUIPMENT_SALES__WISDOM_SAP_SURB
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Check the _FILEDATE column in the BRONZE.TMEA_EQUIPMENT_SALES.WISDOM_SAP_SURB
+      table to ensure it falls within the last 24-hour interval.
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 24
+- name: BRONZE__TMEA_EQUIPMENT_SALES__WISDOM_TEA_MAC_LIST
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Check the _FILEDATE column in the BRONZE.TMEA_EQUIPMENT_SALES.WISDOM_TEA_MAC_LIST
+      table to ensure it falls within the last 24-hour interval.
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 24
+- name: BRONZE__TMEA_EQUIPMENT_SALES__WISDOM_WISDOM_SURB_PROGRESS
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Check the _FILEDATE column in the BRONZE.TMEA_EQUIPMENT_SALES.WISDOM_WISDOM_SURB_PROGRESS
+      table to ensure it falls within the last 24-hour interval.
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 24
+- name: BRONZE__TMEA_EQUIPMENT_SALES__SHAREPOINT_TMEA_SALES_FORECAST
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Check the _FILEDATE column in the BRONZE.TMEA_EQUIPMENT_SALES.SHAREPOINT_TMEA_SALES_FORECAST
+      table to ensure it falls within the last 24-hour interval.    
+- name: BRONZE__TMEA_EQUIPMENT_SALES__SHAREPOINT_TMEA_SALES_BUDGET
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Check the _FILEDATE column in the BRONZE.TMEA_EQUIPMENT_SALES.SHAREPOINT_TMEA_SALES_BUDGET
+      table to ensure it falls within the last 24-hour interval.
+- name: BRONZE__TMEA_EQUIPMENT_SALES__SHAREPOINT_TMEA_SALES_ACTUAL
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Check the _FILEDATE column in the BRONZE.TMEA_EQUIPMENT_SALES.SHAREPOINT_TMEA_SALES_ACTUAL
+      table to ensure it falls within the last 24-hour interval.
+- name: BRONZE__TMEA_EQUIPMENT_SALES__SHAREPOINT_TMEA_ORDER_FORECAST
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Check the _FILEDATE column in the BRONZE.TMEA_EQUIPMENT_SALES.SHAREPOINT_TMEA_ORDER_FORECAST
+      table to ensure it falls within the last 24-hour interval.
+- name: BRONZE__TMEA_EQUIPMENT_SALES__SHAREPOINT_TMEA_ORDER_BUDGET
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Check the _FILEDATE column in the BRONZE.TMEA_EQUIPMENT_SALES.SHAREPOINT_TMEA_ORDER_BUDGET
+      table to ensure it falls within the last 24-hour interval.   
+- name: BRONZE__TMEA_EQUIPMENT_SALES__SHAREPOINT_TMEA_ORDER_ACTUAL
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Check the _FILEDATE column in the BRONZE.TMEA_EQUIPMENT_SALES.SHAREPOINT_TMEA_ORDER_ACTUAL
+      table to ensure it falls within the last 24-hour interval.                                              

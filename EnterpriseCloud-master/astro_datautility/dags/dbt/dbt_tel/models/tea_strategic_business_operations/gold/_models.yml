@@ -1,0 +1,53 @@
+models:
+- name: GOLD__TEA_STRATEGIC_BUSINESS_OPERATIONS__COMPANY
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_STRATEGIC_BUSINESS_OPERATIONS__CONTRACT_SUMMARY_PURCHASE_ORDER_DETAILS
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_STRATEGIC_BUSINESS_OPERATIONS__EMPLOYEE_MONTHLY_SNAPSHOT
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_STRATEGIC_BUSINESS_OPERATIONS__EMPLOYEE_TEACOMMON_HISTORICAL_MONTHLY_SNAPSHOT
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_STRATEGIC_BUSINESS_OPERATIONS__GLOBAL_EMPLOYEE
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_STRATEGIC_BUSINESS_OPERATIONS__GLOBAL_MACHINES
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_STRATEGIC_BUSINESS_OPERATIONS__PURCHASE_ORDER_DELIVERY_LINE
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_STRATEGIC_BUSINESS_OPERATIONS__SALES_ORDER_BILLING_LINE
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_STRATEGIC_BUSINESS_OPERATIONS__SALES_ORDER_BILLING_PLAN
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_STRATEGIC_BUSINESS_OPERATIONS__SALES_ORDER_DELIVERY_LINE
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_STRATEGIC_BUSINESS_OPERATIONS__SALES_ORDER_MASTER
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_STRATEGIC_BUSINESS_OPERATIONS__SALES_ORDER_SCHEDULE_LINE
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_STRATEGIC_BUSINESS_OPERATIONS__TIMESHEET
+  tests:
+  - has_data
+  - recently_run

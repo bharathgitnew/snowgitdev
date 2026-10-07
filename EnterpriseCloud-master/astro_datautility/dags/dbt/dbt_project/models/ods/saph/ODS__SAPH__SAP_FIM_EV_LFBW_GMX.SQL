@@ -1,0 +1,90 @@
+
+
+	/************
+	Model file generated from gmxDbtTemplateUtility.ipynb
+	*************/
+
+
+	{{ config(
+	  materialized='incremental',
+	  incremental_strategy='insert_overwrite',
+	  alias='SAP_FIM_EV_LFBW_GMX',
+	  transient=false
+	) }}
+
+	with source_data as (
+	SELECT
+    	_FILEDATE,
+		_FILENAME,
+		JSONFIELD:"LIFNR"::STRING AS "LIFNR",
+ 	 	JSONFIELD:"BUKRS"::STRING AS "BUKRS",
+ 	 	JSONFIELD:"WITHT"::STRING AS "WITHT",
+ 	 	JSONFIELD:"WT_SUBJCT"::STRING AS "WT_SUBJCT",
+ 	 	JSONFIELD:"QSREC"::STRING AS "QSREC",
+ 	 	JSONFIELD:"WT_WTSTCD"::STRING AS "WT_WTSTCD",
+ 	 	JSONFIELD:"WT_WITHCD"::STRING AS "WT_WITHCD",
+ 	 	JSONFIELD:"WT_EXNR"::STRING AS "WT_EXNR",
+ 	 	JSONFIELD:"WT_EXRT"::STRING AS "WT_EXRT",
+ 	 	JSONFIELD:"WT_EXDF"::STRING AS "WT_EXDF",
+ 	 	JSONFIELD:"WT_EXDT"::STRING AS "WT_EXDT",
+ 	 	JSONFIELD:"WT_WTEXRS"::STRING AS "WT_WTEXRS",
+ 	 	JSONFIELD:"DELFLAG"::STRING AS "DELFLAG",
+ 	 	JSONFIELD:"CDCHANGENR"::STRING AS "CDCHANGENR",
+ 	 	JSONFIELD:"PSL_INSDATE"::STRING AS "PSL_INSDATE",
+ 	 	JSONFIELD:"PSL_UPDDATE"::STRING AS "PSL_UPDDATE"
+	from {{ source('SAPH','SAP_FIM_EV_LFBW_GMX') }}
+	    WHERE REGEXP_SUBSTR(_FILENAME,'\\d{14}') = (SELECT MAX(REGEXP_SUBSTR(_filename,'\\d{14}')) from {{ source('SAPH', 'SAP_FIM_EV_LFBW_GMX') }})
+	),
+
+	transform_data as (
+	SELECT
+		_FILEDATE,
+		_FILENAME,
+		'{{ invocation_id }}' AS _AUDIT_LOG_ID,
+        SHA2('hash_me') as _ROW_HASH,
+		"LIFNR",
+ 	 	"BUKRS",
+ 	 	"WITHT",
+ 	 	"WT_SUBJCT",
+ 	 	"QSREC",
+ 	 	"WT_WTSTCD",
+ 	 	"WT_WITHCD",
+ 	 	"WT_EXNR",
+ 	 	"WT_EXRT",
+ 	 	"WT_EXDF",
+ 	 	"WT_EXDT",
+ 	 	"WT_WTEXRS",
+ 	 	"DELFLAG",
+ 	 	"CDCHANGENR",
+ 	 	"PSL_INSDATE",
+ 	 	"PSL_UPDDATE"
+	from source_data
+	),
+
+	type_data as (
+	SELECT
+		cast(_FILEDATE AS TIMESTAMP_NTZ(9)) AS _FILEDATE,
+		cast(_FILENAME as varchar(128)) as _FILENAME,
+        cast(_AUDIT_LOG_ID as varchar(128)) as _AUDIT_LOG_ID,
+        cast(_ROW_HASH as varchar(128)) as _ROW_HASH,
+		CAST("LIFNR" AS NVARCHAR) AS "LIFNR",
+ 	 	CAST("BUKRS" AS NVARCHAR) AS "BUKRS",
+ 	 	CAST("WITHT" AS NVARCHAR) AS "WITHT",
+ 	 	CAST("WT_SUBJCT" AS NVARCHAR) AS "WT_SUBJCT",
+ 	 	CAST("QSREC" AS NVARCHAR) AS "QSREC",
+ 	 	CAST("WT_WTSTCD" AS NVARCHAR) AS "WT_WTSTCD",
+ 	 	CAST("WT_WITHCD" AS NVARCHAR) AS "WT_WITHCD",
+ 	 	CAST("WT_EXNR" AS NVARCHAR) AS "WT_EXNR",
+ 	 	CAST("WT_EXRT" AS FLOAT) AS "WT_EXRT",
+ 	 	CAST("WT_EXDF" AS TIMESTAMP) AS "WT_EXDF",
+ 	 	CAST("WT_EXDT" AS TIMESTAMP) AS "WT_EXDT",
+ 	 	CAST("WT_WTEXRS" AS NVARCHAR) AS "WT_WTEXRS",
+ 	 	CAST("DELFLAG" AS BOOLEAN) AS "DELFLAG",
+ 	 	CAST("CDCHANGENR" AS NVARCHAR) AS "CDCHANGENR",
+ 	 	CAST("PSL_INSDATE" AS TIMESTAMP) AS "PSL_INSDATE",
+ 	 	CAST("PSL_UPDDATE" AS TIMESTAMP) AS "PSL_UPDDATE"
+	from transform_data
+	)
+
+	select * from type_data
+

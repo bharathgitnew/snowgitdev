@@ -1,0 +1,59 @@
+/************
+Model file generated from dbtGeneratePubViews: 03.10.2022.08.14.14"
+*************/
+
+{{ config(
+      materialized='view',
+      alias='BAANFINANCEGENERALLEDGER_INTEGRATIONREFERENCES',
+      transient=false
+) }}
+
+with source_data as (
+    SELECT
+        _CAPTUREDATETIME,
+        _COMPANYID,
+        APPROVALDOCUMENT,
+        APPROVALDOCUMENTLINE,
+        APPROVALTRANSACTIONTYPE,
+        BATCHNUMBER,
+        CREATIONDATE,
+        DOCUMENT,
+        FINANCECOMPANY,
+        FINANCIALTRANSACTIONDESCRIPTION,
+        FINANCIALTRANSACTIONID,
+        FINANCIALUSERGROUP,
+        FROMTODESCRIPTION,
+        FROMTOID,
+        INTEGRATIONTRANSACTIONSTATUSDESCRIPTION,
+        INTEGRATIONTRANSACTIONSTATUSID,
+        LINENUMBER,
+        ORDER_,
+        ORDER_POSITION,
+        ORIGINALCOMPANY,
+        POSTEDBYUSER,
+        POSTINGDATE,
+        PRINTEDDESCRIPTION,
+        PRINTEDID,
+        PROJECT,
+        RECEIPTNUMBER,
+        RECEIPTSEQUENCE,
+        RELATEDORDER,
+        RELATEDORDERPOSITION,
+        RELATEDORDERSEQUENCE,
+        SEQUENCENUMBER_SERN,
+        SEQUENCENUMBER_SQNB,
+        TEMPORARYFIELDFORUNIQUEKEY,
+        TRANSACTIONORIGINDESCRIPTION,
+        TRANSACTIONORIGINID,
+        TRANSACTIONTIME,
+        TRANSACTIONTYPE,
+        USER
+    from {{ ref('ODS__BAAN__BAANFINANCEGENERALLEDGER_INTEGRATIONREFERENCES') }}
+),
+
+transform_data AS
+(
+    select * from source_data
+)
+
+    select * from transform_data

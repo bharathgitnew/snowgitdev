@@ -1,0 +1,46 @@
+models:
+- name: SILVER__TEA_SPARES_REVENUE__BAANV_TEA_CUSTOMERS
+  tests:
+  - has_data
+  - recently_run
+  
+- name: SILVER__TEA_SPARES_REVENUE__FINALIZEDTRANSACTIONS
+  tests:
+  - has_data
+  - recently_run
+  
+- name: SILVER__TEA_SPARES_REVENUE__INTEGRATEDTRANSACTIONS
+  tests:
+  - has_data
+  - recently_run
+  
+- name: SILVER__TEA_SPARES_REVENUE__ITEM
+  tests:
+  - has_data
+  - recently_run
+  
+- name: SILVER__TEA_SPARES_REVENUE__PURCHASEORDER
+  tests:
+  - has_data
+  - recently_run
+  
+- name: SILVER__TEA_SPARES_REVENUE__REPLENISHMENTORDER
+  tests:
+  - has_data
+  - recently_run
+  
+- name: SILVER__TEA_SPARES_REVENUE__SALESORDER
+  tests:
+  - has_data
+  - recently_run
+  
+- name: SILVER__TEA_SPARES_REVENUE__SERVICEORDER
+  tests:
+  - has_data
+  - recently_run
+  
+- name: SILVER__TEA_SPARES_REVENUE__SUPPLIERS
+  tests:
+  - has_data
+  - recently_run
+  

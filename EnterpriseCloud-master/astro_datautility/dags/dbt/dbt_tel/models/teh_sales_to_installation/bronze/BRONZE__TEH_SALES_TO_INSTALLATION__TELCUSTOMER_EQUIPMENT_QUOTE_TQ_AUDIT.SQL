@@ -1,0 +1,99 @@
+{{ config(
+    materialized='tel_incremental',
+    incremental_strategy='insert_overwrite',
+    alias='TELCUSTOMER_EQUIPMENT_QUOTE_TQ_AUDIT',
+    unique_key = []
+) }}
+
+with source_data as
+(
+    SELECT
+        	_FILENAME,
+        	_FILEDATE,
+            JSONFIELD:"TEL_QUOTE_ID"::STRING AS TEL_QUOTE_ID,
+            JSONFIELD:"EQUIPMENT_QUOTE_TEL_QUOTE_ID"::STRING AS EQUIPMENT_QUOTE_TEL_QUOTE_ID,
+            JSONFIELD:"EQUIPMENT_QUOTE_ID"::STRING AS EQUIPMENT_QUOTE_ID,
+            JSONFIELD:"QUOTE_AMT"::STRING AS QUOTE_AMT,
+            JSONFIELD:"QUOTE_CURRENCY"::STRING AS QUOTE_CURRENCY,
+            JSONFIELD:"LEAD_TIME"::STRING AS LEAD_TIME,
+            JSONFIELD:"LEAD_TIME_UNIT"::STRING AS LEAD_TIME_UNIT,
+            JSONFIELD:"REFERENCE_1"::STRING AS REFERENCE_1,
+            JSONFIELD:"QUOTE_SEQ"::STRING AS QUOTE_SEQ,
+            JSONFIELD:"CATEGORY"::STRING AS CATEGORY,
+            JSONFIELD:"NTE"::STRING AS NTE,
+            JSONFIELD:"QUOTE_TYPE"::STRING AS QUOTE_TYPE,
+            JSONFIELD:"ENTITY"::STRING AS ENTITY,
+            JSONFIELD:"ESA"::STRING AS ESA,
+            JSONFIELD:"TIERED"::STRING AS TIERED,
+            JSONFIELD:"ENTITY_REQUIRED"::STRING AS ENTITY_REQUIRED,
+            JSONFIELD:"LAST_UPDATE_BY"::STRING AS LAST_UPDATE_BY,
+            REGEXP_REPLACE(JSONFIELD:"LAST_UPDATE_DT", '\/Date\\(|\\)\/', '')::TIMESTAMP AS LAST_UPDATE_DT,
+            JSONFIELD:"ESA_LITE_CANDIDATE"::STRING AS ESA_LITE_CANDIDATE,
+            JSONFIELD:"ESA_LITE_YEAR"::STRING AS ESA_LITE_YEAR,
+            JSONFIELD:"ESA_LITE_QUARTER"::STRING AS ESA_LITE_QUARTER,
+            JSONFIELD:"ESA_LITE_COMMENTS"::STRING AS ESA_LITE_COMMENTS,
+            JSONFIELD:"ACTIVE"::STRING AS ACTIVE 
+        FROM {{ source("TELCUSTOMER", "EQUIPMENT_QUOTE_TQ_AUDIT") }}
+        WHERE _Filedate = (SELECT MAX(_FileDate) FROM {{ source("TELCUSTOMER", "EQUIPMENT_QUOTE_TQ_AUDIT") }})
+        )
+,transform_data as
+(
+    SELECT
+        '{{ invocation_id }}' AS _AUDIT_LOG_ID,
+        SHA2('hash_me') AS _ROW_HASH,
+        TEL_QUOTE_ID,
+        EQUIPMENT_QUOTE_TEL_QUOTE_ID,
+        EQUIPMENT_QUOTE_ID,
+        QUOTE_AMT,
+        QUOTE_CURRENCY,
+        LEAD_TIME,
+        LEAD_TIME_UNIT,
+        REFERENCE_1,
+        QUOTE_SEQ,
+        CATEGORY,
+        NTE,
+        QUOTE_TYPE,
+        ENTITY,
+        ESA,
+        TIERED,
+        ENTITY_REQUIRED,
+        LAST_UPDATE_BY,
+        LAST_UPDATE_DT,
+        ESA_LITE_CANDIDATE,
+        ESA_LITE_YEAR,
+        ESA_LITE_QUARTER,
+        ESA_LITE_COMMENTS,
+        ACTIVE
+    FROM source_data
+)
+,type_data as 
+(
+    select
+        CAST(_AUDIT_LOG_ID AS VARCHAR(128)) AS _AUDIT_LOG_ID,
+        CAST(_ROW_HASH AS VARCHAR(128)) AS _ROW_HASH,
+        TEL_QUOTE_ID,
+        EQUIPMENT_QUOTE_TEL_QUOTE_ID,
+        EQUIPMENT_QUOTE_ID,
+        QUOTE_AMT,
+        QUOTE_CURRENCY,
+        LEAD_TIME,
+        LEAD_TIME_UNIT,
+        REFERENCE_1,
+        QUOTE_SEQ,
+        CATEGORY,
+        NTE,
+        QUOTE_TYPE,
+        ENTITY,
+        ESA,
+        TIERED,
+        ENTITY_REQUIRED,
+        LAST_UPDATE_BY,
+        CAST(LAST_UPDATE_DT as TIMESTAMP_NTZ(9)) AS LAST_UPDATE_DT,
+        ESA_LITE_CANDIDATE,
+        ESA_LITE_YEAR,
+        ESA_LITE_QUARTER,
+        ESA_LITE_COMMENTS,
+        ACTIVE
+    from transform_data
+    )
+select * from type_data

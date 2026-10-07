@@ -1,0 +1,19 @@
+version: 2
+sources:
+- name: MONDAY
+  description: Landing Zone - MONDAY Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: MONDAY
+  tables:
+  - name: WORKSPACE
+    identifier: WORKSPACE
+    description: Landing table for WORKSPACE file.
+  - name: ITEMS
+    identifier: ITEMS
+    description: Landing table for ITEMS file.
+  - name: SUBITEMSID
+    identifier: SUBITEMSID
+    description: Landing table for SUBITEMSID file.
+  - name: SUBITEMS
+    identifier: SUBITEMS
+    description: Landing table for SUBITEMS file.

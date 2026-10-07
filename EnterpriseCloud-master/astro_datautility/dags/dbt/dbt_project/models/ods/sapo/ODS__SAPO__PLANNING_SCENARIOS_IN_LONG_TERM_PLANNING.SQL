@@ -1,0 +1,113 @@
+{{ config(
+        materialized='incremental',
+        incremental_strategy='merge',
+        alias='PLANNING_SCENARIOS_IN_LONG_TERM_PLANNING',
+        unique_key = ['MANDT',
+    'PLSCN'],
+        transient=false
+) }}
+
+with source_data as (
+	SELECT 
+	_CAPTUREDATETIME,
+	MANDT,
+	PLSCN,
+	PSACT,
+	PLSCT,
+	PDAT1,
+	PDAT2,
+	MDATE,
+	SBFLG,
+	SSTCK,
+	SSTFL,
+	VERSA,
+	FIXEL,
+	VRSIO,
+	EISDT,
+	VSBCO,
+	BCODT,
+	FIXLO,
+	EINPL,
+	KDAKZ,
+	FBAKZ,
+	FPAKZ,
+	DIRKZ,
+	AVMKZ,
+	LLSKZ,
+	LTPLS,
+	LTPID
+	FROM {{source('SAP_ORACLE_LIVE', 'PLSC')}}
+),
+
+
+transform_data as 
+(
+SELECT
+    _CAPTUREDATETIME,
+    '{{ invocation_id }}' AS _AUDIT_LOG_ID,
+    SHA2('hash_me') as _ROW_HASH,
+	MANDT as MANDT,
+	PLSCN as PLSCN,
+	PSACT as PSACT,
+	PLSCT as PLSCT,
+	PDAT1 as PDAT1,
+	PDAT2 as PDAT2,
+	MDATE as MDATE,
+	SBFLG as SBFLG,
+	SSTCK as SSTCK,
+	SSTFL as SSTFL,
+	VERSA as VERSA,
+	FIXEL as FIXEL,
+	VRSIO as VRSIO,
+	EISDT as EISDT,
+	VSBCO as VSBCO,
+	BCODT as BCODT,
+	FIXLO as FIXLO,
+	EINPL as EINPL,
+	KDAKZ as KDAKZ,
+	FBAKZ as FBAKZ,
+	FPAKZ as FPAKZ,
+	DIRKZ as DIRKZ,
+	AVMKZ as AVMKZ,
+	LLSKZ as LLSKZ,
+	LTPLS as LTPLS,
+	LTPID as LTPID
+	FROM SOURCE_DATA
+), 
+
+type_data as 
+(
+SELECT 
+	CAST(_CAPTUREDATETIME AS TIMESTAMP_LTZ(9)) AS _CAPTUREDATETIME,
+	CAST(_AUDIT_LOG_ID AS VARCHAR(128)) AS _AUDIT_LOG_ID,
+	CAST(_ROW_HASH AS VARCHAR(128)) AS _ROW_HASH,
+	MANDT,
+	PLSCN,
+	PSACT,
+	PLSCT,
+	PDAT1,
+	PDAT2,
+	MDATE,
+	SBFLG,
+	SSTCK,
+	SSTFL,
+	VERSA,
+	FIXEL,
+	VRSIO,
+	EISDT,
+	VSBCO,
+	BCODT,
+	FIXLO,
+	EINPL,
+	KDAKZ,
+	FBAKZ,
+	FPAKZ,
+	DIRKZ,
+	AVMKZ,
+	LLSKZ,
+	LTPLS,
+	LTPID
+FROM TRANSFORM_DATA
+)
+ 
+SELECT * FROM TYPE_DATA

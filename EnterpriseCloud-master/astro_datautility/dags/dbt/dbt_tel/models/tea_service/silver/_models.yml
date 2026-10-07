@@ -1,0 +1,489 @@
+version: 2
+models:
+  - name: SILVER__TEA_SERVICE__ACCIDENTREPORTSFORUS_NOLOCK
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__ACCOUNT
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__ACCOUNT_DETAILS
+    tests:
+      - has_data
+      - recently_run
+    columns:
+      - name: _FILEDATE
+  - name: SILVER__TEA_SERVICE__ACTIVE_CONTRACTS
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__BAANV_TEA_BU_MAPPINGS
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__BAANV_TEA_CONFIGURATIONS
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__BAANV_TEA_DIMENSIONS
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__BAANV_TEA_OBJECTS
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__BAANV_TEA_SERVICE_ORDERS
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__BAAN_OFFICE
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__BUSINESS_PARTNERS
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__BUSINESS_PARTNERS_GENERAL_DATA
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__CONTRACTS_MASTER
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__CONTRACT_SUMMARY_ACCOUNT
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__CONTRACT_SUMMARY_DETAILS
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__CONTRACT_SUMMARY_PURCHASE_ORDER_DETAILS
+    tests:
+      - has_data
+      - recently_run
+    columns:
+      - name: _FILEDATE
+  - name: SILVER__TEA_SERVICE__COST_CENTER
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__CUSTOMER
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__CUSTOMERGROUP
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__DAILY_ACTUALS
+    tests:
+      - has_data
+      - recently_run
+    columns:
+      - name: _FILEDATE
+        description: Timestamp of ingestion job start
+        tests:
+          - dbt_expectations.expect_row_values_to_have_recent_data:
+              datepart: hours
+              interval: 48
+  - name: SILVER__TEA_SERVICE__DAILY_ACTUALS_SALES_LINE
+    tests:
+      - has_data
+      - recently_run
+    columns:
+      - name: _FILEDATE
+        description: Timestamp of ingestion job start
+        tests:
+          - dbt_expectations.expect_row_values_to_have_recent_data:
+              datepart: hours
+              interval: 48
+  - name: SILVER__TEA_SERVICE__DAILY_ACTUALS_SALES_LINE_ENHANCED
+    tests:
+      - has_data
+      - recently_run
+    columns:
+      - name: _FILEDATE
+        description: Timestamp of ingestion job start
+        tests:
+          - dbt_expectations.expect_row_values_to_have_recent_data:
+              datepart: hours
+              interval: 48
+  - name: SILVER__TEA_SERVICE__DATA_KEY_STARTUP_SPOTTER_AUDIT
+    tests:
+      - has_data
+      - recently_run
+    columns:
+      - name: _FILEDATE
+  - name: SILVER__TEA_SERVICE__EMPLOYEE
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__EMPLOYEE_MONTHLY_SNAPSHOT
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__EMPLOYEE_TEACOMMON_HISTORICAL_MONTHLY_SNAPSHOT
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__FAB
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__FINANCE_ADJ_MAPPINGS
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__GCE_SERVICE_REVENUE_REPORT
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__GEMDATA_IN_EMPLOYEE_JOB_DATA
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__GLOBAL_EMPLOYEE
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__INVENTORY_GENERAL_MATERIAL
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__KRONOS_TIMESHEET
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__LEGACY_FSTR_CONFIGURATION_v1
+    tests:
+      - dbt_expectations.expect_table_row_count_to_be_between:
+          min_value: 1
+  - name: SILVER__TEA_SERVICE__LEGACY_FSTR_CONFIGURATION_v2
+    tests:
+      - dbt_expectations.expect_table_row_count_to_be_between:
+          min_value: 1
+  - name: SILVER__TEA_SERVICE__LEGACY_FSTR_XREFERENCE_CONTRACT_BUNDLETERMS_v1
+    tests:
+      - dbt_expectations.expect_table_row_count_to_be_between:
+          min_value: 1
+  - name: SILVER__TEA_SERVICE__LEGACY_FSTR_XREFERENCE_CONTRACT_BUNDLETERMS_v2
+    tests:
+      - dbt_expectations.expect_table_row_count_to_be_between:
+          min_value: 1
+  - name: SILVER__TEA_SERVICE__LEGACY_FSTR_XREFERENCE_CONTRACT_TYPE_v1
+    tests:
+      - dbt_expectations.expect_table_row_count_to_be_between:
+          min_value: 1
+  - name: SILVER__TEA_SERVICE__LEGACY_FSTR_XREFERENCE_CONTRACT_TYPE_v2
+    tests:
+      - dbt_expectations.expect_table_row_count_to_be_between:
+          min_value: 1
+  - name: SILVER__TEA_SERVICE__MACHINE
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__MACHINES_MONTHLY_INSTALL_BASE
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__MACHINE_DISTINCT
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__MAC_MAIN
+    tests:
+      - has_data
+      - recently_run
+    columns:
+      - name: _FILEDATE
+  - name: SILVER__TEA_SERVICE__MATERIAL_PLANT_MASTER
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__MDM_COMPANY
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__MDM_OFFICE
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__MYSKILLS_COMPANY
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__NEGOTIATION_DATA_WITH_SALES_HEADER
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__OPTIONSET_METADATA
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__PAID_SERVICE_QUOTE_MASTER
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__PNL_ACCOUNTS_SALES_CATEGORY
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__PROCESS_ORDER_DETAILS
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__PROFIT_CENTER
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__PURCHASE_ORDER_DELIVERY_LINE
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__SALES_ORDER
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__SALES_ORDER_BILLING_LINE
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__SALES_ORDER_BILLING_PLAN
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__SALES_ORDER_DELIVERY_LINE
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__SALES_ORDER_LINE_MASTER
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__SALES_ORDER_MASTER
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__SALES_ORDER_SCHEDULE_LINE
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__SAP_CUSTOMER
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__SAP_DEPARTMENT
+    tests:
+      - has_data
+      - recently_run
+    columns:
+      - name: _FILEDATE
+  - name: SILVER__TEA_SERVICE__SAP_LABOR_HOUR_INTERMEDIATE_TABLE
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__SAP_REGION
+    tests:
+      - has_data
+      - recently_run
+    columns:
+      - name: _FILEDATE
+  - name: SILVER__TEA_SERVICE__SAP_SALES_CATEGORY
+    tests:
+      - has_data
+      - recently_run
+    columns:
+      - name: _FILEDATE
+  - name: SILVER__TEA_SERVICE__SAP_SEGMENT
+    tests:
+      - has_data
+      - recently_run
+    columns:
+      - name: _FILEDATE
+  - name: SILVER__TEA_SERVICE__SAP_SURB
+    tests:
+      - has_data
+      - recently_run
+    columns:
+      - name: _FILEDATE
+  - name: SILVER__TEA_SERVICE__SERVICECONTRACTSFLEXTSRS
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__SERVICEORDER
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__SERVICEORDER_DISTINCT
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__SERVICE_B_CODE_MAPPING
+    tests:
+      - has_data
+      - recently_run
+    columns:
+      - name: _FILEDATE
+  - name: SILVER__TEA_SERVICE__SERVICE_CONTRACT
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__SERVICE_CONTRACT_QUOTE_DATA
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__SERVICE_ORDER_LINE
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__SHARED_DATASETS_COMPANY
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__SYSTEM_USER
+    tests:
+      - has_data
+      - recently_run
+    columns:
+      - name: _FILEDATE
+        description: Timestamp of ingestion job start
+        tests:
+          - dbt_expectations.expect_row_values_to_have_recent_data:
+              datepart: hours
+              interval: 24
+  - name: SILVER__TEA_SERVICE__TEA_MAC_LIST
+    tests:
+      - has_data
+      - recently_run
+    columns:
+      - name: _FILEDATE
+  - name: SILVER__TEA_SERVICE__TEA_OBJECTS
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__TERRITORY
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__TIMESHEET
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__TIRS_STARTUP_SAFETY
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__UNIVERSAL_ACTUAL_SETTLEMENT
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__UNIVERSAL_ACTUAL_SETTLEMENT_EXTERNAL
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__UNIVERSAL_BILLING_DOCUMENT
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__UNIVERSAL_FI_POSTINGS
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__UNIVERSAL_GOODS_MOVEMENT
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__UNIVERSAL_GOODS_RECEIPT_PO
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__UNIVERSAL_INCOMING_INVOICE
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__UNIVERSAL_INVENTORY_DIFFERENCE
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__UNIVERSAL_JOURNAL_ENTRY_LINE
+    tests:
+      - has_data
+      - recently_run
+    columns:
+      - name: _FILEDATE
+        description: Timestamp of ingestion job start
+        tests:
+          - dbt_expectations.expect_row_values_to_have_recent_data:
+              datepart: hours
+              interval: 48
+  - name: SILVER__TEA_SERVICE__UNIVERSAL_PL_ACCOUNT_TYPE
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__UNIVERSAL_POST_CLOSING_MATERIAL_LEDGER
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__UNIVERSAL_PPV_TRANSACTIONS
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__WBS_CODE_DESCRIPTION
+    tests:
+      - has_data
+      - recently_run
+    columns:
+      - name: _FILEDATE
+  - name: SILVER__TEA_SERVICE__WBS_MASTER
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__WISDOM_MACHINE_DETAILS
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__WISDOM_SURB_PROGRESS
+    tests:
+      - has_data
+      - recently_run
+    columns:
+      - name: _FILEDATE
+  - name: SILVER__TEA_SERVICE__WORKERCOMPANYLIST
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__WORKORDER
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__WORKORDER_ESCALATION
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__WORKORDER_ESCALATION_HISTORY
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__WORKORDER_TIMEENTRY
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__WO_STATEMETADATA
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__WO_SUMMARY_DETAILS
+    tests:
+      - has_data
+      - recently_run
+  - name: SILVER__TEA_SERVICE__WO_TEAM
+    tests:
+      - has_data
+      - recently_run
+    columns:
+      - name: _FILEDATE

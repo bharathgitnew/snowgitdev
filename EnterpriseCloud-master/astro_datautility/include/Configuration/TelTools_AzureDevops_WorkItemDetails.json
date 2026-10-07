@@ -1,0 +1,16 @@
+{
+	"WorkItemDetails": {
+    "SiteConfig":{
+        "org_url": "https://172.26.95.56/DefaultCollection",
+        "work_item_site":"_apis/wit/wiql?api-version=7.1&{$top}=1"
+
+    },
+    "SnowflakeConn":
+    {
+        "SNOWFLAKE_SCHEMA_NAME": "TMEA_AZURE_DEVOPS",
+        "SNOWFLAKE_DATABASE_NAME": "<<LZ>>",
+        "SNOWFLAKE_TABLE_NAME": "WORK_ITEM_DETAILS"
+    }
+
+}
+}

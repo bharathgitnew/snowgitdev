@@ -1,0 +1,13 @@
+models:
+- name: GOLD__TEA_THREEPL_OPERATIONS__INVENTORY_MATCH_3PL_DATA
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_THREEPL_OPERATIONS__INVENTORY_MATCH_SAP_DATA
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_THREEPL_OPERATIONS__INVENTORY_MATCH_UPS
+  tests:
+  - has_data
+  - recently_run

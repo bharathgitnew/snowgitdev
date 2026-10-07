@@ -1,0 +1,54 @@
+{
+    "TB_Variance_Success": [
+        {
+            "schedule": "08:00",
+            "sender": "no_reply_telusdwprod1@us.tel.com",
+            "receiver": "prathamesh.x.nimkar@us.tel.com, rajiv.x.ranjan@us.tel.com, alex.corbin@us.tel.com, lisa.thiel@us.tel.com, roger.x.webb@us.tel.com",
+            "subject": "Success - Finance Tabular Successfully Validated to Trial Balance",
+            "body": "Finance Tabular Successfully Validated to Trial Balance",
+            "sql": "SELECT * FROM EDW.DE.F_TRIAL_BALANCE WHERE TRIAL_BALANCE_VARIANCE=0;",
+            "flow_name": "ETL.ODS-Common_2_EDW_FACTS",
+            "task_name": "SF Load - F_TRIAL_BALANCE",
+            "include_sql_results": "False"
+        }
+    ],
+    "TB_Variance_Failure": [
+        {
+            "schedule": "08:00",
+            "sender": "no_reply_telusdwprod1@us.tel.com",
+            "receiver": "prathamesh.x.nimkar@us.tel.com, rajiv.x.ranjan@us.tel.com, alex.corbin@us.tel.com, lisa.thiel@us.tel.com, roger.x.webb@us.tel.com",
+            "subject": "Failure - Finance Tabular Failed Validation to Trial Balance",
+            "body": "Finance Tabular Failed Validation to Trial Balance",
+            "sql": "SELECT * FROM PUB_DEV.DE.TRIAL_BALANCE_NOTIFICATION_FAILURE ORDER BY ABS(TRIAL_BALANCE_VARIANCE);",
+            "flow_name": "ETL.ODS-Common_2_EDW_FACTS",
+            "task_name": "SF Load - F_TRIAL_BALANCE",
+            "include_sql_results": "True"
+        }
+    ],
+    "SAPO-ActualGoodsMovementDate_Refresh": [
+        {
+            "schedule": "05:30",
+            "sender": "no_reply_telusdwprod1@us.tel.com",
+            "receiver": "roger.x.webb@us.tel.com",
+            "subject": "Failure - TMEA SAPO might be stale",
+            "body": "This might indicate that SAPO is out of date either from HVR or DBT",
+            "sql": "SELECT Actual_Goods_Movement_Date FROM PUB.ODS_Common.Delivery_Line_Item WHERE Actual_Goods_Movement_Date <> DATEADD(day,-1,CURRENT_DATE) ORDER BY Actual_Goods_Movement_Date DESC LIMIT 1;",
+            "flow_name": "System.SQLFileUploader",
+            "task_name": "Upload",
+            "include_sql_results": "True"
+        }
+    ],
+    "DQ-Test_DE_TELREPORTING_OBJECT_DISTINCT_RECORD_Failure": [
+        {
+            "schedule": "08:00",
+            "sender": "no_reply_telusdwprod1@us.tel.com",
+            "receiver": "tara.x.greig@us.tel.com",
+            "subject": "Failure - DE_TELREPORTING_OBJECT_DISTINCT_RECORD Test Case Laura Keenan",
+            "body": "DE_TelReporting object, non-distinct records",
+            "sql": "SELECT * FROM TESTING.REPORTS.RESULTS_LATEST WHERE TEST_RESULT='Fail' AND NAME='DE_TELREPORTING_OBJECT_DISTINCT_RECORD';",
+            "flow_name": "DBT.Driver.Testing",
+            "task_name": "Combining TestCases (Waiting)",
+            "include_sql_results": "True"
+        }
+    ]
+}

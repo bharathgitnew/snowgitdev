@@ -1,0 +1,117 @@
+{{ config(
+        materialized='incremental',
+        incremental_strategy='merge',
+        alias='INFOTYPE_1001_DB_TABLE',
+        unique_key = ['MANDT',
+    'OTYPE',
+    'OBJID',
+    'PLVAR',
+    'RSIGN',
+    'RELAT',
+    'ISTAT',
+    'PRIOX',
+    'BEGDA',
+    'ENDDA',
+    'VARYF',
+    'SEQNR'],
+        transient=false
+) }}
+
+with source_data as (
+	SELECT 
+	_CAPTUREDATETIME,
+	MANDT,
+	OTYPE,
+	OBJID,
+	PLVAR,
+	RSIGN,
+	RELAT,
+	ISTAT,
+	PRIOX,
+	BEGDA,
+	ENDDA,
+	VARYF,
+	SEQNR,
+	INFTY,
+	OTJID,
+	SUBTY,
+	AEDTM,
+	UNAME,
+	REASN,
+	HISTO,
+	ITXNR,
+	SCLAS,
+	SOBID,
+	PROZT,
+	ADATANR
+	FROM {{source('SAP_ORACLE_LIVE', 'HRP1001')}}
+),
+
+
+transform_data as 
+(
+SELECT
+    _CAPTUREDATETIME,
+    '{{ invocation_id }}' AS _AUDIT_LOG_ID,
+    SHA2('hash_me') as _ROW_HASH,
+	MANDT as MANDT,
+	OTYPE as OTYPE,
+	OBJID as OBJID,
+	PLVAR as PLVAR,
+	RSIGN as RSIGN,
+	RELAT as RELAT,
+	ISTAT as ISTAT,
+	PRIOX as PRIOX,
+	BEGDA as BEGDA,
+	ENDDA as ENDDA,
+	VARYF as VARYF,
+	SEQNR as SEQNR,
+	INFTY as INFTY,
+	OTJID as OTJID,
+	SUBTY as SUBTY,
+	AEDTM as AEDTM,
+	UNAME as UNAME,
+	REASN as REASN,
+	HISTO as HISTO,
+	ITXNR as ITXNR,
+	SCLAS as SCLAS,
+	SOBID as SOBID,
+	PROZT as PROZT,
+	ADATANR as ADATANR
+	FROM SOURCE_DATA
+), 
+
+type_data as 
+(
+SELECT 
+	CAST(_CAPTUREDATETIME AS TIMESTAMP_LTZ(9)) AS _CAPTUREDATETIME,
+	CAST(_AUDIT_LOG_ID AS VARCHAR(128)) AS _AUDIT_LOG_ID,
+	CAST(_ROW_HASH AS VARCHAR(128)) AS _ROW_HASH,
+	MANDT,
+	OTYPE,
+	OBJID,
+	PLVAR,
+	RSIGN,
+	RELAT,
+	ISTAT,
+	PRIOX,
+	BEGDA,
+	ENDDA,
+	VARYF,
+	SEQNR,
+	INFTY,
+	OTJID,
+	SUBTY,
+	AEDTM,
+	UNAME,
+	REASN,
+	HISTO,
+	ITXNR,
+	SCLAS,
+	SOBID,
+	CAST(PROZT AS NUMBER(38,10)) AS PROZT,
+	ADATANR
+FROM TRANSFORM_DATA
+)
+ 
+SELECT * FROM TYPE_DATA

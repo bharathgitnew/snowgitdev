@@ -1,0 +1,456 @@
+version: 2
+sources:
+- name: LEGACY93
+  description: Landing Zone - LEGACY93 Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: LEGACY93
+  tables:
+  - name: BAANV_ADMIN_BUSINESS_PARTNERS
+    identifier: BAANV_ADMIN_BUSINESS_PARTNERS
+    description: Landing table for BAANV_ADMIN_BUSINESS_PARTNERS file.
+  - name: BAANV_ALL_COMMODITIES
+    identifier: BAANV_ALL_COMMODITIES
+    description: Landing table for BAANV_ALL_COMMODITIES file.
+  - name: BAANV_ALL_INVENTORY_ADJ_ORDER_HIST
+    identifier: BAANV_ALL_INVENTORY_ADJ_ORDER_HIST
+    description: Landing table for BAANV_ALL_INVENTORY_ADJ_ORDER_HIST file.
+  - name: BAANV_ALL_SUPPLIER_INFO
+    identifier: BAANV_ALL_SUPPLIER_INFO
+    description: Landing table for BAANV_ALL_SUPPLIER_INFO file.
+  - name: BAANV_DIMENSIONS
+    identifier: BAANV_DIMENSIONS
+    description: Landing table for BAANV_DIMENSIONS file.
+  - name: BAANV_FINALIZED_TRANSACTIONS_BUOPS
+    identifier: BAANV_FINALIZED_TRANSACTIONS_BUOPS
+    description: Landing table for BAANV_FINALIZED_TRANSACTIONS_BUOPS file.
+  - name: BAANV_FINALIZED_TRANSACTIONS_SALESOPS
+    identifier: BAANV_FINALIZED_TRANSACTIONS_SALESOPS
+    description: Landing table for BAANV_FINALIZED_TRANSACTIONS_SALESOPS file.
+  - name: BAANV_INSTALLMENT_SCHEDULES
+    identifier: BAANV_INSTALLMENT_SCHEDULES
+    description: Landing table for BAANV_INSTALLMENT_SCHEDULES file.
+  - name: BAANV_PLAN_INV_TRANSACTIONS
+    identifier: BAANV_PLAN_INV_TRANSACTIONS
+    description: Landing table for BAANV_PLAN_INV_TRANSACTIONS file.
+  - name: BAANV_ALL_ITEM_GROUPS
+    identifier: BAANV_ALL_ITEM_GROUPS
+    description: Landing table for BAANV_ALL_ITEM_GROUPS file.
+  - name: BAANV_ALL_PURCHASE_ORDERS
+    identifier: BAANV_ALL_PURCHASE_ORDERS
+    description: Landing table for BAANV_ALL_PURCHASE_ORDERS file.
+  - name: BAANV_TEA_ADDRESSES
+    identifier: BAANV_TEA_ADDRESSES
+    description: Landing table for BAANV_TEA_ADDRESSES file.
+  - name: BAANV_TEA_ALTERNATE_SUPPLIERS_BY_ITEM
+    identifier: BAANV_TEA_ALTERNATE_SUPPLIERS_BY_ITEM
+    description: Landing table for BAANV_TEA_ALTERNATE_SUPPLIERS_BY_ITEM file.
+  - name: BAANV_TEA_ALTERNATIVE_ITEMS
+    identifier: BAANV_TEA_ALTERNATIVE_ITEMS
+    description: Landing table for BAANV_TEA_ALTERNATIVE_ITEMS file.
+  - name: BAANV_TEA_AR_OPEN_ENTRIES
+    identifier: BAANV_TEA_AR_OPEN_ENTRIES
+    description: Landing table for BAANV_TEA_AR_OPEN_ENTRIES file.
+  - name: BAANV_TEA_BP_SALES_INVOICE_BALANCE
+    identifier: BAANV_TEA_BP_SALES_INVOICE_BALANCE
+    description: Landing table for BAANV_TEA_BP_SALES_INVOICE_BALANCE file.
+  - name: BAANV_TEA_BPCODE_MAP
+    identifier: BAANV_TEA_BPCODE_MAP
+    description: Landing table for BAANV_TEA_BPCODE_MAP file.
+  - name: BAANV_TEA_BU_MAPPINGS
+    identifier: BAANV_TEA_BU_MAPPINGS
+    description: Landing table for BAANV_TEA_BU_MAPPINGS file.
+  - name: BAANV_TEA_COMMERCIAL_INVOICES
+    identifier: BAANV_TEA_COMMERCIAL_INVOICES
+    description: Landing table for BAANV_TEA_COMMERCIAL_INVOICES file.
+  - name: BAANV_TEA_CONFIGURATIONS
+    identifier: BAANV_TEA_CONFIGURATIONS
+    description: Landing table for BAANV_TEA_CONFIGURATIONS file.
+  - name: BAANV_TEA_CONTRACT_INSTALLMENTS
+    identifier: BAANV_TEA_CONTRACT_INSTALLMENTS
+    description: Landing table for BAANV_TEA_CONTRACT_INSTALLMENTS file.
+  - name: BAANV_TEA_CONTRACTS
+    identifier: BAANV_TEA_CONTRACTS
+    description: Landing table for BAANV_TEA_CONTRACTS file.
+  - name: BAANV_TEA_CUSTOMERCODES
+    identifier: BAANV_TEA_CUSTOMERCODES
+    description: Landing table for BAANV_TEA_CUSTOMERCODES file.
+  - name: BAANV_TEA_CUSTOMERS
+    identifier: BAANV_TEA_CUSTOMERS
+    description: Landing table for BAANV_TEA_CUSTOMERS file.
+  - name: BAANV_TEA_DIMENSIONS
+    identifier: BAANV_TEA_DIMENSIONS
+    description: Landing table for BAANV_TEA_DIMENSIONS file.
+  - name: BAANV_TEA_ECBPI100
+    identifier: BAANV_TEA_ECBPI100
+    description: Landing table for BAANV_TEA_ECBPI100 file.
+  - name: BAANV_TEA_ECBPI101
+    identifier: BAANV_TEA_ECBPI101
+    description: Landing table for BAANV_TEA_ECBPI101 file.
+  - name: BAANV_TEA_EVENT_TRACKING
+    identifier: BAANV_TEA_EVENT_TRACKING
+    description: Landing table for BAANV_TEA_EVENT_TRACKING file.
+  - name: BAANV_TEA_FINALIZED_TRANSACTIONS
+    identifier: BAANV_TEA_FINALIZED_TRANSACTIONS
+    description: Landing table for BAANV_TEA_FINALIZED_TRANSACTIONS file.
+  - name: BAANV_TEA_FINALIZED_TRANSACTIONS_CONTRACTS
+    identifier: BAANV_TEA_FINALIZED_TRANSACTIONS_CONTRACTS
+    description: Landing table for BAANV_TEA_FINALIZED_TRANSACTIONS_CONTRACTS file.
+  - name: BAANV_TEA_FINALIZED_TRANSACTIONS_CSC
+    identifier: BAANV_TEA_FINALIZED_TRANSACTIONS_CSC
+    description: Landing table for BAANV_TEA_FINALIZED_TRANSACTIONS_CSC file.
+  - name: BAANV_TEA_FINALIZED_TRANSACTIONS_CT
+    identifier: BAANV_TEA_FINALIZED_TRANSACTIONS_CT
+    description: Landing table for BAANV_TEA_FINALIZED_TRANSACTIONS_CT file.
+  - name: BAANV_TEA_FINALIZED_TRANSACTIONS_EXT
+    identifier: BAANV_TEA_FINALIZED_TRANSACTIONS_EXT
+    description: Landing table for BAANV_TEA_FINALIZED_TRANSACTIONS_EXT file.
+  - name: BAANV_TEA_FINALIZED_TRANSACTIONS_FST
+    identifier: BAANV_TEA_FINALIZED_TRANSACTIONS_FST
+    description: Landing table for BAANV_TEA_FINALIZED_TRANSACTIONS_FST file.
+  - name: BAANV_TEA_FINALIZED_TRANSACTIONS_HOLD
+    identifier: BAANV_TEA_FINALIZED_TRANSACTIONS_HOLD
+    description: Landing table for BAANV_TEA_FINALIZED_TRANSACTIONS_HOLD file.
+  - name: BAANV_TEA_FINALIZED_TRANSACTIONS_REV_COGS
+    identifier: BAANV_TEA_FINALIZED_TRANSACTIONS_REV_COGS
+    description: Landing table for BAANV_TEA_FINALIZED_TRANSACTIONS_REV_COGS file.
+  - name: BAANV_TEA_INTEGRATION_TRANSACTIONS
+    identifier: BAANV_TEA_INTEGRATION_TRANSACTIONS
+    description: Landing table for BAANV_TEA_INTEGRATION_TRANSACTIONS file.
+  - name: BAANV_TEA_INTEGRATION_TRANSACTIONS_CSC
+    identifier: BAANV_TEA_INTEGRATION_TRANSACTIONS_CSC
+    description: Landing table for BAANV_TEA_INTEGRATION_TRANSACTIONS_CSC file.
+  - name: BAANV_TEA_INTEGRATION_TRANSACTIONS_CT
+    identifier: BAANV_TEA_INTEGRATION_TRANSACTIONS_CT
+    description: Landing table for BAANV_TEA_INTEGRATION_TRANSACTIONS_CT file.
+  - name: BAANV_TEA_INTEGRATION_TRANSACTIONS_REV_COGS
+    identifier: BAANV_TEA_INTEGRATION_TRANSACTIONS_REV_COGS
+    description: Landing table for BAANV_TEA_INTEGRATION_TRANSACTIONS_REV_COGS file.
+  - name: BAANV_TEA_INV_BY_WAREHOUSE_INTEL
+    identifier: BAANV_TEA_INV_BY_WAREHOUSE_INTEL
+    description: Landing table for BAANV_TEA_INV_BY_WAREHOUSE_INTEL file.
+  - name: BAANV_TEA_INV_BY_WAREHOUSE_INTEL_FIFO
+    identifier: BAANV_TEA_INV_BY_WAREHOUSE_INTEL_FIFO
+    description: Landing table for BAANV_TEA_INV_BY_WAREHOUSE_INTEL_FIFO file.
+  - name: BAANV_TEA_INV_BY_WAREHOUSE_NONINTEL
+    identifier: BAANV_TEA_INV_BY_WAREHOUSE_NONINTEL
+    description: Landing table for BAANV_TEA_INV_BY_WAREHOUSE_NONINTEL file.
+  - name: BAANV_TEA_INV_BY_WAREHOUSE_NONINTEL_FIFO
+    identifier: BAANV_TEA_INV_BY_WAREHOUSE_NONINTEL_FIFO
+    description: Landing table for BAANV_TEA_INV_BY_WAREHOUSE_NONINTEL_FIFO file.
+  - name: BAANV_TEA_INVENTORY_BY_WAREHOUSE
+    identifier: BAANV_TEA_INVENTORY_BY_WAREHOUSE
+    description: Landing table for BAANV_TEA_INVENTORY_BY_WAREHOUSE file.
+  - name: BAANV_TEA_INVENTORY_BY_WAREHOUSE_AND_QUANTITY
+    identifier: BAANV_TEA_INVENTORY_BY_WAREHOUSE_AND_QUANTITY
+    description: Landing table for BAANV_TEA_INVENTORY_BY_WAREHOUSE_AND_QUANTITY file.
+  - name: BAANV_TEA_INVENTORY_BY_WAREHOUSE_FIFO
+    identifier: BAANV_TEA_INVENTORY_BY_WAREHOUSE_FIFO
+    description: Landing table for BAANV_TEA_INVENTORY_BY_WAREHOUSE_FIFO file.
+  - name: BAANV_TEA_INVENTORY_BY_WAREHOUSE_FIFO_WEEKLY
+    identifier: BAANV_TEA_INVENTORY_BY_WAREHOUSE_FIFO_WEEKLY
+    description: Landing table for BAANV_TEA_INVENTORY_BY_WAREHOUSE_FIFO_WEEKLY file.
+  - name: BAANV_TEA_INVENTORY_TRANSACTIONS_BY_ITEM_AND_WAREHOUSE
+    identifier: BAANV_TEA_INVENTORY_TRANSACTIONS_BY_ITEM_AND_WAREHOUSE
+    description: Landing table for BAANV_TEA_INVENTORY_TRANSACTIONS_BY_ITEM_AND_WAREHOUS
+      file.
+  - name: BAANV_TEA_INVENTORY_VAL_BY_WAREHOUSE_FIFO
+    identifier: BAANV_TEA_INVENTORY_VAL_BY_WAREHOUSE_FIFO
+    description: Landing table for BAANV_TEA_INVENTORY_VAL_BY_WAREHOUSE_FIFO file.
+  - name: BAANV_TEA_ITEM_TRANSACTIONS
+    identifier: BAANV_TEA_ITEM_TRANSACTIONS
+    description: Landing table for BAANV_TEA_ITEM_TRANSACTIONS file.
+  - name: BAANV_TEA_ITEM_TRANSACTIONS_FIFO
+    identifier: BAANV_TEA_ITEM_TRANSACTIONS_FIFO
+    description: Landing table for BAANV_TEA_ITEM_TRANSACTIONS_FIFO file.
+  - name: BAANV_TEA_ITEMS
+    identifier: BAANV_TEA_ITEMS
+    description: Landing table for BAANV_TEA_ITEMS file.
+  - name: BAANV_TEA_MDM_HOURLYLABORTYPES
+    identifier: BAANV_TEA_MDM_HOURLYLABORTYPES
+    description: Landing table for BAANV_TEA_MDM_HOURLYLABORTYPES file.
+  - name: BAANV_TEA_MDM_LABORRATES
+    identifier: BAANV_TEA_MDM_LABORRATES
+    description: Landing table for BAANV_TEA_MDM_LABORRATES file.
+  - name: BAANV_TEA_MDM_TASKS
+    identifier: BAANV_TEA_MDM_TASKS
+    description: Landing table for BAANV_TEA_MDM_TASKS file.
+  - name: BAANV_TEA_OBJECTS
+    identifier: BAANV_TEA_OBJECTS
+    description: Landing table for BAANV_TEA_OBJECTS file.
+  - name: BAANV_TEA_OBJECTS_ON_CONTRACTS
+    identifier: BAANV_TEA_OBJECTS_ON_CONTRACTS
+    description: Landing table for BAANV_TEA_OBJECTS_ON_CONTRACTS file.
+  - name: BAANV_TEA_OPEN_INVOICES
+    identifier: BAANV_TEA_OPEN_INVOICES
+    description: Landing table for BAANV_TEA_OPEN_INVOICES file.
+  - name: BAANV_TEA_OPEN_SERVICE_INVOICES
+    identifier: BAANV_TEA_OPEN_SERVICE_INVOICES
+    description: Landing table for BAANV_TEA_OPEN_SERVICE_INVOICES file.
+  - name: BAANV_TEA_PRICE_BOOKS
+    identifier: BAANV_TEA_PRICE_BOOKS
+    description: Landing table for BAANV_TEA_PRICE_BOOKS file.
+  - name: BAANV_TEA_PURCHASE_ORDER_HISTORY
+    identifier: BAANV_TEA_PURCHASE_ORDER_HISTORY
+    description: Landing table for BAANV_TEA_PURCHASE_ORDER_HISTORY file.
+  - name: BAANV_TEA_PURCHASE_ORDERS
+    identifier: BAANV_TEA_PURCHASE_ORDERS
+    description: Landing table for BAANV_TEA_PURCHASE_ORDERS file.
+  - name: BAANV_TEA_REPLENISHMENT_ORDER_USERS
+    identifier: BAANV_TEA_REPLENISHMENT_ORDER_USERS
+    description: Landing table for BAANV_TEA_REPLENISHMENT_ORDER_USERS file.
+  - name: BAANV_TEA_REPLENISHMENT_ORDERS
+    identifier: BAANV_TEA_REPLENISHMENT_ORDERS
+    description: Landing table for BAANV_TEA_REPLENISHMENT_ORDERS file.
+  - name: BAANV_TEA_SALES_ORDER_HISTORY
+    identifier: BAANV_TEA_SALES_ORDER_HISTORY
+    description: Landing table for BAANV_TEA_SALES_ORDER_HISTORY file.
+  - name: BAANV_TEA_SALES_ORDERS
+    identifier: BAANV_TEA_SALES_ORDERS
+    description: Landing table for BAANV_TEA_SALES_ORDERS file.
+  - name: BAANV_TEA_SALES_QUOTES
+    identifier: BAANV_TEA_SALES_QUOTES
+    description: Landing table for BAANV_TEA_SALES_QUOTES file.
+  - name: BAANV_TEA_SERVICE_ORDERS
+    identifier: BAANV_TEA_SERVICE_ORDERS
+    description: Landing table for BAANV_TEA_SERVICE_ORDERS file.
+  - name: BAANV_TEA_SHIP_TRACKING
+    identifier: BAANV_TEA_SHIP_TRACKING
+    description: Landing table for BAANV_TEA_SHIP_TRACKING file.
+  - name: BAANV_TEA_SUPPLIER_ITEM_CODES
+    identifier: BAANV_TEA_SUPPLIER_ITEM_CODES
+    description: Landing table for BAANV_TEA_SUPPLIER_ITEM_CODES file.
+  - name: BAANV_TEA_SUPPLIERS
+    identifier: BAANV_TEA_SUPPLIERS
+    description: Landing table for BAANV_TEA_SUPPLIERS file.
+  - name: BAANV_TEA_SURB_ERRORS
+    identifier: BAANV_TEA_SURB_ERRORS
+    description: Landing table for BAANV_TEA_SURB_ERRORS file.
+  - name: BAANV_TEA_SURB_STAGING
+    identifier: BAANV_TEA_SURB_STAGING
+    description: Landing table for BAANV_TEA_SURB_STAGING file.
+  - name: BAANV_TEA_TEH_AP
+    identifier: BAANV_TEA_TEH_AP
+    description: Landing table for BAANV_TEA_TEH_AP file.
+  - name: BAANV_TEA_TEH_AP_ORDER_RELATED
+    identifier: BAANV_TEA_TEH_AP_ORDER_RELATED
+    description: Landing table for BAANV_TEA_TEH_AP_ORDER_RELATED file.
+  - name: BAANV_TEA_TEH_CHART_OF_ACCOUNTS
+    identifier: BAANV_TEA_TEH_CHART_OF_ACCOUNTS
+    description: Landing table for BAANV_TEA_TEH_CHART_OF_ACCOUNTS file.
+  - name: BAANV_TEA_TEH_FINALIZED_TRANSACTIONS
+    identifier: BAANV_TEA_TEH_FINALIZED_TRANSACTIONS
+    description: Landing table for BAANV_TEA_TEH_FINALIZED_TRANSACTIONS file.
+  - name: BAANV_TEA_UPS_EDI_214
+    identifier: BAANV_TEA_UPS_EDI_214
+    description: Landing table for BAANV_TEA_UPS_EDI_214 file.
+  - name: BAANV_TEA_WAREHOUSE_ORDERS_INBOUND
+    identifier: BAANV_TEA_WAREHOUSE_ORDERS_INBOUND
+    description: Landing table for BAANV_TEA_WAREHOUSE_ORDERS_INBOUND file.
+  - name: BAANV_TEA_WAREHOUSE_ORDERS_OUTBOUND
+    identifier: BAANV_TEA_WAREHOUSE_ORDERS_OUTBOUND
+    description: Landing table for BAANV_TEA_WAREHOUSE_ORDERS_OUTBOUND file.
+  - name: BAANV_TEH_AR_OPEN_ENTRIES
+    identifier: BAANV_TEH_AR_OPEN_ENTRIES
+    description: Landing table for BAANV_TEH_AR_OPEN_ENTRIES file.
+  - name: BAANV_TEH_DIMENSIONS
+    identifier: BAANV_TEH_DIMENSIONS
+    description: Landing table for BAANV_TEH_DIMENSIONS file.
+  - name: BAANV_TEH_FINALIZED_TRANSACTIONS
+    identifier: BAANV_TEH_FINALIZED_TRANSACTIONS
+    description: Landing table for BAANV_TEH_FINALIZED_TRANSACTIONS file.
+  - name: BAANV_TEH_OPEN_INVOICES
+    identifier: BAANV_TEH_OPEN_INVOICES
+    description: Landing table for BAANV_TEH_OPEN_INVOICES file.
+  - name: BAANV_TEI_AP
+    identifier: BAANV_TEI_AP
+    description: Landing table for BAANV_TEI_AP file.
+  - name: BAANV_TEI_AR_OPEN_ENTRIES
+    identifier: BAANV_TEI_AR_OPEN_ENTRIES
+    description: Landing table for BAANV_TEI_AR_OPEN_ENTRIES file.
+  - name: BAANV_TEI_COST_PRICE_DETAILS
+    identifier: BAANV_TEI_COST_PRICE_DETAILS
+    description: Landing table for BAANV_TEI_COST_PRICE_DETAILS file.
+  - name: BAANV_TEI_CUSTOMERS
+    identifier: BAANV_TEI_CUSTOMERS
+    description: Landing table for BAANV_TEI_CUSTOMERS file.
+  - name: BAANV_TEI_DIMENSIONS
+    identifier: BAANV_TEI_DIMENSIONS
+    description: Landing table for BAANV_TEI_DIMENSIONS file.
+  - name: BAANV_TEI_EMPLOYEES
+    identifier: BAANV_TEI_EMPLOYEES
+    description: Landing table for BAANV_TEI_EMPLOYEES file.
+  - name: BAANV_TEI_ENGINEERING_BOMS
+    identifier: BAANV_TEI_ENGINEERING_BOMS
+    description: Landing table for BAANV_TEI_ENGINEERING_BOMS file.
+  - name: BAANV_TEI_FINALIZED_TRANSACTIONS
+    identifier: BAANV_TEI_FINALIZED_TRANSACTIONS
+    description: Landing table for BAANV_TEI_FINALIZED_TRANSACTIONS file.
+  - name: BAANV_TEI_INTEGRATION_TRANSACTIONS
+    identifier: BAANV_TEI_INTEGRATION_TRANSACTIONS
+    description: Landing table for BAANV_TEI_INTEGRATION_TRANSACTIONS file.
+  - name: BAANV_TEI_INVENTORY_BY_WAREHOUSE
+    identifier: BAANV_TEI_INVENTORY_BY_WAREHOUSE
+    description: Landing table for BAANV_TEI_INVENTORY_BY_WAREHOUSE file.
+  - name: BAANV_TEI_ITEMS
+    identifier: BAANV_TEI_ITEMS
+    description: Landing table for BAANV_TEI_ITEMS file.
+  - name: BAANV_TEI_PRICE_BOOKS
+    identifier: BAANV_TEI_PRICE_BOOKS
+    description: Landing table for BAANV_TEI_PRICE_BOOKS file.
+  - name: BAANV_TEI_PRODUCTION_BOMS
+    identifier: BAANV_TEI_PRODUCTION_BOMS
+    description: Landing table for BAANV_TEI_PRODUCTION_BOMS file.
+  - name: BAANV_TEI_PURCHASE_ORDER_PARAMETERS
+    identifier: BAANV_TEI_PURCHASE_ORDER_PARAMETERS
+    description: Landing table for BAANV_TEI_PURCHASE_ORDER_PARAMETERS file.
+  - name: BAANV_TEI_PURCHASE_ORDERS
+    identifier: BAANV_TEI_PURCHASE_ORDERS
+    description: Landing table for BAANV_TEI_PURCHASE_ORDERS file.
+  - name: BAANV_TEI_SALES_ORDERS
+    identifier: BAANV_TEI_SALES_ORDERS
+    description: Landing table for BAANV_TEI_SALES_ORDERS file.
+  - name: BAANV_TEI_SUPPLIERS
+    identifier: BAANV_TEI_SUPPLIERS
+    description: Landing table for BAANV_TEI_SUPPLIERS file.
+  - name: BAANV_TEI_VENDOR_RATINGS
+    identifier: BAANV_TEI_VENDOR_RATINGS
+    description: Landing table for BAANV_TEI_VENDOR_RATINGS file.
+  - name: BAANV_TEI_WAREHOUSE_ORDERS_INBOUND
+    identifier: BAANV_TEI_WAREHOUSE_ORDERS_INBOUND
+    description: Landing table for BAANV_TEI_WAREHOUSE_ORDERS_INBOUND file.
+  - name: BAANV_TEI_WAREHOUSE_ORDERS_OUTBOUND
+    identifier: BAANV_TEI_WAREHOUSE_ORDERS_OUTBOUND
+    description: Landing table for BAANV_TEI_WAREHOUSE_ORDERS_OUTBOUND file.
+  - name: BAANV_TOP_TEA_CONTRACTS
+    identifier: BAANV_TOP_TEA_CONTRACTS
+    description: Landing table for BAANV_TOP_TEA_CONTRACTS file.
+  - name: BAANV_TTCA_AP
+    identifier: BAANV_TTCA_AP
+    description: Landing table for BAANV_TTCA_AP file.
+  - name: BAANV_TTCA_AR_OPEN_ENTRIES
+    identifier: BAANV_TTCA_AR_OPEN_ENTRIES
+    description: Landing table for BAANV_TTCA_AR_OPEN_ENTRIES file.
+  - name: BAANV_TTCA_CHART_OF_ACCOUNTS
+    identifier: BAANV_TTCA_CHART_OF_ACCOUNTS
+    description: Landing table for BAANV_TTCA_CHART_OF_ACCOUNTS file.
+  - name: BAANV_TTCA_DIM_LEDGER_COMB_W_BUDGETS
+    identifier: BAANV_TTCA_DIM_LEDGER_COMB_W_BUDGETS
+    description: Landing table for BAANV_TTCA_DIM_LEDGER_COMB_W_BUDGETS file.
+  - name: BAANV_TTCA_DIMENSIONS
+    identifier: BAANV_TTCA_DIMENSIONS
+    description: Landing table for BAANV_TTCA_DIMENSIONS file.
+  - name: BAANV_TTCA_ENGINEERING_ITEMS
+    identifier: BAANV_TTCA_ENGINEERING_ITEMS
+    description: Landing table for BAANV_TTCA_ENGINEERING_ITEMS file.
+  - name: BAANV_TTCA_FINALIZED_TRANSACTIONS
+    identifier: BAANV_TTCA_FINALIZED_TRANSACTIONS
+    description: Landing table for BAANV_TTCA_FINALIZED_TRANSACTIONS file.
+  - name: BAANV_TTCA_INTEGRATION_TRANSACTIONS
+    identifier: BAANV_TTCA_INTEGRATION_TRANSACTIONS
+    description: Landing table for BAANV_TTCA_INTEGRATION_TRANSACTIONS file.
+  - name: BAANV_TTCA_INVENTORY_BY_WAREHOUSE
+    identifier: BAANV_TTCA_INVENTORY_BY_WAREHOUSE
+    description: Landing table for BAANV_TTCA_INVENTORY_BY_WAREHOUSE file.
+  - name: BAANV_TTCA_INVENTORY_BY_WHSE_LOC_LOT
+    identifier: BAANV_TTCA_INVENTORY_BY_WHSE_LOC_LOT
+    description: Landing table for BAANV_TTCA_INVENTORY_BY_WHSE_LOC_LOT file.
+  - name: BAANV_TTCA_ITEM_TRANSACTIONS
+    identifier: BAANV_TTCA_ITEM_TRANSACTIONS
+    description: Landing table for BAANV_TTCA_ITEM_TRANSACTIONS file.
+  - name: BAANV_TTCA_ITEMS
+    identifier: BAANV_TTCA_ITEMS
+    description: Landing table for BAANV_TTCA_ITEMS file.
+  - name: BAANV_TTCA_PROJECTS
+    identifier: BAANV_TTCA_PROJECTS
+    description: Landing table for BAANV_TTCA_PROJECTS file.
+  - name: BAANV_TTCA_PURCHASE_ORDERS
+    identifier: BAANV_TTCA_PURCHASE_ORDERS
+    description: Landing table for BAANV_TTCA_PURCHASE_ORDERS file.
+  - name: BAANV_TTCA_REPLENISHMENT_ORDERS
+    identifier: BAANV_TTCA_REPLENISHMENT_ORDERS
+    description: Landing table for BAANV_TTCA_REPLENISHMENT_ORDERS file.
+  - name: BAANV_TTCA_SALES_ORDERS
+    identifier: BAANV_TTCA_SALES_ORDERS
+    description: Landing table for BAANV_TTCA_SALES_ORDERS file.
+  - name: BAANV_TTCA_SUPPLIERS
+    identifier: BAANV_TTCA_SUPPLIERS
+    description: Landing table for BAANV_TTCA_SUPPLIERS file.
+  - name: BAANV_TTI_CUSTOMERS
+    identifier: BAANV_TTI_CUSTOMERS
+    description: Landing table for BAANV_TTI_CUSTOMERS file.
+  - name: BAANV_TTI_FINALIZED_TRANSACTIONS
+    identifier: BAANV_TTI_FINALIZED_TRANSACTIONS
+    description: Landing table for BAANV_TTI_FINALIZED_TRANSACTIONS file.
+  - name: BAANV_TTI_INTEGRATION_TRANSACTIONS
+    identifier: BAANV_TTI_INTEGRATION_TRANSACTIONS
+    description: Landing table for BAANV_TTI_INTEGRATION_TRANSACTIONS file.
+  - name: BAANV_TTI_INVENTORY_BY_WAREHOUSE
+    identifier: BAANV_TTI_INVENTORY_BY_WAREHOUSE
+    description: Landing table for BAANV_TTI_INVENTORY_BY_WAREHOUSE file.
+  - name: BAANV_TTI_INVENTORY_BY_WAREHOUSE_FIFO
+    identifier: BAANV_TTI_INVENTORY_BY_WAREHOUSE_FIFO
+    description: Landing table for BAANV_TTI_INVENTORY_BY_WAREHOUSE_FIFO file.
+  - name: BAANV_TTI_INVENTORY_TRANS_BY_ITEM_AND_WAREHOUSE
+    identifier: BAANV_TTI_INVENTORY_TRANS_BY_ITEM_AND_WAREHOUSE
+    description: Landing table for BAANV_TTI_INVENTORY_TRANS_BY_ITEM_AND_WAREHOUSE
+      file.
+  - name: BAANV_TTI_ITEMS
+    identifier: BAANV_TTI_ITEMS
+    description: Landing table for BAANV_TTI_ITEMS file.
+  - name: BAANV_TTI_PRODUCTION_BOMS
+    identifier: BAANV_TTI_PRODUCTION_BOMS
+    description: Landing table for BAANV_TTI_PRODUCTION_BOMS file.
+  - name: BAANV_TTI_PRODUCTION_ORDERS
+    identifier: BAANV_TTI_PRODUCTION_ORDERS
+    description: Landing table for BAANV_TTI_PRODUCTION_ORDERS file.
+  - name: BAANV_TTI_PURCHASE_ORDERS
+    identifier: BAANV_TTI_PURCHASE_ORDERS
+    description: Landing table for BAANV_TTI_PURCHASE_ORDERS file.
+  - name: BAANV_TTI_REPLENISHMENT_ORDERS
+    identifier: BAANV_TTI_REPLENISHMENT_ORDERS
+    description: Landing table for BAANV_TTI_REPLENISHMENT_ORDERS file.
+  - name: BAANV_TTI_SALES_ORDERS
+    identifier: BAANV_TTI_SALES_ORDERS
+    description: Landing table for BAANV_TTI_SALES_ORDERS file.
+  - name: BAANV_TTI_SERVICE_ORDERS
+    identifier: BAANV_TTI_SERVICE_ORDERS
+    description: Landing table for BAANV_TTI_SERVICE_ORDERS file.
+  - name: BAANV_TTI_SUPPLIERS
+    identifier: BAANV_TTI_SUPPLIERS
+    description: Landing table for BAANV_TTI_SUPPLIERS file.
+  - name: BAANV_TVC_FINALIZED_TRANSACTIONS
+    identifier: BAANV_TVC_FINALIZED_TRANSACTIONS
+    description: Landing table for BAANV_TVC_FINALIZED_TRANSACTIONS file.
+  - name: BAANV_TVC_PURCHASE_ORDERS
+    identifier: BAANV_TVC_PURCHASE_ORDERS
+    description: Landing table for BAANV_TVC_PURCHASE_ORDERS file.
+  - name: BAANV_WHSETYPE
+    identifier: BAANV_WHSETYPE
+    description: Landing table for BAANV_WHSETYPE file.
+  - name: CUSTOMER_GROUP
+    identifier: CUSTOMER_GROUP
+    description: Landing table for CUSTOMER_GROUP file
+  - name: WISDOM_MACHINE_FCNS
+    identifier: WISDOM_MACHINE_FCNS
+    description: Landing table for WISDOM_MACHINE_FCNS file.
+  - name: MACHINES_MONTHLY_INSTALL_BASE
+    identifier: MACHINES_MONTHLY_INSTALL_BASE
+    description: Landing table for MACHINES_MONTHLY_INSTALL_BASE file.
+  - name: TEL_SHIPPING_ADVICE
+    identifier: TEL_SHIPPING_ADVICE
+    description: Landing table for TEL_SHIPPING_ADVICE.
+  - name: FEDEX_DATA
+    identifier: FEDEX_DATA
+    description: Landing table for FEDEX_DATA.
+  - name: CARMA_NOW_ACCRUAL
+    identifier: CARMA_NOW_ACCRUAL
+    description: Landing table for CARMA_NOW_ACCRUAL.
+  - name: BAANV_SERVICE_ORDERS_ACCRUAL
+    identifier: BAANV_SERVICE_ORDERS_ACCRUAL
+    description: Landing table for BAANV_SERVICE_ORDERS_ACCRUAL.
+  - name: ARCHIVE_SAFETY_INVESTIGATION
+    identifier: ARCHIVE_SAFETY_INVESTIGATION
+    description: Landing table for SAFETY_INVESTIGATION.
+  - name: ARCHIVE_SAFETY_ACTION_ITEMS
+    identifier: ARCHIVE_SAFETY_ACTION_ITEMS
+    description: Landing table for SAFETY_ACTION_ITEMS. 

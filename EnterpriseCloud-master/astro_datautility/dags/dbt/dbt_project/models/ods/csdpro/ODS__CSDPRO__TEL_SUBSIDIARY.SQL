@@ -1,0 +1,56 @@
+/************
+Model file generated from csdproDbtTemplateUtility.ipynb 
+*************/
+
+
+{{ config(
+    	materialized='incremental',
+    	incremental_strategy='merge',
+    	alias='TEL_SUBSIDIARY',
+    	unique_key = ['TEL_SUBSIDIARY_ID'],
+    	transient=false
+) }} 
+
+with source_data as (
+	SELECT
+		JSONFIELD:"TEL_SUBSIDIARY_ID"::STRING AS "TEL_SUBSIDIARY_ID", 
+ 	 	JSONFIELD:"GLOBAL_REGION_ID"::STRING AS "GLOBAL_REGION_ID", 
+ 	 	JSONFIELD:"ABBREVIATION"::STRING AS "ABBREVIATION", 
+ 	 	JSONFIELD:"DESCRIPTION"::STRING AS "DESCRIPTION", 
+ 	 	JSONFIELD:"BAAN_CO_NO"::STRING AS "BAAN_CO_NO", 
+ 	 	JSONFIELD:"SORT_ORDER"::STRING AS "SORT_ORDER", 
+ 	 	REGEXP_REPLACE(JSONFIELD:"INACTIVE_DATE", '\/Date\\(|\\)\/', '')::TIMESTAMP AS INACTIVE_DATE
+	FROM {{ source('CSDPRO','TEL_SUBSIDIARY') }}
+	{% if is_incremental() %}WHERE  _FILEDATE > IFNULL((SELECT MAX(Hist._FILEDATE) FROM {{ source('CSDPRO','TEL_SUBSIDIARY') }} Hist),'1970-01-01'){% endif %}
+    QUALIFY (ROW_NUMBER() OVER (PARTITION BY JSONFIELD:"TEL_SUBSIDIARY_ID"::STRING  ORDER BY _FILENAME DESC,_FILEDATE DESC )) = 1
+),
+
+transform_data as (
+	SELECT 
+		"TEL_SUBSIDIARY_ID", 
+ 	 	"GLOBAL_REGION_ID", 
+ 	 	"ABBREVIATION", 
+ 	 	"DESCRIPTION", 
+ 	 	"BAAN_CO_NO", 
+ 	 	"SORT_ORDER", 
+ 	 	"INACTIVE_DATE",
+		'{{ invocation_id }}' AS AUDIT_LOG_ID,
+		SHA2('hash_me') AS _ROW_HASH -- Adds column to table on full refresh.
+	FROM source_data
+),
+
+type_data as (
+	SELECT
+		CAST("TEL_SUBSIDIARY_ID" AS NUMBER(38,0)) AS "TEL_SUBSIDIARY_ID", 
+ 	 	CAST("GLOBAL_REGION_ID" AS NUMBER(38,0)) AS "GLOBAL_REGION_ID", 
+ 	 	CAST("ABBREVIATION" AS VARCHAR(16777216)) AS "ABBREVIATION", 
+ 	 	CAST("DESCRIPTION" AS VARCHAR(16777216)) AS "DESCRIPTION", 
+ 	 	CAST("BAAN_CO_NO" AS VARCHAR(16777216)) AS "BAAN_CO_NO", 
+ 	 	CAST("SORT_ORDER" AS NUMBER(38,0)) AS "SORT_ORDER", 
+ 	 	CAST("INACTIVE_DATE" AS TIMESTAMP_LTZ(9)) AS "INACTIVE_DATE",
+		CAST(AUDIT_LOG_ID AS VARCHAR(128)) AS AUDIT_LOG_ID,
+		CAST(_ROW_HASH AS VARCHAR(128)) AS _ROW_HASH
+	FROM transform_data
+)
+
+SELECT * FROM type_data

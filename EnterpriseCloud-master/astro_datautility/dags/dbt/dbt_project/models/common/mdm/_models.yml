@@ -1,0 +1,52 @@
+version: 2
+models:
+- name: COMMON__MDM__COMPANY
+  description: Model MDM Company file.
+- name: COMMON__MDM__CONTRACTFLXTSR
+  description: Model MDM ContractFLXTSR file.
+- name: COMMON__MDM__CONTRACTFLXTRANSITIONHRS
+  description: Model MDM ContractFLXTransitionHRS file.
+- name: COMMON__MDM__CUSTOMER
+  description: Model MDM mdmCustomer file.
+- name: COMMON__MDM__CUSTOMERGROUP
+  description: Model MDM CustomerGroup file.
+- name: COMMON__MDM__EMPLOYEEGROUPMAPPING
+  description: Model MDM EmployeeGroupMapping file.
+- name: COMMON__MDM__EMPLOYEESJOBTITLEMAPPING
+  description: Model MDM EmployeesJobTitleMapping file.
+- name: COMMON__MDM__FSTSTARTUPSUPERVISORS
+  description: Model MDM FSTStartupSupervisors file.
+- name: COMMON__MDM__MACHINES_S2B_INTEGRATION_LATEST_RECORD
+  description: Model MDM Machines_S2B_Integration_Latest_Record file.
+- name: COMMON__MDM__MACHINECHAMBEREXCEPTIONLIST
+  description: Model MDM MachineChamberExceptionList file.
+- name: COMMON__MDM__MACHINEMODELGROUP
+  description: Model MDM MachineModelGroup file.
+- name: COMMON__MDM__MACHINESTATUSMAPPING
+  description: Model MDM MachineStatusMapping file.
+- name: COMMON__MDM__MACHINEWAFERSIZE
+  description: Model MDM MachineWaferSize file.
+- name: COMMON__MDM__OFFICE
+  description: Model MDM Office file.
+- name: COMMON__MDM__PAIDSERVICECUSTOMERPO
+  description: Model MDM PaidServiceCustomerPO file.
+- name: COMMON__MDM__PAIDSERVICEEXCEPTIONPRICING
+  description: Model MDM PaidServiceExceptionPricing file.
+- name: COMMON__MDM__PAIDSERVICESOREQUEST
+  description: Model MDM PaidServiceSORequest file.
+- name: COMMON__MDM__PDSHOURLYRATE
+  description: Model MDM PDSHourlyRate file.
+- name: COMMON__MDM__PAIDSERVICEQUOTE
+  description: Model MDM PaidServiceQuote file.
+- name: COMMON__MDM__SALESACCOUNTREGION
+  description: Model MDM SalesAccountRegion file.
+- name: COMMON__MDM__SEGMENTBRIDGE
+  description: Model MDM SegmentBridge file.
+- name: COMMON__MDM__TASTASK
+  description: Model MDM TASTask file.
+- name: COMMON__MDM__TASTYPEOFWORK
+  description: Model MDM TASTypeOfWork file.
+- name: COMMON__MDM__TYPEOFWORKBRIDGE
+  description: Model MDM TypeOfWorkBridge file.
+- name: COMMON__MDM__WRENCHTIME
+  description: Model MDM WrenchTime file.

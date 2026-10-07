@@ -1,0 +1,524 @@
+
+# Name your project! Project names should contain only lowercase characters
+# and underscores. A good package name should reflect your organization's
+# name or the intended use of these models
+name: 'dbt_tel'
+version: '1.0.0'
+config-version: 2
+# This setting configures which "profile" dbt uses for this project.
+profile: 'dbt_tel'
+
+# These configurations specify where dbt should look for different types of files.
+# The `model-paths` config, for example, states that models in this project can be
+# found in the "models/" directory. You probably won't need to change these!
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+
+clean-targets:         # directories to be removed by `dbt clean`
+  - "target"
+  - "dbt_packages"
+
+
+on-run-start:
+  - "{{ log('COMMAND_INVOCATION_ID: ' ~ invocation_id, info=True) }}"
+on-run-end:
+  - "{{ dbt_artifacts.upload_results(results) if (env_var('SNOWFLAKE_ENV', '') != 'DEV') }}"
+
+# Configuring models
+# Full documentation: https://docs.getdbt.com/docs/configuring-models
+
+# In this example config, we tell dbt to build all models in the example/
+# directory as views. These settings can be overridden in the individual model
+# files using the `{{ config(...) }}` macro.
+models:
+  dbt_tel:
+    +transient: false
+    +on_schema_change: 'fail'
+    +materialized: tel_incremental
+    +incremental_strategy: insert_overwrite
+    +persist_docs:
+      relation: true
+      columns: true
+
+    tea_intel_sms:
+      +snowflake_warehouse: "{{ env_var('SNOWFLAKE_TEA_INTEL_SMS_WH') }}"
+      bronze:
+        +database: "{{ env_var('SNOWFLAKE_BRONZE') }}"
+        +schema: TEA_INTEL_SMS
+      silver:
+        +database: "{{ env_var('SNOWFLAKE_SILVER') }}"
+        +schema: TEA_INTEL_SMS
+      gold:
+        +database: "{{ env_var('SNOWFLAKE_GOLD') }}"
+        +schema: TEA_INTEL_SMS
+
+    teh_support_services:
+      +snowflake_warehouse: "{{ env_var('SNOWFLAKE_TEH_SUPPORT_SERVICES_WH') }}"
+      bronze:
+        +database: "{{ env_var('SNOWFLAKE_BRONZE') }}"
+        +schema: TEH_SUPPORT_SERVICES
+      silver:
+        +database: "{{ env_var('SNOWFLAKE_SILVER') }}"
+        +schema: TEH_SUPPORT_SERVICES
+      gold:
+        +database: "{{ env_var('SNOWFLAKE_GOLD') }}"
+        +schema: TEH_SUPPORT_SERVICES
+
+    tea_service:
+      +snowflake_warehouse: "{{ env_var('SNOWFLAKE_TEA_SERVICE_WH') }}"
+      bronze:
+        +database: "{{ env_var('SNOWFLAKE_BRONZE') }}"
+        +schema: TEA_SERVICE
+      silver:
+        +database: "{{ env_var('SNOWFLAKE_SILVER') }}"
+        +schema: TEA_SERVICE
+      gold:
+        +database: "{{ env_var('SNOWFLAKE_GOLD') }}"
+        +schema: TEA_SERVICE
+
+    tea_spares_revenue:
+      +snowflake_warehouse: "{{ env_var('SNOWFLAKE_TEA_SPARES_REVENUE_WH') }}"
+      bronze:
+        +database: "{{ env_var('SNOWFLAKE_BRONZE') }}"
+        +schema: TEA_SPARES_REVENUE
+      silver:
+        +database: "{{ env_var('SNOWFLAKE_SILVER') }}"
+        +schema: TEA_SPARES_REVENUE
+      gold:
+        +database: "{{ env_var('SNOWFLAKE_GOLD') }}"
+        +schema: TEA_SPARES_REVENUE
+
+    teh_procurement:
+      +snowflake_warehouse: "{{ env_var('SNOWFLAKE_TEH_PROCUREMENT_WH') }}"
+      bronze:
+        +database: "{{ env_var('SNOWFLAKE_BRONZE') }}"
+        +schema: TEH_PROCUREMENT
+      silver:
+        +database: "{{ env_var('SNOWFLAKE_SILVER') }}"
+        +schema: TEH_PROCUREMENT
+      gold:
+        +database: "{{ env_var('SNOWFLAKE_GOLD') }}"
+        +schema: TEH_PROCUREMENT
+
+    teh_data_ops:
+      +snowflake_warehouse: "{{ env_var('SNOWFLAKE_TEH_DATA_OPS_WH') }}"
+      bronze:
+        +database: "{{ env_var('SNOWFLAKE_BRONZE') }}"
+        +schema: TEH_DATA_OPS
+      silver:
+        +database: "{{ env_var('SNOWFLAKE_SILVER') }}"
+        +schema: TEH_DATA_OPS
+      gold:
+        +database: "{{ env_var('SNOWFLAKE_GOLD') }}"
+        +schema: TEH_DATA_OPS
+
+    teh_equipment_sales:
+      +snowflake_warehouse: "{{ env_var('SNOWFLAKE_TEH_EQUIPMENT_SALES_WH') }}"
+      bronze:
+        +database: "{{ env_var('SNOWFLAKE_BRONZE') }}"
+        +schema: TEH_EQUIPMENT_SALES
+      silver:
+        +database: "{{ env_var('SNOWFLAKE_SILVER') }}"
+        +schema: TEH_EQUIPMENT_SALES
+      gold:
+        +database: "{{ env_var('SNOWFLAKE_GOLD') }}"
+        +schema: TEH_EQUIPMENT_SALES
+
+    teh_international_trade:
+      +snowflake_warehouse: "{{ env_var('SNOWFLAKE_TEH_INTERNATIONAL_TRADE_WH') }}"
+      bronze:
+        +database: "{{ env_var('SNOWFLAKE_BRONZE') }}"
+        +schema: TEH_INTERNATIONAL_TRADE
+      silver:
+        +database: "{{ env_var('SNOWFLAKE_SILVER') }}"
+        +schema: TEH_INTERNATIONAL_TRADE
+      gold:
+        +database: "{{ env_var('SNOWFLAKE_GOLD') }}"
+        +schema: TEH_INTERNATIONAL_TRADE
+
+    tmea_safety:
+      +snowflake_warehouse: "{{ env_var('SNOWFLAKE_TMEA_SAFETY_WH') }}"
+      bronze:
+        +database: "{{ env_var('SNOWFLAKE_BRONZE') }}"
+        +schema: TMEA_SAFETY
+      silver:
+        +database: "{{ env_var('SNOWFLAKE_SILVER') }}"
+        +schema: TMEA_SAFETY
+      gold:
+        +database: "{{ env_var('SNOWFLAKE_GOLD') }}"
+        +schema: TMEA_SAFETY
+
+    tmea_engineering:
+      +snowflake_warehouse: "{{ env_var('SNOWFLAKE_TMEA_ENGINEERING_WH') }}"
+      bronze:
+        +database: "{{ env_var('SNOWFLAKE_BRONZE') }}"
+        +schema: TMEA_ENGINEERING
+      silver:
+        +database: "{{ env_var('SNOWFLAKE_SILVER') }}"
+        +schema: TMEA_ENGINEERING
+      gold:
+        +database: "{{ env_var('SNOWFLAKE_GOLD') }}"
+        +schema: TMEA_ENGINEERING
+
+    tmea_manufacturing:
+      +snowflake_warehouse: "{{ env_var('SNOWFLAKE_TMEA_MANUFACTURING_WH') }}"
+      bronze:
+        +database: "{{ env_var('SNOWFLAKE_BRONZE') }}"
+        +schema: TMEA_MANUFACTURING
+      silver:
+        +database: "{{ env_var('SNOWFLAKE_SILVER') }}"
+        +schema: TMEA_MANUFACTURING
+      gold:
+        +database: "{{ env_var('SNOWFLAKE_GOLD') }}"
+        +schema: TMEA_MANUFACTURING
+
+    tmea_finance:
+      +snowflake_warehouse: "{{ env_var('SNOWFLAKE_TMEA_FINANCE_WH') }}"
+      bronze:
+        +database: "{{ env_var('SNOWFLAKE_BRONZE') }}"
+        +schema: TMEA_FINANCE
+      silver:
+        +database: "{{ env_var('SNOWFLAKE_SILVER') }}"
+        +schema: TMEA_FINANCE
+      gold:
+        +database: "{{ env_var('SNOWFLAKE_GOLD') }}"
+        +schema: TMEA_FINANCE
+
+    tmea_product_support_group:
+      +snowflake_warehouse: "{{ env_var('SNOWFLAKE_TMEA_PRODUCT_SUPPORT_GROUP_WH') }}"
+      bronze:
+        +database: "{{ env_var('SNOWFLAKE_BRONZE') }}"
+        +schema: TMEA_PRODUCT_SUPPORT_GROUP
+      silver:
+        +database: "{{ env_var('SNOWFLAKE_SILVER') }}"
+        +schema: TMEA_PRODUCT_SUPPORT_GROUP
+      gold:
+        +database: "{{ env_var('SNOWFLAKE_GOLD') }}"
+        +schema: TMEA_PRODUCT_SUPPORT_GROUP
+
+    tmea_quality:
+      +snowflake_warehouse: "{{ env_var('SNOWFLAKE_TMEA_QUALITY_WH') }}"
+      bronze:
+        +database: "{{ env_var('SNOWFLAKE_BRONZE') }}"
+        +schema: TMEA_QUALITY
+      silver:
+        +database: "{{ env_var('SNOWFLAKE_SILVER') }}"
+        +schema: TMEA_QUALITY
+      gold:
+        +database: "{{ env_var('SNOWFLAKE_GOLD') }}"
+        +schema: TMEA_QUALITY
+
+    tmea_supply_chain:
+      +snowflake_warehouse: "{{ env_var('SNOWFLAKE_TMEA_SUPPLY_CHAIN_WH') }}"
+      bronze:
+        +database: "{{ env_var('SNOWFLAKE_BRONZE') }}"
+        +schema: TMEA_SUPPLY_CHAIN
+      silver:
+        +database: "{{ env_var('SNOWFLAKE_SILVER') }}"
+        +schema: TMEA_SUPPLY_CHAIN
+      gold:
+        +database: "{{ env_var('SNOWFLAKE_GOLD') }}"
+        +schema: TMEA_SUPPLY_CHAIN
+
+    tea_strategic_business_operations:
+      +snowflake_warehouse: "{{ env_var('SNOWFLAKE_TEA_STRATEGIC_BUSINESS_OPERATIONS_WH') }}"
+      bronze:
+        +database: "{{ env_var('SNOWFLAKE_BRONZE') }}"
+        +schema: TEA_STRATEGIC_BUSINESS_OPERATIONS
+      silver:
+        +database: "{{ env_var('SNOWFLAKE_SILVER') }}"
+        +schema: TEA_STRATEGIC_BUSINESS_OPERATIONS
+      gold:
+        +database: "{{ env_var('SNOWFLAKE_GOLD') }}"
+        +schema: TEA_STRATEGIC_BUSINESS_OPERATIONS
+
+    tea_sales_revenue:
+      +snowflake_warehouse: "{{ env_var('SNOWFLAKE_TEA_SALES_REVENUE_WH') }}"
+      bronze:
+        +database: "{{ env_var('SNOWFLAKE_BRONZE') }}"
+        +schema: TEA_SALES_REVENUE
+      silver:
+        +database: "{{ env_var('SNOWFLAKE_SILVER') }}"
+        +schema: TEA_SALES_REVENUE
+      gold:
+        +database: "{{ env_var('SNOWFLAKE_GOLD') }}"
+        +schema: TEA_SALES_REVENUE
+
+    tea_direct_purchasing:
+      +snowflake_warehouse: "{{ env_var('SNOWFLAKE_TEA_DIRECT_PURCHASING_WH') }}"
+      bronze:
+        +database: "{{ env_var('SNOWFLAKE_BRONZE') }}"
+        +schema: TEA_DIRECT_PURCHASING
+      silver:
+        +database: "{{ env_var('SNOWFLAKE_SILVER') }}"
+        +schema: TEA_DIRECT_PURCHASING
+      gold:
+        +database: "{{ env_var('SNOWFLAKE_GOLD') }}"
+        +schema: TEA_DIRECT_PURCHASING
+
+    teh_sales_to_installation:
+      +snowflake_warehouse: "{{ env_var('SNOWFLAKE_TEH_SALES_TO_INSTALLATION_WH') }}"
+      bronze:
+        +database: "{{ env_var('SNOWFLAKE_BRONZE') }}"
+        +schema: TEH_SALES_TO_INSTALLATION
+      silver:
+        +database: "{{ env_var('SNOWFLAKE_SILVER') }}"
+        +schema: TEH_SALES_TO_INSTALLATION
+      gold:
+        +database: "{{ env_var('SNOWFLAKE_GOLD') }}"
+        +schema: TEH_SALES_TO_INSTALLATION
+
+    tea_technical_training:
+      +snowflake_warehouse: "{{ env_var('SNOWFLAKE_TEA_TECHNICAL_TRAINING_WH') }}"
+      bronze:
+        +database: "{{ env_var('SNOWFLAKE_BRONZE') }}"
+        +schema: TEA_TECHNICAL_TRAINING
+      silver:
+        +database: "{{ env_var('SNOWFLAKE_SILVER') }}"
+        +schema: TEA_TECHNICAL_TRAINING
+      gold:
+        +database: "{{ env_var('SNOWFLAKE_GOLD') }}"
+        +schema: TEA_TECHNICAL_TRAINING
+
+    tea_technical_support:
+      +snowflake_warehouse: "{{ env_var('SNOWFLAKE_TEA_TECHNICAL_SUPPORT_WH') }}"
+      bronze:
+        +database: "{{ env_var('SNOWFLAKE_BRONZE') }}"
+        +schema: TEA_TECHNICAL_SUPPORT
+      silver:
+        +database: "{{ env_var('SNOWFLAKE_SILVER') }}"
+        +schema: TEA_TECHNICAL_SUPPORT
+      gold:
+        +database: "{{ env_var('SNOWFLAKE_GOLD') }}"
+        +schema: TEA_TECHNICAL_SUPPORT
+
+    tea_gce_afs:
+      +snowflake_warehouse: "{{ env_var('SNOWFLAKE_TEA_GCE_AFS_WH') }}"
+      bronze:
+        +database: "{{ env_var('SNOWFLAKE_BRONZE') }}"
+        +schema: TEA_GCE_AFS
+      silver:
+        +database: "{{ env_var('SNOWFLAKE_SILVER') }}"
+        +schema: TEA_GCE_AFS
+      gold:
+        +database: "{{ env_var('SNOWFLAKE_GOLD') }}"
+        +schema: TEA_GCE_AFS
+
+    tea_threepl_operations:
+      +snowflake_warehouse: "{{ env_var('SNOWFLAKE_TEA_THREEPL_OPERATIONS_WH') }}"
+      bronze:
+        +database: "{{ env_var('SNOWFLAKE_BRONZE') }}"
+        +schema: TEA_THREEPL_OPERATIONS
+      silver:
+        +database: "{{ env_var('SNOWFLAKE_SILVER') }}"
+        +schema: TEA_THREEPL_OPERATIONS
+      gold:
+        +database: "{{ env_var('SNOWFLAKE_GOLD') }}"
+        +schema: TEA_THREEPL_OPERATIONS
+
+    teh_ehs:
+      +snowflake_warehouse: "{{ env_var('SNOWFLAKE_TEH_EHS_WH') }}"
+      bronze:
+        +database: "{{ env_var('SNOWFLAKE_BRONZE') }}"
+        +schema: TEH_EHS
+      silver:
+        +database: "{{ env_var('SNOWFLAKE_SILVER') }}"
+        +schema: TEH_EHS
+      gold:
+        +database: "{{ env_var('SNOWFLAKE_GOLD') }}"
+        +schema: TEH_EHS
+
+    teh_applications:
+      +snowflake_warehouse: "{{ env_var('SNOWFLAKE_TEH_APPLICATIONS_WH') }}"
+      bronze:
+        +database: "{{ env_var('SNOWFLAKE_BRONZE') }}"
+        +schema: TEH_APPLICATIONS
+      silver:
+        +database: "{{ env_var('SNOWFLAKE_SILVER') }}"
+        +schema: TEH_APPLICATIONS
+      gold:
+        +database: "{{ env_var('SNOWFLAKE_GOLD') }}"
+        +schema: TEH_APPLICATIONS
+
+    teh_product_support:
+      +snowflake_warehouse: "{{ env_var('SNOWFLAKE_TEH_PRODUCT_SUPPORT_WH') }}"
+      bronze:
+        +database: "{{ env_var('SNOWFLAKE_BRONZE') }}"
+        +schema: TEH_PRODUCT_SUPPORT
+      silver:
+        +database: "{{ env_var('SNOWFLAKE_SILVER') }}"
+        +schema: TEH_PRODUCT_SUPPORT
+      gold:
+        +database: "{{ env_var('SNOWFLAKE_GOLD') }}"
+        +schema: TEH_PRODUCT_SUPPORT
+  
+    teh_infosec:
+      +snowflake_warehouse: "{{ env_var('SNOWFLAKE_TEH_INFOSEC_WH') }}"
+      bronze:
+        +database: "{{ env_var('SNOWFLAKE_BRONZE') }}"
+        +schema: TEH_INFOSEC
+      silver:
+        +database: "{{ env_var('SNOWFLAKE_SILVER') }}"
+        +schema: TEH_INFOSEC
+      gold:
+        +database: "{{ env_var('SNOWFLAKE_GOLD') }}"
+        +schema: TEH_INFOSEC
+
+    tea_logistics:
+      +snowflake_warehouse: "{{ env_var('SNOWFLAKE_TEA_LOGISTICS_WH') }}"
+      bronze:
+        +database: "{{ env_var('SNOWFLAKE_BRONZE') }}"
+        +schema: TEA_LOGISTICS
+      silver:
+        +database: "{{ env_var('SNOWFLAKE_SILVER') }}"
+        +schema: TEA_LOGISTICS
+      gold:
+        +database: "{{ env_var('SNOWFLAKE_GOLD') }}"
+        +schema: TEA_LOGISTICS
+
+    tea_diverse_systems_and_solutions:
+      +snowflake_warehouse: "{{ env_var('SNOWFLAKE_TEA_DIVERSE_SYSTEMS_AND_SOLUTIONS_WH') }}"
+      bronze:
+        +database: "{{ env_var('SNOWFLAKE_BRONZE') }}"
+        +schema: TEA_DIVERSE_SYSTEMS_AND_SOLUTIONS
+
+    teh_human_resources: 
+      +snowflake_warehouse: "{{ env_var('SNOWFLAKE_TEH_HUMAN_RESOURCES_WH') }}"
+      bronze:
+        +database: "{{ env_var('SNOWFLAKE_BRONZE') }}"
+        +schema: TEH_HUMAN_RESOURCES    
+      silver:
+        +database: "{{ env_var('SNOWFLAKE_SILVER') }}"
+        +schema: TEH_HUMAN_RESOURCES     
+
+    tmea_equipment_sales: 
+      +snowflake_warehouse: "{{ env_var('SNOWFLAKE_TMEA_EQUIPMENT_SALES_WH') }}"
+      bronze:
+        +database: "{{ env_var('SNOWFLAKE_BRONZE') }}"
+        +schema: TMEA_EQUIPMENT_SALES    
+      silver:
+        +database: "{{ env_var('SNOWFLAKE_SILVER') }}"
+        +schema: TMEA_EQUIPMENT_SALES   
+      gold:
+        +database: "{{ env_var('SNOWFLAKE_GOLD') }}"
+        +schema: TMEA_EQUIPMENT_SALES
+
+
+    # teh_is_mgmt: 
+    #   +snowflake_warehouse: "{{ env_var('SNOWFLAKE_TEH_IS_MGMT_WH') }}"
+    #   bronze:
+    #     +database: "{{ env_var('SNOWFLAKE_BRONZE') }}"
+    #     +schema: TEH_IS_MGMT    
+    #   silver:
+    #     +database: "{{ env_var('SNOWFLAKE_SILVER') }}"
+    #     +schema: TEH_IS_MGMT   
+    #   gold:
+    #     +database: "{{ env_var('SNOWFLAKE_GOLD') }}"
+    #     +schema: TEH_IS_MGMT
+
+    tea_planning: 
+      +snowflake_warehouse: "{{ env_var('SNOWFLAKE_TEA_PLANNING_WH') }}"
+      bronze:
+        +database: "{{ env_var('SNOWFLAKE_BRONZE') }}"
+        +schema: TEA_PLANNING    
+      silver:
+        +database: "{{ env_var('SNOWFLAKE_SILVER') }}"
+        +schema: TEA_PLANNING   
+      gold:
+        +database: "{{ env_var('SNOWFLAKE_GOLD') }}"
+        +schema: TEA_PLANNING
+
+    teh_finance: 
+      +snowflake_warehouse: "{{ env_var('SNOWFLAKE_TEH_FINANCE_WH') }}"
+      bronze:
+        +database: "{{ env_var('SNOWFLAKE_BRONZE') }}"
+        +schema: TEH_FINANCE    
+      silver:
+        +database: "{{ env_var('SNOWFLAKE_SILVER') }}"
+        +schema: TEH_FINANCE   
+      gold:
+        +database: "{{ env_var('SNOWFLAKE_GOLD') }}"
+        +schema: TEH_FINANCE
+
+    teh_revenue_cogs: 
+      +snowflake_warehouse: "{{ env_var('SNOWFLAKE_TEH_REVENUE_COGS_WH') }}"
+      bronze:
+        +database: "{{ env_var('SNOWFLAKE_BRONZE') }}"
+        +schema: TEH_REVENUE_COGS    
+      silver:
+        +database: "{{ env_var('SNOWFLAKE_SILVER') }}"
+        +schema: TEH_REVENUE_COGS   
+      gold:
+        +database: "{{ env_var('SNOWFLAKE_GOLD') }}"
+        +schema: TEH_REVENUE_COGS
+
+    tee_sales_service_admin:
+      +snowflake_warehouse: "{{ env_var('SNOWFLAKE_TEE_SALES_SERVICE_ADMIN_WH') }}"
+      bronze:
+        +database: "{{ env_var('SNOWFLAKE_BRONZE') }}"
+        +schema: TEE_SALES_SERVICE_ADMIN    
+      silver:
+        +database: "{{ env_var('SNOWFLAKE_SILVER') }}"
+        +schema: TEE_SALES_SERVICE_ADMIN   
+      gold:
+        +database: "{{ env_var('SNOWFLAKE_GOLD') }}"
+        +schema: TEE_SALES_SERVICE_ADMIN
+
+    tee_spares_support: 
+      +snowflake_warehouse: "{{ env_var('SNOWFLAKE_TEE_SPARES_SUPPORT_WH') }}"
+      bronze:
+        +database: "{{ env_var('SNOWFLAKE_BRONZE') }}"
+        +schema: TEE_SPARES_SUPPORT    
+      silver:
+        +database: "{{ env_var('SNOWFLAKE_SILVER') }}"
+        +schema: TEE_SPARES_SUPPORT   
+      # gold:
+      #   +database: "{{ env_var('SNOWFLAKE_GOLD') }}"
+      #   +schema: TEE_SPARES_SUPPORT
+
+    ttca_quality: 
+      bronze:
+        +database: "{{ env_var('SNOWFLAKE_BRONZE') }}"
+        +schema: TTCA_QUALITY    
+      # silver:
+      #   +database: "{{ env_var('SNOWFLAKE_SILVER') }}"
+      #   +schema: TTCA_QUALITY   
+      # gold:
+      #   +database: "{{ env_var('SNOWFLAKE_GOLD') }}"
+      #   +schema: TTCA_QUALITY
+
+  dbt_artifacts:
+    +database: "{{ env_var('SNOWFLAKE_ADMIN') }}"
+    +schema: DBT_ARTIFACTS
+
+# flags:
+#   require_generic_test_arguments_property: false
+
+vars:
+  # global variables
+  dbt_date:time_zone: 'America/Chicago'
+  dbt_artifacts_exclude_all_results: true
+  NullTypeValues:
+    TEXT: '''NULLFIELDVALUE'''
+    STRING: '''NULLFIELDVALUE'''
+    DATE: CAST('19000101' AS DATE)
+    TIMESTAMP: CAST('19000101' AS TIMESTAMP)
+    TIMESTAMP_TZ: CAST('19000101' AS TIMESTAMP_TZ)
+    TIMESTAMP_NTZ: CAST('19000101' AS TIMESTAMP_NTZ)
+    TIMESTAMP_LTZ: CAST('19000101' AS TIMESTAMP_LTZ)
+    CHARACTER: ''''
+    CHAR: ''''
+    NUMBER: -999999999999999999
+    character varying: '''NULLFIELDVALUE'''
+    BOOLEAN: false
+    VARIANT: '''NULLFIELDVALUE'''
+    FLOAT: .999999999999999
+    ARRAY: '[''NULLFIELDVALUE'']'
+    OBJECT: '{''NULLFIELDVALUE'': ''NULLFIELDVALUE''}'
+    BINARY: TO_BINARY(HEX_ENCODE('''NULLFIELDVALUE'''), 'HEX')
+

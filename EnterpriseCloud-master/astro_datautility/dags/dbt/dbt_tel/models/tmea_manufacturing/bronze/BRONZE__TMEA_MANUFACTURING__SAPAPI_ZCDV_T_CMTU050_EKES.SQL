@@ -1,0 +1,154 @@
+	{{ config(
+    	   materialized='tel_incremental',
+    	  incremental_strategy='insert_overwrite',
+    	  alias='SAPAPI_ZCDV_T_CMTU050_EKES',
+    	  unique_key = [''],
+    	  transient=false	
+		) 
+	}} 
+
+
+	with source_data as ( 
+    SELECT
+        _FILEDATE,
+        _FILENAME,
+		JSONFIELD:"Mandt"::STRING AS MANDT, -- No Mapping in GMX
+		JSONFIELD:"EBELN"::STRING AS EBELN,
+		LPAD(coalesce(JSONFIELD:"EBELP"::STRING,''),5,'0') as "EBELP",
+		LPAD(coalesce(JSONFIELD:"ETENS"::STRING,''),5,'0') as "ETENS",
+		JSONFIELD:"EBTYP"::STRING AS EBTYP,
+		JSONFIELD:"EINDT"::STRING AS EINDT,
+		JSONFIELD:"LPEIN"::STRING AS LPEIN,
+		JSONFIELD:"UZEIT"::STRING AS UZEIT,
+		JSONFIELD:"ERDAT"::STRING AS ERDAT,
+		JSONFIELD:"EZEIT"::STRING AS EZEIT,
+		JSONFIELD:"MENGE"::STRING AS MENGE,
+		JSONFIELD:"DABMG"::STRING AS DABMG,
+		JSONFIELD:"ESTKZ"::STRING AS ESTKZ,
+		JSONFIELD:"LOEKZ"::STRING AS LOEKZ,
+		JSONFIELD:"KZDIS"::STRING AS KZDIS,
+		JSONFIELD:"XBLNR"::STRING AS XBLNR,
+		JSONFIELD:"VBELN"::STRING AS VBELN,
+		JSONFIELD:"VBELP"::STRING AS VBELP,
+		JSONFIELD:"MPROF"::STRING AS MPROF,
+		JSONFIELD:"EMATN"::STRING AS EMATN,
+		JSONFIELD:"MAHNZ"::STRING AS MAHNZ,
+		JSONFIELD:"CHARG"::STRING AS CHARG,
+		JSONFIELD:"UECHA"::STRING AS UECHA,
+		JSONFIELD:"REF_ETENS"::STRING AS REF_ETENS,
+		JSONFIELD:"IMWRK"::STRING AS IMWRK,
+		JSONFIELD:"VBELN_ST"::STRING AS VBELN_ST,
+		JSONFIELD:"VBELP_ST"::STRING AS VBELP_ST,
+		JSONFIELD:"HANDOVERDATE"::STRING AS HANDOVERDATE,
+		JSONFIELD:"HANDOVERTIME"::STRING AS HANDOVERTIME,
+		JSONFIELD:"Sgt_Scat"::STRING AS SGT_SCAT, -- No Mapping in GMX
+		JSONFIELD:"Msgtstmp"::STRING AS MSGTSTMP, -- No Mapping in GMX
+		JSONFIELD:"Cwm_Menge"::STRING AS CWM_MENGE, -- No Mapping in GMX
+		JSONFIELD:"Cwm_Dabmg"::STRING AS CWM_DABMG, -- No Mapping in GMX
+		JSONFIELD:"_Dataaging"::STRING AS _DATAAGING, -- No Mapping in GMX
+		JSONFIELD:"Fsh_Salloc_Qty"::STRING AS FSH_SALLOC_QTY, -- No Mapping in GMX
+		JSONFIELD:"Ormng"::STRING AS ORMNG, -- No Mapping in GMX
+		JSONFIELD:"Tms_Ref_Uuid"::STRING AS TMS_REF_UUID, -- No Mapping in GMX
+		JSONFIELD:"update_date"::STRING AS UPDATE_DATE -- No Mapping in GMX
+ 	from {{ source('SAPH','SAP_US_MMT_EV_EKES') }}
+	WHERE _FILEDATE::STRING = (
+        SELECT MAX(RUN_TIME)::STRING
+        FROM {{ source('SAPH', 'CONTROLTABLE') }}
+        WHERE TABLE_NAME = 'SAP_US_MMT_EV_EKES'
+        )
+	QUALIFY ROW_NUMBER() OVER ( PARTITION BY EBELN, EBELP, ETENS ORDER BY _FILEDATE DESC, _UPLOADDATE DESC) = 1
+	),
+	
+	transform_data as (
+    SELECT
+        '{{ invocation_id }}' AS _AUDIT_LOG_ID,
+        SHA2('hash_me') AS _ROW_HASH,
+        _FILEDATE AS _FILEDATE,
+        _FILENAME AS _FILENAME,
+		EBELN as EBELN,
+		LPAD(coalesce("EBELP",''),5,'0') as "EBELP",
+		LPAD(coalesce("ETENS",''),5,'0') as "ETENS",
+		EBTYP as EBTYP,
+		COALESCE(REGEXP_REPLACE(TRY_TO_DATE("EINDT"),'-',''),'') as "EINDT",
+		LPEIN as LPEIN,
+		REGEXP_REPLACE("UZEIT",':') as "UZEIT",
+		COALESCE(REGEXP_REPLACE(TRY_TO_DATE("ERDAT"),'-',''),'00000000') as "ERDAT",
+		REGEXP_REPLACE("EZEIT",':') as "EZEIT",
+		MENGE as MENGE,
+		DABMG as DABMG,
+		coalesce("ESTKZ",'') as "ESTKZ",
+		coalesce("LOEKZ",'') as "LOEKZ",
+		Case when "KZDIS"='X' then 'true' else 'false' end as "KZDIS",
+		coalesce("XBLNR",'') as "XBLNR",
+		coalesce("VBELN",'') as "VBELN",
+		LPAD(coalesce("VBELP",''),6,'0') as "VBELP",
+		coalesce("MPROF",'') as "MPROF",
+		coalesce("EMATN",'') as "EMATN",
+		MAHNZ as MAHNZ,
+		coalesce("CHARG",'') as "CHARG",
+		LPAD(coalesce("UECHA",''),6,'0') as "UECHA",
+		LPAD(coalesce("REF_ETENS",''),5,'0') as "REF_ETENS",
+		Case when "IMWRK"='X' then 'true' else 'false' end as "IMWRK",
+		coalesce("VBELN_ST",'') as "VBELN_ST",
+		LPAD(coalesce("VBELP_ST",''),6,'0') as "VBELP_ST",
+		HANDOVERDATE as HANDOVERDATE,
+		REGEXP_REPLACE("HANDOVERTIME",':') as "HANDOVERTIME",
+		SGT_SCAT as SGT_SCAT,
+		MSGTSTMP as MSGTSTMP,
+		CWM_MENGE as CWM_MENGE,
+		CWM_DABMG as CWM_DABMG,
+		_DATAAGING as _DATAAGING,
+		FSH_SALLOC_QTY as FSH_SALLOC_QTY,
+		ORMNG as ORMNG,
+		TMS_REF_UUID as TMS_REF_UUID,
+		UPDATE_DATE as UPDATE_DATE
+    FROM source_data 
+),
+
+type_data as (
+    SELECT
+        _AUDIT_LOG_ID,
+        _ROW_HASH,
+        _FILEDATE,
+        _FILENAME,
+		EBELN,
+		EBELP,
+		ETENS,
+		EBTYP,
+		EINDT,
+		LPEIN,
+		UZEIT,
+		ERDAT,
+		EZEIT,
+		MENGE,
+		DABMG,
+		ESTKZ,
+		LOEKZ,
+		KZDIS,
+		XBLNR,
+		VBELN,
+		VBELP,
+		MPROF,
+		EMATN,
+		MAHNZ,
+		CHARG,
+		UECHA,
+		REF_ETENS,
+		IMWRK,
+		VBELN_ST,
+		VBELP_ST,
+		HANDOVERDATE,
+		HANDOVERTIME,
+		SGT_SCAT,
+		MSGTSTMP,
+		CWM_MENGE,
+		CWM_DABMG,
+		_DATAAGING,
+		FSH_SALLOC_QTY,
+		ORMNG,
+		TMS_REF_UUID,
+		UPDATE_DATE
+    FROM transform_data 
+)
+
+	select * from type_data

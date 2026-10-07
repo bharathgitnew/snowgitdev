@@ -1,0 +1,15 @@
+version: 2
+
+models:
+  - name: PUB__DE_OPERATIONS__TPS
+    config:
+      meta:
+        owner:
+          primary: Frank Ayala
+          secondary: Gabriel Hallett
+  - name: PUB__DE_OPERATIONS__RTISSTROUBLE
+    config:
+      meta:
+        owner:
+          primary: Frank Ayala
+          secondary: Gabriel Hallett

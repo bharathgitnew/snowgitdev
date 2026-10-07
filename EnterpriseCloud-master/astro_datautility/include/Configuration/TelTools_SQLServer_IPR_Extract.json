@@ -1,0 +1,235 @@
+{
+  "IPR": {
+    "DataSet1": {
+      "schema": "dbo",
+      "table": "ADDRESS_BAAN",
+      "Incremental": "NULL",
+      "sftablename": "ADDRESS_BAAN",
+      "filter": ""
+    },
+    "DataSet2": {
+      "schema": "dbo",
+      "table": "CATEGORY",
+      "Incremental": "NULL",
+      "sftablename": "CATEGORY",
+      "filter": ""
+    },
+    "DataSet3": {
+      "schema": "dbo",
+      "table": "CATEGORY_X_COMPANY",
+      "Incremental": "NULL",
+      "sftablename": "CATEGORY_X_COMPANY",
+      "filter": ""
+    },
+    "DataSet4": {
+      "schema": "dbo",
+      "table": "COMPANY_CODE",
+      "Incremental": "NULL",
+      "sftablename": "COMPANY_CODE",
+      "filter": ""
+    },
+    "DataSet5": {
+      "schema": "dbo",
+      "table": "CONTACT",
+      "Incremental": "NULL",
+      "sftablename": "CONTACT",
+      "filter": ""
+    },
+    "DataSet6": {
+      "schema": "dbo",
+      "table": "COST_CENTER_BAAN",
+      "Incremental": "NULL",
+      "sftablename": "COST_CENTER_BAAN",
+      "filter": ""
+    },
+    "DataSet7": {
+      "schema": "dbo",
+      "table": "COST_CENTER_TYPE",
+      "Incremental": "NULL",
+      "sftablename": "COST_CENTER_TYPE",
+      "filter": ""
+    },
+    "DataSet8": {
+      "schema": "dbo",
+      "table": "country",
+      "Incremental": "NULL",
+      "sftablename": "COUNTRY",
+      "filter": ""
+    },
+    "DataSet9": {
+      "schema": "dbo",
+      "table": "DEPT_X_SEGMENT",
+      "Incremental": "NULL",
+      "sftablename": "DEPT_X_SEGMENT",
+      "filter": ""
+    },
+    "DataSet10": {
+      "schema": "dbo",
+      "table": "DIMENSION",
+      "Incremental": "NULL",
+      "sftablename": "DIMENSION",
+      "filter": ""
+    },
+    "DataSet11": {
+      "schema": "dbo",
+      "table": "EMPLOYEES",
+      "Incremental": "NULL",
+      "sftablename": "EMPLOYEES",
+      "filter": ""
+    },
+    "DataSet12": {
+      "schema": "dbo",
+      "table": "IPR_PENDING_APPROVAL",
+      "Incremental": "NULL",
+      "sftablename": "IPR_PENDING_APPROVAL",
+      "filter": ""
+    },
+    "DataSet13": {
+      "schema": "dbo",
+      "table": "IPR_STATUS",
+      "Incremental": "NULL",
+      "sftablename": "IPR_STATUS",
+      "filter": ""
+    },
+    "DataSet14": {
+      "schema": "dbo",
+      "table": "MACHINE_STATUS",
+      "Incremental": "NULL",
+      "sftablename": "MACHINE_STATUS",
+      "filter": ""
+    },
+    "DataSet15": {
+      "schema": "dbo",
+      "table": "NON_US_EMPLOYEE",
+      "Incremental": "NULL",
+      "sftablename": "NON_US_EMPLOYEE",
+      "filter": ""
+    },
+    "DataSet16": {
+      "schema": "dbo",
+      "table": "ORDER_HEADER",
+      "Incremental": "NULL",
+      "sftablename": "ORDER_HEADER",
+      "filter": ""
+    },
+    "DataSet17": {
+      "schema": "dbo",
+      "table": "ORDER_LINES",
+      "Incremental": "NULL",
+      "sftablename": "ORDER_LINES",
+      "filter": ""
+    },
+    "DataSet18": {
+      "schema": "dbo",
+      "table": "REASON",
+      "Incremental": "NULL",
+      "sftablename": "REASON",
+      "filter": ""
+    },
+    "DataSet19": {
+      "schema": "dbo",
+      "table": "REASON_X_COMPANY",
+      "Incremental": "NULL",
+      "sftablename": "REASON_X_COMPANY",
+      "filter": ""
+    },
+    "DataSet20": {
+      "schema": "dbo",
+      "table": "ROLE_TYPE",
+      "Incremental": "NULL",
+      "sftablename": "ROLE_TYPE",
+      "filter": ""
+    },
+    "DataSet21": {
+      "schema": "dbo",
+      "table": "SHIP_ROUTE_BAAN",
+      "Incremental": "NULL",
+      "sftablename": "SHIP_ROUTE_BAAN",
+      "filter": ""
+    },
+    "DataSet22": {
+      "schema": "dbo",
+      "table": "SHIPPING_ROUTE",
+      "Incremental": "NULL",
+      "sftablename": "SHIPPING_ROUTE",
+      "filter": ""
+    },
+    "DataSet23": {
+      "schema": "dbo",
+      "table": "SOLD_TO_COMPANY",
+      "Incremental": "NULL",
+      "sftablename": "SOLD_TO_COMPANY",
+      "filter": ""
+    },
+    "DataSet24": {
+      "schema": "dbo",
+      "table": "state",
+      "Incremental": "NULL",
+      "sftablename": "STATE",
+      "filter": ""
+    },
+    "DataSet25": {
+      "schema": "dbo",
+      "table": "URGENCY",
+      "Incremental": "NULL",
+      "sftablename": "URGENCY",
+      "filter": ""
+    },
+    "DataSet26": {
+      "schema": "dbo",
+      "table": "USER_INFO",
+      "Incremental": "NULL",
+      "sftablename": "USER_INFO",
+      "filter": ""
+    },
+    "DataSet27": {
+      "schema": "dbo",
+      "table": "USER_ROLE",
+      "Incremental": "NULL",
+      "sftablename": "USER_ROLE",
+      "filter": ""
+    },
+    "DataSet28": {
+      "schema": "dbo",
+      "table": "WEB_SERVICE_LOG",
+      "Incremental": "NULL",
+      "sftablename": "WEB_SERVICE_LOG",
+      "filter": ""
+    },
+    "DataSet29": {
+      "schema": "dbo",
+      "table": "WF_APPROVER_GROUP",
+      "Incremental": "NULL",
+      "sftablename": "WF_APPROVER_GROUP",
+      "filter": ""
+    },
+    "DataSet30": {
+      "schema": "dbo",
+      "table": "WF_GROUP_USERS",
+      "Incremental": "NULL",
+      "sftablename": "WF_GROUP_USERS",
+      "filter": ""
+    },
+    "DataSet31": {
+      "schema": "dbo",
+      "table": "WF_SETTINGS",
+      "Incremental": "NULL",
+      "sftablename": "WF_SETTINGS",
+      "filter": ""
+    },
+    "DataSet32": {
+      "schema": "dbo",
+      "table": "WF_STATUS",
+      "Incremental": "NULL",
+      "sftablename": "WF_STATUS",
+      "filter": ""
+    },
+    "DataSet33": {
+      "schema": "dbo",
+      "table": "WF_STATUS_TYPE",
+      "Incremental": "NULL",
+      "sftablename": "WF_STATUS_TYPE",
+      "filter": ""
+    }
+  }
+}

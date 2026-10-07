@@ -1,0 +1,25 @@
+version: 2
+models:
+- name: COMMON__REPORTS__NCDR_NON_CONSUMED_REPORT
+  description: Primary data source is NCDR_SAPH. Unique by SALES_DOCUMENT_HDR and SALES_DOCUMENT_LINE. This report shows all ZS14 NCDRs that 
+    are not consumed, defined by the GOODS_REMAINING_QTY column. If an NCDR is appearing on this report, it must mean that it is either not 
+    delivered or GOODS_REMAINING_QTY > 0. GOODS_REMAINING_QTY is calculated as the difference between GOODS_ON_LOAN_QTY and the sum of 
+    GOODS_CONSUMED_QTY and GOODS_RETURN_QTY, all of which are based on the sales order's material documents. NCDRs that are cancelled in 
+    NOW will not appear on this report. If you believe that an NCDR should not appear on this report, please double check SAP first, and 
+    then reach out to the RMA team for assistance.
+  columns:
+    - name: SALES_DOCUMENT_HDR
+      description: Sales document header number
+    - name: SALES_DOCUMENT_LINE
+      description: Sales document line number
+    - name: GOODS_ON_LOAN_QTY
+      description: Using the sales order's material documents, adds up the total quantity of goods.
+    - name: GOODS_CONSUMED_QTY
+      description: Using the sales order's material documents, adds up the total quantity of goods consumed. For consumption to count, 
+        the material document must link to a service order that then links to a ZS12 order with the same NCDR number.
+    - name: GOODS_RETURN_QTY
+      description: Using the sales order's material documents, adds up the total quantity of goods returned.
+    - name: GOODS_REMAINING_QTY
+      description: Subtracts the GOODS_CONSUMED_QTY and GOODS_RETURN_QTY from the GOODS_ON_LOAN_QTY.
+    - name: TOTAL_AMOUNT
+      description: Equates to INTERNAL_SO_PRICE * SAP_ORDER_QTY

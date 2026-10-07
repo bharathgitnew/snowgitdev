@@ -1,0 +1,7 @@
+{
+	"Workday-WorkdayCompanyList": {
+        "SNOWFLAKE_SCHEMA_NAME": "WORKDAY",
+        "SNOWFLAKE_TABLE_NAME": "WORKERCOMPANYLIST",
+        "FILE": "F:Shares\\Files\\Workday\\TEH_CR_Worker_List*.csv"
+    }
+}

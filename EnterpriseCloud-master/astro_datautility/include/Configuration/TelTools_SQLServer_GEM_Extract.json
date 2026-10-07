@@ -1,0 +1,11 @@
+{
+    "GEM": {
+        "DataSet1": {
+            "schema": "dbo",
+            "table": "V_ReferenceStandardUsers",
+            "Incremental": "NULL",
+            "sftablename": "REFERENCE_STANDARD_USERS",
+            "filter": ""
+        }
+    }
+}

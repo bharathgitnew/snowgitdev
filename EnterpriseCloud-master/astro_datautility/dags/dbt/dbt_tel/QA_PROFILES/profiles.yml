@@ -1,0 +1,14 @@
+dbt_tel:
+  target: qa
+  outputs:
+    qa:
+      account: '{{ env_var(''SNOWFLAKE_ACCOUNT'') }}'
+      user: "{{ env_var('SNOWFLAKE_USER') }}"
+      password: "{{ env_var('SNOWFLAKE_SECRET') }}"
+      database: "{{ env_var('SNOWFLAKE_BRONZE') }}"
+      role: "{{ env_var('SNOWFLAKE_PLATFORM_TEAM') }}"
+      schema: DUMMY_SCHEMA
+      threads: 8
+      type: snowflake
+      warehouse: PLATFORM_DEV_WH
+      client_session_keep_alive: False

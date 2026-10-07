@@ -1,0 +1,32 @@
+version: 2
+models:
+- name: ODS__WISDOM__TEA_MAC_LIST
+  description: Model Workday TEA_MAC_LIST file.
+- name: ODS__WISDOM__ES_TPS_SPS_NTS_US
+  description: Model Workday ES_TPS_SPS_NTS_US file.
+- name: ODS__WISDOM__MAC_MAIN
+  description: Model Workday MAC_MAIN file.
+- name: ODS__WISDOM__WISDOM_SURB_PROGRESS
+  description: Model Workday WISDOM_SURB_PROGRESS file.
+- name: ODS__WISDOM__SAP_SURB
+  description: Model Workday SAP_SURB file.
+- name: ODS__WISDOM__WISDOM_SURB_DELAY
+  description: Model Workday WISDOM_SURB_DELAY file.
+- name: ODS__WISDOM__WISDOM_ES_MAC_US
+  description: Landing table for WISDOM_ES_MAC_US file.
+- name: ODS__WISDOM__TCMS_MACHINES
+  description: Landing table for TCMS_MACHINES.
+- name: ODS__WISDOM__TCMS_LIST
+  description: Landing table for TCMS_LIST.
+- name: ODS__WISDOM__WISDOM_ES_CLAIM_US
+  description: Landing table for WISDOM_ES_CLAIM_US file.
+- name: ODS__WISDOM__WISDOM_ES_NTS_US
+  description: Landing table for WISDOM_ES_NTS_US file.
+- name: ODS__WISDOM__WISDOM_UPGRADE_TARGET
+  description: Landing table for WISDOM_UPGRADE_TARGET.
+- name: ODS__WISDOM__NIS_EMP
+  description: Landing table for NIS_EMP.
+- name: ODS__WISDOM__UPGRADE_LIST_FCN_RSN
+  description: Landing table for UPGRADE_LIST_FCN_RSN.
+- name: ODS__WISDOM__WISDOM_UG_UNNEC_CTG
+  description: Landing table for WISDOM_UG_UNNEC_CTG.

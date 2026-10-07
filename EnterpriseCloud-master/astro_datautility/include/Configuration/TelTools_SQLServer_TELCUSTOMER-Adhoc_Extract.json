@@ -1,0 +1,39 @@
+{
+    "TELCUSTOMER-Adhoc": {
+        "DataSet1": {
+            "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+            "table": "CAPITAL_PO_EVENT_TRACKING",
+            "Incremental": "NULL",
+            "sftablename": "CAPITAL_PO_EVENT_TRACKING",
+            "filter": ""
+        },
+        "DataSet2": {
+            "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+            "table": "CAPITAL_PO_HEADER",
+            "Incremental": "NULL",
+            "sftablename": "CAPITAL_PO_HEADER",
+            "filter": ""
+        },
+        "DataSet3": {
+            "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+            "table": "CAPITAL_PO_LINE",
+            "Incremental": "NULL",
+            "sftablename": "CAPITAL_PO_LINE",
+            "filter": ""
+        },
+        "DataSet4": {
+            "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+            "table": "CAPITAL_PO_SHIP_TO_DESCR",
+            "Incremental": "NULL",
+            "sftablename": "CAPITAL_PO_SHIP_TO_DESCR",
+            "filter": ""
+        },
+        "DataSet5": {
+            "schema": "TELAUSB2B2223.TELCUSTOMER_REPORTING.dbo",
+            "table": "CAPITAL_PO_SHIP_TO_LOCATION",
+            "Incremental": "NULL",
+            "sftablename": "CAPITAL_PO_SHIP_TO_LOCATION",
+            "filter": ""
+        }
+    }
+}

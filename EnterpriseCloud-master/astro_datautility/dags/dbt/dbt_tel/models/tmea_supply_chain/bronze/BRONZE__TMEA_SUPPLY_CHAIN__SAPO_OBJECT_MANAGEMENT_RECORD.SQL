@@ -1,0 +1,99 @@
+{{ config(
+    materialized='tel_incremental',
+    incremental_strategy='merge',
+    alias='SAPO_OBJECT_MANAGEMENT_RECORD',
+    unique_key = ['MANDT',
+    'AENNR',
+    'AETYP',
+    'OBJKT']
+) }}
+
+with source_data as (
+	SELECT 
+	_CAPTUREDATETIME,
+	MANDT,
+	AENNR,
+	AETYP,
+	OBJKT,
+	USOBJ,
+	CCVMS,
+	OITXT,
+	LTXSP,
+	AEDAT,
+	AENAM,
+	ANDAT,
+	ANNAM,
+	OBJDT,
+	OBJNM,
+	CCLCK,
+	AEOST,
+	REVLV,
+	AEDTZ,
+	CCSTO,
+	CCOAA,
+	CONT1
+	FROM {{ source("SAP_ORACLE_LIVE", "AEOI") }}
+        
+        )
+,
+    transform_data as 
+(
+    SELECT
+	'{{ invocation_id }}' AS _AUDIT_LOG_ID,
+	SHA2('hash_me') as _ROW_HASH,
+	_CAPTUREDATETIME,
+	MANDT as MANDT,
+	AENNR as AENNR,
+	AETYP as AETYP,
+	OBJKT as OBJKT,
+	USOBJ as USOBJ,
+	CCVMS as CCVMS,
+	OITXT as OITXT,
+	LTXSP as LTXSP,
+	AEDAT as AEDAT,
+	AENAM as AENAM,
+	ANDAT as ANDAT,
+	ANNAM as ANNAM,
+	OBJDT as OBJDT,
+	OBJNM as OBJNM,
+	CCLCK as CCLCK,
+	AEOST as AEOST,
+	REVLV as REVLV,
+	AEDTZ as AEDTZ,
+	CCSTO as CCSTO,
+	CCOAA as CCOAA,
+	CONT1 as CONT1
+	FROM SOURCE_DATA
+    ), 
+
+    type_data as 
+    (
+    SELECT 
+	CAST(_AUDIT_LOG_ID AS VARCHAR(128)) AS _AUDIT_LOG_ID,
+	CAST(_ROW_HASH AS VARCHAR(128)) AS _ROW_HASH,
+	CAST(_CAPTUREDATETIME AS TIMESTAMP_LTZ(9)) AS _CAPTUREDATETIME,
+	MANDT,
+	AENNR,
+	AETYP,
+	OBJKT,
+	USOBJ,
+	CCVMS,
+	OITXT,
+	LTXSP,
+	AEDAT,
+	AENAM,
+	ANDAT,
+	ANNAM,
+	OBJDT,
+	OBJNM,
+	CCLCK,
+	AEOST,
+	REVLV,
+	AEDTZ,
+	CCSTO,
+	CCOAA,
+	CONT1
+FROM TRANSFORM_DATA
+    )
+ 
+    SELECT * FROM TYPE_DATA

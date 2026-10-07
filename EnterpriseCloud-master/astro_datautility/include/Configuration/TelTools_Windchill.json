@@ -1,0 +1,9 @@
+
+{
+    "WINDCHILL":{
+		"CHANGE_MANAGEMENT_DASHBOARD":{
+            "snowflake_schema":"WINDCHILL",
+            "snowflake_table":"CHANGE_MANAGEMENT_DASHBOARD"
+		}
+    }
+}

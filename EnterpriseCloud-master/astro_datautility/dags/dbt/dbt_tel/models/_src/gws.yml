@@ -1,0 +1,445 @@
+version: 2
+sources:
+- name: GWS
+  description: Landing Zone - For GWS Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: GWS
+  tables:
+  - name: CONTROLTABLE
+    identifier: CONTROLTABLE
+    description: Control/audit table tracking each incremental extraction run per
+      source table (watermarks, timing, file date, and row counts) that drives incremental
+      bronze loads
+  - name: BK_GWS_ORDER_LOT_LINE
+    identifier: BK_GWS_ORDER_LOT_LINE
+    description: Landing table for BK_GWS_ORDER_LOT_LINE from SQLServer [TEL_GWS].[dbo].[BK_gws_order_lot_line]
+  - name: GWS_AUDIT_DOCUMENTS
+    identifier: GWS_AUDIT_DOCUMENTS
+    description: Landing table for GWS_AUDIT_DOCUMENTS from SQLServer [TEL_GWS].[dbo].[gws_audit_documents]
+  - name: GWS_AUDIT_ENTITY_DOCUMENTS
+    identifier: GWS_AUDIT_ENTITY_DOCUMENTS
+    description: Landing table for GWS_AUDIT_ENTITY_DOCUMENTS from SQLServer [TEL_GWS].[dbo].[gws_AUDIT_ENTITY_DOCUMENTS]
+  - name: GWS_AUDIT_ENTITY_IMEC
+    identifier: GWS_AUDIT_ENTITY_IMEC
+    description: Landing table for GWS_AUDIT_ENTITY_IMEC from SQLServer [TEL_GWS].[dbo].[gws_AUDIT_ENTITY_IMEC]
+  - name: GWS_AUDIT_ENTITY_ORDERS
+    identifier: GWS_AUDIT_ENTITY_ORDERS
+    description: Landing table for GWS_AUDIT_ENTITY_ORDERS from SQLServer [TEL_GWS].[dbo].[gws_AUDIT_ENTITY_ORDERS]
+  - name: GWS_AUDIT_ENTITY_REFERENCE_DATA
+    identifier: GWS_AUDIT_ENTITY_REFERENCE_DATA
+    description: Landing table for GWS_AUDIT_ENTITY_REFERENCE_DATA from SQLServer
+      [TEL_GWS].[dbo].[gws_AUDIT_ENTITY_REFERENCE_DATA]
+  - name: GWS_AUDIT_ENTITY_REQUESTS
+    identifier: GWS_AUDIT_ENTITY_REQUESTS
+    description: Landing table for GWS_AUDIT_ENTITY_REQUESTS from SQLServer [TEL_GWS].[dbo].[gws_AUDIT_ENTITY_REQUESTS]
+  - name: GWS_AUDIT_IMEC
+    identifier: GWS_AUDIT_IMEC
+    description: Landing table for GWS_AUDIT_IMEC from SQLServer [TEL_GWS].[dbo].[gws_audit_imec]
+  - name: GWS_AUDIT_MESSAGES
+    identifier: GWS_AUDIT_MESSAGES
+    description: Landing table for GWS_AUDIT_MESSAGES from SQLServer [TEL_GWS].[dbo].[gws_audit_messages]
+  - name: GWS_AUDIT_ORDERS
+    identifier: GWS_AUDIT_ORDERS
+    description: Landing table for GWS_AUDIT_ORDERS from SQLServer [TEL_GWS].[dbo].[gws_audit_orders]
+  - name: GWS_AUDIT_REFERENCE_DATA
+    identifier: GWS_AUDIT_REFERENCE_DATA
+    description: Landing table for GWS_AUDIT_REFERENCE_DATA from SQLServer [TEL_GWS].[dbo].[gws_audit_reference_data]
+  - name: GWS_AUDIT_REQUESTS
+    identifier: GWS_AUDIT_REQUESTS
+    description: Landing table for GWS_AUDIT_REQUESTS from SQLServer [TEL_GWS].[dbo].[gws_audit_requests]
+  - name: GWS_BUSINESS_UNIT
+    identifier: GWS_BUSINESS_UNIT
+    description: Landing table for GWS_BUSINESS_UNIT from SQLServer [TEL_GWS].[dbo].[gws_business_unit]
+  - name: GWS_CATEGORY
+    identifier: GWS_CATEGORY
+    description: Landing table for GWS_CATEGORY from SQLServer [TEL_GWS].[dbo].[gws_category]
+  - name: GWS_CATEGORY_SITE
+    identifier: GWS_CATEGORY_SITE
+    description: Landing table for GWS_CATEGORY_SITE from SQLServer [TEL_GWS].[dbo].[gws_category_site]
+  - name: GWS_CONFIDENCIAL_LEVEL
+    identifier: GWS_CONFIDENCIAL_LEVEL
+    description: Landing table for GWS_CONFIDENCIAL_LEVEL from SQLServer [TEL_GWS].[dbo].[gws_CONFIDENCIAL_LEVEL]
+  - name: GWS_COST_FORMULA
+    identifier: GWS_COST_FORMULA
+    description: Landing table for GWS_COST_FORMULA from SQLServer [TEL_GWS].[dbo].[gws_COST_FORMULA]
+  - name: GWS_COUNTRIES
+    identifier: GWS_COUNTRIES
+    description: Landing table for GWS_COUNTRIES from SQLServer [TEL_GWS].[dbo].[gws_COUNTRIES]
+  - name: GWS_CURRENCY
+    identifier: GWS_CURRENCY
+    description: Landing table for GWS_CURRENCY from SQLServer [TEL_GWS].[dbo].[gws_currency]
+  - name: GWS_DEPARTMENT
+    identifier: GWS_DEPARTMENT
+    description: Landing table for GWS_DEPARTMENT from SQLServer [TEL_GWS].[dbo].[gws_department]
+  - name: GWS_DEPARTMENT_GEM_MAPPING
+    identifier: GWS_DEPARTMENT_GEM_MAPPING
+    description: Landing table for GWS_DEPARTMENT_GEM_MAPPING from SQLServer [TEL_GWS].[dbo].[gws_department_gem_mapping]
+  - name: GWS_DOCUMENT
+    identifier: GWS_DOCUMENT
+    description: Landing table for GWS_DOCUMENT from SQLServer [TEL_GWS].[dbo].[gws_document]
+  - name: GWS_DOCUMENT_CATEGORY
+    identifier: GWS_DOCUMENT_CATEGORY
+    description: Landing table for GWS_DOCUMENT_CATEGORY from SQLServer [TEL_GWS].[dbo].[gws_document_category]
+  - name: GWS_DOCUMENT_TYPE
+    identifier: GWS_DOCUMENT_TYPE
+    description: Landing table for GWS_DOCUMENT_TYPE from SQLServer [TEL_GWS].[dbo].[gws_document_type]
+  - name: GWS_DOCUMENT_TYPE_ORDER_STATUS
+    identifier: GWS_DOCUMENT_TYPE_ORDER_STATUS
+    description: Landing table for GWS_DOCUMENT_TYPE_ORDER_STATUS from SQLServer [TEL_GWS].[dbo].[gws_document_type_order_status]
+  - name: GWS_DOCUMENT_TYPE_REQUEST_STATUS
+    identifier: GWS_DOCUMENT_TYPE_REQUEST_STATUS
+    description: Landing table for GWS_DOCUMENT_TYPE_REQUEST_STATUS from SQLServer
+      [TEL_GWS].[dbo].[gws_document_type_request_status]
+  - name: GWS_DOCUMENT_TYPE_ROLE
+    identifier: GWS_DOCUMENT_TYPE_ROLE
+    description: Landing table for GWS_DOCUMENT_TYPE_ROLE from SQLServer [TEL_GWS].[dbo].[gws_document_type_role]
+  - name: GWS_KPI
+    identifier: GWS_KPI
+    description: Landing table for GWS_KPI from SQLServer [TEL_GWS].[dbo].[gws_kpi]
+  - name: GWS_MESSAGE
+    identifier: GWS_MESSAGE
+    description: Landing table for GWS_MESSAGE from SQLServer [TEL_GWS].[dbo].[gws_message]
+  - name: GWS_MESSAGE_CENTER
+    identifier: GWS_MESSAGE_CENTER
+    description: Landing table for GWS_MESSAGE_CENTER from SQLServer [TEL_GWS].[dbo].[gws_message_center]
+  - name: GWS_MESSAGE_FUNCTIONALITY
+    identifier: GWS_MESSAGE_FUNCTIONALITY
+    description: Landing table for GWS_MESSAGE_FUNCTIONALITY from SQLServer [TEL_GWS].[dbo].[gws_MESSAGE_FUNCTIONALITY]
+  - name: GWS_NEWS
+    identifier: GWS_NEWS
+    description: Landing table for GWS_NEWS from SQLServer [TEL_GWS].[dbo].[gws_news]
+  - name: GWS_NEWS_LOG
+    identifier: GWS_NEWS_LOG
+    description: Landing table for GWS_NEWS_LOG from SQLServer [TEL_GWS].[dbo].[gws_news_log]
+  - name: GWS_ORDER
+    identifier: GWS_ORDER
+    description: Landing table for GWS_ORDER from SQLServer [TEL_GWS].[dbo].[gws_order]
+  - name: GWS_ORDER_ASSIGN_LOT
+    identifier: GWS_ORDER_ASSIGN_LOT
+    description: Landing table for GWS_ORDER_ASSIGN_LOT from SQLServer [TEL_GWS].[dbo].[gws_order_assign_lot]
+  - name: GWS_ORDER_ASSIGN_LOT_STATUS
+    identifier: GWS_ORDER_ASSIGN_LOT_STATUS
+    description: Landing table for GWS_ORDER_ASSIGN_LOT_STATUS from SQLServer [TEL_GWS].[dbo].[gws_ORDER_ASSIGN_LOT_STATUS]
+  - name: GWS_ORDER_ASSIGN_LOT_VERSIONS
+    identifier: GWS_ORDER_ASSIGN_LOT_VERSIONS
+    description: Landing table for GWS_ORDER_ASSIGN_LOT_VERSIONS from SQLServer [TEL_GWS].[dbo].[gws_order_assign_lot_versions]
+  - name: GWS_ORDER_DOCUMENT
+    identifier: GWS_ORDER_DOCUMENT
+    description: Landing table for GWS_ORDER_DOCUMENT from SQLServer [TEL_GWS].[dbo].[gws_order_document]
+  - name: GWS_ORDER_DOCUMENT_TYPE
+    identifier: GWS_ORDER_DOCUMENT_TYPE
+    description: Landing table for GWS_ORDER_DOCUMENT_TYPE from SQLServer [TEL_GWS].[dbo].[gws_ORDER_DOCUMENT_TYPE]
+  - name: GWS_ORDER_DOCUMENT_VERSIONS
+    identifier: GWS_ORDER_DOCUMENT_VERSIONS
+    description: Landing table for GWS_ORDER_DOCUMENT_VERSIONS from SQLServer [TEL_GWS].[dbo].[gws_order_document_versions]
+  - name: GWS_ORDER_FORMAT_ID_MANAGEMENT
+    identifier: GWS_ORDER_FORMAT_ID_MANAGEMENT
+    description: Landing table for GWS_ORDER_FORMAT_ID_MANAGEMENT from SQLServer [TEL_GWS].[dbo].[gws_order_format_id_management]
+  - name: GWS_ORDER_LOT
+    identifier: GWS_ORDER_LOT
+    description: Landing table for GWS_ORDER_LOT from SQLServer [TEL_GWS].[dbo].[gws_order_lot]
+  - name: GWS_ORDER_LOT_LINE
+    identifier: GWS_ORDER_LOT_LINE
+    description: Landing table for GWS_ORDER_LOT_LINE from SQLServer [TEL_GWS].[dbo].[gws_order_lot_line]
+  - name: GWS_ORDER_LOT_LINE_CHECKBOX
+    identifier: GWS_ORDER_LOT_LINE_CHECKBOX
+    description: Landing table for GWS_ORDER_LOT_LINE_CHECKBOX from SQLServer [TEL_GWS].[dbo].[gws_order_lot_line_checkbox]
+  - name: GWS_ORDER_LOT_LINE_CHECKBOX_VERSIONS
+    identifier: GWS_ORDER_LOT_LINE_CHECKBOX_VERSIONS
+    description: Landing table for GWS_ORDER_LOT_LINE_CHECKBOX_VERSIONS from SQLServer
+      [TEL_GWS].[dbo].[gws_order_lot_line_checkbox_versions]
+  - name: GWS_ORDER_LOT_LINE_VERSIONS
+    identifier: GWS_ORDER_LOT_LINE_VERSIONS
+    description: Landing table for GWS_ORDER_LOT_LINE_VERSIONS from SQLServer [TEL_GWS].[dbo].[gws_order_lot_line_versions]
+  - name: GWS_ORDER_LOT_LINE_WAFER
+    identifier: GWS_ORDER_LOT_LINE_WAFER
+    description: Landing table for GWS_ORDER_LOT_LINE_WAFER from SQLServer [TEL_GWS].[dbo].[gws_order_lot_line_wafer]
+  - name: GWS_ORDER_LOT_LINE_WAFER_VERSIONS
+    identifier: GWS_ORDER_LOT_LINE_WAFER_VERSIONS
+    description: Landing table for GWS_ORDER_LOT_LINE_WAFER_VERSIONS from SQLServer
+      [TEL_GWS].[dbo].[gws_order_lot_line_wafer_versions]
+  - name: GWS_ORDER_LOT_VERSIONS
+    identifier: GWS_ORDER_LOT_VERSIONS
+    description: Landing table for GWS_ORDER_LOT_VERSIONS from SQLServer [TEL_GWS].[dbo].[gws_order_lot_versions]
+  - name: GWS_ORDER_NOTES
+    identifier: GWS_ORDER_NOTES
+    description: Landing table for GWS_ORDER_NOTES from SQLServer [TEL_GWS].[dbo].[gws_order_notes]
+  - name: GWS_ORDER_SHIPPING_FEEDBACK
+    identifier: GWS_ORDER_SHIPPING_FEEDBACK
+    description: Landing table for GWS_ORDER_SHIPPING_FEEDBACK from SQLServer [TEL_GWS].[dbo].[gws_order_shipping_feedback]
+  - name: GWS_ORDER_STAKEHOLDERS
+    identifier: GWS_ORDER_STAKEHOLDERS
+    description: Landing table for GWS_ORDER_STAKEHOLDERS from SQLServer [TEL_GWS].[dbo].[gws_order_stakeholders]
+  - name: GWS_ORDER_STAKEHOLDERS_VERSIONS
+    identifier: GWS_ORDER_STAKEHOLDERS_VERSIONS
+    description: Landing table for GWS_ORDER_STAKEHOLDERS_VERSIONS from SQLServer
+      [TEL_GWS].[dbo].[gws_order_stakeholders_versions]
+  - name: GWS_ORDER_STATUS
+    identifier: GWS_ORDER_STATUS
+    description: Landing table for GWS_ORDER_STATUS from SQLServer [TEL_GWS].[dbo].[gws_ORDER_STATUS]
+  - name: GWS_ORDER_TAG
+    identifier: GWS_ORDER_TAG
+    description: Landing table for GWS_ORDER_TAG from SQLServer [TEL_GWS].[dbo].[gws_order_tag]
+  - name: GWS_ORDER_TAG_VERSIONS
+    identifier: GWS_ORDER_TAG_VERSIONS
+    description: Landing table for GWS_ORDER_TAG_VERSIONS from SQLServer [TEL_GWS].[dbo].[gws_order_tag_versions]
+  - name: GWS_ORDER_USING_BONDED_WAFER_TYPE
+    identifier: GWS_ORDER_USING_BONDED_WAFER_TYPE
+    description: Landing table for GWS_ORDER_USING_BONDED_WAFER_TYPE from SQLServer
+      [TEL_GWS].[dbo].[gws_ORDER_USING_BONDED_WAFER_TYPE]
+  - name: GWS_ORDER_VERSIONS
+    identifier: GWS_ORDER_VERSIONS
+    description: Landing table for GWS_ORDER_VERSIONS from SQLServer [TEL_GWS].[dbo].[gws_order_versions]
+  - name: GWS_ORGANIZATION
+    identifier: GWS_ORGANIZATION
+    description: Landing table for GWS_ORGANIZATION from SQLServer [TEL_GWS].[dbo].[gws_organization]
+  - name: GWS_ORGANIZATION_GEM_MAPPING
+    identifier: GWS_ORGANIZATION_GEM_MAPPING
+    description: Landing table for GWS_ORGANIZATION_GEM_MAPPING from SQLServer [TEL_GWS].[dbo].[gws_organization_gem_mapping]
+  - name: GWS_PROCESS_AREAS
+    identifier: GWS_PROCESS_AREAS
+    description: Landing table for GWS_PROCESS_AREAS from SQLServer [TEL_GWS].[dbo].[gws_process_areas]
+  - name: GWS_PROCESS_PARAMETER
+    identifier: GWS_PROCESS_PARAMETER
+    description: Landing table for GWS_PROCESS_PARAMETER from SQLServer [TEL_GWS].[dbo].[gws_process_parameter]
+  - name: GWS_PROCESS_PARAMETER_VALUE
+    identifier: GWS_PROCESS_PARAMETER_VALUE
+    description: Landing table for GWS_PROCESS_PARAMETER_VALUE from SQLServer [TEL_GWS].[dbo].[gws_process_parameter_value]
+  - name: GWS_PROJECT
+    identifier: GWS_PROJECT
+    description: Landing table for GWS_PROJECT from SQLServer [TEL_GWS].[dbo].[gws_project]
+  - name: GWS_QUESTINIOR
+    identifier: GWS_QUESTINIOR
+    description: Landing table for GWS_QUESTINIOR from SQLServer [TEL_GWS].[dbo].[gws_questinior]
+  - name: GWS_RECIPE
+    identifier: GWS_RECIPE
+    description: Landing table for GWS_RECIPE from SQLServer [TEL_GWS].[dbo].[gws_recipe]
+  - name: GWS_RECIPE_NEEDED
+    identifier: GWS_RECIPE_NEEDED
+    description: Landing table for GWS_RECIPE_NEEDED from SQLServer [TEL_GWS].[dbo].[gws_recipe_needed]
+  - name: GWS_RECIPE_PARAMETER_VALUE
+    identifier: GWS_RECIPE_PARAMETER_VALUE
+    description: Landing table for GWS_RECIPE_PARAMETER_VALUE from SQLServer [TEL_GWS].[dbo].[gws_recipe_parameter_value]
+  - name: GWS_RECIPE_TYPE
+    identifier: GWS_RECIPE_TYPE
+    description: Landing table for GWS_RECIPE_TYPE from SQLServer [TEL_GWS].[dbo].[gws_RECIPE_TYPE]
+  - name: GWS_REQUEST
+    identifier: GWS_REQUEST
+    description: Landing table for GWS_REQUEST from SQLServer [TEL_GWS].[dbo].[gws_request]
+  - name: GWS_REQUEST_DOCUMENT
+    identifier: GWS_REQUEST_DOCUMENT
+    description: Landing table for GWS_REQUEST_DOCUMENT from SQLServer [TEL_GWS].[dbo].[gws_request_document]
+  - name: GWS_REQUEST_DOCUMENT_TYPE
+    identifier: GWS_REQUEST_DOCUMENT_TYPE
+    description: Landing table for GWS_REQUEST_DOCUMENT_TYPE from SQLServer [TEL_GWS].[dbo].[gws_REQUEST_DOCUMENT_TYPE]
+  - name: GWS_REQUEST_FORMAT_ID_MANAGEMENT
+    identifier: GWS_REQUEST_FORMAT_ID_MANAGEMENT
+    description: Landing table for GWS_REQUEST_FORMAT_ID_MANAGEMENT from SQLServer
+      [TEL_GWS].[dbo].[gws_request_format_id_management]
+  - name: GWS_REQUEST_PRIORITY
+    identifier: GWS_REQUEST_PRIORITY
+    description: Landing table for GWS_REQUEST_PRIORITY from SQLServer [TEL_GWS].[dbo].[gws_REQUEST_PRIORITY]
+  - name: GWS_REQUEST_SHIPPING_WAFER_FEEDBACK
+    identifier: GWS_REQUEST_SHIPPING_WAFER_FEEDBACK
+    description: Landing table for GWS_REQUEST_SHIPPING_WAFER_FEEDBACK from SQLServer
+      [TEL_GWS].[dbo].[gws_request_shipping_wafer_feedback]
+  - name: GWS_REQUEST_SHIPPING_WAFERS
+    identifier: GWS_REQUEST_SHIPPING_WAFERS
+    description: Landing table for GWS_REQUEST_SHIPPING_WAFERS from SQLServer [TEL_GWS].[dbo].[gws_request_shipping_wafers]
+  - name: GWS_REQUEST_STAKEHOLDERS
+    identifier: GWS_REQUEST_STAKEHOLDERS
+    description: Landing table for GWS_REQUEST_STAKEHOLDERS from SQLServer [TEL_GWS].[dbo].[gws_request_stakeholders]
+  - name: GWS_REQUEST_UPDATE_LOG
+    identifier: GWS_REQUEST_UPDATE_LOG
+    description: Landing table for GWS_REQUEST_UPDATE_LOG from SQLServer [TEL_GWS].[dbo].[gws_request_update_log]
+  - name: GWS_REQUEST_UPDATE_LOG_USER
+    identifier: GWS_REQUEST_UPDATE_LOG_USER
+    description: Landing table for GWS_REQUEST_UPDATE_LOG_USER from SQLServer [TEL_GWS].[dbo].[gws_request_update_log_user]
+  - name: GWS_REQUESTSTATUS
+    identifier: GWS_REQUESTSTATUS
+    description: Landing table for GWS_REQUESTSTATUS from SQLServer [TEL_GWS].[dbo].[gws_REQUESTSTATUS]
+  - name: GWS_ROLE
+    identifier: GWS_ROLE
+    description: Landing table for GWS_ROLE from SQLServer [TEL_GWS].[dbo].[gws_role]
+  - name: GWS_ROUTE
+    identifier: GWS_ROUTE
+    description: Landing table for GWS_ROUTE from SQLServer [TEL_GWS].[dbo].[gws_route]
+  - name: GWS_ROUTE_DOCUMENT
+    identifier: GWS_ROUTE_DOCUMENT
+    description: Landing table for GWS_ROUTE_DOCUMENT from SQLServer [TEL_GWS].[dbo].[gws_route_document]
+  - name: GWS_SHIPPING_ADDRESS
+    identifier: GWS_SHIPPING_ADDRESS
+    description: Landing table for GWS_SHIPPING_ADDRESS from SQLServer [TEL_GWS].[dbo].[gws_shipping_address]
+  - name: GWS_SITE
+    identifier: GWS_SITE
+    description: Landing table for GWS_SITE from SQLServer [TEL_GWS].[dbo].[gws_site]
+  - name: GWS_SITE_COST
+    identifier: GWS_SITE_COST
+    description: Landing table for GWS_SITE_COST from SQLServer [TEL_GWS].[dbo].[gws_site_cost]
+  - name: GWS_TAG
+    identifier: GWS_TAG
+    description: Landing table for GWS_TAG from SQLServer [TEL_GWS].[dbo].[gws_tag]
+  - name: GWS_TOOL
+    identifier: GWS_TOOL
+    description: Landing table for GWS_TOOL from SQLServer [TEL_GWS].[dbo].[gws_tool]
+  - name: GWS_TOOL_AREA
+    identifier: GWS_TOOL_AREA
+    description: Landing table for GWS_TOOL_AREA from SQLServer [TEL_GWS].[dbo].[gws_tool_area]
+  - name: GWS_TOOL_COST
+    identifier: GWS_TOOL_COST
+    description: Landing table for GWS_TOOL_COST from SQLServer [TEL_GWS].[dbo].[gws_tool_cost]
+  - name: GWS_TOOL_PROCESS_AREAS
+    identifier: GWS_TOOL_PROCESS_AREAS
+    description: Landing table for GWS_TOOL_PROCESS_AREAS from SQLServer [TEL_GWS].[dbo].[gws_tool_process_areas]
+  - name: GWS_TOOL_TAGS
+    identifier: GWS_TOOL_TAGS
+    description: Landing table for GWS_TOOL_TAGS from SQLServer [TEL_GWS].[dbo].[gws_tool_tags]
+  - name: GWS_TOOL_TYPE
+    identifier: GWS_TOOL_TYPE
+    description: Landing table for GWS_TOOL_TYPE from SQLServer [TEL_GWS].[dbo].[gws_TOOL_TYPE]
+  - name: GWS_USER
+    identifier: GWS_USER
+    description: Landing table for GWS_USER from SQLServer [TEL_GWS].[dbo].[gws_user]
+  - name: GWS_USER_CONFIGURATION
+    identifier: GWS_USER_CONFIGURATION
+    description: Landing table for GWS_USER_CONFIGURATION from SQLServer [TEL_GWS].[dbo].[gws_user_configuration]
+  - name: GWS_USER_EMAIL
+    identifier: GWS_USER_EMAIL
+    description: Landing table for GWS_USER_EMAIL from SQLServer [TEL_GWS].[dbo].[gws_user_email]
+  - name: GWS_USER_EMAIL_NOTIFICATIONS
+    identifier: GWS_USER_EMAIL_NOTIFICATIONS
+    description: Landing table for GWS_USER_EMAIL_NOTIFICATIONS from SQLServer [TEL_GWS].[dbo].[gws_USER_EMAIL_NOTIFICATIONS]
+  - name: GWS_USER_EMAIL_SITE
+    identifier: GWS_USER_EMAIL_SITE
+    description: Landing table for GWS_USER_EMAIL_SITE from SQLServer [TEL_GWS].[dbo].[gws_user_email_site]
+  - name: GWS_USER_ROLE
+    identifier: GWS_USER_ROLE
+    description: Landing table for GWS_USER_ROLE from SQLServer [TEL_GWS].[dbo].[gws_user_role]
+  - name: GWS_USER_V3
+    identifier: GWS_USER_V3
+    description: Landing table for GWS_USER_V3 from SQLServer [TEL_GWS].[dbo].[gws_user_V3]
+  - name: GWS_WAFER_TYPE
+    identifier: GWS_WAFER_TYPE
+    description: Landing table for GWS_WAFER_TYPE from SQLServer [TEL_GWS].[dbo].[gws_wafer_type]
+  - name: GWS_WAFER_TYPE_COST
+    identifier: GWS_WAFER_TYPE_COST
+    description: Landing table for GWS_WAFER_TYPE_COST from SQLServer [TEL_GWS].[dbo].[gws_wafer_type_cost]
+  - name: BK_GWS_COST_FORMULA
+    identifier: BK_GWS_COST_FORMULA
+    description: Landing table for BK_GWS_COST_FORMULA from SQLServer [TEL_GWS].[dbo].[BK_gws_COST_FORMULA]
+  - name: BK_GWS_SITE
+    identifier: BK_GWS_SITE
+    description: Landing table for BK_GWS_SITE from SQLServer [TEL_GWS].[dbo].[BK_gws_site]
+  - name: BK_GWS_USER_UV
+    identifier: BK_GWS_USER_UV
+    description: Landing table for BK_GWS_USER_UV from SQLServer [TEL_GWS].[dbo].[BK_gws_user_UV]
+  - name: BKR_GWS_ORDER_LOT_LINE
+    identifier: BKR_GWS_ORDER_LOT_LINE
+    description: Landing table for BKR_GWS_ORDER_LOT_LINE from SQLServer [TEL_GWS].[dbo].[BKR_gws_order_lot_line]
+  - name: GEM_EMPLOYEE_GWS
+    identifier: GEM_EMPLOYEE_GWS
+    description: Landing table for GEM_EMPLOYEE_GWS from SQLServer [TEL_GWS].[dbo].[gem_employee_gws]
+  - name: IMEC_BUDGET
+    identifier: IMEC_BUDGET
+    description: Landing table for IMEC_BUDGET from SQLServer [TEL_GWS].[dbo].[imec_budget]
+  - name: IMEC_COMPANY_ADDRESS
+    identifier: IMEC_COMPANY_ADDRESS
+    description: Landing table for IMEC_COMPANY_ADDRESS from SQLServer [TEL_GWS].[dbo].[imec_company_address]
+  - name: IMEC_CONFIDENCIAL_LEVEL
+    identifier: IMEC_CONFIDENCIAL_LEVEL
+    description: Landing table for IMEC_CONFIDENCIAL_LEVEL from SQLServer [TEL_GWS].[dbo].[imec_CONFIDENCIAL_LEVEL]
+  - name: IMEC_FACTORY_BU_DEPARTMENT
+    identifier: IMEC_FACTORY_BU_DEPARTMENT
+    description: Landing table for IMEC_FACTORY_BU_DEPARTMENT from SQLServer [TEL_GWS].[dbo].[imec_factory_bu_department]
+  - name: IMEC_IMEC_DOCUMENT_TYPE
+    identifier: IMEC_IMEC_DOCUMENT_TYPE
+    description: Landing table for IMEC_IMEC_DOCUMENT_TYPE from SQLServer [TEL_GWS].[dbo].[imec_IMEC_DOCUMENT_TYPE]
+  - name: IMEC_IMEC_STATUS
+    identifier: IMEC_IMEC_STATUS
+    description: Landing table for IMEC_IMEC_STATUS from SQLServer [TEL_GWS].[dbo].[imec_IMEC_STATUS]
+  - name: IMEC_INTEGRATOR
+    identifier: IMEC_INTEGRATOR
+    description: Landing table for IMEC_INTEGRATOR from SQLServer [TEL_GWS].[dbo].[imec_integrator]
+  - name: IMEC_LITHO_MASKSET
+    identifier: IMEC_LITHO_MASKSET
+    description: Landing table for IMEC_LITHO_MASKSET from SQLServer [TEL_GWS].[dbo].[imec_litho_maskset]
+  - name: IMEC_NO_OF_WAFER
+    identifier: IMEC_NO_OF_WAFER
+    description: Landing table for IMEC_NO_OF_WAFER from SQLServer [TEL_GWS].[dbo].[imec_no_of_wafer]
+  - name: IMEC_ORDER
+    identifier: IMEC_ORDER
+    description: Landing table for IMEC_ORDER from SQLServer [TEL_GWS].[dbo].[imec_order]
+  - name: IMEC_ORDER_ASSIGN_LOT
+    identifier: IMEC_ORDER_ASSIGN_LOT
+    description: Landing table for IMEC_ORDER_ASSIGN_LOT from SQLServer [TEL_GWS].[dbo].[imec_order_assign_lot]
+  - name: IMEC_ORDER_ASSIGN_LOT_VERSIONS
+    identifier: IMEC_ORDER_ASSIGN_LOT_VERSIONS
+    description: Landing table for IMEC_ORDER_ASSIGN_LOT_VERSIONS from SQLServer [TEL_GWS].[dbo].[imec_order_assign_lot_versions]
+  - name: IMEC_ORDER_DOCUMENT
+    identifier: IMEC_ORDER_DOCUMENT
+    description: Landing table for IMEC_ORDER_DOCUMENT from SQLServer [TEL_GWS].[dbo].[imec_order_document]
+  - name: IMEC_ORDER_DOCUMENT_VERSIONS
+    identifier: IMEC_ORDER_DOCUMENT_VERSIONS
+    description: Landing table for IMEC_ORDER_DOCUMENT_VERSIONS from SQLServer [TEL_GWS].[dbo].[imec_order_document_versions]
+  - name: IMEC_ORDER_FORMAT_ID_MANAGEMENT
+    identifier: IMEC_ORDER_FORMAT_ID_MANAGEMENT
+    description: Landing table for IMEC_ORDER_FORMAT_ID_MANAGEMENT from SQLServer
+      [TEL_GWS].[dbo].[imec_order_format_id_management]
+  - name: IMEC_ORDER_LOT
+    identifier: IMEC_ORDER_LOT
+    description: Landing table for IMEC_ORDER_LOT from SQLServer [TEL_GWS].[dbo].[imec_order_lot]
+  - name: IMEC_ORDER_LOT_LINE
+    identifier: IMEC_ORDER_LOT_LINE
+    description: Landing table for IMEC_ORDER_LOT_LINE from SQLServer [TEL_GWS].[dbo].[imec_order_lot_line]
+  - name: IMEC_ORDER_LOT_LINE_VERSIONS
+    identifier: IMEC_ORDER_LOT_LINE_VERSIONS
+    description: Landing table for IMEC_ORDER_LOT_LINE_VERSIONS from SQLServer [TEL_GWS].[dbo].[imec_order_lot_line_versions]
+  - name: IMEC_ORDER_LOT_VERSIONS
+    identifier: IMEC_ORDER_LOT_VERSIONS
+    description: Landing table for IMEC_ORDER_LOT_VERSIONS from SQLServer [TEL_GWS].[dbo].[imec_order_lot_versions]
+  - name: IMEC_ORDER_NOTES
+    identifier: IMEC_ORDER_NOTES
+    description: Landing table for IMEC_ORDER_NOTES from SQLServer [TEL_GWS].[dbo].[imec_order_notes]
+  - name: IMEC_ORDER_NOTES_VERSIONS
+    identifier: IMEC_ORDER_NOTES_VERSIONS
+    description: Landing table for IMEC_ORDER_NOTES_VERSIONS from SQLServer [TEL_GWS].[dbo].[imec_order_notes_versions]
+  - name: IMEC_ORDER_SHIPPING_FEEDBACK
+    identifier: IMEC_ORDER_SHIPPING_FEEDBACK
+    description: Landing table for IMEC_ORDER_SHIPPING_FEEDBACK from SQLServer [TEL_GWS].[dbo].[imec_order_shipping_feedback]
+  - name: IMEC_ORDER_STAKEHOLDERS
+    identifier: IMEC_ORDER_STAKEHOLDERS
+    description: Landing table for IMEC_ORDER_STAKEHOLDERS from SQLServer [TEL_GWS].[dbo].[imec_order_stakeholders]
+  - name: IMEC_ORDER_STAKEHOLDERS_VERSIONS
+    identifier: IMEC_ORDER_STAKEHOLDERS_VERSIONS
+    description: Landing table for IMEC_ORDER_STAKEHOLDERS_VERSIONS from SQLServer
+      [TEL_GWS].[dbo].[imec_order_stakeholders_versions]
+  - name: IMEC_ORDER_TAG
+    identifier: IMEC_ORDER_TAG
+    description: Landing table for IMEC_ORDER_TAG from SQLServer [TEL_GWS].[dbo].[imec_order_tag]
+  - name: IMEC_ORDER_TAG_VERSIONS
+    identifier: IMEC_ORDER_TAG_VERSIONS
+    description: Landing table for IMEC_ORDER_TAG_VERSIONS from SQLServer [TEL_GWS].[dbo].[imec_order_tag_versions]
+  - name: IMEC_ORDER_VERSIONS
+    identifier: IMEC_ORDER_VERSIONS
+    description: Landing table for IMEC_ORDER_VERSIONS from SQLServer [TEL_GWS].[dbo].[imec_order_versions]
+  - name: IMEC_PROJECT
+    identifier: IMEC_PROJECT
+    description: Landing table for IMEC_PROJECT from SQLServer [TEL_GWS].[dbo].[imec_project]
+  - name: IMEC_REPORT_DATA
+    identifier: IMEC_REPORT_DATA
+    description: Landing table for IMEC_REPORT_DATA from SQLServer [TEL_GWS].[dbo].[imec_report_data]
+  - name: IMEC_REQUEST_TYPE
+    identifier: IMEC_REQUEST_TYPE
+    description: Landing table for IMEC_REQUEST_TYPE from SQLServer [TEL_GWS].[dbo].[imec_request_type]
+  - name: IMEC_SHIPPER
+    identifier: IMEC_SHIPPER
+    description: Landing table for IMEC_SHIPPER from SQLServer [TEL_GWS].[dbo].[imec_shipper]
+  - name: IMEC_WAFER_TYPE
+    identifier: IMEC_WAFER_TYPE
+    description: Landing table for IMEC_WAFER_TYPE from SQLServer [TEL_GWS].[dbo].[imec_wafer_type]
+  - name: OLD_USERS
+    identifier: OLD_USERS
+    description: Landing table for OLD_USERS from SQLServer [TEL_GWS].[dbo].[OLD_Users]
+  - name: V_GEM_EMPLOYEE_GWS
+    identifier: V_GEM_EMPLOYEE_GWS
+    description: Landing table for V_GEM_EMPLOYEE_GWS from SQLServer [TEL_GWS].[dbo].[v_gem_employee_gws]

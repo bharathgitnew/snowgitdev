@@ -1,0 +1,48 @@
+{{ config(
+        materialized='incremental',
+        incremental_strategy='merge',
+        alias='USER_MASTER_TEXTS_FOR_PROFILES_USR10',
+        unique_key = ['CLIENT',
+    'LANGUAGE_KEY',
+    'AUTH_PROFILE_IN_USER_MASTER_MAINTENANCE',
+    'ACTIVE_OR_MAINTENANCE_VERSION'],
+        transient=false
+) }}
+
+with source_data as (
+    select
+        MANDT as CLIENT,
+		LANGU as LANGUAGE_KEY,
+		PROFN as AUTH_PROFILE_IN_USER_MASTER_MAINTENANCE,
+		AKTPS as ACTIVE_OR_MAINTENANCE_VERSION,
+		PTEXT as TEXTS_IN_USER_MASTERAUTHORIZATIONS,
+		_CAPTUREDATETIME
+    from {{ ref('ODS__SAPO__USER_MASTER_TEXTS_FOR_PROFILES_USR10') }}
+),
+
+transform_data as (
+    select
+        CLIENT,
+		LANGUAGE_KEY,
+		AUTH_PROFILE_IN_USER_MASTER_MAINTENANCE,
+		ACTIVE_OR_MAINTENANCE_VERSION,
+		TEXTS_IN_USER_MASTERAUTHORIZATIONS,
+		_CAPTUREDATETIME,
+		'{{ invocation_id }}' AS AUDIT_LOG_ID,
+		SHA2('hash_me') as _ROW_HASH
+    from source_data
+),
+
+type_data as (
+    select
+        cast(CLIENT as VARCHAR) as CLIENT,
+		cast(LANGUAGE_KEY as VARCHAR) as LANGUAGE_KEY,
+		cast(AUTH_PROFILE_IN_USER_MASTER_MAINTENANCE as VARCHAR) as AUTH_PROFILE_IN_USER_MASTER_MAINTENANCE,
+		cast(ACTIVE_OR_MAINTENANCE_VERSION as VARCHAR) as ACTIVE_OR_MAINTENANCE_VERSION,
+		cast(TEXTS_IN_USER_MASTERAUTHORIZATIONS as VARCHAR) as TEXTS_IN_USER_MASTERAUTHORIZATIONS,
+		cast(_CAPTUREDATETIME as TIMESTAMP_LTZ(9)) as _CAPTUREDATETIME,
+		cast(AUDIT_LOG_ID as varchar(128)) as AUDIT_LOG_ID,
+		cast(_ROW_HASH as varchar(128)) as _ROW_HASH
+    from transform_data
+)
+select * from type_data

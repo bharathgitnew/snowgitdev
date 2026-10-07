@@ -1,0 +1,77 @@
+{{ config(
+        materialized='incremental',
+        incremental_strategy='merge',
+        alias='TOTAL_SPECIAL_STOCKS_WITH_VENDOR',
+        unique_key = ['MANDT',
+    'MATNR',
+    'WERKS',
+    'SOBKZ',
+    'LIFNR'],
+        transient=false
+) }}
+
+with source_data as (
+	SELECT 
+	_CAPTUREDATETIME,
+	MANDT,
+	MATNR,
+	WERKS,
+	SOBKZ,
+	LIFNR,
+	LFGJA,
+	LFMON,
+	SLLAB,
+	SLINS,
+	SLEIN,
+	ERSDA,
+	XOBEW,
+	SLUML
+	FROM {{source('SAP_ORACLE_LIVE', 'MSSL')}}
+),
+
+
+transform_data as 
+(
+SELECT
+    _CAPTUREDATETIME,
+    '{{ invocation_id }}' AS _AUDIT_LOG_ID,
+    SHA2('hash_me') as _ROW_HASH,
+	MANDT as MANDT,
+	MATNR as MATNR,
+	WERKS as WERKS,
+	SOBKZ as SOBKZ,
+	LIFNR as LIFNR,
+	LFGJA as LFGJA,
+	LFMON as LFMON,
+	SLLAB as SLLAB,
+	SLINS as SLINS,
+	SLEIN as SLEIN,
+	ERSDA as ERSDA,
+	XOBEW as XOBEW,
+	SLUML as SLUML
+	FROM SOURCE_DATA
+), 
+
+type_data as 
+(
+SELECT 
+	CAST(_CAPTUREDATETIME AS TIMESTAMP_LTZ(9)) AS _CAPTUREDATETIME,
+	CAST(_AUDIT_LOG_ID AS VARCHAR(128)) AS _AUDIT_LOG_ID,
+	CAST(_ROW_HASH AS VARCHAR(128)) AS _ROW_HASH,
+	MANDT,
+	MATNR,
+	WERKS,
+	SOBKZ,
+	LIFNR,
+	LFGJA,
+	LFMON,
+	CAST(SLLAB AS NUMBER(38,10)) AS SLLAB,
+	CAST(SLINS AS NUMBER(38,10)) AS SLINS,
+	CAST(SLEIN AS NUMBER(38,10)) AS SLEIN,
+	ERSDA,
+	XOBEW,
+	CAST(SLUML AS NUMBER(38,10)) AS SLUML
+FROM TRANSFORM_DATA
+)
+ 
+SELECT * FROM TYPE_DATA

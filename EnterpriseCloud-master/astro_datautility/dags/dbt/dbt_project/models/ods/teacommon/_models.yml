@@ -1,0 +1,10 @@
+version: 2
+models:
+- name: ODS__TEACOMMON__EMPLOYEE
+  description: Model TEACOMMON EMPLOYEE file.
+- name: ODS__TEACOMMON__LOCATIONS
+  description: Landing table for LOCATIONS file.
+- name: ODS__TEACOMMON__PRODUCTLINES
+  description: Landing table for PRODUCTLINES file.
+- name: ODS__TEACOMMON__DEPARTMENTS
+  description: Landing table for DEPARTMENTS file.

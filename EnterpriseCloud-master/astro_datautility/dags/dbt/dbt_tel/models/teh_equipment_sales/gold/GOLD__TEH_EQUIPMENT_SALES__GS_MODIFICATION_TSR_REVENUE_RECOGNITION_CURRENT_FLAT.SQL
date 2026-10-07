@@ -1,0 +1,328 @@
+{{ config(
+      materialized='tel_incremental',
+      incremental_strategy='insert_overwrite',
+      alias='GS_MODIFICATION_TSR_REVENUE_RECOGNITION_CURRENT_FLAT',
+      transient=false
+) }}
+
+WITH ref_gs_us_revenue_budget as
+(
+  SELECT *
+  FROM {{ ref('GOLD__TEH_EQUIPMENT_SALES__GS_US_REVENUE_BUDGET') }}
+)
+
+,ref_gs_us_revenue_forecast as
+(
+  SELECT *
+  FROM {{ ref('GOLD__TEH_EQUIPMENT_SALES__GS_US_REVENUE_FORECAST') }}
+)
+
+,GSData AS 
+(
+--Forecast--
+SELECT
+    Sales_Account,
+    Sales_Region,
+    BU,
+    Sub_BU,
+    BU_Group,
+    Sold_to_Party,
+    End_User,
+    FAB,
+    Sales_Order_No,
+    Sales_Category_Group,
+    Sales_Category,
+    Is_Placeholder,
+    Product_Name,
+    Serial_No,
+    Sales_Month,
+    Sales_Amount,
+    QUANTITY,
+    Customs_Clearance_Date,
+    On_Dock_Date,
+    Sales_Date,
+    Is_Loaner,
+    -- Revenue_Recognition_Criteria,
+    Revenue_Recognition_Criteria_Short,
+    Data_Snapshot,
+    Data_Type,
+    ''                              AS Budget_Type,
+    BU_Code,
+    Sub_BU_Code,
+    Order_Type_Code,
+    Sold_to_Party_Code,
+    End_User_Code_Mixed,
+    _5_DIGIT_END_USER_CODE,
+    End_User_Code,
+    GS_Forecast_FK_Date             AS GS_FK_Date,
+    GS_Forecast_FY                  AS GS_FY,
+    GS_Forecast_FY_Half             AS GS_FY_Half,
+    GS_Forecast_FY_Q                AS GS_FY_Q,
+    Beginning_of_GS_Forecast_FY_Q   AS Beginning_of_GS_FY_Q,
+    End_of_GS_Forecast_FY_Q         AS End_of_GS_FY_Q,
+	Beginning_of_Current_FY,
+	End_of_Current_FY,
+	Beginning_of_Current_FY_Half,
+	End_of_Current_FY_Half,
+	Beginning_of_Current_FY_Q,
+	End_of_Current_FY_Q,
+    Beginning_of_Next_FY,
+	End_of_Next_FY,
+	Beginning_of_Next_FY_Half,
+	End_of_Next_FY_Half,
+	Beginning_of_Next_FY_Q,
+	End_of_Next_FY_Q,
+	Beginning_of_2_FY_Ago,
+	End_of_2_FY_Ahead
+FROM ref_gs_us_revenue_forecast gs
+WHERE DATA_SNAPSHOT = (SELECT MAX(DATA_SNAPSHOT) FROM ref_gs_us_revenue_forecast)
+    AND SALES_MONTH >= Beginning_of_Current_FY_Half AND SALES_MONTH <= End_of_Current_FY_Half
+    AND REVENUE_RECOGNITION_CRITERIA_SHORT = 'TSR'
+    
+UNION ALL
+--Budget--
+SELECT
+    Sales_Account,
+    Sales_Region,
+    BU,
+    Sub_BU,
+    BU_Group,
+    Sold_to_Party,
+    End_User,
+    FAB,
+    Sales_Order_No,
+    Sales_Category_Group,
+    Sales_Category,
+    Is_Placeholder,
+    Product_Name,
+    Serial_No,
+    Sales_Month,
+    Sales_Amount,
+    QUANTITY,
+    Customs_Clearance_Date,
+    On_Dock_Date,
+    Sales_Date,
+    Is_Loaner,
+    -- Revenue_Recognition_Criteria,
+    Revenue_Recognition_Criteria_Short,
+    Data_Snapshot,
+    Data_Type,
+    Budget_Type,
+    BU_Code,
+    Sub_BU_Code,
+    Order_Type_Code,
+    Sold_to_Party_Code,
+    End_User_Code_Mixed,
+    _5_DIGIT_END_USER_CODE,
+    End_User_Code,
+    GS_Budget_FK_Date               AS GS_FK_Date,
+    GS_Budget_FY                    AS GS_FY,
+    GS_Budget_FY_Half               AS GS_FY_Half,
+    GS_Budget_FY_Q                  AS GS_FY_Q,
+    Beginning_of_GS_Budget_FY_Q     AS Beginning_of_GS_FY_Q,
+    End_of_GS_Budget_FY_Q           AS End_of_GS_FY_Q,
+	Beginning_of_Current_FY,
+	End_of_Current_FY,
+	Beginning_of_Current_FY_Half,
+	End_of_Current_FY_Half,
+	Beginning_of_Current_FY_Q,
+	End_of_Current_FY_Q,
+    Beginning_of_Next_FY,
+	End_of_Next_FY,
+	Beginning_of_Next_FY_Half,
+	End_of_Next_FY_Half,
+	Beginning_of_Next_FY_Q,
+	End_of_Next_FY_Q,
+	Beginning_of_2_FY_Ago,
+	End_of_2_FY_Ahead
+FROM ref_gs_us_revenue_budget gs
+WHERE CASE WHEN MONTH(CURRENT_DATE()) IN (4, 5, 6, 7, 8, 9) THEN Budget_Type = 'Original' 
+        WHEN MONTH(CURRENT_DATE()) IN (10, 11, 12, 1, 2, 3) THEN Budget_Type = 'Revised' END
+    AND DATA_SNAPSHOT = (SELECT MAX(DATA_SNAPSHOT) FROM ref_gs_us_revenue_budget)
+    AND SALES_MONTH >= Beginning_of_Current_FY_Half AND SALES_MONTH <= End_of_Current_FY_Half
+    AND REVENUE_RECOGNITION_CRITERIA_SHORT = 'TSR'
+)
+
+,data_snapshot_cte AS 
+(
+    SELECT *
+FROM GSData
+WHERE Data_Snapshot = (SELECT MAX(DATA_SNAPSHOT) FROM GSData)
+)
+
+,source_data AS (
+    SELECT
+    SALES_ACCOUNT,
+	SALES_REGION,
+	BU,
+	SUB_BU,
+	BU_GROUP,
+	SOLD_TO_PARTY,
+	END_USER,
+	FAB,
+	SALES_ORDER_NO,
+	SALES_CATEGORY_GROUP,
+	SALES_CATEGORY,
+	IS_PLACEHOLDER,
+	PRODUCT_NAME,
+	SERIAL_NO,
+	SALES_MONTH,
+	SALES_AMOUNT,
+	QUANTITY,
+	CUSTOMS_CLEARANCE_DATE,
+	ON_DOCK_DATE,
+	SALES_DATE,
+	IS_LOANER,
+	REVENUE_RECOGNITION_CRITERIA_SHORT,
+	DATA_SNAPSHOT,
+	DATA_TYPE,
+	BUDGET_TYPE,
+	BU_CODE,
+	SUB_BU_CODE,
+	ORDER_TYPE_CODE,
+	SOLD_TO_PARTY_CODE,
+	END_USER_CODE_MIXED,
+	_5_DIGIT_END_USER_CODE,
+	END_USER_CODE,
+	GS_FK_DATE,
+	GS_FY,
+	GS_FY_HALF,
+	GS_FY_Q,
+	BEGINNING_OF_GS_FY_Q,
+	END_OF_GS_FY_Q,
+	BEGINNING_OF_CURRENT_FY,
+	END_OF_CURRENT_FY,
+	BEGINNING_OF_CURRENT_FY_HALF,
+	END_OF_CURRENT_FY_HALF,
+	BEGINNING_OF_CURRENT_FY_Q,
+	END_OF_CURRENT_FY_Q,
+	BEGINNING_OF_NEXT_FY,
+	END_OF_NEXT_FY,
+	BEGINNING_OF_NEXT_FY_HALF,
+	END_OF_NEXT_FY_HALF,
+	BEGINNING_OF_NEXT_FY_Q,
+	END_OF_NEXT_FY_Q,
+	BEGINNING_OF_2_FY_AGO,
+	END_OF_2_FY_AHEAD
+    FROM data_snapshot_cte
+)    
+
+,transform_data AS (
+    SELECT
+        '{{ invocation_id }}' AS _AUDIT_LOG_ID,
+        SHA2('hash_me') AS _ROW_HASH,
+        SALES_ACCOUNT,
+        SALES_REGION,
+        BU,
+        SUB_BU,
+        BU_GROUP,
+        SOLD_TO_PARTY,
+        END_USER,
+        FAB,
+        SALES_ORDER_NO,
+        SALES_CATEGORY_GROUP,
+        SALES_CATEGORY,
+        IS_PLACEHOLDER,
+        PRODUCT_NAME,
+        SERIAL_NO,
+        SALES_MONTH,
+        SALES_AMOUNT,
+        QUANTITY,
+        CUSTOMS_CLEARANCE_DATE,
+        ON_DOCK_DATE,
+        SALES_DATE,
+        IS_LOANER,
+        REVENUE_RECOGNITION_CRITERIA_SHORT,
+        DATA_SNAPSHOT,
+        DATA_TYPE,
+        BUDGET_TYPE,
+        BU_CODE,
+        SUB_BU_CODE,
+        ORDER_TYPE_CODE,
+        SOLD_TO_PARTY_CODE,
+        END_USER_CODE_MIXED,
+        _5_DIGIT_END_USER_CODE,
+        END_USER_CODE,
+        GS_FK_DATE,
+        GS_FY,
+        GS_FY_HALF,
+        GS_FY_Q,
+        BEGINNING_OF_GS_FY_Q,
+        END_OF_GS_FY_Q,
+        BEGINNING_OF_CURRENT_FY,
+        END_OF_CURRENT_FY,
+        BEGINNING_OF_CURRENT_FY_HALF,
+        END_OF_CURRENT_FY_HALF,
+        BEGINNING_OF_CURRENT_FY_Q,
+        END_OF_CURRENT_FY_Q,
+        BEGINNING_OF_NEXT_FY,
+        END_OF_NEXT_FY,
+        BEGINNING_OF_NEXT_FY_HALF,
+        END_OF_NEXT_FY_HALF,
+        BEGINNING_OF_NEXT_FY_Q,
+        END_OF_NEXT_FY_Q,
+        BEGINNING_OF_2_FY_AGO,
+        END_OF_2_FY_AHEAD
+FROM source_data
+)
+
+,type_data as 
+(
+    select
+        cast(_AUDIT_LOG_ID as varchar(128)) as _AUDIT_LOG_ID,
+        cast(_ROW_HASH as varchar(128)) as _ROW_HASH,
+        cast(SALES_ACCOUNT as VARCHAR(13)) as SALES_ACCOUNT,
+        cast(SALES_REGION as VARCHAR(16777216)) as SALES_REGION,
+        cast(BU as VARCHAR(16777216)) as BU,
+        cast(SUB_BU as VARCHAR(16777216)) as SUB_BU,
+        cast(BU_GROUP as VARCHAR(16777216)) as BU_GROUP,
+        cast(SOLD_TO_PARTY as VARCHAR(16777216)) as SOLD_TO_PARTY,
+        cast(END_USER as VARCHAR(16777216)) as END_USER,
+        cast(FAB as VARCHAR(16777216)) as FAB,
+        cast(SALES_ORDER_NO as VARCHAR(16777216)) as SALES_ORDER_NO,
+        cast(SALES_CATEGORY_GROUP as VARCHAR(16777216)) as SALES_CATEGORY_GROUP,
+        cast(SALES_CATEGORY as VARCHAR(16777216)) as SALES_CATEGORY,
+        cast(IS_PLACEHOLDER as VARCHAR(16777216)) as IS_PLACEHOLDER,
+        cast(PRODUCT_NAME as VARCHAR(16777216)) as PRODUCT_NAME,
+        cast(SERIAL_NO as VARCHAR(16777216)) as SERIAL_NO,
+        cast(SALES_MONTH as DATE) as SALES_MONTH,
+        cast(SALES_AMOUNT as NUMBER(38,0)) as SALES_AMOUNT,
+        cast(QUANTITY as NUMBER(38,0)) as QUANTITY,
+        cast(CUSTOMS_CLEARANCE_DATE as DATE) as CUSTOMS_CLEARANCE_DATE,
+        cast(ON_DOCK_DATE as DATE) as ON_DOCK_DATE,
+        cast(SALES_DATE as DATE) as SALES_DATE,
+        cast(IS_LOANER as VARCHAR(3)) as IS_LOANER,
+        cast(REVENUE_RECOGNITION_CRITERIA_SHORT as VARCHAR(16777216)) as REVENUE_RECOGNITION_CRITERIA_SHORT,
+        cast(DATA_SNAPSHOT as DATE) as DATA_SNAPSHOT,
+        cast(DATA_TYPE as VARCHAR(16777216)) as DATA_TYPE,
+        cast(BUDGET_TYPE as VARCHAR(16777216)) as BUDGET_TYPE,
+        cast(BU_CODE as VARCHAR(16777216)) as BU_CODE,
+        cast(SUB_BU_CODE as VARCHAR(16777216)) as SUB_BU_CODE,
+        cast(ORDER_TYPE_CODE as VARCHAR(16777216)) as ORDER_TYPE_CODE,
+        cast(SOLD_TO_PARTY_CODE as VARCHAR(16777216)) as SOLD_TO_PARTY_CODE,
+        cast(END_USER_CODE_MIXED as VARCHAR(16777216)) as END_USER_CODE_MIXED,
+        cast(_5_DIGIT_END_USER_CODE as VARCHAR(16777216)) as _5_DIGIT_END_USER_CODE,
+        cast(END_USER_CODE as VARCHAR(16777216)) as END_USER_CODE,
+        cast(GS_FK_DATE as DATE) as GS_FK_DATE,
+        cast(GS_FY as VARCHAR(16777216)) as GS_FY,
+        cast(GS_FY_HALF as VARCHAR(16777216)) as GS_FY_HALF,
+        cast(GS_FY_Q as VARCHAR(16777216)) as GS_FY_Q,
+        cast(BEGINNING_OF_GS_FY_Q as DATE) as BEGINNING_OF_GS_FY_Q,
+        cast(END_OF_GS_FY_Q as DATE) as END_OF_GS_FY_Q,
+        cast(BEGINNING_OF_CURRENT_FY as DATE) as BEGINNING_OF_CURRENT_FY,
+        cast(END_OF_CURRENT_FY as DATE) as END_OF_CURRENT_FY,
+        cast(BEGINNING_OF_CURRENT_FY_HALF as DATE) as BEGINNING_OF_CURRENT_FY_HALF,
+        cast(END_OF_CURRENT_FY_HALF as DATE) as END_OF_CURRENT_FY_HALF,
+        cast(BEGINNING_OF_CURRENT_FY_Q as DATE) as BEGINNING_OF_CURRENT_FY_Q,
+        cast(END_OF_CURRENT_FY_Q as DATE) as END_OF_CURRENT_FY_Q,
+        cast(BEGINNING_OF_NEXT_FY as DATE) as BEGINNING_OF_NEXT_FY,
+        cast(END_OF_NEXT_FY as DATE) as END_OF_NEXT_FY,
+        cast(BEGINNING_OF_NEXT_FY_HALF as DATE) as BEGINNING_OF_NEXT_FY_HALF,
+        cast(END_OF_NEXT_FY_HALF as DATE) as END_OF_NEXT_FY_HALF,
+        cast(BEGINNING_OF_NEXT_FY_Q as DATE) as BEGINNING_OF_NEXT_FY_Q,
+        cast(END_OF_NEXT_FY_Q as DATE) as END_OF_NEXT_FY_Q,
+        cast(BEGINNING_OF_2_FY_AGO as DATE) as BEGINNING_OF_2_FY_AGO,
+        cast(END_OF_2_FY_AHEAD as DATE) as END_OF_2_FY_AHEAD
+from transform_data
+    )
+select * from type_data

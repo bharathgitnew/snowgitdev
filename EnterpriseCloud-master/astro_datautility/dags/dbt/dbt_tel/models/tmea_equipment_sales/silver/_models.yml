@@ -1,0 +1,45 @@
+models:
+- name: SILVER__TMEA_EQUIPMENT_SALES__COMMON_US_BU_ACCOUNT
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_EQUIPMENT_SALES__COMMON_US_CUSTOMER_A_CODE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_EQUIPMENT_SALES__COMMON_US_CUSTOMER_B_CODE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_EQUIPMENT_SALES__COMMON_US_SUB_BU_INCLUDE_TMEA
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_EQUIPMENT_SALES__MAC_MAIN
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_EQUIPMENT_SALES__OPPORTUNITY_SNAPSHOT
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_EQUIPMENT_SALES__SALES_DOCUMENT_SNAPSHOT
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_EQUIPMENT_SALES__SAP_SURB
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_EQUIPMENT_SALES__SERVICE_B_CODE_MAPPING
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_EQUIPMENT_SALES__TEA_MAC_LIST
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TMEA_EQUIPMENT_SALES__WISDOM_SURB_PROGRESS
+  tests:
+  - has_data
+  - recently_run

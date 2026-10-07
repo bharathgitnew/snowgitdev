@@ -1,0 +1,688 @@
+{{ config(
+    	materialized='tel_incremental',
+    	incremental_strategy='insert_overwrite',
+    	alias='ACCOUNTING_EQUIPMENT_ACCEPTANCE_REVENUE_RECOGNITION_CURRENT_FLAT',
+    	transient=false
+) }}
+
+WITH ref_cte_ACCOUNTING_US_REVENUE_BUDGET as (
+    select * from {{ ref('GOLD__TEH_EQUIPMENT_SALES__ACCOUNTING_US_REVENUE_BUDGET') }}
+),
+
+ref_cte_ACCOUNTING_US_REVENUE_FORECAST as (
+    select * from {{ ref('GOLD__TEH_EQUIPMENT_SALES__ACCOUNTING_US_REVENUE_FORECAST') }}
+),
+
+ACCData
+
+AS
+
+(
+
+--Forecast--
+
+SELECT
+
+    Account_Group1,
+
+    Account_Group2,
+
+    Sales_Account,
+
+    Sales_Region,
+
+    BU,
+
+    BU_Group,
+
+    Sub_BU,
+
+    Sold_to_Party,
+
+    End_User,
+
+    FAB,
+
+    Sales_Order_No,
+
+    Sales_Category_Group,
+
+    SALES_CATEGORY,
+
+    SALES_REPORTING_FLAG AS SALES_REPORTING,
+
+    BU_PLACEHOLDER,
+
+    bulk_flag,
+
+    Internal_Sales,
+
+    BOOKING_CONFIDENCE_BU,
+
+    Model,
+
+    Order_Item,
+
+    Opportunity_ID,
+
+    Sales_Document_Item_No,
+
+    Project_No,
+
+    SERIAL_NO,
+
+    PM_SERIAL_NO,
+
+    Adjusted_Serial_No,
+
+    First_Serial_No,
+
+    CUSTOMER_TOOL_ID,
+
+    Quantity,
+
+    MAIN_TOOL,
+
+    Booking_Month,
+
+    BOOKING_DATE,
+
+    ENDUSER_BOOKING_MONTH,
+
+    ENDUSER_BOOKING_DATE,
+
+    ENDUSER_BOOKING_DATE_ACTUAL,
+
+    ORDER_APPROVAL_STATUS,
+
+    SHIP_MONTH,
+
+    SHIP_DATE,
+
+    SCHEDULED_CUSTOMS_CLEARAN_DATE,
+
+	CONFIRMED_CUSTOMS_CLEARAN_DATE,
+
+	SCHEDULED_ONDOCK_DATE,
+
+	SCHEDULED_ONDOCKDATE_CONFIRMED,
+
+    TECH_ACCEPT_TSR_SIGN_DATE,
+
+	TECH_ACCEP_TSRSIGN_DATE_ACTUAL,
+
+	TECH_ACCEP_TSRSIGN_UNAVAILABLE,
+
+	EST,
+
+    SALES_DATE_EST_ACTUAL_STATUS,
+
+	ENDUSER_SALES_EST_ACT_STATUS,
+
+	APPROVAL_STATUS_SALES,
+
+    SALES_RECORDING_FLAG,
+
+    SALES_MONTH,
+
+    SALES_DATE,
+
+    ENDUSER_SALES_MONTH,
+
+    END_USER_SALES_DATE,
+
+    Currency,
+
+    Sales_Amount,
+
+    -- Sales_Amount_after_Adjustment,
+
+    Is_Loaner,
+
+    Loan_Expiration_Date,
+
+    Revenue_Recognition_Criteria,
+
+    Revenue_Recognition_Criteria_Short,
+
+    SALES_DOCUMENT_TYPES,
+
+    REVENUE_RECOGNITION,
+
+    Sales_Comments,
+
+    Internal_Comments,
+
+    Data_Snapshot,
+
+    Source_Type,
+
+    ''                                      AS Budget_Type,
+
+    Cost_Center_Code,
+
+    profit_center_group2,
+
+    profit_cent_group_repseg,
+
+    Profit_Center_Code,
+
+    Profit_Center_Group_Code,
+
+    SALES_CATEGORY_CODE,
+
+    Material_Group_Code,
+
+    MODEL_CODE,
+
+    SOLD_TO_PARTY_CODE,
+
+    SOLD_TO_PARTY_OFFICE_CODE,
+
+    End_User_Code,
+
+    ENDUSER_OFFICE_CODE,
+
+    FAB_Code,
+
+    Accounting_Forecast_FK_Date             AS Accounting_FK_Date,
+
+    Accounting_Forecast_FY                  AS Accounting_FY,
+
+    Accounting_Forecast_FY_Half             AS Accounting_FY_Half,
+
+    Accounting_Forecast_FY_Q                AS Accounting_FY_Q,
+
+    Beginning_of_Accounting_Forecast_FY_Q   AS Beginning_of_Accounting_FY_Q,
+
+    End_of_Accounting_Forecast_FY_Q         AS End_of_Accounting_FY_Q,
+
+    Beginning_of_Current_FY,
+
+    End_of_Current_FY,
+
+	Beginning_of_Current_FY_Half,
+
+	End_of_Current_FY_Half,
+
+	Beginning_of_Current_FY_Q,
+
+	End_of_Current_FY_Q,
+
+    Beginning_of_Next_FY,
+
+	End_of_Next_FY,
+
+	Beginning_of_Next_FY_Half,
+
+	End_of_Next_FY_Half,
+
+	Beginning_of_Next_FY_Q,
+
+	End_of_Next_FY_Q,
+
+	Beginning_of_2_FY_Ago,
+
+	End_of_2_FY_Ahead,
+
+    _FILENAME
+
+FROM ref_cte_ACCOUNTING_US_REVENUE_FORECAST acc
+
+WHERE Data_Snapshot = (SELECT MAX(Data_Snapshot) FROM ref_cte_ACCOUNTING_US_REVENUE_FORECAST)
+
+    AND SALES_MONTH >= Beginning_of_Current_FY AND SALES_MONTH <= END_OF_CURRENT_FY_HALF
+
+    AND REVENUE_RECOGNITION_CRITERIA_SHORT = 'Acceptance'
+
+    
+
+UNION ALL
+
+--Budget--
+
+SELECT
+
+    Account_Group1,
+
+    Account_Group2,
+
+    Sales_Account,
+
+    Sales_Region,
+
+    BU,
+
+    BU_Group,
+
+    Sub_BU,
+
+    Sold_to_Party,
+
+    End_User,
+
+    FAB,
+
+    Sales_Order_No,
+
+    Sales_Category_Group,
+
+    SALES_CATEGORY,
+
+    SALES_REPORTING_FLAG AS SALES_REPORTING,
+
+    BU_PLACEHOLDER,
+
+    bulk_flag,
+
+    Internal_Sales,
+
+    BOOKING_CONFIDENCE_BU,
+
+    Model,
+
+    Order_Item,
+
+    Opportunity_ID,
+
+    Sales_Document_Item_No,
+
+    Project_No,
+
+    SERIAL_NO,
+
+    PM_SERIAL_NO,
+
+    Adjusted_Serial_No,
+
+    First_Serial_No,
+
+    CUSTOMER_TOOL_ID,
+
+    Quantity,
+
+    MAIN_TOOL,
+
+    Booking_Month,
+
+    BOOKING_DATE,
+
+    ENDUSER_BOOKING_MONTH,
+
+    ENDUSER_BOOKING_DATE,
+
+    ENDUSER_BOOKING_DATE_ACTUAL,
+
+    ORDER_APPROVAL_STATUS,
+
+    SHIP_MONTH,
+
+    SHIP_DATE,
+
+    SCHEDULED_CUSTOMS_CLEARAN_DATE,
+
+	CONFIRMED_CUSTOMS_CLEARAN_DATE,
+
+	SCHEDULED_ONDOCK_DATE,
+
+	SCHEDULED_ONDOCKDATE_CONFIRMED,
+
+    TECH_ACCEPT_TSR_SIGN_DATE,
+
+	TECH_ACCEP_TSRSIGN_DATE_ACTUAL,
+
+	TECH_ACCEP_TSRSIGN_UNAVAILABLE,
+
+	EST,
+
+    SALES_DATE_EST_ACTUAL_STATUS,
+
+	ENDUSER_SALES_EST_ACT_STATUS,
+
+	APPROVAL_STATUS_SALES,
+
+    SALES_RECORDING_FLAG,
+
+    SALES_MONTH,
+
+    SALES_DATE,
+
+    ENDUSER_SALES_MONTH,
+
+    END_USER_SALES_DATE,
+
+    Currency,
+
+    Sales_Amount,
+
+    -- Sales_Amount_after_Adjustment,
+
+    Is_Loaner,
+
+    Loan_Expiration_Date,
+
+    Revenue_Recognition_Criteria,
+
+    Revenue_Recognition_Criteria_Short,
+
+    SALES_DOCUMENT_TYPES,
+
+    REVENUE_RECOGNITION,
+
+    Sales_Comments,
+
+    Internal_Comments,
+
+    Data_Snapshot,
+
+    Source_Type,
+
+    Budget_Type,
+
+    Cost_Center_Code,
+
+    profit_center_group2,
+
+    profit_cent_group_repseg,
+
+    Profit_Center_Code,
+
+    Profit_Center_Group_Code,
+
+    SALES_CATEGORY_CODE,
+
+    Material_Group_Code,
+
+    MODEL_CODE,
+
+    SOLD_TO_PARTY_CODE,
+
+    SOLD_TO_PARTY_OFFICE_CODE,
+
+    End_User_Code,
+
+    ENDUSER_OFFICE_CODE,
+
+    FAB_Code,
+
+    Accounting_Budget_FK_Date           AS Accounting_FK_Date,
+
+    Accounting_Budget_FY                AS Accounting_FK,
+
+    Accounting_Budget_FY_Half           AS Accounting_FK_Half,
+
+    Accounting_Budget_FY_Q              AS Accounting_FK_Q,
+
+    Beginning_of_Accounting_Budget_FY_Q AS Beginning_of_Accounting_FY_Q,
+
+    End_of_Accounting_Budget_FY_Q       AS End_of_Accounting_FY_Q,
+
+    Beginning_of_Current_FY,
+
+    End_of_Current_FY,
+
+	Beginning_of_Current_FY_Half,
+
+	End_of_Current_FY_Half,
+
+	Beginning_of_Current_FY_Q,
+
+	End_of_Current_FY_Q,
+
+    Beginning_of_Next_FY,
+
+	End_of_Next_FY,
+
+	Beginning_of_Next_FY_Half,
+
+	End_of_Next_FY_Half,
+
+	Beginning_of_Next_FY_Q,
+
+	End_of_Next_FY_Q,
+
+	Beginning_of_2_FY_Ago,
+
+	End_of_2_FY_Ahead,
+
+    _FILENAME
+
+FROM ref_cte_ACCOUNTING_US_REVENUE_BUDGET acc
+
+WHERE CASE WHEN MONTH(CURRENT_DATE()) IN (4, 5, 6, 7, 8, 9) THEN Budget_Type = 'Original' 
+
+        WHEN MONTH(CURRENT_DATE()) IN (10, 11, 12, 1, 2, 3) THEN Budget_Type = 'Revised' END
+
+    AND Data_Snapshot = (SELECT MAX(Data_Snapshot) FROM ref_cte_ACCOUNTING_US_REVENUE_BUDGET)
+
+    AND SALES_MONTH >= Beginning_of_Current_FY_Half AND SALES_MONTH <= End_of_Current_FY_Half
+
+    AND REVENUE_RECOGNITION_CRITERIA_SHORT = 'Acceptance'
+
+),
+
+source_data as (
+SELECT *
+
+FROM ACCData
+
+WHERE Data_Snapshot = (SELECT MAX(DATA_SNAPSHOT) FROM ACCData)
+
+),
+
+transform_data as (
+select
+        '{{ invocation_id }}' AS _AUDIT_LOG_ID,
+        SHA2('hash_me') AS _ROW_HASH,
+        ACCOUNT_GROUP1,
+        ACCOUNT_GROUP2,
+        SALES_ACCOUNT,
+        SALES_REGION,
+        BU,
+        BU_GROUP,
+        SUB_BU,
+        SOLD_TO_PARTY,
+        END_USER,
+        FAB,
+        SALES_ORDER_NO,
+        SALES_CATEGORY_GROUP,
+        SALES_CATEGORY,
+        SALES_REPORTING,
+        BU_PLACEHOLDER,
+        BULK_FLAG,
+        INTERNAL_SALES,
+        BOOKING_CONFIDENCE_BU,
+        MODEL,
+        ORDER_ITEM,
+        OPPORTUNITY_ID,
+        SALES_DOCUMENT_ITEM_NO,
+        PROJECT_NO,
+        SERIAL_NO,
+        PM_SERIAL_NO,
+        ADJUSTED_SERIAL_NO,
+        FIRST_SERIAL_NO,
+        CUSTOMER_TOOL_ID,
+        QUANTITY,
+        MAIN_TOOL,
+        BOOKING_MONTH,
+        BOOKING_DATE,
+        ENDUSER_BOOKING_MONTH,
+        ENDUSER_BOOKING_DATE,
+        ENDUSER_BOOKING_DATE_ACTUAL,
+        ORDER_APPROVAL_STATUS,
+        SHIP_MONTH,
+        SHIP_DATE,
+        SCHEDULED_CUSTOMS_CLEARAN_DATE,
+        CONFIRMED_CUSTOMS_CLEARAN_DATE,
+        SCHEDULED_ONDOCK_DATE,
+        SCHEDULED_ONDOCKDATE_CONFIRMED,
+        TECH_ACCEPT_TSR_SIGN_DATE,
+        TECH_ACCEP_TSRSIGN_DATE_ACTUAL,
+        TECH_ACCEP_TSRSIGN_UNAVAILABLE,
+        EST,
+        SALES_DATE_EST_ACTUAL_STATUS,
+        ENDUSER_SALES_EST_ACT_STATUS,
+        APPROVAL_STATUS_SALES,
+        SALES_RECORDING_FLAG,
+        SALES_MONTH,
+        SALES_DATE,
+        ENDUSER_SALES_MONTH,
+        END_USER_SALES_DATE,
+        CURRENCY,
+        SALES_AMOUNT,
+        IS_LOANER,
+        LOAN_EXPIRATION_DATE,
+        REVENUE_RECOGNITION_CRITERIA,
+        REVENUE_RECOGNITION_CRITERIA_SHORT,
+        SALES_DOCUMENT_TYPES,
+        REVENUE_RECOGNITION,
+        SALES_COMMENTS,
+        INTERNAL_COMMENTS,
+        DATA_SNAPSHOT,
+        SOURCE_TYPE,
+        BUDGET_TYPE,
+        COST_CENTER_CODE,
+        PROFIT_CENTER_GROUP2,
+        PROFIT_CENT_GROUP_REPSEG,
+        PROFIT_CENTER_CODE,
+        PROFIT_CENTER_GROUP_CODE,
+        SALES_CATEGORY_CODE,
+        MATERIAL_GROUP_CODE,
+        MODEL_CODE,
+        SOLD_TO_PARTY_CODE,
+        SOLD_TO_PARTY_OFFICE_CODE,
+        END_USER_CODE,
+        ENDUSER_OFFICE_CODE,
+        FAB_CODE,
+        ACCOUNTING_FK_DATE,
+        ACCOUNTING_FY,
+        ACCOUNTING_FY_HALF,
+        ACCOUNTING_FY_Q,
+        BEGINNING_OF_ACCOUNTING_FY_Q,
+        END_OF_ACCOUNTING_FY_Q,
+        BEGINNING_OF_CURRENT_FY,
+        END_OF_CURRENT_FY,
+        BEGINNING_OF_CURRENT_FY_HALF,
+        END_OF_CURRENT_FY_HALF,
+        BEGINNING_OF_CURRENT_FY_Q,
+        END_OF_CURRENT_FY_Q,
+        BEGINNING_OF_NEXT_FY,
+        END_OF_NEXT_FY,
+        BEGINNING_OF_NEXT_FY_HALF,
+        END_OF_NEXT_FY_HALF,
+        BEGINNING_OF_NEXT_FY_Q,
+        END_OF_NEXT_FY_Q,
+        BEGINNING_OF_2_FY_AGO,
+        END_OF_2_FY_AHEAD,
+        _FILENAME
+from source_data
+),
+
+type_data as (
+select
+        cast(_AUDIT_LOG_ID as varchar(128)) as _AUDIT_LOG_ID,
+        cast(_ROW_HASH as varchar(128)) as _ROW_HASH,
+        CAST(ACCOUNT_GROUP1 as VARCHAR(16777216)) as ACCOUNT_GROUP1,
+        CAST(ACCOUNT_GROUP2 as VARCHAR(16777216)) as ACCOUNT_GROUP2,
+        CAST(SALES_ACCOUNT as VARCHAR(16777216)) as SALES_ACCOUNT,
+        CAST(SALES_REGION as VARCHAR(16777216)) as SALES_REGION,
+        CAST(BU as VARCHAR(16777216)) as BU,
+        CAST(BU_GROUP as VARCHAR(16777216)) as BU_GROUP,
+        CAST(SUB_BU as VARCHAR(16777216)) as SUB_BU,
+        CAST(SOLD_TO_PARTY as VARCHAR(16777216)) as SOLD_TO_PARTY,
+        CAST(END_USER as VARCHAR(16777216)) as END_USER,
+        CAST(FAB as VARCHAR(16777216)) as FAB,
+        CAST(SALES_ORDER_NO as VARCHAR(16777216)) as SALES_ORDER_NO,
+        CAST(SALES_CATEGORY_GROUP as VARCHAR(16777216)) as SALES_CATEGORY_GROUP,
+        CAST(SALES_CATEGORY as VARCHAR(16777216)) as SALES_CATEGORY,
+        CAST(SALES_REPORTING as VARCHAR(16777216)) as SALES_REPORTING,
+        CAST(BU_PLACEHOLDER as VARCHAR(16777216)) as BU_PLACEHOLDER,
+        CAST(BULK_FLAG as VARCHAR(16777216)) as BULK_FLAG,
+        CAST(INTERNAL_SALES as VARCHAR(16777216)) as INTERNAL_SALES,
+        CAST(BOOKING_CONFIDENCE_BU as VARCHAR(16777216)) as BOOKING_CONFIDENCE_BU,
+        CAST(MODEL as VARCHAR(16777216)) as MODEL,
+        CAST(ORDER_ITEM as VARCHAR(16777216)) as ORDER_ITEM,
+        CAST(OPPORTUNITY_ID as VARCHAR(16777216)) as OPPORTUNITY_ID,
+        CAST(SALES_DOCUMENT_ITEM_NO as VARCHAR(16777216)) as SALES_DOCUMENT_ITEM_NO,
+        CAST(PROJECT_NO as VARCHAR(16777216)) as PROJECT_NO,
+        CAST(SERIAL_NO as VARCHAR(16777216)) as SERIAL_NO,
+        CAST(PM_SERIAL_NO as VARCHAR(16777216)) as PM_SERIAL_NO,
+        CAST(ADJUSTED_SERIAL_NO as VARCHAR(16777216)) as ADJUSTED_SERIAL_NO,
+        CAST(FIRST_SERIAL_NO as VARCHAR(16777216)) as FIRST_SERIAL_NO,
+        CAST(CUSTOMER_TOOL_ID as VARCHAR(16777216)) as CUSTOMER_TOOL_ID,
+        CAST(QUANTITY as NUMBER(38,0)) as QUANTITY,
+        CAST(MAIN_TOOL as NUMBER(38,0)) as MAIN_TOOL,
+        CAST(BOOKING_MONTH as DATE) as BOOKING_MONTH,
+        CAST(BOOKING_DATE as DATE) as BOOKING_DATE,
+        CAST(ENDUSER_BOOKING_MONTH as DATE) as ENDUSER_BOOKING_MONTH,
+        CAST(ENDUSER_BOOKING_DATE as DATE) as ENDUSER_BOOKING_DATE,
+        CAST(ENDUSER_BOOKING_DATE_ACTUAL as VARCHAR(16777216)) as ENDUSER_BOOKING_DATE_ACTUAL,
+        CAST(ORDER_APPROVAL_STATUS as VARCHAR(16777216)) as ORDER_APPROVAL_STATUS,
+        CAST(SHIP_MONTH as DATE) as SHIP_MONTH,
+        CAST(SHIP_DATE as DATE) as SHIP_DATE,
+        CAST(SCHEDULED_CUSTOMS_CLEARAN_DATE as DATE) as SCHEDULED_CUSTOMS_CLEARAN_DATE,
+        CAST(CONFIRMED_CUSTOMS_CLEARAN_DATE as DATE) as CONFIRMED_CUSTOMS_CLEARAN_DATE,
+        CAST(SCHEDULED_ONDOCK_DATE as DATE) as SCHEDULED_ONDOCK_DATE,
+        CAST(SCHEDULED_ONDOCKDATE_CONFIRMED as VARCHAR(16777216)) as SCHEDULED_ONDOCKDATE_CONFIRMED,
+        CAST(TECH_ACCEPT_TSR_SIGN_DATE as DATE) as TECH_ACCEPT_TSR_SIGN_DATE,
+        CAST(TECH_ACCEP_TSRSIGN_DATE_ACTUAL as VARCHAR(16777216)) as TECH_ACCEP_TSRSIGN_DATE_ACTUAL,
+        CAST(TECH_ACCEP_TSRSIGN_UNAVAILABLE as VARCHAR(16777216)) as TECH_ACCEP_TSRSIGN_UNAVAILABLE,
+        CAST(EST as VARCHAR(16777216)) as EST,
+        CAST(SALES_DATE_EST_ACTUAL_STATUS as VARCHAR(16777216)) as SALES_DATE_EST_ACTUAL_STATUS,
+        CAST(ENDUSER_SALES_EST_ACT_STATUS as VARCHAR(16777216)) as ENDUSER_SALES_EST_ACT_STATUS,
+        CAST(APPROVAL_STATUS_SALES as VARCHAR(16777216)) as APPROVAL_STATUS_SALES,
+        CAST(SALES_RECORDING_FLAG as VARCHAR(16777216)) as SALES_RECORDING_FLAG,
+        CAST(SALES_MONTH as DATE) as SALES_MONTH,
+        CAST(SALES_DATE as DATE) as SALES_DATE,
+        CAST(ENDUSER_SALES_MONTH as DATE) as ENDUSER_SALES_MONTH,
+        CAST(END_USER_SALES_DATE as DATE) as END_USER_SALES_DATE,
+        CAST(CURRENCY as VARCHAR(16777216)) as CURRENCY,
+        CAST(SALES_AMOUNT as NUMBER(38,0)) as SALES_AMOUNT,
+        CAST(IS_LOANER as VARCHAR(16777216)) as IS_LOANER,
+        CAST(LOAN_EXPIRATION_DATE as VARCHAR(16777216)) as LOAN_EXPIRATION_DATE,
+        CAST(REVENUE_RECOGNITION_CRITERIA as VARCHAR(16777216)) as REVENUE_RECOGNITION_CRITERIA,
+        CAST(REVENUE_RECOGNITION_CRITERIA_SHORT as VARCHAR(16777216)) as REVENUE_RECOGNITION_CRITERIA_SHORT,
+        CAST(SALES_DOCUMENT_TYPES as VARCHAR(16777216)) as SALES_DOCUMENT_TYPES,
+        CAST(REVENUE_RECOGNITION as VARCHAR(16777216)) as REVENUE_RECOGNITION,
+        CAST(SALES_COMMENTS as VARCHAR(16777216)) as SALES_COMMENTS,
+        CAST(INTERNAL_COMMENTS as VARCHAR(16777216)) as INTERNAL_COMMENTS,
+        CAST(DATA_SNAPSHOT as DATE) as DATA_SNAPSHOT,
+        CAST(SOURCE_TYPE as VARCHAR(16777216)) as SOURCE_TYPE,
+        CAST(BUDGET_TYPE as VARCHAR(16777216)) as BUDGET_TYPE,
+        CAST(COST_CENTER_CODE as VARCHAR(16777216)) as COST_CENTER_CODE,
+        CAST(PROFIT_CENTER_GROUP2 as VARCHAR(16777216)) as PROFIT_CENTER_GROUP2,
+        CAST(PROFIT_CENT_GROUP_REPSEG as VARCHAR(16777216)) as PROFIT_CENT_GROUP_REPSEG,
+        CAST(PROFIT_CENTER_CODE as VARCHAR(16777216)) as PROFIT_CENTER_CODE,
+        CAST(PROFIT_CENTER_GROUP_CODE as VARCHAR(16777216)) as PROFIT_CENTER_GROUP_CODE,
+        CAST(SALES_CATEGORY_CODE as VARCHAR(16777216)) as SALES_CATEGORY_CODE,
+        CAST(MATERIAL_GROUP_CODE as VARCHAR(16777216)) as MATERIAL_GROUP_CODE,
+        CAST(MODEL_CODE as VARCHAR(16777216)) as MODEL_CODE,
+        CAST(SOLD_TO_PARTY_CODE as VARCHAR(16777216)) as SOLD_TO_PARTY_CODE,
+        CAST(SOLD_TO_PARTY_OFFICE_CODE as VARCHAR(16777216)) as SOLD_TO_PARTY_OFFICE_CODE,
+        CAST(END_USER_CODE as VARCHAR(16777216)) as END_USER_CODE,
+        CAST(ENDUSER_OFFICE_CODE as VARCHAR(16777216)) as ENDUSER_OFFICE_CODE,
+        CAST(FAB_CODE as VARCHAR(16777216)) as FAB_CODE,
+        CAST(ACCOUNTING_FK_DATE as DATE) as ACCOUNTING_FK_DATE,
+        CAST(ACCOUNTING_FY as VARCHAR(16777216)) as ACCOUNTING_FY,
+        CAST(ACCOUNTING_FY_HALF as VARCHAR(16777216)) as ACCOUNTING_FY_HALF,
+        CAST(ACCOUNTING_FY_Q as VARCHAR(16777216)) as ACCOUNTING_FY_Q,
+        CAST(BEGINNING_OF_ACCOUNTING_FY_Q as DATE) as BEGINNING_OF_ACCOUNTING_FY_Q,
+        CAST(END_OF_ACCOUNTING_FY_Q as DATE) as END_OF_ACCOUNTING_FY_Q,
+        CAST(BEGINNING_OF_CURRENT_FY as DATE) as BEGINNING_OF_CURRENT_FY,
+        CAST(END_OF_CURRENT_FY as DATE) as END_OF_CURRENT_FY,
+        CAST(BEGINNING_OF_CURRENT_FY_HALF as DATE) as BEGINNING_OF_CURRENT_FY_HALF,
+        CAST(END_OF_CURRENT_FY_HALF as DATE) as END_OF_CURRENT_FY_HALF,
+        CAST(BEGINNING_OF_CURRENT_FY_Q as DATE) as BEGINNING_OF_CURRENT_FY_Q,
+        CAST(END_OF_CURRENT_FY_Q as DATE) as END_OF_CURRENT_FY_Q,
+        CAST(BEGINNING_OF_NEXT_FY as DATE) as BEGINNING_OF_NEXT_FY,
+        CAST(END_OF_NEXT_FY as DATE) as END_OF_NEXT_FY,
+        CAST(BEGINNING_OF_NEXT_FY_HALF as DATE) as BEGINNING_OF_NEXT_FY_HALF,
+        CAST(END_OF_NEXT_FY_HALF as DATE) as END_OF_NEXT_FY_HALF,
+        CAST(BEGINNING_OF_NEXT_FY_Q as DATE) as BEGINNING_OF_NEXT_FY_Q,
+        CAST(END_OF_NEXT_FY_Q as DATE) as END_OF_NEXT_FY_Q,
+        CAST(BEGINNING_OF_2_FY_AGO as DATE) as BEGINNING_OF_2_FY_AGO,
+        CAST(END_OF_2_FY_AHEAD as DATE) as END_OF_2_FY_AHEAD,
+        CAST(_FILENAME as VARCHAR(16777216)) as _FILENAME
+from transform_data 
+)
+select * from type_data

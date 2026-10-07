@@ -1,0 +1,107 @@
+/************
+	Model file generated from gmxDbtTemplateUtility.ipynb 
+	*************/
+
+	
+	{{ config(
+    	  materialized='incremental',
+    	  incremental_strategy='insert_overwrite',
+    	  alias='SAP_MMM_EV_ZMAT0002_GMX',
+    	  unique_key = [''],
+    	  transient=false	
+) }} 
+
+	with source_data as (
+	SELECT
+		JSONFIELD:"ZZPROCO"::STRING AS "ZZPROCO", 
+ 	 	JSONFIELD:"ZZMODEL"::STRING AS "ZZMODEL", 
+ 	 	JSONFIELD:"ZZSYSN"::STRING AS "ZZSYSN", 
+ 	 	JSONFIELD:"ZZETEXT"::STRING AS "ZZETEXT", 
+ 	 	JSONFIELD:"ZZJTEXT"::STRING AS "ZZJTEXT", 
+ 	 	JSONFIELD:"ZZWEFSZ"::STRING AS "ZZWEFSZ", 
+ 	 	JSONFIELD:"ZZCANCD"::STRING AS "ZZCANCD", 
+ 	 	JSONFIELD:"ZZSWLHV"::STRING AS "ZZSWLHV", 
+ 	 	JSONFIELD:"ZZNMTF"::STRING AS "ZZNMTF", 
+ 	 	JSONFIELD:"DEL_FLG"::STRING AS "DEL_FLG", 
+ 	 	JSONFIELD:"C_DATE"::STRING AS "C_DATE", 
+ 	 	JSONFIELD:"C_TIME"::STRING AS "C_TIME", 
+ 	 	JSONFIELD:"C_USER"::STRING AS "C_USER", 
+ 	 	JSONFIELD:"C_PGM"::STRING AS "C_PGM", 
+ 	 	JSONFIELD:"U_DATE"::STRING AS "U_DATE", 
+ 	 	JSONFIELD:"U_TIME"::STRING AS "U_TIME", 
+ 	 	JSONFIELD:"U_USER"::STRING AS "U_USER", 
+ 	 	JSONFIELD:"U_PGM"::STRING AS "U_PGM", 
+ 	 	JSONFIELD:"DELFLAG"::STRING AS "DELFLAG", 
+ 	 	JSONFIELD:"CDCHANGENR"::STRING AS "CDCHANGENR", 
+ 	 	JSONFIELD:"PSL_INSDATE"::STRING AS "PSL_INSDATE", 
+ 	 	JSONFIELD:"PSL_UPDDATE"::STRING AS "PSL_UPDDATE",
+		_FILEDATE,
+		_FILENAME
+	from {{ source('SAPH','SAP_MMM_EV_ZMAT0002_GMX') }}
+	WHERE REGEXP_SUBSTR(_FILENAME,'\\d{14}') = (SELECT MAX(REGEXP_SUBSTR(_filename,'\\d{14}')) from {{ source('SAPH', 'SAP_MMM_EV_ZMAT0002_GMX') }})
+	QUALIFY ROW_NUMBER() OVER ( PARTITION BY ZZMODEL, ZZPROCO ORDER BY _FILEDATE DESC, _UPLOADDATE DESC) = 1
+	),
+	
+	transform_data as (
+	SELECT 
+		"ZZPROCO", 
+ 	 	"ZZMODEL", 
+ 	 	"ZZSYSN", 
+ 	 	"ZZETEXT", 
+ 	 	"ZZJTEXT", 
+ 	 	"ZZWEFSZ", 
+ 	 	"ZZCANCD", 
+ 	 	"ZZSWLHV", 
+ 	 	"ZZNMTF", 
+ 	 	"DEL_FLG", 
+ 	 	"C_DATE", 
+ 	 	"C_TIME", 
+ 	 	"C_USER", 
+ 	 	"C_PGM", 
+ 	 	"U_DATE", 
+ 	 	"U_TIME", 
+ 	 	"U_USER", 
+ 	 	"U_PGM", 
+ 	 	"DELFLAG", 
+ 	 	"CDCHANGENR", 
+ 	 	"PSL_INSDATE", 
+ 	 	"PSL_UPDDATE",
+		_FILEDATE,
+		_FILENAME,
+		'{{ invocation_id }}' AS AUDIT_LOG_ID,
+        SHA2('hash_me') as _ROW_HASH -- Adds column to table on full refresh.
+	from source_data
+	),
+	
+	type_data as (
+	SELECT
+		CAST("ZZPROCO" AS NVARCHAR) AS "ZZPROCO", 
+ 	 	CAST("ZZMODEL" AS NVARCHAR) AS "ZZMODEL", 
+ 	 	CAST("ZZSYSN" AS NVARCHAR) AS "ZZSYSN", 
+ 	 	CAST("ZZETEXT" AS NVARCHAR) AS "ZZETEXT", 
+ 	 	CAST("ZZJTEXT" AS NVARCHAR) AS "ZZJTEXT", 
+ 	 	CAST("ZZWEFSZ" AS NVARCHAR) AS "ZZWEFSZ", 
+ 	 	CAST("ZZCANCD" AS TIMESTAMP) AS "ZZCANCD", 
+ 	 	CAST("ZZSWLHV" AS NVARCHAR) AS "ZZSWLHV", 
+ 	 	CAST("ZZNMTF" AS NVARCHAR) AS "ZZNMTF", 
+ 	 	CAST("DEL_FLG" AS NVARCHAR) AS "DEL_FLG", 
+ 	 	CAST("C_DATE" AS TIMESTAMP) AS "C_DATE", 
+ 	 	CAST("C_TIME" AS VARCHAR) AS "C_TIME", 
+ 	 	CAST("C_USER" AS NVARCHAR) AS "C_USER", 
+ 	 	CAST("C_PGM" AS NVARCHAR) AS "C_PGM", 
+ 	 	CAST("U_DATE" AS TIMESTAMP) AS "U_DATE", 
+ 	 	CAST("U_TIME" AS VARCHAR) AS "U_TIME", 
+ 	 	CAST("U_USER" AS NVARCHAR) AS "U_USER", 
+ 	 	CAST("U_PGM" AS NVARCHAR) AS "U_PGM", 
+ 	 	CAST("DELFLAG" AS BOOLEAN) AS "DELFLAG", 
+ 	 	CAST("CDCHANGENR" AS NVARCHAR) AS "CDCHANGENR", 
+ 	 	CAST("PSL_INSDATE" AS TIMESTAMP) AS "PSL_INSDATE", 
+ 	 	CAST("PSL_UPDDATE" AS TIMESTAMP) AS "PSL_UPDDATE",
+		cast(_FILEDATE AS TIMESTAMP_NTZ(9)) AS _FILEDATE,
+		cast(_FILENAME as varchar(128)) as _FILENAME,
+        cast(AUDIT_LOG_ID as varchar(128)) as AUDIT_LOG_ID,
+        cast(_ROW_HASH as varchar(128)) as _ROW_HASH
+	from transform_data
+	)
+
+	select * from type_data

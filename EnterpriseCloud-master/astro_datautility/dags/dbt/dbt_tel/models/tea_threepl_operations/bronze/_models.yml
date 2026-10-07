@@ -1,0 +1,25 @@
+models:
+- name: BRONZE__TEA_THREEPL_OPERATIONS__SAPAPI_ZCDV_T_CMTU025_MATDOC
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_THREEPL_OPERATIONS__SAPAPI_ZCDV_T_CMTU026_MARC
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_THREEPL_OPERATIONS__SAPAPI_ZCDV_T_CMTU056_AUSP
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_THREEPL_OPERATIONS__SAPAPI_ZCDV_T_CMTU057_INOB
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_THREEPL_OPERATIONS__SAPAPI_ZCDV_T_CMTU105_MCHB
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_THREEPL_OPERATIONS__THREEPL_TPL_UPS_INVENTORY_FILE_US
+  tests:
+  - has_data
+  - recently_run

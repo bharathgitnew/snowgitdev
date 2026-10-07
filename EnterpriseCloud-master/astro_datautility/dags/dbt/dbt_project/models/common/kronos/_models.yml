@@ -1,0 +1,21 @@
+version: 2
+models:
+- name: COMMON__KRONOS__TIMESHEET
+  description: kronos timesheet model
+  columns:
+  - name: SOURCESYSTEM
+    description: |
+      This model is built with three sources unioned together. This is a flag to trace which source was used.
+      - "C" is the most common, coming from CRM / manual entries
+      - "N" represents time off entries
+      - "O" are entries coming from the old Kronos system
+- name: COMMON__KRONOS__TIMESHEETTOTALS_WRENCHTYPE
+  description: kronos TimesheetTotals_WrenchType model
+- name: COMMON__KRONOS__SERVICEORDERTOTALS
+  description: kronos ServiceOrderTotals model
+- name: COMMON__KRONOS__MACHINETOTALS
+  description: kronos MachineTotals model
+- name: COMMON__KRONOS__CONTRACTTOTALS
+  description: kronos ContractTotals model
+- name: COMMON__KRONOS__ACTIVITIES_TEE
+  description: kronos Activities_TEE model

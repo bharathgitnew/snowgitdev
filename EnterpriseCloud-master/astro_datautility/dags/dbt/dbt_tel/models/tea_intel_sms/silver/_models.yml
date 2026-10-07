@@ -1,0 +1,254 @@
+version: 2
+models:
+- name: SILVER__TEA_INTEL_SMS__BUSINESS_PARTNERS_3200_ADDRESS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_INTEL_SMS__BUSINESS_PARTNERS_GENERAL_DATA
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_INTEL_SMS__CONSIGNMENT_SHIPMENT_RECEIPT
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+- name: SILVER__TEA_INTEL_SMS__CONSIGNMENT_TRANSACTION
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_INTEL_SMS__DELIVERY_ORDER_LINE_MASTER_PUB
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_INTEL_SMS__DEMANDRETURN_HISTORY
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_INTEL_SMS__DEMAND_BY_SITE_V2
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_INTEL_SMS__DEMAND_HISTORY
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: FILEDATE
+    description: Timestamp of ingestion job start
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 24
+- name: SILVER__TEA_INTEL_SMS__INVENTORY_GENERAL_MATERIAL
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_INTEL_SMS__INVENTORY_HISTORY
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: FILEDATE
+    description: Timestamp of ingestion job start
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 24
+- name: SILVER__TEA_INTEL_SMS__INVENTORY_LIVE
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: FILEDATE
+- name: SILVER__TEA_INTEL_SMS__INVENTORY_MRP_AREA_MATERIAL
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_INTEL_SMS__INVENTORY_PLANT_MATERIAL
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_INTEL_SMS__INVENTORY_SALES_MATERIAL
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_INTEL_SMS__MASTER_MATERIAL_REPORT
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_INTEL_SMS__MATERIAL_GROUP_DESCRIPTIONS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_INTEL_SMS__MATERIAL_MASTER_INTEL
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_INTEL_SMS__MATERIAL_PLANT_MASTER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_INTEL_SMS__MATERIAL_PRICING_GROUP1
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_INTEL_SMS__MATERIAL_PRICING_GROUP2
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_INTEL_SMS__MATERIAL_SALES_ORG_MASTER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_INTEL_SMS__MATERIAL_TYPE_DESCRIPTIONS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_INTEL_SMS__MATERIAL_VALUATION_MASTER_CODED
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_INTEL_SMS__MSBI_VF_BY_SITE
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: FILEDATE
+- name: SILVER__TEA_INTEL_SMS__MSBI_VF_BY_STOCKROOM
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: FILEDATE
+- name: SILVER__TEA_INTEL_SMS__MSBI_VF_TEA
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_INTEL_SMS__MSBI_VF_TEE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_INTEL_SMS__ORDERS_LIVE
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: FILEDATE
+- name: SILVER__TEA_INTEL_SMS__PRICE_MATRIX
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_INTEL_SMS__PURCHASEORDER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_INTEL_SMS__PURCHASE_INFORMATION_PURCHASE_ORDER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_INTEL_SMS__PURCHASE_ORDER_DELIVERY_LINE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_INTEL_SMS__SALESORDER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_INTEL_SMS__SALES_ORDER_BILLING_LINE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_INTEL_SMS__SALES_ORDER_DELIVERY_LINE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_INTEL_SMS__SAPH_PRICE_MATRIX
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_INTEL_SMS__SERVICEORDER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_INTEL_SMS__TEA_BAAN_SALES_SERVICES_ORDERS_BY_MONTH_CUSTOMER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_INTEL_SMS__TPL_ASN
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+- name: SILVER__TEA_INTEL_SMS__TPL_RECEIVING_ADVICE
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+- name: SILVER__TEA_INTEL_SMS__BUSINESS_PARTNERS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_INTEL_SMS__DAYS_OF_INVENTORY_MASTER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_INTEL_SMS__DROPSHIP_MODEL
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_INTEL_SMS__EMPLOYEE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_INTEL_SMS__GLOBAL_EMPLOYEE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_INTEL_SMS__INVENTORY_HISTORY_SUMMARY
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_INTEL_SMS__MDM_COMPANY
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_INTEL_SMS__MYSKILLS_COMPANY
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_INTEL_SMS__OPEN_PURCHASE_ORDER_MASTER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_INTEL_SMS__PART_STOCK_OVERVIEW_REPORT
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_INTEL_SMS__PURCHASE_ORDER_AGREEMENT_SCHEDULE_LINE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_INTEL_SMS__PURCHASE_ORDER_MASTER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_INTEL_SMS__PURCHASE_ORDER_SUPPLIER_CONFIRMATION
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_INTEL_SMS__SALES_ORDER_DOCUMENT_FLOW
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_INTEL_SMS__SHARED_DATASETS_COMPANY
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_INTEL_SMS__WORKERCOMPANYLIST
+  tests:
+  - has_data
+  - recently_run

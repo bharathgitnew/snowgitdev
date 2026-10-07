@@ -1,0 +1,92 @@
+name: SQL Clone Diff
+
+on:
+  workflow_dispatch:
+    inputs:
+      base_ref:
+        description: "Base branch or SHA (e.g. master)"
+        required: true
+        default: "master"
+
+      head_ref:
+        description: "Head branch or SHA to compare"
+        required: true
+        default: "sit"
+
+run-name: "${{ github.workflow }} | ${{ github.event_name }} | ${{ github.ref_name }} | ${{ github.run_id }}-${{ github.run_attempt }}"
+
+jobs:
+  diff-files:
+    name: Get changed Snow/ files
+    runs-on: [self-hosted, windows]
+    environment: ${{ github.ref_name == 'sit' && 'sit' || github.ref_name == 'qa' && 'qa' || github.ref_name == 'master' && 'master' }}
+    outputs:
+      has_changes: ${{ steps.pr-extractor.outputs.has_changes }}
+      files: ${{ steps.pr-extractor.outputs.changed_files }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          sparse-checkout: |
+            Snow/
+            .github/scripts/
+          sparse-checkout-cone-mode: true
+
+      - name: Get changed files - Snow
+        id: pr-extractor
+        shell: pwsh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          INPUT_BASE_REF: ${{ inputs.base_ref }}
+          INPUT_HEAD_REF: ${{ inputs.head_ref }}
+          INPUT_GRAB_ON: "Snow/"
+          INPUT_SQL_ONLY: "true"
+        run: python .github/scripts/get_diff_files.py
+
+  deploy-snowflake:
+    name: Deploy to Snowflake
+    runs-on: [self-hosted, windows]
+    needs: diff-files
+    environment: ${{ github.ref_name == 'sit' && 'sit' || github.ref_name == 'qa' && 'qa' || github.ref_name == 'master' && 'master' }}
+    env:
+      SNOWFLAKE_ACCOUNT: ${{ vars.SNOWFLAKE_ACCOUNT }}
+      SNOWFLAKE_USER: ${{ vars.SNOWFLAKE_USER }}
+      SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_SECRET }}
+      SNOWFLAKE_WAREHOUSE: ${{ vars.SNOWFLAKE_WAREHOUSE }}
+      SNOWFLAKE_ROLE: ${{ vars.SNOWFLAKE_ROLE }}
+      DEPLOYMENT_BRANCH_TEMPLATE: ${{ github.ref_name }}
+
+    if: ${{ needs.diff-files.outputs.has_changes == 'true' }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          sparse-checkout: |
+            Snow/
+            .github/scripts/
+          sparse-checkout-cone-mode: true
+
+      - name: Run changed files - Snow
+        shell: python
+        env:
+          SNOWFLAKE_ACCOUNT: ${{ vars.SNOWFLAKE_ACCOUNT }}
+          SNOWFLAKE_USER: ${{ vars.SNOWFLAKE_USER }}
+          SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_SECRET }}
+          SNOWFLAKE_WAREHOUSE: ${{ vars.SNOWFLAKE_WAREHOUSE }}
+          SNOWFLAKE_ROLE: ${{ vars.SNOWFLAKE_ROLE }}
+          DEPLOYMENT_BRANCH_TEMPLATE: ${{ github.ref_name }}
+        run: |
+          import subprocess
+          files = "${{ needs.diff-files.outputs.files }}".replace("||", " ").split()
+          print("Deploying files:", files)
+          for file in files:
+              print(f"Deploying {file}...")
+              subprocess.check_call(
+                  ["python", ".github\scripts\deploy_snowfiles.py", file]
+              )          
+ 

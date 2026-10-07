@@ -1,0 +1,103 @@
+{{ config(
+    	  materialized='incremental',
+    	  incremental_strategy='merge',
+    	  alias='SAP_US_PPT_EV_AUAK',
+    	  unique_key = ['BELNR'],
+          tags=["on_demand"],
+    	  transient=false	
+) }} 
+
+with source_data as (
+SELECT
+	JSONFIELD:"ABRNR"::STRING AS "ABRNR", 
+ 	JSONFIELD:"BELNR"::STRING AS "BELNR", 
+ 	JSONFIELD:"BLDAT"::STRING AS "BLDAT", 
+ 	JSONFIELD:"BUDAT"::STRING AS "BUDAT", 
+ 	JSONFIELD:"BUGJAHR"::STRING AS "BUGJAHR", 
+ 	JSONFIELD:"BUKRS"::STRING AS "BUKRS", 
+ 	JSONFIELD:"BUPERIO"::STRING AS "BUPERIO", 
+ 	JSONFIELD:"CO_VAART"::STRING AS "CO_VAART", 
+ 	JSONFIELD:"CPUDT"::STRING AS "CPUDT", 
+ 	JSONFIELD:"GJAHR"::STRING AS "GJAHR", 
+ 	JSONFIELD:"KOKRS"::STRING AS "KOKRS", 
+ 	JSONFIELD:"KURST"::STRING AS "KURST", 
+ 	JSONFIELD:"OBJNR"::STRING AS "OBJNR", 
+ 	JSONFIELD:"PERIO"::STRING AS "PERIO", 
+ 	JSONFIELD:"SAPRL"::STRING AS "SAPRL", 
+ 	JSONFIELD:"VERSN"::STRING AS "VERSN", 
+ 	JSONFIELD:"WRTTP"::STRING AS "WRTTP", 
+ 	JSONFIELD:"WSDAT"::STRING AS "WSDAT", 
+    JSONFIELD:"TIMESTMP"::STRING AS "TIMESTMP",  
+ 	JSONFIELD:"DELFLAG"::STRING AS "DELFLAG", 
+ 	JSONFIELD:"PSL_INSDATE"::STRING AS "PSL_INSDATE", 
+ 	JSONFIELD:"PSL_UPDDATE"::STRING AS "PSL_UPDDATE",
+	_FILEDATE,
+	_FILENAME
+FROM {{ source('SAPH','SAP_US_PPT_EV_AUAK') }}
+{% if is_incremental() %} WHERE _FILEDATE >= IFNULL((SELECT MAX(_FILEDATE) FROM {{ this }}), '1970-01-01') {% endif %}
+QUALIFY (ROW_NUMBER() OVER (PARTITION BY JSONFIELD:"BELNR"::STRING ORDER BY _FILEDATE DESC )) = 1
+),
+	
+transform_data as (
+SELECT 
+	_FILEDATE,
+	_FILENAME,
+	'{{ invocation_id }}' AS _AUDIT_LOG_ID,
+    SHA2('hash_me') as _ROW_HASH, -- Adds column to table on full refresh.
+    ABRNR, 
+ 	BELNR, 
+ 	BLDAT, 
+ 	BUDAT, 
+ 	BUGJAHR, 
+ 	BUKRS, 
+ 	BUPERIO, 
+ 	CO_VAART, 
+ 	CPUDT, 
+ 	GJAHR, 
+ 	KOKRS, 
+ 	KURST, 
+ 	OBJNR, 
+ 	PERIO, 
+ 	SAPRL, 
+ 	VERSN, 
+ 	WRTTP, 
+ 	WSDAT, 
+    TIMESTMP,  
+ 	DELFLAG, 
+ 	PSL_INSDATE, 
+ 	PSL_UPDDATE
+FROM source_data
+),
+	
+type_data as (
+SELECT
+    CAST(_FILEDATE AS TIMESTAMP_NTZ(9)) AS _FILEDATE,
+	CAST(_FILENAME as varchar(128)) as _FILENAME,
+    CAST(_AUDIT_LOG_ID as varchar(128)) as _AUDIT_LOG_ID,
+    CAST(_ROW_HASH as varchar(128)) as _ROW_HASH,
+    ABRNR, 
+ 	BELNR, 
+ 	BLDAT, 
+ 	BUDAT, 
+ 	BUGJAHR, 
+ 	BUKRS, 
+ 	BUPERIO, 
+ 	CO_VAART, 
+ 	CPUDT, 
+ 	GJAHR, 
+ 	KOKRS, 
+ 	KURST, 
+ 	OBJNR, 
+ 	PERIO, 
+ 	SAPRL, 
+ 	VERSN, 
+ 	WRTTP, 
+ 	WSDAT, 
+    CAST("TIMESTMP" AS FLOAT) AS "TIMESTMP", 
+ 	DELFLAG, 
+ 	PSL_INSDATE, 
+ 	PSL_UPDDATE
+from transform_data
+)
+
+select * from type_data

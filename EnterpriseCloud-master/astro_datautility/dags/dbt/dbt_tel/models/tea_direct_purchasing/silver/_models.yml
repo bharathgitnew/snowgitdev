@@ -1,0 +1,85 @@
+models:
+- name: SILVER__TEA_DIRECT_PURCHASING__BUSINESS_PARTNERS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_DIRECT_PURCHASING__BUSINESS_PARTNERS_GENERAL_DATA
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_DIRECT_PURCHASING__DAYS_OF_INVENTORY_MASTER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_DIRECT_PURCHASING__DROPSHIP_MODEL
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_DIRECT_PURCHASING__INVENTORY_HISTORY_SUMMARY
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_DIRECT_PURCHASING__INVENTORY_SALES_MATERIAL
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_DIRECT_PURCHASING__MATERIAL_SALES_ORG_MASTER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_DIRECT_PURCHASING__PRICE_MATRIX
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_DIRECT_PURCHASING__PURCHASE_INFORMATION_PURCHASE_ORDER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_DIRECT_PURCHASING__PURCHASE_ORDER_AGREEMENT_SCHEDULE_LINE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_DIRECT_PURCHASING__PURCHASE_ORDER_SUPPLIER_CONFIRMATION
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_DIRECT_PURCHASING__PURCHASING_SOURCE_LIST
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_DIRECT_PURCHASING__SALESORDER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_DIRECT_PURCHASING__SALES_ORDER_BILLING_LINE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_DIRECT_PURCHASING__SALES_ORDER_DELIVERY_LINE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_DIRECT_PURCHASING__SALES_ORDER_DOCUMENT_FLOW
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_DIRECT_PURCHASING__SALES_ORDER_SCHEDULE_LINE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_DIRECT_PURCHASING__SERVICEORDER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_DIRECT_PURCHASING__TEA_BAAN_SALES_SERVICES_ORDERS_BY_MONTH_CUSTOMER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_DIRECT_PURCHASING__TPL_ASN
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEA_DIRECT_PURCHASING__TPL_RECEIVING_ADVICE
+  tests:
+  - has_data
+  - recently_run

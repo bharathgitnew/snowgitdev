@@ -1,0 +1,9 @@
+sources:
+- name: OUTSYSTEMS
+  description: Landing Zone - For OUTSYSTEMS Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: OUTSYSTEMS
+  tables:
+  - name: BULKBILLING_LIST
+    identifier: BULKBILLING_LIST
+    description: Landing table for BULKBILLING_LIST from SQLServer [tel_sap_order_workflow].[dbo].[v_bulkbilling_list]

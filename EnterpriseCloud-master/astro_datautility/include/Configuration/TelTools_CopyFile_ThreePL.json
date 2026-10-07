@@ -1,0 +1,19 @@
+{
+    "CopyFile": {
+        "TPL_UPS_INVENTORY_FILE_US": {
+            "fileshare": "\\\\172.26.95.21\\BIData\\US",
+            "table": "TPL_UPS_INVENTORY_FILE_US",
+            "schema": "THREEPL",
+            "securables": {
+                "username": "telcustomerprod\\svc_bidata",
+                "password-name": "ThreePLInventory"
+            },
+            "file_pattern": "TEA_INV_*.CSV",
+            "is_incremental": true,
+            "delimiter": "|",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true
+        }
+    }
+}

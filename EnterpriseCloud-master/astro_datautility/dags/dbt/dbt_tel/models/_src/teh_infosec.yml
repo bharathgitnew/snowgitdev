@@ -1,0 +1,10 @@
+version: 2
+sources:
+- name: TEH_INFOSEC
+  description: Landing Zone - TEH_INFOSEC Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: TEH_INFOSEC
+  tables:
+  - name: MOBILEIRON_DEVICES
+    identifier: MOBILEIRON_DEVICES
+    description: Landing table for API ingestion / getMobileIronData.py

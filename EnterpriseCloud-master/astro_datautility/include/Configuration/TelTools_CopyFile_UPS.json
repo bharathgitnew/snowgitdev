@@ -1,0 +1,68 @@
+{
+    "CopyFile": {
+        "UPS-TEA_SEC_232": {
+            "fileshare": "<<FILE_SHARE>>\\Files\\UPS_Data",
+            "table": "TEA_SEC_232",
+            "schema": "UPS",
+            "file_pattern": "TEA SEC 232 Daily Report*.txt",
+            "is_incremental": false,
+            "delimiter": "|",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "xlsx",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "UPS-INVOICE_EXPORT_HISTORY_BY_INVOICE": {
+            "fileshare": "<<FILE_SHARE>>\\Files\\UPS_Data",
+            "table": "INVOICE_EXPORT_HISTORY_BY_INVOICE",
+            "schema": "UPS",
+            "file_pattern": "InvoiceExportHistory_Invoice_*.xlsx",
+            "is_incremental": false,
+            "delimiter": "|",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "xlsx",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "UPS-INVOICE_EXPORT_HISTORY_BY_BILLING_DATE": {
+            "fileshare": "<<FILE_SHARE>>\\Files\\UPS_Data",
+            "table": "INVOICE_EXPORT_HISTORY_BY_BILLING_DATE",
+            "schema": "UPS",
+            "file_pattern": "InvoiceExportHistory_Billing_Date_*.xlsx",
+            "is_incremental": false,
+            "delimiter": "|",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "xlsx",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        },
+        "UPS-TEA_ORDERS": {
+            "fileshare": "<<FILE_SHARE>>\\Files\\UPS_Data",
+            "table": "TEA_ORDERS",
+            "schema": "UPS",
+            "file_pattern": "TEA Orders*.xlsx",
+            "is_incremental": false,
+            "delimiter": "|",
+            "skip_header": false,
+            "ignore_header": true,
+            "is_active": true,
+            "file_format": "xlsx",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        }
+    }
+}

@@ -1,0 +1,101 @@
+/************
+Model file generated from dbtGeneratePubViews: 08.28.2023.08.32.40"
+*************/
+
+{{ config(
+      materialized='view',
+      alias='CUSTOMER_MASTER_COMPANY_CODE',
+      transient=false
+) }}
+
+with source_data as (
+    SELECT
+        MANDT,
+        KUNNR,
+        BUKRS,
+        PERNR,
+        ERDAT,
+        ERNAM,
+        SPERR,
+        LOEVM,
+        ZUAWA,
+        BUSAB,
+        AKONT,
+        BEGRU,
+        KNRZE,
+        KNRZB,
+        ZAMIM,
+        ZAMIV,
+        ZAMIR,
+        ZAMIB,
+        ZAMIO,
+        ZWELS,
+        XVERR,
+        ZAHLS,
+        ZTERM,
+        WAKON,
+        VZSKZ,
+        ZINDT,
+        ZINRT,
+        EIKTO,
+        ZSABE,
+        KVERM,
+        FDGRV,
+        VRBKZ,
+        VLIBB,
+        VRSZL,
+        VRSPR,
+        VRSNR,
+        VERDT,
+        PERKZ,
+        XDEZV,
+        XAUSZ,
+        WEBTR,
+        REMIT,
+        DATLZ,
+        XZVER,
+        TOGRU,
+        KULTG,
+        HBKID,
+        XPORE,
+        BLNKZ,
+        ALTKN,
+        ZGRUP,
+        URLID,
+        MGRUP,
+        LOCKB,
+        UZAWE,
+        EKVBD,
+        SREGL,
+        XEDIP,
+        FRGRP,
+        VRSDG,
+        TLFXS,
+        INTAD,
+        XKNZB,
+        GUZTE,
+        GRICD,
+        GRIDT,
+        WBRSL,
+        CONFS,
+        UPDAT,
+        UPTIM,
+        NODEL,
+        TLFNS,
+        CESSION_KZ,
+        AVSND,
+        AD_HASH,
+        QLAND,
+        CVP_XBLCK_B,
+        CIIUCODE,
+        GMVKZD,
+        _CAPTUREDATETIME
+    from {{ ref('ODS__SAPO__CUSTOMER_MASTER_COMPANY_CODE') }}
+),
+
+transform_data AS
+(
+    select * from source_data
+)
+
+    select * from transform_data

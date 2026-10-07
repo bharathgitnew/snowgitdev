@@ -1,0 +1,25 @@
+{
+  "ADS-MADataOutputProduction": {
+    "DataSet1": {
+      "schema": "dbo",
+      "table": "Prod_ENTITY_Output_ES",
+      "Incremental": "NULL",
+      "sftablename": "PROD_ENTITY_OUTPUT_ES",
+      "filter": ""
+    },
+    "DataSet2": {
+      "schema": "dbo",
+      "table": "Prod_Tool_List_Output_ES",
+      "Incremental": "NULL",
+      "sftablename": "PROD_TOOL_LIST_OUTPUT_ES",
+      "filter": ""
+    },
+    "DataSet3": {
+      "schema": "dbo",
+      "table": "Prod_WW_Output_ES",
+      "Incremental": "NULL",
+      "sftablename": "PROD_WW_OUTPUT_ES",
+      "filter": ""
+    }
+  }
+}

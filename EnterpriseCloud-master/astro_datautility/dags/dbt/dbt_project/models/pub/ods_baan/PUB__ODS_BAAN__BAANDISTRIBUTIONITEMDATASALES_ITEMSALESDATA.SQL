@@ -1,0 +1,51 @@
+/************
+Model file generated from dbtGeneratePubViews: 03.10.2022.08.14.05"
+*************/
+
+{{ config(
+      materialized='view',
+      alias='BAANDISTRIBUTIONITEMDATASALES_ITEMSALESDATA',
+      transient=false
+) }}
+
+with source_data as (
+    SELECT
+        _CAPTUREDATETIME,
+        _COMPANYID,
+        ACCESSORIESALLOWEDDESCRIPTION,
+        ACCESSORIESALLOWEDID,
+        COMMISSIONGROUP,
+        COMMITMENTPOLICYDESCRIPTION,
+        COMMITMENTPOLICYID,
+        DIRECTDELIVERYFROMQUANTITY,
+        ITEM,
+        ITEMSALESTEXT,
+        LASTSALESPRICETRANSACTIONDATE,
+        LOWERMARGIN,
+        MINIMUMORDERQUANTITY,
+        MINIMUMQUANTITYTOCOMMIT,
+        MINIMUMRATEFORCOMMITMENT,
+        RELEASETOWAREHOUSEDESCRIPTION,
+        RELEASETOWAREHOUSEID,
+        RETURNCOMPONENTSDESCRIPTION,
+        RETURNCOMPONENTSID,
+        SALESPRICE,
+        SALESPRICEGROUP,
+        SALESPRICEUNIT,
+        SALESREBATEGROUP,
+        SALESSTATISTICSGROUP,
+        SALESUNIT,
+        SEARCHKEYI,
+        SUGGESTEDRETAILPRICE,
+        TAXCODE,
+        UPPERMARGIN,
+        WAREHOUSE
+    from {{ ref('ODS__BAAN__BAANDISTRIBUTIONITEMDATASALES_ITEMSALESDATA') }}
+),
+
+transform_data AS
+(
+    select * from source_data
+)
+
+    select * from transform_data

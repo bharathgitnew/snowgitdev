@@ -1,0 +1,109 @@
+models:
+- name: GOLD__TMEA_QUALITY__DISPLAY_LIST_OF_TASKS_LIST_OF_NOTIFICATIONS
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_QUALITY__FLOOR_QUALITY_CONTROL_TAT
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_QUALITY__FQC_BACKLOG
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_QUALITY__FQC_ITEMIZED_BACKLOG
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_QUALITY__FQC_STOCK
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_QUALITY__GOOD_RECEIPT_RECEIVABLES
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_QUALITY__IQC_BACKLOG
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_QUALITY__IQC_ITEMIZED_BACKLOG
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_QUALITY__IQC_STOCK
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_QUALITY__MANUFACTURING_QUALITY_NOTIFICATIONS
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_QUALITY__MATERIAL_GOODS_ISSUE_FOR_MANUFACTURING_ORDER
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_QUALITY__MATERIAL_REVIEW_BOARD_TAT
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_QUALITY__MATERIAL_SUPPLIER
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_QUALITY__MRB_BACKLOG
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_QUALITY__MRB_ITEMIZED_BACKLOG
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_QUALITY__MRB_STOCK
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_QUALITY__NONCONFORMING_MATERIAL_NUMBER_PPM
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_QUALITY__PPM_SUPPLIER_GROUPS
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_QUALITY__PPM_SUPPLIER_GROUPS_COMPLAINT_AND_RECEIPT_QTY
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_QUALITY__QN_TOOL_SCORECARD
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_QUALITY__RTVS_BACKLOG
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_QUALITY__RTVS_ITEMIZED_BACKLOG
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_QUALITY__RTVS_STOCK
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_QUALITY__SUPPLIER_CHANGE_REQUESTS
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_QUALITY__SUPPLIER_CHANGE_REQUEST_HISTORY
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_QUALITY__SUPPLIER_CHANGE_REQUEST_TAT_MILESTONES
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_QUALITY__SUPPLIER_QUALITY_NOTIFICATIONS
+  tests:
+  - has_data
+  - recently_run

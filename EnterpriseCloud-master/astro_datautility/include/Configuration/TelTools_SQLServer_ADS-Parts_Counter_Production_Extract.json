@@ -1,0 +1,18 @@
+{
+  "ADS-Parts_Counter_Production": {
+    "DataSet1": {
+      "schema": "dbo",
+      "table": "Prod_Entity_Reset",
+      "Incremental": "NULL",
+      "sftablename": "PROD_ENTITY_RESET",
+      "filter": ""
+    },
+    "DataSet2": {
+      "schema": "dbo",
+      "table": "Prod_PM_Reset",
+      "Incremental": "NULL",
+      "sftablename": "PROD_PM_RESET",
+      "filter": ""
+    }
+  }
+}

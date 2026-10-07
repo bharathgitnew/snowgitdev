@@ -1,0 +1,47 @@
+{
+    "TEL_Workday_USA-Attendance_Status": {
+        "fileshare": "172.26.95.51/sftp_root2/TEL_Workday_USA/bidata",
+        "table": "ATTENDANCE_STATUS",
+        "schema": "FILE",
+        "file_pattern": "Attendance_Status.csv",
+        "is_incremental": true,
+        "delimiter": ",",
+        "skip_header": false,
+        "is_active": true,
+        "securables": {
+            "username": "TEHBIUser",
+            "password-name": "SFTP-WORKDAY-SVC-PASSWORD"
+        }
+    },
+    "TEL_Workday_USA-Campaign": {
+        "fileshare": "172.26.95.51/sftp_root2/TEL_Workday_USA/bidata",
+        "table": "CAMPAIGN",
+        "schema": "FILE",
+        "file_pattern": "Campaign.csv",
+        "is_incremental": true,
+        "delimiter": ",",
+        "skip_header": false,
+        "is_active": true,
+        "securables": {
+            "username": "TEHBIUser",
+            "password-name": "SFTP-WORKDAY-SVC-PASSWORD"
+        }
+    },
+    "TEA_SEC_232_Daily_Report": {
+        "fileshare": "ftp2.ups.com/reports/archive",
+        "table": "TEA_SEC_232",
+        "schema": "UPS",
+        "file_pattern": "TEA SEC 232 * Report*.txt",
+        "is_incremental": true,
+        "delimiter": "\t",
+        "skip_header": false,
+		"ignore_header": true,
+        "is_active": true,
+		"port": 10022,
+		"load_as_json": true,
+        "securables": {
+            "username": "tokyoea",
+            "password-name": "UPS-FTPSITE-PASSWORD"
+        }
+    }
+}

@@ -1,0 +1,17 @@
+models:
+- name: BRONZE__TMEA_SAFETY__SHAREPOINT_TMEA_ENVIRONMENTAL_KPI
+  tests:
+  - has_data
+
+- name: BRONZE__TMEA_SAFETY__SHAREPOINT_TMEA_MANAGEMENT_KPI_GOALS
+  tests:
+  - has_data
+
+- name: BRONZE__TMEA_SAFETY__TIRS_ACCIDENTREPORTSFORUS_NOLOCK
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TMEA_SAFETY__TIRS_ACCIDENTWORKFLOWPROGRESSFORUS_NOLOCK
+  tests:
+  - has_data
+  - recently_run

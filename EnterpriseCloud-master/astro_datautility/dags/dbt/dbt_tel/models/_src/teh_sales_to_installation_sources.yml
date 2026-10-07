@@ -1,0 +1,10 @@
+version: 2
+sources:
+- name: STATIC_OBJECTS
+  description: BRONZE-TEH_SALES_TO_INSTALLATION Schema
+  database: '{{ env_var(''SNOWFLAKE_BRONZE'') }}'
+  schema: TEH_SALES_TO_INSTALLATION
+  tables:
+  - name: STATIC_LEGACY_INTEL_GLOBAL_MACHINE_HISTORY_SNAPSHOT
+    identifier: STATIC_LEGACY_INTEL_GLOBAL_MACHINE_HISTORY_SNAPSHOT  
+  

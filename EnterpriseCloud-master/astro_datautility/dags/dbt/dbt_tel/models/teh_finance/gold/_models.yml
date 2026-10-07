@@ -1,0 +1,102 @@
+version: 2
+models:
+- name: GOLD__TEH_FINANCE__ACCOUNTS_RECEIVABLE_AGING
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_FINANCE__BOOKING_BILLING_BACKLOG
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_FINANCE__BOOKING_BILLING_BACKLOG_DAILY
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_FINANCE__CONTRACT_BACKLOG
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_FINANCE__DAILY_ACTUALS_SALES_LINE_SNAPSHOT
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_FINANCE__DEFERRED_REVENUE
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_FINANCE__FBR_ACCOUNTS_RECEIVABLE_AGING
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_FINANCE__FINANCE_BACKLOG
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_FINANCE__GROSS_SALES_BY_COUNTRY_STATE_CITY
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_FINANCE__INTERCOMPANY_REVENUE_COGS
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_FINANCE__INV_PURCHASES_FINANCE
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_FINANCE__INVENTORY_PURCHASE
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_FINANCE__INVENTORY_REVALUATION
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_FINANCE__NCDR_RETURNS
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_FINANCE__OPEN_INVOICES
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_FINANCE__PARTS_ACCRUAL_VALIDATION
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_FINANCE__PARTS_ACCRUAL_VALIDATION_MONTHLY
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_FINANCE__PARTS_MARGIN_ANALYSIS
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_FINANCE__PURCHASE_ORDER_LINE_REPORT
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_FINANCE__SALES_TAX
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_FINANCE__TAX_FOR_IPR
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_FINANCE__TMEA_TAX_FY23
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_FINANCE__VENDOR_INVOICES
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_FINANCE__WIP_SERVICE_DETAILS
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEH_FINANCE__WIP_SERVICE_NCDR_REPAIR
+  tests:
+  - has_data
+  - recently_run

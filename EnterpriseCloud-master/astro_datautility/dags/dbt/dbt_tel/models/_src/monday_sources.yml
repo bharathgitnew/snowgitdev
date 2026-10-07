@@ -1,0 +1,40 @@
+version: 2
+sources:
+- name: MONDAY
+  description: Landing Zone - MONDAY Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: MONDAY
+  tables:
+  - name: TCD_MASTER_PROD_WORKING
+    identifier: TCD_MASTER_PROD_WORKING
+    description: Landing table for TCD_MASTER_PROD_WORKING file.
+  - name: WORKSPACE
+    identifier: WORKSPACE
+    description: Landing table for WORKSPACE file.
+  - name: ITEMS
+    identifier: ITEMS
+    description: Landing table for ITEMS file.
+  - name: SUBITEMSID
+    identifier: SUBITEMSID
+    description: Landing table for SUBITEMSID file.
+  - name: SUBITEMS
+    identifier: SUBITEMS
+    description: Landing table for SUBITEMS file.
+  - name: TMEA_PROJECTS_TOP_LEVEL
+    identifier: TMEA_PROJECTS_TOP_LEVEL
+    description: Landing table for TMEA_PROJECTS_TOP_LEVEL file.
+  - name: WORK_ITEMS
+    identifier: WORK_ITEMS
+    description: Landing table for WORK_ITEMS file.
+  - name: ENGINEERING_ACTION_REQUESTS
+    identifier: ENGINEERING_ACTION_REQUESTS
+    description: Landing table for ENGINEERING_ACTION_REQUESTS file.
+  - name: ENGINEERING_CHANGE_CONTROL
+    identifier: ENGINEERING_CHANGE_CONTROL
+    description: Landing table for ENGINEERING_CHANGE_CONTROL file.
+  - name: ENGINEERING_CHANGE_CONTROL_ACTIVITY_LOG
+    identifier: ENGINEERING_CHANGE_CONTROL_ACTIVITY_LOG
+    description: Landing table for ENGINEERING_CHANGE_CONTROL_ACTIVITY_LOG file.
+  - name: CUE_ORDER_TRACKING
+    identifier: CUE_ORDER_TRACKING
+    description: Landing table for CUE_ORDER_TRACKING file.

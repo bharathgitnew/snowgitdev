@@ -1,0 +1,39 @@
+{
+    "REDGATE": {
+        "DataSet1": {
+            "schema": "alert",
+            "table": "Alert",
+            "Incremental": "NULL",
+            "sftablename": "ALERT",
+            "filter": ""
+        },
+        "DataSet2": {
+            "schema": "alert",
+            "table": "Alert_Type",
+            "Incremental": "NULL",
+            "sftablename": "ALERTTYPE",
+            "filter": ""
+        },
+        "DataSet3": {
+            "schema": "alert",
+            "table": "Alert_Severity",
+            "Incremental": "NULL",
+            "sftablename": "ALERTSEVERITY",
+            "filter": ""
+        },
+        "DataSet4": {
+            "schema": "alert",
+            "table": "Alert_Comment",
+            "Incremental": "NULL",
+            "sftablename": "ALERTCOMMENT",
+            "filter": ""
+        },
+        "DataSet5": {
+            "schema": "datawarehouse",
+            "table": "LastBackups",
+            "Incremental": "NULL",
+            "sftablename": "LASTBACKUP",
+            "filter": ""
+        }
+    }
+}

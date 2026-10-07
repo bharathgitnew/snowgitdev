@@ -1,0 +1,10 @@
+USE ROLE TASKADMIN;
+USE WAREHOUSE SYSTEMMAINTENANCE_WH;
+
+CREATE OR REPLACE TASK <<ADMIN>>.Entitlement.Map_Finance_Expense_PC_Load
+  WAREHOUSE = SYSTEMMAINTENANCE_WH
+  SCHEDULE = 'USING CRON 0 21 * * * America/Chicago'
+  ALLOW_OVERLAPPING_EXECUTION = FALSE
+  COMMENT = 'Finance_Expense Entitlement Security Load'
+AS CALL <<ADMIN>>.Entitlement.Map_Finance_Expense_PC()
+;

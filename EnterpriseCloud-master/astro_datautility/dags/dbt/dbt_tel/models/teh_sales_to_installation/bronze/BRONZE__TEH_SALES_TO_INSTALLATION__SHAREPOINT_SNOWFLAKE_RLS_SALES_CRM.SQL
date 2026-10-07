@@ -1,0 +1,103 @@
+/************
+    Model file generated from SAPAPIUtility 
+    *************/
+    
+    
+    {{ config(
+          materialized='tel_incremental',
+          incremental_strategy='insert_overwrite',
+          alias='SHAREPOINT_SNOWFLAKE_RLS_SALES_CRM',
+          transient=false    
+) }} 
+    
+    with source_data as (
+        SELECT
+        JSONFIELD:fields:Title::STRING AS "FIRST_NAME", 
+ 	 	JSONFIELD:fields:LastName::STRING AS "LAST_NAME", 
+ 	 	JSONFIELD:fields:Email::STRING AS "EMAIL", 
+ 	 	JSONFIELD:fields:SEAOTHERS_x002d_TI::STRING AS "SEA & OTHERS-TI", 
+ 	 	JSONFIELD:fields:SEAOTHERS_x002d_INTEL::STRING AS "SEA & OTHERS-INTEL", 
+ 	 	JSONFIELD:fields:SEAOTHERS_x002d_MICRON::STRING AS "SEA & OTHERS-MICRON", 
+ 	 	JSONFIELD:fields:NORTHAMERICA_x002d_TI::STRING AS "NORTH AMERICA-TI", 
+ 	 	JSONFIELD:fields:NORTHAMERICA_x002d_INTEL::STRING AS "NORTH AMERICA-INTEL", 
+ 	 	JSONFIELD:fields:NORTHAMERICA_x002d_MICRON::STRING AS "NORTH AMERICA-MICRON", 
+ 	 	JSONFIELD:fields:NORTHAMERICA_x002d_REGIONAL::STRING AS "NORTH AMERICA-REGIONAL", 
+ 	 	JSONFIELD:fields:NORTHAMERICA_x002d_GF_x002f_IBM::STRING AS "NORTH AMERICA-GF/IBM", 
+ 	 	JSONFIELD:fields:NORTHAMERICA_x002d_TSMC::STRING AS "NORTH AMERICA-TSMC", 
+ 	 	JSONFIELD:fields:NORTHAMERICA_x002d_SAMSUNG::STRING AS "NORTH AMERICA-SAMSUNG", 
+ 	 	JSONFIELD:fields:NORTHAMERICA_x002d_TELGROUP::STRING AS "NORTH AMERICA-TEL GROUP", 
+ 	 	JSONFIELD:fields:EUROPE_x002d_GF_x002f_IBM::STRING AS "EUROPE-GF/BIM", 
+		JSONFIELD:fields:EUROPE_x002d_REGIONAL::STRING AS "EUROPE-REGIONAL",
+ 	 	JSONFIELD:fields:EUROPE_x002d_TI::STRING AS "EUROPE-TI", 
+ 	 	JSONFIELD:fields:EUROPE_x002d_INTEL::STRING AS "EUROPE-INTEL", 
+ 	 	JSONFIELD:fields:EUROPE_x002d_MICRON::STRING AS "EUROPE-MICRON", 
+ 	 	JSONFIELD:fields:CHINA_x002d_INTEL::STRING AS "CHINA-INTEL", 
+ 	 	JSONFIELD:fields:CHINA_x002d_TI::STRING AS "CHINA-TI", 
+        _FILEDATE,
+		_FILENAME,
+        _UPLOADDATE
+        FROM {{ source('SHAREPOINT', 'RLS_SALES_CRM') }} AS RLS_SALES_CRM
+        {% if is_tel_incremental() %}WHERE  _UPLOADDATE > IFNULL((SELECT MAX(_UPLOADDATE) FROM {{ this }}),'1970-01-01'){% endif %}
+        QUALIFY (ROW_NUMBER() OVER (PARTITION BY EMAIL  ORDER BY _FILEDATE DESC, _UPLOADDATE DESC)) = 1
+    ),
+    transform_data as (
+        SELECT
+		'{{ invocation_id }}' AS _AUDIT_LOG_ID,
+        SHA2('hash_me') as _ROW_HASH,
+		_FILEDATE,
+        "EMAIL", 
+        "FIRST_NAME", 
+ 	 	"LAST_NAME", 
+ 	 	"SEA & OTHERS-TI", 
+ 	 	"SEA & OTHERS-INTEL", 
+ 	 	"SEA & OTHERS-MICRON", 
+ 	 	"NORTH AMERICA-TI", 
+ 	 	"NORTH AMERICA-INTEL", 
+ 	 	"NORTH AMERICA-MICRON", 
+ 	 	"NORTH AMERICA-REGIONAL", 
+ 	 	"NORTH AMERICA-GF/IBM", 
+ 	 	"NORTH AMERICA-TSMC", 
+ 	 	"NORTH AMERICA-SAMSUNG", 
+ 	 	"NORTH AMERICA-TEL GROUP", 
+ 	 	"EUROPE-GF/BIM", 
+		"EUROPE-REGIONAL",
+ 	 	"EUROPE-TI", 
+ 	 	"EUROPE-INTEL", 
+ 	 	"EUROPE-MICRON", 
+ 	 	"CHINA-INTEL", 
+ 	 	"CHINA-TI",
+		_FILENAME,
+        _UPLOADDATE		
+        FROM source_data
+    ),
+    type_data as (
+        SELECT
+		cast(_AUDIT_LOG_ID as varchar(128)) as _AUDIT_LOG_ID,
+        cast(_ROW_HASH as varchar(128)) as _ROW_HASH,
+     	"EMAIL", 
+        "FIRST_NAME", 
+ 	 	"LAST_NAME", 
+ 	 	"SEA & OTHERS-TI", 
+ 	 	"SEA & OTHERS-INTEL", 
+ 	 	"SEA & OTHERS-MICRON", 
+ 	 	"NORTH AMERICA-TI", 
+ 	 	"NORTH AMERICA-INTEL", 
+ 	 	"NORTH AMERICA-MICRON", 
+ 	 	"NORTH AMERICA-REGIONAL", 
+ 	 	"NORTH AMERICA-GF/IBM", 
+ 	 	"NORTH AMERICA-TSMC", 
+ 	 	"NORTH AMERICA-SAMSUNG", 
+ 	 	"NORTH AMERICA-TEL GROUP", 
+ 	 	"EUROPE-GF/BIM", 
+		"EUROPE-REGIONAL",
+ 	 	"EUROPE-TI", 
+ 	 	"EUROPE-INTEL", 
+ 	 	"EUROPE-MICRON", 
+ 	 	"CHINA-INTEL", 
+ 	 	"CHINA-TI",
+        cast(_FILEDATE AS TIMESTAMP_NTZ(9)) AS _FILEDATE,
+		cast(_FILENAME as varchar(128)) as _FILENAME,
+        cast(_UPLOADDATE as TIMESTAMP_NTZ(9)) as _UPLOADDATE
+        FROM transform_data
+    )
+    SELECT * FROM type_data

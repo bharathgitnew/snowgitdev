@@ -1,0 +1,29 @@
+dbt_project:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      account: "{{ env_var('SNOWFLAKE_ACCOUNT') }}"
+      user: "{{ env_var('SNOWFLAKE_USER') }}"
+      password: "{{ env_var('SNOWFLAKE_SECRET') }}"
+      role: "{{ env_var('SNOWFLAKE_ROLE') }}"
+      warehouse: "{{ env_var('SNOWFLAKE_WAREHOUSE') }}"
+      database: "{{ env_var('SNOWFLAKE_ADMIN') }}"
+      schema: DUMMY_SCHEMA
+      threads: 4
+      client_session_keep_alive: False
+
+dbt_tel:
+  target: dev
+  outputs:
+    dev:
+      account: '{{ env_var(''SNOWFLAKE_ACCOUNT'') }}'
+      user: "{{ env_var('SNOWFLAKE_USER') }}"
+      password: "{{ env_var('SNOWFLAKE_SECRET') }}"
+      database: "{{ env_var('SNOWFLAKE_BRONZE') }}"
+      role: "{{ env_var('SNOWFLAKE_PLATFORM_TEAM') }}"
+      schema: DUMMY_SCHEMA
+      threads: 8
+      type: snowflake
+      warehouse: PLATFORM_WH
+      client_session_keep_alive: False

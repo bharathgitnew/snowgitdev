@@ -1,0 +1,10 @@
+version: 2
+models:
+- name: COMMON__NOW__NOWDATA
+  description: Model Nowdata file.
+- name: COMMON__NOW__DEFECTIVE_PORTION_TYPES
+  description: Model Defective_portion_types file.
+- name: COMMON__NOW__NCDR_PARTS
+  description: Model NCDR_Parts file.
+- name: COMMON__NOW__SERIAL_NUMBERS
+  description: Model SERIAL_Numbers file.

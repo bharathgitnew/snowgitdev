@@ -1,0 +1,20 @@
+version: 2
+models:
+- name: COMMON__PROPHET__DEMANDRETURN_HISTORY
+  description: Model PROPHET DemandReturn_History file.
+- name: COMMON__PROPHET__DEMANDRETURN_LIVE
+  description: Model PROPHET DemandReturn_History file.
+- name: COMMON__PROPHET__DEMAND_HISTORY
+  description: Model PROPHET Demand_History file.
+- name: COMMON__PROPHET__DEMAND_LIVE
+  description: Model PROPHET Demand_Live file.
+- name: COMMON__PROPHET__INVENTORY_HISTORY
+  description: Model PROPHET Inventory_History file.
+- name: COMMON__PROPHET__INVENTORY_LIVE
+  description: Model PROPHET Inventory_Live file.
+- name: COMMON__PROPHET__INVENTORY_ACTIVE
+  description: Model PROPHET Inventory_Active file.
+- name: COMMON__PROPHET__ORDERS_HISTORY
+  description: Model PROPHET Orders_History file.
+- name: COMMON__PROPHET__ORDERS_LIVE
+  description: Model PROPHET Orders_Live file.

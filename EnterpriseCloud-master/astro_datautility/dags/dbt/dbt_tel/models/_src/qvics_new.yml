@@ -1,0 +1,72 @@
+sources:
+  - name: QVICS
+    description: Landing Zone - For QVICS Schema
+    database: "{{ env_var('SNOWFLAKE_LZ') }}"
+    schema: QVICS
+    tables:
+      - name: CONTROLTABLE
+        identifier: CONTROLTABLE
+        description: Control table for tracking the last run time of each source table in QVICS schema
+      - name: V_APPROVALACTIVITIES
+        identifier: V_APPROVALACTIVITIES
+        description: Landing table for V_APPROVALACTIVITIES from SQLServer [QVICS_c].[dbo].[v_ApprovalActivities]
+      - name: V_LISTASSIGNEDPEOPLE
+        identifier: V_LISTASSIGNEDPEOPLE
+        description: Landing table for V_LISTASSIGNEDPEOPLE from SQLServer [QVICS_c].[dbo].[v_listAssignedPeople]
+      - name: V_ATTACHMENTSALL
+        identifier: V_ATTACHMENTSALL
+        description: Landing table for V_ATTACHMENTSALL from SQLServer [QVICS_c].[dbo].[v_attachmentsALL]
+      - name: V_LISTTROUBLES
+        identifier: V_LISTTROUBLES
+        description: Landing table for V_LISTTROUBLES from SQLServer [QVICS_c].[dbo].[v_listTroubles]
+      - name: V_EMERGENTMEASURES
+        identifier: V_EMERGENTMEASURES
+        description: Landing table for V_EMERGENTMEASURES from SQLServer [QVICS_c].[dbo].[v_emergentMeasures]
+      - name: V_LISTQUICKTROUBLES
+        identifier: V_LISTQUICKTROUBLES
+        description: Landing table for V_LISTQUICKTROUBLES from SQLServer [QVICS_c].[dbo].[v_listQuickTroubles]
+      - name: V_LISTINQUIRIES
+        identifier: V_LISTINQUIRIES
+        description: Landing table for V_LISTINQUIRIES from SQLServer [QVICS_c].[dbo].[v_listInquiries]
+      - name: V_MASTER_ITEMS
+        identifier: V_MASTER_ITEMS
+        description: Landing table for V_MASTER_ITEMS from SQLServer [QVICS_c].[dbo].[v_Master_Items]
+      - name: V_LISTMESSAGES
+        identifier: V_LISTMESSAGES
+        description: Landing table for V_LISTMESSAGES from SQLServer [QVICS_c].[dbo].[v_listMessages]
+      - name: V_PARMANENTMEASURES
+        identifier: V_PARMANENTMEASURES
+        description: Landing table for V_PARMANENTMEASURES from SQLServer [QVICS_c].[dbo].[v_parmanentMeasures]
+      - name: V_PART_CONTROLS
+        identifier: V_PART_CONTROLS
+        description: Landing table for V_PART_CONTROLS from SQLServer [QVICS_c].[dbo].[v_Part_Controls]
+      - name: V_PARTS
+        identifier: V_PARTS
+        description: Landing table for V_PARTS from SQLServer [QVICS_c].[dbo].[v_Parts]
+      - name: V_TROUBLE_COMPONENTLISTS
+        identifier: V_TROUBLE_COMPONENTLISTS
+        description: Landing table for V_TROUBLE_COMPONENTLISTS from SQLServer [QVICS_c].[dbo].[v_trouble_componentLists]
+      - name: V_TROUBLE_OWNERLISTS
+        identifier: V_TROUBLE_OWNERLISTS
+        description: Landing table for V_TROUBLE_OWNERLISTS from SQLServer [QVICS_c].[dbo].[v_trouble_ownerLists]
+      - name: V_LISTUSEFULS
+        identifier: V_LISTUSEFULS
+        description: Landing table for V_LISTUSEFULS from SQLServer [QVICS_c].[dbo].[v_listUsefuls]
+      - name: V_LISTOPTIONS
+        identifier: V_LISTOPTIONS
+        description: Landing table for V_LISTOPTIONS from SQLServer [QVICS_c].[dbo].[v_listOptions]
+      - name: V_LISTCURRENTSTATUSES
+        identifier: V_LISTCURRENTSTATUSES
+        description: Landing table for V_LISTCURRENTSTATUSES from SQLServer [QVICS_c].[dbo].[v_listCurrentStatuses]
+      - name: V_LISTQVICS
+        identifier: V_LISTQVICS
+        description: Landing table for V_LISTQVICS from SQLServer [QVICS_c].[dbo].[v_listQVICS]
+      - name: V_LISTDEPARTMENTS
+        identifier: V_LISTDEPARTMENTS
+        description: Landing table for V_LISTDEPARTMENTS from SQLServer [QVICS_c].[dbo].[v_listDepartments]
+      - name: V_PARMANENTMEASURE_PROGRESSES
+        identifier: V_PARMANENTMEASURE_PROGRESSES
+        description: Landing table for V_PARMANENTMEASURE_PROGRESSES from SQLServer [QVICS_c].[dbo].[v_ParmanentMeasure_Progresses]
+      - name: QVICS_C_ES_LISTTROUBLES
+        identifier: QVICS_C_ES_LISTTROUBLES
+        description: Landing table for QVICS_C_ES_LISTTROUBLES from SQLServer [QVICS].[dbo].[QVICS_C_ES_LISTTROUBLES]

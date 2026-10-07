@@ -1,0 +1,16 @@
+version: 2
+sources:
+- name: MYSKILLS
+  description: Landing Zone - MYSKILLS Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: MYSKILLS
+  tables:
+  - name: GBMN_TABLE
+    identifier: GBMN_Table
+    description: Landing table for GBMN_Table file.
+  - name: KSMN_TABLE
+    identifier: KSMN_Table
+    description: Landing table for KSMN_Table file.
+  - name: WORKDAYEMPLOYEE
+    identifier: WorkdayEmployee
+    description: Landing table for WorkdayEmployee_JSON file.

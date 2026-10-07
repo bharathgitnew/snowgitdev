@@ -1,0 +1,460 @@
+version: 2
+sources:
+- name: SAPAPI
+  description: Landing Zone - SAPAPI Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: SAPAPI
+  tables:
+  - name: ZCDV_CM0660_03_AFVV
+    identifier: ZCDV_CM0660_03_AFVV
+    description: Landing table for ZCDV_CM0660_03_AFVV file.
+  - name: ZCDV_CM0610_24_ZMAT0011
+    identifier: ZCDV_CM0610_24_ZMAT0011
+    description: Landing table for ZCDV_CM0610_24_ZMAT0011 file.
+  - name: ZCDV_T_CMTU103_MATDOC_EXTRACT
+    identifier: ZCDV_T_CMTU103_MATDOC_EXTRACT
+    description: Landing table for ZCDV_T_CMTU103_MATDOC_EXTRACT file.
+  - name: ZCDV_T_CMTU197_RSEG
+    identifier: ZCDV_T_CMTU197_RSEG
+    description: Landing table for ZCDV_T_CMTU197_RSEG file.
+  - name: ZCDV_T_CMTU229_A916
+    identifier: ZCDV_T_CMTU229_A916
+    description: Landing table for ZCDV_T_CMTU229_A916 file.
+  - name: ZCDV_T_CMTU231_ZSDT0176
+    identifier: ZCDV_T_CMTU231_ZSDT0176
+    description: Landing table for ZCDV_T_CMTU231_ZSDT0176 file.
+  - name: ZCDV_T_CMTU217_EKBE
+    identifier: ZCDV_T_CMTU217_EKBE
+    description: Landing table for ZCDV_T_CMTU217_EKBE file.
+  - name: ZCDV_T_CMTU219_AFRU
+    identifier: ZCDV_T_CMTU219_AFRU
+    description: Landing table for ZCDV_T_CMTU219_AFRU file.
+  - name: ZCDV_T_CMTU222_AUAK
+    identifier: ZCDV_T_CMTU222_AUAK
+    description: Landing table for ZCDV_T_CMTU222_AUAK file.
+  - name: ZCDV_T_CMTU226_STAS
+    identifier: ZCDV_T_CMTU226_STAS
+    description: Landing table for ZCDV_T_CMTU226_STAS file.
+  - name: ZCDV_T_CMTU230_ZSDT2004
+    identifier: ZCDV_T_CMTU230_ZSDT2004
+    description: Landing table for ZCDV_T_CMTU230_ZSDT2004 file.
+  - name: ZCDV_T_CMTU233_VBBE
+    identifier: ZCDV_T_CMTU233_VBBE
+    description: Landing table for ZCDV_T_CMTU233_VBBE file.
+  - name: ZCDV_T_CMTU234_EORD
+    identifier: ZCDV_T_CMTU234_EORD
+    description: Landing table for ZCDV_T_CMTU234_EORD file.
+  - name: ZCDV_T_CMTU235_RESB
+    identifier: ZCDV_T_CMTU235_RESB
+    description: Landing table for ZCDV_T_CMTU235_RESB file.
+  - name: ZCDV_T_CMTU236_AFIH
+    identifier: ZCDV_T_CMTU236_AFIH
+    description: Landing table for ZCDV_T_CMTU236_AFIH file.
+  - name: ZCDV_T_CMTU237_RBKP
+    identifier: ZCDV_T_CMTU237_RBKP
+    description: Landing table for ZCDV_T_CMTU237_RBKP file.
+  - name: ZCDV_T_CMTU238_BNKA
+    identifier: ZCDV_T_CMTU238_BNKA
+    description: Landing table for ZCDV_T_CMTU238_BNKA file.
+  - name: ZCDV_T_CMTU239_T015W
+    identifier: ZCDV_T_CMTU239_T015W
+    description: Landing table for ZCDV_T_CMTU239_T015W file.
+  - name: AFIH
+    identifier: AFIH
+    description: Landing table for AFIH file.
+  - name: AFRD
+    identifier: AFRD
+    description: Landing table for AFRD file.
+  - name: AFRU
+    identifier: AFRU
+    description: Landing table for AFRU file.
+  - name: AUAK
+    identifier: AUAK
+    description: Landing table for AUAK file.
+  - name: EKBE
+    identifier: EKBE
+    description: Landing table for EKBE file.
+  - name: JSTO
+    identifier: JSTO
+    description: Landing table for JSTO file.
+  - name: TJ02
+    identifier: TJ02
+    description: Landing table for TJ02 file.
+  - name: TJ04
+    identifier: TJ04
+    description: Landing table for TJ04 file.
+  - name: RESB
+    identifier: RESB
+    description: Landing table for RESB file.
+  - name: ZMMT1013
+    identifier: ZMMT1013
+    description: Landing table for ZMMT1013 file.
+  - name: ZCDV_T_CMTU212_DFKKBPTAXNUM
+    identifier: ZCDV_T_CMTU212_DFKKBPTAXNUM
+    description: Landing table for ZCDV_T_CMTU212_DFKKBPTAXNUM file.
+  - name: ZCDV_T_CMTU213_ADR6
+    identifier: ZCDV_T_CMTU213_ADR6
+    description: Landing table for ZCDV_T_CMTU213_ADR6 file.
+  - name: ZCDV_T_CMTU210_CDHDR
+    identifier: ZCDV_T_CMTU210_CDHDR
+    description: Landing table for ZCDV_T_CMTU210_CDHDR file.
+  - name: ZCDV_T_CMTU203_TWLAD
+    identifier: ZCDV_T_CMTU203_TWLAD
+    description: Landing table for ZCDV_T_CMTU203_TWLAD file.
+  - name: ZCDV_T_CMTU206_LFBW
+    identifier: ZCDV_T_CMTU206_LFBW
+    description: Landing table for ZCDV_T_CMTU206_LFBW file.
+  - name: ZCDV_T_CMTU207_TIBAN
+    identifier: ZCDV_T_CMTU207_TIBAN
+    description: Landing table for ZCDV_T_CMTU207_TIBAN file.
+  - name: ZCDV_T_CMTU208_WYT3
+    identifier: ZCDV_T_CMTU208_WYT3
+    description: Landing table for ZCDV_T_CMTU208_WYT3 file.
+  - name: ZCDV_T_CMTU209_BUT020
+    identifier: ZCDV_T_CMTU209_BUT020
+    description: Landing table for ZCDV_T_CMTU209_BUT020 file.
+  - name: ZCDV_T_CMTU200_TVLKT
+    identifier: ZCDV_T_CMTU200_TVLKT
+    description: Landing table for ZCDV_T_CMTU200_TVLKT file.
+  - name: ZCDV_T_CMTU201_BUT0ID
+    identifier: ZCDV_T_CMTU201_BUT0ID
+    description: Landing table for ZCDV_T_CMTU201_BUT0ID file.
+  - name: ZCDV_T_CMTU184_ZSDT0015
+    identifier: ZCDV_T_CMTU184_ZSDT0015
+    description: Landing table for ZCDV_T_CMTU184_ZSDT0015 file.
+  - name: ZCDV_T_CMTU121_SKAT
+    identifier: ZCDV_T_CMTU121_SKAT
+    description: Landing table for ZCDV_T_CMTU121_SKAT file.
+  - name: ZCDV_T_CMTU123_T023T
+    identifier: ZCDV_T_CMTU123_T023T
+    description: Landing table for ZCDV_T_CMTU123_T023T file.
+  - name: ZCDV_T_CMTU125_T134T
+    identifier: ZCDV_T_CMTU125_T134T
+    description: Landing table for ZCDV_T_CMTU125_T134T file.
+  - name: ZCDV_T_CMTU196_AUAA
+    identifier: ZCDV_T_CMTU196_AUAA
+    description: Landing table for ZCDV_T_CMTU196_AUAA file.
+  - name: ZCDV_T_CMTU016_ZSDT0163
+    identifier: ZCDV_T_CMTU016_ZSDT0163
+    description: Landing table for ZCDV_T_CMTU016_ZSDT0163 file.
+  - name: ZCDV_T_CMTU061_LFA1
+    identifier: ZCDV_T_CMTU061_LFA1
+    description: Landing table for ZCDV_T_CMTU061_LFA1 file.
+  - name: ZCDV_T_CMTU119_AFKO
+    identifier: ZCDV_T_CMTU119_AFKO
+    description: Landing table for ZCDV_T_CMTU119_AFKO file.
+  - name: ZCDV_T_CMTU182_ZMAT0013
+    identifier: ZCDV_T_CMTU182_ZMAT0013
+    description: Landing table for ZCDV_T_CMTU182_ZMAT0013 file.
+  - name: ZCDV_T_CMTU187_ZSDT0165
+    identifier: ZCDV_T_CMTU187_ZSDT0165
+    description: Landing table for ZCDV_T_CMTU187_ZSDT0165 file.
+  - name: ZCDV_T_CMTU062_T001
+    identifier: ZCDV_T_CMTU062_T001
+    description: Landing table for ZCDV_T_CMTU062_T001 file.
+  - name: ZCDV_T_CMTU087_ADRC
+    identifier: ZCDV_T_CMTU087_ADRC
+    description: Landing table for ZCDV_T_CMTU087_ADRC file.
+  - name: ZCDV_T_CMTU092_CSKT
+    identifier: ZCDV_T_CMTU092_CSKT
+    description: Landing table for ZCDV_T_CMTU092_CSKT file.
+  - name: ZCDV_T_CMTU098_LFB1
+    identifier: ZCDV_T_CMTU098_LFB1
+    description: Landing table for ZCDV_T_CMTU098_LFB1 file.
+  - name: ZCDV_T_CMTU099_LFBK
+    identifier: ZCDV_T_CMTU099_LFBK
+    description: Landing table for ZCDV_T_CMTU099_LFBK file.
+  - name: ZCDV_T_CMTU100_LFM1
+    identifier: ZCDV_T_CMTU100_LFM1
+    description: Landing table for ZCDV_T_CMTU100_LFM1 file.
+  - name: ZCDV_CM0090_03_LFM1
+    identifier: ZCDV_CM0090_03_LFM1
+    description: Landing table for ZCDV_CM0090_03_LFM1 file.
+  - name: ZCDV_CM0700_05_AFKO
+    identifier: ZCDV_CM0700_05_AFKO
+    description: Landing table for ZCDV_CM0700_05_AFKO file.
+  - name: ZCDV_T_CMTU109_MSKA
+    identifier: ZCDV_T_CMTU109_MSKA
+    description: Landing table for ZCDV_T_CMTU109_MSKA file.
+  - name: ZCDV_T_CMTU110_MSKU
+    identifier: ZCDV_T_CMTU110_MSKU
+    description: Landing table for ZCDV_T_CMTU110_MSKU file.
+  - name: ZCDV_T_CMTU129_T161T
+    identifier: ZCDV_T_CMTU129_T161T
+    description: Landing table for ZCDV_T_CMTU129_T161T file.
+  - name: ZCDV_T_CMTU135_T178T
+    identifier: ZCDV_T_CMTU135_T178T
+    description: Landing table for ZCDV_T_CMTU135_T178T file.
+  - name: ZCDV_T_CMTU139_T685T
+    identifier: ZCDV_T_CMTU139_T685T
+    description: Landing table for ZCDV_T_CMTU139_T685T file.
+  - name: ZCDV_T_CMTU147_TMVFT
+    identifier: ZCDV_T_CMTU147_TMVFT
+    description: Landing table for ZCDV_T_CMTU147_TMVFT file.
+  - name: ZCDV_T_CMTU171_TVM1T
+    identifier: ZCDV_T_CMTU171_TVM1T
+    description: Landing table for ZCDV_T_CMTU171_TVM1T file.
+  - name: ZCDV_T_CMTU173_TVM2T
+    identifier: ZCDV_T_CMTU173_TVM2T
+    description: Landing table for ZCDV_T_CMTU173_TVM2T file.
+  - name: ZCDV_T_CMTU105_MCHB
+    identifier: ZCDV_T_CMTU105_MCHB
+    description: Landing table for ZCDV_T_CMTU105_MCHB file.
+  - name: ZCDV_T_CMTU192_FPLT
+    identifier: ZCDV_T_CMTU192_FPLT
+    description: Landing table for ZCDV_T_CMTU192_FPLT file.
+  - name: ZCDV_T_CMTU082_A032
+    identifier: ZCDV_T_CMTU082_A032
+    description: Landing table for ZCDV_T_CMTU082_A032 file.
+  - name: ZCDV_T_CMTU084_A350
+    identifier: ZCDV_T_CMTU084_A350
+    description: Landing table for ZCDV_T_CMTU084_A350 file.
+  - name: ZCDV_T_CMTU086_A919
+    identifier: ZCDV_T_CMTU086_A919
+    description: Landing table for ZCDV_T_CMTU086_A919 file.
+  - name: ZCDV_T_CMTU183_ZSDT0013
+    identifier: ZCDV_T_CMTU183_ZSDT0013
+    description: Landing table for ZCDV_T_CMTU183_ZSDT0013 file.
+  - name: ZCDV_T_CMTU191_FPLA
+    identifier: ZCDV_T_CMTU191_FPLA
+    description: Landing table for ZCDV_T_CMTU191_FPLA file.
+  - name: ZCDV_T_CMTU120_DD07T_POSAR
+    identifier: ZCDV_T_CMTU120_DD07T_POSAR
+    description: Landing table for ZCDV_T_CMTU120_DD07T_POSAR file.
+  - name: ZCDV_T_CMTU155_TVAGT
+    identifier: ZCDV_T_CMTU155_TVAGT
+    description: Landing table for ZCDV_T_CMTU155_TVAGT file.
+  - name: ZCDV_T_CMTU024_ACDOCA
+    identifier: ZCDV_T_CMTU024_ACDOCA
+    description: Landing table for ZCDV_T_CMTU024_ACDOCA file.
+  - name: ZCDV_T_CMTU024_01_ACDOCA
+    identifier: ZCDV_T_CMTU024_01_ACDOCA
+    description: Landing table for ZCDV_T_CMTU024_01_ACDOCA file.
+  - name: ZCDV_T_CMTU114_SKA1
+    identifier: ZCDV_T_CMTU114_SKA1
+    description: Landing table for ZCDV_T_CMTU114_SKA1 file.
+  - name: ZCDV_T_CMTU160_TVAUT
+    identifier: ZCDV_T_CMTU160_TVAUT
+    description: Landing table for ZCDV_T_CMTU160_TVAUT file.
+  - name: ZCDV_T_CMTU163_TVFKT
+    identifier: ZCDV_T_CMTU163_TVFKT
+    description: Landing table for ZCDV_T_CMTU163_TVFKT file.
+  - name: ZCDV_T_CMTU168_TVKOT
+    identifier: ZCDV_T_CMTU168_TVKOT
+    description: Landing table for ZCDV_T_CMTU168_TVKOT file.
+  - name: ZCDV_T_CMTU177_TVV1T
+    identifier: ZCDV_T_CMTU177_TVV1T
+    description: Landing table for ZCDV_T_CMTU177_TVV1T file.
+  - name: ZCDV_T_CMTU178_TVV2T
+    identifier: ZCDV_T_CMTU178_TVV2T
+    description: Landing table for ZCDV_T_CMTU178_TVV2T file.
+  - name: ZCDV_T_CMTU090_AUFK
+    identifier: ZCDV_T_CMTU090_AUFK
+    description: Landing table for ZCDV_T_CMTU090_AUFK file.
+  - name: ZCDV_T_CMTU063_T001W
+    identifier: ZCDV_T_CMTU063_T001W
+    description: Landing table for ZCDV_T_CMTU063_T001W file.
+  - name: ZCDV_T_CMTU080_T001L
+    identifier: ZCDV_T_CMTU080_T001L
+    description: Landing table for ZCDV_T_CMTU080_T001L file.
+  - name: ZCDV_T_CMTU088_AFPO
+    identifier: ZCDV_T_CMTU088_AFPO
+    description: Landing table for ZCDV_T_CMTU088_AFPO file.
+  - name: ZCDV_T_CMTU089_AFVC
+    identifier: ZCDV_T_CMTU089_AFVC
+    description: Landing table for ZCDV_T_CMTU089_AFVC file.
+  - name: ZCDV_T_CMTU091_CEPCT
+    identifier: ZCDV_T_CMTU091_CEPCT
+    description: Landing table for ZCDV_T_CMTU091_CEPCT file.
+  - name: ZCDV_T_CMTU106_MDMA
+    identifier: ZCDV_T_CMTU106_MDMA
+    description: Landing table for ZCDV_T_CMTU106_MDMA file.
+  - name: ZCDV_T_CMTU083_A114
+    identifier: ZCDV_T_CMTU083_A114
+    description: Landing table for ZCDV_T_CMTU083_A114 file.
+  - name: ZCDV_T_CMTU085_A910
+    identifier: ZCDV_T_CMTU085_A910
+    description: Landing table for ZCDV_T_CMTU085_A910 file.
+  - name: ZCDV_T_CMTU020_KNA1
+    identifier: ZCDV_T_CMTU020_KNA1
+    description: Landing table for ZCDV_T_CMTU020_KNA1 file.
+  - name: ZCDV_T_CMTU057_INOB
+    identifier: ZCDV_T_CMTU057_INOB
+    description: Landing table for ZCDV_T_CMTU057_INOB file.
+  - name: ZCDV_T_CMTU058_CAWN
+    identifier: ZCDV_T_CMTU058_CAWN
+    description: Landing table for ZCDV_T_CMTU058_CAWN file.
+  - name: ZCDV_T_CMTU019_MVKE
+    identifier: ZCDV_T_CMTU019_MVKE
+    description: Landing table for ZCDV_T_CMTU019_MVKE file.
+  - name: ZCDV_T_CMTU045_BSET
+    identifier: ZCDV_T_CMTU045_BSET
+    description: Landing table for ZCDV_T_CMTU045_BSET file.
+  - name: ZCDV_T_CMTU046_COBK
+    identifier: ZCDV_T_CMTU046_COBK
+    description: Landing table for ZCDV_T_CMTU046_COBK file.
+  - name: ZCDV_T_CMTU050_EKES
+    identifier: ZCDV_T_CMTU050_EKES
+    description: Landing table for ZCDV_T_CMTU050_EKES file.
+  - name: ZCDV_T_CMTU051_MARD
+    identifier: ZCDV_T_CMTU051_MARD
+    description: Landing table for ZCDV_T_CMTU051_MARD file.
+  - name: ZCDV_T_CMTU053_BUT000
+    identifier: ZCDV_T_CMTU053_BUT000
+    description: Landing table for ZCDV_T_CMTU053_BUT000 file.
+  - name: ZCDV_T_CMTU056_AUSP
+    identifier: ZCDV_T_CMTU056_AUSP
+    description: Landing table for ZCDV_T_CMTU056_AUSP file.
+  - name: ZCDV_T_CMTU069_VBKD
+    identifier: ZCDV_T_CMTU069_VBKD
+    description: Landing table for ZCDV_T_CMTU069_VBKD file.
+  - name: ZCDV_T_CMTU018_MAKT
+    identifier: ZCDV_T_CMTU018_MAKT
+    description: Landing table for ZCDV_T_CMTU018_MAKT file.
+  - name: ZCDV_T_CMTU021_KNVV
+    identifier: ZCDV_T_CMTU021_KNVV
+    description: Landing table for ZCDV_T_CMTU021_KNVV file.
+  - name: ZCDV_CM0080_11_KNVV
+    identifier: ZCDV_CM0080_11_KNVV
+    description: Landing table for ZCDV_CM0080_11_KNVV file.
+  - name: ZCDV_T_CMTU064_VBFA
+    identifier: ZCDV_T_CMTU064_VBFA
+    description: Landing table for ZCDV_T_CMTU064_VBFA file.
+  - name: ZCDV_T_CMTU074_EINA
+    identifier: ZCDV_T_CMTU074_EINA
+    description: Landing table for ZCDV_T_CMTU074_EINA file.
+  - name: ZCDV_T_CMTU079_MBEW
+    identifier: ZCDV_T_CMTU079_MBEW
+    description: Landing table for ZCDV_T_CMTU079_MBEW file.
+  - name: ZCDV_T_CMTU023_TVAKT
+    identifier: ZCDV_T_CMTU023_TVAKT
+    description: Landing table for ZCDV_T_CMTU023_TVAKT file.
+  - name: ZCDV_T_CMTU025_MATDOC
+    identifier: ZCDV_T_CMTU025_MATDOC
+    description: Landing table for ZCDV_T_CMTU025_MATDOC file.
+  - name: ZCDV_T_CMTU047_VBPA
+    identifier: ZCDV_T_CMTU047_VBPA
+    description: Landing table for ZCDV_T_CMTU047_VBPA file.
+  - name: ZCDV_T_CMTU048_EKET
+    identifier: ZCDV_T_CMTU048_EKET
+    description: Landing table for ZCDV_T_CMTU048_EKET file.
+  - name: ZCDV_T_CMTU049_EKKN
+    identifier: ZCDV_T_CMTU049_EKKN
+    description: Landing table for ZCDV_T_CMTU049_EKKN file.
+  - name: ZCDV_T_CMTU073_EINE
+    identifier: ZCDV_T_CMTU073_EINE
+    description: Landing table for ZCDV_T_CMTU073_EINE file.
+  - name: ZCDV_T_CMTU038_BSEG
+    identifier: ZCDV_T_CMTU038_BSEG
+    description: Landing table for ZCDV_T_CMTU038_BSEG file.
+  - name: ZCDV_T_CMTU038_BSEG_SEC
+    identifier: ZCDV_T_CMTU038_BSEG_SEC
+    description: Landing table for ZCDV_T_CMTU038_BSEG_SEC file.
+  - name: ZCDV_T_CMTU014_VBRK
+    identifier: ZCDV_T_CMTU014_VBRK
+    description: Landing table for ZCDV_T_CMTU014_VBRK file.
+  - name: ZCDV_T_CMTU035_CEPC
+    identifier: ZCDV_T_CMTU035_CEPC
+    description: Landing table for ZCDV_T_CMTU035_CEPC file.
+  - name: ZCDV_T_CMTU036_CSKS
+    identifier: ZCDV_T_CMTU036_CSKS
+    description: Landing table for ZCDV_T_CMTU036_CSKS file.
+  - name: ZCDV_T_CMTU037_BKPF
+    identifier: ZCDV_T_CMTU037_BKPF
+    description: Landing table for ZCDV_T_CMTU037_BKPF file.
+  - name: ZCDV_T_CMTU040_PRPS
+    identifier: ZCDV_T_CMTU040_PRPS
+    description: Landing table for ZCDV_T_CMTU040_PRPS file.
+  - name: ZCDV_T_CMTU011_VBEP
+    identifier: ZCDV_T_CMTU011_VBEP
+    description: Landing table for ZCDV_T_CMTU011_VBEP file.
+  - name: ZCDV_T_CMTU028_EKPO
+    identifier: ZCDV_T_CMTU028_EKPO
+    description: Landing table for ZCDV_T_CMTU028_EKPO file.
+  - name: ZCDV_T_CMTU030_KONP
+    identifier: ZCDV_T_CMTU030_KONP
+    description: Landing table for ZCDV_T_CMTU030_KONP file.
+  - name: ZCDV_T_CMTU030_KONP_SEC
+    identifier: ZCDV_T_CMTU030_KONP_SEC
+    description: Landing table for ZCDV_T_CMTU030_KONP_SEC file.
+  - name: ZCDV_T_CMTU031_A904
+    identifier: ZCDV_T_CMTU031_A904
+    description: Landing table for ZCDV_T_CMTU031_A904 file.
+  - name: ZCDV_T_CMTU032_A901
+    identifier: ZCDV_T_CMTU032_A901
+    description: Landing table for ZCDV_T_CMTU032_A901 file.
+  - name: ZCDV_T_CMTU033_A902
+    identifier: ZCDV_T_CMTU033_A902
+    description: Landing table for ZCDV_T_CMTU033_A902 file.
+  - name: ZCDV_T_CMTU026_MARC
+    identifier: ZCDV_T_CMTU026_MARC
+    description: Landing table for ZCDV_T_CMTU026_MARC file.
+  - name: ZCDV_T_CMTU029_PRCD_ELEMENTS
+    identifier: ZCDV_T_CMTU029_PRCD_ELEMENTS
+    description: Landing table for ZCDV_T_CMTU029_PRCD_ELEMENTS file.
+  - name: ZCDV_T_CMTU012_LIKP
+    identifier: ZCDV_T_CMTU012_LIKP
+    description: Landing table for ZCDV_T_CMTU012_LIKP file.
+  - name: ZCDV_T_CMTU015_VBRP
+    identifier: ZCDV_T_CMTU015_VBRP
+    description: Landing table for ZCDV_T_CMTU015_VBRP file.
+  - name: ZCDV_T_CMTU027_EKKO
+    identifier: ZCDV_T_CMTU027_EKKO
+    description: Landing table for ZCDV_T_CMTU027_EKKO file.
+  - name: ZCDV_T_CMTU009_VBAK
+    identifier: ZCDV_T_CMTU009_VBAK
+    description: Landing table for ZCDV_T_CMTU009_VBAK file.
+  - name: ZCDV_T_CMTU010_VBAP
+    identifier: ZCDV_T_CMTU010_VBAP
+    description: Landing table for ZCDV_T_CMTU010_VBAP file.
+  - name: ZCDV_T_CMTU013_LIPS
+    identifier: ZCDV_T_CMTU013_LIPS
+    description: Landing table for ZCDV_T_CMTU013_LIPS file.
+  - name: ZCDV_T_CMTU017_MARA
+    identifier: ZCDV_T_CMTU017_MARA
+    description: Landing table for ZCDV_T_CMTU017_MARA file.
+  - name: ZSDT0060
+    identifier: ZSDT0060
+    description: Landing table for ZSDT0060 file.
+  - name: ZCDV_T_CMTU242_EBAN
+    identifier: ZCDV_T_CMTU242_EBAN
+    description: Landing table for ZCDV_T_CMTU242_EBAN file.
+  - name: ZCDV_T_CMTU241_A017
+    identifier: ZCDV_T_CMTU241_A017
+    description: Landing table for ZCDV_T_CMTU241_A017 file.
+  - name: ZCDV_T_CMTU249_T015WT
+    identifier: ZCDV_T_CMTU249_T015WT
+    description: Landing table for ZCDV_T_CMTU249_T015WT file.
+  - name: ZCDV_T_CMTU243_MBEWH
+    identifier: ZCDV_T_CMTU243_MBEWH
+    description: Landing table for ZCDV_T_CMTU243_MBEWH file.
+  - name: ZCDV_T_CMTU246_EBEWH
+    identifier: ZCDV_T_CMTU246_EBEWH
+    description: Landing table for ZCDV_T_CMTU246_EBEWH file.
+  - name: ZCDV_T_SDT010
+    identifier: ZCDV_T_SDT010
+    description: Landing table for ZCDV_T_SDT010 file.
+  - name: ZCDV_T_CMTU250_ZSDT0167
+    identifier: ZCDV_T_CMTU250_ZSDT0167
+    description: Landing table for ZCDV_T_CMTU250_ZSDT0167.
+  - name: ZCDV_T_CMTU251_ZMAT0011
+    identifier: ZCDV_T_CMTU251_ZMAT0011
+    description: Landing table for ZCDV_T_CMTU251_ZMAT0011.
+  - name: CONTROLTABLE
+    identifier: CONTROLTABLE
+    description: Landing table for CONTROLTABLE.
+  - name: ZCDV_CM0610_01_VBAP
+    identifier: ZCDV_CM0610_01_VBAP
+    description: Landing table for ZCDV_CM0610_01_VBAP.
+  - name: ZCDV_T_MMTU004_01
+    identifier: ZCDV_T_MMTU004_01
+    description: Landing table for ZCDV_T_MMTU004_01.
+  - name: ZCDV_T_CMTU013_LIPS_SECT
+    identifier: ZCDV_T_CMTU013_LIPS_SECT
+    description: Landing table for ZCDV_T_CMTU013_LIPS_SECT.
+  - name: ZCDV_CM0610_01_VBAP_SECT
+    identifier: ZCDV_CM0610_01_VBAP_SECT
+    description: Landing table for ZCDV_CM0610_01_VBAP_SECT.
+  - name: ZCDV_CM0280_10_SKAT
+    identifier: ZCDV_CM0280_10_SKAT
+    description: Landing table for ZCDV_CM0280_10_SKAT.

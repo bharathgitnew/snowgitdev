@@ -1,0 +1,19 @@
+version: 2
+sources:
+  - name: QVICS
+    description: Landing Zone - QVICS Schema
+    database: "{{ env_var('SNOWFLAKE_LZ') }}"
+    schema: QVICS
+    tables:
+      - name: ALLTROUBLE
+        identifier: ALLTROUBLE
+        description: Landing table for ALLTROUBLE.
+      - name: ALLPART
+        identifier: ALLPART
+        description: Landing table for ALLPART.
+      - name: QVICS_C_ES_LIST_TROUBLES
+        identifier: QVICS_C_ES_LIST_TROUBLES
+        description: Landing table for QVICS_C_ES_LIST_TROUBLES.
+      - name: CONTROLTABLE
+        identifier: CONTROLTABLE
+        description: Landing table for CONTROLTABLE.

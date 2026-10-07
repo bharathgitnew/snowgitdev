@@ -1,0 +1,5 @@
+models:
+- name: GOLD__TEH_EHS__TIRSACCIDENT
+  tests:
+  - has_data
+  - recently_run

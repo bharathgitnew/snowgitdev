@@ -1,0 +1,97 @@
+/************
+    Model file generated from TelTool SQL SERVER Ingestion Utility 
+    *************/
+    
+
+    {{ config(
+            materialized='incremental',
+            incremental_strategy='insert_overwrite',
+            alias='BAANV_SERVICE_ORDERS_ACCRUAL',
+            unique_key=[],
+            transient=false    
+) }} 
+    
+    with source_data as (
+        SELECT
+        _FILEDATE,
+		_FILENAME,
+        SERVICE_ORDER_NO, 
+ 	 	ACTIVITY_LINE, 
+ 	 	ORDER_DATE, 
+ 	 	ORDER_DT, 
+ 	 	ORDER_STATUS, 
+ 	 	ORDER_STATUS_DESC, 
+ 	 	ACTIVITY_STATUS, 
+ 	 	ACTIVITY_STATUS_DESC, 
+ 	 	CUSTOMER_PO, 
+ 	 	CUSTOMER_PO_LINE, 
+ 	 	LINE_NUMBER, 
+ 	 	DELIVERY_TYPE, 
+ 	 	ITEM, 
+ 	 	ORDERED_QTY, 
+ 	 	DELIVERED_QTY, 
+ 	 	TO_BE_DEL_QTY, 
+ 	 	TRANSACTION_TYPE, 
+ 	 	INVOICE_DATE, 
+ 	 	COST_LINE_STATUS, 
+ 	 	INVOICE_STATUS
+        FROM {{ ref('ODS__LEGACY93__BAANV_SERVICE_ORDERS_ACCRUAL') }} AS BAANV_SERVICE_ORDERS_ACCRUAL
+        
+    ),
+    transform_data as (
+        SELECT
+        _FILEDATE,
+		_FILENAME,
+		'{{ invocation_id }}' AS _AUDIT_LOG_ID,
+        SHA2('hash_me') as _ROW_HASH,
+        SERVICE_ORDER_NO, 
+ 	 	ACTIVITY_LINE, 
+ 	 	ORDER_DATE, 
+ 	 	ORDER_DT, 
+ 	 	ORDER_STATUS, 
+ 	 	ORDER_STATUS_DESC, 
+ 	 	ACTIVITY_STATUS, 
+ 	 	ACTIVITY_STATUS_DESC, 
+ 	 	CUSTOMER_PO, 
+ 	 	CUSTOMER_PO_LINE, 
+ 	 	LINE_NUMBER, 
+ 	 	DELIVERY_TYPE, 
+ 	 	ITEM, 
+ 	 	ORDERED_QTY, 
+ 	 	DELIVERED_QTY, 
+ 	 	TO_BE_DEL_QTY, 
+ 	 	TRANSACTION_TYPE, 
+ 	 	INVOICE_DATE, 
+ 	 	COST_LINE_STATUS, 
+ 	 	INVOICE_STATUS
+        FROM source_data
+    ),
+    type_data as (
+        SELECT
+        CAST(_FILEDATE AS TIMESTAMP_NTZ(9)) AS _FILEDATE,
+		CAST(_FILENAME AS VARCHAR(128)) AS _FILENAME,
+        CAST(_AUDIT_LOG_ID AS VARCHAR(128)) AS _AUDIT_LOG_ID,
+        CAST(_ROW_HASH AS VARCHAR(128)) AS _ROW_HASH,
+        SERVICE_ORDER_NO, 
+ 	 	CAST(ACTIVITY_LINE AS FLOAT) AS ACTIVITY_LINE, 
+ 	 	CAST(ORDER_DATE AS TIMESTAMP_NTZ(9)) AS ORDER_DATE, 
+ 	 	CAST(ORDER_DT AS TIMESTAMP_NTZ(9)) AS ORDER_DT, 
+ 	 	CAST(ORDER_STATUS AS FLOAT) AS ORDER_STATUS, 
+ 	 	ORDER_STATUS_DESC, 
+ 	 	CAST(ACTIVITY_STATUS AS FLOAT) AS ACTIVITY_STATUS, 
+ 	 	ACTIVITY_STATUS_DESC, 
+ 	 	CUSTOMER_PO, 
+ 	 	CUSTOMER_PO_LINE, 
+ 	 	CAST(LINE_NUMBER AS FLOAT) AS LINE_NUMBER, 
+ 	 	DELIVERY_TYPE, 
+ 	 	ITEM, 
+ 	 	CAST(ORDERED_QTY AS NUMBER(38,0)) AS ORDERED_QTY, 
+ 	 	CAST(DELIVERED_QTY AS FLOAT) AS DELIVERED_QTY, 
+ 	 	CAST(TO_BE_DEL_QTY AS FLOAT) AS TO_BE_DEL_QTY, 
+ 	 	TRANSACTION_TYPE, 
+ 	 	CAST(INVOICE_DATE AS TIMESTAMP_NTZ(9)) AS INVOICE_DATE, 
+ 	 	COST_LINE_STATUS, 
+ 	 	INVOICE_STATUS
+        FROM transform_data
+    )
+    SELECT * FROM type_data

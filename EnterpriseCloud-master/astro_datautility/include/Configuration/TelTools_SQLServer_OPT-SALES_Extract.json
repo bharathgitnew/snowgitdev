@@ -1,0 +1,11 @@
+{
+    "OPT-SALES": {
+        "DataSet1": {
+            "schema": "dbo",
+            "table": "v_order_process_tracking",
+            "Incremental": "NULL",
+            "sftablename": "ORDER_PROCESS_TRACKING",
+            "filter": ""
+        }
+    }
+}

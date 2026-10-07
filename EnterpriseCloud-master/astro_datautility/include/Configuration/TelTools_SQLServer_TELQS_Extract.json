@@ -1,0 +1,136 @@
+{
+    "TELQS":{
+		"DataSet1":{
+            "schema":"dbo",
+            "table":"OSUSR_B2L_PROCESSORDERDETAILS",
+            "Incremental":"NULL",
+            "sftablename":"PROCESS_ORDER_DETAILS",
+            "filter": ""
+		},
+        "DataSet2":{
+            "schema":"dbo",
+            "table":"OSUSR_B2L_PAIDSERVICEQUOTEMASTER",
+            "Incremental":"NULL",
+            "sftablename":"PAID_SERVICE_QUOTE_MASTER",
+            "filter": ""
+        },
+        "DataSet3":{
+            "schema":"dbo",
+            "table":"OSUSR_bn7_ServiceContractQuoteMaster",
+            "Incremental":"NULL",
+            "sftablename":"OSUSR_bn7_ServiceContractQuoteMaster",
+            "filter": ""
+        },
+        "DataSet4":{
+            "schema":"dbo",
+            "table":"OSUSR_BN7_CONTRACTSERIALNUMBER",
+            "Incremental":"NULL",
+            "sftablename":"OSUSR_BN7_CONTRACTSERIALNUMBER",
+            "filter": ""
+        },
+        "DataSet5":{
+            "schema":"dbo",
+            "table":"OSUSR_BN7_QUOTESTATUS",
+            "Incremental":"NULL",
+            "sftablename":"OSUSR_BN7_QUOTESTATUS",
+            "filter": ""
+        }
+        ,
+        "DataSet6":{
+            "schema":"dbo",
+            "table":"OSUSR_CZN_CONTRACTTYPEDETAILS",
+            "Incremental":"NULL",
+            "sftablename":"OSUSR_CZN_CONTRACTTYPEDETAILS",
+            "filter": ""
+        }
+        ,
+        "DataSet7":{
+            "schema":"dbo",
+            "table":"OSUSR_69G_CONTRACTS",
+            "Incremental":"NULL",
+            "sftablename":"OSUSR_69G_CONTRACTS",
+            "filter": ""
+        }
+        ,
+        "DataSet8":{
+            "schema":"dbo",
+            "table":"OSUSR_69G_ENGINEERONSITE",
+            "Incremental":"NULL",
+            "sftablename":"OSUSR_69G_ENGINEERONSITE",
+            "filter": ""
+        }
+        ,
+        "DataSet9":{
+            "schema":"dbo",
+            "table":"OSUSR_CZN_CONTRACTTYPE",
+            "Incremental":"NULL",
+            "sftablename":"OSUSR_CZN_CONTRACTTYPE",
+            "filter": ""
+        },
+        "DataSet10":{
+            "schema":"dbo",
+            "table":"OSUSR_BN7_ADVANCEFILTERDATACONTRACTTYPE",
+            "Incremental":"NULL",
+            "sftablename":"OSUSR_BN7_ADVANCEFILTERDATACONTRACTTYPE",
+            "filter": ""
+        },
+        "DataSet11":{
+            "schema":"dbo",
+            "table":"OSUSR_bn7_ServiceQuoteWithContract",
+            "Incremental":"NULL",
+            "sftablename":"OSUSR_bn7_ServiceQuoteWithContract",
+            "filter": ""
+        },
+        "DataSet12":{
+            "schema":"dbo",
+            "table":"OSUSR_BN7_VERSIONHISTORY",
+            "Incremental":"NULL",
+            "sftablename":"OSUSR_BN7_VERSIONHISTORY",
+            "filter": ""
+        }
+        ,
+        "DataSet13":{
+            "schema":"dbo",
+            "table":"OSUSR_BN7_SQCPROCESSORDERPRICING",
+            "Incremental":"NULL",
+            "sftablename":"OSUSR_BN7_SQCPROCESSORDERPRICING",
+            "filter": ""
+        }
+        ,
+        "DataSet14":{
+            "schema":"dbo",
+            "table":"OSUSR_BN7_ADDTIONALDETAILS",
+            "Incremental":"NULL",
+            "sftablename":"OSUSR_BN7_ADDTIONALDETAILS",
+            "filter": ""
+		},
+        "DataSet15":{
+            "schema":"dbo",
+            "table":"OSUSR_69G_CONTRACTLENGTH",
+            "Incremental":"NULL",
+            "sftablename":"OSUSR_69G_CONTRACTLENGTH",
+            "filter": ""
+        },
+        "DataSet16":{
+            "schema":"dbo",
+            "table":"OSUSR_69G_FLEX",
+            "Incremental":"NULL",
+            "sftablename":"OSUSR_69G_FLEX",
+            "filter": ""
+        },
+        "DataSet17":{
+            "schema":"dbo",
+            "table":"OSUSR_69G_FLEX_TYPEOFWORK",
+            "Incremental":"NULL",
+            "sftablename":"OSUSR_69G_FLEX_TYPEOFWORK",
+            "filter": ""
+        },
+        "DataSet18":{
+            "schema":"dbo",
+            "table":"OSUSR_PR4_TYPEOFWORK",
+            "Incremental":"NULL",
+            "sftablename":"OSUSR_PR4_TYPEOFWORK",
+            "filter": ""
+        }
+	}
+}

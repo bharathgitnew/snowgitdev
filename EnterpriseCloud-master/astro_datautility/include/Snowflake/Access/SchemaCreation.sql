@@ -1,0 +1,3 @@
+SELECT StatementText AS Set_Default_SQL
+FROM SchemaExecutionStatements
+ORDER BY Ordering;

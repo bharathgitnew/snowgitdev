@@ -1,0 +1,21 @@
+
+{
+    "POWERBILOGS":{
+		"ACTIVITY":{
+            "snowflake_schema":"POWERBI",
+            "snowflake_table":"ACTIVITY"
+		},
+		"DATASETS":{
+            "snowflake_schema":"POWERBI",
+            "snowflake_table":"DATASETS"
+		},
+		"GATEWAYS":{
+            "snowflake_schema":"POWERBI",
+            "snowflake_table":"GATEWAYS"
+		},
+		"GROUPS":{
+            "snowflake_schema":"POWERBI",
+            "snowflake_table":"GROUPS"
+		}
+    }
+}

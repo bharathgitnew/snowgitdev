@@ -1,0 +1,63 @@
+version: 2
+sources:
+- name: WISDOM
+  description: Landing Zone - Wisdom Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: Wisdom
+  tables:
+  - name: TEA_MAC_LIST
+    identifier: TEA_MAC_LIST
+    description: Landing table for TEA_MAC_LIST file.
+  - name: ES_TPS_SPS_NTS_US
+    identifier: ES_TPS_SPS_NTS_US
+    description: Landing table for ES_TPS_SPS_NTS_US file.
+  - name: MAC_MAIN
+    identifier: MAC_MAIN
+    description: Landing table for MAC_MAIN file.
+  - name: WISDOM_SURB_PROGRESS
+    identifier: WISDOM_SURB_PROGRESS
+    description: Landing table for WISDOM_SURB_PROGRESS file.
+  - name: SAP_SURB
+    identifier: SAP_SURB
+    description: Landing table for SAP_SURB file.
+  - name: WISDOM_SURB_DELAY
+    identifier: WISDOM_SURB_DELAY
+    description: Landing table for WISDOM_SURB_DELAY file.
+  - name: WISDOM_ES_MAC_US
+    identifier: WISDOM_ES_MAC_US
+    description: Landing table for WISDOM_ES_MAC_US file.
+  - name: TCMS_MACHINES
+    identifier: TCMS_MACHINES
+    description: Landing table for TCMS_MACHINES.
+  - name: TCMS_LIST
+    identifier: TCMS_LIST
+    description: Landing table for TCMS_LIST.
+  - name: WISDOM_ES_CLAIM_US
+    identifier: WISDOM_ES_CLAIM_US
+    description: Landing table for WISDOM_ES_CLAIM_US file.
+  - name: WISDOM_ES_NTS_US
+    identifier: WISDOM_ES_NTS_US
+    description: Landing table for WISDOM_ES_NTS_US file.
+  - name: UG_EXPLN
+    identifier: UG_EXPLN
+  - name: UG_EXPLN_RCD
+    identifier: UG_EXPLN_RCD
+  - name: UG_EXPLAIN_US
+    identifier: UG_EXPLAIN_US
+  - name: UG_EXPLAIN_TI_US
+    identifier: UG_EXPLAIN_TI_US
+  - name: WISDOM_UPGRADE_TARGET
+    identifier: WISDOM_UPGRADE_TARGET
+    description: Landing table for WISDOM_UPGRADE_TARGET.
+  - name: NIS_EMP
+    identifier: NIS_EMP
+    description: Landing table for NIS_EMP.
+  - name: UPGRADE_LIST_FCN_RSN
+    identifier: UPGRADE_LIST_FCN_RSN
+    description: Landing table for UPGRADE_LIST_FCN_RSN.
+  - name: WISDOM_UG_UNNEC_CTG
+    identifier: WISDOM_UG_UNNEC_CTG
+    description: Landing table for WISDOM_UG_UNNEC_CTG.
+  - name: CONTROLTABLE
+    identifier: CONTROLTABLE
+    description: Landing table for CONTROLTABLE.

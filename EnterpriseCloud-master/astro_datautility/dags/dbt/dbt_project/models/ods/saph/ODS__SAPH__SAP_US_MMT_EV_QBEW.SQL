@@ -1,0 +1,118 @@
+/************
+	Model file generated from gmxDbtTemplateUtility.ipynb 
+	*************/
+
+	
+	{{ config(
+    	  materialized='incremental',
+    	  incremental_strategy='insert_overwrite',
+    	  alias='SAP_US_MMT_EV_QBEW',
+    	  unique_key = [''],
+    	  transient=false	
+) }} 
+
+	with source_data as (
+	SELECT
+		JSONFIELD:"MATNR"::STRING AS "MATNR", 
+ 	 	JSONFIELD:"BWKEY"::STRING AS "BWKEY", 
+ 	 	JSONFIELD:"BWTAR"::STRING AS "BWTAR", 
+ 	 	JSONFIELD:"SOBKZ"::STRING AS "SOBKZ", 
+ 	 	JSONFIELD:"PSPNR"::STRING AS "PSPNR", 
+ 	 	JSONFIELD:"LBKUM"::STRING AS "LBKUM", 
+ 	 	JSONFIELD:"MEINS"::STRING AS "MEINS", 
+ 	 	JSONFIELD:"SALK3"::STRING AS "SALK3", 
+ 	 	JSONFIELD:"WAERS"::STRING AS "WAERS", 
+ 	 	JSONFIELD:"VPRSV"::STRING AS "VPRSV", 
+ 	 	JSONFIELD:"VERPR"::STRING AS "VERPR", 
+ 	 	JSONFIELD:"WAERS001"::STRING AS "WAERS001", 
+ 	 	JSONFIELD:"STPRS"::STRING AS "STPRS", 
+ 	 	JSONFIELD:"WAERS002"::STRING AS "WAERS002", 
+ 	 	JSONFIELD:"PEINH"::STRING AS "PEINH", 
+ 	 	JSONFIELD:"BKLAS"::STRING AS "BKLAS", 
+ 	 	JSONFIELD:"LFGJA"::STRING AS "LFGJA", 
+ 	 	JSONFIELD:"LFMON"::STRING AS "LFMON", 
+ 	 	JSONFIELD:"MEINS001"::STRING AS "MEINS001", 
+ 	 	JSONFIELD:"BUKRS"::STRING AS "BUKRS", 
+ 	 	JSONFIELD:"WAERS003"::STRING AS "WAERS003", 
+ 	 	JSONFIELD:"ZFPDT"::STRING AS "ZFPDT", 
+ 	 	JSONFIELD:"DELFLAG"::STRING AS "DELFLAG", 
+ 	 	JSONFIELD:"CDCHANGENR"::STRING AS "CDCHANGENR", 
+ 	 	JSONFIELD:"PSL_INSDATE"::STRING AS "PSL_INSDATE", 
+ 	 	JSONFIELD:"PSL_UPDDATE"::STRING AS "PSL_UPDDATE",
+		_FILEDATE,
+		_FILENAME
+	from {{ source('SAPH','SAP_US_MMT_EV_QBEW') }}
+	WHERE REGEXP_SUBSTR(_FILENAME,'\\d{14}') = (SELECT MAX(REGEXP_SUBSTR(_filename,'\\d{14}')) from {{ source('SAPH', 'SAP_US_MMT_EV_QBEW') }})
+	),
+	
+	transform_data as (
+	SELECT 
+		"MATNR", 
+ 	 	"BWKEY", 
+ 	 	"BWTAR", 
+ 	 	"SOBKZ", 
+ 	 	"PSPNR", 
+ 	 	"LBKUM", 
+ 	 	"MEINS", 
+ 	 	"SALK3", 
+ 	 	"WAERS", 
+ 	 	"VPRSV", 
+ 	 	"VERPR", 
+ 	 	"WAERS001", 
+ 	 	"STPRS", 
+ 	 	"WAERS002", 
+ 	 	"PEINH", 
+ 	 	"BKLAS", 
+ 	 	"LFGJA", 
+ 	 	"LFMON", 
+ 	 	"MEINS001", 
+ 	 	"BUKRS", 
+ 	 	"WAERS003", 
+ 	 	"ZFPDT", 
+ 	 	"DELFLAG", 
+ 	 	"CDCHANGENR", 
+ 	 	"PSL_INSDATE", 
+ 	 	"PSL_UPDDATE",
+		_FILEDATE,
+		_FILENAME,
+		'{{ invocation_id }}' AS AUDIT_LOG_ID,
+        SHA2('hash_me') as _ROW_HASH -- Adds column to table on full refresh.
+	from source_data
+	),
+	
+	type_data as (
+	SELECT
+		CAST("MATNR" AS NVARCHAR) AS "MATNR", 
+ 	 	CAST("BWKEY" AS NVARCHAR) AS "BWKEY", 
+ 	 	CAST("BWTAR" AS NVARCHAR) AS "BWTAR", 
+ 	 	CAST("SOBKZ" AS NVARCHAR) AS "SOBKZ", 
+ 	 	CAST("PSPNR" AS VARCHAR) AS "PSPNR", 
+ 	 	CAST("LBKUM" AS FLOAT) AS "LBKUM", 
+ 	 	CAST("MEINS" AS NVARCHAR) AS "MEINS", 
+ 	 	CAST("SALK3" AS FLOAT) AS "SALK3", 
+ 	 	CAST("WAERS" AS NVARCHAR) AS "WAERS", 
+ 	 	CAST("VPRSV" AS NVARCHAR) AS "VPRSV", 
+ 	 	CAST("VERPR" AS FLOAT) AS "VERPR", 
+ 	 	CAST("WAERS001" AS NVARCHAR) AS "WAERS001", 
+ 	 	CAST("STPRS" AS FLOAT) AS "STPRS", 
+ 	 	CAST("WAERS002" AS NVARCHAR) AS "WAERS002", 
+ 	 	CAST("PEINH" AS FLOAT) AS "PEINH", 
+ 	 	CAST("BKLAS" AS NVARCHAR) AS "BKLAS", 
+ 	 	CAST("LFGJA" AS VARCHAR) AS "LFGJA", 
+ 	 	CAST("LFMON" AS VARCHAR) AS "LFMON", 
+ 	 	CAST("MEINS001" AS NVARCHAR) AS "MEINS001", 
+ 	 	CAST("BUKRS" AS NVARCHAR) AS "BUKRS", 
+ 	 	CAST("WAERS003" AS NVARCHAR) AS "WAERS003", 
+ 	 	CAST("ZFPDT" AS TIMESTAMP) AS "ZFPDT", 
+ 	 	CAST("DELFLAG" AS BOOLEAN) AS "DELFLAG", 
+ 	 	CAST("CDCHANGENR" AS NVARCHAR) AS "CDCHANGENR", 
+ 	 	CAST("PSL_INSDATE" AS TIMESTAMP) AS "PSL_INSDATE", 
+ 	 	CAST("PSL_UPDDATE" AS TIMESTAMP) AS "PSL_UPDDATE",
+		cast(_FILEDATE AS TIMESTAMP_NTZ(9)) AS _FILEDATE,
+		cast(_FILENAME as varchar(128)) as _FILENAME,
+        cast(AUDIT_LOG_ID as varchar(128)) as AUDIT_LOG_ID,
+        cast(_ROW_HASH as varchar(128)) as _ROW_HASH
+	from transform_data
+	)
+
+	select * from type_data

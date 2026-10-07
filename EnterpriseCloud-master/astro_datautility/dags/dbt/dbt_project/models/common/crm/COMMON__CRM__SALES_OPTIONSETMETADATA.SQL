@@ -1,0 +1,51 @@
+{{ config(
+    	materialized='incremental',
+    	incremental_strategy='insert_overwrite',
+    	alias='SALES_OPTIONSETMETADATA',
+    	transient=false
+) }}
+
+with source_data as (
+select
+    ENTITYNAME,
+    OPTIONSETNAME,
+    OPTION,
+    ISUSERLOCALIZEDLABEL,
+    LOCALIZEDLABELLANGUAGECODE,
+    LOCALIZEDLABEL,
+    _FILEDATE,
+    _FILENAME
+from {{ ref('ODS__CRM_FILE__OPTIONSETMETADATA') }}
+),
+
+transform_data as (
+select
+    ENTITYNAME,
+    OPTIONSETNAME,
+    OPTION,
+    ISUSERLOCALIZEDLABEL,
+    LOCALIZEDLABELLANGUAGECODE,
+    LOCALIZEDLABEL,
+    _FILEDATE,
+    _FILENAME,
+    '{{ invocation_id }}' AS AUDIT_LOG_ID,
+    SHA2('hash_me') AS _ROW_HASH
+from source_data
+),
+
+type_data as (
+select
+    CAST(ENTITYNAME as VARCHAR(16777216)) as ENTITYNAME,
+    CAST(OPTIONSETNAME as VARCHAR(16777216)) as OPTIONSETNAME,
+    CAST(OPTION as NUMBER(38,0)) as OPTION,
+    CAST(ISUSERLOCALIZEDLABEL as BOOLEAN) as ISUSERLOCALIZEDLABEL,
+    CAST(LOCALIZEDLABELLANGUAGECODE as NUMBER(38,0)) as LOCALIZEDLABELLANGUAGECODE,
+    CAST(LOCALIZEDLABEL as VARCHAR(16777216)) as LOCALIZEDLABEL,
+    CAST(_FILEDATE as TIMESTAMP_NTZ(9)) as _FILEDATE,
+    CAST(_FILENAME as VARCHAR(16777216)) as _FILENAME,
+    CAST(AUDIT_LOG_ID as VARCHAR(128)) as AUDIT_LOG_ID,
+    CAST(_ROW_HASH as VARCHAR(128)) as _ROW_HASH
+from transform_data
+)
+
+select * from type_data

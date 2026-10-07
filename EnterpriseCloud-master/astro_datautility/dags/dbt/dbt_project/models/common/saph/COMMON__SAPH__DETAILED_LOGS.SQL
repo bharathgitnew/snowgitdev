@@ -1,0 +1,90 @@
+{{ config(
+    materialized='incremental',
+    incremental_strategy='insert_overwrite',
+    alias='DETAILED_LOGS'
+) }}
+
+with common_flow as
+(
+  SELECT DISTINCT ID as FLOW_ID,NAME as FLOW_NAME, MAX(TO_DATE(UPDATED)) as FLOW_UPDATE_DATE
+  FROM {{ ref('COMMON__PREFECT__FLOW') }} group by all
+)
+,common_flow_run as
+(
+  SELECT DISTINCT *
+  FROM {{ ref('COMMON__PREFECT__FLOW_RUN') }}
+)
+,common_logs as
+(
+  SELECT DISTINCT *
+  FROM {{ ref('COMMON__PREFECT__LOGS') }}
+)
+,source_data as
+(
+    SELECT
+        DISTINCT
+        FLOW_RUN.ID AS FLOW_RUN_ID
+        ,FLOW.FLOW_NAME AS FLOW_NAME
+        ,FLOW_RUN.NAME AS FLOW_RUN_NAME
+        ,FLOW_RUN.LABELS AS RUN_ENVIRONMENT
+        ,FLOW_RUN.PARAMETERS AS PARAMETERS
+        ,FLOW_RUN.START_TIME AS START_TIME
+        ,FLOW_RUN.END_TIME AS END_TIME
+        ,FLOW_RUN.STATE AS RUN_STATE
+        ,datediff('seconds',FLOW_RUN.start_time,FLOW_RUN.end_time) as RUN_TIME_IN_SECONDS
+        ,LISTAGG(LOGS.DETAILED_LOGS,'\n') WITHIN GROUP(ORDER BY FLOW_RUN.ID,FLOW_RUN.VERSION desc) over(partition by FLOW_RUN.ID,FLOW_RUN.VERSION) AS DETAILED_LOGS
+    FROM 
+        common_flow as FLOW
+        ,common_flow_run as FLOW_RUN
+        ,common_logs as LOGS
+    WHERE 
+        FLOW.FLOW_ID=FLOW_RUN.FLOW_ID
+        AND FLOW_RUN.ID=LOGS.ID
+    GROUP BY 
+        FLOW_RUN.ID
+        ,FLOW.FLOW_NAME
+        ,FLOW_RUN.NAME
+        ,FLOW_RUN.LABELS
+        ,FLOW_RUN.PARAMETERS
+        ,FLOW_RUN.START_TIME
+        ,FLOW_RUN.END_TIME
+        ,FLOW_RUN.STATE
+        ,FLOW_RUN.VERSION
+        ,RUN_TIME_IN_SECONDS
+        ,LOGS.DETAILED_LOGS
+    ORDER BY 
+        FLOW_RUN_ID
+)
+,transform_data as
+(
+    SELECT
+        FLOW_RUN_ID as FLOW_RUN_ID
+        ,FLOW_NAME as FLOW_NAME
+        ,FLOW_RUN_NAME AS FLOW_RUN_NAME
+        ,RUN_ENVIRONMENT AS RUN_ENVIRONMENT
+        ,PARAMETERS AS PARAMETERS
+        ,START_TIME AS START_TIME
+        ,END_TIME AS END_TIME
+        ,RUN_STATE AS RUN_STATE
+        ,RUN_TIME_IN_SECONDS AS RUN_TIME_IN_SECONDS
+        ,DETAILED_LOGS AS DETAILED_LOGS
+        ,'{{ invocation_id }}' AS AUDIT_LOG_ID
+    FROM source_data
+)
+, type_data AS
+(
+    SELECT
+        CAST(FLOW_RUN_ID AS VARCHAR(16777216))  AS FLOW_RUN_ID
+        ,CAST(FLOW_NAME AS VARCHAR(16777216))  AS FLOW_NAME
+        ,CAST(FLOW_RUN_NAME AS VARCHAR(16777216))  AS FLOW_RUN_NAME
+        ,CAST(RUN_ENVIRONMENT AS VARCHAR(16777216))  AS RUN_ENVIRONMENT
+        ,CAST(PARAMETERS AS VARCHAR(16777216))  AS PARAMETERS
+        ,CAST(START_TIME AS VARCHAR(16777216))  AS START_TIME
+        ,CAST(END_TIME AS VARCHAR(16777216))  AS END_TIME
+        ,CAST(RUN_STATE AS VARCHAR(16777216))  AS RUN_STATE
+        ,CAST(RUN_TIME_IN_SECONDS AS VARCHAR(16777216))  AS RUN_TIME_IN_SECONDS
+        ,CAST(DETAILED_LOGS AS VARCHAR(16777216))  AS DETAILED_LOGS
+        ,CAST(AUDIT_LOG_ID as VARCHAR(128)) as AUDIT_LOG_ID
+    FROM transform_data
+)
+select * from type_data

@@ -1,0 +1,469 @@
+models:
+  - name: BRONZE__TEH_DATA_OPS__ATLAN_TABLES
+    description: |
+      PURPOSE: Raw Atlan table-asset feed used to stage catalog names, tags, classifications, and other metadata for data operations reporting.
+      GRAIN: One row = one Atlan table asset GUID after keeping the latest available update.
+    tests:
+      - dbt_expectations.expect_table_row_count_to_be_between:
+          min_value: 1
+    columns:
+      - name: GUID
+        description: Unique Atlan identifier for the cataloged table asset. Stored as source text. The same GUID is reused across updates for the same asset.
+      - name: DISPLAY_TEXT
+        description: Display name shown for the table asset in Atlan. Stored as source text. It can differ from the physical database object name when curated labels are applied.
+      - name: ATLAN_TAGS
+        description: Tag values attached to the Atlan table asset. Stored as a semi-structured array value. The tag set can change as governance teams reclassify or enrich the asset.
+      - name: CLASSIFICATION_NAMES
+        description: Classification labels assigned to the table asset in Atlan. Stored as a semi-structured array value. These labels follow Atlan governance taxonomy rather than source-system naming.
+      - name: CREATE_TIME
+        description: Time when the table asset was first created in Atlan. Stored as an epoch-style integer timestamp. It must be converted to a readable datetime for business reporting.
+      - name: CREATED_BY
+        description: Identity payload for the user or process that created the Atlan asset. Stored as a semi-structured object value. The object shape depends on the Atlan API response.
+      - name: IS_INCOMPLETE
+        description: Indicator showing whether the Atlan asset record is marked incomplete. Stored as a boolean value. True values usually mean metadata enrichment or certification is still pending.
+      - name: LABELS
+        description: Label values attached to the table asset in Atlan. Stored as a semi-structured array value. Labels can overlap with tags and classifications but are maintained separately in the source platform.
+      - name: MEANING_NAMES
+        description: Business glossary term names linked to the table asset. Stored as a semi-structured array value. Names can change over time if glossary terms are renamed.
+      - name: MEANINGS
+        description: Full glossary meaning payload associated with the table asset. Stored as a semi-structured array value. It requires JSON parsing before individual glossary terms can be analyzed.
+      - name: STATUS
+        description: Current status assigned to the Atlan table asset. Stored as source text. Allowed values follow Atlan workflow conventions rather than dbt model logic.
+      - name: TYPE_NAME
+        description: Atlan asset type name for the catalog entry. Stored as source text. It distinguishes table assets from other catalog object types.
+      - name: UPDATE_TIME
+        description: Time of the latest Atlan update captured for the asset. Stored as an epoch-style integer timestamp. The model uses it to keep the newest row for each GUID.
+      - name: UPDATED_BY
+        description: Identity of the user or process that last updated the Atlan asset. Stored as source text. It can represent either manual catalog maintenance or automated ingestion.
+      - name: ATTRIBUTES
+        description: Extended Atlan attribute payload for the table asset. Stored as a semi-structured object value. The contents need flattening before individual attributes can be reported.
+  - name: BRONZE__TEH_DATA_OPS__AZURE_DEVOPS_PULL_REQUESTS
+    description: |
+      PURPOSE: Raw Azure DevOps pull request feed used to stage repository, review, and merge details for engineering workflow reporting.
+      GRAIN: One row = one pull request ID after keeping the latest file-backed version.
+    tests:
+      - dbt_expectations.expect_table_row_count_to_be_between:
+          min_value: 1
+    columns:
+      - name: REPOSITORY
+        description: Repository payload associated with the pull request. Stored as a semi-structured object value. The object must be parsed to report repository name, project, or identifiers separately.
+      - name: PULLREQUESTID
+        description: Unique identifier for the Azure DevOps pull request. Stored as an integer value. It is the main key for tracking one pull request across refreshes.
+      - name: CODEREVIEWID
+        description: Code review identifier associated with the pull request. Stored as an integer value. It can differ from the pull request ID because Azure DevOps exposes both identifiers.
+      - name: STATUS
+        description: Current lifecycle status of the pull request. Stored as source text. Typical values reflect whether the request is active, completed, or abandoned.
+      - name: CREATEDBY
+        description: Creator details for the pull request. Stored as a semi-structured object value. The object contains identity fields rather than a single flattened username.
+      - name: CREATIONDATE
+        description: Date and time when the pull request was created. Stored as a source datetime string. It should be parsed before time-based reporting or duration calculations.
+      - name: CLOSEDDATE
+        description: Date and time when the pull request was closed. Stored as a source datetime string. It remains blank for open pull requests.
+      - name: TITLE
+        description: Title entered for the pull request. Stored as source text. Teams often use this field as the quickest summary of the proposed change.
+      - name: DESCRIPTION
+        description: Detailed description entered on the pull request. Stored as source text. Content quality and formatting depend on author habits rather than a strict template.
+      - name: SOURCEREFNAME
+        description: Source branch reference used for the pull request. Stored as source text. It usually appears in full Git ref format rather than a simplified branch name.
+      - name: TARGETREFNAME
+        description: Target branch reference the pull request is merging into. Stored as source text. It usually appears in full Git ref format rather than a simplified branch name.
+      - name: MERGESTATUS
+        description: Merge processing status reported by Azure DevOps. Stored as source text. It reflects system merge checks rather than reviewer approval status.
+      - name: ISDRAFT
+        description: Indicator showing whether the pull request is still in draft mode. Stored as a boolean value. Draft pull requests are typically not ready for final review or completion.
+      - name: MERGEID
+        description: Identifier tied to the merge operation for the pull request. Stored as source text. It is useful for technical traceability rather than end-user reporting.
+      - name: LASTMERGESOURCECOMMIT
+        description: Commit payload representing the latest source-branch commit considered in the merge. Stored as a semi-structured object value. It needs parsing to expose commit IDs or metadata fields.
+      - name: LASTMERGETARGETCOMMIT
+        description: Commit payload representing the latest target-branch commit considered in the merge. Stored as a semi-structured object value. It needs parsing to expose commit IDs or metadata fields.
+      - name: LASTMERGECOMMIT
+        description: Commit payload for the resulting merge commit when one exists. Stored as a semi-structured object value. It can be blank until the pull request is actually merged.
+      - name: REVIEWERS
+        description: Reviewer list attached to the pull request. Stored as a semi-structured array value. Each element must be flattened to analyze reviewer-level activity.
+      - name: URL
+        description: Azure DevOps URL associated with the pull request record. Stored as source text. It usually points to an API or web resource rather than a business label.
+      - name: COMPLETIONOPTIONS
+        description: Completion settings attached to the pull request. Stored as a semi-structured object value. The object captures merge preferences rather than the outcome itself.
+      - name: SUPPORTSITERATIONS
+        description: Indicator showing whether the pull request supports iteration tracking. Stored as a boolean value. Its meaning is specific to Azure DevOps review behavior.
+      - name: COMPLETIONQUEUETIME
+        description: Timestamp when pull request completion was queued. Stored as a source datetime string. It can be blank when completion has never been queued.
+      - name: CLOSEDBY
+        description: Identity details for the user or process that closed the pull request. Stored as a semi-structured object value. The closer is not always the same person as the author or merger.
+      - name: ARTIFACTID
+        description: Azure DevOps artifact identifier for the pull request record. Stored as source text. It is mainly useful for system integrations and traceability.
+  - name: BRONZE__TEH_DATA_OPS__KANBANIZE_CARDS
+    description: |
+      PURPOSE: Raw Kanbanize card feed used to stage work item, workflow, timing, and comment details for delivery reporting.
+      GRAIN: One row = one Kanbanize card ID after keeping the latest file-backed version.
+    tests:
+      - dbt_expectations.expect_table_row_count_to_be_between:
+          min_value: 1
+    columns:
+      - name: CARD_ID
+        description: Unique identifier for the Kanbanize card. Stored as source text. It is the main key used to track one work item across refreshes.
+      - name: CUSTOM_ID
+        description: User-facing card number shown in Kanbanize. Stored as source text. Teams often reference this value in discussions instead of the internal card ID.
+      - name: BOARD_ID
+        description: Identifier of the Kanbanize board that contains the card. Stored as source text. A lookup is usually needed to convert it into a board name.
+      - name: WORKFLOW_ID
+        description: Identifier of the workflow assigned to the card. Stored as source text. It determines which workflow definition the card follows.
+      - name: TITLE
+        description: Short title of the Kanbanize card. Stored as source text. Teams typically use it as the primary summary of the work item.
+      - name: OWNER_USER_ID
+        description: Identifier of the user who currently owns the card. Stored as source text. A separate user lookup is needed to resolve the person name.
+      - name: TYPE_ID
+        description: Identifier of the card type configured in Kanbanize. Stored as source text. It usually needs a reference mapping to become a business-friendly label.
+      - name: COLOR
+        description: Color assigned to the card in Kanbanize. Stored as source text. It often carries team-specific meaning rather than a universal standard.
+      - name: IS_BLOCKED
+        description: Indicator showing whether the card is currently blocked. Stored as source text from the source payload. Source values may use string flags instead of normalized booleans.
+      - name: SECTION
+        description: Section of the board where the card is currently placed. Stored as source text. Section names follow the board configuration used by the team.
+      - name: COLUMN_ID
+        description: Identifier of the current workflow column for the card. Stored as source text. A reference mapping is needed to show the business column name.
+      - name: LANE_ID
+        description: Identifier of the lane where the card currently sits. Stored as source text. Lane meaning depends on the board design used by the team.
+      - name: POSITION
+        description: Position of the card within its current lane or column. Stored as source text. It is mainly useful for board ordering rather than trend reporting.
+      - name: DESCRIPTION
+        description: Detailed body text entered on the Kanbanize card. Stored as source text. Content quality varies because this field is free-form.
+      - name: SIZE
+        description: Size value assigned to the card. Stored as source text. Interpretation depends on the estimation scale used by the team.
+      - name: PRIORITY
+        description: Priority level assigned to the card. Stored as source text. Priority labels are team-maintained and are not standardized by this model.
+      - name: DEADLINE
+        description: Deadline or due date carried on the card. Stored as a source datetime string. It may be blank when the work item has no committed due date.
+      - name: REPORTER
+        description: Reporter information captured for the card. Stored as source text. It may represent a person name, username, or system-provided value.
+      - name: CREATED_AT
+        description: Timestamp when the card was created. Stored as a source datetime string. It should be parsed before time-based reporting.
+      - name: REVISION
+        description: Revision counter for the card record. Stored as source text. Higher values usually indicate the card has been edited more times.
+      - name: LAST_MODIFIED
+        description: Timestamp of the most recent card update. Stored as a source datetime string. It reflects source maintenance timing rather than a business milestone.
+      - name: IN_CURRENT_POSITION_SINCE
+        description: Timestamp showing when the card entered its current position. Stored as a source datetime string. It is useful for measuring time spent in the current workflow stage.
+      - name: FIRST_START_TIME
+        description: First recorded start time for work on the card. Stored as a source datetime string. It can remain blank when work has never officially started.
+      - name: FIRST_END_TIME
+        description: First recorded completion time for work on the card. Stored as a source datetime string. It can remain blank when the card has not yet completed once.
+      - name: LAST_START_TIME
+        description: Most recent recorded start time for the card. Stored as a source datetime string. It can differ from the first start time when work was restarted.
+      - name: LAST_END_TIME
+        description: Most recent recorded completion time for the card. Stored as a source datetime string. It can differ from the first end time when the card was reopened and completed again.
+      - name: BLOCK_REASON
+        description: Free-form reason explaining why the card is blocked. Stored as source text. The wording is team-entered and may not follow a standard taxonomy.
+      - name: CHILD_CARD_STATS
+        description: Summary statistics for child cards linked to the card. Stored as source text from the payload. Additional parsing may be needed to analyze the underlying counts.
+      - name: CUSTOM_FIELDS
+        description: Custom field values attached to the card. Stored as source text from the payload. The contents need parsing to report individual field values.
+      - name: TAG_IDS
+        description: Tag identifiers attached to the card. Stored as source text from the payload. A lookup to the tag reference model is needed for readable tag names.
+      - name: FINISHED_SUBTASK_COUNT
+        description: Count of completed subtasks on the card. Stored as source text. It should be cast before numeric aggregation.
+      - name: UNFINISHED_SUBTASK_COUNT
+        description: Count of remaining unfinished subtasks on the card. Stored as source text. It should be cast before numeric aggregation.
+      - name: COMMENT_COUNT
+        description: Number of comments recorded on the card. Stored as source text. It should be cast before numeric aggregation.
+      - name: COMMENTS
+        description: Comment payload associated with the card. Stored as a semi-structured variant value. Each comment must be flattened to analyze commenter or message details.
+      - name: CURRENT_CYCLE_TIME
+        description: Current cycle time measurement for the card. Stored as source text. The unit depends on how Kanbanize exports timing metrics.
+      - name: CURRENT_BLOCK_TIME
+        description: Current blocked-time measurement for the card. Stored as source text. The unit depends on how Kanbanize exports timing metrics.
+      - name: CURRENT_LOGGED_TIME
+        description: Current logged-time measurement for the card. Stored as source text. The unit depends on how Kanbanize exports timing metrics.
+      - name: DESCRIPTION_HTML
+        description: HTML-rendered version of the card description. Stored as source text. It is more useful for display fidelity than for plain-language analysis.
+      - name: STATE
+        description: Current Kanbanize state value for the card. Stored as source text. State labels reflect board workflow configuration rather than a universal status list.
+  - name: BRONZE__TEH_DATA_OPS__KANBANIZE_CUSTOMFIELDS
+    description: |
+      PURPOSE: Raw Kanbanize custom field definition feed used to stage field setup and configuration details for delivery reporting.
+      GRAIN: One row = one Kanbanize custom field ID after keeping the latest file-backed version.
+    tests:
+      - dbt_expectations.expect_table_row_count_to_be_between:
+          min_value: 1
+    columns:
+      - name: FIELD_ID
+        description: Unique identifier for the Kanbanize custom field. Stored as source text. It is the main key for one field definition.
+      - name: NAME
+        description: Display name of the custom field. Stored as source text. Teams may rename the field over time while keeping the same field ID.
+      - name: COLOR
+        description: Color assigned to the custom field in Kanbanize. Stored as source text. It is mainly a display setting rather than a business attribute.
+      - name: IS_IMMUTABLE
+        description: Indicator showing whether the field definition is locked from certain changes. Stored as source text from the source payload. Source values may use string flags instead of normalized booleans.
+      - name: IS_ALWAYS_PRESENT
+        description: Indicator showing whether the field is always present on cards. Stored as source text from the source payload. Source values may use string flags instead of normalized booleans.
+      - name: ALL_PROPERTIES_ARE_LOCKED
+        description: Indicator showing whether all properties of the custom field are locked. Stored as source text from the source payload. Source values may use string flags instead of normalized booleans.
+      - name: AVAILABILITY
+        description: Availability setting for where the custom field can be used. Stored as source text. Meanings depend on Kanbanize configuration rules.
+      - name: IS_ENABLED
+        description: Indicator showing whether the custom field is enabled. Stored as source text from the source payload. Disabled fields can still appear historically in older card data.
+      - name: DISPLAY_WIDTH
+        description: Configured display width for the custom field. Stored as source text. The value reflects UI configuration rather than business content.
+      - name: MIN_NUMBER_OF_VALUES
+        description: Minimum number of values allowed for the custom field. Stored as source text. It should be cast before numeric validation or reporting.
+      - name: MAX_NUMBER_OF_VALUES
+        description: Maximum number of values allowed for the custom field. Stored as source text. It should be cast before numeric validation or reporting.
+      - name: ALLOW_OTHER_VALUE
+        description: Indicator showing whether values outside the configured list are allowed. Stored as source text from the source payload. Source values may use string flags instead of normalized booleans.
+      - name: ALLOWED_VALUES_ARE_LOCKED
+        description: Indicator showing whether the field's allowed values are locked. Stored as source text from the source payload. Teams may still see historical values that no longer appear in the active configuration.
+      - name: TYPE
+        description: Kanbanize data type assigned to the custom field. Stored as source text. Type values control how field entries should be interpreted downstream.
+  - name: BRONZE__TEH_DATA_OPS__KANBANIZE_CUSTOMFIELDS_VALUES
+    description: |
+      PURPOSE: Raw Kanbanize custom field value-option feed used to stage allowed values for configured custom fields.
+      GRAIN: One row = one custom field ID and value ID combination after keeping the latest file-backed version.
+    tests:
+      - dbt_expectations.expect_table_row_count_to_be_between:
+          min_value: 1
+    columns:
+      - name: FIELD_ID
+        description: Identifier of the Kanbanize custom field this value belongs to. Stored as source text. It should be joined to the custom field definition to understand the field context.
+      - name: VALUE_ID
+        description: Unique identifier for the allowed value within the custom field. Stored as source text. It is only unique within the scope of its parent field.
+      - name: POSITION
+        description: Display or ordering position of the value option. Stored as source text. It should be cast before numeric sorting or sequence analysis.
+      - name: IS_ENABLED
+        description: Indicator showing whether the value option is currently enabled. Stored as source text from the source payload. Disabled values can still appear in historical card records.
+      - name: IS_DEFAULT
+        description: Indicator showing whether the value option is the default for the field. Stored as source text from the source payload. Source values may use string flags instead of normalized booleans.
+      - name: VALUE
+        description: Display value available for the custom field. Stored as source text. Users see this label directly when selecting the option on a card.
+  - name: BRONZE__TEH_DATA_OPS__KANBANIZE_TAGS
+    description: |
+      PURPOSE: Raw Kanbanize tag definition feed used to stage tag labels and availability settings for delivery reporting.
+      GRAIN: One row = one Kanbanize tag ID after keeping the latest file-backed version.
+    tests:
+      - dbt_expectations.expect_table_row_count_to_be_between:
+          min_value: 1
+    columns:
+      - name: TAG_ID
+        description: Unique identifier for the Kanbanize tag. Stored as source text. It is the main key for the tag definition.
+      - name: LABEL
+        description: Display label of the Kanbanize tag. Stored as source text. Teams use this value directly on cards and reports.
+      - name: COLOR
+        description: Color assigned to the tag in Kanbanize. Stored as source text. It is primarily a visual setting rather than a business classification by itself.
+      - name: AVAILABILITY
+        description: Availability setting showing where the tag can be used. Stored as source text. Meanings depend on Kanbanize board and configuration rules.
+      - name: IS_ENABLED
+        description: Indicator showing whether the tag is currently enabled. Stored as source text from the source payload. Disabled tags can still appear in historical card data.
+  - name: BRONZE__TEH_DATA_OPS__KANBANIZE_USERS
+    description: |
+      PURPOSE: Raw Kanbanize user feed used to stage board-user identity details for delivery reporting and joins.
+      GRAIN: One row = one Kanbanize user ID after keeping the latest file-backed version.
+    tests:
+      - dbt_expectations.expect_table_row_count_to_be_between:
+          min_value: 1
+    columns:
+      - name: USER_ID
+        description: Unique identifier for the Kanbanize user. Stored as source text. It is the key used to connect user records to card ownership and activity fields.
+      - name: USERNAME
+        description: Username recorded for the Kanbanize user. Stored as source text. It can differ from a person's display name.
+      - name: REALNAME
+        description: Display or real name of the Kanbanize user. Stored as source text. Spelling and formatting follow the user profile maintained in Kanbanize.
+      - name: AVATAR
+        description: Avatar reference associated with the user profile. Stored as source text. It is mainly useful for UI display rather than analytical reporting.
+      - name: ATTRIBUTES
+        description: Extended user attribute payload from Kanbanize. Stored as source text from the source payload. Additional parsing may be needed to report individual attribute values.
+  - name: BRONZE__TEH_DATA_OPS__MDM_COMPANY
+    description: |
+      PURPOSE: Raw MDM company master feed used to stage company identifiers and company names for data operations reference reporting.
+      GRAIN: One row = one company code from the latest selected MDM source file.
+    tests:
+      - dbt_expectations.expect_table_row_count_to_be_between:
+          min_value: 1
+    columns:
+      - name: _REFRESHDATE
+        description: Last sql run of the dbt model.
+        tests:
+          - dbt_expectations.expect_row_values_to_have_recent_data:
+              datepart: hours
+              interval: 12
+      - name: COMPANYCODE
+        description: Master-data company code from the MDM source. Stored as source text. It is the primary identifier for a company in this bronze output.
+      - name: COMPANYNAME
+        description: Short company name carried on the MDM master record. Stored as source text. Naming follows source master-data conventions.
+      - name: LONGNAME
+        description: Extended or formal company name from the master record. Stored as source text. It can provide a more complete label than the short company name.
+      - name: ACTIVEINDICATOR
+        description: Indicator showing whether the company is marked active in MDM. Stored as source text from the source payload. Source values may not be normalized to a single boolean standard.
+  - name: BRONZE__TEH_DATA_OPS__MYSKILLS_KSMN_TABLE
+    description: |
+      PURPOSE: Raw MySkills KSMN feed used to stage employee, organizational, and milestone attributes for training-related data operations reporting.
+      GRAIN: One row = one TELKAICD record from the latest selected MySkills source file.
+    tests:
+      - dbt_expectations.expect_table_row_count_to_be_between:
+          min_value: 1
+    columns:
+      - name: _REFRESHDATE
+        description: Last sql run of the dbt model.
+        tests:
+          - dbt_expectations.expect_row_values_to_have_recent_data:
+              datepart: hours
+              interval: 12
+      - name: GYOMUYMD
+        description: Reporting date for the MySkills snapshot. Stored as a date-like YMD value. It anchors the record to the business day the source file represents.
+      - name: TELKAICD
+        description: Primary training-record identifier in KSMN. Stored as source text. It is the key used to track one employee snapshot across loads.
+      - name: SEISNM
+        description: Employee surname captured in the KSMN feed. Stored as source text. Character display depends on the upstream file encoding and source language settings.
+      - name: SEISNE
+        description: Employee given name captured in the KSMN feed. Stored as source text. Character display depends on the upstream file encoding and source language settings.
+      - name: SSRYNM
+        description: Primary organization or division name on the record. Stored as source text. It reflects the source system's naming, not a curated reporting label.
+      - name: SSRYNE
+        description: Alternate organization or division name on the record. Stored as source text. It often carries the same organization in another language or character set.
+      - name: FKINM
+        description: Primary section or classification label for the employee. Stored as source text. Local training terminology may be needed to read the abbreviation correctly.
+      - name: FKINE
+        description: Alternate section or classification label for the employee. Stored as source text. It often reflects the same label in another language or character set.
+      - name: KKBASCD
+        description: Base classification code that groups the employee in MySkills. Stored as source text. The source application defines the code meaning and bronze does not expand it.
+      - name: KUNICD
+        description: Country or operating-unit code carried on the record. Stored as source text. The valid code list comes from the upstream MySkills application.
+      - name: KSTUKACD
+        description: Organization-structure code used to place the employee in the training hierarchy. Stored as source text. Reference mappings are usually needed to turn it into a readable business label.
+      - name: SOSIKKBN
+        description: Organization classification code attached to the record. Stored as source text. The classification logic stays source-specific and is not normalized in bronze.
+      - name: TELSYMD
+        description: TEL milestone date in the MySkills training sequence. Stored as a date-like YMD value. Blank or placeholder values can appear when the milestone has not been reached.
+      - name: TACSYMD
+        description: TAC milestone date in the MySkills training sequence. Stored as a date-like YMD value. Blank or placeholder values can appear when the milestone has not been reached.
+      - name: ZSBSYMD
+        description: ZSBS milestone date in the MySkills training sequence. Stored as a date-like YMD value. The checkpoint code remains shorthand and usually needs the training glossary for interpretation.
+      - name: ZSKSYMD
+        description: ZSK milestone date in the MySkills training sequence. Stored as a date-like YMD value. The checkpoint code remains shorthand and usually needs the training glossary for interpretation.
+      - name: ZSKSSYMD
+        description: Start date for the ZSK stage in the MySkills training sequence. Stored as a date-like YMD value. The stage code remains shorthand and usually needs the training glossary for interpretation.
+      - name: ZSKESYMD
+        description: End date for the ZSK stage in the MySkills training sequence. Stored as a date-like YMD value. The stage code remains shorthand and usually needs the training glossary for interpretation.
+      - name: ZSK1YMD
+        description: First ZSK step date in the MySkills training sequence. Stored as a date-like YMD value. Step numbering follows source milestone order rather than a calendar convention.
+      - name: ZSK2YMD
+        description: Second ZSK step date in the MySkills training sequence. Stored as a date-like YMD value. Step numbering follows source milestone order rather than a calendar convention.
+      - name: ZSNBYMD
+        description: Date when the ZSNBYMD checkpoint was logged in MySkills. Stored as a date-like YMD value. The checkpoint code remains in source shorthand and usually needs the training glossary for interpretation.
+      - name: ZSYSYMD
+        description: Date when the ZSYSYMD checkpoint was logged in MySkills. Stored as a date-like YMD value. The checkpoint code remains in source shorthand and usually needs the training glossary for interpretation.
+      - name: ZSTACYMD
+        description: Date when the ZSTACYMD checkpoint was logged in MySkills. Stored as a date-like YMD value. The checkpoint code remains in source shorthand and usually needs the training glossary for interpretation.
+      - name: ZSSIZYMD
+        description: Date when the ZSSIZYMD checkpoint was logged in MySkills. Stored as a date-like YMD value. The checkpoint code remains in source shorthand and usually needs the training glossary for interpretation.
+      - name: ZSSPYMD
+        description: Date when the ZSSPYMD checkpoint was logged in MySkills. Stored as a date-like YMD value. The checkpoint code remains in source shorthand and usually needs the training glossary for interpretation.
+      - name: ZSGSYMD
+        description: Date when the ZSGSYMD checkpoint was logged in MySkills. Stored as a date-like YMD value. The checkpoint code remains in source shorthand and usually needs the training glossary for interpretation.
+      - name: ZSNPYMD
+        description: Date when the ZSNPYMD checkpoint was logged in MySkills. Stored as a date-like YMD value. The checkpoint code remains in source shorthand and usually needs the training glossary for interpretation.
+      - name: ZSTKYMD
+        description: Date when the ZSTKYMD checkpoint was logged in MySkills. Stored as a date-like YMD value. The checkpoint code remains in source shorthand and usually needs the training glossary for interpretation.
+      - name: ZSKKYMD
+        description: Date when the ZSKKYMD checkpoint was logged in MySkills. Stored as a date-like YMD value. The checkpoint code remains in source shorthand and usually needs the training glossary for interpretation.
+      - name: ZSKTYMD
+        description: Date when the ZSKTYMD checkpoint was logged in MySkills. Stored as a date-like YMD value. The checkpoint code remains in source shorthand and usually needs the training glossary for interpretation.
+      - name: ZSKHYMD
+        description: Date when the ZSKHYMD checkpoint was logged in MySkills. Stored as a date-like YMD value. The checkpoint code remains in source shorthand and usually needs the training glossary for interpretation.
+      - name: ZSNHYMD
+        description: Date when the ZSNHYMD checkpoint was logged in MySkills. Stored as a date-like YMD value. The checkpoint code remains in source shorthand and usually needs the training glossary for interpretation.
+      - name: ZSNSYMD
+        description: Date when the ZSNSYMD checkpoint was logged in MySkills. Stored as a date-like YMD value. The checkpoint code remains in source shorthand and usually needs the training glossary for interpretation.
+      - name: TSBSYMD
+        description: Date when the TSBSYMD checkpoint was logged in MySkills. Stored as a date-like YMD value. The checkpoint code remains in source shorthand and usually needs the training glossary for interpretation.
+      - name: TSKSYMD
+        description: Date when the TSKSYMD checkpoint was logged in MySkills. Stored as a date-like YMD value. The checkpoint code remains in source shorthand and usually needs the training glossary for interpretation.
+      - name: TSKSSYMD
+        description: Date when the TSK stage-start checkpoint was logged in MySkills. Stored as a date-like YMD value. The checkpoint code remains MySkills shorthand and usually needs the training glossary for interpretation.
+      - name: TSKESYMD
+        description: Date when the TSK stage-end checkpoint was logged in MySkills. Stored as a date-like YMD value. The checkpoint code remains MySkills shorthand and usually needs the training glossary for interpretation.
+      - name: TSK1YMD
+        description: Date when the first TSK checkpoint step was logged in MySkills. Stored as a date-like YMD value. Step numbering follows source milestone sequencing rather than a standard calendar definition.
+      - name: TSK2YMD
+        description: Date when the second TSK checkpoint step was logged in MySkills. Stored as a date-like YMD value. Step numbering follows source milestone sequencing rather than a standard calendar definition.
+      - name: TSNBYMD
+        description: Date when the TSNBYMD checkpoint was logged in MySkills. Stored as a date-like YMD value. The checkpoint code remains in source shorthand and usually needs the training glossary for interpretation.
+      - name: TSYSYMD
+        description: Date when the TSYSYMD checkpoint was logged in MySkills. Stored as a date-like YMD value. The checkpoint code remains in source shorthand and usually needs the training glossary for interpretation.
+      - name: TSTACYMD
+        description: Date when the TSTACYMD checkpoint was logged in MySkills. Stored as a date-like YMD value. The checkpoint code remains in source shorthand and usually needs the training glossary for interpretation.
+      - name: TSSITYMD
+        description: Date when the TSSITYMD checkpoint was logged in MySkills. Stored as a date-like YMD value. The checkpoint code remains in source shorthand and usually needs the training glossary for interpretation.
+      - name: TSSPYMD
+        description: Date when the TSSPYMD checkpoint was logged in MySkills. Stored as a date-like YMD value. The checkpoint code remains in source shorthand and usually needs the training glossary for interpretation.
+      - name: TSGSYMD
+        description: Date when the TSGSYMD checkpoint was logged in MySkills. Stored as a date-like YMD value. The checkpoint code remains in source shorthand and usually needs the training glossary for interpretation.
+      - name: TSNPYMD
+        description: Date when the TSNPYMD checkpoint was logged in MySkills. Stored as a date-like YMD value. The checkpoint code remains in source shorthand and usually needs the training glossary for interpretation.
+      - name: TSTKYMD
+        description: Date when the TSTKYMD checkpoint was logged in MySkills. Stored as a date-like YMD value. The checkpoint code remains in source shorthand and usually needs the training glossary for interpretation.
+      - name: TSKKYMD
+        description: Date when the TSKKYMD checkpoint was logged in MySkills. Stored as a date-like YMD value. The checkpoint code remains in source shorthand and usually needs the training glossary for interpretation.
+      - name: TSKTYMD
+        description: Date when the TSKTYMD checkpoint was logged in MySkills. Stored as a date-like YMD value. The checkpoint code remains in source shorthand and usually needs the training glossary for interpretation.
+      - name: TSKHYMD
+        description: Date when the TSKHYMD checkpoint was logged in MySkills. Stored as a date-like YMD value. The checkpoint code remains in source shorthand and usually needs the training glossary for interpretation.
+      - name: TSNHYMD
+        description: Date when the TSNHYMD checkpoint was logged in MySkills. Stored as a date-like YMD value. The checkpoint code remains in source shorthand and usually needs the training glossary for interpretation.
+      - name: TSNSYMD
+        description: Date when the TSNSYMD checkpoint was logged in MySkills. Stored as a date-like YMD value. The checkpoint code remains in source shorthand and usually needs the training glossary for interpretation.
+      - name: NODSKBN
+        description: MySkills source classification code for the record. Stored as source text. Business interpretation depends on the upstream code glossary.
+      - name: KKKSSYMD
+        description: Date when the KKK stage-start checkpoint was logged in MySkills. Stored as a date-like YMD value. The checkpoint code remains MySkills shorthand and usually needs the training glossary for interpretation.
+      - name: KKMSTYMD
+        description: Date when the KKMSTYMD checkpoint was logged in MySkills. Stored as a date-like YMD value. The checkpoint code remains in source shorthand and usually needs the training glossary for interpretation.
+      - name: KKKTIYMD
+        description: KKK transition date in the MySkills training sequence. Stored as a date-like YMD value. The code is shorthand and usually needs the training glossary for interpretation.
+      - name: KNMHTYMD
+        description: KNMH milestone date in the MySkills training sequence. Stored as a date-like YMD value. The code is shorthand and usually needs the training glossary for interpretation.
+      - name: KGMKTYMD
+        description: KGMK milestone date in the MySkills training sequence. Stored as a date-like YMD value. The code is shorthand and usually needs the training glossary for interpretation.
+      - name: KOGMKYMD
+        description: KOGM milestone date in the MySkills training sequence. Stored as a date-like YMD value. The code is shorthand and usually needs the training glossary for interpretation.
+      - name: KNAMTYMD
+        description: KNAM milestone date in the MySkills training sequence. Stored as a date-like YMD value. The code is shorthand and usually needs the training glossary for interpretation.
+      - name: KAGMKYMD
+        description: KAGM milestone date in the MySkills training sequence. Stored as a date-like YMD value. The code is shorthand and usually needs the training glossary for interpretation.
+      - name: KGTMYMD
+        description: KGT milestone date in the MySkills training sequence. Stored as a date-like YMD value. The code is shorthand and usually needs the training glossary for interpretation.
+      - name: KKMSKYMD
+        description: KKMSK milestone date in the MySkills training sequence. Stored as a date-like YMD value. The code is shorthand and usually needs the training glossary for interpretation.
+      - name: JKMSKYMD
+        description: JKMSK milestone date in the MySkills training sequence. Stored as a date-like YMD value. The code is shorthand and usually needs the training glossary for interpretation.
+      - name: SCHEHYMD
+        description: SCHE milestone date in the MySkills training sequence. Stored as a date-like YMD value. The code is shorthand and usually needs the training glossary for interpretation.
+      - name: SOHAYMD
+        description: SOHA milestone date in the MySkills training sequence. Stored as a date-like YMD value. The code is shorthand and usually needs the training glossary for interpretation.
+      - name: BATSYMD
+        description: BATS milestone date in the training path. Stored as a date-like YMD value. The event label stays in source shorthand and may need the training glossary for interpretation.
+      - name: BATSFLG
+        description: Flag indicating whether the BATS milestone or status applies. Stored as source text from the source payload. Upstream values may not follow one normalized true-or-false standard.
+      - name: OLRIFLG
+        description: Flag carried from the MySkills source record. Stored as source text from the source payload. Business meaning depends on the source-system flag glossary.
+      - name: JYDHKBN
+        description: MySkills operational code JYDHKBN used by the source training process. Stored as source text. The code requires source documentation for business interpretation.
+      - name: GBRKKBN
+        description: MySkills operational code GBRKKBN used by the source training process. Stored as source text. The code requires source documentation for business interpretation.
+      - name: SKSDSKS
+        description: Numeric MySkills status or sequence code SKSDSKS. Stored as an integer value. Business interpretation depends on the upstream code documentation.
+      - name: SKSDSYKS
+        description: Numeric MySkills status or sequence code SKSDSYKS. Stored as an integer value. Business interpretation depends on the upstream code documentation.
+      - name: GYMHDK
+        description: MySkills operational code GYMHDK carried on the record. Stored as source text. The code requires source documentation for business interpretation.
+      - name: TORIYMD
+        description: TORI milestone date in the training path. Stored as a date-like YMD value. It can remain blank when the related milestone has not yet occurred.
+      - name: HUKSKNS
+        description: Numeric MySkills source field HUKSKNS tied to the training record. Stored as an integer value. Business interpretation depends on the upstream code documentation.
+      - name: OLRKYMD
+        description: OLRK milestone date in the training path. Stored as a date-like YMD value. It can remain blank when the related milestone has not yet occurred.
+      - name: BTRKYMD
+        description: BTRK milestone date in the training path. Stored as a date-like YMD value. It can remain blank when the related milestone has not yet occurred.
+      - name: HMAKKBN
+        description: MySkills operational code HMAKKBN carried on the record. Stored as source text. The code requires source documentation for business interpretation.
+      - name: TIMESP
+        description: Timestamp converted from the inbound MySkills date wrapper. Stored as a timestamp value. Parsing depends on the source `/Date()/` style representation.

@@ -1,0 +1,143 @@
+name: Snowflake SQL Deploy
+
+on:
+  push:
+    branches:
+      - qa
+      - sit
+      - master
+    paths:
+      - "Snow/**"
+
+run-name: "${{ github.workflow }} | ${{ github.event_name }} | ${{ github.ref_name }} | ${{ github.run_id }}-${{ github.run_attempt }}"
+
+jobs:
+          
+  collect-files:
+    name: Snowflake SQL Check
+    runs-on: [self-hosted, windows, build3]
+    environment: ${{ github.ref_name == 'sit' && 'sit' || github.ref_name == 'qa' && 'qa' || github.ref_name == 'master' && 'master' }}
+    if: ${{ contains(github.event.head_commit.message, 'from Tokyo-Electron/master') == false }}
+    outputs:
+      snow_has_changes: ${{ steps.snow.outputs.has_changes }}
+      snow_changed_files: ${{ steps.snow.outputs.changed_files }}
+      dbt_has_changes: ${{ steps.dbt.outputs.has_changes }}
+      dbt_changed_files: ${{ steps.dbt.outputs.changed_files }}
+      has_policies: ${{ steps.detect.outputs.has_policies }}
+      policy_refs: ${{ steps.detect.outputs.policy_refs }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          sparse-checkout: |
+            Snow/
+            astro_datautility/dags/dbt/dbt_project
+            .github/scripts/
+          sparse-checkout-cone-mode: true
+
+      - name: Get changed files - Snow
+        id: snow
+        shell: pwsh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          INPUT_BASE_REF: ${{ github.event.before }}
+          INPUT_HEAD_REF: ${{ github.event.after }}
+          INPUT_GRAB_ON: "Snow/"
+          INPUT_SQL_ONLY: "true"
+        run: python .github/scripts/get_diff_files.py
+
+      - name: Get changed files - dbt_project
+        id: dbt
+        shell: pwsh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          INPUT_BASE_REF: ${{ github.event.before }}
+          INPUT_HEAD_REF: ${{ github.event.after }}
+          INPUT_GRAB_ON: "astro_datautility/dags/dbt/dbt_project"
+          INPUT_SQL_ONLY: "true"
+        run: python .github/scripts/get_diff_files.py
+
+      - name: Detect RLS/CMP
+        id: detect
+        if: ${{ false && steps.dbt.outputs.has_changes == 'true' }}
+        shell: python
+        env:
+          SNOWFLAKE_ACCOUNT: ${{ vars.SNOWFLAKE_ACCOUNT }}
+          SNOWFLAKE_USER: ${{ vars.SNOWFLAKE_USER }}
+          SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_SECRET }}
+          SNOWFLAKE_WAREHOUSE: ${{ vars.SNOWFLAKE_WAREHOUSE }}
+        run: |
+          import subprocess
+
+          env = "${{ github.ref_name }}".lower()
+          if env == "qa":
+              sf_env = "QA"
+          elif env == "sit":
+              sf_env = "SIT"
+          else:
+              sf_env = "PROD"
+
+          changed_files = "${{ steps.dbt.outputs.changed_files }}"
+          print("Detecting policies for dbt_project changes")
+          print("Env:", sf_env)
+          print("Files:", changed_files)
+
+          subprocess.check_call(
+              ["python", ".github\\scripts\\get_rls_cls.py", "--env", sf_env, "--changed-files", changed_files]
+          )
+
+  deploy-snowflake:
+    name: Deploy Snowfiles
+    runs-on: [self-hosted, windows, build3]
+    needs: collect-files
+    environment: ${{ github.ref_name == 'sit' && 'sit' || github.ref_name == 'qa' && 'qa' || github.ref_name == 'master' && 'master' }}
+    if: ${{ contains(github.event.head_commit.message, 'from Tokyo-Electron/master') == false && (needs.collect-files.outputs.snow_has_changes == 'true' || needs.collect-files.outputs.has_policies == 'true') }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          sparse-checkout: |
+            Snow/
+            .github/scripts/
+          sparse-checkout-cone-mode: true
+
+      - name: Run changed files - Snow
+        if: ${{ needs.collect-files.outputs.snow_has_changes == 'true' }}
+        shell: python
+        env:
+          SNOWFLAKE_ACCOUNT: ${{ vars.SNOWFLAKE_ACCOUNT }}
+          SNOWFLAKE_USER: ${{ vars.SNOWFLAKE_USER }}
+          SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_SECRET }}
+          SNOWFLAKE_WAREHOUSE: ${{ vars.SNOWFLAKE_WAREHOUSE }}
+          SNOWFLAKE_ROLE: ${{ vars.SNOWFLAKE_ROLE }}
+          SNOWFLAKE_SYSADMIN_ROLE: ${{ vars.SNOWFLAKE_SYSADMIN_ROLE }}
+          DEPLOYMENT_BRANCH_TEMPLATE: ${{ github.ref_name }}
+        run: |
+          import subprocess
+          files = "${{ needs.collect-files.outputs.snow_changed_files }}".replace("||", " ").split()
+          print("Deploying files:", files)
+          for file in files:
+              print(f"Deploying {file}...")
+              subprocess.check_call(["python", ".github\\scripts\\deploy_snowfiles.py", file])
+
+      - name: Apply RLS/CMP
+        if: ${{ false && needs.collect-files.outputs.has_policies == 'true' }}
+        shell: python
+        env:
+          SNOWFLAKE_ACCOUNT: ${{ vars.SNOWFLAKE_ACCOUNT }}
+          SNOWFLAKE_USER: ${{ vars.SNOWFLAKE_USER }}
+          SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_SECRET }}
+          SNOWFLAKE_WAREHOUSE: ${{ vars.SNOWFLAKE_WAREHOUSE }}
+          SNOWFLAKE_MASKING_USER: ${{ vars.SNOWFLAKE_USER }}
+          SNOWFLAKE_MASKING_PASSWORD: ${{ secrets.SNOWFLAKE_SECRET }}
+        run: |
+          import subprocess
+          policy_refs = '${{ needs.collect-files.outputs.policy_refs }}'
+          print("Applying policy refs:", policy_refs)
+          subprocess.check_call(
+              ["python", ".github\\scripts\\deploy_rls_cmp.py", "--policy-refs", policy_refs]
+          )

@@ -1,0 +1,5 @@
+models:
+- name: GOLD__TMEA_EQUIPMENT_SALES__WISDOM_GLOBAL_MACHINES
+  tests:
+  - has_data
+  - recently_run

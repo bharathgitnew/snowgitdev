@@ -1,0 +1,16 @@
+{{ config(
+        materialized='view',
+        alias='SAP_LINK_SO_PO',
+        transient=false    
+) }}
+
+
+with source_data as (
+    select 
+        * exclude(AUDIT_LOG_ID, _ROW_HASH)
+    from {{ ref('COMMON__SAPH__SAP_LINK_SO_PO') }} 
+),
+transform_data AS(
+    select * from source_data
+)
+select * from transform_data

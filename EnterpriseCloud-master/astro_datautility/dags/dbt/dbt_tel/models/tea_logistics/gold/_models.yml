@@ -1,0 +1,121 @@
+models:
+- name: GOLD__TEA_LOGISTICS__CONSIGNMENT_BATCH_WMS
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_LOGISTICS__CONSIGNMENT_FILLUP
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_LOGISTICS__CUSTOMER_PAID_REPAIR_REVENUE_COGS_REPORT
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_LOGISTICS__DAILY_ACTUALS
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_LOGISTICS__DAILY_ACTUALS_SALES_LINE
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_LOGISTICS__DECONTAMINATION
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_LOGISTICS__DROPSHIP_REPORT
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_LOGISTICS__INVENTORY_MATCH_3PL_DATA
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_LOGISTICS__INVENTORY_MATCH_SAP_DATA
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_LOGISTICS__INVENTORY_MATCH_UPS
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_LOGISTICS__MASTER_MATERIAL_REPORT
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_LOGISTICS__MATERIAL_MASTER_3PL_UPS_REPORT
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_LOGISTICS__MATERIAL_MASTER_INTEL
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_LOGISTICS__MM_INTEL_WITH_ROP_SS
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_LOGISTICS__PNL_ACCOUNTS_SALES_CATEGORY
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_LOGISTICS__PRICE_MATRIX
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_LOGISTICS__RMA_MASTER_REPORT
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_LOGISTICS__ROP_SS_CROSSTAB
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_LOGISTICS__ROP_SS_REPORT
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_LOGISTICS__STO_REPORT_RAW
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_LOGISTICS__UNIVERSAL_ACTUAL_SETTLEMENT
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_LOGISTICS__UNIVERSAL_BILLING_DOCUMENT
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_LOGISTICS__UNIVERSAL_FI_POSTINGS
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_LOGISTICS__UNIVERSAL_GOODS_MOVEMENT
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_LOGISTICS__UNIVERSAL_GOODS_RECEIPT_PO
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_LOGISTICS__UNIVERSAL_INCOMING_INVOICE
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_LOGISTICS__UNIVERSAL_INVENTORY_DIFFERENCE
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_LOGISTICS__UNIVERSAL_PL_ACCOUNT_TYPE
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_LOGISTICS__UNIVERSAL_POST_CLOSING_MATERIAL_LEDGER
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_LOGISTICS__UNIVERSAL_PPV_TRANSACTIONS
+  tests:
+  - has_data
+  - recently_run

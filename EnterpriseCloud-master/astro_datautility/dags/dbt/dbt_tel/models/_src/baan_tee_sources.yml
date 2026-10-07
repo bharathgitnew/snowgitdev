@@ -1,0 +1,181 @@
+version: 2
+sources:
+- name: BAAN3_ORACLE_LIVE
+  description: Landing Zone - BAAN3_ORACLE_LIVE Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ_HVR'') }}'
+  schema: BAAN3_ORACLE_LIVE
+  tables:
+  - name: TTCCOM010200
+    identifier: TTCCOM010200
+    description: Landing table for TTCCOM010200 file.
+  - name: TTCCOM020200
+    identifier: TTCCOM020200
+    description: Landing table for TTCCOM020200 file.
+  - name: TTCMCS008200
+    identifier: TTCMCS008200
+    description: Landing table for TTCMCS008200 file.
+  - name: TTCMCS030200
+    identifier: TTCMCS030200
+    description: Landing table for TTCMCS030200 file.
+  - name: TTCMCS032200
+    identifier: TTCMCS032200
+    description: Landing table for TTCMCS032200 file.
+  - name: TTDINV001200
+    identifier: TTDINV001200
+    description: Landing table for TTDINV001200 file.
+  - name: TTDPUR040200
+    identifier: TTDPUR040200
+    description: Landing table for TTDPUR040200 file.
+  - name: TTDPUR041200
+    identifier: TTDPUR041200
+    description: Landing table for TTDPUR041200 file.
+  - name: TTDPUR045200
+    identifier: TTDPUR045200
+    description: Landing table for TTDPUR045200 file.
+  - name: TTDRPL100200
+    identifier: TTDRPL100200
+    description: Landing table for TTDRPL100200 file.
+  - name: TTDSLS040200
+    identifier: TTDSLS040200
+    description: Landing table for TTDSLS040200 file.
+  - name: TTDSLS041200
+    identifier: TTDSLS041200
+    description: Landing table for TTDSLS041200 file.
+  - name: TTDSLS045200
+    identifier: TTDSLS045200
+    description: Landing table for TTDSLS045200 file.
+  - name: TTFACP200200
+    identifier: TTFACP200200
+    description: Landing table for TTFACP200200 file.
+  - name: TTFACR200200
+    identifier: TTFACR200200
+    description: Landing table for TTFACR200200 file.
+  - name: TTFACR200201
+    identifier: TTFACR200201
+    description: Landing table for TTFACR200201 file.
+  - name: TTFACR200202
+    identifier: TTFACR200202
+    description: Landing table for TTFACR200202 file.
+  - name: TTFACR200203
+    identifier: TTFACR200203
+    description: Landing table for TTFACR200203 file.
+  - name: TTFACR200204
+    identifier: TTFACR200204
+    description: Landing table for TTFACR200204 file.
+  - name: TTFACR200205
+    identifier: TTFACR200205
+    description: Landing table for TTFACR200205 file.
+  - name: TTFACR200206
+    identifier: TTFACR200206
+    description: Landing table for TTFACR200206 file.
+  - name: TTFACR200207
+    identifier: TTFACR200207
+    description: Landing table for TTFACR200207 file.
+  - name: TTFACR200208
+    identifier: TTFACR200208
+    description: Landing table for TTFACR200208 file.
+  - name: TTFACR200209
+    identifier: TTFACR200209
+    description: Landing table for TTFACR200209 file.
+  - name: TTFACR400200
+    identifier: TTFACR400200
+    description: Landing table for TTFACR400200 file.
+  - name: TTFACR400201
+    identifier: TTFACR400201
+    description: Landing table for TTFACR400201 file.
+  - name: TTFACR400202
+    identifier: TTFACR400202
+    description: Landing table for TTFACR400202 file.
+  - name: TTFACR400203
+    identifier: TTFACR400203
+    description: Landing table for TTFACR400203 file.
+  - name: TTFACR400204
+    identifier: TTFACR400204
+    description: Landing table for TTFACR400204 file.
+  - name: TTFACR400205
+    identifier: TTFACR400205
+    description: Landing table for TTFACR400205 file.
+  - name: TTFACR400207
+    identifier: TTFACR400207
+    description: Landing table for TTFACR400207 file.
+  - name: TTFACR400208
+    identifier: TTFACR400208
+    description: Landing table for TTFACR400208 file.
+  - name: TTFACR400209
+    identifier: TTFACR400209
+    description: Landing table for TTFACR400209 file.
+  - name: TTFACR401200
+    identifier: TTFACR401200
+    description: Landing table for TTFACR401200 file.
+  - name: TTFACR401201
+    identifier: TTFACR401201
+    description: Landing table for TTFACR401201 file.
+  - name: TTFACR401202
+    identifier: TTFACR401202
+    description: Landing table for TTFACR401202 file.
+  - name: TTFACR401203
+    identifier: TTFACR401203
+    description: Landing table for TTFACR401203 file.
+  - name: TTFACR401204
+    identifier: TTFACR401204
+    description: Landing table for TTFACR401204 file.
+  - name: TTFACR401205
+    identifier: TTFACR401205
+    description: Landing table for TTFACR401205 file.
+  - name: TTFACR401207
+    identifier: TTFACR401207
+    description: Landing table for TTFACR401207 file.
+  - name: TTFACR401208
+    identifier: TTFACR401208
+    description: Landing table for TTFACR401208 file.
+  - name: TTFACR401209
+    identifier: TTFACR401209
+    description: Landing table for TTFACR401209 file.
+  - name: TTFGLD106200
+    identifier: TTFGLD106200
+    description: Landing table for TTFGLD106200 file.
+  - name: TTFGLD106201
+    identifier: TTFGLD106201
+    description: Landing table for TTFGLD106201 file.
+  - name: TTFGLD106202
+    identifier: TTFGLD106202
+    description: Landing table for TTFGLD106202 file.
+  - name: TTFGLD106203
+    identifier: TTFGLD106203
+    description: Landing table for TTFGLD106203 file.
+  - name: TTFGLD106204
+    identifier: TTFGLD106204
+    description: Landing table for TTFGLD106204 file.
+  - name: TTFGLD106205
+    identifier: TTFGLD106205
+    description: Landing table for TTFGLD106205 file.
+  - name: TTFGLD106206
+    identifier: TTFGLD106206
+    description: Landing table for TTFGLD106206 file.
+  - name: TTFGLD106207
+    identifier: TTFGLD106207
+    description: Landing table for TTFGLD106207 file.
+  - name: TTFGLD106208
+    identifier: TTFGLD106208
+    description: Landing table for TTFGLD106208 file.
+  - name: TTFGLD106209
+    identifier: TTFGLD106209
+    description: Landing table for TTFGLD106209 file.
+  - name: TTFGLD410200
+    identifier: TTFGLD410200
+    description: Landing table for TTFGLD410200 file.
+  - name: TTFGLD410208
+    identifier: TTFGLD410208
+    description: Landing table for TTFGLD410208 file.
+  - name: TTFGLD410209
+    identifier: TTFGLD410209
+    description: Landing table for TTFGLD410209 file.
+  - name: TTIITM001200
+    identifier: TTIITM001200
+    description: Landing table for TTIITM001200 file.
+  - name: TTIPCS020200
+    identifier: TTIPCS020200
+    description: Landing table for TTIPCS020200 file.
+  - name: TTSSMA102200
+    identifier: TTSSMA102200
+    description: Landing table for TTSSMA102200 file.

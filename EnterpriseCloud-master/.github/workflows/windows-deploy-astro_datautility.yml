@@ -1,0 +1,48 @@
+name: Deploy files on box
+on:
+  push:
+    branches:
+      - qa
+      - sit
+      - master
+    paths:
+      - "astro_datautility/**"
+
+run-name: "${{ github.workflow }} | ${{ github.event_name }} | ${{ github.ref_name }} | ${{ github.run_id }}-${{ github.run_attempt }}"
+
+env:
+  SHARE_PATH: 'f$\Shares'
+  
+jobs:
+  deploy:
+    name: Get changed files and deploy
+    runs-on: [self-hosted, windows, build3]
+    environment: ${{ github.ref_name == 'sit' && 'sit' || github.ref_name == 'qa' && 'qa' || github.ref_name == 'master' && 'master' }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Get changed files
+        id: files
+        shell: pwsh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          INPUT_BASE_REF: ${{ github.event.before }}
+          INPUT_HEAD_REF: ${{ github.event.after }}
+          INPUT_GRAB_ON: "astro_datautility/"
+          INPUT_SQL_ONLY: "false"
+        run: python .github/scripts/get_diff_files.py
+
+      - name: Deploy Files to Windows Share
+        id: deploy
+        if: steps.files.outputs.has_changes == 'true' || steps.files.outputs.has_deletes == 'true'
+        shell: pwsh
+        env:
+          CHANGED_FILES: ${{ steps.files.outputs.changed_files }}
+          DELETED_FILES: ${{ steps.files.outputs.deleted_files }}
+          SERVER_NAME: ${{ vars.SERVER_NAME }}
+          SHARE_PATH: ${{ env.SHARE_PATH }}
+          SVC_PREFECT_AD_PASSWORD: ${{ secrets.SVC_PREFECT_AD_PASSWORD }}
+        run: python .github/scripts/deploy_files.py

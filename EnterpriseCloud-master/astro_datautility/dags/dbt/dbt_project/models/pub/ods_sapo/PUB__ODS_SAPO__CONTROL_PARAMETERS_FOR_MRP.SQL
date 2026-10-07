@@ -1,0 +1,101 @@
+/************
+Model file generated from dbtGeneratePubViews: 08.28.2023.08.32.43"
+*************/
+
+{{ config(
+      materialized='view',
+      alias='CONTROL_PARAMETERS_FOR_MRP',
+      transient=false
+) }}
+
+with source_data as (
+    SELECT
+        MANDT,
+        WERKS,
+        FIXPA,
+        FIXBA,
+        FIXBE,
+        UMTHZ,
+        VWVOR,
+        VWVER,
+        PLAHZ,
+        NKPAF,
+        NKBAN,
+        PSBAN,
+        NKDIS,
+        NKRES,
+        PSRES,
+        BZTEK,
+        EREKG,
+        ERDSG,
+        MXBST,
+        MXPLA,
+        ANZLS,
+        MXSTA,
+        CSLID,
+        KTAGE,
+        KWOCH,
+        KMONA,
+        KFLPR,
+        KMRPP,
+        MRRPP,
+        KRAST,
+        PRAST,
+        FIXFA,
+        APLSL,
+        LIFKZ,
+        GTERM,
+        KZDRB,
+        KNTBE,
+        KNTBU,
+        KTDBU,
+        KZMAL,
+        KZUMB,
+        FIXQM,
+        XFAN1,
+        XFAN2,
+        XFAN3,
+        PRREG,
+        AUART,
+        FIXLA,
+        RPRRG,
+        FEDIS,
+        REFWK,
+        SIMPL,
+        SELFE,
+        SELBE,
+        SELQM,
+        SELBA,
+        SELPA,
+        SELZR,
+        NKSBD,
+        VERTR,
+        AUAR2,
+        NKSAF,
+        WAKHZ,
+        EXSGT,
+        BESAL,
+        KASTL,
+        NKCRQ,
+        SEREP,
+        IKDPL,
+        SELSB,
+        NFVBC,
+        COMPM,
+        DBEPL,
+        SELPZ,
+        SELLA,
+        SBUFF,
+        SELIW,
+        DSADA,
+        EVAPR,
+        _CAPTUREDATETIME
+    from {{ ref('ODS__SAPO__CONTROL_PARAMETERS_FOR_MRP') }}
+),
+
+transform_data AS
+(
+    select * from source_data
+)
+
+    select * from transform_data

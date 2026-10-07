@@ -1,0 +1,90 @@
+{{ config(
+        materialized='incremental',
+        incremental_strategy='merge',
+        alias='GL_ACCOUNT_MASTER',
+        unique_key = ['MANDT',
+    'KTOPL',
+    'SAKNR'],
+        transient=false
+) }}
+
+with source_data as (
+	SELECT 
+	_CAPTUREDATETIME,
+	MANDT,
+	KTOPL,
+	SAKNR,
+	XBILK,
+	SAKAN,
+	BILKT,
+	ERDAT,
+	ERNAM,
+	GVTYP,
+	KTOKS,
+	MUSTR,
+	VBUND,
+	XLOEV,
+	XSPEA,
+	XSPEB,
+	XSPEP,
+	MCOD1,
+	FUNC_AREA
+	FROM {{source('SAP_ORACLE_LIVE', 'SKA1')}}
+),
+
+
+transform_data as 
+(
+SELECT
+    _CAPTUREDATETIME,
+    '{{ invocation_id }}' AS _AUDIT_LOG_ID,
+    SHA2('hash_me') as _ROW_HASH,
+	MANDT as MANDT,
+	KTOPL as KTOPL,
+	SAKNR as SAKNR,
+	XBILK as XBILK,
+	SAKAN as SAKAN,
+	BILKT as BILKT,
+	ERDAT as ERDAT,
+	ERNAM as ERNAM,
+	GVTYP as GVTYP,
+	KTOKS as KTOKS,
+	MUSTR as MUSTR,
+	VBUND as VBUND,
+	XLOEV as XLOEV,
+	XSPEA as XSPEA,
+	XSPEB as XSPEB,
+	XSPEP as XSPEP,
+	MCOD1 as MCOD1,
+	FUNC_AREA as FUNC_AREA
+	FROM SOURCE_DATA
+), 
+
+type_data as 
+(
+SELECT 
+	CAST(_CAPTUREDATETIME AS TIMESTAMP_LTZ(9)) AS _CAPTUREDATETIME,
+	CAST(_AUDIT_LOG_ID AS VARCHAR(128)) AS _AUDIT_LOG_ID,
+	CAST(_ROW_HASH AS VARCHAR(128)) AS _ROW_HASH,
+	MANDT,
+	KTOPL,
+	SAKNR,
+	XBILK,
+	SAKAN,
+	BILKT,
+	ERDAT,
+	ERNAM,
+	GVTYP,
+	KTOKS,
+	MUSTR,
+	VBUND,
+	XLOEV,
+	XSPEA,
+	XSPEB,
+	XSPEP,
+	MCOD1,
+	FUNC_AREA
+FROM TRANSFORM_DATA
+)
+ 
+SELECT * FROM TYPE_DATA

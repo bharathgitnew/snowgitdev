@@ -1,0 +1,509 @@
+models:
+- name: BRONZE__TEA_LOGISTICS__CARMA_CORE_RETURN_REASON_TYPE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__CARMA_CSO
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__CARMA_CSO_LINE_ITEM
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__CARMA_DISPOSITION_TYPE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__CARMA_DMG_LIABILITY_DISP_TYPE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__CARMA_NCDR_TYPE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__CARMA_ORDER_TYPE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__CARMA_PART_SCRAP_DISP_TYPE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__CARMA_POST_CONSUME_PART_RETURN
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__CARMA_PROCESS_SALES
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__CARMA_RECEIVE_REQUEST
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__CARMA_REQUEST_SALES
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__CARMA_REQUEST_SERVICE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__CARMA_RETURN_REASON_TYPE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__CARMA_RMA
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__CRM_FILE_GLOBALOPTIONSETMETADATA
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__CRM_FILE_INCIDENT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__CRM_FILE_MSDYN_WORKORDER
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__CRM_FILE_OPTIONSETMETADATA
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__CRM_FILE_TEL_COM_DECONTAMINATION
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__FILE_FINANCE_ADJ_MAPPINGS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__FILE_INTEL_MSBI_FULL_ITEM_BOM
+  description:
+    This Bronze object is retained for future reference.
+    As part of the activity moving MSBI_VF_BY_SITE logistics to INTEL_SMS,
+    the downstream SILVER object SILVER.TEA_LOGISTICS.MSBI_VF_BY_SITE
+    and the GOLD object GOLD.TEA_LOGISTICS.MSBI_VF_CROSSTAB
+    are being reorganized. Specifically, the GOLD MSBI_VF_CROSSTAB
+    object is being moved to the tea_intel_sms domain.
+  tests:
+    - has_data
+- name: BRONZE__TEA_LOGISTICS__FILE_SAP_MATERIAL_CLASSIFICATIONS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__FILE_SAP_SALES_CATEGORY
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__FILE_SAP_SEGMENT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__FILE_WBS_CODE_DESCRIPTION
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__MDM_CUSTOMER_GROUP_MAPPING
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__ROSETTA_CONSIGNMENT_SHIPMENT_RECEIPT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__ROSETTA_CONSIGNMENT_TRANSACTION
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_MATERIAL_MASTER_3PL
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_VBAP_BLANK_PROFIT_CENTER
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU009_VBAK_HIST
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU010_VBAP_HIST
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU010_VBAP_SECT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU012_LIKP_HIST
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU013_LIPS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU014_VBRK_HIST
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU015_VBRP_HIST
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU017_MARA
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU019_MVKE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU020_KNA1
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU021_KNVV
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU023_TVAKT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU024_ACDOCA
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU025_MATDOC
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU026_MARC
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU027_EKKO
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU028_EKPO
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU030_KONP
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU031_A904
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU032_A901
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU033_A902
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU035_CEPC
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU036_CSKS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU037_BKPF
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU038_BSEG
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU038_BSEG_SEC
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU040_PRPS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU045_BSET
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU047_VBPA
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU049_EKKN
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU050_EKES
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU053_BUT000
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU056_AUSP
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU057_INOB
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU061_LFA1
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU064_VBFA
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU073_EINE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU074_EINA
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU080_T001L
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU082_A032
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU083_A114
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU084_A350
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU085_A910
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU086_A919
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU089_AFVC
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU090_AUFK
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU091_CEPCT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU092_CSKT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU098_LFB1
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU100_LFM1
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU105_MCHB
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU106_MDMA
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU119_AFKO
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU120_DD07T_POSAR
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU123_T023T
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU125_T134T
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU160_TVAUT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU163_TVFKT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU171_TVM1T
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU173_TVM2T
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU177_TVV1T
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU196_AUAA
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU200_TVLKT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU201_BUT0ID
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU206_LFBW
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU210_CDHDR
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU217_EKBE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU222_AUAK
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU229_A916
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU231_ZSDT0176
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU235_RESB
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU236_AFIH
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU241_A017
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU251_ZMAT0011
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPH_PARTS_EXPORTIMPORT_CONTROL
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPH_SAP_FIM_EV_SKAT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPH_SAP_SDT_EV_DROPSHIPREPORT_GMX_HIST
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPH_SAP_US_MMT_EV_MBEW
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPH_SAP_ZZM_EV_KONP
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SHAREPOINT_CUSTOMER_GROUP_MAPPING
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SHAREPOINT_ORACLE_DEPARTMENT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SHAREPOINT_ORACLE_REGION
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SHAREPOINT_ORACLE_SEGMENT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SHAREPOINT_SERVICE_BUSINESS_UNIT_MAPPING
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SHAREPOINT_SERVICE_B_CODE_MAPPING
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__THREEPL_TPL_RECEIVING_ADVICE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__THREEPL_TPL_SHIPMENT_CONFIRMATION
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__THREEPL_TPL_SHIPMENT_LINE_DETAIL
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__THREEPL_TPL_SHIPMENT_STATUS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__THREEPL_TPL_UPS_INVENTORY_FILE_US
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__ZCDV_T_CMTU009_VBAK
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__ZCDV_T_CMTU010_VBAP
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__ZCDV_T_CMTU012_LIKP
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__ZCDV_T_CMTU014_VBRK
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__ZCDV_T_CMTU015_VBRP
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__FILE_COST_CENTER
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__FILE_PROFIT_CENTER
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU011_VBEP_HIST
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEA_LOGISTICS__SAPAPI_ZCDV_T_CMTU011_VBEP
+  tests:
+  - has_data
+  - recently_run

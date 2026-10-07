@@ -1,0 +1,38 @@
+{
+    "BAAN5": {
+		"connections":"baan5",
+        "servername": "172.26.95.27",
+        "port": "1521",
+        "database": "BAAN5",
+        "username": "BAANORACLE-USERNAME",
+        "password": "BAANORACLE-PASSWORD",
+		"outputfolder":"Wisdom"
+    },
+    "WISDOM": {
+		"connections":"wisdom",
+        "servername": "172.26.95.32",
+        "port": "1521",
+        "database": "srv_trac12",
+        "username": "WISDOM-USERNAME",
+        "password": "WISDOM-PASSWORD",
+		"outputfolder":"Wisdom"
+    },
+    "NOW": {
+		"connections":"NOW",
+        "servername": "172.26.95.4",
+        "port": "1521",
+        "database": "NOW",
+        "username": "NOW-USERNAME",
+        "password": "NOW-PASSWORD",
+		"outputfolder":"NOW"
+    },
+    "NOWUAT": {
+		"connections":"NOWUAT",
+        "servername": "172.26.95.28",
+        "port": "1521",
+        "database": "NOW",
+        "username": "NOW-UAT-USERNAME",
+        "password": "NOW-UAT-PASSWORD",
+		"outputfolder":"NOW_UAT"
+    }
+}

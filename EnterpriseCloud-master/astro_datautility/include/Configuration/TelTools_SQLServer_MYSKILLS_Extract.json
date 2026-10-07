@@ -1,0 +1,25 @@
+{
+    "MYSKILLS": {
+        "DataSet1": {
+            "schema": "dbo",
+            "table": "GBMN_TABLE",
+            "Incremental": "NULL",
+            "sftablename": "GBMN_TABLE",
+            "filter": ""
+        },
+        "DataSet2": {
+            "schema": "dbo",
+            "table": "KSMN_TABLE",
+            "Incremental": "NULL",
+            "sftablename": "KSMN_TABLE",
+            "filter": ""
+        },
+        "DataSet3": {
+            "schema": "MySkills_Vault.MySkills",
+            "table": "T_WorkDay",
+            "Incremental": "NULL",
+            "sftablename": "WORKDAYEMPLOYEE",
+            "filter": ""
+        }
+    }
+}

@@ -1,0 +1,236 @@
+version: 2
+sources:
+- name: FILE
+  description: Landing Zone - FILE Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: FILE
+  tables:
+  - name: CAMPAIGN
+    identifier: CAMPAIGN
+    desription: Landing Table for CAMPAIGN
+  - name: ATTENDANCE_STATUS
+    identifier: ATTENDANCE_STATUS
+    desription: Landing Table for ATTENDANCE_STATUS
+  - name: TASTYPEOFWORK
+    identifier: TASTYPEOFWORK
+    desription: Landing Table for TASTYPEOFWORK
+  - name: WORLDCITIES_DB
+    identifier: WORLDCITIES_DB
+    desription: Landing Table for WORLDCITIES_DB
+  - name: OPENDATASOFT_POSTALCODE_GEODATA
+    identifier: OPENDATASOFT_POSTALCODE_GEODATA
+    description: Landing table for OPENDATASOFT_POSTALCODE_GEODATA
+  - name: BAAN_TEE_SALES
+    identifier: BAAN_TEE_SALES
+    description: Landing Table for BAAN_TEE_SALES
+  - name: WBS_CODE_DESCRIPTION
+    identifier: WBS_CODE_DESCRIPTION
+    description: Landing table for WBS_CODE_DESCRIPTION file.
+  - name: FORECASTBUDGET
+    identifier: ForecastBudget
+    description: Landing table for ForecastBudget file.
+  - name: FORECASTBUDGET_EPBCS
+    identifier: ForecastBudget_epbcs
+    description: Landing table for ForecastBudget_epbcs file.
+  - name: SAP_ACCOUNT
+    identifier: SAP_ACCOUNT
+    description: SAP_ACCOUNT Table
+  - name: SAP_ACCOUNT_EXPENSE
+    identifier: SAP_ACCOUNT_EXPENSE
+    description: SAP_ACCOUNT_EXPENSE Table
+  - name: SAP_DOCUMENT_TYPE_DESCRIPTION
+    identifier: SAP_DOCUMENT_TYPE_DESCRIPTION
+    description: SAP_DOCUMENT_TYPE_DESCRIPTION Table
+  - name: SAP_DOCUMENT_TYPE
+    identifier: SAP_DOCUMENT_TYPE
+    description: SAP_DOCUMENT_TYPE Table
+  - name: SAP_CUSTOMER_GROUP
+    identifier: SAP_CUSTOMER_GROUP
+    description: SAP_CUSTOMER_GROUP Table
+  - name: ORACLE_CUSTOMER_MAP
+    identifier: ORACLE_CUSTOMER_MAP
+    description: Landing table for ORACLE_CUSTOMER_MAP file.
+  - name: SAP_SEGMENT
+    identifier: SAP_SEGMENT
+    description: Landing table for SAP_SEGMENT file.
+  - name: SAP_SALES_CATEGORY
+    identifier: SAP_SALES_CATEGORY
+    description: Landing table for SAP_SALES_CATEGORY file.
+  - name: SAP_REGION
+    identifier: SAP_REGION
+    description: Landing table for SAP_REGION file.
+  - name: SAP_DEPARTMENT
+    identifier: SAP_DEPARTMENT
+    description: Landing table for SAP_DEPARTMENT file.
+  - name: GSUSBOOKINGHISTORY
+    identifier: GSUSBOOKINGHISTORY
+    description: Landing table for GSUSBOOKINGHISTORY file.
+  - name: GSUSSALESHISTORY
+    identifier: GSUSSALESHISTORY
+    description: Landing table for GSUSSALESHISTORY file.
+  - name: OPENPO
+    identifier: OPENPO
+    description: Landing table for OPENPO file.
+  - name: ACTIVEASSETREPORT
+    identifier: ACTIVEASSETREPORT
+    description: Landing table for ACTIVEASSETREPORT file.
+  - name: BUSINESSUNIT
+    identifier: BUSINESSUNIT
+    description: Landing table for BUSINESSUNIT file.
+  - name: SIRFIS_AREA
+    identifier: SIRFIS_AREA
+    description: Landing table for SIRFIS_AREA file.
+  - name: SIRFIS_PRICE_ESTIMATE_INLINE
+    identifier: SIRFIS_PRICE_ESTIMATE_INLINE
+    description: Landing table for SIRFIS_PRICE_ESTIMATE_INLINE file.
+  - name: PROFIT_CENTER
+    identifier: PROFIT_CENTER
+    description: Landing table for PROFIT_CENTER file.
+  - name: SAP_USER_LIST
+    identifier: SAP_USER_LIST
+    description: Landing table for SAP_USER_LIST file.
+  - name: COST_CENTER
+    identifier: COST_CENTER
+    description: Landing table for COST_CENTER file.
+  - name: SAP_DE_REFERENCE
+    identifier: SAP_DE_REFERENCE
+    description: Landing table for SAP_DE_REFERENCE file.
+  - name: SERVICE_B_CODE_MAPPING
+    identifier: SERVICE_B_CODE_MAPPING
+    description: Landing table for SERVICE_B_CODE_MAPPING file.
+  - name: FST_EMPLOYEE_GROUP
+    identifier: FST_EMPLOYEE_GROUP
+    description: Landing table for FST_EMPLOYEE_GROUP file.
+  - name: SALES_DOCUMENT_TYPE_MAPPING
+    identifier: SALES_DOCUMENT_TYPE_MAPPING
+    description: Landing table for SALES_DOCUMENT_TYPE_MAPPING file.
+  - name: FINANCE_ADJ_MAPPINGS
+    identifier: FINANCE_ADJ_MAPPINGS
+    description: Landing table for FINANCE_ADJ_MAPPINGS file.
+  - name: INTEL_VFBOM
+    identifier: INTEL_VFBOM
+    description: Landing table for INTEL_VFBOM file.
+  - name: STOCK_TEE_CRYSTAL
+    identifier: STOCK_TEE_CRYSTAL
+    description: Landing table for STOCK_TEE_CRYSTAL file.
+  - name: ORACLE_ACCOUNT_MAP
+    identifier: ORACLE_ACCOUNT_MAP
+    description: Landing table for ORACLE_ACCOUNT_MAP file.
+  - name: ORACLE_DEPARTMENT_MAP
+    identifier: ORACLE_DEPARTMENT_MAP
+    description: Landing table for ORACLE_DEPARTMENT_MAP file.
+  - name: ORACLE_REGION_MAP
+    identifier: ORACLE_REGION_MAP
+    description: Landing table for ORACLE_REGION_MAP file.
+  - name: ORACLE_SALES_CATEGORY_MAP
+    identifier: ORACLE_SALES_CATEGORY_MAP
+    description: Landing table for ORACLE_SALES_CATEGORY_MAP file.
+  - name: ORACLE_SEGMENT_MAP
+    identifier: ORACLE_SEGMENT_MAP
+    description: Landing table for ORACLE_SEGMENT_MAP file.
+  - name: PAID_SERVICE_LEGACY_BAAN_BACKLOG
+    identifier: PAID_SERVICE_LEGACY_BAAN_BACKLOG
+    description: Landing table for PAID_SERVICE_LEGACY_BAAN_BACKLOG file.
+  - name: PRODUCT_TYPE_MAP
+    identifier: PRODUCT_TYPE_MAP
+    description: Landing table for PRODUCT_TYPE_MAP file.
+  - name: SAP_STORAGE_LOCATION_MASTER
+    identifier: SAP_STORAGE_LOCATION_MASTER
+    description: Landing table for SAP_STORAGE_LOCATION_MASTER file.
+  - name: ORACLE_STANDARD_DEPT_HIERARCHY
+    identifier: ORACLE_STANDARD_DEPT_HIERARCHY
+    description: Landing table for ORACLE_STANDARD_DEPT_HIERARCHY file.
+  - name: ORACLE_FUNCTIONAL_DEPT_HIERARCHY
+    identifier: ORACLE_FUNCTIONAL_DEPT_HIERARCHY
+    description: Landing table for ORACLE_FUNCTIONAL_DEPT_HIERARCHY file.
+  - name: DEMAND_CAPACITY_LIST
+    identifier: DEMAND_CAPACITY_LIST
+    description: Landing table for DEMAND_CAPACITY_LIST file.
+  - name: ORACLE_DEPT_MGMT_HIERARCHY
+    identifier: ORACLE_DEPT_MGMT_HIERARCHY
+    description: Landing table for ORACLE_DEPT_MGMT_HIERARCHY.
+  - name: INTEL_MSBI_FULL_ITEM_BOM
+    identifier: INTEL_MSBI_FULL_ITEM_BOM
+    description: Landing table for INTEL_MSBI_FULL_ITEM_BOM.
+  - name: STARTUP_SPOTTER_AUDIT
+    identifier: STARTUP_SPOTTER_AUDIT
+    description: Landing table for STARTUP_SPOTTER_AUDIT.
+  - name: DATA_KEY_STARTUP_SPOTTER_AUDIT
+    identifier: DATA_KEY_STARTUP_SPOTTER_AUDIT
+    description: Landing table for DATA_KEY_STARTUP_SPOTTER_AUDIT.
+  - name: SIRFIS_TOOL_INSTALLATION_SCHEDULE_BASE
+    identifier: SIRFIS_TOOL_INSTALLATION_SCHEDULE_BASE
+    description: Landing table for SIRFIS_TOOL_INSTALLATION_SCHEDULE_BASE file.
+  - name: SERVICE_EMPLOYEE_ROSTER
+    identifier: SERVICE_EMPLOYEE_ROSTER
+    description: Landing table for SERVICE_EMPLOYEE_ROSTER file.
+  - name: VBAP_BLANK_PROFIT_CENTER
+    identifier: VBAP_BLANK_PROFIT_CENTER
+    description: Landing table for VBAP_BLANK_PROFIT_CENTER file.
+  - name: CUSTOMER_GROUP_MAPPING
+    identifier: CUSTOMER_GROUP_MAPPING
+    description: Landing table for CUSTOMER_GROUP_MAPPING file.
+  - name: CUSTOMER_SITE_SERVICE_MANAGER_MAPPING
+    identifier: CUSTOMER_SITE_SERVICE_MANAGER_MAPPING
+    description: Landing table for CUSTOMER_SITE_SERVICE_MANAGER_MAPPING file.
+  - name: INTP
+    identifier: INTP
+    description: Landing table for INTP file.
+  - name: ZCSV_T_SDT
+    identifier: ZCSV_T_SDT
+    description: Landing table for ZCSV_T_SDT file.
+  - name: SERVICE_BUSINESS_UNIT_MAPPING
+    identifier: SERVICE_BUSINESS_UNIT_MAPPING
+    description: Landing table for SERVICE_BUSINESS_UNIT_MAPPING file.
+  - name: TEA_PRICEBOOK
+    identifier: TEA_PRICEBOOK
+    description: Landing table for TEA_PRICEBOOK file.
+  - name: TEL_PRICING_ACTUAL
+    identifier: TEL_PRICING_ACTUAL
+    description: Landing table for TEL_PRICING_ACTUAL file.
+  - name: ORACLE_PC_MGMT_HIERARCHY
+    identifier: ORACLE_PC_MGMT_HIERARCHY
+    description: Landing table for ORACLE_PC_MGMT_HIERARCHY file.
+  - name: GLOBAL_BOOKING_INTEL
+    identifier: GLOBAL_BOOKING_INTEL
+    description: Landing table for GLOBAL_BOOKING_INTEL.
+  - name: GLOBAL_SALES_INTEL
+    identifier: GLOBAL_SALES_INTEL
+    description: Landing table for GLOBAL_SALES_INTEL.
+  - name: SERVICE_SEGMENT_MAPPING
+    identifier: SERVICE_SEGMENT_MAPPING
+    description: Landing table for SERVICE_SEGMENT_MAPPING.
+  - name: MACHINE_BUSINESS_UNIT_MAPPING
+    identifier: MACHINE_BUSINESS_UNIT_MAPPING
+    description: Landing table for MACHINE_BUSINESS_UNIT_MAPPING.
+  - name: SERVICE_PRODUCT_TYPECODE_MAPPING
+    identifier: SERVICE_PRODUCT_TYPECODE_MAPPING
+    description: Landing table for SERVICE_PRODUCT_TYPECODE_MAPPING.
+  - name: SERVICE_CUSTOMER_MAPPING
+    identifier: SERVICE_CUSTOMER_MAPPING
+    description: Landing table for SERVICE_CUSTOMER_MAPPING.
+  - name: MACHINE_MODEL_MAPPING
+    identifier: MACHINE_MODEL_MAPPING
+    description: Landing table for MACHINE_MODEL_MAPPING.
+  - name: SERVICE_OFFICE_MAPPING
+    identifier: SERVICE_OFFICE_MAPPING
+    description: Landing table for SERVICE_OFFICE_MAPPING.
+  - name: SAP_MATERIAL_CLASSIFICATIONS
+    identifier: SAP_MATERIAL_CLASSIFICATIONS
+    description: Landing table for SAP_MATERIAL_CLASSIFICATIONS.
+  - name: SAPO_A004
+    identifier: SAPO_A004
+    description: A004 is a pool table type that is not supported by standard HVR process. Workaround is used where ERP team generates a file in ECC6.
+      This files is then picked up by Data Center team and placed on our network folder Shares\Files\UPS_Data and is ingested via FileUploader.
+  - name: SAPO_A005
+    identifier: SAPO_A005
+    description: A005 is a pool table type that is not supported by standard HVR process. Workaround is used where ERP team generates a file in ECC6.
+      This files is then picked up by Data Center team and placed on our network folder Shares\Files\UPS_Data and is ingested via FileUploader.
+  - name: SAPO_T457T
+    identifier: T457T
+    description:  T457T is a pool table type that is not supported by standard HVR process. Workaround is used where ERP team generates a file in ECC6.
+      This files is then picked up by Data Center team and placed on our network folder Shares\Files\UPS_Data and is ingested via FileUploader.
+  - name: FAB21_EHS_AUDIT_ETC
+    identifier: FAB21_EHS_AUDIT_ETC
+    description: Excel Sheet coming from a box file ingestion belonging to EHS team. This file contains 8 columns of data with no headers.
+      The file is landed in Snowflake as is and the transformation logic is applied in the model to read the data.

@@ -1,0 +1,14 @@
+models:
+- name: GOLD__TMEA_PRODUCT_SUPPORT_GROUP__ESCALATION_CLOSURE_DAYS
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_PRODUCT_SUPPORT_GROUP__FAT_COMPLETION_TIME
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_PRODUCT_SUPPORT_GROUP__GCIB_CASES
+- name: GOLD__TMEA_PRODUCT_SUPPORT_GROUP__GLOBAL_MACHINES
+  tests:
+  - has_data
+  - recently_run

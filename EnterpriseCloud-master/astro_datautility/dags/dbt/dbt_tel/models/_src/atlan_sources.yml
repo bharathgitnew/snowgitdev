@@ -1,0 +1,13 @@
+version: 2
+sources:
+- name: ATLAN
+  description: Landing Zone - Atlan Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: ATLAN
+  tables:
+  - name: CONTROLTABLE
+    identifier: CONTROLTABLE
+    description: Landing table for CONTROLTABLE file.
+  - name: TABLES
+    identifier: TABLES
+    description: Landing table for TABLES file.

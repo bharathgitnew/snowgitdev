@@ -1,0 +1,22 @@
+version: 2
+sources:
+- name: REDGATE
+  description: Landing Zone - REDGATE Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: REDGATE
+  tables:
+  - name: ALERTCOMMENT
+    identifier: AlertComment
+    description: Landing table for AlertComment_Stream file.
+  - name: ALERTSEVERITY
+    identifier: AlertSeverity
+    description: Landing table for AlertSeverity_Stream file.
+  - name: ALERTTYPE
+    identifier: AlertType
+    description: Landing table for AlertType_Stream file.
+  - name: ALERT
+    identifier: Alert
+    description: Landing table for Alert_Stream file.
+  - name: LASTBACKUP
+    identifier: LastBackup
+    description: Landing table for LastBackup_Stream file.

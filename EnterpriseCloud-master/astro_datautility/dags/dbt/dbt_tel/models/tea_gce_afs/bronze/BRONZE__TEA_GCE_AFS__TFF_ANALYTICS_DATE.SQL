@@ -1,0 +1,69 @@
+/************
+Model file generated from Python utility
+*************/
+
+{{ config(
+	materialized='tel_incremental',
+	incremental_strategy='insert_overwrite',
+	alias='TFF_ANALYTICS_DATE',
+	transient=false
+) }}
+
+with source_data as (
+	SELECT
+		_FILEDATE,
+		_FILENAME,
+		_UPLOADDATE,
+		JSONFIELD:"id"::NUMBER(38,10) AS ID,
+		REGEXP_REPLACE(JSONFIELD:"dt", '\/Date\\(|\\)\/', '')::TIMESTAMP_NTZ AS DT,
+		JSONFIELD:"year"::NUMBER(38,10) AS YEAR,
+		JSONFIELD:"quarter"::NUMBER(38,10) AS QUARTER,
+		JSONFIELD:"month_num"::NUMBER(38,10) AS MONTH_NUM,
+		JSONFIELD:"month_name"::VARCHAR AS MONTH_NAME,
+		JSONFIELD:"day_of_month"::NUMBER(38,10) AS DAY_OF_MONTH,
+		JSONFIELD:"day_of_week"::NUMBER(38,10) AS DAY_OF_WEEK,
+		JSONFIELD:"ww_id"::NUMBER(38,10) AS WW_ID
+	FROM {{ source("ADS", "TFF_ANALYTICS_DATE") }}
+WHERE
+	_FILEDATE = (SELECT MAX(_FILEDATE) FROM {{ source('ADS', 'TFF_ANALYTICS_DATE') }} ) 
+),
+
+transform_data as (
+	SELECT
+		_FILEDATE AS _FILEDATE,
+		_FILENAME AS _FILENAME,
+		_UPLOADDATE AS _UPLOADDATE,
+		'{{ invocation_id }}' AS _AUDIT_LOG_ID,
+		SHA2('hash_me') AS _ROW_HASH,
+		ID,
+		DT,
+		YEAR,
+		QUARTER,
+		MONTH_NUM,
+		MONTH_NAME,
+		DAY_OF_MONTH,
+		DAY_OF_WEEK,
+		WW_ID
+	FROM source_data
+),
+
+type_data as (
+	SELECT
+		CAST(_FILEDATE AS TIMESTAMP_NTZ(9)) AS _FILEDATE,
+		_FILENAME,
+		_UPLOADDATE,
+		CAST(_AUDIT_LOG_ID AS VARCHAR(128)) AS _AUDIT_LOG_ID,
+		CAST(_ROW_HASH AS VARCHAR(128)) AS _ROW_HASH,
+		CAST(ID AS NUMBER(38,10)) AS ID,
+		CAST(DT AS TIMESTAMP_NTZ) AS DT,
+		CAST(YEAR AS NUMBER(38,10)) AS YEAR,
+		CAST(QUARTER AS NUMBER(38,10)) AS QUARTER,
+		CAST(MONTH_NUM AS NUMBER(38,10)) AS MONTH_NUM,
+		MONTH_NAME,
+		CAST(DAY_OF_MONTH AS NUMBER(38,10)) AS DAY_OF_MONTH,
+		CAST(DAY_OF_WEEK AS NUMBER(38,10)) AS DAY_OF_WEEK,
+		CAST(WW_ID AS NUMBER(38,10)) AS WW_ID
+	FROM transform_data
+)
+
+SELECT * FROM type_data

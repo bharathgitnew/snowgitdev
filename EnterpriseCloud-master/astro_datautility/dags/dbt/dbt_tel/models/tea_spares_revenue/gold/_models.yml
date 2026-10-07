@@ -1,0 +1,56 @@
+models:
+- name: GOLD__TEA_SPARES_REVENUE__FINALFINANCIALDATA_IPO
+  tests:
+  - has_data
+  - recently_run
+  
+- name: GOLD__TEA_SPARES_REVENUE__FINALFINANCIALDATA_NOIPO
+  tests:
+  - has_data
+  - recently_run
+  
+- name: GOLD__TEA_SPARES_REVENUE__FINALTRANSINTEGRDATA
+  tests:
+  - has_data
+  - recently_run
+  
+- name: GOLD__TEA_SPARES_REVENUE__FINALTRANS_PN
+  tests:
+  - has_data
+  - recently_run
+  
+- name: GOLD__TEA_SPARES_REVENUE__FINALTRANS_PNQTY
+  tests:
+  - has_data
+  - recently_run
+  
+- name: GOLD__TEA_SPARES_REVENUE__SR_FINALIZEDTRANSACTIONS
+  tests:
+  - has_data
+  - recently_run
+  
+- name: GOLD__TEA_SPARES_REVENUE__SR_INTEGRATEDTRANSACTIONS
+  tests:
+  - has_data
+  - recently_run
+  
+- name: GOLD__TEA_SPARES_REVENUE__SR_PURCHASEORDER
+  tests:
+  - has_data
+  - recently_run
+  
+- name: GOLD__TEA_SPARES_REVENUE__SR_REPLENISHMENTORDER
+  tests:
+  - has_data
+  - recently_run
+  
+- name: GOLD__TEA_SPARES_REVENUE__SR_SALESORDER
+  tests:
+  - has_data
+  - recently_run
+  
+- name: GOLD__TEA_SPARES_REVENUE__SR_SERVICEORDER
+  tests:
+  - has_data
+  - recently_run
+  

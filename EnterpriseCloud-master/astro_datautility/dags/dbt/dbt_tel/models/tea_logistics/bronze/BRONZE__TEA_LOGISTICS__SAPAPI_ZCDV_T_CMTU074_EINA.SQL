@@ -1,0 +1,162 @@
+{{ config(
+    	  materialized='tel_incremental',
+    	  incremental_strategy='merge',
+    	  alias='SAPAPI_ZCDV_T_CMTU074_EINA',
+    	  unique_key = ['INFNR'],
+    	  transient=false	
+) }} 
+
+	with source_data as ( 
+    SELECT
+        _FILEDATE,
+        _FILENAME,
+		JSONFIELD:"Mandt"::STRING AS MANDT, -- No Mapping in GMX
+		JSONFIELD:"INFNR"::STRING AS INFNR,
+		JSONFIELD:"MATNR"::STRING AS MATNR,
+		JSONFIELD:"MATKL"::STRING AS MATKL,
+		JSONFIELD:"LIFNR"::STRING AS LIFNR,
+		JSONFIELD:"LOEKZ"::STRING AS LOEKZ,
+		JSONFIELD:"ERDAT"::STRING AS ERDAT,
+		JSONFIELD:"ERNAM"::STRING AS ERNAM,
+		JSONFIELD:"TXZ01"::STRING AS TXZ01,
+		JSONFIELD:"SORTL"::STRING AS SORTL,
+		JSONFIELD:"MEINS"::STRING AS MEINS,
+		JSONFIELD:"UMREZ"::STRING AS UMREZ,
+		JSONFIELD:"UMREN"::STRING AS UMREN,
+		JSONFIELD:"IDNLF"::STRING AS IDNLF,
+		JSONFIELD:"Verkf"::STRING AS VERKF, -- No Mapping in GMX
+		JSONFIELD:"Telf1"::STRING AS TELF1, -- No Mapping in GMX
+		JSONFIELD:"MAHN1"::STRING AS MAHN1,
+		JSONFIELD:"MAHN2"::STRING AS MAHN2,
+		JSONFIELD:"MAHN3"::STRING AS MAHN3,
+		JSONFIELD:"URZNR"::STRING AS URZNR,
+		JSONFIELD:"URZDT"::STRING AS URZDT,
+		JSONFIELD:"URZLA"::STRING AS URZLA,
+		JSONFIELD:"URZTP"::STRING AS URZTP,
+		JSONFIELD:"URZZT"::STRING AS URZZT,
+		JSONFIELD:"LMEIN"::STRING AS LMEIN,
+		JSONFIELD:"REGIO"::STRING AS REGIO,
+		JSONFIELD:"VABME"::STRING AS VABME,
+		JSONFIELD:"LTSNR"::STRING AS LTSNR,
+		JSONFIELD:"LTSSF"::STRING AS LTSSF,
+		JSONFIELD:"WGLIF"::STRING AS WGLIF,
+		JSONFIELD:"RUECK"::STRING AS RUECK,
+		JSONFIELD:"LIFAB"::STRING AS LIFAB,
+		JSONFIELD:"LIFBI"::STRING AS LIFBI,
+		JSONFIELD:"KOLIF"::STRING AS KOLIF,
+		JSONFIELD:"ANZPU"::STRING AS ANZPU,
+		JSONFIELD:"PUNEI"::STRING AS PUNEI,
+		JSONFIELD:"RELIF"::STRING AS RELIF,
+		JSONFIELD:"MFRNR"::STRING AS MFRNR,
+		JSONFIELD:"DummyEinaInclEewPs"::STRING AS DUMMYEINAINCLEEWPS, -- No Mapping in GMX
+		JSONFIELD:"Lastchangedatetime"::STRING AS LASTCHANGEDATETIME, -- No Mapping in GMX
+		JSONFIELD:"Iseopblocked"::STRING AS ISEOPBLOCKED, -- No Mapping in GMX
+		JSONFIELD:"update_date"::STRING AS UPDATE_DATE -- No Mapping in GMX
+	from {{ source('SAPH','SAP_MMM_EV_EINA') }}
+	{% if is_tel_incremental() %}
+		WHERE  _FILEDATE >= IFNULL((SELECT MAX(_FILEDATE) FROM {{ this }}),'1970-01-01')
+	{% endif %}
+        QUALIFY (ROW_NUMBER() OVER (PARTITION BY INFNR  ORDER BY  _FILEDATE DESC )) = 1
+	),
+	
+	transform_data as (
+    SELECT
+        _Filename AS _Filename,
+        _Filedate AS _Filedate,
+        '{{ invocation_id }}' AS _AUDIT_LOG_ID,
+        SHA2('hash_me') AS _ROW_HASH,
+        INFNR as INFNR,
+        COALESCE("MATNR",'') as "MATNR",
+        COALESCE("MATKL",'') as "MATKL",
+        LIFNR as LIFNR,
+        Case when "LOEKZ"='X' then 'true' else 'false' end as "LOEKZ",
+        COALESCE(REGEXP_REPLACE(TRY_TO_DATE("ERDAT"),'-',''),'') as "ERDAT",
+        ERNAM as ERNAM,
+        COALESCE("TXZ01",'') as "TXZ01",
+        COALESCE("SORTL",'') as "SORTL",
+        MEINS as MEINS,
+        UMREZ as UMREZ,
+        UMREN as UMREN,
+        COALESCE("IDNLF",'') as "IDNLF",
+        VERKF as VERKF,
+        TELF1 as TELF1,
+        MAHN1 as MAHN1,
+        MAHN2 as MAHN2,
+        MAHN3 as MAHN3,
+        COALESCE("URZNR",'') as "URZNR",
+        COALESCE(REGEXP_REPLACE(TRY_TO_DATE("URZDT"::STRING),'-',''),'00000000') as "URZDT",
+        COALESCE("URZLA",'') as "URZLA",
+        COALESCE("URZTP",'') as "URZTP",
+        COALESCE("URZZT",'') as "URZZT",
+        COALESCE("LMEIN",'') as "LMEIN",
+        COALESCE("REGIO",'') as "REGIO",
+        COALESCE("VABME",'') as "VABME",
+        COALESCE("LTSNR",'') as "LTSNR",
+        LPAD(COALESCE("LTSSF",''),5,'0') as "LTSSF",
+        COALESCE("WGLIF",'') as "WGLIF",
+        COALESCE("RUECK",'') as "RUECK",
+        COALESCE(REGEXP_REPLACE(TRY_TO_DATE("LIFAB"::STRING),'-',''),'00000000') as "LIFAB",
+        COALESCE(REGEXP_REPLACE(TRY_TO_DATE("LIFBI"::STRING),'-',''),'00000000') as "LIFBI",
+        COALESCE("KOLIF",'') as "KOLIF",
+        ANZPU as ANZPU,
+        COALESCE("PUNEI",'') as "PUNEI",
+        Case when "RELIF"='X' then 'true' else 'false' end as "RELIF",
+        COALESCE("MFRNR",'') as "MFRNR",
+        DUMMYEINAINCLEEWPS as DUMMYEINAINCLEEWPS,
+        LASTCHANGEDATETIME as LASTCHANGEDATETIME,
+        ISEOPBLOCKED as ISEOPBLOCKED,
+        UPDATE_DATE as UPDATE_DATE
+FROM source_data 
+),
+
+type_data as (
+    SELECT
+        _Filename AS _Filename,
+        _Filedate AS _Filedate,
+        cast(_AUDIT_LOG_ID as varchar(128)) as _AUDIT_LOG_ID,
+        cast(_ROW_HASH as varchar(128)) as _ROW_HASH,
+        INFNR,
+        MATNR,
+        MATKL,
+        LIFNR,
+        LOEKZ,
+        ERDAT,
+        ERNAM,
+        TXZ01,
+        SORTL,
+        MEINS,
+        UMREZ,
+        UMREN,
+        IDNLF,
+        VERKF,
+        TELF1,
+        MAHN1,
+        MAHN2,
+        MAHN3,
+        URZNR,
+        URZDT,
+        URZLA,
+        URZTP,
+        URZZT,
+        LMEIN,
+        REGIO,
+        VABME,
+        LTSNR,
+        LTSSF,
+        WGLIF,
+        RUECK,
+        LIFAB,
+        LIFBI,
+        KOLIF,
+        ANZPU,
+        PUNEI,
+        RELIF,
+        MFRNR,
+        DUMMYEINAINCLEEWPS,
+        LASTCHANGEDATETIME,
+        ISEOPBLOCKED,
+        UPDATE_DATE
+FROM transform_data 
+)
+
+	select * from type_data

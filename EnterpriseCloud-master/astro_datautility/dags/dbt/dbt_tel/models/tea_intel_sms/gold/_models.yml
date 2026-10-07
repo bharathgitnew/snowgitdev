@@ -1,0 +1,51 @@
+version: 2
+models:
+- name: GOLD__TEA_INTEL_SMS__AWI_REPORT
+- name: GOLD__TEA_INTEL_SMS__CONSIGNMENT_FILLUP
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_INTEL_SMS__MM_INTEL_WITH_ROP_SS
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_INTEL_SMS__PURCHASE_ORDER_ERROR_REPORT
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_INTEL_SMS__ROP_SS_REPORT
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_INTEL_SMS__STO_REPORT_RAW
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_INTEL_SMS__PART_STOCK_OVERVIEW_HISTORY
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_INTEL_SMS__PART_STOCK_OVERVIEW
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_INTEL_SMS__FILL_REPORT_1274
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_INTEL_SMS__FILL_REPORT_1276
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_INTEL_SMS__FILL_REPORT_1278
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_INTEL_SMS__MSBI_VF_CROSSTAB
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_INTEL_SMS__SALES_PRICE_CHANGE
+  tests:
+  - has_data
+  - recently_run

@@ -1,0 +1,84 @@
+{{ config(
+        materialized='tel_incremental',
+        incremental_strategy='merge',
+        alias='TASK_LIST_SELECTION_OF_OPERATIONS_ACTIVITIES',
+        unique_key = ['CLIENT',
+	    'TASK_LIST_TYPE',
+	    'KEY_FOR_TASK_LIST_GROUP',
+        'GROUP_COUNTER',
+        'SEQUENCE',
+	    'NUMBER_OF_THE_TASK_LIST_NODE',
+	    'INTERNAL_COUNTER'],
+        transient=false
+) }}
+
+with source_data as (
+    select
+        _CAPTUREDATETIME,
+        MANDT AS CLIENT,
+        PLNTY AS TASK_LIST_TYPE,
+        PLNNR AS KEY_FOR_TASK_LIST_GROUP,
+        PLNAL AS GROUP_COUNTER,
+        PLNFL AS SEQUENCE,
+        PLNKN AS NUMBER_OF_THE_TASK_LIST_NODE,
+        ZAEHL AS INTERNAL_COUNTER,
+        DATUV AS VALID_FROM_DATE,
+        TECHV AS TECHNICAL_STATUS_FROM,
+        AENNR AS CHANGE_NUMBER,
+        LOEKZ AS DELETION_INDICATOR,
+        PARKZ AS INDICATOR_INACTIVE_CHANGES,
+        ANDAT AS DATE_RECORD_CREATED_ON,
+        ANNAM AS USER_WHO_CREATED_RECORD,
+        AEDAT AS LAST_CHANGED_ON,
+        AENAM AS NAME_OF_PERSON_WHO_CHANGED_OBJECT
+    from {{ ref('BRONZE__TMEA_MANUFACTURING__SAPO_TASK_LIST_SELECTION_OF_OPERATIONS_ACTIVITIES') }}
+),
+
+transform_data as (
+    select
+		'{{ invocation_id }}' AS _AUDIT_LOG_ID,
+		SHA2('hash_me') as _ROW_HASH,
+        _CAPTUREDATETIME AS _CAPTUREDATETIME,
+		CLIENT,
+        TASK_LIST_TYPE,
+        KEY_FOR_TASK_LIST_GROUP,
+        GROUP_COUNTER,
+        SEQUENCE,
+        NUMBER_OF_THE_TASK_LIST_NODE,
+        INTERNAL_COUNTER,
+        VALID_FROM_DATE,
+        TECHNICAL_STATUS_FROM,
+        CHANGE_NUMBER,
+        DELETION_INDICATOR,
+        INDICATOR_INACTIVE_CHANGES,
+        DATE_RECORD_CREATED_ON,
+        USER_WHO_CREATED_RECORD,
+        LAST_CHANGED_ON,
+        NAME_OF_PERSON_WHO_CHANGED_OBJECT
+    from source_data
+),
+
+type_data as (
+    select
+        cast(_AUDIT_LOG_ID as varchar(128)) as _AUDIT_LOG_ID,
+        cast(_ROW_HASH as varchar(128)) as _ROW_HASH,
+        cast(_CAPTUREDATETIME as TIMESTAMP_LTZ(9)) as _CAPTUREDATETIME,
+        CLIENT,
+        TASK_LIST_TYPE,
+        KEY_FOR_TASK_LIST_GROUP,
+        GROUP_COUNTER,
+        SEQUENCE,
+        NUMBER_OF_THE_TASK_LIST_NODE,
+        INTERNAL_COUNTER,
+        VALID_FROM_DATE,
+        TECHNICAL_STATUS_FROM,
+        CHANGE_NUMBER,
+        DELETION_INDICATOR,
+        INDICATOR_INACTIVE_CHANGES,
+        DATE_RECORD_CREATED_ON,
+        USER_WHO_CREATED_RECORD,
+        LAST_CHANGED_ON,
+        NAME_OF_PERSON_WHO_CHANGED_OBJECT
+    from transform_data
+)
+select * from type_data

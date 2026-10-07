@@ -1,0 +1,21 @@
+{
+    "CopyFile": {
+        "DTEX_DataSet1": {
+            "fileshare": "\\\\172.26.95.59\\filedrop\\extPartner",
+            "table": "DTEX_DAILY_DATA",
+            "schema": "DTEX",
+            "file_pattern": "DTEX*.json",
+            "is_incremental": false,
+            "delimiter": ",",
+            "skip_header": false,
+            "ignore_header": true,
+            "delete_after" : true,
+            "is_active": true,
+            "file_format": "ndjson",
+            "securables": {
+            "username": "us\\svc_prefect",
+            "password-name": "SVC-PREFECT-AD-PASSWORD"
+            }
+        }
+    }
+}

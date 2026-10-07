@@ -1,0 +1,62 @@
+/************
+Model file generated from dbtGeneratePubViews: 12.19.2022.19.11.45"
+*************/
+
+{{ config(
+      materialized='view',
+      alias='ORDER_TYPE',
+      transient=false
+) }}
+
+with source_data as (
+    SELECT
+        ORDER_TYPE_ID,
+        STATECODE,
+        STATUSCODE,
+        OWNINGTEAM,
+        OWNINGTEAM_ENTITYTYPE,
+        OWNINGBUSINESSUNIT,
+        OWNINGBUSINESSUNIT_ENTITYTYPE,
+        OWNINGUSER,
+        OWNINGUSER_ENTITYTYPE,
+        MODIFIEDBY,
+        MODIFIEDBY_ENTITYTYPE,
+        CREATEDBY,
+        CREATEDBY_ENTITYTYPE,
+        MODIFIEDONBEHALFBY,
+        MODIFIEDONBEHALFBY_ENTITYTYPE,
+        CREATEDONBEHALFBY,
+        CREATEDONBEHALFBY_ENTITYTYPE,
+        OWNERID,
+        OWNERID_ENTITYTYPE,
+        MODIFIEDONBEHALFBYYOMINAME,
+        VERSIONNUMBER,
+        OWNINGBUSINESSUNITNAME,
+        MODIFIEDONBEHALFBYNAME,
+        OWNERIDNAME,
+        TEL_COM_ORDER_TYPE,
+        OVERRIDDENCREATEDON,
+        CREATEDONBEHALFBYNAME,
+        MODIFIEDBYNAME,
+        MODIFIEDON,
+        CREATEDBYNAME,
+        UTCCONVERSIONTIMEZONECODE,
+        MODIFIEDBYYOMINAME,
+        TEL_COM_ORDER_TYPE_CODE,
+        CREATEDONBEHALFBYYOMINAME,
+        CREATEDON,
+        TIMEZONERULEVERSIONNUMBER,
+        OWNERIDTYPE,
+        IMPORTSEQUENCENUMBER,
+        TEL_COM_ORDER_TYPEID,
+        CREATEDBYYOMINAME,
+        OWNERIDYOMINAME
+    from {{ ref('COMMON__CRM__ORDER_TYPE') }}
+),
+
+transform_data AS
+(
+    select * from source_data
+)
+
+    select * from transform_data

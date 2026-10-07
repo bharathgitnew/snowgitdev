@@ -1,0 +1,100 @@
+/************
+Model file generated from dbtGeneratePubViews: 10.18.2022.06.21.49"
+*************/
+
+{{ config(
+      materialized='view',
+      alias='ZCDV_T_CMTU036_CSKS',
+      transient=false
+) }}
+
+with source_data as (
+    SELECT
+        MANDT,
+        KOKRS,
+        KOSTL,
+        DATBI,
+        DATAB,
+        BKZKP,
+        PKZKP,
+        BUKRS,
+        GSBER,
+        KOSAR,
+        VERAK,
+        VERAK_USER,
+        WAERS,
+        KALSM,
+        TXJCD,
+        PRCTR,
+        WERKS,
+        LOGSYSTEM,
+        ERSDA,
+        USNAM,
+        BKZKS,
+        BKZER,
+        BKZOB,
+        PKZKS,
+        PKZER,
+        VMETH,
+        MGEFL,
+        ABTEI,
+        NKOST,
+        KVEWE,
+        KAPPL,
+        KOSZSCHL,
+        LAND1,
+        ANRED,
+        NAME1,
+        NAME2,
+        NAME3,
+        NAME4,
+        ORT01,
+        ORT02,
+        STRAS,
+        PFACH,
+        PSTLZ,
+        PSTL2,
+        REGIO,
+        SPRAS,
+        TELBX,
+        TELF1,
+        TELF2,
+        TELFX,
+        TELTX,
+        TELX1,
+        DATLT,
+        DRNAM,
+        KHINR,
+        CCKEY,
+        KOMPL,
+        STAKZ,
+        OBJNR,
+        FUNKT,
+        AFUNK,
+        CPI_TEMPL,
+        CPD_TEMPL,
+        FUNC_AREA,
+        SCI_TEMPL,
+        SCD_TEMPL,
+        SKI_TEMPL,
+        SKD_TEMPL,
+        EEW_CSKS_PS_DUMMY,
+        VNAME,
+        RECID,
+        ETYPE,
+        JV_OTYPE,
+        JV_JIBCL,
+        JV_JIBSA,
+        FERC_IND,
+        UPDATE_DATE,
+        _FILEDATE,
+        _FILENAME
+    from {{ ref('ODS__SAPAPI__ZCDV_T_CMTU036_CSKS') }}
+),
+
+transform_data AS
+(
+    select * from source_data
+)
+
+    select * from transform_data

@@ -1,0 +1,16 @@
+version: 2
+sources:
+- name: ROSETTA
+  description: Landing Zone - ROSETTA Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: ROSETTA
+  tables:
+  - name: CONSIGNMENT_TRANSACTION
+    identifier: CONSIGNMENT_TRANSACTION
+    description: Landing table for CONSIGNMENT_TRANSACTION file.
+  - name: CONSIGNMENT_SHIPMENT_RECEIPT
+    identifier: CONSIGNMENT_SHIPMENT_RECEIPT
+    description: Landing table for CONSIGNMENT_SHIPMENT_RECEIPT file.
+  - name: RN_CONSIGNMENT_TRANSACTION
+    identifier: RN_CONSIGNMENT_TRANSACTION
+    description: Landing table for RN_CONSIGNMENT_TRANSACTION file.

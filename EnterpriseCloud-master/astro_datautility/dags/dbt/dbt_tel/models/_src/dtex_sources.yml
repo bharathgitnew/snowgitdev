@@ -1,0 +1,10 @@
+version: 2
+sources:
+- name: DTEX
+  description: Landing Zone - FILE Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: DTEX
+  tables:
+  - name: DTEX_DAILY_DATA
+    identifier: DTEX_DAILY_DATA
+    desription: Landing Table for DTEX_DAILY_DATA

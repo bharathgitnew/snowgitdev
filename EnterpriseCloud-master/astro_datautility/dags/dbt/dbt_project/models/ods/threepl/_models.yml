@@ -1,0 +1,24 @@
+version: 2
+models:
+- name: ODS__THREEPL__TPL_ASN_SUPPLIER
+  description: Model THREEPL TPL_ASN_Supplier file.
+- name: ODS__THREEPL__TPL_DELIVERY_TYPE
+  description: Model THREEPL TPL_Delivery_Type file.
+- name: ODS__THREEPL__TPL_SHIPMENT_LINE_DETAIL
+  description: Model THREEPL TPL_Shipment_Line_Detail file.
+- name: ODS__THREEPL__TPL_SHIPMENT_STATUS
+  description: Model THREEPL TPL_Shipment_Status file.
+- name: ODS__THREEPL__TPL_SHIP_REQUEST
+  description: Landing table for TPL_Ship_Request file.
+- name: ODS__THREEPL__TPL_SHIPMENT_CONFIRMATION
+  description: Landing table for TPL_Shipment_Confirmation file.
+- name: ODS__THREEPL__TPL_STORAGE_LOCATION
+  description: Landing table for TPL_Storage_Location file.
+- name: ODS__THREEPL__TPL_ASN
+  description: Landing table for TPL_ASN file.
+- name: ODS__THREEPL__TPL_RECEIVING_ADVICE
+  description: Landing table for TPL_Receiving_Advice file.
+- name: ODS__THREEPL__TPL_SHIPPING_INFORMATION
+  description: Landing table for TPL_Shipping_Information file.
+- name: ODS__THREEPL__TPL_UPS_INVENTORY_FILE_US
+  description: Landing table for TPL_UPS_Inventory_File_US file.

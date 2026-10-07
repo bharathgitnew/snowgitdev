@@ -1,0 +1,10 @@
+version: 2
+sources:
+- name: AZURE_DEVOPS
+  description: Landing Zone - Ariba Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: AZURE_DEVOPS
+  tables:
+  - name: PULL_REQUESTS
+    identifier: PULL_REQUESTS
+    description: Landing table for PULL_REQUESTS file.

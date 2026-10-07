@@ -1,0 +1,109 @@
+{{ config(
+        materialized='tel_incremental',
+        incremental_strategy='merge',
+        alias='SAPO_SALES_DOCUMENT_PARTNER',
+        unique_key = ['MANDT',
+    'VBELN',
+    'POSNR',
+    'PARVW'],
+        transient=false
+) }}
+
+with source_data as (
+	SELECT 
+	_CAPTUREDATETIME,
+	MANDT,
+	VBELN,
+	POSNR,
+	PARVW,
+	KUNNR,
+	LIFNR,
+	PERNR,
+	PARNR,
+	ADRNR,
+	ABLAD,
+	LAND1,
+	ADRDA,
+	XCPDK,
+	HITYP,
+	PRFRE,
+	BOKRE,
+	HISTUNR,
+	KNREF,
+	LZONE,
+	HZUOR,
+	STCEG,
+	PARVW_FF,
+	ADRNP,
+	KALE
+	FROM {{source('SAP_ORACLE_LIVE', 'VBPA')}}
+),
+
+
+transform_data as 
+(
+SELECT
+    _CAPTUREDATETIME,
+    '{{ invocation_id }}' AS _AUDIT_LOG_ID,
+    SHA2('hash_me') as _ROW_HASH,
+	MANDT as MANDT,
+	VBELN as VBELN,
+	POSNR as POSNR,
+	PARVW as PARVW,
+	KUNNR as KUNNR,
+	LIFNR as LIFNR,
+	PERNR as PERNR,
+	PARNR as PARNR,
+	ADRNR as ADRNR,
+	ABLAD as ABLAD,
+	LAND1 as LAND1,
+	ADRDA as ADRDA,
+	XCPDK as XCPDK,
+	HITYP as HITYP,
+	PRFRE as PRFRE,
+	BOKRE as BOKRE,
+	HISTUNR as HISTUNR,
+	KNREF as KNREF,
+	LZONE as LZONE,
+	HZUOR as HZUOR,
+	STCEG as STCEG,
+	PARVW_FF as PARVW_FF,
+	ADRNP as ADRNP,
+	KALE as KALE
+	FROM SOURCE_DATA
+), 
+
+type_data as 
+(
+SELECT 
+	CAST(_CAPTUREDATETIME AS TIMESTAMP_LTZ(9)) AS _CAPTUREDATETIME,
+	CAST(_AUDIT_LOG_ID AS VARCHAR(128)) AS _AUDIT_LOG_ID,
+	CAST(_ROW_HASH AS VARCHAR(128)) AS _ROW_HASH,
+	MANDT,
+	VBELN,
+	POSNR,
+	PARVW,
+	KUNNR,
+	LIFNR,
+	PERNR,
+	PARNR,
+	ADRNR,
+	ABLAD,
+	LAND1,
+	ADRDA,
+	XCPDK,
+	HITYP,
+	PRFRE,
+	BOKRE,
+	HISTUNR,
+	KNREF,
+	LZONE,
+	HZUOR,
+	STCEG,
+	PARVW_FF,
+	ADRNP,
+	KALE
+FROM TRANSFORM_DATA
+)
+ 
+SELECT * FROM TYPE_DATA

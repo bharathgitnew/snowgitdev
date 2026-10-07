@@ -1,0 +1,413 @@
+{
+    "NOW_SALES_CAT_CROSSWALK": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "NOW_SALES_CAT_CROSSWALK",
+        "FILE": "172.26.95.44\\Shares\\Files\\File\\NOW_SALES_CAT_CROSSWALK.csv"
+    },
+    "WORLDCITIES_DB": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "WORLDCITIES_DB",
+        "FILE": "172.26.95.44\\Shares\\Files\\File\\worldcities.csv"
+    },
+    "OPENDATASOFT_POSTALCODE_GEODATA": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "OPENDATASOFT_POSTALCODE_GEODATA",
+        "FILE": "172.26.95.44\\Shares\\Files\\File\\OPENDATASOFT_POSTALCODE_GEODATA.csv"
+    },
+    "Baan-Tee-Sales": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "BAAN_TEE_SALES",
+        "FILE": "F:\\Shares\\Files\\Baan-Tee\\tbl_tee_sales.csv"
+    },
+    "ForecastBudget": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "FORECASTBUDGET",
+        "FILE": "F:\\Shares\\Files\\TokyoElectron\\ForecastBudget\\FinDataExport_*.txt",
+        "DELIMETER": "|"
+    },
+    "ForecastBudget_EPBCS": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "FORECASTBUDGET_EPBCS",
+        "FILE": "F:\\Shares\\Files\\TokyoElectron\\ForecastBudget\\FinDataExportEPBCS*.txt",
+        "DELIMETER": "|"
+    },
+    "OpenPO": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "OpenPO",
+        "FILE": "F:\\Shares\\Files\\Baan\\OpenPO\\open_po_tea.txt"
+    },
+    "Dfs_ActiveAssetReport": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "ACTIVEASSETREPORT",
+        "FILE": "F:\\Shares\\Files\\DFS\\ACTIVEASSETREPORT.csv"
+    },
+    "File-Paid_Service_Exception_Pricing": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "Paid_Service_Exceptipn_Pricing",
+        "FILE": "172.26.95.44\\Shares\\Files\\File\\Paid_Service_Exceptipn_Pricing*.json"
+    },
+    "File-Contract_FLX_TransitionHrs": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "Contract_FLX_TransitionHrs",
+        "FILE": "172.26.95.44\\Shares\\Files\\File\\Contract_FLX_TransitionHrs*.json"
+    },
+    "File-Wrench_Time_Mapping": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "Wrench_Time_Mapping",
+        "FILE": "172.26.95.44\\Shares\\Files\\File\\Wrench_Time_Mapping*.json"
+    },
+    "GSUS-ACCUSREVENUEBUDGET": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "TEL_ACC_REVENUE_BUDGET_FORECAST",
+        "FILE": "F:\\Shares\\Files\\TokyoElectron\\GSUS\\TEL_ACC_Revenue*.csv",
+		"IGNORE_HEADER": true
+    },
+    "GSUS-TELBUDGETFORECAST": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "TEL_GS_REVENUE_BUDGET_FORECAST",
+        "FILE": "F:\\Shares\\Files\\TokyoElectron\\GSUS\\USA Sales Latest*.csv",
+		"IGNORE_HEADER": true
+    },
+    "GSUS-BOOKINGDETAILS": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "TEL_GS_BOOKING_BUDGET_FORECAST",
+        "FILE": "F:\\Shares\\Files\\TokyoElectron\\GSUS\\USA Booking*.csv",
+		"IGNORE_HEADER": true
+    },
+    "Security-CRMSALES_SECURITY_INTEL_SALES_SOLUTIONS": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "CRMSALES_SECURITY",
+        "FILE": "F:\\Shares\\Files\\Security\\CRMSALES\\CRMSALES_SECURITY_INTEL_SALES_SOLUTIONS*.csv"
+    },
+    "Security-CRMSALES_SECURITY_SALES_OPERATIONS": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "CRMSALES_SECURITY",
+        "FILE": "F:\\Shares\\Files\\Security\\CRMSALES\\CRMSALES_SECURITY_SALES_OPERATIONS*.csv"
+    },
+    "Security-CRMSALES_SECURITY_TEE_SALES_SERVICE_ADMIN": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "CRMSALES_SECURITY",
+        "FILE": "F:\\Shares\\Files\\Security\\CRMSALES\\CRMSALES_SECURITY_TEE_SALES_SERVICE_ADMIN*.csv"
+    },
+    "FILE-BUSINESSUNIT": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "BUSINESSUNIT",
+        "FILE": "F:\\Shares\\Files\\SparesRevenue\\BUSINESSUNIT*.csv"
+    },
+    "IntelSales-SIRFISAREA": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "SIRFIS_AREA",
+        "FILE": "F:\\Shares\\Files\\IntelSales\\SIRFIS_AREA*.csv"
+    },
+    "FILE-COST_CENTER": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "COST_CENTER",
+        "FILE": "172.26.95.44\\Shares\\Files\\File\\Cost_Center*.csv"
+    },
+    "FILE-PROFIT_CENTER": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "PROFIT_CENTER",
+        "FILE": "172.26.95.44\\Shares\\Files\\File\\Profit_Center*.csv"
+    },
+    "FILE-ORACLE_CUSTOMER_MAP": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "ORACLE_CUSTOMER_MAP",
+        "FILE": "172.26.95.44\\Shares\\Files\\File\\ORACLE_CUSTOMER_MAP.csv"
+    },
+    "FILE-SAP_ACCOUNT_EXPENSE": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "SAP_ACCOUNT_EXPENSE",
+        "FILE": "172.26.95.44\\Shares\\Files\\File\\SAP_ACCOUNT_EXPENSE.csv"
+    },
+    "FILE-SAP_DEPARTMENT": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "SAP_DEPARTMENT",
+        "FILE": "172.26.95.44\\Shares\\Files\\File\\SAP_DEPARTMENT*.csv"
+    },
+    "FILE-SAP_MATERIAL_MASTER": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "SAP_MATERIAL_CLASSIFICATIONS",
+        "FILE": "172.26.95.44\\Shares\\Files\\File\\SAP Material Classifications.xlsx"
+    },
+    "FILE-SAP_REGION": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "SAP_REGION",
+        "FILE": "172.26.95.44\\Shares\\Files\\File\\SAP_REGION*.csv"
+    },
+    "FILE-SAP_SALES_CATEGORY": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "SAP_SALES_CATEGORY",
+        "FILE": "172.26.95.44\\Shares\\Files\\File\\SAP_SALES_CATEGORY*.csv"
+    },
+    "FILE-SAP_SEGMENT": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "SAP_SEGMENT",
+        "FILE": "172.26.95.44\\Shares\\Files\\File\\SAP_SEGMENT*.csv"
+    },
+    "FILE-SAP_ACCOUNT": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "SAP_ACCOUNT",
+        "FILE": "172.26.95.44\\Shares\\Files\\File\\SAP_ACCOUNT.csv"
+    },
+    "FILE-SAP_DOCUMENT_TYPE": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "SAP_DOCUMENT_TYPE",
+        "FILE": "172.26.95.44\\Shares\\Files\\File\\SAP_DOCUMENT_TYPE.csv"
+    },
+    "FILE-SAP_DOCUMENT_TYPE_DESCRIPTION": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "SAP_DOCUMENT_TYPE_DESCRIPTION",
+        "FILE": "172.26.95.44\\Shares\\Files\\File\\SAP_DOCUMENT_TYPE_DESCRIPTION.csv"
+    },
+    "FILE-SAP_CUSTOMER_GROUP": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "SAP_CUSTOMER_GROUP",
+        "FILE": "172.26.95.44\\Shares\\Files\\File\\SAP_CUSTOMER_GROUP.csv"
+    },
+    "FILE-SERVICE_B_CODE_MAPPING": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "SERVICE_B_CODE_MAPPING",
+        "FILE": "F:\\Shares\\Files\\TEA_FS\\SERVICE_B_CODE_MAPPING.csv"
+    },
+    "FILE-PAID_SERVICE_LEGACY_BAAN_BACKLOG": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "PAID_SERVICE_LEGACY_BAAN_BACKLOG",
+        "FILE": "172.26.95.44\\Shares\\Files\\File\\Paid_Service_Legacy_Baan_Backlog.csv"
+    },
+    "FILE-SALES_DOCUMENT_TYPE_MAPPING": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "SALES_DOCUMENT_TYPE_MAPPING",
+        "FILE": "172.26.95.44\\Shares\\Files\\File\\SALES_DOCUMENT_TYPE_MAPPING.csv"
+    },
+    "FILE-SAP_USER_LIST": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "SAP_USER_LIST",
+        "FILE": "172.26.95.44\\Shares\\Files\\File\\SAP_User_List*.csv"
+    },
+    "FILE-SAP_DE_REFERENCE": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "SAP_DE_REFERENCE",
+        "FILE": "172.26.95.44\\Shares\\Files\\File\\SAP_DE_Reference*.csv"
+    },
+    "FILE-FST_EMPLOYEE_GROUP": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "FST_EMPLOYEE_GROUP",
+        "FILE": "172.26.95.44\\Shares\\Files\\File\\FST_EMPLOYEE_GROUP*.csv"
+    },
+    "FILE-WBS_CODE_DESCRIPTION": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "WBS_CODE_DESCRIPTION",
+        "FILE": "172.26.95.44\\Shares\\Files\\File\\WBS_CODE_DESCRIPTION*.csv"
+    },
+    "FILE-FINANCE_ADJ_MAPPINGS": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "FINANCE_ADJ_MAPPINGS",
+        "FILE": "172.26.95.44\\Shares\\Files\\File\\FINANCE_ADJ_MAPPINGS*.csv"
+    },
+    "INTEL_VFBOM": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "INTEL_VFBOM",
+        "FILE": "F:\\Shares\\Files\\Intel-VFBOM\\IntelVF*.csv"
+    },
+    "STOCK_TEE_CRYSTAL": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "STOCK_TEE_CRYSTAL",
+        "FILE": "172.26.95.44\\Shares\\Files\\File\\TEEInv*.csv"
+    },
+    "FILE-ORACLE_ACCOUNT_MAP": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "ORACLE_ACCOUNT_MAP",
+        "FILE": "172.26.95.44\\Shares\\Files\\File\\ORACLE_ACCOUNT_MAP.csv"
+    },
+    "FILE-ORACLE_DEPARTMENT_MAP": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "ORACLE_DEPARTMENT_MAP",
+        "FILE": "172.26.95.44\\Shares\\Files\\File\\ORACLE_DEPARTMENT_MAP.csv"
+    },
+    "FILE-ORACLE_REGION_MAP": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "ORACLE_REGION_MAP",
+        "FILE": "172.26.95.44\\Shares\\Files\\File\\ORACLE_REGION_MAP.csv"
+    },
+    "FILE-ORACLE_SALES_CATEGORY_MAP": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "ORACLE_SALES_CATEGORY_MAP",
+        "FILE": "172.26.95.44\\Shares\\Files\\File\\ORACLE_SALES_CATEGORY_MAP.csv"
+    },
+    "FILE-ORACLE_STANDARD_DEPT_HIERARCHY": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "ORACLE_STANDARD_DEPT_HIERARCHY",
+        "FILE": "172.26.95.44\\Shares\\Files\\File\\ORACLE_STANDARD_DEPT_HIERARCHY.csv"
+    },
+    "FILE-ORACLE_FUNCTIONAL_DEPT_HIERARCHY": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "ORACLE_FUNCTIONAL_DEPT_HIERARCHY",
+        "FILE": "172.26.95.44\\Shares\\Files\\File\\ORACLE_FUNCTIONAL_DEPT_HIERARCHY.csv"
+    },
+    "FILE-ORACLE_SEGMENT_MAP": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "ORACLE_SEGMENT_MAP",
+        "FILE": "172.26.95.44\\Shares\\Files\\File\\ORACLE_SEGMENT_MAP.csv"
+    },
+    "FILE-SAP_STORAGE_LOCATION_MASTER": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "SAP_STORAGE_LOCATION_MASTER",
+        "FILE": "172.26.95.44\\Shares\\Files\\File\\SAP_STORAGE_LOCATION_MASTER.csv"
+    },
+    "DEMAND_CAPACITY_LIST": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "DEMAND_CAPACITY_LIST",
+        "FILE": "172.26.95.44\\Shares\\Files\\File\\DEMAND_CAPACITY_LIST*.csv"
+    },
+    "FILE-PRODUCT_TYPE_MAP": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "PRODUCT_TYPE_MAP",
+        "FILE": "172.26.95.44\\Shares\\Files\\File\\PRODUCT_TYPE_MAP.csv"
+    },
+    "FILE-ORACLE_DEPT_MGMT_HIERARCHY": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "ORACLE_DEPT_MGMT_HIERARCHY",
+        "FILE": "172.26.95.44\\Shares\\Files\\File\\Oracle_Department_Hierarchy.csv"
+    },
+    "FILE-ORACLE_PC_MGMT_HIERARCHY": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "ORACLE_PC_MGMT_HIERARCHY",
+        "FILE": "172.26.95.44\\Shares\\Files\\File\\ORACLE_PC_MGMT_HIERARCHY.csv"
+    },
+    "FILE-INTEL_MSBI_FULL_ITEM_BOM": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "INTEL_MSBI_FULL_ITEM_BOM",
+        "FILE": "F:\\Shares\\Files\\Intel-MSBI\\All Sites MSBI BOM *.csv"
+    },
+    "FILE-STARTUP_SPOTTER_AUDIT": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "STARTUP_SPOTTER_AUDIT",
+        "FILE": "F:\\Shares\\Files\\Startup-Audit\\Spotter Audit Summary*.csv",
+        "ENCODING": "cp1252",
+        "IGNORE_HEADER": true
+    },
+    "FILE-DATA_KEY_STARTUP_SPOTTER_AUDIT": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "DATA_KEY_STARTUP_SPOTTER_AUDIT",
+        "FILE": "F:\\Shares\\Files\\Startup-Audit\\Data key*.csv"
+    },
+    "FILE-SERVICE_EMPLOYEE_ROSTER": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "SERVICE_EMPLOYEE_ROSTER",
+        "FILE": "F:\\Shares\\Files\\TEA_FS\\SERVICE_EMPLOYEE*.csv"
+    },
+    "FILE-VBAP_BLANK_PROFIT_CENTER": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "VBAP_BLANK_PROFIT_CENTER",
+        "FILE": "172.26.95.44\\Shares\\Files\\File\\vbap*.csv"
+    },
+    "FILE-CUSTOMER_GROUP_MAPPING": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "CUSTOMER_GROUP_MAPPING",
+        "FILE": "F:\\Shares\\Files\\TEA_FS\\CUSTOMER_GROUP_MAPPING*.csv"
+    },
+    "FILE-INTP": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "INTP",
+        "FILE": "F:\\Shares\\Files\\TEA_Planning\\INTP*.tsv",
+        "DELIMETER": ",",
+        "HEADER_ROW": 0
+    },
+    "FILE-SERVICE_BUSINESS_UNIT_MAPPING": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "SERVICE_BUSINESS_UNIT_MAPPING",
+        "FILE": "F:\\Shares\\Files\\TEA_FS\\SERVICE_BUSINESS_UNIT_MAPPING*.csv"
+    },
+    "FILE-TEA_PRICEBOOK": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "TEA_PRICEBOOK",
+        "FILE": "172.26.95.44\\Shares\\Files\\File\\TEA_PRICEBOOK*.csv",
+        "ENCODING": "unicode_escape"
+    },
+    "FILE-TEL_PRICING_ACTUAL": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "TEL_PRICING_ACTUAL",
+        "FILE": "172.26.95.44\\Shares\\Files\\File\\TEL_PRICING_ACTUAL*.csv"
+    },
+    "FILE-OS_USER_PROFILE": {
+        "SNOWFLAKE_SCHEMA_NAME": "TELQS",
+        "SNOWFLAKE_TABLE_NAME": "OS_USER_PROFILE",
+        "FILE": "172.26.95.44\\Shares\\Files\\File\\OS_USER_PROFILE*.csv"
+    },
+    "INTEL-GLOBAL_BOOKING_INTEL": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "GLOBAL_BOOKING_INTEL",
+        "FILE": "F:\\Shares\\Files\\IntelSales\\Intel Booking Latest*.csv",
+		"IGNORE_HEADER": true
+    },
+    "INTEL-GLOBAL_SALES_INTEL": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "GLOBAL_SALES_INTEL",
+        "FILE": "F:\\Shares\\Files\\IntelSales\\Intel Sales Latest*.csv",
+		"IGNORE_HEADER": true
+    },
+    "FILE-TYPEOFWORK_MAPPING": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "TASTYPEOFWORK",
+        "FILE": "F:\\Shares\\Files\\TEA_FS\\TYPEOFWORK_MAPPING*.csv"
+    },
+    "FILE-MACHINE_BUSINESS_UNIT_MAPPING": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "MACHINE_BUSINESS_UNIT_MAPPING",
+        "FILE": "F:\\Shares\\Files\\TEA_FS\\MACHINE_BUSINESS_UNIT_MAPPING*.csv"
+    },
+    "FILE-MACHINE_MODEL_MAPPING": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "MACHINE_MODEL_MAPPING",
+        "FILE": "F:\\Shares\\Files\\TEA_FS\\MACHINE_MODEL_MAPPING*.csv"
+    },
+    "FILE-SERVICE_CUSTOMER_MAPPING": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "SERVICE_CUSTOMER_MAPPING",
+        "FILE": "F:\\Shares\\Files\\TEA_FS\\SERVICE_CUSTOMER_MAPPING*.csv"
+    },
+    "FILE-PRODUCT_TYPECODE_MAPPING": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "SERVICE_PRODUCT_TYPECODE_MAPPING",
+        "FILE": "F:\\Shares\\Files\\TEA_FS\\SERVICE_PRODUCT_TYPECODE_MAPPING*.csv"
+    },
+    "FILE-SERVICE_SEGMENT_MAPPING": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "SERVICE_SEGMENT_MAPPING",
+        "FILE": "F:\\Shares\\Files\\TEA_FS\\SERVICE_SEGMENT_MAPPING*.csv"
+    },
+    "FILE-SERVICE_OFFICE_MAPPING": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "SERVICE_OFFICE_MAPPING",
+        "FILE": "F:\\Shares\\Files\\TEA_FS\\SERVICE_OFFICE_MAPPING*.csv"
+    },
+    "Security-SALES_OPERATIONS_SECURITY": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "SALES_OPERATIONS_SECURITY",
+        "FILE": "F:\\Shares\\Files\\Security\\SALES_OPERATIONS\\SALES_OPERATIONS_SECURITY*.csv"
+    },
+    "ZMMT1013": {
+        "SNOWFLAKE_SCHEMA_NAME": "SAPAPI",
+        "SNOWFLAKE_TABLE_NAME": "ZMMT1013",
+        "FILE": "172.26.95.44\\Shares\\Files\\File\\ZMMT1013*.csv",
+		"IGNORE_HEADER": true
+    },
+    "ZSDT0060": {
+        "SNOWFLAKE_SCHEMA_NAME": "SAPAPI",
+        "SNOWFLAKE_TABLE_NAME": "ZSDT0060",
+        "FILE": "172.26.95.44\\Shares\\Files\\File\\ZSDT0060*.csv",
+		"IGNORE_HEADER": true
+    },
+    "SAPO_A004": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "SAPO_A004",
+        "FILE": "172.26.95.44\\Shares\\Files\\UPS_Data\\ERP\\*_A004.CSV",
+        "HEADER_ROW": 2
+    },
+    "SAPO_A005": {
+        "SNOWFLAKE_SCHEMA_NAME": "FILE",
+        "SNOWFLAKE_TABLE_NAME": "SAPO_A005",
+        "FILE": "172.26.95.44\\Shares\\Files\\UPS_Data\\ERP\\*_A005.CSV",
+        "HEADER_ROW": 2
+    }
+}

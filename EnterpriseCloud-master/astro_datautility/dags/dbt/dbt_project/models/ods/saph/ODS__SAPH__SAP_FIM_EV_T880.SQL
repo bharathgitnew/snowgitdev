@@ -1,0 +1,113 @@
+/************
+	Model file generated from gmxDbtTemplateUtility.ipynb 
+	*************/
+
+	
+	{{ config(
+    	  materialized='incremental',
+    	  incremental_strategy='insert_overwrite',
+    	  alias='SAP_FIM_EV_T880',
+    	  unique_key = [''],
+    	  transient=false	
+) }} 
+
+	with source_data as (
+	SELECT
+		JSONFIELD:"RCOMP"::STRING AS "RCOMP", 
+ 	 	JSONFIELD:"NAME1"::STRING AS "NAME1", 
+ 	 	JSONFIELD:"CNTRY"::STRING AS "CNTRY", 
+ 	 	JSONFIELD:"NAME2"::STRING AS "NAME2", 
+ 	 	JSONFIELD:"LANGU"::STRING AS "LANGU", 
+ 	 	JSONFIELD:"STRET"::STRING AS "STRET", 
+ 	 	JSONFIELD:"POBOX"::STRING AS "POBOX", 
+ 	 	JSONFIELD:"PSTLC"::STRING AS "PSTLC", 
+ 	 	JSONFIELD:"CITY"::STRING AS "CITY", 
+ 	 	JSONFIELD:"CURR"::STRING AS "CURR", 
+ 	 	JSONFIELD:"MODCP"::STRING AS "MODCP", 
+ 	 	JSONFIELD:"GLSIP"::STRING AS "GLSIP", 
+ 	 	JSONFIELD:"RESTA"::STRING AS "RESTA", 
+ 	 	JSONFIELD:"RFORM"::STRING AS "RFORM", 
+ 	 	JSONFIELD:"ZWEIG"::STRING AS "ZWEIG", 
+ 	 	JSONFIELD:"MCOMP"::STRING AS "MCOMP", 
+ 	 	JSONFIELD:"MCLNT"::STRING AS "MCLNT", 
+ 	 	JSONFIELD:"LCCOMP"::STRING AS "LCCOMP", 
+ 	 	JSONFIELD:"STRT2"::STRING AS "STRT2", 
+ 	 	JSONFIELD:"INDPO"::STRING AS "INDPO", 
+ 	 	JSONFIELD:"DELFLAG"::STRING AS "DELFLAG", 
+ 	 	JSONFIELD:"CDCHANGENR"::STRING AS "CDCHANGENR", 
+ 	 	JSONFIELD:"PSL_INSDATE"::STRING AS "PSL_INSDATE", 
+ 	 	JSONFIELD:"PSL_UPDDATE"::STRING AS "PSL_UPDDATE",
+		_FILEDATE,
+		_FILENAME
+	from {{ source('SAPH','SAP_FIM_EV_T880') }}
+	WHERE REGEXP_SUBSTR(_FILENAME,'\\d{14}') = (SELECT MAX(REGEXP_SUBSTR(_filename,'\\d{14}')) from {{ source('SAPH', 'SAP_FIM_EV_T880') }})
+	QUALIFY ROW_NUMBER() OVER ( PARTITION BY RCOMP ORDER BY _FILEDATE DESC, _UPLOADDATE DESC) = 1
+	),
+	
+	transform_data as (
+	SELECT 
+		"RCOMP", 
+ 	 	"NAME1", 
+ 	 	"CNTRY", 
+ 	 	"NAME2", 
+ 	 	"LANGU", 
+ 	 	"STRET", 
+ 	 	"POBOX", 
+ 	 	"PSTLC", 
+ 	 	"CITY", 
+ 	 	"CURR", 
+ 	 	"MODCP", 
+ 	 	"GLSIP", 
+ 	 	"RESTA", 
+ 	 	"RFORM", 
+ 	 	"ZWEIG", 
+ 	 	"MCOMP", 
+ 	 	"MCLNT", 
+ 	 	"LCCOMP", 
+ 	 	"STRT2", 
+ 	 	"INDPO", 
+ 	 	"DELFLAG", 
+ 	 	"CDCHANGENR", 
+ 	 	"PSL_INSDATE", 
+ 	 	"PSL_UPDDATE",
+		_FILEDATE,
+		_FILENAME,
+		'{{ invocation_id }}' AS AUDIT_LOG_ID,
+        SHA2('hash_me') as _ROW_HASH -- Adds column to table on full refresh.
+	from source_data
+	),
+	
+	type_data as (
+	SELECT
+		CAST("RCOMP" AS NVARCHAR) AS "RCOMP", 
+ 	 	CAST("NAME1" AS NVARCHAR) AS "NAME1", 
+ 	 	CAST("CNTRY" AS NVARCHAR) AS "CNTRY", 
+ 	 	CAST("NAME2" AS NVARCHAR) AS "NAME2", 
+ 	 	CAST("LANGU" AS NVARCHAR) AS "LANGU", 
+ 	 	CAST("STRET" AS NVARCHAR) AS "STRET", 
+ 	 	CAST("POBOX" AS NVARCHAR) AS "POBOX", 
+ 	 	CAST("PSTLC" AS NVARCHAR) AS "PSTLC", 
+ 	 	CAST("CITY" AS NVARCHAR) AS "CITY", 
+ 	 	CAST("CURR" AS NVARCHAR) AS "CURR", 
+ 	 	CAST("MODCP" AS NVARCHAR) AS "MODCP", 
+ 	 	CAST("GLSIP" AS NVARCHAR) AS "GLSIP", 
+ 	 	CAST("RESTA" AS NVARCHAR) AS "RESTA", 
+ 	 	CAST("RFORM" AS NVARCHAR) AS "RFORM", 
+ 	 	CAST("ZWEIG" AS NVARCHAR) AS "ZWEIG", 
+ 	 	CAST("MCOMP" AS NVARCHAR) AS "MCOMP", 
+ 	 	CAST("MCLNT" AS VARCHAR) AS "MCLNT", 
+ 	 	CAST("LCCOMP" AS NVARCHAR) AS "LCCOMP", 
+ 	 	CAST("STRT2" AS NVARCHAR) AS "STRT2", 
+ 	 	CAST("INDPO" AS NVARCHAR) AS "INDPO", 
+ 	 	CAST("DELFLAG" AS BOOLEAN) AS "DELFLAG", 
+ 	 	CAST("CDCHANGENR" AS NVARCHAR) AS "CDCHANGENR", 
+ 	 	CAST("PSL_INSDATE" AS TIMESTAMP) AS "PSL_INSDATE", 
+ 	 	CAST("PSL_UPDDATE" AS TIMESTAMP) AS "PSL_UPDDATE",
+		cast(_FILEDATE AS TIMESTAMP_NTZ(9)) AS _FILEDATE,
+		cast(_FILENAME as varchar(128)) as _FILENAME,
+        cast(AUDIT_LOG_ID as varchar(128)) as AUDIT_LOG_ID,
+        cast(_ROW_HASH as varchar(128)) as _ROW_HASH
+	from transform_data
+	)
+
+	select * from type_data

@@ -1,0 +1,64 @@
+/************
+Model file generated from dbtGeneratePubViews: 12.19.2022.19.11.44"
+*************/
+
+{{ config(
+      materialized='view',
+      alias='CHAMBER',
+      transient=false
+) }}
+
+with source_data as (
+    SELECT
+        CHAMBER_ID,
+        STATECODE,
+        STATUSCODE,
+        OWNINGTEAM,
+        OWNINGTEAM_ENTITYTYPE,
+        MODIFIEDBY,
+        MODIFIEDBY_ENTITYTYPE,
+        CREATEDBY,
+        CREATEDBY_ENTITYTYPE,
+        OWNINGUSER,
+        OWNINGUSER_ENTITYTYPE,
+        OWNINGBUSINESSUNIT,
+        OWNINGBUSINESSUNIT_ENTITYTYPE,
+        MODIFIEDONBEHALFBY,
+        MODIFIEDONBEHALFBY_ENTITYTYPE,
+        CREATEDONBEHALFBY,
+        CREATEDONBEHALFBY_ENTITYTYPE,
+        OWNERID,
+        OWNERID_ENTITYTYPE,
+        MODIFIEDONBEHALFBYYOMINAME,
+        TEL_SM_CHAMBER_J,
+        TEL_SM_PRODUCT_CODE,
+        VERSIONNUMBER,
+        OWNINGBUSINESSUNITNAME,
+        MODIFIEDONBEHALFBYNAME,
+        OWNERIDNAME,
+        OVERRIDDENCREATEDON,
+        TEL_SM_CHAMBERID,
+        CREATEDONBEHALFBYNAME,
+        MODIFIEDBYNAME,
+        MODIFIEDON,
+        CREATEDBYNAME,
+        UTCCONVERSIONTIMEZONECODE,
+        MODIFIEDBYYOMINAME,
+        CREATEDONBEHALFBYYOMINAME,
+        TEL_SM_CHAMBER,
+        CREATEDON,
+        TIMEZONERULEVERSIONNUMBER,
+        OWNERIDTYPE,
+        IMPORTSEQUENCENUMBER,
+        TEL_SM_CHAMBER_CODE,
+        CREATEDBYYOMINAME,
+        OWNERIDYOMINAME
+    from {{ ref('COMMON__CRM__CHAMBER') }}
+),
+
+transform_data AS
+(
+    select * from source_data
+)
+
+    select * from transform_data

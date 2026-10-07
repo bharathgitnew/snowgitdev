@@ -1,0 +1,144 @@
+{
+  "QVICS-NEW": {
+    "DataSet1": {
+      "schema": "dbo",
+      "table": "v_ApprovalActivities",
+      "Incremental": "NULL",
+      "sftablename": "V_APPROVALACTIVITIES",
+      "filter": " ApplicationID = 19"
+    },
+    "DataSet2": {
+      "schema": "dbo",
+      "table": "v_listAssignedPeople",
+      "Incremental": "NULL",
+      "sftablename": "V_LISTASSIGNEDPEOPLE",
+      "filter": " ApplicationID = 19"
+    },
+    "DataSet3": {
+      "schema": "dbo",
+      "table": "v_attachmentsALL",
+      "Incremental": "NULL",
+      "sftablename": "V_ATTACHMENTSALL",
+      "filter": " ApplicationID = 19 AND AttachmentType = 10"
+    },
+    "DataSet4": {
+      "schema": "dbo",
+      "table": "v_listTroubles",
+      "Incremental": "NULL",
+      "sftablename": "V_LISTTROUBLES",
+      "filter": " ApplicationID = 19"
+    },
+    "DataSet5": {
+      "schema": "dbo",
+      "table": "v_emergentMeasures",
+      "Incremental": "NULL",
+      "sftablename": "V_EMERGENTMEASURES",
+      "filter": " emergentMeasure_troubleID IN ( SELECT trouble_ID FROM v_listQuickTroubles WHERE ApplicationID = 19 )"
+    },
+    "DataSet6": {
+      "schema": "dbo",
+      "table": "v_listQuickTroubles",
+      "Incremental": "NULL",
+      "sftablename": "V_LISTQUICKTROUBLES",
+      "filter": ""
+    },
+    "DataSet7": {
+      "schema": "dbo",
+      "table": "v_listInquiries",
+      "Incremental": "NULL",
+      "sftablename": "V_LISTINQUIRIES",
+      "filter": " ApplicationID = 19"
+    },
+    "DataSet8": {
+      "schema": "dbo",
+      "table": "v_Master_Items",
+      "Incremental": "NULL",
+      "sftablename": "V_MASTER_ITEMS",
+      "filter": " ApplicationID = 19"
+    },
+    "DataSet9": {
+      "schema": "dbo",
+      "table": "v_listMessages",
+      "Incremental": "NULL",
+      "sftablename": "V_LISTMESSAGES",
+      "filter": " ApplicationID = 19"
+    },
+    "DataSet10": {
+      "schema": "dbo",
+      "table": "v_parmanentMeasures",
+      "Incremental": "NULL",
+      "sftablename": "V_PARMANENTMEASURES",
+      "filter": " parmanentMeasure_troubleID IN ( SELECT trouble_ID FROM v_listQuickTroubles WHERE ApplicationID = 19 )"
+    },
+    "DataSet11": {
+      "schema": "dbo",
+      "table": "v_Part_Controls",
+      "Incremental": "NULL",
+      "sftablename": "V_PART_CONTROLS",
+      "filter": " ApplicationID = 19"
+    },
+    "DataSet12": {
+      "schema": "dbo",
+      "table": "v_Parts",
+      "Incremental": "NULL",
+      "sftablename": "V_PARTS",
+      "filter": " ApplicationID = 19"
+    },
+    "DataSet13": {
+      "schema": "dbo",
+      "table": "v_trouble_componentLists",
+      "Incremental": "NULL",
+      "sftablename": "V_TROUBLE_COMPONENTLISTS",
+      "filter": " troubleid IN ( SELECT trouble_ID FROM v_listQuickTroubles WHERE ApplicationID = 19 )"
+    },
+    "DataSet14": {
+      "schema": "dbo",
+      "table": "v_trouble_ownerLists",
+      "Incremental": "NULL",
+      "sftablename": "V_TROUBLE_OWNERLISTS",
+      "filter": " troubleid IN ( SELECT trouble_ID FROM v_listQuickTroubles WHERE ApplicationID = 19 )"
+    },
+    "DataSet15": {
+      "schema": "dbo",
+      "table": "v_listUsefuls",
+      "Incremental": "NULL",
+      "sftablename": "V_LISTUSEFULS",
+      "filter": " ApplicationID = 19"
+    },
+    "DataSet16": {
+      "schema": "dbo",
+      "table": "v_listOptions",
+      "Incremental": "NULL",
+      "sftablename": "V_LISTOPTIONS",
+      "filter": " ApplicationID = 19"
+    },
+    "DataSet17": {
+      "schema": "dbo",
+      "table": "v_listCurrentStatuses",
+      "Incremental": "NULL",
+      "sftablename": "V_LISTCURRENTSTATUSES",
+      "filter": " ApplicationID = 19"
+    },
+    "DataSet18": {
+      "schema": "dbo",
+      "table": "v_listQVICS",
+      "Incremental": "NULL",
+      "sftablename": "V_LISTQVICS",
+      "filter": " ApplicationID = 19"
+    },
+    "DataSet19": {
+      "schema": "dbo",
+      "table": "v_listDepartments",
+      "Incremental": "NULL",
+      "sftablename": "V_LISTDEPARTMENTS",
+      "filter": " ApplicationID = 19"
+    },
+    "DataSet20": {
+      "schema": "dbo",
+      "table": "v_ParmanentMeasure_Progresses",
+      "Incremental": "NULL",
+      "sftablename": "V_PARMANENTMEASURE_PROGRESSES",
+      "filter": " ApplicationID = 19"
+    }
+  }
+}

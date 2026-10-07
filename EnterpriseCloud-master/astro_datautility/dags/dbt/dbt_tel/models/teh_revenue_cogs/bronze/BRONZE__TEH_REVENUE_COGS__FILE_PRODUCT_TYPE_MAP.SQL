@@ -1,0 +1,60 @@
+{{ config(
+    materialized='tel_incremental',
+    incremental_strategy='insert_overwrite',
+    alias='FILE_PRODUCT_TYPE_MAP'
+) }}
+
+with source_data as
+(
+    SELECT
+        _FILENAME,
+        _FILEDATE,
+        _UPLOADDATE,
+        PRODUCT_TYPE_CODE,
+        PRODUCT_TYPE,
+        PRODUCT_TYPE_CATEGORY,
+        REVENUE_SOURCE,
+        PRODUCT_TYPE_GROUP,
+        PRODUCT_TYPE_GROUP_LEGACY,
+        STATUTORY_GROUP
+    FROM {{ source("FILE", "PRODUCT_TYPE_MAP") }}
+    where _UPLOADDATE = (select max(_UPLOADDATE) from {{ source("FILE", "PRODUCT_TYPE_MAP") }})
+
+)
+
+,transform_data as
+(
+    SELECT
+        _FILEDATE,
+        _FILENAME,
+        '{{ invocation_id }}' AS _AUDIT_LOG_ID,
+        SHA2('hash_me') as _ROW_HASH,
+        _UPLOADDATE,
+        PRODUCT_TYPE_CODE,
+        PRODUCT_TYPE,
+        PRODUCT_TYPE_CATEGORY,
+        REVENUE_SOURCE,
+        PRODUCT_TYPE_GROUP,
+        PRODUCT_TYPE_GROUP_LEGACY,
+        STATUTORY_GROUP
+        FROM source_data
+)
+
+,type_data as
+(
+    select
+        CAST(_FILEDATE AS TIMESTAMP_NTZ(9)) AS _FILEDATE,
+        CAST(_FILENAME AS VARCHAR(16777216)) AS _FILENAME,
+        CAST(_AUDIT_LOG_ID AS VARCHAR(128)) AS _AUDIT_LOG_ID,
+        CAST(_ROW_HASH as varchar(128)) as _ROW_HASH,
+        CAST(_UPLOADDATE AS TIMESTAMP_NTZ(9)) AS _UPLOADDATE,
+        CAST(PRODUCT_TYPE_CODE AS VARCHAR(16777216)) AS PRODUCT_TYPE_CODE,
+        CAST(PRODUCT_TYPE AS VARCHAR(16777216)) AS PRODUCT_TYPE,
+        CAST(PRODUCT_TYPE_CATEGORY AS VARCHAR(16777216)) AS PRODUCT_TYPE_CATEGORY,
+        CAST(REVENUE_SOURCE AS VARCHAR(16777216)) AS REVENUE_SOURCE,
+        CAST(PRODUCT_TYPE_GROUP AS VARCHAR(16777216)) AS PRODUCT_TYPE_GROUP,
+        CAST(PRODUCT_TYPE_GROUP_LEGACY AS VARCHAR(16777216)) AS PRODUCT_TYPE_GROUP_LEGACY,
+        CAST(STATUTORY_GROUP AS VARCHAR(16777216)) AS STATUTORY_GROUP
+    from transform_data
+    )
+select * from type_data

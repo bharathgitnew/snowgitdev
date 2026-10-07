@@ -1,0 +1,273 @@
+models:
+- name: SILVER__TEH_REVENUE_COGS__ACCOUNT
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__BAANV_TEA_SERVICE_ORDERS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__BAAN_FINANCIALTRANSACTIONS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__BAAN_OFFICE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__BAAN_REVENUEANDCOGSDETAILS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__BUSINESS_PARTNERS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__BUSINESS_PARTNERS_GENERAL_DATA
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__CONTRACT_SUMMARY_DETAILS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__COST_CENTER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__COST_CENTER_GROUP
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__CUSTOMERGROUP
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__FAB
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__FINANCE_ADJ_MAPPINGS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__FORECASTBUDGET
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__MAC_MAIN
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__MATERIAL_GROUP_DESCRIPTIONS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__MATERIAL_PLANT_MASTER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__MATERIAL_PRICING_GROUP1
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__MATERIAL_PRICING_GROUP2
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__MATERIAL_SALES_ORG_MASTER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__MATERIAL_TYPE_DESCRIPTIONS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__MATERIAL_VALUATION_MASTER_CODED
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__MDM_COMPANY
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__MDM_OFFICE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__MYSKILLS_COMPANY
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__OPTIONSET_METADATA
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__ORACLE_ACCOUNT_MAP
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__ORACLE_CUSTOMER_MAP
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__ORACLE_SALES_CATEGORY_MAP
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__PRICE_MATRIX
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__PROCESS_ORDER_DETAILS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__PRODUCT_TYPE_MAP
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__PROFIT_CENTER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__PURCHASE_INFORMATION_PURCHASE_ORDER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__PURCHASE_ORDER_DELIVERY_LINE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__RMA_SAPH
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__SALES_ORDER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__SALES_ORDER_BILLING_LINE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__SALES_ORDER_BILLING_PLAN
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__SALES_ORDER_DELIVERY_LINE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__SALES_ORDER_SCHEDULE_LINE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__SAP_DEPARTMENT
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__SAP_REGION
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__SAP_SALES_CATEGORY
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__SAP_SEGMENT
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__SAP_SURB
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__SERVICEORDER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__SERVICE_B_CODE_MAPPING
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__SERVICE_ORDER_LINE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__SETTLEMENT_MASTER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__TEA_MAC_LIST
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__TEA_OBJECTS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__UNIVERSAL_ACTUAL_SETTLEMENT_EXTERNAL
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__UNIVERSAL_JOURNAL_ENTRY_LINE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__UNIVERSAL_JOURNAL_SALES_LINE
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__WBS_CODE_DESCRIPTION
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__WBS_MASTER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__WISDOM_MACHINE_DETAILS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__WISDOM_SURB_PROGRESS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__WORKERCOMPANYLIST
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__WORKORDER
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__WO_SUMMARY_DETAILS
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__ZCDV_T_CMTU009_VBAK
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__ZCDV_T_CMTU010_VBAP
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__ZCDV_T_CMTU011_VBEP
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__ZCDV_T_CMTU012_LIKP
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__ZCDV_T_CMTU014_VBRK
+  tests:
+  - has_data
+  - recently_run
+- name: SILVER__TEH_REVENUE_COGS__ZCDV_T_CMTU015_VBRP
+  tests:
+  - has_data
+  - recently_run

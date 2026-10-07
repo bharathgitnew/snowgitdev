@@ -1,0 +1,11 @@
+{
+  "QVICS-Trouble": {
+    "DataSet1": {
+      "schema": "dbo",
+      "table": "QVICS_C_ES_LISTTROUBLES",
+      "Incremental": "NULL",
+      "sftablename": "QVICS_C_ES_LIST_TROUBLES",
+      "filter": ""
+    }
+  }
+}

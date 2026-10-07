@@ -1,0 +1,880 @@
+version: 2
+models:
+- name: BRONZE__TEH_FINANCE__ACTIVEDIRECTORY_USERLIST
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__BAAN_BAAN_FINALIZEDTRANSACTIONS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__BAAN_BAANCENTRALINVOICINGSALESINVOICING_INVOICE_SOURCERELATIONS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__BAAN_BAANCOMMONCOMMONDATA_BUCODEMAPPING
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__BAAN_BAANCOMMONCOMMONDATA_BUSINESSPARTNERS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__BAAN_BAANCOMMONCOMMONDATA_EMPLOYEES
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__BAAN_BAANCOMMONCOMMONDATA_SOLDTOBUSINESSPARTNERS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__BAAN_BAANCOMMONSYSTEMTABLES_COSTCOMPONENTS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__BAAN_BAANFINANCEGENERALLEDGER_DIMENSIONDESCRIPTIONS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__BAAN_BAANFINANCEGENERALLEDGER_DIMENSIONS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__BAAN_BAANFINANCEGENERALLEDGER_SIMPLEINTEGRATIONRELATIONSBYELEMENT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__BAAN_BAANSERVICECONFIGURATIONCONTROL_CONFIGURATIONS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__BAAN_BAANSERVICECONFIGURATIONCONTROL_OBJECTRELATIONS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__BAAN_BAANSERVICECONFIGURATIONCONTROL_OBJECTS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__BAAN_BAANSERVICECONFIGURATIONCONTROL_WARRANTIES
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__BAAN_BAANSERVICECONTRACTMANAGEMENT_SERVICECONTRACTS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__BAAN_BAANSERVICESERVICEORDERCONTROL_MAINTAINREASONFORORDERINGPARTS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__BAAN_BAANSERVICESERVICEORDERCONTROL_SERVICEEXECUTIONASSIGNMENTS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__BAAN_BAANSERVICESERVICEORDERCONTROL_SERVICEHOURSACCOUNTING
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__BAAN_BAANSERVICESERVICEORDERCONTROL_SERVICEORDER_POLINK
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__BAAN_BAANSERVICESERVICEORDERCONTROL_SERVICEORDERACTIVITIES
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__BAAN_BAANSERVICESERVICEORDERCONTROL_SERVICEORDERLABORCOSTS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__BAAN_BAANSERVICESERVICEORDERCONTROL_SERVICEORDERMATERIALCOSTS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__BAAN_BAANSERVICESERVICEORDERCONTROL_SERVICEORDEROTHERCOSTS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__BAAN_BAANSERVICESERVICEORDERCONTROL_SERVICEORDERS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__BAAN_BAANTOOLSTEXTMANAGER_TEXT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__BAAN_BAANWAREHOUSINGINVENTORYHANDLING_INBOUNDORDERLINES
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__BAAN_BAANWAREHOUSINGINVENTORYHANDLING_OUTBOUNDORDERLINES
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__BAAN_TTFGLD106200
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__BAAN_TTFGLD008200
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__BAAN_TTCCOM100200
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__CARMA_CORE_RETURN_REASON_TYPE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__CARMA_CSO
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__CARMA_CSO_LINE_ITEM
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__CARMA_POST_CONSUME_PART_RETURN
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__CARMA_RETURN_REASON_TYPE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__CRM_FILE_ACCOUNT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__CRM_FILE_CNT_CNT_CONTRACTSUMMARY_ACCOUNT_FAB
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__CRM_FILE_CNT_CONTRACTSCOPEMASTER
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__CRM_FILE_CNT_CONTRACTSUMMARY
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__CRM_FILE_CNT_MSDYN_AGREEMENT_MSDYN_CUSTOMERASSET
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__CRM_FILE_CNT_ORDERNUMBER
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__CRM_FILE_CNT_ORDERNUMBERGROUP
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__CRM_FILE_GLOBALOPTIONSETMETADATA
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__CRM_FILE_MSDYN_AGREEMENT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__CRM_FILE_MSDYN_CUSTOMERASSET
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__CRM_FILE_MSDYN_PROJECT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__CRM_FILE_MSDYN_TIMEENTRY
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__CRM_FILE_MSDYN_WORKORDER
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__CRM_FILE_MSDYN_WORKORDERPRODUCT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__CRM_FILE_MSDYN_WORKORDERSERVICE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__CRM_FILE_MSDYN_WORKORDERSUBSTATUS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__CRM_FILE_MSDYN_WORKORDERTYPE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__CRM_FILE_OPTIONSETMETADATA
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__CRM_FILE_SYSTEMUSER
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__CRM_FILE_TEAM
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__CRM_FILE_TEL_COM_SALESORDERHEADER
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__CRM_FILE_WO_TYPEOFWORK
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__FILE_COST_CENTER
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__FILE_CUSTOMER_GROUP_MAPPING
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__FILE_FINANCE_ADJ_MAPPINGS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__FILE_FORECASTBUDGET
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__FILE_FORECASTBUDGET_EPBCS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__FILE_FST_EMPLOYEE_GROUP
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__FILE_OPENDATASOFT_POSTALCODE_GEODATA
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__FILE_ORACLE_FUNCTIONAL_DEPT_HIERARCHY
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__FILE_ORACLE_STANDARD_DEPT_HIERARCHY
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__FILE_PRODUCT_TYPE_MAP
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__FILE_PROFIT_CENTER
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__FILE_SAP_CUSTOMER_GROUP
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__FILE_SAP_MATERIAL_CLASSIFICATIONS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__FILE_SAP_SALES_CATEGORY
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__FILE_TEL_PRICING_ACTUAL
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__FILE_WBS_CODE_DESCRIPTION
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__KRONOS_ACTIVITIESTOTAL
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__KRONOS_TIMECARD
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__MDM_COMPANY
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__MDM_CUSTOMER_GROUP_MAPPING
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__MDM_EMPLOYEE_ADP_CODE_MAPPING
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__MDM_EMPLOYEE_TYPE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__MDM_EMPLOYEES_JOB_TITLE_MAPPING
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__MDM_FST_KRONOS_WRENCH_TIME_MAPPING
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__MDM_KRONOS_SHIFT_TABLE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__MDM_MACHINE_CHAMBER_EXCEPTION_LIST
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__MDM_MACHINE_STATUS_MAPPING
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__MDM_MANAGER_EMPLOYEE_GROUP
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__MDM_OFFICE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__MDM_ORACLEEPBCSACCOUNT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__MDM_PAID_SERVICE_EXCEPTION_PRICING
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__MDM_PDS_HOURLY_RATE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__MDM_SEGMENTMAPPING
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__MDM_TASTASK
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__MDM_TIMECARDPAYCODE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__MYSKILLS_KSMN_TABLE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__MYSKILLS_WORKDAYEMPLOYEE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__NOW_NCDR_PARTS_HISTORY
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__NOW_NOWDATA
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__ROSETTA_CONSIGNMENT_TRANSACTION
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_VBAP_BLANK_PROFIT_CENTER
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU009_VBAK
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU009_VBAK_HIST
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU010_VBAP
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU010_VBAP_HIST
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU010_VBAP_SECT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU011_VBEP
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU011_VBEP_HIST
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU012_LIKP
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU012_LIKP_HIST
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU013_LIPS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU014_VBRK
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU014_VBRK_HIST
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU015_VBRP
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU015_VBRP_HIST
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU016_ZSDT0163
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU017_MARA
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU019_MVKE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU020_KNA1
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU021_KNVV
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU023_TVAKT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU024_01_ACDOCA
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU024_ACDOCA
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU025_MATDOC
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU026_MARC
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU027_EKKO
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU028_EKPO
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU029_PRCD_ELEMENTS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU030_KONP
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU031_A904
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU032_A901
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU033_A902
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU035_CEPC
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU036_CSKS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU037_BKPF
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU038_BSEG
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU038_BSEG_SEC
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU040_PRPS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU045_BSET
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU047_VBPA
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU053_BUT000
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU061_LFA1
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU064_VBFA
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU069_VBKD
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU073_EINE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU074_EINA
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU080_T001L
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU082_A032
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU083_A114
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU084_A350
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU085_A910
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU086_A919
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU087_ADRC
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU089_AFVC
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU090_AUFK
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU091_CEPCT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU092_CSKT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU098_LFB1
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU100_LFM1
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU119_AFKO
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU120_DD07T_POSAR
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU123_T023T
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU125_T134T
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU129_T161T
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU139_T685T
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU160_TVAUT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU163_TVFKT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU171_TVM1T
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU173_TVM2T
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU177_TVV1T
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU178_TVV2T
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU191_FPLA
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU192_FPLT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU196_AUAA
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU197_RSEG
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU201_BUT0ID
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU206_LFBW
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU210_CDHDR
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU219_AFRU
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU222_AUAK
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU229_A916
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU236_AFIH
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU241_A017
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU243_MBEWH
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPAPI_ZCDV_T_CMTU246_EBEWH
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPH_PARTS_EXPORTIMPORT_CONTROL
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPH_SAP_FIM_EV_SKAT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPH_SAP_FIM_EV_T880
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPH_SAP_US_FIT_EV_BSEG
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPH_SAP_US_MMT_EV_MBEW
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPH_SAP_US_MMT_EV_MSPR
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPH_SAP_US_SDT_EV_VBKD
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPH_SAP_ZZM_EV_KONP
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPH_SAP_ZZM_EV_T005T
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPH_SAP_ZZM_EV_T005U
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPO_DOCUMENT_TYPE_TEXTS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPO_SAPO_ACCOUNTING_DOCUMENT_HEADER
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SAPO_SAPO_ACCOUNTING_DOCUMENT_SEGMENT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SHAREPOINT_CUSTOMER_GROUP_MAPPING
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SHAREPOINT_CUSTOMER_SITE_SERVICE_MANAGER_MAPPING
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SHAREPOINT_ORACLE_CUSTOMER
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SHAREPOINT_ORACLE_DEPARTMENT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SHAREPOINT_ORACLE_GL_ACCOUNT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SHAREPOINT_ORACLE_PC_MGMT_HIERARCHY
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SHAREPOINT_ORACLE_REGION
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SHAREPOINT_ORACLE_SALES_CATEGORY
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SHAREPOINT_ORACLE_SEGMENT
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SHAREPOINT_SERVICE_B_CODE_MAPPING
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SHAREPOINT_SERVICE_BUSINESS_UNIT_MAPPING
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SHAREPOINT_SERVICE_CUSTOMER_MAPPING
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SHAREPOINT_TASTYPEOFWORK
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__TEA93TEL_REPORTING_BAANV_TEA_CUSTOMERS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__TEACOMMON_DEPARTMENTS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__TEACOMMON_EMPLOYEE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__TEACOMMON_LOCATIONS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__TEACOMMON_PRODUCTLINES
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__TELQS_PROCESS_ORDER_DETAILS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__TELUSDWPROD1_FINANCIALTRANSACTIONS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__TELUSDWPROD1_REVENUEANDCOGSDETAILS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__THREEPL_TPL_SHIPMENT_CONFIRMATION
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__WISDOM_MAC_MAIN
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__WISDOM_SAP_SURB
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__WISDOM_TEA_MAC_LIST
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__WISDOM_WISDOM_SURB_PROGRESS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__WORKDAY_WORKERCOMPANYLIST
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_FINANCE__SHAREPOINT_MAP_ORACLE_ACCOUNT
+  tests:
+  - has_data
+  - recently_run

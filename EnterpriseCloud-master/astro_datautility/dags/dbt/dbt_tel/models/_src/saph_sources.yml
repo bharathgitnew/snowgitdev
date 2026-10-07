@@ -1,0 +1,895 @@
+version: 2
+sources:
+- name: SAPH
+  description: Landing Zone - SAPH_USR2 Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: SAPH
+  tables:
+  - name: SAP_MMM_EV_ADR6
+    identifier: SAP_MMM_EV_ADR6
+    description: Landing table for SAP_MMM_EV_ADR6 file.
+  - name: SAP_ZZM_EV_TIBAN
+    identifier: SAP_ZZM_EV_TIBAN
+    description: Landing table for SAP_ZZM_EV_TIBAN file.
+  - name: SAP_US_MMT_EV_EBAN_GMX
+    identifier: SAP_US_MMT_EV_EBAN_GMX
+    description: Landing table for SAP_US_MMT_EV_EBAN_GMX file.
+  - name: SAP_SDT_EV_VBBE_GMX
+    identifier: SAP_SDT_EV_VBBE_GMX
+    description: Landing table for SAP_SDT_EV_VBBE_GMX file.
+  - name: SAP_US_MMT_EV_MATDOC_EXTRACT_GMX
+    identifier: SAP_US_MMT_EV_MATDOC_EXTRACT_GMX
+    description: Landing table for SAP_US_MMT_EV_MATDOC_EXTRACT_GMX file.
+  - name: SAP_PPT_EV_AUAA
+    identifier: SAP_PPT_EV_AUAA
+    description: Landing table for SAP_PPT_EV_AUAA file.
+  - name: SAP_US_PPT_EV_AFRU
+    identifier: SAP_US_PPT_EV_AFRU
+    description: Landing table for SAP_US_PPT_EV_AFRU file.
+  - name: SAP_SDT_EV_FPLT_GMX
+    identifier: SAP_SDT_EV_FPLT_GMX
+    description: Landing table for SAP_SDT_EV_FPLT_GMX file.
+  - name: SAP_SDT_EV_ZSDT2004_GMX
+    identifier: SAP_SDT_EV_ZSDT2004_GMX
+    description: Landing table for SAP_SDT_EV_ZSDT2004_GMX file.
+  - name: SAP_SDT_EV_DROPSHIPREPORT_GMX_HIST
+    identifier: SAP_SDT_EV_DropshipReport_GMX_HIST
+    description: Landing table for SAP_SDT_EV_DropshipReport_GMX_HIST file.
+  - name: SAP_SDT_EV_DROPSHIPREPORT_GMX
+    identifier: SAP_SDT_EV_DropshipReport_GMX
+    description: Landing table for SAP_SDT_EV_DropshipReport_GMX file.
+  - name: SAP_AAM_EV_ANLB
+    identifier: SAP_AAM_EV_ANLB
+    description: Landing table for SAP_AAM_EV_ANLB file.
+  - name: SAP_FIM_EV_T007S_GMX
+    identifier: SAP_FIM_EV_T007S_GMX
+    description: Landing table for SAP_FIM_EV_T007S_GMX file.
+  - name: SAP_FIM_EV_T059ZT_GMX
+    identifier: SAP_FIM_EV_T059ZT_GMX
+    description: Landing table for SAP_FIM_EV_T059ZT_GMX file.
+  - name: SAP_FIM_EV_TSTL_GMX
+    identifier: SAP_FIM_EV_TSTL_GMX
+    description: Landing table for SAP_FIM_EV_TSTL_GMX file.
+  - name: SAP_MMM_EV_T001K
+    identifier: SAP_MMM_EV_T001K
+    description: Landing table for SAP_MMM_EV_T001K file.
+  - name: SAP_MMM_EV_T156
+    identifier: SAP_MMM_EV_T156
+    description: Landing table for SAP_MMM_EV_T156 file.
+  - name: SAP_MMM_EV_T156T
+    identifier: SAP_MMM_EV_T156T
+    description: Landing table for SAP_MMM_EV_T156T file.
+  - name: SAP_AAM_EV_T093T_GMX
+    identifier: SAP_AAM_EV_T093T_GMX
+    description: Landing table for SAP_AAM_EV_T093T_GMX file.
+  - name: SAP_AAT_EV_ANEK
+    identifier: SAP_AAT_EV_ANEK
+    description: Landing table for SAP_AAT_EV_ANEK file.
+  - name: SAP_AAT_EV_ANEP
+    identifier: SAP_AAT_EV_ANEP
+    description: Landing table for SAP_AAT_EV_ANEP file.
+  - name: SAP_COM_EV_TKA02
+    identifier: SAP_COM_EV_TKA02
+    description: Landing table for SAP_COM_EV_TKA02 file.
+  - name: SAP_FIM_EV_ANLA
+    identifier: SAP_FIM_EV_ANLA
+    description: Landing table for SAP_FIM_EV_ANLA file.
+  - name: SAP_FIM_EV_BNKA
+    identifier: SAP_FIM_EV_BNKA
+    description: Landing table for SAP_FIM_EV_BNKA file.
+  - name: SAP_FIM_EV_SKAT
+    identifier: SAP_FIM_EV_SKAT
+    description: Landing table for SAP_FIM_EV_SKAT file.
+  - name: SAP_FIM_EV_T052
+    identifier: SAP_FIM_EV_T052
+    description: Landing table for SAP_FIM_EV_T052 file.
+  - name: SAP_FIM_EV_TABWT
+    identifier: SAP_FIM_EV_TABWT
+    description: Landing table for SAP_FIM_EV_TABWT file.
+  - name: SAP_FIM_EV_TSKMT_GMX
+    identifier: SAP_FIM_EV_TSKMT_GMX
+    description: Landing table for SAP_FIM_EV_TSKMT_GMX file.
+  - name: SAP_MMM_EV_MARM_GMX
+    identifier: SAP_MMM_EV_MARM_GMX
+    description: Landing table for SAP_MMM_EV_MARM_GMX file.
+  - name: SAP_MMM_EV_T134
+    identifier: SAP_MMM_EV_T134
+    description: Landing table for SAP_MMM_EV_T134 file.
+  - name: SAP_MMM_EV_T134T
+    identifier: SAP_MMM_EV_T134T
+    description: Landing table for SAP_MMM_EV_T134T file.
+  - name: SAP_MMM_EV_T163K
+    identifier: SAP_MMM_EV_T163K
+    description: Landing table for SAP_MMM_EV_T163K file.
+  - name: SAP_MMM_EV_T163Y
+    identifier: SAP_MMM_EV_T163Y
+    description: Landing table for SAP_MMM_EV_T163Y file.
+  - name: SAP_MMM_EV_TVM1
+    identifier: SAP_MMM_EV_TVM1
+    description: Landing table for SAP_MMM_EV_TVM1 file.
+  - name: SAP_SDM_EV_KNVI_GMX
+    identifier: SAP_SDM_EV_KNVI_GMX
+    description: Landing table for SAP_SDM_EV_KNVI_GMX file.
+  - name: SAP_SDM_EV_T171
+    identifier: SAP_SDM_EV_T171
+    description: Landing table for SAP_SDM_EV_T171 file.
+  - name: SAP_SDM_EV_T171T
+    identifier: SAP_SDM_EV_T171T
+    description: Landing table for SAP_SDM_EV_T171T file.
+  - name: SAP_SDM_EV_TVFK
+    identifier: SAP_SDM_EV_TVFK
+    description: Landing table for SAP_SDM_EV_TVFK file.
+  - name: SAP_SDM_EV_TVGRT
+    identifier: SAP_SDM_EV_TVGRT
+    description: Landing table for SAP_SDM_EV_TVGRT file.
+  - name: SAP_SDT_EV_ZSDT0169_GMX
+    identifier: SAP_SDT_EV_ZSDT0169_GMX
+    description: Landing table for SAP_SDT_EV_ZSDT0169_GMX file.
+  - name: SAP_US_MMT_EV_MKPF
+    identifier: SAP_US_MMT_EV_MKPF
+    description: Landing table for SAP_US_MMT_EV_MKPF file.
+  - name: SAP_AAM_EV_ANLBZW_GMX
+    identifier: SAP_AAM_EV_ANLBZW_GMX
+    description: Landing table for SAP_AAM_EV_ANLBZW_GMX file.
+  - name: SAP_AAM_EV_ANLC_GMX
+    identifier: SAP_AAM_EV_ANLC_GMX
+    description: Landing table for SAP_AAM_EV_ANLC_GMX file.
+  - name: SAP_AAM_EV_ANLH_GMX
+    identifier: SAP_AAM_EV_ANLH_GMX
+    description: Landing table for SAP_AAM_EV_ANLH_GMX file.
+  - name: SAP_AAM_EV_ANLU_GMX
+    identifier: SAP_AAM_EV_ANLU_GMX
+    description: Landing table for SAP_AAM_EV_ANLU_GMX file.
+  - name: SAP_AAM_EV_ANLZ_GMX
+    identifier: SAP_AAM_EV_ANLZ_GMX
+    description: Landing table for SAP_AAM_EV_ANLZ_GMX file.
+  - name: SAP_AAM_EV_T090NAT_GMX
+    identifier: SAP_AAM_EV_T090NAT_GMX
+    description: Landing table for SAP_AAM_EV_T090NAT_GMX file.
+  - name: SAP_COM_EV_AUFK
+    identifier: SAP_COM_EV_AUFK
+    description: Landing table for SAP_COM_EV_AUFK file.
+  - name: SAP_COM_EV_T006A_GMX
+    identifier: SAP_COM_EV_T006A_GMX
+    description: Landing table for SAP_COM_EV_T006A_GMX file.
+  - name: SAP_FIM_EV_DFKKBPTAXNUM_GMX
+    identifier: SAP_FIM_EV_DFKKBPTAXNUM_GMX
+    description: Landing table for SAP_FIM_EV_DFKKBPTAXNUM_GMX file.
+  - name: SAP_FIM_EV_LFBW_GMX
+    identifier: SAP_FIM_EV_LFBW_GMX
+    description: Landing table for SAP_FIM_EV_LFBW_GMX file.
+  - name: SAP_FIM_EV_T001
+    identifier: SAP_FIM_EV_T001
+    description: Landing table for SAP_FIM_EV_T001 file.
+  - name: SAP_FIM_EV_T052S_GMX
+    identifier: SAP_FIM_EV_T052S_GMX
+    description: Landing table for SAP_FIM_EV_T052S_GMX file.
+  - name: SAP_FIM_EV_T052U
+    identifier: SAP_FIM_EV_T052U
+    description: Landing table for SAP_FIM_EV_T052U file.
+  - name: SAP_FIM_EV_T880
+    identifier: SAP_FIM_EV_T880
+    description: Landing table for SAP_FIM_EV_T880 file.
+  - name: SAP_MMM_EV_MAKT
+    identifier: SAP_MMM_EV_MAKT
+    description: Landing table for SAP_MMM_EV_MAKT file.
+  - name: SAP_MMM_EV_MLAN_GMX
+    identifier: SAP_MMM_EV_MLAN_GMX
+    description: Landing table for SAP_MMM_EV_MLAN_GMX file.
+  - name: SAP_MMM_EV_T023
+    identifier: SAP_MMM_EV_T023
+    description: Landing table for SAP_MMM_EV_T023 file.
+  - name: SAP_MMM_EV_T023T
+    identifier: SAP_MMM_EV_T023T
+    description: Landing table for SAP_MMM_EV_T023T file.
+  - name: SAP_MMM_EV_T024
+    identifier: SAP_MMM_EV_T024
+    description: Landing table for SAP_MMM_EV_T024 file.
+  - name: SAP_MMM_EV_T024E
+    identifier: SAP_MMM_EV_T024E
+    description: Landing table for SAP_MMM_EV_T024E file.
+  - name: SAP_MMM_EV_T161
+    identifier: SAP_MMM_EV_T161
+    description: Landing table for SAP_MMM_EV_T161 file.
+  - name: SAP_MMM_EV_T161T
+    identifier: SAP_MMM_EV_T161T
+    description: Landing table for SAP_MMM_EV_T161T file.
+  - name: SAP_MMM_EV_T163I
+    identifier: SAP_MMM_EV_T163I
+    description: Landing table for SAP_MMM_EV_T163I file.
+  - name: SAP_MMM_EV_TVM1T
+    identifier: SAP_MMM_EV_TVM1T
+    description: Landing table for SAP_MMM_EV_TVM1T file.
+  - name: SAP_MMM_EV_TVM2
+    identifier: SAP_MMM_EV_TVM2
+    description: Landing table for SAP_MMM_EV_TVM2 file.
+  - name: SAP_MMM_EV_TVM2T
+    identifier: SAP_MMM_EV_TVM2T
+    description: Landing table for SAP_MMM_EV_TVM2T file.
+  - name: SAP_MMM_EV_ZMAT0002_GMX
+    identifier: SAP_MMM_EV_ZMAT0002_GMX
+    description: Landing table for SAP_MMM_EV_ZMAT0002_GMX file.
+  - name: SAP_SDM_EV_T685T_GMX
+    identifier: SAP_SDM_EV_T685T_GMX
+    description: Landing table for SAP_SDM_EV_T685T_GMX file.
+  - name: SAP_SDM_EV_TVAP
+    identifier: SAP_SDM_EV_TVAP
+    description: Landing table for SAP_SDM_EV_TVAP file.
+  - name: SAP_SDM_EV_TVAPT
+    identifier: SAP_SDM_EV_TVAPT
+    description: Landing table for SAP_SDM_EV_TVAPT file.
+  - name: SAP_SDM_EV_TVAU
+    identifier: SAP_SDM_EV_TVAU
+    description: Landing table for SAP_SDM_EV_TVAU file.
+  - name: SAP_SDM_EV_TVAUT
+    identifier: SAP_SDM_EV_TVAUT
+    description: Landing table for SAP_SDM_EV_TVAUT file.
+  - name: SAP_SDM_EV_TVBUR
+    identifier: SAP_SDM_EV_TVBUR
+    description: Landing table for SAP_SDM_EV_TVBUR file.
+  - name: SAP_SDM_EV_TVKBT
+    identifier: SAP_SDM_EV_TVKBT
+    description: Landing table for SAP_SDM_EV_TVKBT file.
+  - name: SAP_SDT_EV_FPLA_GMX
+    identifier: SAP_SDT_EV_FPLA_GMX
+    description: Landing table for SAP_SDT_EV_FPLA_GMX file.
+  - name: SAP_SDT_EV_ZSDT0168_GMX
+    identifier: SAP_SDT_EV_ZSDT0168_GMX
+    description: Landing table for SAP_SDT_EV_ZSDT0168_GMX file.
+  - name: SAP_SDT_EV_ZSDT0196_GMX
+    identifier: SAP_SDT_EV_ZSDT0196_GMX
+    description: Landing table for SAP_SDT_EV_ZSDT0196_GMX file.
+  - name: SAP_US_PPT_EV_AFKO
+    identifier: SAP_US_PPT_EV_AFKO
+    description: Landing table for SAP_US_PPT_EV_AFKO file.
+  - name: SAP_US_SDT_EV_VBKD
+    identifier: SAP_US_SDT_EV_VBKD
+    description: Landing table for SAP_US_SDT_EV_VBKD file.
+  - name: SAP_US_SDT_EV_ZSDT0163_GMX
+    identifier: SAP_US_SDT_EV_ZSDT0163_GMX
+    description: Landing table for SAP_US_SDT_EV_ZSDT0163_GMX file.
+  - name: SAP_ZZM_EV_T005U
+    identifier: SAP_ZZM_EV_T005U
+    description: Landing table for SAP_ZZM_EV_T005U file.
+  - name: SAP_ZZM_EV_TCURC
+    identifier: SAP_ZZM_EV_TCURC
+    description: Landing table for SAP_ZZM_EV_TCURC file.
+  - name: SAP_ZZM_EV_TCURT
+    identifier: SAP_ZZM_EV_TCURT
+    description: Landing table for SAP_ZZM_EV_TCURT file.
+  - name: SAP_US_FIT_EV_ZFIT0070_GMX
+    identifier: SAP_US_FIT_EV_ZFIT0070_GMX
+    description: Landing table for SAP_US_FIT_EV_ZFIT0070_GMX file.
+  - name: SAP_COM_EV_TKA01
+    identifier: SAP_COM_EV_TKA01
+    description: Landing table for SAP_COM_EV_TKA01 file.
+  - name: SAP_US_MMT_EV_EBEW
+    identifier: SAP_US_MMT_EV_EBEW
+    description: Landing table for SAP_US_MMT_EV_EBEW file.
+  - name: SAP_US_MMT_EV_MBEW
+    identifier: SAP_US_MMT_EV_MBEW
+    description: Landing table for SAP_US_MMT_EV_MBEW file.
+  - name: SAP_US_MMT_EV_MSSA
+    identifier: SAP_US_MMT_EV_MSSA
+    description: Landing table for SAP_US_MMT_EV_MSSA file.
+  - name: SAP_US_MMT_EV_QBEW
+    identifier: SAP_US_MMT_EV_QBEW
+    description: Landing table for SAP_US_MMT_EV_QBEW file.
+  - name: SAP_US_MMT_EV_RSEG
+    identifier: SAP_US_MMT_EV_RSEG
+    description: Landing table for SAP_US_MMT_EV_RSEG file.
+  - name: SAP_ZZM_EV_T005
+    identifier: SAP_ZZM_EV_T005
+    description: Landing table for SAP_ZZM_EV_T005 file.
+  - name: SAP_ZZM_EV_T005S
+    identifier: SAP_ZZM_EV_T005S
+    description: Landing table for SAP_ZZM_EV_T005S file.
+  - name: SAP_ZZM_EV_T005T
+    identifier: SAP_ZZM_EV_T005T
+    description: Landing table for SAP_ZZM_EV_T005T file.
+  - name: SAP_MMM_EV_T001L
+    identifier: SAP_MMM_EV_T001L
+    description: Landing table for SAP_MMM_EV_T001L file.
+  - name: SAP_MMM_EV_T001W
+    identifier: SAP_MMM_EV_T001W
+    description: Landing table for SAP_MMM_EV_T001W file.
+  - name: SAP_SDM_EV_TVAK
+    identifier: SAP_SDM_EV_TVAK
+    description: Landing table for SAP_SDM_EV_TVAK file.
+  - name: SAP_SDM_EV_TVAKT
+    identifier: SAP_SDM_EV_TVAKT
+    description: Landing table for SAP_SDM_EV_TVAKT file.
+  - name: SAP_SDM_EV_TVFKT
+    identifier: SAP_SDM_EV_TVFKT
+    description: Landing table for SAP_SDM_EV_TVFKT file.
+  - name: SAP_SDM_EV_TVKGR
+    identifier: SAP_SDM_EV_TVKGR
+    description: Landing table for SAP_SDM_EV_TVKGR file.
+  - name: SAP_US_MMT_EV_MCHB
+    identifier: SAP_US_MMT_EV_MCHB
+    description: Landing table for SAP_US_MMT_EV_MCHB file.
+  - name: SAP_US_MMT_EV_MSKA
+    identifier: SAP_US_MMT_EV_MSKA
+    description: Landing table for SAP_US_MMT_EV_MSKA file.
+  - name: SAP_US_MMT_EV_MSKU
+    identifier: SAP_US_MMT_EV_MSKU
+    description: Landing table for SAP_US_MMT_EV_MSKU file.
+  - name: SAP_US_MMT_EV_MSLB
+    identifier: SAP_US_MMT_EV_MSLB
+    description: Landing table for SAP_US_MMT_EV_MSLB file.
+  - name: SAP_US_MMT_EV_MSPR
+    identifier: SAP_US_MMT_EV_MSPR
+    description: Landing table for SAP_US_MMT_EV_MSPR file.
+  - name: SAP_US_PPT_EV_AFPO
+    identifier: SAP_US_PPT_EV_AFPO
+    description: Landing table for SAP_US_PPT_EV_AFPO file.
+  - name: SAP_US_PPT_EV_AFVC
+    identifier: SAP_US_PPT_EV_AFVC
+    description: Landing table for SAP_US_PPT_EV_AFVC file.
+  - name: SAP_COM_EV_CEPCT
+    identifier: SAP_COM_EV_CEPCT
+    description: Landing table for SAP_COM_EV_CEPCT file.
+  - name: SAP_COM_EV_CSKT
+    identifier: SAP_COM_EV_CSKT
+    description: Landing table for SAP_COM_EV_CSKT file.
+  - name: SAP_FIM_EV_LFB1
+    identifier: SAP_FIM_EV_LFB1
+    description: Landing table for SAP_FIM_EV_LFB1 file.
+  - name: SAP_FIM_EV_SKA1
+    identifier: SAP_FIM_EV_SKA1
+    description: Landing table for SAP_FIM_EV_SKA1 file.
+  - name: SAP_FIM_EV_TABW
+    identifier: SAP_FIM_EV_TABW
+    description: Landing table for SAP_FIM_EV_TABW file.
+  - name: SAP_FIM_EV_TSKDT_GMX
+    identifier: SAP_FIM_EV_TSKDT_GMX
+    description: Landing table for SAP_FIM_EV_TSKDT_GMX file.
+  - name: SAP_FIM_EV_TSKM_GMX
+    identifier: SAP_FIM_EV_TSKM_GMX
+    description: Landing table for SAP_FIM_EV_TSKM_GMX file.
+  - name: SAP_MMM_EV_EINA
+    identifier: SAP_MMM_EV_EINA
+    description: Landing table for SAP_MMM_EV_EINA file.
+  - name: SAP_MMM_EV_EINE
+    identifier: SAP_MMM_EV_EINE
+    description: Landing table for SAP_MMM_EV_EINE file.
+  - name: SAP_MMM_EV_LFM1_GMX
+    identifier: SAP_MMM_EV_LFM1_GMX
+    description: Landing table for SAP_MMM_EV_LFM1_GMX file.
+  - name: SAP_SDM_EV_A910_GMX
+    identifier: SAP_SDM_EV_A910_GMX
+    description: Landing table for SAP_SDM_EV_A910_GMX file.
+  - name: SAP_SDM_EV_KNA1
+    identifier: SAP_SDM_EV_KNA1
+    description: Landing table for SAP_SDM_EV_KNA1 file.
+  - name: SAP_SDM_EV_KNMT
+    identifier: SAP_SDM_EV_KNMT
+    description: Landing table for SAP_SDM_EV_KNMT file.
+  - name: SAP_SDT_EV_ZSDT0013_GMX
+    identifier: SAP_SDT_EV_ZSDT0013_GMX
+    description: Landing table for SAP_SDT_EV_ZSDT0013_GMX file.
+  - name: SAP_SDT_EV_ZSDT0015_GMX
+    identifier: SAP_SDT_EV_ZSDT0015_GMX
+    description: Landing table for SAP_SDT_EV_ZSDT0015_GMX file.
+  - name: SAP_SDT_EV_ZSDT0164_GMX
+    identifier: SAP_SDT_EV_ZSDT0164_GMX
+    description: Landing table for SAP_SDT_EV_ZSDT0164_GMX file.
+  - name: SAP_SDT_EV_ZSDT0165_GMX
+    identifier: SAP_SDT_EV_ZSDT0165_GMX
+    description: Landing table for SAP_SDT_EV_ZSDT0165_GMX file.
+  - name: SAP_ZZM_EV_TSADVT_GMX
+    identifier: SAP_ZZM_EV_TSADVT_GMX
+    description: Landing table for SAP_ZZM_EV_TSADVT_GMX file.
+  - name: SAP_COM_EV_PRHI_GMX
+    identifier: SAP_COM_EV_PRHI_GMX
+    description: Landing table for SAP_COM_EV_PRHI_GMX file.
+  - name: SAP_MMM_EV_LFA1
+    identifier: SAP_MMM_EV_LFA1
+    description: Landing table for SAP_MMM_EV_LFA1 file.
+  - name: SAP_SDT_EV_ZSDT0080_GMX
+    identifier: SAP_SDT_EV_ZSDT0080_GMX
+    description: Landing table for SAP_SDT_EV_ZSDT0080_GMX file.
+  - name: SAP_ZZM_EV_ADRC
+    identifier: SAP_ZZM_EV_ADRC
+    description: Landing table for SAP_ZZM_EV_ADRC file.
+  - name: SAP_SDM_EV_A114_GMX
+    identifier: SAP_SDM_EV_A114_GMX
+    description: Landing table for SAP_SDM_EV_A114_GMX file.
+  - name: SAP_SDM_EV_T685_GMX
+    identifier: SAP_SDM_EV_T685_GMX
+    description: Landing table for SAP_SDM_EV_T685_GMX file.
+  - name: SAP_FIT_EV_ZFIT0034_GMX
+    identifier: SAP_FIT_EV_ZFIT0034_GMX
+    description: Landing table for SAP_FIT_EV_ZFIT0034_GMX file.
+  - name: SAP_SDT_EV_VBFA_GMX
+    identifier: SAP_SDT_EV_VBFA_GMX
+    description: Landing table for SAP_SDT_EV_VBFA_GMX file.
+  - name: SAP_SDM_EV_KNVP
+    identifier: SAP_SDM_EV_KNVP
+    description: Landing table for SAP_SDM_EV_KNVP file.
+  - name: SAP_COM_EV_PRTE
+    identifier: SAP_COM_EV_PRTE
+    description: Landing table for SAP_COM_EV_PRTE file.
+  - name: SAP_FIM_EV_KNB1
+    identifier: SAP_FIM_EV_KNB1
+    description: Landing table for SAP_FIM_EV_KNB1 file.
+  - name: SAP_QMT_EV_AUSP
+    identifier: SAP_QMT_EV_AUSP
+    description: Landing table for SAP_QMT_EV_AUSP file.
+  - name: SAP_ZZM_EV_BUT000
+    identifier: SAP_ZZM_EV_BUT000
+    description: Landing table for SAP_ZZM_EV_BUT000 file.
+  - name: SAP_ZZM_EV_CAWN
+    identifier: SAP_ZZM_EV_CAWN
+    description: Landing table for SAP_ZZM_EV_CAWN file.
+  - name: SAP_ZZM_EV_CAWNT
+    identifier: SAP_ZZM_EV_CAWNT
+    description: Landing table for SAP_ZZM_EV_CAWNT file.
+  - name: SAP_ZZM_EV_INOB
+    identifier: SAP_ZZM_EV_INOB
+    description: Landing table for SAP_ZZM_EV_INOB file.
+  - name: SAP_US_COT_EV_COBK
+    identifier: SAP_US_COT_EV_COBK
+    description: Landing table for SAP_US_COT_EV_COBK file.
+  - name: SAP_FIT_EV_BSET
+    identifier: SAP_FIT_EV_BSET
+    description: Landing table for SAP_FIT_EV_BSET file.
+  - name: SAP_US_MMM_EV_MVKE
+    identifier: SAP_US_MMM_EV_MVKE
+    description: Landing table for SAP_US_MMM_EV_MVKE file.
+  - name: SAP_US_MMT_EV_EKES
+    identifier: SAP_US_MMT_EV_EKES
+    description: Landing table for SAP_US_MMT_EV_EKES file.
+  - name: SAP_US_MMT_EV_EKET
+    identifier: SAP_US_MMT_EV_EKET
+    description: Landing table for SAP_US_MMT_EV_EKET file.
+  - name: SAP_MMT_EV_EKKN
+    identifier: SAP_MMT_EV_EKKN
+    description: Landing table for SAP_MMT_EV_EKKN file.
+  - name: SAP_US_MMT_EV_MARD
+    identifier: SAP_US_MMT_EV_MARD
+    description: Landing table for SAP_US_MMT_EV_MARD file.
+  - name: SAP_SDM_EV_KNVV
+    identifier: SAP_SDM_EV_KNVV
+    description: Landing table for SAP_SDM_EV_KNVV file.
+  - name: SAP_US_SDT_EV_VBPA
+    identifier: SAP_US_SDT_EV_VBPA
+    description: Landing table for SAP_US_SDT_EV_VBPA file.
+  - name: SAP_US_FIT_EV_FAAT_PLAN_VALUES
+    identifier: SAP_US_FIT_EV_FAAT_PLAN_VALUES
+    description: Landing table for SAP_US_FIT_EV_FAAT_PLAN_VALUES file.
+  - name: SAP_US_FIT_EV_FAAT_YDDA
+    identifier: SAP_US_FIT_EV_FAAT_YDDA
+    description: Landing table for SAP_US_FIT_EV_FAAT_YDDA file.
+  - name: SAP_US_FIT_EV_FAAT_DOC_IT
+    identifier: SAP_US_FIT_EV_FAAT_DOC_IT
+    description: Landing table for SAP_US_FIT_EV_FAAT_DOC_IT file.
+  - name: SAP_US_SDT_EV_PRCD_ELEMENTS
+    identifier: SAP_US_SDT_EV_PRCD_Elements
+    description: Landing table for SAP_US_SDT_EV_PRCD_Elements file.
+  - name: SAP_COM_EV_CSKS
+    identifier: SAP_COM_EV_CSKS
+    description: Landing table for SAP_COM_EV_CSKS file.
+  - name: SAP_COM_EV_PROJ
+    identifier: SAP_COM_EV_PROJ
+    description: Landing table for SAP_COM_EV_PROJ file.
+  - name: SAP_COM_EV_PRPS
+    identifier: SAP_COM_EV_PRPS
+    description: Landing table for SAP_COM_EV_PRPS file.
+  - name: SAP_US_FIT_EV_BKPFN
+    identifier: SAP_US_FIT_EV_BKPFN
+    description: Landing table for SAP_US_FIT_EV_BKPFN file.
+  - name: SAP_US_FIT_EV_BSEG
+    identifier: SAP_US_FIT_EV_BSEG
+    description: Landing table for SAP_US_FIT_EV_BSEG file.
+  - name: SAP_COM_EV_CEPC
+    identifier: SAP_COM_EV_CEPC
+    description: Landing table for SAP_COM_EV_CEPC file.
+  - name: SAP_FIM_EV_SKB1
+    identifier: SAP_FIM_EV_SKB1
+    description: Landing table for SAP_FIM_EV_SKB1 file.
+  - name: SAP_US_MMT_EV_MARC
+    identifier: SAP_US_MMT_EV_MARC
+    description: Landing table for SAP_US_MMT_EV_MARC file.
+  - name: SAP_US_SDT_EV_VBRK
+    identifier: SAP_US_SDT_EV_VBRK
+    description: Landing table for SAP_US_SDT_EV_VBRK file.
+  - name: SAP_US_SDT_EV_VBRP
+    identifier: SAP_US_SDT_EV_VBRP
+    description: Landing table for SAP_US_SDT_EV_VBRP file.
+  - name: SAP_US_MMT_EV_EKKO
+    identifier: SAP_US_MMT_EV_EKKO
+    description: Landing table for SAP_US_MMT_EV_EKKO file.
+  - name: SAP_US_SDT_EV_LIKP
+    identifier: SAP_US_SDT_EV_LIKP
+    description: Landing table for SAP_US_SDT_EV_LIKP file.
+  - name: SAP_US_SDT_EV_LIPS
+    identifier: SAP_US_SDT_EV_LIPS
+    description: Landing table for SAP_US_SDT_EV_LIPS file.
+  - name: SAP_US_SDT_EV_VBAK
+    identifier: SAP_US_SDT_EV_VBAK
+    description: Landing table for SAP_US_SDT_EV_VBAK file.
+  - name: SAP_US_SDT_EV_VBAP
+    identifier: SAP_US_SDT_EV_VBAP
+    description: Landing table for SAP_US_SDT_EV_VBAP file.
+  - name: SAP_SDM_EV_A901_GMX
+    identifier: SAP_SDM_EV_A901_GMX
+    description: Landing table for SAP_SDM_EV_A901_GMX file.
+  - name: SAP_SDM_EV_A902_GMX
+    identifier: SAP_SDM_EV_A902_GMX
+    description: Landing table for SAP_SDM_EV_A902_GMX file.
+  - name: SAP_SDM_EV_A904_GMX
+    identifier: SAP_SDM_EV_A904_GMX
+    description: Landing table for SAP_SDM_EV_A904_GMX file.
+  - name: SAP_US_MMT_EV_EKPO
+    identifier: SAP_US_MMT_EV_EKPO
+    description: Landing table for SAP_US_MMT_EV_EKPO file.
+  - name: SAP_US_SDT_EV_VBEP
+    identifier: SAP_US_SDT_EV_VBEP
+    description: Landing table for SAP_US_SDT_EV_VBEP file.
+  - name: SAP_ZZM_EV_KONP
+    identifier: SAP_ZZM_EV_KONP
+    description: Landing table for SAP_ZZM_EV_KONP file.
+  - name: FILELIST
+    identifier: FILELIST
+    description: Landing table for FILELIST file.
+  - name: PARTS_EXPORTIMPORT_CONTROL
+    identifier: PARTS_EXPORTIMPORT_CONTROL
+    description: Landing table for PARTS_EXPORTIMPORT_CONTROL file.
+  - name: PSL_ZZM_EV_FISCALPERIODEXT
+    identifier: PSL_ZZM_EV_FISCALPERIODEXT
+    description: Landing table for PSL_ZZM_EV_FISCALPERIODEXT file.
+  - name: SAP_AAM_EVF_ASSETNUMBER_GMX
+    identifier: SAP_AAM_EVF_ASSETNUMBER_GMX
+    description: Landing table for SAP_AAM_EVF_ASSETNUMBER_GMX file.
+  - name: SAP_AAM_EVF_DEPRAREA_GMX
+    identifier: SAP_AAM_EVF_DEPRAREA_GMX
+    description: Landing table for SAP_AAM_EVF_DEPRAREA_GMX file.
+  - name: SAP_AAM_EVF_FIXEDASSET_GMX
+    identifier: SAP_AAM_EVF_FIXEDASSET_GMX
+    description: Landing table for SAP_AAM_EVF_FIXEDASSET_GMX file.
+  - name: SAP_AAT_EVF_FIXEDASSETLINEITEMS_GMX
+    identifier: SAP_AAT_EVF_FIXEDASSETLINEITEMS_GMX
+    description: Landing table for SAP_AAT_EVF_FIXEDASSETLINEITEMS_GMX file.
+  - name: SAP_COM_EVF_CONTROLAREAASSIGN_GMX
+    identifier: SAP_COM_EVF_CONTROLAREAASSIGN_GMX
+    description: Landing table for SAP_COM_EVF_CONTROLAREAASSIGN_GMX file.
+  - name: SAP_COM_EVF_COSTCENTERHIER_GMX
+    identifier: SAP_COM_EVF_COSTCENTERHIER_GMX
+    description: Landing table for SAP_COM_EVF_COSTCENTERHIER_GMX file.
+  - name: SAP_COM_EVF_PROFITCENTERHIER_GMX
+    identifier: SAP_COM_EVF_PROFITCENTERHIER_GMX
+    description: Landing table for SAP_COM_EVF_PROFITCENTERHIER_GMX file.
+  - name: SAP_COM_EV_ORDER
+    identifier: SAP_COM_EV_ORDER
+    description: Landing table for SAP_COM_EV_ORDER file.
+  - name: SAP_COM_EV_WBSELEMENT
+    identifier: SAP_COM_EV_WBSELEMENT
+    description: Landing table for SAP_COM_EV_WBSELEMENT file.
+  - name: SAP_FIM_EVF_TAXCLASSMATERIAL_GMX
+    identifier: SAP_FIM_EVF_TAXCLASSMATERIAL_GMX
+    description: Landing table for SAP_FIM_EVF_TAXCLASSMATERIAL_GMX file.
+  - name: SAP_FIM_EVF_WITHHOLDINGTAX_GMX
+    identifier: SAP_FIM_EVF_WITHHOLDINGTAX_GMX
+    description: Landing table for SAP_FIM_EVF_WITHHOLDINGTAX_GMX file.
+  - name: SAP_FIM_EV_ACCOUNT
+    identifier: SAP_FIM_EV_ACCOUNT
+    description: Landing table for SAP_FIM_EV_ACCOUNT file.
+  - name: SAP_FIM_EV_ACCOUNT_GMX
+    identifier: SAP_FIM_EV_ACCOUNT_GMX
+    description: Landing table for SAP_FIM_EV_ACCOUNT_GMX file.
+  - name: SAP_FIM_EV_COMPANY
+    identifier: SAP_FIM_EV_COMPANY
+    description: Landing table for SAP_FIM_EV_COMPANY file.
+  - name: SAP_FIT_EVF_NEWGLARDOCUMENT_GMX
+    identifier: SAP_FIT_EVF_NEWGLARDOCUMENT_GMX
+    description: Landing table for SAP_FIT_EVF_NEWGLARDOCUMENT_GMX file.
+  - name: SAP_FIT_EVF_TAXDATADOCSEGMENT_GMX
+    identifier: SAP_FIT_EVF_TAXDATADOCSEGMENT_GMX
+    description: Landing table for SAP_FIT_EVF_TAXDATADOCSEGMENT_GMX file.
+  - name: SAP_FIT_FL_ACDOCA_GMX
+    identifier: SAP_FIT_FL_ACDOCA_GMX
+    description: Landing table for SAP_FIT_FL_ACDOCA_GMX file.
+  - name: SAP_INVENTORYFORMATERIAL_GMX
+    identifier: SAP_INVENTORYFORMATERIAL_GMX
+    description: Landing table for SAP_INVENTORYFORMATERIAL_GMX file.
+  - name: SAP_MMM_EVF_MODELTYPE_GMX
+    identifier: SAP_MMM_EVF_MODELTYPE_GMX
+    description: Landing table for SAP_MMM_EVF_MODELTYPE_GMX file.
+  - name: SAP_MMM_EVF_PURCHASEREQUESTDOCTYPE_GMX
+    identifier: SAP_MMM_EVF_PURCHASEREQUESTDOCTYPE_GMX
+    description: Landing table for SAP_MMM_EVF_PURCHASEREQUESTDOCTYPE_GMX file.
+  - name: SAP_MMM_EVF_STORAGELOCATION_GMX
+    identifier: SAP_MMM_EVF_STORAGELOCATION_GMX
+    description: Landing table for SAP_MMM_EVF_STORAGELOCATION_GMX file.
+  - name: SAP_MMM_EVF_VENDORATTRIBUTE_GMX
+    identifier: SAP_MMM_EVF_VENDORATTRIBUTE_GMX
+    description: Landing table for SAP_MMM_EVF_VENDORATTRIBUTE_GMX file.
+  - name: SAP_MMM_EV_MARA
+    identifier: SAP_MMM_EV_MARA
+    description: Landing table for SAP_MMM_EV_MARA file.
+  - name: SAP_MMM_EV_MATERIALEX
+    identifier: SAP_MMM_EV_MATERIALEX
+    description: Landing table for SAP_MMM_EV_MATERIALEX file.
+  - name: SAP_MMM_EV_MDMA_GMX
+    identifier: SAP_MMM_EV_MDMA_GMX
+    description: Landing table for SAP_MMM_EV_MDMA_GMX file.
+  - name: SAP_MMM_EV_PURCHASEORG
+    identifier: SAP_MMM_EV_PURCHASEORG
+    description: Landing table for SAP_MMM_EV_PURCHASEORG file.
+  - name: SAP_MMM_EV_VENDOR
+    identifier: SAP_MMM_EV_VENDOR
+    description: Landing table for SAP_MMM_EV_VENDOR file.
+  - name: SAP_MMT_EV_ZCSV_CM1560_00_GMX
+    identifier: SAP_MMT_EV_ZCSV_CM1560_00_GMX
+    description: Landing table for SAP_MMT_EV_ZCSV_CM1560_00_GMX file.
+  - name: SAP_MMT_FL_MATDOC_GMX
+    identifier: SAP_MMT_FL_MATDOC_GMX
+    description: Landing table for SAP_MMT_FL_MATDOC_GMX file.
+  - name: SAP_SDM_EV_ORDERREASON
+    identifier: SAP_SDM_EV_ORDERREASON
+    description: Landing table for SAP_SDM_EV_ORDERREASON file.
+  - name: SAP_SDT_EVF_DO_GTM_RECEIVED_GMX
+    identifier: SAP_SDT_EVF_DO_GTM_RECEIVED_GMX
+    description: Landing table for SAP_SDT_EVF_DO_GTM_RECEIVED_GMX file.
+  - name: SAP_ZZM_EVF_ADDRESS_GMX
+    identifier: SAP_ZZM_EVF_ADDRESS_GMX
+    description: Landing table for SAP_ZZM_EVF_ADDRESS_GMX file.
+  - name: SAP_COM_EVF_PROFITCENTERHIERYM_GMX
+    identifier: SAP_COM_EVF_PROFITCENTERHIERYM_GMX
+    description: Landing table for SAP_COM_EVF_PROFITCENTERHIERYM_GMX file.
+  - name: SAP_FIM_EVF_TAX_GMX
+    identifier: SAP_FIM_EVF_TAX_GMX
+    description: Landing table for SAP_FIM_EVF_TAX_GMX file.
+  - name: SAP_FIT_EVF_FIXEDASSETLEDGERADDDATA_GMX
+    identifier: SAP_FIT_EVF_FIXEDASSETLEDGERADDDATA_GMX
+    description: Landing table for SAP_FIT_EVF_FIXEDASSETLEDGERADDDATA_GMX file.
+  - name: SAP_FIM_EVF_CUSTOMERTAX_GMX
+    identifier: SAP_FIM_EVF_CUSTOMERTAX_GMX
+    description: Landing table for SAP_FIM_EVF_CUSTOMERTAX_GMX file.
+  - name: SAP_FIM_EVF_PAYMENTTERMSDESCRIPTION_GMX
+    identifier: SAP_FIM_EVF_PAYMENTTERMSDESCRIPTION_GMX
+    description: Landing table for SAP_FIM_EVF_PAYMENTTERMSDESCRIPTION_GMX file.
+  - name: SAP_FIM_EVF_PAYMENTTERMS_GMX
+    identifier: SAP_FIM_EVF_PAYMENTTERMS_GMX
+    description: Landing table for SAP_FIM_EVF_PAYMENTTERMS_GMX file.
+  - name: SAP_FIM_EV_CONSOLIDATECOMPANY
+    identifier: SAP_FIM_EV_CONSOLIDATECOMPANY
+    description: Landing table for SAP_FIM_EV_CONSOLIDATECOMPANY file.
+  - name: SAP_MMM_EVF_MATERIAL_GMX
+    identifier: SAP_MMM_EVF_MATERIAL_GMX
+    description: Landing table for SAP_MMM_EVF_MATERIAL_GMX file.
+  - name: SAP_MMM_EV_PURCHASEDOCTYPE
+    identifier: SAP_MMM_EV_PURCHASEDOCTYPE
+    description: Landing table for SAP_MMM_EV_PURCHASEDOCTYPE file.
+  - name: SAP_SDT_EVF_DELIVERYORDER_GMX
+    identifier: SAP_SDT_EVF_DELIVERYORDER_GMX
+    description: Landing table for SAP_SDT_EVF_DELIVERYORDER_GMX file.
+  - name: SAP_ZZT_EVF_SCRIPTLONGTEXT_GMX
+    identifier: SAP_ZZT_EVF_SCRIPTLONGTEXT_GMX
+    description: Landing table for SAP_ZZT_EVF_SCRIPTLONGTEXT_GMX file.
+  - name: VENDORATTRIBUTEBAD
+    identifier: VENDORATTRIBUTEBAD
+    description: Landing table for VENDORATTRIBUTEBAD file.
+  - name: SAP_FIM_EVF_PROCESSINGCATEGORY_GMX
+    identifier: SAP_FIM_EVF_PROCESSINGCATEGORY_GMX
+    description: Landing table for SAP_FIM_EVF_PROCESSINGCATEGORY_GMX file.
+  - name: SAP_FIT_EVF_NEWGLDOCUMENT_GMX
+    identifier: SAP_FIT_EVF_NEWGLDOCUMENT_GMX
+    description: Landing table for SAP_FIT_EVF_NEWGLDOCUMENT_GMX file.
+  - name: SAP_MMM_EV_MATERIAL
+    identifier: SAP_MMM_EV_MATERIAL
+    description: Landing table for SAP_MMM_EV_MATERIAL file.
+  - name: SAP_SDM_EV_SALESDOCITEMCAT
+    identifier: SAP_SDM_EV_SALESDOCITEMCAT
+    description: Landing table for SAP_SDM_EV_SALESDOCITEMCAT file.
+  - name: SAP_SDT_EVF_SO_GTM_RECEIVED_GMX
+    identifier: SAP_SDT_EVF_SO_GTM_RECEIVED_GMX
+    description: Landing table for SAP_SDT_EVF_SO_GTM_RECEIVED_GMX file.
+  - name: SAP_SDM_EV_SALESDOCTYPE
+    identifier: SAP_SDM_EV_SALESDOCTYPE
+    description: Landing table for SAP_SDM_EV_SALESDOCTYPE file.
+  - name: SAP_COM_EVF_ASSIGNUOM_GMX
+    identifier: SAP_COM_EVF_ASSIGNUOM_GMX
+    description: Landing table for SAP_COM_EVF_ASSIGNUOM_GMX file.
+  - name: SAP_FIT_EVF_NEWGLTOTAL_GMX
+    identifier: SAP_FIT_EVF_NEWGLTOTAL_GMX
+    description: Landing table for SAP_FIT_EVF_NEWGLTOTAL_GMX file.
+  - name: SAP_FIT_EV_ACDOCA_GMX
+    identifier: SAP_FIT_EV_ACDOCA_GMX
+    description: Landing table for SAP_FIT_EV_ACDOCA_GMX file.
+  - name: SAP_MMM_EV_ACCCATEGORY
+    identifier: SAP_MMM_EV_ACCCATEGORY
+    description: Landing table for SAP_MMM_EV_ACCCATEGORY file.
+  - name: SAP_MMM_EV_MATERIALGRP
+    identifier: SAP_MMM_EV_MATERIALGRP
+    description: Landing table for SAP_MMM_EV_MATERIALGRP file.
+  - name: SAP_MMM_EV_MOVINGTYPE
+    identifier: SAP_MMM_EV_MOVINGTYPE
+    description: Landing table for SAP_MMM_EV_MOVINGTYPE file.
+  - name: SAP_MMM_EV_PLANT
+    identifier: SAP_MMM_EV_PLANT
+    description: Landing table for SAP_MMM_EV_PLANT file.
+  - name: SAP_MMM_EV_STORAGELOCATION
+    identifier: SAP_MMM_EV_STORAGELOCATION
+    description: Landing table for SAP_MMM_EV_STORAGELOCATION file.
+  - name: SAP_MMT_EVF_INVENTORY_GMX
+    identifier: SAP_MMT_EVF_INVENTORY_GMX
+    description: Landing table for SAP_MMT_EVF_INVENTORY_GMX file.
+  - name: SAP_MMT_EVF_INVFLOW_GMX
+    identifier: SAP_MMT_EVF_INVFLOW_GMX
+    description: Landing table for SAP_MMT_EVF_INVFLOW_GMX file.
+  - name: SAP_MMT_EVF_PURCHASEORDER_GMX
+    identifier: SAP_MMT_EVF_PURCHASEORDER_GMX
+    description: Landing table for SAP_MMT_EVF_PURCHASEORDER_GMX file.
+  - name: SAP_MMT_EVF_WBSINVENTORYDETAILS_GMX
+    identifier: SAP_MMT_EVF_WBSINVENTORYDETAILS_GMX
+    description: Landing table for SAP_MMT_EVF_WBSINVENTORYDETAILS_GMX file.
+  - name: SAP_MMT_EV_MATDOC_GMX
+    identifier: SAP_MMT_EV_MATDOC_GMX
+    description: Landing table for SAP_MMT_EV_MATDOC_GMX file.
+  - name: SAP_MMT_EV_ZCSV_CM_GMX
+    identifier: SAP_MMT_EV_ZCSV_CM_GMX
+    description: Landing table for SAP_MMT_EV_ZCSV_CM_GMX file.
+  - name: SAP_SDM_EVF_CONDITIONTYPE_GMX
+    identifier: SAP_SDM_EVF_CONDITIONTYPE_GMX
+    description: Landing table for SAP_SDM_EVF_CONDITIONTYPE_GMX file.
+  - name: SAP_SDM_EVF_CUSTOMERATTRIBUTE_GMX
+    identifier: SAP_SDM_EVF_CUSTOMERATTRIBUTE_GMX
+    description: Landing table for SAP_SDM_EVF_CUSTOMERATTRIBUTE_GMX file.
+  - name: SAP_SDM_EV_BILLINGDOCTYPE
+    identifier: SAP_SDM_EV_BILLINGDOCTYPE
+    description: Landing table for SAP_SDM_EV_BILLINGDOCTYPE file.
+  - name: SAP_SDM_EV_SALESREP
+    identifier: SAP_SDM_EV_SALESREP
+    description: Landing table for SAP_SDM_EV_SALESREP file.
+  - name: SAP_SDM_EV_SHIPPOINT
+    identifier: SAP_SDM_EV_SHIPPOINT
+    description: Landing table for SAP_SDM_EV_SHIPPOINT file.
+  - name: SAP_SDT_EVF_BILLING_GMX
+    identifier: SAP_SDT_EVF_BILLING_GMX
+    description: Landing table for SAP_SDT_EVF_BILLING_GMX file.
+  - name: SAP_SDT_EVF_SALESORDER_GMX
+    identifier: SAP_SDT_EVF_SALESORDER_GMX
+    description: Landing table for SAP_SDT_EVF_SALESORDER_GMX file.
+  - name: SAP_SDT_EVF_SO_GTM_CHECKOUT_GMX
+    identifier: SAP_SDT_EVF_SO_GTM_CHECKOUT_GMX
+    description: Landing table for SAP_SDT_EVF_SO_GTM_CHECKOUT_GMX file.
+  - name: SAP_US_COT_EV_COEP
+    identifier: SAP_US_COT_EV_COEP
+    description: Landing table for SAP_US_COT_EV_COEP file.
+  - name: SAP_US_FIT_EV_ACDOCA_GMX
+    identifier: SAP_US_FIT_EV_ACDOCA_GMX
+    description: Landing table for SAP_US_FIT_EV_ACDOCA_GMX file.
+  - name: SAP_ZZM_EVF_CLASSSYSKWD_GMX
+    identifier: SAP_ZZM_EVF_CLASSSYSKWD_GMX
+    description: Landing table for SAP_ZZM_EVF_CLASSSYSKWD_GMX file.
+  - name: SAP_ZZM_EV_COUNTRY
+    identifier: SAP_ZZM_EV_COUNTRY
+    description: Landing table for SAP_ZZM_EV_COUNTRY file.
+  - name: SAP_ZZM_EV_CURRENCY
+    identifier: SAP_ZZM_EV_CURRENCY
+    description: Landing table for SAP_ZZM_EV_CURRENCY file.
+  - name: SF_PSL_ZZM_EV_FISCALPERIODEXT
+    identifier: SF_PSL_ZZM_EV_FISCALPERIODEXT
+    description: Landing table for SF_PSL_ZZM_EV_FISCALPERIODEXT file.
+  - name: SAP_FIT_EVF_BATCHBILLING_GMX
+    identifier: SAP_FIT_EVF_BATCHBILLING_GMX
+    description: Landing table for SAP_FIT_EVF_BATCHBILLING_GMX file.
+  - name: SAP_FIT_EVF_NEWGLAPDOCUMENT_GMX
+    identifier: SAP_FIT_EVF_NEWGLAPDOCUMENT_GMX
+    description: Landing table for SAP_FIT_EVF_NEWGLAPDOCUMENT_GMX file.
+  - name: SAP_MMM_EV_ITEMCATEGORY
+    identifier: SAP_MMM_EV_ITEMCATEGORY
+    description: Landing table for SAP_MMM_EV_ITEMCATEGORY file.
+  - name: SAP_MMT_EVF_INCOMINGINVOICE_GMX
+    identifier: SAP_MMT_EVF_INCOMINGINVOICE_GMX
+    description: Landing table for SAP_MMT_EVF_INCOMINGINVOICE_GMX file.
+  - name: SAP_SDM_EVF_CUSTOMER_GMX
+    identifier: SAP_SDM_EVF_CUSTOMER_GMX
+    description: Landing table for SAP_SDM_EVF_CUSTOMER_GMX file.
+  - name: SAP_SDM_EV_SALESGROUP
+    identifier: SAP_SDM_EV_SALESGROUP
+    description: Landing table for SAP_SDM_EV_SALESGROUP file.
+  - name: SAP_SDT_EVF_SALESCONDITION_GMX
+    identifier: SAP_SDT_EVF_SALESCONDITION_GMX
+    description: Landing table for SAP_SDT_EVF_SALESCONDITION_GMX file.
+  - name: SAP_US_MMT_EV_PRCDP_GMX
+    identifier: SAP_US_MMT_EV_PRCDP_GMX
+    description: Landing table for SAP_US_MMT_EV_PRCDP_GMX file.
+  - name: SAP_ZZM_EV_REGION
+    identifier: SAP_ZZM_EV_REGION
+    description: Landing table for SAP_ZZM_EV_REGION file.
+  - name: SF_SAP_MMT_EV_ZCSV_CM1560_00_GMX
+    identifier: SF_SAP_MMT_EV_ZCSV_CM1560_00_GMX
+    description: Landing table for SF_SAP_MMT_EV_ZCSV_CM1560_00_GMX file.
+  - name: SAP_SDM_EVF_DOMAINFIXEDVAL_GMX
+    identifier: SAP_SDM_EVF_DOMAINFIXEDVAL_GMX
+    description: Landing table for SAP_SDM_EVF_DOMAINFIXEDVAL_GMX file.
+  - name: SAP_MMM_EVF_VENDOR_GMX
+    identifier: SAP_MMM_EVF_VENDOR_GMX
+    description: Landing table for SAP_MMM_EVF_VENDOR_GMX file.
+  - name: SAP_SDM_EV_SALESAREA
+    identifier: SAP_SDM_EV_SALESAREA
+    description: Landing table for SAP_SDM_EV_SALESAREA file.
+  - name: SAP_SDT_EVF_DO_GTM_CHECKOUT_GMX
+    identifier: SAP_SDT_EVF_DO_GTM_CHECKOUT_GMX
+    description: Landing table for SAP_SDT_EVF_DO_GTM_CHECKOUT_GMX file.
+  - name: SAP_US_FIT_EV_ACDOCA
+    identifier: SAP_US_FIT_EV_ACDOCA
+    description: Landing table for SAP_US_FIT_EV_ACDOCA file.
+  - name: SAP_US_MMT_EV_MATDOC_GMX
+    identifier: SAP_US_MMT_EV_MATDOC_GMX
+    description: Landing table for SAP_US_MMT_EV_MATDOC_GMX file.
+  - name: SAP_ZZM_EVF_ITNADDRESSVER_GMX
+    identifier: SAP_ZZM_EVF_ITNADDRESSVER_GMX
+    description: Landing table for SAP_ZZM_EVF_ITNADDRESSVER_GMX file.
+  - name: SAP_MMM_EV_PURCHASEGRP
+    identifier: SAP_MMM_EV_PURCHASEGRP
+    description: Landing table for SAP_MMM_EV_PURCHASEGRP file.
+  - name: SAP_MMT_EVF_PURCHASEREQUEST_GMX
+    identifier: SAP_MMT_EVF_PURCHASEREQUEST_GMX
+    description: Landing table for SAP_MMT_EVF_PURCHASEREQUEST_GMX file.
+  - name: SAP_SDM_EV_DOCSTATUS
+    identifier: SAP_SDM_EV_DOCSTATUS
+    description: Landing table for SAP_SDM_EV_DOCSTATUS file.
+  - name: SAP_US_MMT_FL_MATDOC_GMX
+    identifier: SAP_US_MMT_FL_MATDOC_GMX
+    description: Landing table for SAP_US_MMT_FL_MATDOC_GMX file.
+  - name: SAP_SDM_EV_SALESOFFICE
+    identifier: SAP_SDM_EV_SALESOFFICE
+    description: Landing table for SAP_SDM_EV_SALESOFFICE file.
+  - name: SAP_ZZM_EV_BUT0ID_GMX
+    identifier: SAP_ZZM_EV_BUT0ID_GMX
+    description: Landing table for SAP_ZZM_EV_BUT0ID_GMX file.
+  - name: SAP_ZZM_EV_BUT000_GMX
+    identifier: SAP_ZZM_EV_BUT000_GMX
+    description: Landing table for SAP_ZZM_EV_BUT000_GMX file.
+  - name: SAP_MMM_EV_MARA_GMX
+    identifier: SAP_MMM_EV_MARA_GMX
+    description: Landing table for SAP_MMM_EV_MARA_GMX file.
+  - name: ZCDV_T_CMTU092_CSKT
+    identifier: ZCDV_T_CMTU092_CSKT
+    description: Landing table for ZCDV_T_CMTU092_CSKT file.
+  - name: SAP_US_MMT_EV_EKBE
+    identifier: SAP_US_MMT_EV_EKBE
+    description: Landing table for SAP_US_MMT_EV_EKBE file.
+  - name: SAP_US_PMT_EV_AFIH
+    identifier: SAP_US_PMT_EV_AFIH
+    description: Landing table for SAP_US_PMT_EV_AFIH file.
+  - name: SAP_MMM_EV_EORD
+    identifier: SAP_MMM_EV_EORD
+    description: Landing table for SAP_MMM_EV_EORD file.
+  - name: SAP_SDM_EV_A916_GMX
+    identifier: SAP_SDM_EV_A916_GMX
+    description: Landing table for SAP_SDM_EV_A916_GMX file.
+  - name: SAP_MMT_EV_RBKP_GMX
+    identifier: SAP_MMT_EV_RBKP_GMX
+    description: Landing table for SAP_MMT_EV_RBKP_GMX file.
+  - name: SAP_MMM_EV_A017
+    identifier: SAP_MMM_EV_A017
+    description: Landing table for SAP_MMM_EV_A017 file.
+  - name: CONTROLTABLE
+    identifier: CONTROLTABLE
+    description: Landing table for CONTROLTABLE.
+  - name: SAP_ZZM_EV_BUT020_GMX
+    identifier: SAP_ZZM_EV_BUT020_GMX
+    description: Landing table for SAP_ZZM_EV_BUT020_GMX file.
+  - name: SAP_SDM_EV_WYT3_GMX
+    identifier: SAP_SDM_EV_WYT3_GMX
+    description: Landing table for SAP_SDM_EV_WYT3_GMX file.
+  - name: SAP_SDM_EV_DD07T_GMX
+    identifier: SAP_SDM_EV_DD07T_GMX
+    description: Landing table for SAP_SDM_EV_DD07T_GMX
+  - name: SAP_SDT_EV_ZSDT0167_GMX
+    identifier: SAP_SDT_EV_ZSDT0167_GMX
+    description: Landing table for SAP_SDT_EV_ZSDT0167_GMX
+  - name: SAP_US_PPT_EV_RESBOR
+    identifier: SAP_US_PPT_EV_RESBOR
+    description: Landing table for SAP_US_PPT_EV_RESBOR file.
+  - name: SAP_US_SDT_EV_INVOICEEXPORTHISTORY_GMX
+    identifier: SAP_US_SDT_EV_INVOICEEXPORTHISTORY_GMX
+    description: Landing table for SAP_US_SDT_EV_INVOICEEXPORTHISTORY_GMX file.
+  - name: SAP_SDT_EV_ZSDT0176_GMX
+    identifier: SAP_SDT_EV_ZSDT0176_GMX
+    description: Landing table for SAP_SDT_EV_ZSDT0176_GMX file.

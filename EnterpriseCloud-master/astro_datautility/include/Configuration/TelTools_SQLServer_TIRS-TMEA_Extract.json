@@ -1,0 +1,11 @@
+{
+    "TIRS-TMEA":{
+	"DataSet1":{
+            "schema":"dbo",
+            "table":"AccidentReportsForTMEA_nolock",
+            "Incremental":"NULL",
+            "sftablename":"AccidentReportsForTMEA_nolock",
+            "filter": ""
+		}
+    }
+}        

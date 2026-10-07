@@ -1,0 +1,64 @@
+version: 2
+sources:
+- name: SUPPLIER
+  description: Landing Zone - SUPPLIER Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: SUPPLIER
+  tables:
+  - name: SUPPL_CHG_REQUEST_TRACKER
+    identifier: SUPPL_CHG_REQUEST_TRACKER
+    description: Landing table for SUPPL_CHG_REQUEST_TRACKER.
+  - name: SUPPL_REASON
+    identifier: SUPPL_REASON
+    description: Landing table for SUPPL_REASON.
+  - name: SUPPL_FACTORY
+    identifier: SUPPL_FACTORY
+    description: Landing table for SUPPL_FACTORY.
+  - name: SUPPL_CHG_REQUEST_PART_INFO
+    identifier: SUPPL_CHG_REQUEST_PART_INFO
+    description: Landing table for SUPPL_CHG_REQUEST_PART_INFO.
+  - name: SUPPL_CHG_REQUEST_ATTACH
+    identifier: SUPPL_CHG_REQUEST_ATTACH
+    description: Landing table for SUPPL_CHG_REQUEST_ATTACH.
+  - name: SUPPL_APPLICABLE_CATEGORY
+    identifier: SUPPL_APPLICABLE_CATEGORY
+    description: Landing table for SUPPL_APPLICABLE_CATEGORY.
+  - name: SUPPL_CHANGE_REQUEST
+    identifier: SUPPL_CHANGE_REQUEST
+    description: Landing table for SUPPL_CHANGE_REQUEST.
+  - name: SUPPL_ROLE_DESCR
+    identifier: SUPPL_ROLE_DESCR
+    description: Landing table for SUPPL_ROLE_DESCR.
+  - name: SUPPL_APPLICABLE_CATEGORY_DESCR
+    identifier: SUPPL_APPLICABLE_CATEGORY_DESCR
+    description: Landing table for SUPPL_APPLICABLE_CATEGORY_DESCR.
+  - name: SUPPL_REASON_DESCR
+    identifier: SUPPL_REASON_DESCR
+    description: Landing table for SUPPL_REASON_DESCR.
+  - name: SUPPL_BUSINESS_PARTNER
+    identifier: SUPPL_BUSINESS_PARTNER
+    description: Landing table for SUPPL_BUSINESS_PARTNER.
+  - name: SUPPL_CHG_REQUEST_FACTORY
+    identifier: SUPPL_CHG_REQUEST_FACTORY
+    description: Landing table for SUPPL_CHG_REQUEST_FACTORY.
+  - name: SUPPL_CHG_REQUEST_APPROVER
+    identifier: SUPPL_CHG_REQUEST_APPROVER
+    description: Landing table for SUPPL_CHG_REQUEST_APPROVER.
+  - name: SUPPL_STATUS_DESCR
+    identifier: SUPPL_STATUS_DESCR
+    description: Landing table for SUPPL_STATUS_DESCR.
+  - name: SUPPL_ACTION_DESCR
+    identifier: SUPPL_ACTION_DESCR
+    description: Landing table for SUPPL_ACTION_DESCR.
+  - name: SUPPL_CHG_REQUEST_COMMENT
+    identifier: SUPPL_CHG_REQUEST_COMMENT
+    description: Landing table for SUPPL_CHG_REQUEST_COMMENT.
+  - name: SUPPL_USER_ROLE
+    identifier: SUPPL_USER_ROLE
+    description: Landing table for SUPPL_USER_ROLE.
+  - name: SUPPL_USER_INFO
+    identifier: SUPPL_USER_INFO
+    description: Landing table for SUPPL_USER_INFO.
+  - name: SUPPL_CHG_REQUEST_APPROVAL
+    identifier: SUPPL_CHG_REQUEST_APPROVAL
+    description: Landing table for SUPPL_CHG_REQUEST_APPROVAL.

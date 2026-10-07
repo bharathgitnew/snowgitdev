@@ -1,0 +1,96 @@
+
+
+	/************
+	Model file generated from gmxDbtTemplateUtility.ipynb
+	*************/
+
+
+	{{ config(
+	  materialized='incremental',
+	  incremental_strategy='merge',
+	  alias='SAP_US_PPT_EV_AFRU',
+	  unique_key = ['RUECK','RMZHL'],
+	  enabled=false,
+	  transient=false
+	) }}
+
+	with source_data as (
+	SELECT
+    	_FILEDATE,
+		_FILENAME,
+		JSONFIELD:"RUECK"::STRING AS "RUECK",
+ 	 	JSONFIELD:"RMZHL"::STRING AS "RMZHL",
+ 	 	JSONFIELD:"BUDAT"::STRING AS "BUDAT",
+ 	 	JSONFIELD:"WERKS"::STRING AS "WERKS",
+ 	 	JSONFIELD:"LTXA1"::STRING AS "LTXA1",
+ 	 	JSONFIELD:"ILE01"::STRING AS "ILE01",
+ 	 	JSONFIELD:"ISM01"::STRING AS "ISM01",
+ 	 	JSONFIELD:"ISMNW"::STRING AS "ISMNW",
+ 	 	JSONFIELD:"ISDD"::STRING AS "ISDD",
+ 	 	JSONFIELD:"ISDZ"::STRING AS "ISDZ",
+ 	 	JSONFIELD:"IEDD"::STRING AS "IEDD",
+ 	 	JSONFIELD:"IEDZ"::STRING AS "IEDZ",
+ 	 	JSONFIELD:"AUFNR"::STRING AS "AUFNR",
+ 	 	JSONFIELD:"DELFLAG"::STRING AS "DELFLAG",
+ 	 	JSONFIELD:"CDCHANGENR"::STRING AS "CDCHANGENR",
+ 	 	JSONFIELD:"PSL_INSDATE"::STRING AS "PSL_INSDATE",
+ 	 	JSONFIELD:"PSL_UPDDATE"::STRING AS "PSL_UPDDATE"
+	from {{ source('SAPH','SAP_US_PPT_EV_AFRU') }}
+	{% if is_incremental() %}WHERE  _FILENAME > IFNULL((SELECT MAX(_FILENAME) FROM {{ this }}),'1970-01-01'){% endif %}
+        QUALIFY (ROW_NUMBER() OVER (PARTITION BY JSONFIELD:"RUECK"::STRING,JSONFIELD:"RMZHL"::STRING  ORDER BY _FILEDATE DESC )) = 1
+	),
+
+	transform_data as (
+	SELECT
+		_FILEDATE,
+		_FILENAME,
+		'{{ invocation_id }}' AS _AUDIT_LOG_ID,
+        SHA2('hash_me') as _ROW_HASH,
+		LPAD(RUECK,10,'0') as "RUECK",
+		LPAD(RMZHL,8,'0') as "RMZHL",
+ 	 	COALESCE(REGEXP_REPLACE(TO_DATE("BUDAT"),'-',''),'') as "BUDAT",
+ 	 	"WERKS",
+ 	 	"LTXA1",
+ 	 	"ILE01",
+ 	 	"ISM01",
+ 	 	"ISMNW",
+ 	 	COALESCE(REGEXP_REPLACE(TO_DATE("ISDD"),'-',''),'') as "ISDD",
+ 	 	"ISDZ",
+		COALESCE(REGEXP_REPLACE(TRY_TO_DATE("IEDD"),'-',''),'') as "IEDD",
+ 	 	"IEDZ",
+ 	 	"AUFNR",
+ 	 	"DELFLAG",
+ 	 	"CDCHANGENR",
+ 	 	"PSL_INSDATE",
+ 	 	"PSL_UPDDATE"
+	from source_data
+	),
+
+	type_data as (
+	SELECT
+		cast(_FILEDATE AS TIMESTAMP_NTZ(9)) AS _FILEDATE,
+		cast(_FILENAME as varchar(128)) as _FILENAME,
+        cast(_AUDIT_LOG_ID as varchar(128)) as _AUDIT_LOG_ID,
+        cast(_ROW_HASH as varchar(128)) as _ROW_HASH,
+		CAST("RUECK" AS VARCHAR) AS "RUECK",
+ 	 	CAST("RMZHL" AS VARCHAR) AS "RMZHL",
+ 	 	CAST("BUDAT" AS VARCHAR) AS "BUDAT",
+ 	 	CAST("WERKS" AS VARCHAR) AS "WERKS",
+ 	 	CAST("LTXA1" AS VARCHAR) AS "LTXA1",
+ 	 	CAST("ILE01" AS VARCHAR) AS "ILE01",
+ 	 	CAST("ISM01" AS VARCHAR) AS "ISM01",
+ 	 	CAST("ISMNW" AS VARCHAR) AS "ISMNW",
+ 	 	CAST("ISDD" AS VARCHAR) AS "ISDD",
+ 	 	CAST("ISDZ" AS VARCHAR) AS "ISDZ",
+ 	 	CAST("IEDD" AS VARCHAR) AS "IEDD",
+ 	 	CAST("IEDZ" AS VARCHAR) AS "IEDZ",
+ 	 	CAST("AUFNR" AS VARCHAR) AS "AUFNR",
+ 	 	CAST("DELFLAG" AS BOOLEAN) AS "DELFLAG",
+ 	 	CAST("CDCHANGENR" AS VARCHAR) AS "CDCHANGENR",
+ 	 	CAST("PSL_INSDATE" AS TIMESTAMP) AS "PSL_INSDATE",
+ 	 	CAST("PSL_UPDDATE" AS TIMESTAMP) AS "PSL_UPDDATE"
+	from transform_data
+	)
+
+	select * from type_data
+

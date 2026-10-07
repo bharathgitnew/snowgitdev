@@ -1,0 +1,22 @@
+models:
+- name: BRONZE__TEE_SPARES_SUPPORT__PROPHET_DEMAND
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEE_SPARES_SUPPORT__PROPHET_DEMANDRETURN
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEE_SPARES_SUPPORT__PROPHET_INVENTORY
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEE_SPARES_SUPPORT__PROPHET_ORDERS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEE_SPARES_SUPPORT__SAPH_PARTS_EXPORTIMPORT_CONTROL
+  tests:
+  - has_data
+  - recently_run
+

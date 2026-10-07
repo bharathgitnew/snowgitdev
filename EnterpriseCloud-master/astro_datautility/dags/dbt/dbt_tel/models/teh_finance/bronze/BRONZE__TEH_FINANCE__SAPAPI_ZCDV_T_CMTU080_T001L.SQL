@@ -1,0 +1,110 @@
+/************
+	Model file generated from SAPAPIUtility 
+	*************/
+
+	
+	{{ config(
+    	  materialized='tel_incremental',
+    	  incremental_strategy='insert_overwrite',
+    	  alias='SAPAPI_ZCDV_T_CMTU080_T001L',
+    	  unique_key = [''],
+    	  transient=false	
+) }} 
+
+	with source_data as ( 
+    SELECT DISTINCT
+        _FILEDATE,
+        _FILENAME, 
+     	JSONFIELD:"MANDT"::STRING AS "MANDT",
+		JSONFIELD:"WERKS"::STRING AS "WERKS",
+		JSONFIELD:"LGORT"::STRING AS "LGORT",
+		JSONFIELD:"LGOBE"::STRING AS "LGOBE",
+		JSONFIELD:"SPART"::STRING AS "SPART",
+		JSONFIELD:"XLONG"::STRING AS "XLONG",
+		JSONFIELD:"XBUFX"::STRING AS "XBUFX",
+		JSONFIELD:"DISKZ"::STRING AS "DISKZ",
+		JSONFIELD:"XBLGO"::STRING AS "XBLGO",
+		JSONFIELD:"XRESS"::STRING AS "XRESS",
+		JSONFIELD:"XHUPF"::STRING AS "XHUPF",
+		JSONFIELD:"PARLG"::STRING AS "PARLG",
+		JSONFIELD:"VKORG"::STRING AS "VKORG",
+		JSONFIELD:"VTWEG"::STRING AS "VTWEG",
+		JSONFIELD:"VSTEL"::STRING AS "VSTEL",
+		JSONFIELD:"LIFNR"::STRING AS "LIFNR",
+		JSONFIELD:"KUNNR"::STRING AS "KUNNR",
+		JSONFIELD:"MESBS"::STRING AS "MESBS",
+		JSONFIELD:"MESST"::STRING AS "MESST",
+		JSONFIELD:"OIHLICNO"::STRING AS "OIHLICNO",
+		JSONFIELD:"OIGITRFL"::STRING AS "OIGITRFL",
+		JSONFIELD:"OIBTNKASSIGN"::STRING AS "OIBTNKASSIGN"
+   	FROM {{ source('SAPH','SAP_MMM_EV_T001L') }}
+	WHERE _FILEDATE::STRING = (
+        SELECT MAX(RUN_TIME)::STRING
+        FROM {{ source('SAPH', 'CONTROLTABLE') }}
+        WHERE TABLE_NAME = 'SAP_MMM_EV_T001L'
+        )	
+	QUALIFY ROW_NUMBER() OVER ( PARTITION BY LGORT, WERKS ORDER BY _FILEDATE DESC, _UPLOADDATE DESC) = 1
+	),
+	
+	transform_data as (
+    SELECT
+        _FILEDATE AS _FILEDATE,
+        _FILENAME AS _FILENAME,
+        '{{ invocation_id }}' AS AUDIT_LOG_ID,
+        SHA2('hash_me') AS _ROW_HASH,
+		WERKS as WERKS,
+		LGORT as LGORT,
+		LGOBE as LGOBE,
+		SPART as SPART,
+		XLONG as XLONG,
+		XBUFX as XBUFX,
+		DISKZ as DISKZ,
+		XBLGO as XBLGO,
+		XRESS as XRESS,
+		XHUPF as XHUPF,
+		PARLG as PARLG,
+		VKORG as VKORG,
+		VTWEG as VTWEG,
+		VSTEL as VSTEL,
+		LIFNR as LIFNR,
+		KUNNR as KUNNR,
+		MESBS as MESBS,
+		MESST as MESST,
+		OIHLICNO as OIHLICNO,
+		OIGITRFL as OIGITRFL,
+		OIBTNKASSIGN as OIBTNKASSIGN
+    FROM source_data 
+),
+
+type_data as (
+    SELECT
+        _FILEDATE,
+        _FILENAME,
+        AUDIT_LOG_ID,
+        _ROW_HASH,
+		WERKS,
+		LGORT,
+		LGOBE,
+		SPART,
+		XLONG,
+		XBUFX,
+		DISKZ,
+		XBLGO,
+		XRESS,
+		XHUPF,
+		PARLG,
+		VKORG,
+		VTWEG,
+		VSTEL,
+		LIFNR,
+		KUNNR,
+		MESBS,
+		MESST,
+		OIHLICNO,
+		OIGITRFL,
+		OIBTNKASSIGN
+    FROM transform_data 
+)
+
+	select * from type_data
+

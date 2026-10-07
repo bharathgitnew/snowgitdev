@@ -1,0 +1,45 @@
+models:
+- name: GOLD__TEA_DIRECT_PURCHASING__BLOCKED_INVOICES
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_DIRECT_PURCHASING__DIRECT_PURCHASE_GR_NI_REPORT
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_DIRECT_PURCHASING__INVENTORY_HISTORY
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_DIRECT_PURCHASING__IPO_SALES_ORDER
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_DIRECT_PURCHASING__OPEN_PURCHASE_ORDER_MASTER
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_DIRECT_PURCHASING__PIR_REPORT
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_DIRECT_PURCHASING__PURCHASE_ORDER_DELIVERY_LINE
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_DIRECT_PURCHASING__PURCHASE_ORDER_ERROR_REPORT
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_DIRECT_PURCHASING__PURCHASE_ORDER_MASTER
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_DIRECT_PURCHASING__SOURCE_LIST_REPORT
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TEA_DIRECT_PURCHASING__CP3_DIRECT_SPEND_OEM_REPORTING
+  tests:
+  - has_data
+  - recently_run

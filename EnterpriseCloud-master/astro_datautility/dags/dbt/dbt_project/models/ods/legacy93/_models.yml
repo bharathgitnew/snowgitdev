@@ -1,0 +1,38 @@
+version: 2
+models:
+- name: ODS__LEGACY93__BAANV_ADMIN_BUSINESS_PARTNERS
+  description: Landing table for BAANV_ADMIN_BUSINESS_PARTNERS file.
+- name: ODS__LEGACY93__BAANV_ALL_COMMODITIES
+  description: Landing table for BAANV_ALL_COMMODITIES file.
+- name: ODS__LEGACY93__BAANV_ALL_INVENTORY_ADJ_ORDER_HIST
+  description: Landing table for BAANV_ALL_INVENTORY_ADJ_ORDER_HIST file.
+- name: ODS__LEGACY93__BAANV_ALL_ITEM_GROUPS
+  description: Landing table for BAANV_ALL_ITEM_GROUPS file.
+- name: ODS__LEGACY93__BAANV_ALL_PURCHASE_ORDERS
+  description: Landing table for BAANV_ALL_PURCHASE_ORDERS file.
+- name: ODS__LEGACY93__BAANV_TEA_ADDRESSES
+  description: Landing table for BAANV_TEA_ADDRESSES file.
+- name: ODS__LEGACY93__BAANV_TEA_CONTRACTS
+  description: Landing table for BAANV_TEA_CONTRACTS file.
+- name: ODS__LEGACY93__BAANV_TEA_CUSTOMERS
+  description: Landing table for BAANV_TEA_CUSTOMERS file.
+- name: ODS__LEGACY93__BAANV_TEA_OBJECTS
+  description: Landing table for BAANV_TEA_OBJECTS file.
+- name: ODS__LEGACY93__BAANV_TEA_SUPPLIERS
+  description: Landing table for BAANV_TEA_SUPPLIERS file.
+- name: ODS__LEGACY93__CUSTOMER_GROUP
+  description: Landing table for CUSTOMER_GROUP file.
+- name: ODS__LEGACY93__WISDOM_MACHINE_FCNS
+  description: Landing table for WISDOM_MACHINE_FCNS file.
+- name: ODS__LEGACY93__TEL_SHIPPING_ADVICE
+  description: Landing table for TEL_SHIPPING_ADVICE.
+- name: ODS__LEGACY93__FEDEX_DATA
+  description: Landing table for FEDEX_DATA.
+- name: ODS__LEGACY93__CARMA_NOW_ACCRUAL
+  description: Landing table for CARMA_NOW_ACCRUAL.
+- name: ODS__LEGACY93__BAANV_SERVICE_ORDERS_ACCRUAL
+  description: Landing table for BAANV_SERVICE_ORDERS_ACCRUAL.
+- name: ODS__LEGACY93__ARCHIVE_SAFETY_INVESTIGATION
+  description: Landing table for SAFETY_INVESTIGATION.
+- name: ODS__LEGACY93__ARCHIVE_SAFETY_ACTION_ITEMS
+  description: Landing table for SAFETY_ACTION_ITEMS.

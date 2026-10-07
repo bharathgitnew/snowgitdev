@@ -1,0 +1,13 @@
+models:
+- name: GOLD__TMEA_SAFETY__ENVIRONMENTAL_H20_CO2_RECYCLE
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_SAFETY__RECORDABLES
+  tests:
+  - has_data
+  - recently_run
+- name: GOLD__TMEA_SAFETY__TIRS_ACCIDENT_REPORT
+  tests:
+  - has_data
+  - recently_run

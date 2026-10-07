@@ -1,0 +1,6 @@
+version: 2
+models:
+- name: COMMON__CARMA__CONSUMPTION
+  description: Model CARMA Consumption file.
+- name: COMMON__CARMA__RMA
+  description: Model CARMA RMA file.

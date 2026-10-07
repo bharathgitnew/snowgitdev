@@ -1,0 +1,352 @@
+version: 2
+models:
+- name: ODS__SAPH__SAP_SDT_EV_DROPSHIPREPORT_GMX
+  description: Landing table for SAP_SDT_EV_DropshipReport_GMX file.
+  columns:
+  - name: PSL_UPDDATE
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: day
+        interval: 1
+        config:
+          alias: SAPH_SAP_SDT_EV_DropshipReport_GMX_PSL_UPDDATE
+- name: ODS__SAPH__SAP_SDT_EV_DROPSHIPREPORT_GMX_HIST
+  description: Landing table for SAP_SDT_EV_DropshipReport_GMX_HIST file.
+- name: ODS__SAPH__SAP_AAM_EV_ANLB
+  description: Landing table for SAP_AAM_EV_ANLB file.
+- name: ODS__SAPH__SAP_FIM_EV_T007S_GMX
+  description: Landing table for SAP_FIM_EV_T007S_GMX file.
+- name: ODS__SAPH__SAP_FIM_EV_T059ZT_GMX
+  description: Landing table for SAP_FIM_EV_T059ZT_GMX file.
+- name: ODS__SAPH__SAP_FIM_EV_TSTL_GMX
+  description: Landing table for SAP_FIM_EV_TSTL_GMX file.
+- name: ODS__SAPH__SAP_MMM_EV_T001K
+  description: Landing table for SAP_MMM_EV_T001K file.
+- name: ODS__SAPH__SAP_MMM_EV_T156
+  description: Landing table for SAP_MMM_EV_T156 file.
+- name: ODS__SAPH__SAP_MMM_EV_T156T
+  description: Landing table for SAP_MMM_EV_T156T file.
+- name: ODS__SAPH__SAP_AAM_EV_T093T_GMX
+  description: Landing table for SAP_AAM_EV_T093T_GMX file.
+- name: ODS__SAPH__SAP_AAT_EV_ANEK
+  description: Landing table for SAP_AAT_EV_ANEK file.
+- name: ODS__SAPH__SAP_AAT_EV_ANEP
+  description: Landing table for SAP_AAT_EV_ANEP file.
+- name: ODS__SAPH__SAP_COM_EV_TKA02
+  description: Landing table for SAP_COM_EV_TKA02 file.
+- name: ODS__SAPH__SAP_FIM_EV_ANLA
+  description: Landing table for SAP_FIM_EV_ANLA file.
+- name: ODS__SAPH__SAP_FIM_EV_BNKA
+  description: Landing table for SAP_FIM_EV_BNKA file.
+- name: ODS__SAPH__SAP_FIM_EV_SKAT
+  description: Landing table for SAP_FIM_EV_SKAT file.
+- name: ODS__SAPH__SAP_FIM_EV_T052
+  description: Landing table for SAP_FIM_EV_T052 file.
+- name: ODS__SAPH__SAP_FIM_EV_TABWT
+  description: Landing table for SAP_FIM_EV_TABWT file.
+- name: ODS__SAPH__SAP_FIM_EV_TSKMT_GMX
+  description: Landing table for SAP_FIM_EV_TSKMT_GMX file.
+- name: ODS__SAPH__SAP_MMM_EV_MARM_GMX
+  description: Landing table for SAP_MMM_EV_MARM_GMX file.
+- name: ODS__SAPH__SAP_MMM_EV_T134
+  description: Landing table for SAP_MMM_EV_T134 file.
+- name: ODS__SAPH__SAP_MMM_EV_T134T
+  description: Landing table for SAP_MMM_EV_T134T file.
+- name: ODS__SAPH__SAP_MMM_EV_T163K
+  description: Landing table for SAP_MMM_EV_T163K file.
+- name: ODS__SAPH__SAP_MMM_EV_T163Y
+  description: Landing table for SAP_MMM_EV_T163Y file.
+- name: ODS__SAPH__SAP_MMM_EV_TVM1
+  description: Landing table for SAP_MMM_EV_TVM1 file.
+- name: ODS__SAPH__SAP_SDM_EV_KNVI_GMX
+  description: Landing table for SAP_SDM_EV_KNVI_GMX file.
+- name: ODS__SAPH__SAP_SDM_EV_T171
+  description: Landing table for SAP_SDM_EV_T171 file.
+- name: ODS__SAPH__SAP_SDM_EV_T171T
+  description: Landing table for SAP_SDM_EV_T171T file.
+- name: ODS__SAPH__SAP_SDM_EV_TVFK
+  description: Landing table for SAP_SDM_EV_TVFK file.
+- name: ODS__SAPH__SAP_SDM_EV_TVGRT
+  description: Landing table for SAP_SDM_EV_TVGRT file.
+- name: ODS__SAPH__SAP_SDT_EV_ZSDT0169_GMX
+  description: Landing table for SAP_SDT_EV_ZSDT0169_GMX file.
+- name: ODS__SAPH__SAP_US_MMT_EV_MKPF
+  description: Landing table for SAP_US_MMT_EV_MKPF file.
+- name: ODS__SAPH__SAP_AAM_EV_ANLBZW_GMX
+  description: Landing table for SAP_AAM_EV_ANLBZW_GMX file.
+- name: ODS__SAPH__SAP_AAM_EV_ANLC_GMX
+  description: Landing table for SAP_AAM_EV_ANLC_GMX file.
+- name: ODS__SAPH__SAP_AAM_EV_ANLH_GMX
+  description: Landing table for SAP_AAM_EV_ANLH_GMX file.
+- name: ODS__SAPH__SAP_AAM_EV_ANLU_GMX
+  description: Landing table for SAP_AAM_EV_ANLU_GMX file.
+- name: ODS__SAPH__SAP_AAM_EV_ANLZ_GMX
+  description: Landing table for SAP_AAM_EV_ANLZ_GMX file.
+- name: ODS__SAPH__SAP_AAM_EV_T090NAT_GMX
+  description: Landing table for SAP_AAM_EV_T090NAT_GMX file.
+- name: ODS__SAPH__SAP_COM_EV_AUFK
+  description: Landing table for SAP_COM_EV_AUFK file.
+- name: ODS__SAPH__SAP_COM_EV_T006A_GMX
+  description: Landing table for SAP_COM_EV_T006A_GMX file.
+- name: ODS__SAPH__SAP_FIM_EV_DFKKBPTAXNUM_GMX
+  description: Landing table for SAP_FIM_EV_DFKKBPTAXNUM_GMX file.
+- name: ODS__SAPH__SAP_FIM_EV_LFBW_GMX
+  description: Landing table for SAP_FIM_EV_LFBW_GMX file.
+- name: ODS__SAPH__SAP_FIM_EV_T001
+  description: Landing table for SAP_FIM_EV_T001 file.
+- name: ODS__SAPH__SAP_FIM_EV_T052S_GMX
+  description: Landing table for SAP_FIM_EV_T052S_GMX file.
+- name: ODS__SAPH__SAP_FIM_EV_T052U
+  description: Landing table for SAP_FIM_EV_T052U file.
+- name: ODS__SAPH__SAP_FIM_EV_T880
+  description: Landing table for SAP_FIM_EV_T880 file.
+- name: ODS__SAPH__SAP_MMM_EV_MAKT
+  description: Landing table for SAP_MMM_EV_MAKT file.
+- name: ODS__SAPH__SAP_MMM_EV_MLAN_GMX
+  description: Landing table for SAP_MMM_EV_MLAN_GMX file.
+- name: ODS__SAPH__SAP_MMM_EV_T023
+  description: Landing table for SAP_MMM_EV_T023 file.
+- name: ODS__SAPH__SAP_MMM_EV_T023T
+  description: Landing table for SAP_MMM_EV_T023T file.
+- name: ODS__SAPH__SAP_MMM_EV_T024
+  description: Landing table for SAP_MMM_EV_T024 file.
+- name: ODS__SAPH__SAP_MMM_EV_T024E
+  description: Landing table for SAP_MMM_EV_T024E file.
+- name: ODS__SAPH__SAP_MMM_EV_T161
+  description: Landing table for SAP_MMM_EV_T161 file.
+- name: ODS__SAPH__SAP_MMM_EV_T161T
+  description: Landing table for SAP_MMM_EV_T161T file.
+- name: ODS__SAPH__SAP_MMM_EV_T163I
+  description: Landing table for SAP_MMM_EV_T163I file.
+- name: ODS__SAPH__SAP_MMM_EV_TVM1T
+  description: Landing table for SAP_MMM_EV_TVM1T file.
+- name: ODS__SAPH__SAP_MMM_EV_TVM2
+  description: Landing table for SAP_MMM_EV_TVM2 file.
+- name: ODS__SAPH__SAP_MMM_EV_TVM2T
+  description: Landing table for SAP_MMM_EV_TVM2T file.
+- name: ODS__SAPH__SAP_MMM_EV_ZMAT0002_GMX
+  description: Landing table for SAP_MMM_EV_ZMAT0002_GMX file.
+- name: ODS__SAPH__SAP_SDM_EV_T685T_GMX
+  description: Landing table for SAP_SDM_EV_T685T_GMX file.
+- name: ODS__SAPH__SAP_SDM_EV_TVAP
+  description: Landing table for SAP_SDM_EV_TVAP file.
+- name: ODS__SAPH__SAP_SDM_EV_TVAPT
+  description: Landing table for SAP_SDM_EV_TVAPT file.
+- name: ODS__SAPH__SAP_SDM_EV_TVAU
+  description: Landing table for SAP_SDM_EV_TVAU file.
+- name: ODS__SAPH__SAP_SDM_EV_TVAUT
+  description: Landing table for SAP_SDM_EV_TVAUT file.
+- name: ODS__SAPH__SAP_SDM_EV_TVBUR
+  description: Landing table for SAP_SDM_EV_TVBUR file.
+- name: ODS__SAPH__SAP_SDM_EV_TVKBT
+  description: Landing table for SAP_SDM_EV_TVKBT file.
+- name: ODS__SAPH__SAP_SDT_EV_FPLA_GMX
+  description: Landing table for SAP_SDT_EV_FPLA_GMX file.
+- name: ODS__SAPH__SAP_SDT_EV_ZSDT0168_GMX
+  description: Landing table for SAP_SDT_EV_ZSDT0168_GMX file.
+- name: ODS__SAPH__SAP_SDT_EV_ZSDT0196_GMX
+  description: Landing table for SAP_SDT_EV_ZSDT0196_GMX file.
+- name: ODS__SAPH__SAP_US_PPT_EV_AFKO
+  description: Landing table for SAP_US_PPT_EV_AFKO file.
+- name: ODS__SAPH__SAP_US_SDT_EV_VBKD
+  description: Landing table for SAP_US_SDT_EV_VBKD file.
+- name: ODS__SAPH__SAP_US_SDT_EV_ZSDT0163_GMX
+  description: Landing table for SAP_US_SDT_EV_ZSDT0163_GMX file.
+- name: ODS__SAPH__SAP_ZZM_EV_T005U
+  description: Landing table for SAP_ZZM_EV_T005U file.
+- name: ODS__SAPH__SAP_ZZM_EV_TCURC
+  description: Landing table for SAP_ZZM_EV_TCURC file.
+- name: ODS__SAPH__SAP_ZZM_EV_TCURT
+  description: Landing table for SAP_ZZM_EV_TCURT file.
+- name: ODS__SAPH__SAP_US_FIT_EV_ZFIT0070_GMX
+  description: Landing table for SAP_US_FIT_EV_ZFIT0070_GMX file.
+- name: ODS__SAPH__SAP_COM_EV_TKA01
+  description: Landing table for SAP_COM_EV_TKA01 file.
+- name: ODS__SAPH__SAP_US_MMT_EV_EBEW
+  description: Landing table for SAP_US_MMT_EV_EBEW file.
+- name: ODS__SAPH__SAP_US_MMT_EV_MBEW
+  description: Landing table for SAP_US_MMT_EV_MBEW file.
+- name: ODS__SAPH__SAP_US_MMT_EV_MSSA
+  description: Landing table for SAP_US_MMT_EV_MSSA file.
+- name: ODS__SAPH__SAP_US_MMT_EV_QBEW
+  description: Landing table for SAP_US_MMT_EV_QBEW file.
+- name: ODS__SAPH__SAP_US_MMT_EV_RSEG
+  description: Landing table for SAP_US_MMT_EV_RSEG file.
+- name: ODS__SAPH__SAP_ZZM_EV_T005
+  description: Landing table for SAP_ZZM_EV_T005 file.
+- name: ODS__SAPH__SAP_ZZM_EV_T005S
+  description: Landing table for SAP_ZZM_EV_T005S file.
+- name: ODS__SAPH__SAP_ZZM_EV_T005T
+  description: Landing table for SAP_ZZM_EV_T005T file.
+- name: ODS__SAPH__SAP_MMM_EV_T001L
+  description: Landing table for SAP_MMM_EV_T001L file.
+- name: ODS__SAPH__SAP_MMM_EV_T001W
+  description: Landing table for SAP_MMM_EV_T001W file.
+- name: ODS__SAPH__SAP_SDM_EV_TVAK
+  description: Landing table for SAP_SDM_EV_TVAK file.
+- name: ODS__SAPH__SAP_SDM_EV_TVAKT
+  description: Landing table for SAP_SDM_EV_TVAKT file.
+- name: ODS__SAPH__SAP_SDM_EV_TVFKT
+  description: Landing table for SAP_SDM_EV_TVFKT file.
+- name: ODS__SAPH__SAP_SDM_EV_TVKGR
+  description: Landing table for SAP_SDM_EV_TVKGR file.
+- name: ODS__SAPH__SAP_US_MMT_EV_MCHB
+  description: Landing table for SAP_US_MMT_EV_MCHB file.
+- name: ODS__SAPH__SAP_US_MMT_EV_MSKA
+  description: Landing table for SAP_US_MMT_EV_MSKA file.
+- name: ODS__SAPH__SAP_US_MMT_EV_MSKU
+  description: Landing table for SAP_US_MMT_EV_MSKU file.
+- name: ODS__SAPH__SAP_US_MMT_EV_MSLB
+  description: Landing table for SAP_US_MMT_EV_MSLB file.
+- name: ODS__SAPH__SAP_US_MMT_EV_MSPR
+  description: Landing table for SAP_US_MMT_EV_MSPR file.
+- name: ODS__SAPH__SAP_US_PPT_EV_AFPO
+  description: Landing table for SAP_US_PPT_EV_AFPO file.
+- name: ODS__SAPH__SAP_US_PPT_EV_AFVC
+  description: Landing table for SAP_US_PPT_EV_AFVC file.
+- name: ODS__SAPH__SAP_COM_EV_CEPCT
+  description: Landing table for SAP_COM_EV_CEPCT file.
+- name: ODS__SAPH__SAP_COM_EV_CSKT
+  description: Landing table for SAP_COM_EV_CSKT file.
+- name: ODS__SAPH__SAP_FIM_EV_LFB1
+  description: Landing table for SAP_FIM_EV_LFB1 file.
+- name: ODS__SAPH__SAP_FIM_EV_SKA1
+  description: Landing table for SAP_FIM_EV_SKA1 file.
+- name: ODS__SAPH__SAP_FIM_EV_TABW
+  description: Landing table for SAP_FIM_EV_TABW file.
+- name: ODS__SAPH__SAP_FIM_EV_TSKDT_GMX
+  description: Landing table for SAP_FIM_EV_TSKDT_GMX file.
+- name: ODS__SAPH__SAP_FIM_EV_TSKM_GMX
+  description: Landing table for SAP_FIM_EV_TSKM_GMX file.
+- name: ODS__SAPH__SAP_MMM_EV_EINA
+  description: Landing table for SAP_MMM_EV_EINA file.
+- name: ODS__SAPH__SAP_MMM_EV_EINE
+  description: Landing table for SAP_MMM_EV_EINE file.
+- name: ODS__SAPH__SAP_MMM_EV_LFM1_GMX
+  description: Landing table for SAP_MMM_EV_LFM1_GMX file.
+- name: ODS__SAPH__SAP_SDM_EV_A910_GMX
+  description: Landing table for SAP_SDM_EV_A910_GMX file.
+- name: ODS__SAPH__SAP_SDM_EV_KNA1
+  description: Landing table for SAP_SDM_EV_KNA1 file.
+- name: ODS__SAPH__SAP_SDM_EV_KNMT
+  description: Landing table for SAP_SDM_EV_KNMT file.
+- name: ODS__SAPH__SAP_SDT_EV_ZSDT0013_GMX
+  description: Landing table for SAP_SDT_EV_ZSDT0013_GMX file.
+- name: ODS__SAPH__SAP_SDT_EV_ZSDT0015_GMX
+  description: Landing table for SAP_SDT_EV_ZSDT0015_GMX file.
+- name: ODS__SAPH__SAP_SDT_EV_ZSDT0164_GMX
+  description: Landing table for SAP_SDT_EV_ZSDT0164_GMX file.
+- name: ODS__SAPH__SAP_SDT_EV_ZSDT0165_GMX
+  description: Landing table for SAP_SDT_EV_ZSDT0165_GMX file.
+- name: ODS__SAPH__SAP_ZZM_EV_TSADVT_GMX
+  description: Landing table for SAP_ZZM_EV_TSADVT_GMX file.
+- name: ODS__SAPH__SAP_COM_EV_PRHI_GMX
+  description: Landing table for SAP_COM_EV_PRHI_GMX file.
+- name: ODS__SAPH__SAP_MMM_EV_LFA1
+  description: Landing table for SAP_MMM_EV_LFA1 file.
+- name: ODS__SAPH__SAP_SDT_EV_ZSDT0080_GMX
+  description: Landing table for SAP_SDT_EV_ZSDT0080_GMX file.
+- name: ODS__SAPH__SAP_ZZM_EV_ADRC
+  description: Landing table for SAP_ZZM_EV_ADRC file.
+- name: ODS__SAPH__SAP_SDM_EV_A114_GMX
+  description: Landing table for SAP_SDM_EV_A114_GMX file.
+- name: ODS__SAPH__SAP_SDM_EV_T685_GMX
+  description: Landing table for SAP_SDM_EV_T685_GMX file.
+- name: ODS__SAPH__SAP_FIT_EV_ZFIT0034_GMX
+  description: Landing table for SAP_FIT_EV_ZFIT0034_GMX file.
+- name: ODS__SAPH__SAP_SDT_EV_VBFA_GMX
+  description: Landing table for SAP_SDT_EV_VBFA_GMX file.
+- name: ODS__SAPH__SAP_SDM_EV_KNVP
+  description: Landing table for SAP_SDM_EV_KNVP file.
+- name: ODS__SAPH__SAP_COM_EV_PRTE
+  description: Landing table for SAP_COM_EV_PRTE file.
+- name: ODS__SAPH__SAP_FIM_EV_KNB1
+  description: Landing table for SAP_FIM_EV_KNB1 file.
+- name: ODS__SAPH__SAP_QMT_EV_AUSP
+  description: Landing table for SAP_QMT_EV_AUSP file.
+- name: ODS__SAPH__SAP_ZZM_EV_CAWN
+  description: Landing table for SAP_ZZM_EV_CAWN file.
+- name: ODS__SAPH__SAP_ZZM_EV_CAWNT
+  description: Landing table for SAP_ZZM_EV_CAWNT file.
+- name: ODS__SAPH__SAP_ZZM_EV_INOB
+  description: Landing table for SAP_ZZM_EV_INOB file.
+- name: ODS__SAPH__SAP_US_COT_EV_COBK
+  description: Landing table for SAP_US_COT_EV_COBK file.
+- name: ODS__SAPH__SAP_FIT_EV_BSET
+  description: Landing table for SAP_FIT_EV_BSET file.
+- name: ODS__SAPH__SAP_US_MMM_EV_MVKE
+  description: Landing table for SAP_US_MMM_EV_MVKE file.
+- name: ODS__SAPH__SAP_US_MMT_EV_EKES
+  description: Landing table for SAP_US_MMT_EV_EKES file.
+- name: ODS__SAPH__SAP_US_MMT_EV_EKET
+  description: Landing table for SAP_US_MMT_EV_EKET file.
+- name: ODS__SAPH__SAP_MMT_EV_EKKN
+  description: Landing table for SAP_MMT_EV_EKKN file.
+- name: ODS__SAPH__SAP_US_MMT_EV_MARD
+  description: Landing table for SAP_US_MMT_EV_MARD file.
+- name: ODS__SAPH__SAP_SDM_EV_KNVV
+  description: Landing table for SAP_SDM_EV_KNVV file.
+- name: ODS__SAPH__SAP_US_SDT_EV_VBPA
+  description: Landing table for SAP_US_SDT_EV_VBPA file.
+- name: ODS__SAPH__SAP_US_FIT_EV_FAAT_PLAN_VALUES
+  description: Landing table for SAP_US_FIT_EV_FAAT_PLAN_VALUES file.
+- name: ODS__SAPH__SAP_US_FIT_EV_FAAT_YDDA
+  description: Landing table for SAP_US_FIT_EV_FAAT_YDDA file.
+- name: ODS__SAPH__SAP_US_FIT_EV_FAAT_DOC_IT
+  description: Landing table for SAP_US_FIT_EV_FAAT_DOC_IT file.
+- name: ODS__SAPH__SAP_US_SDT_EV_PRCD_ELEMENTS
+  description: Landing table for SAP_US_SDT_EV_PRCD_Elements file.
+- name: ODS__SAPH__SAP_COM_EV_CSKS
+  description: Landing table for SAP_COM_EV_CSKS file.
+- name: ODS__SAPH__SAP_COM_EV_PROJ
+  description: Landing table for SAP_COM_EV_PROJ file.
+- name: ODS__SAPH__SAP_COM_EV_PRPS
+  description: Landing table for SAP_COM_EV_PRPS file.
+- name: ODS__SAPH__SAP_US_FIT_EV_BKPFN
+  description: Landing table for SAP_US_FIT_EV_BKPFN file.
+- name: ODS__SAPH__SAP_US_FIT_EV_BSEG
+  description: Landing table for SAP_US_FIT_EV_BSEG file.
+- name: ODS__SAPH__SAP_COM_EV_CEPC
+  description: Landing table for SAP_COM_EV_CEPC file.
+- name: ODS__SAPH__SAP_FIM_EV_SKB1
+  description: Landing table for SAP_FIM_EV_SKB1 file.
+- name: ODS__SAPH__SAP_US_MMT_EV_MARC
+  description: Landing table for SAP_US_MMT_EV_MARC file.
+- name: ODS__SAPH__SAP_US_SDT_EV_VBRK
+  description: Landing table for SAP_US_SDT_EV_VBRK file.
+- name: ODS__SAPH__SAP_US_SDT_EV_VBRP
+  description: Landing table for SAP_US_SDT_EV_VBRP file.
+- name: ODS__SAPH__SAP_US_MMT_EV_EKKO
+  description: Landing table for SAP_US_MMT_EV_EKKO file.
+- name: ODS__SAPH__SAP_US_SDT_EV_LIKP
+  description: Landing table for SAP_US_SDT_EV_LIKP file.
+- name: ODS__SAPH__SAP_US_SDT_EV_LIPS
+  description: Landing table for SAP_US_SDT_EV_LIPS file.
+- name: ODS__SAPH__SAP_US_SDT_EV_VBAK
+  description: Landing table for SAP_US_SDT_EV_VBAK file.
+- name: ODS__SAPH__SAP_US_SDT_EV_VBAP
+  description: Landing table for SAP_US_SDT_EV_VBAP file.
+- name: ODS__SAPH__SAP_SDM_EV_A901_GMX
+  description: Landing table for SAP_SDM_EV_A901_GMX file.
+- name: ODS__SAPH__SAP_SDM_EV_A902_GMX
+  description: Landing table for SAP_SDM_EV_A902_GMX file.
+- name: ODS__SAPH__SAP_SDM_EV_A904_GMX
+  description: Landing table for SAP_SDM_EV_A904_GMX file.
+- name: ODS__SAPH__SAP_US_MMT_EV_EKPO
+  description: Landing table for SAP_US_MMT_EV_EKPO file.
+- name: ODS__SAPH__SAP_US_SDT_EV_VBEP
+  description: Landing table for SAP_US_SDT_EV_VBEP file.
+- name: ODS__SAPH__SAP_ZZM_EV_KONP
+  description: Landing table for SAP_ZZM_EV_KONP file.
+- name: ODS__SAPH__FILELIST
+  description: Landing table for FILELIST file.
+- name: ODS__SAPH__PARTS_EXPORTIMPORT_CONTROL
+  description: Landing table for PARTS_EXPORTIMPORT_CONTROL file.
+- name: ODS__SAPH__SAP_MMM_EV_MDMA_GMX
+  description: Landing table for SAP_MMM_EV_MDMA_GMX file.
+- name: ODS__SAPH__SAP_US_COT_EV_COEP
+  description: Landing table for SAP_US_COT_EV_COEP file.
+- name: ODS__SAPH__SAP_US_FIT_EV_ACDOCA
+  description: Landing table for SAP_US_FIT_EV_ACDOCA file.
+- name: ODS__SAPH__SAP_US_MMT_EV_MATDOC_GMX
+  description: Landing table for SAP_US_MMT_EV_MATDOC_GMX file.

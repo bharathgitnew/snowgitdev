@@ -1,0 +1,47 @@
+/************
+Model file generated from dbtGeneratePubViews: 12.22.2022.10.52.54"
+*************/
+
+{{ config(
+      materialized='view',
+      alias='BUSINESS_PARTNERS',
+      transient=false
+) }}
+
+with source_data as (
+    SELECT
+        SALES_AND_DISTRIBUTION_DOCUMENT_NUMBER,
+        ITEM_NUMBER_OF_THE_SD_DOCUMENT,
+        PARTNER_FUNCTION,
+        CUSTOMER_NUMBER,
+        ACCOUNT_NUMBER_OF_VENDOR_OR_CREDITOR,
+        PERSONNEL_NUMBER,
+        NUMBER_OF_CONTACT_PERSON,
+        ADDRESS,
+        UNLOADING_POINT,
+        COUNTRY_KEY,
+        ADDRESS_INDICATOR,
+        INDICATOR_IS_THE_ACCOUNT_A_ONE_TIME_ACCOUNT,
+        CUSTOMER_HIERARCHY_TYPE,
+        RELEVANT_FOR_PRICE_DETERMINATION_ID,
+        INDICATOR_CUSTOMER_IS_REBATE_RELEVANT,
+        LEVEL_NUMBER_WITHIN_HIERARCHY,
+        CUSTOMER_DESCRIPTION_OF_PARTNER,
+        TRANSPORTATION_ZONE_TO_OR_FROM_WHICH_THE_GOODS_ARE_DELIVERED,
+        ASSIGNMENT_TO_HIERARCHY,
+        VAT_REGISTRATION_NUMBER,
+        INDICATOR_FURTHER_PARTNERS_IN_THIS_FUNCTION,
+        PERSON_NUMBER,
+        MAINTAIN_APPOINTMENTS_IN_CALENDAR,
+        DATA_FILTER_VALUE_FOR_DATA_AGING,
+        DUMMY_FUNCTION_IN_LENGTH_1,
+        UPDATE_DATE
+    from {{ ref('COMMON__SAPH__BUSINESS_PARTNERS') }}
+),
+
+transform_data AS
+(
+    select * from source_data
+)
+
+    select * from transform_data

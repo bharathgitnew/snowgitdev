@@ -1,0 +1,49 @@
+version: 2
+sources:
+- name: STATIC_OBJECTS
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: STATIC_OBJECTS
+  tables:
+  - name: D_CUSTOMER
+    identifier: D_CUSTOMER
+  - name: D_DATE
+    identifier: D_DATE
+  - name: D_DEPARTMENT
+    identifier: D_DEPARTMENT
+  - name: D_EMPLOYEE
+    identifier: D_EMPLOYEE
+  - name: D_OFFICE
+    identifier: D_OFFICE
+  - name: D_PRODUCT_TYPE
+    identifier: D_PRODUCT_TYPE
+  - name: D_SEGMENT
+    identifier: D_SEGMENT
+  - name: CALENDARDATE
+    identifier: CALENDARDATE
+  - name: CALENDAR_DATE
+    identifier: CALENDAR_DATE
+  - name: COMMENTS
+    identifier: COMMENTS
+  - name: COMNTNOTEDTL
+    identifier: COMNTNOTEDTL
+  - name: PUNCHCOMMENTMM
+    identifier: PUNCHCOMMENTMM
+  - name: TEA_RECENT_TIMESHEET
+    identifier: TEA_RECENT_TIMESHEET
+  - name: TSCOMMENTMM
+    identifier: TSCOMMENTMM
+  - name: KRONOS_COMMENT_CLEANUP
+    identifier: KRONOS_COMMENT_CLEANUP
+  - name: FST_EMPLOYEE_HISTORY
+    identifier: FST_EMPLOYEE_HISTORY
+  - name: COMPANYGROUPING
+    identifier: COMPANYGROUPING
+  - name: BAANCOMMONCOMMONDATA_PAYBYBUSINESSPARTNERS
+    identifier: BAANCOMMONCOMMONDATA_PAYBYBUSINESSPARTNERS
+  - name: LEGACY_FSTR_FST_BUDGET_ACTUAL_FORECAST_LEGACY
+    identifier: LEGACY_FSTR_FST_BUDGET_ACTUAL_FORECAST_LEGACY
+  - name: LEGACY_TELR_BAANV_TEA_FINALIZED_TRANSACTIONS
+    identifier: LEGACY_TELR_BAANV_TEA_FINALIZED_TRANSACTIONS
+  - name: RMA_CUSTOMER_EMPLOYEE_CONTACT
+    identifier: RMA_CUSTOMER_EMPLOYEE_CONTACT
+    description: Landing table for RMA_CUSTOMER_EMPLOYEE_CONTACT file.

@@ -1,0 +1,61 @@
+models:
+- name: GOLD__TEH_INFOSEC__EMPLOYEE_HIERARCHY
+  description: |
+    PURPOSE: Provides a VP-rooted employee reporting hierarchy for InfoSec and management reporting by linking each active employee to the executive branch they roll up under.
+    GRAIN: One row = one active employee mapped to the VP or executive root identified by the hierarchy traversal.
+    KEY LOGIC: Starts from active employees in the silver employee master, identifies VP-, president-, deputy-, fellow-, and selected director-level titles as hierarchy roots, then uses recursive supervisor relationships to assign each employee to that root branch.
+    CAVEAT: The hierarchy depends on active records and job-title pattern matching for the starting executives, so employees under nonstandard titles or incomplete supervisor chains can be missed or assigned differently than the formal org chart.
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _AUDIT_LOG_ID
+    description: dbt run identifier captured for this hierarchy row. Text identifier format. Used to trace the row back to a specific model execution.
+  - name: _ROW_HASH
+    description: Deterministic row hash generated during the gold load. Text hash format. Used for change tracking rather than business reporting.
+  - name: EMPLOYEE_ID
+    description: Employee identifier for the person represented in the hierarchy row. Text identifier format. Matches the employee key carried from the silver employee dataset.
+  - name: EMPLOYEE_EMAIL
+    description: Corporate email address for the employee in the hierarchy row. Text email format. Can be null when the source employee profile is incomplete.
+  - name: EMPLOYEE_FULL_NAME
+    description: Employee full name built from first and last name fields. Text display value. Reflects the current silver employee name values rather than a historical point-in-time name.
+  - name: EMPLOYEE_JOB_TITLE
+    description: Current job title for the employee in the hierarchy row. Text value. Reflects the latest HR-maintained title and is used to interpret role and seniority.
+  - name: VP_EMPLOYEE_ID
+    description: Employee identifier of the VP or executive root at the top of the assigned branch. Text identifier format. Assigned by the hierarchy traversal rather than copied from the employee's direct supervisor field.
+  - name: VP_EMAIL
+    description: Corporate email address of the VP or executive root for the branch. Text email format. Can be null if the root employee record does not contain an email value.
+  - name: VP_FULL_NAME
+    description: Full name of the VP or executive root assigned to the employee's branch. Text display value. Derived from the root employee's first and last name fields in the silver employee dataset.
+  - name: VP_JOB_TITLE
+    description: Job title of the VP or executive root assigned to the employee's branch. Text value. Helps distinguish which executive branch definition the employee ultimately rolls up under.
+- name: GOLD__TEH_INFOSEC__MANAGER_LIST_BY_VP
+  description: |
+    PURPOSE: Provides the manager and director roster grouped by VP branch for InfoSec leadership reporting and span-of-control analysis.
+    GRAIN: One row = one manager or director employee mapped to the VP branch they roll up under.
+    KEY LOGIC: Reads the gold employee hierarchy output, filters rows where the employee job title contains manager or director keywords, and carries forward the VP identifiers and labels for branch-level reporting.
+    CAVEAT: Manager inclusion is driven by text matching on job titles, so leadership roles with atypical titles or abbreviations can be excluded while unrelated titles containing those strings can be included.
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _AUDIT_LOG_ID
+    description: dbt run identifier captured for this manager-list row. Text identifier format. Used to trace the row back to a specific model execution.
+  - name: _ROW_HASH
+    description: Deterministic row hash generated during the gold load. Text hash format. Used for change tracking rather than business reporting.
+  - name: MANAGER_ID
+    description: Employee identifier for the manager or director listed in the VP roster. Text identifier format. Carried forward from the employee identifier in the upstream hierarchy output.
+  - name: MANAGER_EMAIL
+    description: Corporate email address for the manager or director in the VP roster. Text email format. Can be null when the upstream employee profile is incomplete.
+  - name: MANAGER_FULL_NAME
+    description: Full name of the manager or director in the VP roster. Text display value. Inherits the current name values from the upstream employee hierarchy output.
+  - name: MANAGER_JOB_TITLE
+    description: Job title of the manager or director in the VP roster. Text value. This same title field is used to decide whether the employee qualifies for inclusion in the manager list.
+  - name: VP_EMPLOYEE_ID
+    description: Employee identifier of the VP or executive root for the manager's branch. Text identifier format. Inherited from the upstream employee hierarchy branch assignment.
+  - name: VP_EMAIL
+    description: Corporate email address of the VP or executive root for the manager's branch. Text email format. Can be null if the upstream root employee record does not include an email value.
+  - name: VP_FULL_NAME
+    description: Full name of the VP or executive root for the manager's branch. Text display value. Built upstream from the root employee's first and last name fields.
+  - name: VP_JOB_TITLE
+    description: Job title of the VP or executive root for the manager's branch. Text value. Used to distinguish which executive branch the listed manager belongs to.

@@ -1,0 +1,852 @@
+{{ config(
+    materialized='tel_incremental',
+    incremental_strategy='insert_overwrite',
+    alias='SALES_CRM_OPPORTUNITY_INTEL_GLOBAL',
+    transient=false
+) }}
+
+with
+MaxCreated
+as 
+(
+select 
+    tel_sm_crm_opportunity_id  as Opportunity_ID,
+    max(createdon)             as MaxCreatedOn
+from {{ ref('GOLD__TEH_EQUIPMENT_SALES__OPPORTUNITY_ONPRE') }}
+group by tel_sm_crm_opportunity_id
+),   
+CurrentFilter    
+as
+(
+select 
+    Opp.opportunityid,
+    Opp.tel_sm_crm_opportunity_id,
+    case when Opp.Createdon = MaxCreated.MaxCreatedOn then 'Yes' 
+    else 'No' 
+    end                                                         as Is_Current
+from {{ ref('GOLD__TEH_EQUIPMENT_SALES__OPPORTUNITY_ONPRE') }} Opp
+  left outer join MaxCreated on MaxCreated.Opportunity_ID = Opp.tel_sm_crm_opportunity_id
+),
+Opportunity_Group_Table
+as
+(
+select 
+    OPPORTUNITYID as Opportunity_Guid,
+    Index,
+    Value         as Opportunity_Group_ID
+    from {{ ref('GOLD__TEH_EQUIPMENT_SALES__OPPORTUNITY_ONPRE') }} Opp, lateral split_to_table(Opp.tel_sm_linked_opportunity_group, ',')
+),
+Opportunity_Group
+as
+(
+select distinct 
+    relation.opportunity_guid                         as oppId, 
+    listagg(opg.tel_sm_opportunity_group_title , ',') as opp_group_name 
+from Opportunity_Group_Table relation
+    left outer join {{ ref('SILVER__TEH_EQUIPMENT_SALES__SALES_TEL_SM_OPPORTUNITY_GROUP') }} opg on relation.opportunity_group_id = opg.tel_sm_opportunity_group_id
+group by relation.opportunity_guid
+),
+SOURCE_DATA AS (
+    select
+      Opp.opportunityid as Opportunity_GUID,
+      Opp.tel_sm_crm_opportunity_id as Opportunity_ID,
+      Opp.tel_sm_project_no as Project_No,
+      Opp.sm_tel_so_no as Sales_Order_No,
+      Opp.tel_sm_cap_no_ueid as Customer_Forecast_ID,
+      opp.tel_sm_genpo_booking_po_no as COPY_EXACT_ID,
+      LABAccountGroup.name as Account_Group,
+      LABRegionalAccountGroup.name as Regional_Account_Group,
+      LABAccount._SALES_ACCOUNT as SALES_ACCOUNT,
+      LABAccount._SALES_ACCOUNT_REGION as SALES_ACCOUNT_REGION,
+      LABAccount.sales_region as Sales_Region,
+      LABAccountSoldTo.name as Sold_to_Party,
+      LABAccountTELSoldTo.name as TEL_Sold_to_Party,
+      LABAccount.account_name as End_User,
+      LABFab.FAB as FAB,
+      case
+        when FAB ilike 'D1%' then 'D1D'
+        when FAB ilike 'FAB11X%' then 'F11X'
+        when FAB ilike any('FAB24', 'FAB34') then 'F24'
+        when FAB ilike any('FAB32', 'FAB42', 'FAB52', 'FAB62') then 'F32'
+        when FAB ilike any('FAB38%', 'FAB28') then 'F38'
+        when FAB ilike 'FAB68%' then 'F68'
+        when FAB ilike any('FAB15', 'AL-%') then 'F15'
+        when FAB ilike 'CHENGDU' then 'CD-DP'
+        when FAB ilike 'KM2' then 'RA'
+        when FAB ilike 'SC-1' then 'BW'
+        -- when FAB ilike 'RA' and SUB_BU ilike 'TS' then 'RA-ATTD'
+        when FAB ilike 'RA'
+        and not SUB_BU ilike 'TS' then 'RA-IMO'
+        else FAB
+      end as ADJUSTED_SITE,
+      LABBU.bu as BU,
+      LABBU.BU_TYPE as BU_TYPE,
+      LABBU.bu_group as BU_Group,
+      LABBU.sub_bu as Sub_BU,
+      LABOrder.order_type_group as Sales_Category_Group,
+      LABOrder.order_type as Sales_Category,
+      case
+        when SALES_CATEGORY ilike any('%Equip%') then 'Equipment'
+        when SALES_CATEGORY ilike 'Pre-kit' then 'Pre-kit'
+        when SALES_CATEGORY ilike any('%Mod') then 'Modification'
+        else 'Others'
+      end as SALES_CATEGORY_TYPE,
+      Opp.name as Opportunity_Title,
+      OppGr.opp_group_name as Opportunity_Group_Name, -- missing table sales_tel_opportunity_tel_sm_opportunity_group   OppGr.tel_sm_opportunity_group_title
+      LABModel.model as Model,
+      Chamber.tel_sm_chamber as Chamber,
+      Opp.tel_sm_order_item_custom as Order_Item,
+      Opp.tel_sm_opp_title_free_txt as Opportunity_Title_Free_Text,
+      ODSStatus.localizedlabel as Booking_Sales_Status,
+      case
+        when Opp.tel_sm_sales_reporting ilike 'false' then 'No'
+        else 'Yes'
+      end as Sales_Reporting_Flag,
+      case
+        when Opp.tel_sm_bu_placeholder ilike 'false' then 'No'
+        else 'Yes'
+      end as Is_Placeholder,
+      LABConfidenceBU.booking_confidence as Booking_Confidence_BU,
+      LABConfidenceBU.confidence_short as Confidence_BU_Short,
+      LABConfidenceAccount.booking_confidence as Booking_Confidence_Account,
+      LABConfidenceAccount.confidence_short as Confidence_Account_Short,
+      case
+        when LABConfidenceBU.confidence_short in ('S1', 'S2') then LABConfidenceBU.confidence_short
+        when LABConfidenceAccount.confidence_short is null then null
+        else LABConfidenceAccount.confidence_short
+      end as Adjusted_Confidence_Account_Short,
+      Opp.sm_serial_no as Serial_No,
+      Opp.tel_sm_pm_serial_no as PM_Serial_No,
+      case
+        when LABOrder.order_type = 'Chamber' then PM_Serial_No
+        else Serial_No
+      end as Adjusted_Serial_No,
+      split_part(Serial_No, ',', 0) as First_Serial_No,
+      split_part(PM_Serial_No, ',', 0) as First_PM_Serial_No,
+      Opp.sm_customer_tool_id as Customer_Tool_ID,
+      case
+        when regexp_count(CUSTOMER_TOOL_ID, '[A-Z]{3}[0-9]{2,4}') >= 1 then regexp_substr(
+          CUSTOMER_TOOL_ID,
+          '[A-Z]{3}[0-9]{2,4}',
+          1,
+          (
+            regexp_count(CUSTOMER_TOOL_ID, '[A-Z]{3}[0-9]{2,4}')
+          )
+        )
+        else null
+      end as ADJUSTED_CUSTOMER_TOOL_ID,
+      Opp.sm_quote_number as Quote_No,
+      null as Orbit_Iraisho_No, --Opp.sm_orbit_iraisho_no missing
+      Opp.sm_po_no as Purchase_Order_No,
+      to_number(Opp.tel_sm_order_quantity, 38, 0) as Quantity,
+      case
+        when Opp.tel_sm_loaner ilike 'false' then 'No'
+        else 'Yes'
+      end as Is_Loaner,
+      to_date(Opp.tel_sm_loaner_expirydate) as Loan_Expiration_Date,
+      VPA.localizedlabel as VPA,
+      to_date(Opp.tel_sm_enduser_bookingdate) as End_User_Booking_Date_BU,
+      to_date(Opp.tel_sm_enduser_bookingdate_accnt) as End_User_Booking_Date_Account,
+      to_date(Opp.tel_sm_local_subsidiary_po_receivedate) as Subsidiary_PO_Receipt_Date,
+      to_date(Opp.TEL_SM_PODATE) as TEL_PO_Receipt_Date,
+      coalesce(
+        to_date(Opp.tel_sm_local_subsidiary_po_receivedate),
+        to_date(Opp.TEL_SM_PODATE)
+      ) as PO_Receipt_Date,
+      case
+        when Opp.tel_sm_enduser_bookingdate_act ilike 'false' then 'No'
+        else 'Yes'
+      end as Is_Booking_Actual,
+      case
+        when Is_Booking_Actual = 'Yes'
+        and to_date(Opp.tel_sm_bookingdate) <= CURRENT_DATE() then to_date(Opp.tel_sm_bookingdate)
+        else null
+      end as Actual_Booking_Date,
+      to_date(
+        COALESCE(
+          Actual_Booking_Date,
+          End_User_Booking_Date_Account
+        )
+      ) as Adjusted_Booking_Date_Account,
+      case
+        when Opp.tel_sm_poloi ilike 'false' then 'No'
+        else 'Yes'
+      end as Is_Order_Received,
+      to_date(Opp.tel_sm_requested_ex_fctrydate) as Requested_Ex_Factory_Date,
+      to_date(Opp.tel_sm_shipdate) as Ship_Date,
+      to_date(Opp.tel_sm_cstmr_requested_deliverdate) as Customer_Requested_Delivery_Date,
+      to_date(Opp.tel_sm_scheduled_on_dockdate) as Scheduled_On_Dock_Date,
+      to_date(Opp.tel_sm_on_dockdate_field) as Actual_On_Dock_Date,
+      dateadd(day, 120, Ship_Date) as Ship_Date_Plus_120,
+      Currency.ISOCURRENCYCODE as Booking_Currency,
+      EndUserCurrency.ISOCURRENCYCODE as End_User_Booking_Currency,
+      Opp.tel_sm_enduser_booking_amount as Booking_Amount,
+      Opp.tel_sm_enduser_bookingamnt_jpy as End_User_Booking_Amount_JPY,
+      case
+        when END_USER_BOOKING_AMOUNT_JPY is null then END_USER_BOOKING_AMOUNT_JPY
+        when BOOKING_CURRENCY = 'USD' then BOOKING_AMOUNT * 115
+        else BOOKING_AMOUNT
+      end as ADJUSTED_END_USER_BOOKING_AMOUNT_JPY,
+      CommonEmployeeBU.FULL_NAME as BU_Sales_Person,
+      CommonEmployeeAccount.FULL_NAME as Account_Sales_Person,
+      Opp.tel_sm_bu_comments_crm as BU_Comments,
+      Opp.tel_sm_accnt_comments_crm as Account_Comments,
+      Opp.tel_sm_sales_comments_crm_sap as Sales_Comments_to_SAP,
+      Opp.tel_sm_assistants_comments_sap_crm as Assistants_Comments_from_SAP,
+      ODSJHReason.localizedlabel as BU_Account_Difference_Reason,
+      Opp.tel_sm_reason_for_tech_accept_tsr_delay_field as Sign_off_Delay_Reason,
+      Opp.tel_sm_crm_opportunity_id as Main_Tool_Opportunity_ID,
+      Opp.tel_sm_crm_opportunity_id as Prekit_Opportunity_ID,
+      case
+        when Opp.tel_sm_pre_kit_decoupling ilike 'false' then 'No'
+        else 'Yes'
+      end as Prekit_Decoupling,
+      Opp.sm_url as CRM_URL,
+      DateBU.fiscal_year_short_text as BU_Booking_FY,
+      DateBU.FISCAL_YEAR_HALF_YEAR_SHORT_TEXT_ALT as BU_Booking_FY_Half,
+      DateBU.fiscal_year_quarter_short_text as BU_Booking_FY_Q,
+      to_date(DateBU.fiscal_year_beginning_date) as BU_Booking_Beginning_of_FY,
+      to_date(DateBU.fiscal_year_ending_date) as BU_Booking_End_of_FY,
+      to_date(DateBU.fiscal_half_year_beginning_date) as BU_Booking_Beginning_of_FY_Half,
+      to_date(DateBU.fiscal_half_year_ending_date) as BU_Booking_End_of_FY_Half,
+      to_date(DateBU.fiscal_quarter_beginning_date) as BU_Booking_Beginning_of_FY_Q,
+      to_date(DateBU.fiscal_quarter_ending_date) as BU_Booking_End_of_FY_Q,
+      DateAccount.fiscal_year_short_text as Account_Booking_FY,
+      DateAccount.FISCAL_YEAR_HALF_YEAR_SHORT_TEXT_ALT as Account_Booking_FY_Half,
+      DateAccount.fiscal_year_quarter_short_text as Account_Booking_FY_Q,
+      to_date(DateAccount.fiscal_year_beginning_date) as Account_Booking_Beginning_of_FY,
+      to_date(DateAccount.fiscal_year_ending_date) as Account_Booking_End_of_FY,
+      to_date(DateAccount.fiscal_half_year_beginning_date) as Account_Booking_Beginning_of_FY_Half,
+      to_date(DateAccount.fiscal_half_year_ending_date) as Account_Booking_End_of_FY_Half,
+      to_date(DateAccount.fiscal_quarter_beginning_date) as Account_Booking_Beginning_of_FY_Q,
+      to_date(DateAccount.fiscal_quarter_ending_date) as Account_Booking_End_of_FY_Q,
+      DateActual.fiscal_year_short_text as Actual_Booking_FY,
+      DateActual.FISCAL_YEAR_HALF_YEAR_SHORT_TEXT_ALT as Actual_Booking_FY_Half,
+      DateActual.fiscal_year_quarter_short_text as Actual_Booking_FY_Q,
+      to_date(DateActual.fiscal_year_beginning_date) as Actual_Booking_Beginning_of_FY,
+      to_date(DateActual.fiscal_year_ending_date) as Actual_Booking_End_of_FY,
+      to_date(DateActual.fiscal_half_year_beginning_date) as Actual_Booking_Beginning_of_FY_Half,
+      to_date(DateActual.fiscal_half_year_ending_date) as Actual_Booking_End_of_FY_Half,
+      to_date(DateActual.fiscal_quarter_beginning_date) as Actual_Booking_Beginning_of_FY_Q,
+      to_date(DateActual.fiscal_quarter_ending_date) as Actual_Booking_End_of_FY_Q,
+      DateCurrent.FISCAL_YEAR_BEGINNING_DATE as Beginning_of_Current_FY,
+      DateCurrent.FISCAL_YEAR_ENDING_DATE as End_of_Current_FY,
+      DateCurrent.FISCAL_HALF_YEAR_BEGINNING_DATE as Beginning_of_Current_FY_Half,
+      DateCurrent.FISCAL_HALF_YEAR_ENDING_DATE as End_of_Current_FY_Half,
+      DateCurrent.FISCAL_QUARTER_BEGINNING_DATE as Beginning_of_Current_FY_Q,
+      DateCurrent.FISCAL_QUARTER_ENDING_DATE as End_of_Current_FY_Q,
+      dateadd(year, 1, Beginning_of_Current_FY) as Beginning_of_Next_FY,
+      dateadd(year, 1, End_of_Current_FY) as End_of_Next_FY,
+      dateadd(month, 6, Beginning_of_Current_FY_Half) as Beginning_of_Next_FY_Half,
+      dateadd(month, 6, End_of_Current_FY_Half) as End_of_Next_FY_Half,
+      dateadd(month, 3, Beginning_of_Current_FY_Q) as Beginning_of_Next_FY_Q,
+      dateadd(month, 3, End_of_Current_FY_Q) as End_of_Next_FY_Q,
+      dateadd(year, -1, Beginning_of_Current_FY) as Beginning_of_Previous_FY,
+      dateadd(year, -1, End_of_Current_FY) as End_of_Previous_FY,
+      dateadd(month, -6, Beginning_of_Current_FY_Half) as Beginning_of_Previous_FY_Half,
+      dateadd(month, -6, End_of_Current_FY_Half) as End_of_Previous_FY_Half,
+      dateadd(month, -3, Beginning_of_Current_FY_Q) as Beginning_of_Previous_FY_Q,
+      dateadd(month, -3, End_of_Current_FY_Q) as End_of_Previous_FY_Q,
+      dateadd(year, -2, Beginning_of_Current_FY) as Beginning_of_2_FY_Ago,
+      dateadd(year, 2, End_of_Current_FY) as End_of_2_FY_Ahead,
+      End_User_Booking_Date_BU as BU_Booking_Forecast_FK_Date,
+      Adjusted_Booking_Date_Account as Account_Booking_Forecast_FK_Date,
+      Actual_Booking_Date as Booking_Actual_FK_Date,
+      LABCountry.country as End_User_Country,
+      LABDistrict.sales_district as Sales_District,
+      LABOrg.sales_organization as Sales_Organization,
+      CurrentFilter.Is_Current,
+      case
+        when Opp.statecode = 2 then 'No'
+        else 'Yes'
+      end as Is_Active,
+      Opp.createdon as Record_Created_Timestamp,
+      to_date(Opp.createdon) as Record_Created_Date,
+      ODSCreatedBy.com_searchkeyword as Created_By,
+      Opp.modifiedon as Record_Updated_Timestamp,
+      to_date(Opp.modifiedon) as Record_Updated_Date,
+      ODSLastChangedBy.com_searchkeyword as Last_Changed_By,
+      Investment.sm_name as Investment_Map,
+      case
+        when TELOrder.localizedlabel ilike 'Y' then 'Yes'
+        else 'No'
+      end as Is_TEL_Order,
+      case
+        when Opp.tel_sm_distributor ilike 'false' then 'No'
+        else 'Yes'
+      end as Is_Genpo_Booking,
+      GII.localizedlabel as GII,
+      LABAccount.account_code as End_User_Code,
+      LABAccount._5_digit_old_customer_code as _5_Digits_Old_End_User_Code,
+      LABACCOUNTTELSOLDTO.accountnumber as Sold_to_Party_TEL_Code,
+      LABFAB.fab_line_code as FAB_Code,
+      LABBU.cost_center_group_code as Cost_Center_Group_Code,
+      LABOrder.order_type_code as Order_Type_Code,
+      LABModel.product_code as Product_Code,
+      LABModel.model_type_code as Model_Type_Code,
+      to_date(Opp._FILEDATE) as Data_Snapshot,
+      Opp._FILEDATE as Data_Snapshot_Timestamp,
+      ODSWafer.tel_sm_wafer_size_generation as Wafer_Size,
+      case
+        when Opp.sm_por ilike 'true' then 'Yes'
+        else 'No'
+      end as POR,
+      -- not needed in Opportunity but keep for Sales_Document --
+      ODSLabor.localizedlabel as PO_Include_Labor,
+      ModificationLaborType.localizedlabel as Mod_Labor_Type,
+      Opp.tel_sm_service_crm_wo_no as Work_Order_No_Sales_CRM,
+      case
+        when Work_Order_No_Sales_CRM = '99999999' then null
+        else Work_Order_No_Sales_CRM
+      end as Updated_Work_Order_No_Sales_CRM,
+      to_date(Opp.tel_sm_tech_accept_tsr_cstmr_signdate) as Scheduled_Acceptance_TSR_Sign_Off_Date,
+      to_date(Opp.tel_sm_tech_accept_tsr_cstmr_signdate_field) as Scheduled_Acceptance_TSR_Sign_Off_Date_FE,
+      case
+        when Opp.tel_sm_tech_accept_tsr_cstmr_signdate_act ilike 'false' then 'No'
+        else 'Yes'
+      end as Is_Sign_Off_Actual,
+      case
+        when Opp.tel_sm_tech_accept_tsr_sign_un_available ilike 'false' then 'No'
+        else 'Yes'
+      end as Is_Sign_Off_Waved,
+      to_date(
+        case
+          when Is_Sign_Off_Actual = 'Yes'
+          and Scheduled_Acceptance_TSR_Sign_Off_Date <= CURRENT_DATE() then Scheduled_Acceptance_TSR_Sign_Off_Date
+        end
+      ) as Actual_Acceptance_TSR_Sign_Off_Date,
+      -- case when est.basis ilike 'EST' then 'Yes' else 'No' end          as Is_EST,
+      case
+        when Opp.tel_sm_split_sales_ratio_revision ilike 'false' then 'No'
+        else 'Yes'
+      end as Is_Modified_Split_Sales_Ratio,
+      TEL_SM_INCOTERMS_TEE_TO_CUSTOMERNAME as INCOTERMS,
+      concat(
+        ADJUSTED_SITE,
+        SALES_CATEGORY_TYPE,
+        ADJUSTED_CUSTOMER_TOOL_ID
+      ) as FORECAST_KEY,
+      Opp.statecode
+    from
+      {{ ref('SILVER__TEH_EQUIPMENT_SALES__OPPORTUNITY') }} Opp
+      left outer join {{ ref('GOLD__TEH_EQUIPMENT_SALES__SALES_CRM_ACCOUNT') }} LABAccount on LABAccount.account_id = Opp.sm_account_name
+      left outer join {{ ref('SILVER__TEH_EQUIPMENT_SALES__ACCOUNT') }} LABAccountSoldTo on LABAccountSoldTo.id = Opp.tel_sm_sold_to_party
+      left outer join {{ ref('SILVER__TEH_EQUIPMENT_SALES__ACCOUNT') }} LABAccountTELSoldTo on LABAccountTELSoldTo.id = Opp.tel_sm_tel_sold_party
+      left outer join {{ ref('SILVER__TEH_EQUIPMENT_SALES__ACCOUNT') }} LABAccountGroup on LABAccountGroup.id = Opp.sm_account_group_name
+      left outer join {{ ref('SILVER__TEH_EQUIPMENT_SALES__ACCOUNT') }} LABRegionalAccountGroup on LABRegionalAccountGroup.id = Opp.tel_sm_regional_accnt_group
+      left outer join {{ ref('SILVER__TEH_EQUIPMENT_SALES__SALES_CRM_FAB') }} LABFab on LABFab.fab_line_id = Opp.sm_fab_line_name
+      left outer join {{ ref('GOLD__TEH_EQUIPMENT_SALES__SALES_CRM_BUSINESS_UNIT') }} LABBU on LABBU.bu_id = Opp.tel_sm_cost_center_group_name
+      left outer join {{ ref('GOLD__TEH_EQUIPMENT_SALES__SALES_CRM_ORDER_TYPE') }} LABOrder on LABOrder.order_type_id = Opp.tel_sm_order_type
+      left outer join {{ ref('GOLD__TEH_EQUIPMENT_SALES__SALES_CRM_CONFIDENCE') }} LABConfidenceBU on LABConfidenceBU.option_code = Opp.tel_sm_order_confidence
+      left outer join {{ ref('GOLD__TEH_EQUIPMENT_SALES__SALES_CRM_CONFIDENCE') }} LABConfidenceAccount on LABConfidenceAccount.option_code = Opp.tel_sm_booking_confidence_accnt
+      left outer join {{ source('STATIC_OBJECTS', 'CALENDARDATE') }} DateBU on DateBU.calendar_date = to_date(Opp.tel_sm_enduser_bookingdate)
+      left outer join {{ source('STATIC_OBJECTS', 'CALENDARDATE') }} DateAccount on DateAccount.calendar_date = to_date(
+        case
+          when case
+            when case
+              when Opp.tel_sm_enduser_bookingdate_act ilike 'false' then 'No'
+              else 'Yes'
+            end = 'Yes'
+            and to_date(Opp.tel_sm_bookingdate) <= CURRENT_DATE() then to_date(Opp.tel_sm_bookingdate)
+            else null
+          end is not null then case
+            when case
+              when Opp.tel_sm_enduser_bookingdate_act ilike 'false' then 'No'
+              else 'Yes'
+            end = 'Yes'
+            and to_date(Opp.tel_sm_bookingdate) <= CURRENT_DATE() then to_date(Opp.tel_sm_bookingdate)
+            else null
+          end
+          else to_date(Opp.tel_sm_enduser_bookingdate_accnt)
+        end
+      )
+      left outer join {{ source('STATIC_OBJECTS', 'CALENDARDATE') }} DateActual on DateActual.calendar_date = case
+        when case
+          when Opp.tel_sm_enduser_bookingdate_act ilike 'false' then 'No'
+          else 'Yes'
+        end = 'Yes'
+        and to_date(Opp.tel_sm_bookingdate) <= CURRENT_DATE() then to_date(Opp.tel_sm_bookingdate)
+        else null
+      end
+      left outer join {{ source('STATIC_OBJECTS', 'CALENDARDATE') }} DateCurrent on DateCurrent.calendar_date = CURRENT_DATE()
+      left outer join {{ source('DE_OPERATIONS', 'D_EMPLOYEE') }} CommonEmployeeBU on CommonEmployeeBU.employee_id = Opp.tel_sm_sales_person_bu_employee_no
+      left outer join {{ source('DE_OPERATIONS', 'D_EMPLOYEE') }} CommonEmployeeAccount on CommonEmployeeAccount.employee_id = Opp.tel_sm_sales_person_accnt_employee_no
+      left outer join {{ ref('GOLD__TEH_EQUIPMENT_SALES__SALES_CRM_SALES_DISTRICT') }} LABDistrict on LABDistrict.sales_district_id = Opp.tel_sm_sales_district
+      left outer join {{ ref('GOLD__TEH_EQUIPMENT_SALES__SALES_CRM_SALES_ORGANIZATION') }} LABOrg on LABOrg.sales_organization_id = Opp.tel_sm_sales_organization
+      left outer join {{ ref('GOLD__TEH_EQUIPMENT_SALES__SALES_CRM_COUNTRY') }} LABCountry on LABCountry.country_id = Opp.tel_sm_enduser_country
+      left outer join {{ ref('GOLD__TEH_EQUIPMENT_SALES__SALES_CRM_MODEL') }} LABModel on LABModel.model_id = Opp.tel_sm_model_name
+      left outer join Opportunity_Group OppGr on OppGr.OppId = Opp.opportunityid
+      left outer join (
+        select distinct
+          *
+        from
+          {{ ref('SILVER__TEH_EQUIPMENT_SALES__SALES_GLOBALOPTIONSETMETADATA') }}
+        where
+          localizedlabellanguagecode = 1033
+          and optionsetname = 'tel_sm_reason_for_diff_btw_accnt_and_bu'
+      ) ODSJHReason on ODSJHReason.option = Opp.tel_sm_reason_for_diff_btw_accnt_and_bu
+      left outer join {{ ref('SILVER__TEH_EQUIPMENT_SALES__SALES_SYSTEMUSER') }} ODSCreatedBy on ODSCreatedBy.id = Opp.createdby
+      left outer join {{ ref('SILVER__TEH_EQUIPMENT_SALES__SALES_SYSTEMUSER') }} ODSLastChangedBy on ODSLastChangedBy.id = Opp.modifiedby
+      left outer join (
+        select distinct
+          *
+        from
+          {{ ref('SILVER__TEH_EQUIPMENT_SALES__OPTIONSET_METADATA') }}
+        where
+          localizedlabellanguagecode = 1033
+          and optionsetname = 'tel_sm_tel_order'
+      ) TELOrder on TELOrder.option = Opp.tel_sm_tel_order
+      left outer join (
+        select distinct
+          *
+        from
+          {{ ref('SILVER__TEH_EQUIPMENT_SALES__SALES_GLOBALOPTIONSETMETADATA') }}
+        where
+          localizedlabellanguagecode = 1033
+          and optionsetname = 'tel_com_order_reason'
+      ) VPA on VPA.option = Opp.tel_sm_order_reason
+      left outer join {{ ref('SILVER__TEH_EQUIPMENT_SALES__TRANSACTIONCURRENCY') }} Currency on Currency.transaction_currency_id = Opp.transactioncurrencyid
+      left outer join {{ ref('SILVER__TEH_EQUIPMENT_SALES__TRANSACTIONCURRENCY') }} EndUserCurrency on EndUserCurrency.transaction_currency_id = Opp.tel_sm_end_user_booking_currency
+      left outer join (
+        select distinct
+          *
+        from
+          {{ ref('SILVER__TEH_EQUIPMENT_SALES__SALES_OPTIONSETMETADATA') }}
+        where
+          localizedlabellanguagecode = 1033
+          and optionsetname = 'tel_sm_modification_labor_type'
+      ) ModificationLaborType on ModificationLaborType.option = Opp.tel_sm_modification_labor_type
+      left outer join {{ ref('SILVER__TEH_EQUIPMENT_SALES__SALES_SM_INVESTMENT_MAP') }} Investment on Investment.id = Opp.SM_INVESTMENT_MAP_NAME
+      left outer join {{ ref('SILVER__TEH_EQUIPMENT_SALES__CHAMBER') }} Chamber on Chamber.chamber_id = Opp.tel_sm_chamber
+      left outer join (
+        select distinct
+          *
+        from
+          {{ ref('SILVER__TEH_EQUIPMENT_SALES__SALES_GLOBALOPTIONSETMETADATA') }}
+        where
+          localizedlabellanguagecode = 1033
+          and optionsetname = 'tel_sm_po_include_labor'
+      ) ODSLabor on ODSLabor.option = Opp.tel_sm_po_include_labor
+      left outer join (
+        select distinct
+          *
+        from
+          {{ ref('SILVER__TEH_EQUIPMENT_SALES__SALES_GLOBALOPTIONSETMETADATA') }}
+        where
+          localizedlabellanguagecode = 1033
+          and optionsetname = 'tel_sm_booking_sales_status'
+      ) ODSStatus on ODSStatus.option = Opp.tel_sm_booking_sales_status
+      left outer join CurrentFilter on CurrentFilter.opportunityid = Opp.opportunityid
+      left outer join {{ ref('SILVER__TEH_EQUIPMENT_SALES__SALES_TEL_SM_WAFER_SIZE_GENERATION') }} ODSWafer on ODSWafer.tel_sm_wafer_size_generationid = Opp.tel_sm_wafer_size_mm_generation
+      left outer join (
+        select distinct
+          *
+        from
+          {{ ref('SILVER__TEH_EQUIPMENT_SALES__SALES_GLOBALOPTIONSETMETADATA') }}
+        where
+          localizedlabellanguagecode = 1033
+          and optionsetname = 'tel_sm_genpo_involvement_indicator'
+      ) GII on GII.option = Opp.tel_sm_genpo_involvement_indicator
+      -- left outer join (select distinct machine_sn, basis from PUB.COMMON_WISDOM.TEA_MAC_LIST where region_name = 'North America') est on est.machine_sn = case when LABOrder.order_type = 'Chamber' then Opp.tel_sm_pm_serial_no else Opp.sm_serial_no end
+    where
+      Is_Current = 'Yes'
+      and Is_Active = 'Yes'
+      and LABAccount._SALES_ACCOUNT ilike 'Intel'
+      and SALES_CATEGORY_GROUP in (
+        'Equipment',
+        'Modification',
+        'Pre-kit',
+        'Option',
+        'Chamber'
+      )
+      and not Sub_BU like any(
+        'FPD%',
+        '%NEXX',
+        'TEL%',
+        '%Other',
+        'TEL-MS',
+        '%GCIB',
+        '%CCS',
+        'DMS'
+      )
+      and (
+        TEL_SM_SALES_DOCUMENT_TYPENAME not like 'ZZ%'
+        or trim(TEL_SM_SALES_DOCUMENT_TYPENAME) = ''
+        or TEL_SM_SALES_DOCUMENT_TYPENAME is null
+      )
+      and (
+        (
+          SALES_ORGANIZATION ilike 'TEL'
+          and GII ilike '1%'
+          -- and Is_Genpo_Booking ilike 'No'
+          and not SALES_DISTRICT ilike 'Europe'
+        )
+        or (
+          SALES_ORGANIZATION ilike 'TEE'
+          and GII ilike '2%'
+          and SALES_DISTRICT ilike 'Europe'
+          -- and SALES_REPORTING_FLAG ilike 'Yes'
+        )
+      )
+),
+TRANSFORM_DATA AS (
+SELECT
+        '{{ invocation_id }}' AS _AUDIT_LOG_ID,
+        SHA2('hash_me') AS _ROW_HASH,
+        OPPORTUNITY_GUID,
+	    OPPORTUNITY_ID,
+	    PROJECT_NO,
+	    SALES_ORDER_NO,
+	    CUSTOMER_FORECAST_ID,
+	    COPY_EXACT_ID,
+	    ACCOUNT_GROUP,
+	    REGIONAL_ACCOUNT_GROUP,
+	    SALES_ACCOUNT,
+	    SALES_ACCOUNT_REGION,
+	    SALES_REGION,
+	    SOLD_TO_PARTY,
+	    TEL_SOLD_TO_PARTY,
+	    END_USER,
+	    FAB,
+	    ADJUSTED_SITE,
+	    BU,
+	    BU_TYPE,
+	    BU_GROUP,
+	    SUB_BU,
+	    SALES_CATEGORY_GROUP,
+	    SALES_CATEGORY,
+	    SALES_CATEGORY_TYPE,
+	    OPPORTUNITY_TITLE,
+	    OPPORTUNITY_GROUP_NAME,
+	    MODEL,
+	    CHAMBER,
+	    ORDER_ITEM,
+	    OPPORTUNITY_TITLE_FREE_TEXT,
+	    BOOKING_SALES_STATUS,
+	    SALES_REPORTING_FLAG,
+	    IS_PLACEHOLDER,
+	    BOOKING_CONFIDENCE_BU,
+	    CONFIDENCE_BU_SHORT,
+	    BOOKING_CONFIDENCE_ACCOUNT,
+	    CONFIDENCE_ACCOUNT_SHORT,
+	    ADJUSTED_CONFIDENCE_ACCOUNT_SHORT,
+	    SERIAL_NO,
+	    PM_SERIAL_NO,
+	    ADJUSTED_SERIAL_NO,
+	    FIRST_SERIAL_NO,
+	    FIRST_PM_SERIAL_NO,
+	    CUSTOMER_TOOL_ID,
+	    ADJUSTED_CUSTOMER_TOOL_ID,
+	    QUOTE_NO,
+	    ORBIT_IRAISHO_NO,
+	    PURCHASE_ORDER_NO,
+	    QUANTITY,
+	    IS_LOANER,
+	    LOAN_EXPIRATION_DATE,
+	    VPA,
+	    END_USER_BOOKING_DATE_BU,
+	    END_USER_BOOKING_DATE_ACCOUNT,
+	    SUBSIDIARY_PO_RECEIPT_DATE,
+	    TEL_PO_RECEIPT_DATE,
+	    PO_RECEIPT_DATE,
+	    IS_BOOKING_ACTUAL,
+	    ACTUAL_BOOKING_DATE,
+	    ADJUSTED_BOOKING_DATE_ACCOUNT,
+	    IS_ORDER_RECEIVED,
+	    REQUESTED_EX_FACTORY_DATE,
+	    SHIP_DATE,
+	    CUSTOMER_REQUESTED_DELIVERY_DATE,
+	    SCHEDULED_ON_DOCK_DATE,
+	    ACTUAL_ON_DOCK_DATE,
+	    SHIP_DATE_PLUS_120,
+	    BOOKING_CURRENCY,
+	    END_USER_BOOKING_CURRENCY,
+	    BOOKING_AMOUNT,
+	    END_USER_BOOKING_AMOUNT_JPY,
+	    ADJUSTED_END_USER_BOOKING_AMOUNT_JPY,
+	    BU_SALES_PERSON,
+	    ACCOUNT_SALES_PERSON,
+	    BU_COMMENTS,
+	    ACCOUNT_COMMENTS,
+	    SALES_COMMENTS_TO_SAP,
+	    ASSISTANTS_COMMENTS_FROM_SAP,
+	    BU_ACCOUNT_DIFFERENCE_REASON,
+	    SIGN_OFF_DELAY_REASON,
+	    MAIN_TOOL_OPPORTUNITY_ID,
+	    PREKIT_OPPORTUNITY_ID,
+	    PREKIT_DECOUPLING,
+	    CRM_URL,
+	    BU_BOOKING_FY,
+	    BU_BOOKING_FY_HALF,
+	    BU_BOOKING_FY_Q,
+	    BU_BOOKING_BEGINNING_OF_FY,
+	    BU_BOOKING_END_OF_FY,
+	    BU_BOOKING_BEGINNING_OF_FY_HALF,
+	    BU_BOOKING_END_OF_FY_HALF,
+	    BU_BOOKING_BEGINNING_OF_FY_Q,
+	    BU_BOOKING_END_OF_FY_Q,
+	    ACCOUNT_BOOKING_FY,
+	    ACCOUNT_BOOKING_FY_HALF,
+	    ACCOUNT_BOOKING_FY_Q,
+	    ACCOUNT_BOOKING_BEGINNING_OF_FY,
+	    ACCOUNT_BOOKING_END_OF_FY,
+	    ACCOUNT_BOOKING_BEGINNING_OF_FY_HALF,
+	    ACCOUNT_BOOKING_END_OF_FY_HALF,
+	    ACCOUNT_BOOKING_BEGINNING_OF_FY_Q,
+	    ACCOUNT_BOOKING_END_OF_FY_Q,
+	    ACTUAL_BOOKING_FY,
+	    ACTUAL_BOOKING_FY_HALF,
+	    ACTUAL_BOOKING_FY_Q,
+	    ACTUAL_BOOKING_BEGINNING_OF_FY,
+	    ACTUAL_BOOKING_END_OF_FY,
+	    ACTUAL_BOOKING_BEGINNING_OF_FY_HALF,
+	    ACTUAL_BOOKING_END_OF_FY_HALF,
+	    ACTUAL_BOOKING_BEGINNING_OF_FY_Q,
+	    ACTUAL_BOOKING_END_OF_FY_Q,
+	    BEGINNING_OF_CURRENT_FY,
+	    END_OF_CURRENT_FY,
+	    BEGINNING_OF_CURRENT_FY_HALF,
+	    END_OF_CURRENT_FY_HALF,
+	    BEGINNING_OF_CURRENT_FY_Q,
+	    END_OF_CURRENT_FY_Q,
+	    BEGINNING_OF_NEXT_FY,
+	    END_OF_NEXT_FY,
+	    BEGINNING_OF_NEXT_FY_HALF,
+	    END_OF_NEXT_FY_HALF,
+	    BEGINNING_OF_NEXT_FY_Q,
+	    END_OF_NEXT_FY_Q,
+	    BEGINNING_OF_PREVIOUS_FY,
+	    END_OF_PREVIOUS_FY,
+	    BEGINNING_OF_PREVIOUS_FY_HALF,
+	    END_OF_PREVIOUS_FY_HALF,
+	    BEGINNING_OF_PREVIOUS_FY_Q,
+	    END_OF_PREVIOUS_FY_Q,
+	    BEGINNING_OF_2_FY_AGO,
+	    END_OF_2_FY_AHEAD,
+	    BU_BOOKING_FORECAST_FK_DATE,
+	    ACCOUNT_BOOKING_FORECAST_FK_DATE,
+	    BOOKING_ACTUAL_FK_DATE,
+	    END_USER_COUNTRY,
+	    SALES_DISTRICT,
+	    SALES_ORGANIZATION,
+	    IS_CURRENT,
+	    IS_ACTIVE,
+	    RECORD_CREATED_TIMESTAMP,
+	    RECORD_CREATED_DATE,
+	    CREATED_BY,
+	    RECORD_UPDATED_TIMESTAMP,
+	    RECORD_UPDATED_DATE,
+	    LAST_CHANGED_BY,
+	    INVESTMENT_MAP,
+	    IS_TEL_ORDER,
+	    IS_GENPO_BOOKING,
+	    GII,
+	    END_USER_CODE,
+	    _5_DIGITS_OLD_END_USER_CODE,
+	    SOLD_TO_PARTY_TEL_CODE,
+	    FAB_CODE,
+	    COST_CENTER_GROUP_CODE,
+	    ORDER_TYPE_CODE,
+	    PRODUCT_CODE,
+	    MODEL_TYPE_CODE,
+	    DATA_SNAPSHOT,
+	    DATA_SNAPSHOT_TIMESTAMP,
+	    WAFER_SIZE,
+	    POR,
+	    PO_INCLUDE_LABOR,
+	    MOD_LABOR_TYPE,
+	    WORK_ORDER_NO_SALES_CRM,
+	    UPDATED_WORK_ORDER_NO_SALES_CRM,
+	    SCHEDULED_ACCEPTANCE_TSR_SIGN_OFF_DATE,
+	    SCHEDULED_ACCEPTANCE_TSR_SIGN_OFF_DATE_FE,
+	    IS_SIGN_OFF_ACTUAL,
+	    IS_SIGN_OFF_WAVED,
+	    ACTUAL_ACCEPTANCE_TSR_SIGN_OFF_DATE,
+	    IS_MODIFIED_SPLIT_SALES_RATIO,
+	    INCOTERMS,
+	    FORECAST_KEY,
+	    STATECODE
+FROM SOURCE_DATA
+)
+
+,
+TYPE_DATA AS (
+SELECT
+        cast(_AUDIT_LOG_ID as varchar(128)) as _AUDIT_LOG_ID,
+        cast(_ROW_HASH as varchar(128)) as _ROW_HASH,
+        OPPORTUNITY_GUID,
+	    OPPORTUNITY_ID,
+	    PROJECT_NO,
+	    SALES_ORDER_NO,
+	    CUSTOMER_FORECAST_ID,
+	    COPY_EXACT_ID,
+	    ACCOUNT_GROUP,
+	    REGIONAL_ACCOUNT_GROUP,
+	    SALES_ACCOUNT,
+	    SALES_ACCOUNT_REGION,
+	    SALES_REGION,
+	    SOLD_TO_PARTY,
+	    TEL_SOLD_TO_PARTY,
+	    END_USER,
+	    FAB,
+	    ADJUSTED_SITE,
+	    BU,
+	    BU_TYPE,
+	    BU_GROUP,
+	    SUB_BU,
+	    SALES_CATEGORY_GROUP,
+	    SALES_CATEGORY,
+	    SALES_CATEGORY_TYPE,
+	    OPPORTUNITY_TITLE,
+	    OPPORTUNITY_GROUP_NAME,
+	    MODEL,
+	    CHAMBER,
+	    ORDER_ITEM,
+	    OPPORTUNITY_TITLE_FREE_TEXT,
+	    BOOKING_SALES_STATUS,
+	    SALES_REPORTING_FLAG,
+	    IS_PLACEHOLDER,
+	    BOOKING_CONFIDENCE_BU,
+	    CONFIDENCE_BU_SHORT,
+	    BOOKING_CONFIDENCE_ACCOUNT,
+	    CONFIDENCE_ACCOUNT_SHORT,
+	    ADJUSTED_CONFIDENCE_ACCOUNT_SHORT,
+	    SERIAL_NO,
+	    PM_SERIAL_NO,
+	    ADJUSTED_SERIAL_NO,
+	    FIRST_SERIAL_NO,
+	    FIRST_PM_SERIAL_NO,
+	    CUSTOMER_TOOL_ID,
+	    ADJUSTED_CUSTOMER_TOOL_ID,
+	    QUOTE_NO,
+	    ORBIT_IRAISHO_NO,
+	    PURCHASE_ORDER_NO,
+	    QUANTITY,
+	    IS_LOANER,
+	    LOAN_EXPIRATION_DATE,
+	    VPA,
+	    END_USER_BOOKING_DATE_BU,
+	    END_USER_BOOKING_DATE_ACCOUNT,
+	    SUBSIDIARY_PO_RECEIPT_DATE,
+	    TEL_PO_RECEIPT_DATE,
+	    PO_RECEIPT_DATE,
+	    IS_BOOKING_ACTUAL,
+	    ACTUAL_BOOKING_DATE,
+	    ADJUSTED_BOOKING_DATE_ACCOUNT,
+	    IS_ORDER_RECEIVED,
+	    REQUESTED_EX_FACTORY_DATE,
+	    SHIP_DATE,
+	    CUSTOMER_REQUESTED_DELIVERY_DATE,
+	    SCHEDULED_ON_DOCK_DATE,
+	    ACTUAL_ON_DOCK_DATE,
+	    SHIP_DATE_PLUS_120,
+	    BOOKING_CURRENCY,
+	    END_USER_BOOKING_CURRENCY,
+	    BOOKING_AMOUNT,
+	    END_USER_BOOKING_AMOUNT_JPY,
+	    ADJUSTED_END_USER_BOOKING_AMOUNT_JPY,
+	    BU_SALES_PERSON,
+	    ACCOUNT_SALES_PERSON,
+	    BU_COMMENTS,
+	    ACCOUNT_COMMENTS,
+	    SALES_COMMENTS_TO_SAP,
+	    ASSISTANTS_COMMENTS_FROM_SAP,
+	    BU_ACCOUNT_DIFFERENCE_REASON,
+	    SIGN_OFF_DELAY_REASON,
+	    MAIN_TOOL_OPPORTUNITY_ID,
+	    PREKIT_OPPORTUNITY_ID,
+	    PREKIT_DECOUPLING,
+	    CRM_URL,
+	    BU_BOOKING_FY,
+	    BU_BOOKING_FY_HALF,
+	    BU_BOOKING_FY_Q,
+	    BU_BOOKING_BEGINNING_OF_FY,
+	    BU_BOOKING_END_OF_FY,
+	    BU_BOOKING_BEGINNING_OF_FY_HALF,
+	    BU_BOOKING_END_OF_FY_HALF,
+	    BU_BOOKING_BEGINNING_OF_FY_Q,
+	    BU_BOOKING_END_OF_FY_Q,
+	    ACCOUNT_BOOKING_FY,
+	    ACCOUNT_BOOKING_FY_HALF,
+	    ACCOUNT_BOOKING_FY_Q,
+	    ACCOUNT_BOOKING_BEGINNING_OF_FY,
+	    ACCOUNT_BOOKING_END_OF_FY,
+	    ACCOUNT_BOOKING_BEGINNING_OF_FY_HALF,
+	    ACCOUNT_BOOKING_END_OF_FY_HALF,
+	    ACCOUNT_BOOKING_BEGINNING_OF_FY_Q,
+	    ACCOUNT_BOOKING_END_OF_FY_Q,
+	    ACTUAL_BOOKING_FY,
+	    ACTUAL_BOOKING_FY_HALF,
+	    ACTUAL_BOOKING_FY_Q,
+	    ACTUAL_BOOKING_BEGINNING_OF_FY,
+	    ACTUAL_BOOKING_END_OF_FY,
+	    ACTUAL_BOOKING_BEGINNING_OF_FY_HALF,
+	    ACTUAL_BOOKING_END_OF_FY_HALF,
+	    ACTUAL_BOOKING_BEGINNING_OF_FY_Q,
+	    ACTUAL_BOOKING_END_OF_FY_Q,
+	    BEGINNING_OF_CURRENT_FY,
+	    END_OF_CURRENT_FY,
+	    BEGINNING_OF_CURRENT_FY_HALF,
+	    END_OF_CURRENT_FY_HALF,
+	    BEGINNING_OF_CURRENT_FY_Q,
+	    END_OF_CURRENT_FY_Q,
+	    BEGINNING_OF_NEXT_FY,
+	    END_OF_NEXT_FY,
+	    BEGINNING_OF_NEXT_FY_HALF,
+	    END_OF_NEXT_FY_HALF,
+	    BEGINNING_OF_NEXT_FY_Q,
+	    END_OF_NEXT_FY_Q,
+	    BEGINNING_OF_PREVIOUS_FY,
+	    END_OF_PREVIOUS_FY,
+	    BEGINNING_OF_PREVIOUS_FY_HALF,
+	    END_OF_PREVIOUS_FY_HALF,
+	    BEGINNING_OF_PREVIOUS_FY_Q,
+	    END_OF_PREVIOUS_FY_Q,
+	    BEGINNING_OF_2_FY_AGO,
+	    END_OF_2_FY_AHEAD,
+	    BU_BOOKING_FORECAST_FK_DATE,
+	    ACCOUNT_BOOKING_FORECAST_FK_DATE,
+	    BOOKING_ACTUAL_FK_DATE,
+	    END_USER_COUNTRY,
+	    SALES_DISTRICT,
+	    SALES_ORGANIZATION,
+	    IS_CURRENT,
+	    IS_ACTIVE,
+	    RECORD_CREATED_TIMESTAMP,
+	    RECORD_CREATED_DATE,
+	    CREATED_BY,
+	    RECORD_UPDATED_TIMESTAMP,
+	    RECORD_UPDATED_DATE,
+	    LAST_CHANGED_BY,
+	    INVESTMENT_MAP,
+	    IS_TEL_ORDER,
+	    IS_GENPO_BOOKING,
+	    GII,
+	    END_USER_CODE,
+	    _5_DIGITS_OLD_END_USER_CODE,
+	    SOLD_TO_PARTY_TEL_CODE,
+	    FAB_CODE,
+	    COST_CENTER_GROUP_CODE,
+	    ORDER_TYPE_CODE,
+	    PRODUCT_CODE,
+	    MODEL_TYPE_CODE,
+	    DATA_SNAPSHOT,
+	    DATA_SNAPSHOT_TIMESTAMP,
+	    WAFER_SIZE,
+	    POR,
+	    PO_INCLUDE_LABOR,
+	    MOD_LABOR_TYPE,
+	    WORK_ORDER_NO_SALES_CRM,
+	    UPDATED_WORK_ORDER_NO_SALES_CRM,
+	    SCHEDULED_ACCEPTANCE_TSR_SIGN_OFF_DATE,
+	    SCHEDULED_ACCEPTANCE_TSR_SIGN_OFF_DATE_FE,
+	    IS_SIGN_OFF_ACTUAL,
+	    IS_SIGN_OFF_WAVED,
+	    ACTUAL_ACCEPTANCE_TSR_SIGN_OFF_DATE,
+	    IS_MODIFIED_SPLIT_SALES_RATIO,
+	    INCOTERMS,
+	    FORECAST_KEY,
+	    STATECODE
+FROM TRANSFORM_DATA
+)
+SELECT * FROM TYPE_DATA

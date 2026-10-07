@@ -1,0 +1,28 @@
+{
+    "Reporting":{
+		"DataSet1":{
+            "site-url":"account",
+            "sftablename":"REPORTING_ACCOUNT"
+		},
+		"DataSet2":{
+            "site-url":"account/risk_score_history",
+            "sftablename":"REPORTING_ACCCOUNT_RISK_SCORE_HISTORY"
+		},
+		"DataSet3":{
+            "site-url":"users",
+            "sftablename":"REPORTING_USERS"
+		},
+		"DataSet4":{
+            "site-url":"groups",
+            "sftablename":"REPORTING_GROUPS"
+		},
+		"DataSet5":{
+            "site-url":"phishing/campaigns",
+            "sftablename":"REPORTING_PHISHING_CAMPAIGNS"
+		},
+		"DataSet6":{
+            "site-url":"phishing/security_tests",
+            "sftablename":"REPORTING_PHISHING_SECURITY_TESTS"
+		}
+    }
+}

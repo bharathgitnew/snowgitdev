@@ -1,0 +1,51 @@
+{{ config(
+    materialized='incremental',
+    incremental_strategy='merge',
+    alias='SAP_REPORTING_DETAILS',
+    unique_key = ['REPID',
+    'RPT_DATE',
+    'RPT_TIME',
+    'USER_ID']
+) }}
+
+with source_data as (
+	SELECT 
+	_CAPTUREDATETIME,
+	REPID,
+	RPT_DATE,
+	RPT_TIME,
+	USER_ID,
+	NOTE
+	FROM {{ source("SAP_ORACLE_LIVE", "ZRHST") }}
+
+        )
+,
+transform_data as 
+(
+SELECT
+    _CAPTUREDATETIME,
+    '{{ invocation_id }}' AS _AUDIT_LOG_ID,
+    SHA2('hash_me') as _ROW_HASH,
+	REPID as REPID,
+	RPT_DATE as RPT_DATE,
+	RPT_TIME as RPT_TIME,
+	USER_ID as USER_ID,
+	NOTE as NOTE
+	FROM SOURCE_DATA
+), 
+
+type_data as 
+(
+SELECT 
+	CAST(_CAPTUREDATETIME AS TIMESTAMP_LTZ(9)) AS _CAPTUREDATETIME,
+	CAST(_AUDIT_LOG_ID AS VARCHAR(128)) AS _AUDIT_LOG_ID,
+	CAST(_ROW_HASH AS VARCHAR(128)) AS _ROW_HASH,
+	CAST(REPID AS VARCHAR(40)) AS REPID,
+	CAST(RPT_DATE AS VARCHAR(8)) AS RPT_DATE,
+	CAST(RPT_TIME AS VARCHAR(6)) AS RPT_TIME,
+	CAST(USER_ID AS VARCHAR(12)) AS USER_ID,
+	CAST(NOTE AS VARCHAR(132)) AS NOTE
+FROM TRANSFORM_DATA
+)
+ 
+SELECT * FROM TYPE_DATA

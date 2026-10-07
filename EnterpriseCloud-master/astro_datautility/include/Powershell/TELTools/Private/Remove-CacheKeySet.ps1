@@ -1,0 +1,35 @@
+function Remove-CacheKeySet {
+    [CmdletBinding()]
+    Param(
+        [Parameter(Mandatory = $true)]
+        $Key
+    )
+    begin
+    {
+        Write-Verbose "$($MyInvocation.MyCommand) Starting...";
+        $FunctionStatisticsDataSet = @{};
+        $FunctionStatisticsDataSet.Add('Invocation',$MyInvocation);
+        $CurrentDate = Get-Date;
+        $FunctionStatisticsDataSet.Add('StartTime',$CurrentDate);
+        $CurrentDateFormat = Get-Date -Date $CurrentDate -Format FileDateTimeUniversal;
+        $FunctionStatisticsFileName = "$($MyInvocation.MyCommand).Execution.$($CurrentDateFormat).json";
+    }
+    process {
+        $cache = Get-Variable -Name $script:CacheVariableName -Scope Global;
+        foreach($Item in $cache.Value.Keys | Where-Object {$_.StartsWith("$Key.")}){
+            Write-Verbose "Removing Cache Key ($Item)";
+            $cache.Value.Remove($Item);
+        }
+    }
+    end
+    {
+        Write-Verbose "... $($MyInvocation.MyCommand) Ending"
+        $CurrentDate = Get-Date;
+        $FunctionStatisticsDataSet.Add('EndTime',$CurrentDate);
+        $DataSetToWriteJSon = $FunctionStatisticsDataSet | ConvertTo-Json -Depth 3
+        $FunctionDataSet = $DataSetToWriteJSon | ConvertFrom-Json;
+		try {Write-TELLogFile -FileName "$($script:MachineConfiguration.ExecutionLogFileDirectory)$($FunctionStatisticsFileName)" -DataSet $FunctionDataSet -JSonDepth 10;}
+		catch {Write-Host " **** Write-DataSetToFile does not exist... No execution data will be saved." }
+        Write-Verbose "$($MyInvocation.MyCommand) Ended";
+    }
+}

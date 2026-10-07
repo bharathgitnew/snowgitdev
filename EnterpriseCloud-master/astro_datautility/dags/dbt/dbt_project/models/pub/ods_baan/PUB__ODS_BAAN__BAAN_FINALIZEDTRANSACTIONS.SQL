@@ -1,0 +1,80 @@
+{{ config(
+      materialized='view',
+      alias='BAAN_FINALIZEDTRANSACTIONS',
+      transient=false
+) }}
+
+with source_data as (
+    SELECT
+        DIMENSION_TYPE_2,
+        LEDGER_ACC_DESC,
+        QUANTITY_2,
+        TAX_AMOUNT,
+        INVOICE_CORRECTION,
+        TAX_PERIOD,
+        TRANS_TYPE_CORRECTION,
+        TYPE_OF_TRANSACTION,
+        AMOUNT,
+        CURRENCY,
+        DELETED,
+        DIMENSION_TYPE_1,
+        DIMENSION_TYPE_5,
+        FINANCIAL_PERIOD,
+        PERIOD_BEGINING,
+        TYPE_OF_CASH_TRANSACTION,
+        RATE,
+        BATCH,
+        BACKGROUND_SEQUENCE_NO,
+        FINALIZATION_DATE,
+        ORIGINAL_TRANSACTION_TYPE,
+        TAX_LEDGER_AC,
+        TAX_YEAR,
+        DC_DESC,
+        DIMENSION_5,
+        STANDING_ORDER,
+        AUDIT_LOG_ID,
+        FINALIZATION_RUN_NO,
+        ORIGINAL_COMPANY,
+        TAX_TYPE,
+        ORIGINAL_DOCUMENT_NO,
+        TRANSACTION_TEXT,
+        TRANSACTION_TYPE,
+        DIMENSION_TYPE_4,
+        FISCAL_YEAR,
+        LAST_MODIFIED_BY,
+        TAX_AMOUNT_HC,
+        TRANSACTION_CATEGORY,
+        QUANTITY_1,
+        DIMENSION_2,
+        DOC_DATE,
+        LEDGER_ACC,
+        LINE,
+        REPORTING_PERIOD,
+        _ROW_HASH,
+        BUSINESS_PARTNER_ID,
+        CONTROL_ACCOUNT,
+        COUNTRY,
+        DC,
+        DIMENSION_4,
+        DIMENSION_TYPE_3,
+        DOCUMENT,
+        FINALIZATION_TIME,
+        INTEGRATION_TRANSACTION,
+        DIMENSION_1,
+        AMOUNT_IN_HC,
+        RATE_FACTOR,
+        TAX_CODE,
+        DIMENSION_3,
+        REPORTING_YEAR,
+        STANDING_ORDER_SEQUENCE_NO,
+        SEQUENCE_NUMBER,
+        REFERENCE
+    from {{ ref('ODS__BAAN__BAAN_FINALIZEDTRANSACTIONS') }}
+),
+
+transform_data AS
+(
+    select * from source_data
+)
+
+    select * from transform_data

@@ -1,0 +1,47 @@
+version: 2
+sources:
+- name: KRONOS
+  description: Landing Zone - kronos Schema
+  database: '{{ env_var(''SNOWFLAKE_LZ'') }}'
+  schema: kronos
+  tables:
+  - name: ACTIVITIESTOTAL
+    identifier: ActivitiesTotal
+    description: Landing table for ActivitiesTotal file. Often used for punch card entries.
+    columns:
+    - name: HomeBS2Region
+      description: The pk of the ActivitiesTotal Record.
+    - name: TransactionId
+      description: The pk of the ActivitiesTotal Record.
+    - name: PayCode
+      description: The pk of the ActivitiesTotal Record.
+    - name: ApplyDate
+      description: The pk of the ActivitiesTotal Record.
+  - name: TIMECARD
+    identifier: Timecard
+    description: Landing table for Timecard file. Often used for time off and holidays.
+    columns:
+    - name: HomePrimaryOrg
+      description: The pk of the Timecard Record.
+    - name: RecordId
+      description: The pk of the Timecard Record.
+  - name: CONTROLTABLE
+    identifier: CONTROLTABLE
+    description: Ingestion metadata.
+    columns:
+    - name: RUN_TIME
+      description: When the extract started. Formatted as YYYY-MM-DD_HH24_MI_SS_FF6.
+    - name: INCREMENTAL_START_VALUE
+      description: Incremental date used to filter the source data.
+    - name: INCREMENTAL_END_VALUE
+      description: Incremental date used to filter the source data.
+    - name: EXTRACTION_START_TIME
+      description: When the extract started. Formatted as YYYY-MM-DD HH24:MI:SS.FF6.
+    - name: EXTRACTION_END_TIME
+      description: When the extract ended. Formatted as YYYY-MM-DD HH24:MI:SS.FF6.
+    - name: TABLE_NAME
+      description: The name of the ingested table.
+    - name: MAX_FILE_DATE
+      description: When the extract started. Formatted as YYYY-MM-DD HH24:MI:SS.FF6.
+    - name: ROW_COUNT
+      description: The number of ingested records.

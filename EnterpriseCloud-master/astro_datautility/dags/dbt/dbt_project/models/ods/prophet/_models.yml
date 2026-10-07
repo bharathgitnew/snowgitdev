@@ -1,0 +1,10 @@
+version: 2
+models:
+- name: ODS__PROPHET__DEMANDRETURN
+  description: Model PROPHET DemandReturn file.
+- name: ODS__PROPHET__DEMAND
+  description: Model PROPHET Demand file.
+- name: ODS__PROPHET__INVENTORY
+  description: Model PROPHET Inventory file.
+- name: ODS__PROPHET__ORDERS
+  description: Model PROPHET Orders file.

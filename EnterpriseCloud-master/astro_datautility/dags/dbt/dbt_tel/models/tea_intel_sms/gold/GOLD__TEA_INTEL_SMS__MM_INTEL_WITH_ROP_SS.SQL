@@ -1,0 +1,259 @@
+{{ config(
+       materialized='tel_incremental'  ,
+    incremental_strategy='insert_overwrite'  ,
+    alias='MM_INTEL_WITH_ROP_SS'  
+) }}
+
+
+
+
+
+
+
+
+
+
+
+with ROP as ( SELECT 
+    MATERIAL,CONSUMABLE,NARITA_ABC,CRITICALITY_SCORE,
+    case when STORAGE_LOCATION = 'D930'
+    then ROP  else 0 end as D930_ROP,
+     case when STORAGE_LOCATION = 'D930'
+    then SS  else 0 end as D930_SS,
+        case when STORAGE_LOCATION = 'D930'
+    then MAX  else 0 end as D930_MAX,
+     case when STORAGE_LOCATION = 'D830'
+    then ROP  else 0 end as D830_ROP,
+     case when STORAGE_LOCATION = 'D830'
+    then SS  else 0 end as D830_SS,
+     case when STORAGE_LOCATION = 'D830'
+    then MAX  else 0  end as D830_MAX,
+    case when STORAGE_LOCATION = 'E130'
+    then ROP  else 0 end as E130_ROP,
+    case when STORAGE_LOCATION = 'E130'
+    then SS  else 0 end as E130_SS,
+    case when STORAGE_LOCATION = 'E130'
+    then MAX  else 0 end as E130_MAX,
+    case when STORAGE_LOCATION = 'E430'
+    then ROP  else 0 end as E430_ROP,
+    case when STORAGE_LOCATION = 'E430'
+    then SS  else 0 end as E430_SS,
+    case when STORAGE_LOCATION = 'E430'
+    then MAX  else 0 end as E430_MAX,
+    case when STORAGE_LOCATION = 'B330'
+    then ROP  else 0 end as B330_ROP,
+    case when STORAGE_LOCATION = 'B330'
+    then SS  else 0 end as B330_SS,
+    case when STORAGE_LOCATION = 'B330'
+    then MAX  else 0 end as B330_MAX,
+    case when STORAGE_LOCATION = 'E230'
+    then ROP  else 0 end as E230_ROP,
+    case when STORAGE_LOCATION = 'E230'
+    then SS  else 0 end as E230_SS,
+    case when STORAGE_LOCATION = 'E230'
+    then MAX  else 0 end as E230_MAX,
+    case when STORAGE_LOCATION = 'E330'
+    then ROP  else 0 end as E330_ROP,
+    case when STORAGE_LOCATION = 'E330'
+    then SS  else 0 end as E330_SS,
+    case when STORAGE_LOCATION = 'E330'
+    then MAX  else 0 end as E330_MAX,
+    case when STORAGE_LOCATION = 'B230'
+    then ROP  else 0 end as B230_ROP,
+    case when STORAGE_LOCATION = 'B230'
+    then SS  else 0 end as B230_SS,
+    case when STORAGE_LOCATION = 'B230'
+    then MAX  else 0 end as B230_MAX,
+    case when STORAGE_LOCATION = 'A530'
+    then ROP  else 0 end as A530_ROP,
+    case when STORAGE_LOCATION = 'A530'
+    then SS  else 0 end as A530_SS,
+    case when STORAGE_LOCATION = 'A530'
+    then MAX  else 0 end as A530_MAX,
+    case when STORAGE_LOCATION = 'F430'
+    then ROP  else 0 end as F430_ROP,
+    case when STORAGE_LOCATION = 'F430'
+    then SS  else 0 end as F430_SS,
+    case when STORAGE_LOCATION = 'F430'
+    then MAX  else 0 end as F430_MAX
+    from {{ ref('GOLD__TEA_INTEL_SMS__ROP_SS_REPORT') }}  ),
+    
+ROP_ALL as (    
+    select MATERIAL,CONSUMABLE,NARITA_ABC,CRITICALITY_SCORE,
+    sum(D930_ROP) as D930_ROP,sum(D930_SS) as D930_SS,sum(D930_MAX) as D930_MAX,
+    sum(D830_ROP) as D830_ROP,sum(D830_SS) as D830_SS,sum(D830_MAX) as D830_MAX,
+    sum(E130_ROP) as E130_ROP,sum(E130_SS) as E130_SS,sum(E130_MAX) as E130_MAX,
+    sum(E430_ROP) as E430_ROP,sum(E430_SS) as E430_SS,sum(E430_MAX) as E430_MAX,
+    sum(B330_ROP) as B330_ROP,sum(B330_SS) as B330_SS,sum(B330_MAX) as B330_MAX,
+    sum(E230_ROP) as E230_ROP,sum(E230_SS) as E230_SS,sum(E230_MAX) as E230_MAX,
+    sum(E330_ROP) as E330_ROP,sum(E330_SS) as E330_SS,sum(E330_MAX) as E330_MAX,
+    sum(B230_ROP) as B230_ROP,sum(B230_SS) as B230_SS,sum(B230_MAX) as B230_MAX,
+    sum(A530_ROP) as A530_ROP,sum(A530_SS) as A530_SS,sum(A530_MAX) as A530_MAX,
+    sum(F430_ROP) as F430_ROP,sum(F430_SS) as F430_SS,sum(F430_MAX) as F430_MAX
+    from rop
+    group by MATERIAL,CONSUMABLE,NARITA_ABC,CRITICALITY_SCORE
+    ),
+    
+source_data as (
+  SELECT
+    MM.MATERIAL_NUMBER,
+    MM.MATERIAL_DESCRIPTION,
+    MM.ORDER_ITEM_NAME,
+    MM.SPECIFIC_CUSTOMER_SELLABLE_INDICATOR_TEXT,
+    MM.AVAILABLE_FOR_SALE_TEXT,
+    MM.MATERIAL_GROUP_2_TEXT,
+    MM.STANDARD_COST,
+    MM.SALES_PRICE,
+    MM.MAX_LT,
+    MM.BASE_UOM,
+    MM.INTEL_FLAG,
+    MM.COUNTRY_OF_ORIGIN,
+    MM.ABC_GLOBAL,
+    MM.ABC_INTEL,
+    MM.DISTRIBUTION_CHAIN_SPECIFIC_MATERIAL_STATUS,
+    CONSUMABLE,
+    NARITA_ABC, 
+    CRITICALITY_SCORE,
+    D930_ROP,
+    D930_SS,
+    D930_MAX,
+    D830_ROP,
+    D830_SS,
+    D830_MAX,
+    E130_ROP,
+    E130_SS,
+    E130_MAX,
+    E430_ROP,
+    E430_SS,
+    E430_MAX,
+    B330_ROP,
+    B330_SS,
+    B330_MAX,
+    E230_ROP,
+    E230_SS,
+    E230_MAX,
+    E330_ROP,
+    E330_SS,
+    E330_MAX,
+    B230_ROP,
+    B230_SS,
+    B230_MAX,
+    A530_ROP,
+    A530_SS,
+    A530_MAX,
+    F430_ROP,
+    F430_SS,
+    F430_MAX
+from {{ ref('SILVER__TEA_INTEL_SMS__MATERIAL_MASTER_INTEL') }} as MM
+left join ROP_ALL as ROPSS
+ON ROPSS.MATERIAL = MM.MATERIAL_NUMBER
+),
+transform_data as (
+    SELECT
+    '{{ invocation_id }}' AS _AUDIT_LOG_ID, 
+    SHA2('hash_me') as _ROW_HASH , 
+    MATERIAL_NUMBER,
+    MATERIAL_DESCRIPTION,
+    ORDER_ITEM_NAME,
+    SPECIFIC_CUSTOMER_SELLABLE_INDICATOR_TEXT,
+    AVAILABLE_FOR_SALE_TEXT,
+    MATERIAL_GROUP_2_TEXT,
+    STANDARD_COST,
+    SALES_PRICE,
+    MAX_LT,
+    BASE_UOM,
+    INTEL_FLAG,
+    COUNTRY_OF_ORIGIN,
+    ABC_GLOBAL,
+    ABC_INTEL,
+    DISTRIBUTION_CHAIN_SPECIFIC_MATERIAL_STATUS,
+    CONSUMABLE,
+    NARITA_ABC, 
+    CRITICALITY_SCORE,
+    D930_ROP,
+    D930_SS,
+    D930_MAX,
+    D830_ROP,
+    D830_SS,
+    D830_MAX,
+    E130_ROP,
+    E130_SS,
+    E130_MAX,
+    E430_ROP,
+    E430_SS,
+    E430_MAX,
+    B330_ROP,
+    B330_SS,
+    B330_MAX,
+    E230_ROP,
+    E230_SS,
+    E230_MAX,
+    E330_ROP,
+    E330_SS,
+    E330_MAX,
+    B230_ROP,
+    B230_SS,
+    B230_MAX,
+    A530_ROP,
+    A530_SS,
+    A530_MAX,
+    F430_ROP,
+    F430_SS,
+    F430_MAX
+from source_data
+),
+type_data as (
+    SELECT 
+    CAST(_AUDIT_LOG_ID AS VARCHAR(128)) AS _AUDIT_LOG_ID,
+    CAST(_ROW_HASH AS VARCHAR(128)) AS _ROW_HASH,
+    MATERIAL_NUMBER,
+    MATERIAL_DESCRIPTION,
+    ORDER_ITEM_NAME,
+    SPECIFIC_CUSTOMER_SELLABLE_INDICATOR_TEXT,
+    AVAILABLE_FOR_SALE_TEXT,
+    MATERIAL_GROUP_2_TEXT,
+    CAST(STANDARD_COST AS NUMBER(38,2)) AS STANDARD_COST,
+    CAST(SALES_PRICE AS NUMBER(38,2)) AS SALES_PRICE,
+    MAX_LT,
+    BASE_UOM,
+    INTEL_FLAG,
+    COUNTRY_OF_ORIGIN,
+    ABC_GLOBAL,
+    ABC_INTEL,
+    DISTRIBUTION_CHAIN_SPECIFIC_MATERIAL_STATUS,
+    CONSUMABLE,
+    NARITA_ABC,
+    CRITICALITY_SCORE,
+    CAST(D930_ROP AS NUMBER(38,5)) AS D930_ROP,
+    CAST(D930_SS AS NUMBER(38,5)) AS D930_SS,
+    CAST(D930_MAX AS NUMBER(38,5)) AS D930_MAX,
+    CAST(D830_ROP AS NUMBER(38,5)) AS D830_ROP,
+    CAST(D830_SS AS NUMBER(38,5)) AS D830_SS,
+    CAST(D830_MAX AS NUMBER(38,5)) AS D830_MAX,
+    CAST(E130_ROP AS NUMBER(38,5)) AS E130_ROP,
+    CAST(E130_SS AS NUMBER(38,5)) AS E130_SS,
+    CAST(E130_MAX AS NUMBER(38,5)) AS E130_MAX,
+    CAST(E430_ROP AS NUMBER(38,5)) AS E430_ROP,
+    CAST(E430_SS AS NUMBER(38,5)) AS E430_SS,
+    CAST(E430_MAX AS NUMBER(38,5)) AS E430_MAX,
+    CAST(B330_ROP AS NUMBER(38,5)) AS B330_ROP,
+    CAST(B330_SS AS NUMBER(38,5)) AS B330_SS,
+    CAST(B330_MAX AS NUMBER(38,5)) AS B330_MAX,
+    CAST(E230_ROP AS NUMBER(38,5)) AS E230_ROP,
+    CAST(E230_SS AS NUMBER(38,5)) AS E230_SS,
+    CAST(E230_MAX AS NUMBER(38,5)) AS E230_MAX,
+    CAST(E330_ROP AS NUMBER(38,5)) AS E330_ROP,
+    CAST(E330_SS AS NUMBER(38,5)) AS E330_SS,
+    CAST(E330_MAX AS NUMBER(38,5)) AS E330_MAX,
+    CAST(B230_ROP AS NUMBER(38,5)) AS B230_ROP,
+    CAST(B230_SS AS NUMBER(38,5)) AS B230_SS,
+    CAST(B230_MAX AS NUMBER(38,5)) AS B230_MAX,
+    CAST(A530_ROP AS NUMBER(38,5)) AS A530_ROP,
+    CAST(A530_SS AS NUMBER(38,5)) AS A530_SS,
+    CAST(A530_MAX AS NUMBER(38,5)) AS A530_MAX,
+    CAST(F430_ROP AS NUMBER(38,5)) AS F430_ROP,
+    CAST(F430_SS AS NUMBER(38,5)) AS F430_SS,
+    CAST(F430_MAX AS NUMBER(38,5)) AS F430_MAX
+from transform_data
+)
+select * from type_data

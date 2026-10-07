@@ -1,0 +1,4470 @@
+models:
+- name: BRONZE__TMEA_QUALITY__SAPO_ASSIGNMENT_TASK_LISTS_MATERIALS
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: SUCHFELD
+    description: Search Field for Customer-Specific Task List Selection
+  - name: PLNNR
+    description: Key for Task List Group
+  - name: ZAEHL
+    description: Internal counter
+  - name: ZKRIZ
+    description: Counter for additional criteria
+  - name: MATNR
+    description: Material Number
+  - name: PARKZ
+    description: 'Indicator: inactive changes'
+  - name: AENNR
+    description: Change Number
+  - name: POSNR
+    description: Sales Document Item
+  - name: MS_OBJTYPE
+    description: Type of Object for Multiple Specifications
+  - name: PLNAL
+    description: Group Counter
+  - name: WERKS
+    description: Plant
+  - name: PSPNR
+    description: Work breakdown structure element (WBS element)
+  - name: DATUV
+    description: Valid-From Date
+  - name: LOEKZ
+    description: Deletion Indicator
+  - name: PLNTY
+    description: Task List Type
+  - name: TECHV
+    description: Technical status from
+  - name: VBELN
+    description: Sales Document
+  - name: ANDAT
+    description: Date record created on
+  - name: MS_OBJECT
+    description: Object for Multiple Specifications
+  - name: AENAM
+    description: Name of person who changed object
+  - name: LIFNR
+    description: Vendor's account number
+  - name: AEDAT
+    description: Date of Last Change
+  - name: KUNR
+    description: Account number of customer
+  - name: MANDT
+    description: Client
+  - name: ANNAM
+    description: User who created record
+- name: BRONZE__TMEA_QUALITY__SAPO_CODE_GROUP_TEXTS
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: INAKTIV
+    description: Status of Code Group or Code Record
+  - name: LTEXTV
+    description: Long Text Exists for the Code Group
+  - name: KATALOGART
+    description: Catalog
+  - name: MANDANT
+    description: Client
+  - name: CODEGRUPPE
+    description: Code Group
+  - name: KURZTEXT
+    description: Short Description of the Code Group
+  - name: SPRACHE
+    description: Language Key
+- name: BRONZE__TMEA_QUALITY__SAPO_CODE_TEXTS
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: CODEGRUPPE
+    description: Code Group
+  - name: VERSION
+    description: Version Number
+  - name: MANDT
+    description: Client
+  - name: SPRACHE
+    description: Language Key
+  - name: GUELTIGAB
+    description: Valid-From Date
+  - name: KATALOGART
+    description: Catalog
+  - name: LTEXTV
+    description: Long Text Exists for the Code
+  - name: CODE
+    description: Code
+  - name: GELOESCHT
+    description: Data Record Was Deleted
+  - name: INAKTIV
+    description: Status of Code Group or Code Record
+  - name: KURZTEXT
+    description: Short Text for Code (Up to 40 Characters in Length)
+- name: BRONZE__TMEA_QUALITY__SAPO_DOCUMENT_SEGMENT_MATERIAL
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _CAPTUREDATETIME
+    description: Check the _CAPTUREDATETIME column in the BRONZE.TMEA_QUALITY.SAPO_DOCUMENT_SEGMENT_MATERIAL
+      table to ensure it falls within the last 36-hour interval.
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 72
+  - name: WERTU
+    description: Value Updating in Material Master Record
+  - name: VPTNR
+    description: Partner account number
+  - name: BUZEI
+    description: Number of Line Item Within Accounting Document
+  - name: TCODE2_MKPF
+    description: Transaction Code
+  - name: HSDAT
+    description: Date of Manufacture
+  - name: MATBF
+    description: Material in Respect of Which Stock is Managed
+  - name: CPUDT_MKPF
+    description: Day On Which Accounting Document Was Entered
+  - name: LGNUM
+    description: Warehouse Number / Warehouse Complex
+  - name: EQUNR
+    description: Equipment Number
+  - name: FSH_SEASON
+    description: Season
+  - name: UMZST
+    description: Status of Transfer Batch
+  - name: DABRBZ
+    description: Reference date for settlement
+  - name: TXJCD
+    description: Tax Jurisdiction
+  - name: FSH_THEME
+    description: Fashion Theme
+  - name: WRF_CHARSTC3
+    description: Characteristic Value 3
+  - name: CHARG
+    description: Batch Number
+  - name: LGORT
+    description: Storage Location
+  - name: WEMPF
+    description: Goods recipient
+  - name: MEINS
+    description: Base Unit of Measure
+  - name: MJAHR
+    description: Material Document Year
+  - name: KZVBR
+    description: Consumption posting
+  - name: J_1AGIRUPD
+    description: Goods issue revaluation performed
+  - name: UMZUS
+    description: Status key of transfer batch
+  - name: XSKST
+    description: 'Indicator: Statistical Posting to Cost Center'
+  - name: WEANZ
+    description: Number of GR/GI Slips to Be Printed
+  - name: KBLNR
+    description: Document number for earmarked funds
+  - name: BSTME
+    description: Purchase Order Unit of Measure
+  - name: XSPRO
+    description: 'Indicator: Posting to Project Is Statistical'
+  - name: LBKUM
+    description: Total valuated stock before the posting
+  - name: MBLNR
+    description: Number of Material Document
+  - name: SHKUM
+    description: Debit/credit indicator in revaluation
+  - name: TBPOS
+    description: Transfer Requirement Item
+  - name: BELUM
+    description: Accounting Document Number
+  - name: XMACC
+    description: Multiple Account Assignment
+  - name: VBELP_IM
+    description: Delivery Item
+  - name: SGT_RCAT
+    description: Requirement Segment
+  - name: VKMWS
+    description: Tax on Sales/Purchases Code
+  - name: KOSTL
+    description: Cost Center
+  - name: CUOBJ_CH
+    description: Internal object number of the batch classification
+  - name: FSH_DEALLOC_QTY
+    description: ARun Allocated Quantity
+  - name: ABLAD
+    description: Unloading Point
+  - name: PS_PSP_PNR
+    description: Work Breakdown Structure Element (WBS Element)
+  - name: IMKEY
+    description: Internal Key for Real Estate Object
+  - name: LFBNR
+    description: Document No. of a Reference Document
+  - name: RSNUM
+    description: Number of reservation/dependent requirements
+  - name: KZSTR
+    description: Transaction/event is relevant to statistics
+  - name: ZEILE
+    description: Item in Material Document
+  - name: BESTQ
+    description: Stock Category in the Warehouse Management System
+  - name: USNAM_MKPF
+    description: User Name
+  - name: XOBEW
+    description: Vendor Stock Valuation Indicator
+  - name: LSMNG
+    description: Quantity in Unit of Measure from Delivery Note
+  - name: AUFNR
+    description: Order Number
+  - name: PROJN
+    description: 'Old: Project number : No longer used --> PS_POSNR'
+  - name: BUZUM
+    description: Number of Line Item Within Accounting Document
+  - name: PRZNR
+    description: Business Process
+  - name: BNBTR
+    description: Delivery costs in local currency
+  - name: EMLIF
+    description: Vendor to be supplied/who is to receive delivery
+  - name: PALAN
+    description: WMS Number of pallets
+  - name: KUNNR
+    description: Account number of customer
+  - name: XBEAU
+    description: Purchase order created at time of goods receipt
+  - name: LGPLA
+    description: Storage Bin
+  - name: MANDT
+    description: Client
+  - name: TBPRI
+    description: Transfer Priority
+  - name: ZEKKN
+    description: Sequential Number of Account Assignment
+  - name: VKWRA
+    description: Value at sales prices excluding value-added tax
+  - name: XRUEM
+    description: Allow Posting to Previous Period (Backposting)
+  - name: OICONDCOD
+    description: Joint Venture Indicator (Condition Key)
+  - name: BUSTM
+    description: Posting string for quantities
+  - name: PARENT_ID
+    description: Identifier of immediately superior line
+  - name: SAKTO
+    description: G/L Account Number
+  - name: XWSBR
+    description: Reversal of GR allowed for GR-based IV despite invoice
+  - name: VGART_MKPF
+    description: Transaction/Event Type
+  - name: SJAHR
+    description: Material Document Year
+  - name: FKBER
+    description: Functional Area
+  - name: EXBWR
+    description: Externally Entered Posting Amount in Local Currency
+  - name: RSART
+    description: Record type
+  - name: RSPOS
+    description: Item Number of Reservation / Dependent Requirements
+  - name: FSH_COLLECTION
+    description: Fashion Collection
+  - name: MAA_URZEI
+    description: Original Line for Account Assignment Item in Material Doc.
+  - name: XBLVS
+    description: 'Indicator: posting in warehouse management system'
+  - name: EBELP
+    description: Item Number of Purchasing Document
+  - name: QINSPST
+    description: Status of Goods Receipt Inspection
+  - name: WRF_CHARSTC1
+    description: Characteristic Value 1
+  - name: NSCHN
+    description: 'Ind.: interim storage posting for dest.stor.type and bin'
+  - name: PPRCTR
+    description: Partner Profit Center
+  - name: UMSOK
+    description: Special stock indicator for physical stock transfer
+  - name: PRCTR
+    description: Profit Center
+  - name: LINE_DEPTH
+    description: Hierarchy level of line in document
+  - name: BWART
+    description: Movement type (inventory management)
+  - name: EXVKW
+    description: Externally Entered Sales Value in Local Currency
+  - name: ZUSCH
+    description: Batch status key
+  - name: FSH_SEASON_YEAR
+    description: Season Year
+  - name: CPUTM_MKPF
+    description: Time of Entry
+  - name: BWLVS
+    description: Movement Type for Warehouse Management
+  - name: J_1BEXBASE
+    description: Alternate base amount in document currency
+  - name: MAT_PSPNR
+    description: Valuated Sales Order Stock WBS Element
+  - name: LFPOS
+    description: Item of a Reference Document
+  - name: INSMK
+    description: Stock Type
+  - name: KBLPOS
+    description: 'Earmarked Funds: Document Item'
+  - name: LSTAR
+    description: Activity Type
+  - name: DMBUM
+    description: Revaluation amount on back-posting to a previous period
+  - name: MENGU
+    description: Quantity Updating in Material Master Record
+  - name: BEMOT
+    description: Accounting Indicator
+  - name: BPMNG
+    description: Quantity in Purchase Order Price Unit
+  - name: BUALT
+    description: Amount Posted in Alternative Price Control
+  - name: EMATN
+    description: Material number corresponding to manufacturer part number
+  - name: XWOFF
+    description: Calculation of val. open
+  - name: GRUND
+    description: Reason for Movement
+  - name: KDAUF
+    description: Sales Order Number
+  - name: ZUSTD_T156M
+    description: Stock Type Modification (Read from Table T156M)
+  - name: XBLNR_MKPF
+    description: Reference Document Number
+  - name: LFBJA
+    description: Fiscal Year of a Reference Document
+  - name: VKWRT
+    description: Value at Sales Prices Including Value-Added Tax
+  - name: BUSTW
+    description: Posting String for Values
+  - name: SGT_SCAT
+    description: Stock Segment
+  - name: URZEI
+    description: Original line in material document
+  - name: KSTRG
+    description: Cost Object
+  - name: BWTAR
+    description: Valuation Type
+  - name: LINE_ID
+    description: Unique identification of document line
+  - name: WAERS
+    description: Currency Key
+  - name: ANLN2
+    description: Asset Subnumber
+  - name: KZBEW
+    description: Movement Indicator
+  - name: FSH_UMSEA
+    description: Receiving/Issuing Season
+  - name: SOBKZ
+    description: Special Stock Indicator
+  - name: SGT_UMSCAT
+    description: Receiving/Issuing Stock Segment
+  - name: FSH_UMSEA_YR
+    description: Receiving/Issuing Season Year
+  - name: OINAVNW
+    description: Non-deductible input tax
+  - name: BPRME
+    description: Order Price Unit (Purchasing)
+  - name: EBELN
+    description: Purchase order number
+  - name: SPE_GTS_STOCK_TY
+    description: GTS Stock Type
+  - name: GRANT_NBR
+    description: Grant
+  - name: MAT_KDAUF
+    description: Sales order number of valuated sales order stock
+  - name: VPRSV
+    description: Price control indicator
+  - name: VFDAT
+    description: Shelf Life Expiration or Best-Before Date
+  - name: UMMAT
+    description: Receiving/Issuing Material
+  - name: SMBLP
+    description: Item in Material Document
+  - name: LSMEH
+    description: Unit of Measure From Delivery Note
+  - name: AUFPS
+    description: Order item number
+  - name: APLZL
+    description: Internal counter
+  - name: XSERG
+    description: 'Indicator: Posting to Profitability Analysis Is Statistical'
+  - name: XAUTO
+    description: Item automatically created
+  - name: TANUM
+    description: Transfer Order Number
+  - name: XSAUF
+    description: 'Indicator: Posting to Order Is Statistical'
+  - name: WRF_CHARSTC2
+    description: Characteristic Value 2
+  - name: UMCHA
+    description: Receiving/Issuing Batch
+  - name: UMMAB
+    description: Receiving/Issuing Material
+  - name: UBNUM
+    description: Posting Change Number
+  - name: FSH_UMCOLL
+    description: Receiving/Issuing Collection
+  - name: BERKZ
+    description: Material Staging Indicator for Production Supply
+  - name: SHKZG
+    description: Debit/Credit Indicator
+  - name: ZUSTD
+    description: Batch in Restricted-Use Stock
+  - name: VBELN_IM
+    description: Delivery
+  - name: BUKRS
+    description: Company Code
+  - name: PBAMG
+    description: Quantity
+  - name: XRUEJ
+    description: 'Indicator: post to previous year'
+  - name: LGTYP
+    description: Storage Type
+  - name: KDPOS
+    description: Item number in Sales Order
+  - name: LIFNR
+    description: Vendor's account number
+  - name: PARBU
+    description: Clearing company code
+  - name: BSTMG
+    description: Goods receipt quantity in order unit
+  - name: KOKRS
+    description: Controlling Area
+  - name: DISUB_OWNER
+    description: Owner of stock
+  - name: DMBTR
+    description: Amount in local currency
+  - name: UMLGO
+    description: Receiving/issuing storage location
+  - name: PAOBJNR
+    description: Profitability Segment Number (CO-PA)
+  - name: TBNUM
+    description: Transfer Requirement Number
+  - name: EVERE
+    description: Compliance with Shipping Instructions
+  - name: BELNR
+    description: Accounting Document Number
+  - name: MAT_KDPOS
+    description: Sales Order Item of Valuated Sales Order Stock
+  - name: MATNR
+    description: Material Number
+  - name: MWSKZ
+    description: Tax on Sales/Purchases Code
+  - name: SMBLN
+    description: Number of Material Document
+  - name: BUDAT_MKPF
+    description: Posting Date in the Document
+  - name: WERKS
+    description: Plant
+  - name: PLPLA
+    description: Distribution of Differences
+  - name: AUFPL
+    description: Routing number of operations in the order
+  - name: UMBAR
+    description: Valuation Type of Transfer Batch
+  - name: GSBER
+    description: Business Area
+  - name: KZEAR
+    description: Final issue for this reservation
+  - name: SGT_CHINT
+    description: Discrete Batch Number
+  - name: NPLNR
+    description: Network Number for Account Assignment
+  - name: FSH_UMTHEME
+    description: Receiving/Issuing Theme
+  - name: ANLN1
+    description: Main Asset Number
+  - name: WEUNB
+    description: Goods Receipt, Non-Valuated
+  - name: KZBWS
+    description: Valuation of Special Stock
+  - name: GEBER
+    description: Fund
+  - name: DYPLA
+    description: 'Indicator: dynamic storage bin'
+  - name: UMWRK
+    description: Receiving plant/issuing plant
+  - name: EVERS
+    description: Shipping Instructions
+  - name: MENGE
+    description: Quantity
+  - name: DABRZ
+    description: Reference date for settlement
+  - name: SALK3
+    description: Value of total valuated stock before the posting
+  - name: ERFME
+    description: Unit of entry
+  - name: KZZUG
+    description: Receipt Indicator
+  - name: KDEIN
+    description: Delivery schedule for sales order
+  - name: CONDI
+    description: Joint Venture Indicator (Condition Key)
+  - name: FIPOS
+    description: Commitment Item
+  - name: SGTXT
+    description: Item Text
+  - name: AKTNR
+    description: Promotion
+  - name: ERFMG
+    description: Quantity in unit of entry
+  - name: PARGB
+    description: Trading partner's business area
+  - name: FISTL
+    description: Funds Center
+  - name: GJAHR
+    description: Fiscal Year
+  - name: LLIEF
+    description: Supplying Vendor
+  - name: VSCHN
+    description: 'Ind: interim storage posting for source stor.type and bin'
+  - name: ELIKZ
+    description: '"Delivery Completed" Indicator'
+- name: BRONZE__TMEA_QUALITY__SAPO_GENERAL_MATERIAL_DATA
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _CAPTUREDATETIME
+    description: Check the _CAPTUREDATETIME column in the BRONZE.TMEA_QUALITY.SAPO_GENERAL_MATERIAL_DATA
+      table to ensure it falls within the last 36-hour interval.
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 36
+  - name: EXTWG
+    description: External Material Group
+  - name: MEABM
+    description: Unit of Dimension for Length/Width/Height
+  - name: QQTIMEUOM
+    description: Time Unit for Quarantine Period
+  - name: RETDELC
+    description: Return Code
+  - name: PRDHA
+    description: Product Hierarchy
+  - name: ZZREPPARTSENT
+    description: Part Interface sent
+  - name: MAXDIM_UOM
+    description: Unit of Measure for Maximum Packing Length/Width/Height
+  - name: ZZREPCOSTLOG
+    description: Cost Log
+  - name: MANDT
+    description: Client
+  - name: SIZE2_ATINN
+    description: Internal Char. Number for Characteristics for Second Sizes
+  - name: ENTAR
+    description: Deactivated
+  - name: KZGVH
+    description: Packaging Material is Closed Packaging
+  - name: WEORA
+    description: Acceptance At Origin
+  - name: ILOOS
+    description: 'Indicator: In Bulk/Liquid'
+  - name: ERGEI
+    description: Unit of weight (allowed packaging weight)
+  - name: LIQDT
+    description: Deletion date
+  - name: MAXL
+    description: Maximum Packing Length of Packaging Material
+  - name: ZEIAR
+    description: Document type (without Document Management system)
+  - name: FIBER_CODE4
+    description: Fiber Code for Textiles (Component 4)
+  - name: HAZMAT
+    description: Relevant for Hazardous Substances
+  - name: BSTAT
+    description: Creation Status - Seasonal Procurement
+  - name: BLATT
+    description: Page number of document (without Document Management system)
+  - name: PSTAT
+    description: Maintenance status
+  - name: GEWTO
+    description: Excess Weight Tolerance for Handling unit
+  - name: SIZE1
+    description: Characteristic Value for Main Sizes of Variants
+  - name: AEKLK
+    description: Stock Transfer Net Change Costing
+  - name: MBRSH
+    description: Industry Sector
+  - name: VPSTA
+    description: Maintenance status of complete material
+  - name: MFRGR
+    description: Material freight group
+  - name: HOEHE
+    description: Height
+  - name: PICNUM
+    description: Supersession chain number
+  - name: GEWEI
+    description: Weight Unit
+  - name: LAEDA
+    description: Date of Last Change
+  - name: SERLV
+    description: Level of Explicitness for Serial Number
+  - name: EANNR
+    description: European Article Number (EAN) - obsolete!!!!!
+  - name: ZTEL_PRICEOLD
+    description: Previous Price
+  - name: CMREL
+    description: Relevant for Configuration Management
+  - name: KUNNR
+    description: Competitor
+  - name: MPROF
+    description: Mfr part profile
+  - name: LOGLEV_RETO
+    description: Return to Logistics Level
+  - name: XGCHP
+    description: 'Indicator: Approved batch record required'
+  - name: BEHVO
+    description: Container requirements
+  - name: FIBER_PART5
+    description: Percentage Share of Fiber (Component 5)
+  - name: FIBER_PART2
+    description: Percentage Share of Fiber (Component 2)
+  - name: ZZREPCOSTSTAT
+    description: Cost Interface Status
+  - name: ETIAR
+    description: Label type
+  - name: ZZPARTSENT
+    description: Part Interface sent
+  - name: ZZPHREQ
+    description: TEL Photo Required
+  - name: CARE_CODE
+    description: Care Codes (such as Washing Code, Ironing Code, etc.)
+  - name: FIBER_PART3
+    description: Percentage Share of Fiber (Component 3)
+  - name: PLGTP
+    description: Price Band Category
+  - name: MAXB
+    description: Maximum Packing Width of Packaging Material
+  - name: GDS_RELEVANT
+    description: 'Indicator: Global Data Synchronization-Relevant'
+  - name: COMPL
+    description: Material completion level
+  - name: RMATP
+    description: Reference material for materials packed in same way
+  - name: AESZN
+    description: Document change number (without document management system)
+  - name: COLOR_ATINN
+    description: Internal Charactieristic Number for Color Characteristics
+  - name: KZKUP
+    description: 'Indicator: Material can be co-product'
+  - name: VOLTO
+    description: Excess Volume Tolerance of the Handling Unit
+  - name: KZWSM
+    description: Units of measure usage
+  - name: ZTEL_LEADTIME
+    description: Total replenishment lead time (in workdays)
+  - name: HUTYP
+    description: Handling Unit Type
+  - name: BREIT
+    description: Width
+  - name: MAXH
+    description: Maximum Packing Height of Packaging Material
+  - name: INHAL
+    description: Net contents
+  - name: BBTYP
+    description: Assortment List Type
+  - name: ZZPARTLOG
+    description: Part Log
+  - name: QGRP
+    description: Quality Inspection Group
+  - name: TARE_VAR
+    description: Variable Tare Weight
+  - name: NUMTP
+    description: Category of International Article Number (EAN)
+  - name: MATKL
+    description: Material Group
+  - name: MHDRZ
+    description: Minimum Remaining Shelf Life
+  - name: MSTAE
+    description: Cross-Plant Material Status
+  - name: ZZREPPARTLOG
+    description: Part Log
+  - name: LVORM
+    description: Flag Material for Deletion at Client Level
+  - name: PILFERABLE
+    description: Pilferable
+  - name: GTIN_VARIANT
+    description: Global Trade Item Number Variant
+  - name: FORMT
+    description: Page Format of Production Memo
+  - name: CMETH
+    description: Quantity Conversion Method
+  - name: KZNFM
+    description: 'Indicator: The material has a follow-up material'
+  - name: BLANZ
+    description: Number of sheets (without Document Management system)
+  - name: VABME
+    description: Variable Purchase Order Unit Active
+  - name: FIBER_CODE2
+    description: Fiber Code for Textiles (Component 2)
+  - name: VPREH
+    description: Comparison price unit
+  - name: FASHGRD
+    description: Fashion Grade
+  - name: ZZREPPARTCONF
+    description: Part Confirmed (IPDB)
+  - name: ERVOE
+    description: Volume unit (allowed packaging volume)
+  - name: FIBER_PART1
+    description: Percentage Share of Fiber (Component 1)
+  - name: INHME
+    description: Content unit
+  - name: ZZCOSTSENT
+    description: Cost Sent
+  - name: KZUMW
+    description: Environmentally Relevant
+  - name: GENNR
+    description: Material Number of the Generic Material in Prepack Materials
+  - name: KZEFF
+    description: Assign effectivity parameter values/ override change numbers
+  - name: MSTAV
+    description: Cross-distribution-chain material status
+  - name: PROFL
+    description: Dangerous Goods Indicator Profile
+  - name: ZNIS_USLISTPRC
+    description: (Now) US List Price
+  - name: SERIAL
+    description: Serial Number Profile
+  - name: MFRNR
+    description: Manufacturer number
+  - name: SPROF
+    description: Pricing profile for variants
+  - name: FIBER_CODE3
+    description: Fiber Code for Textiles (Component 3)
+  - name: ZZPARTSTAT
+    description: Part Interface Status
+  - name: LOGUNIT
+    description: 'EWM CW: Logistics Unit of Measure'
+  - name: SPART
+    description: Division
+  - name: FIBER_CODE5
+    description: Fiber Code for Textiles (Component 5)
+  - name: BRAND_ID
+    description: Brand
+  - name: FIBER_CODE1
+    description: Fiber Code for Textiles (Component 1)
+  - name: AENAM
+    description: Name of person who changed object
+  - name: STOFF
+    description: Hazardous material number
+  - name: MCOND
+    description: Material Condition Management
+  - name: ERSDA
+    description: Created On
+  - name: ZZOBSOLETESTAT
+    description: OBS status
+  - name: MSTDE
+    description: Date from which the cross-plant material status is valid
+  - name: CWQTOLGR
+    description: 'EWM-CW: Catch Weight Tolerance Group for EWM'
+  - name: HNDLCODE
+    description: Handling Indicator
+  - name: TEMPB
+    description: Temperature conditions indicator
+  - name: KZKFG
+    description: Configurable Material
+  - name: WRKST
+    description: Basic Material
+  - name: BMATN
+    description: Number of firm's own (internal) inventory-managed material
+  - name: HUTYP_DFLT
+    description: Standard HU Type
+  - name: MSTDV
+    description: Date from which the X-distr.-chain material status is valid
+  - name: ERVOL
+    description: Allowed packaging volume
+  - name: ZNIS_INTLPRC
+    description: (Now) NIS International Price
+  - name: FUELG
+    description: Maximum level (by volume)
+  - name: ZEIFO
+    description: Page format of document (without Document Management system)
+  - name: FREE_CHAR
+    description: Characteristic Value for Evaluation Purposes
+  - name: ZZOBSOLETETRIG
+    description: Obsolete triggered
+  - name: KZREV
+    description: Revision Level Has Been Assigned to the Material
+  - name: DATAB
+    description: Valid-From Date
+  - name: ZTEL_OTSCUST
+    description: OTS/Custom
+  - name: MAXC_TOL
+    description: Overcapacity Tolerance of the Handling Unit
+  - name: MATFI
+    description: Material Is Locked
+  - name: PS_SMARTFORM
+    description: Form Name
+  - name: RAUBE
+    description: Storage conditions
+  - name: KOSCH
+    description: Product allocation determination procedure
+  - name: VOLEH
+    description: Volume Unit
+  - name: MTPOS_MARA
+    description: General item category group
+  - name: ATTYP
+    description: Material Category
+  - name: MAGRV
+    description: 'Material Group: Packaging Materials'
+  - name: ZZREPPARTSTAT
+    description: Part Interface Status
+  - name: ZZOBSOLETESENT
+    description: Obsolete sent
+  - name: ZEIVR
+    description: Document version (without Document Management system)
+  - name: MEINS
+    description: Base Unit of Measure
+  - name: ZZREPLACEEXIST
+    description: Replacement in SAP
+  - name: NSNID
+    description: NATO Item Identification Number
+  - name: RBNRM
+    description: Catalog Profile
+  - name: BRGEW
+    description: Gross Weight
+  - name: MAXC
+    description: Maximum Allowed Capacity of Packaging Material
+  - name: ZZOBSOLETEREG
+    description: Obsolete Registered
+  - name: NORMT
+    description: Industry Standard Description (such as ANSI or ISO)
+  - name: SAISO
+    description: Season Category
+  - name: ZEINR
+    description: Document number (without document management system)
+  - name: WESCH
+    description: 'Quantity: Number of GR/GI slips to be printed'
+  - name: ZZCOSTLOG
+    description: Cost Log
+  - name: BEGRU
+    description: Authorization Group
+  - name: QQTIME
+    description: Quarantine Period
+  - name: RDMHD
+    description: Rounding rule for calculation of SLED
+  - name: ERGEW
+    description: Allowed packaging weight
+  - name: MATNR
+    description: Material Number
+  - name: SATNR
+    description: Cross-Plant Configurable Material
+  - name: GROES
+    description: Size/dimensions
+  - name: STFAK
+    description: Stacking factor
+  - name: CWQREL
+    description: 'EWM CW: Material Is a Catch Weight Material'
+  - name: ZTEL_PRICE
+    description: TEL Price
+  - name: TAKLV
+    description: Tax classification of the material
+  - name: ZZPRICE
+    description: Price exists
+  - name: ZZPARTCONF
+    description: Part Confirmed (IPDB)
+  - name: BWVOR
+    description: Procurement rule
+  - name: WHMATGR
+    description: Warehouse Material Group
+  - name: BISMT
+    description: Old material number
+  - name: MLGUT
+    description: Empties Bill of Material
+  - name: IMATN
+    description: FFF class
+  - name: VOLUM
+    description: Volume
+  - name: MFRPN
+    description: Manufacturer Part Number
+  - name: SIZE1_ATINN
+    description: Internal Char. Number for Characteristics for Main Sizes
+  - name: CADKZ
+    description: CAD Indicator
+  - name: BFLME
+    description: Generic Material with Logistical Variants
+  - name: PRZUS
+    description: 'Indicator: Product composition printed on packaging'
+  - name: SIZE2
+    description: Characteristic Value for Second Size for Variants
+  - name: EAN11
+    description: International Article Number (EAN/UPC)
+  - name: FIBER_PART4
+    description: Percentage Share of Fiber (Component 4)
+  - name: ZTEL_UOM
+    description: TEL Unit of measure
+  - name: HERKL
+    description: Country of Origin of Material (Non-Preferential Origin)
+  - name: SAITY
+    description: Rollout in a Season
+  - name: MTART
+    description: Material Type
+  - name: SLED_BBD
+    description: Expiration Date
+  - name: EKWSL
+    description: Purchasing Value Key
+  - name: ZNIS_TEA_TRANPRC
+    description: (Now) TEA Transfer Price
+  - name: LAENG
+    description: Length
+  - name: MHDHB
+    description: Total shelf life
+  - name: ETIAG
+    description: 'IS-R Labeling: material grouping (deactivated in 4.0)'
+  - name: FERTH
+    description: Production/inspection memo
+  - name: PMATA
+    description: Pricing Reference Material
+  - name: DISST
+    description: Low-Level Code
+  - name: NTGEW
+    description: Net Weight
+  - name: ZZCOSTCONF
+    description: Cost Confirmed (NIS)
+  - name: ZZPHPND
+    description: TEL Photo Pending Storage
+  - name: MHDLP
+    description: Storage percentage
+  - name: ZZPHEXI
+    description: TEL Photo Exists (Stored)
+  - name: COLOR
+    description: Characteristic Value for Colors of Variants
+  - name: IHIVI
+    description: 'Indicator: Highly Viscous'
+  - name: IPRKZ
+    description: Period Indicator for Shelf Life Expiration Date
+  - name: SAISJ
+    description: Season Year
+  - name: ZZREPCOSTSENT
+    description: Cost Sent
+  - name: NRFHG
+    description: Material qualifies for discount in kind
+  - name: TRAGR
+    description: Transportation Group
+  - name: LABOR
+    description: Laboratory/design office
+  - name: ZZOBSOLETELOG
+    description: OBS Log
+  - name: ERNAM
+    description: Name of Person Who Created the Object
+  - name: BSTME
+    description: Purchase Order Unit of Measure
+  - name: BWSCL
+    description: Source of Supply
+  - name: WHSTC
+    description: Warehouse Storage Condition
+  - name: XCHPF
+    description: Batch management requirement indicator
+  - name: ZZREPCOSTCONF
+    description: Cost Confirmed (NIS)
+  - name: QMPUR
+    description: QM in Procurement is Active
+  - name: CWQPROC
+    description: 'EWM CW: Catch Weight Profile for Entering CW Quantity'
+  - name: VHART
+    description: Packaging Material Type
+  - name: ZZCOSTSTAT
+    description: Cost Interface Status
+  - name: CUOBF
+    description: Internal object number
+  - name: INHBR
+    description: Gross contents
+  - name: ETIFO
+    description: Label form
+  description: General Material Data
+- name: BRONZE__TMEA_QUALITY__SAPO_HEADER_DATA_FOR_MRP_DOCUMENT
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: SLKZ6
+    description: Selection indicator for exception groups
+  - name: EISBE
+    description: Safety stock
+  - name: SLKZ3
+    description: Selection indicator for exception groups
+  - name: PLWRK
+    description: Plant
+  - name: DISPO
+    description: MRP Controller
+  - name: DISST
+    description: Low-Level Code
+  - name: KZAUS
+    description: Discontinuation indicator
+  - name: SUM03
+    description: No longer used/do not use!!
+  - name: LFRHY
+    description: Planning cycle
+  - name: DTART
+    description: Type of MRP list
+  - name: PERAZ
+    description: Number of periods for the short-term area
+  - name: AUSZ1
+    description: Exception group in the MRP list
+  - name: BEAZT
+    description: Processing time for purchase order proposal
+  - name: DISGR
+    description: MRP Group
+  - name: SHZET
+    description: Safety time (in workdays)
+  - name: LOSKZ
+    description: Lot-size indicator for the short-term period
+  - name: BDBKZ
+    description: Selection indicator for processed MRP lists
+  - name: GRREL
+    description: Relevant for requirements grouping for project stock
+  - name: MRPPP
+    description: PPC planning calendar
+  - name: HANAON
+    description: HANA Optimizations Active / Inactive
+  - name: SLKZ8
+    description: Selection indicator for exception groups
+  - name: NAUKZ
+    description: 'Indicator: new exception in the MRP list'
+  - name: MTWZT
+    description: Material replenishment lead time
+  - name: SOBSL
+    description: Special procurement type
+  - name: MANDT
+    description: Client
+  - name: AUSZ8
+    description: Exception group in the MRP list
+  - name: VRKZ3
+    description: Processing indicator - 03
+  - name: EKGRP
+    description: Purchasing Group
+  - name: SLKZ1
+    description: Selection indicator for exception groups
+  - name: DISLS
+    description: Lot size (materials planning)
+  - name: SUM01
+    description: Plant stock / only plant segment
+  - name: WEBAZ
+    description: Goods receipt processing time in days
+  - name: SLKZ7
+    description: Selection indicator for exception groups
+  - name: SGT_STATC
+    description: Segmentation Status
+  - name: DISVF
+    description: MRP procedure
+  - name: FABKZ
+    description: 'Indicator: Item Relevant to JIT Delivery Schedules'
+  - name: AHDIS
+    description: MRP relevancy for dependent requirements
+  - name: BSTRF
+    description: Rounding value for purchase order quantity
+  - name: DISMM
+    description: MRP Type
+  - name: SOBES
+    description: Special procurement type
+  - name: LOSVF
+    description: Lot-sizing procedure for short-term period
+  - name: CFLAG
+    description: Aggregated MRP list
+  - name: NEGBS
+    description: Negative stock
+  - name: SHPRO
+    description: Period Profile for Safety Time
+  - name: MSGNR
+    description: Message number
+  - name: AUSZ4
+    description: Exception group in the MRP list
+  - name: BADON
+    description: 'Indicator: BAdI is Active'
+  - name: MINBE
+    description: Reorder Point
+  - name: BDARF
+    description: Requirements quantity from material requirements planning
+  - name: MAABC
+    description: ABC Indicator
+  - name: SLKZ2
+    description: Selection indicator for exception groups
+  - name: AUSZ7
+    description: Exception group in the MRP list
+  - name: SUM05
+    description: No longer used/do not use!!
+  - name: MTART
+    description: Material Type
+  - name: BESKZ
+    description: Procurement Type
+  - name: DSDAT
+    description: MRP date
+  - name: FIXTR
+    description: End of planning time fence (date)
+  - name: BERW4
+    description: Second Receipt Days' Supply
+  - name: BSKFL
+    description: Flag whether stock correction factors exist
+  - name: MEINS
+    description: Base Unit of Measure
+  - name: NFMAT
+    description: Follow-Up Material
+  - name: PERIV
+    description: Fiscal Year Variant
+  - name: BSTMA
+    description: Maximum Lot Size
+  - name: AUSZ5
+    description: Exception group in the MRP list
+  - name: BEADA
+    description: MRP list processing date
+  - name: MSGAR
+    description: Message Type
+  - name: MATNR
+    description: Material Number
+  - name: VRKZ2
+    description: Processing indicator 02
+  - name: SLKZ4
+    description: Selection indicator for exception groups
+  - name: SAUFT
+    description: 'Ind.: Repetitive mfg allowed'
+  - name: MSGV2
+    description: Message variable 02
+  - name: MSGV4
+    description: Message variable 04
+  - name: AUSZ2
+    description: Exception group in the MRP list
+  - name: BSTMI
+    description: Minimum Lot Size
+  - name: MSGID
+    description: Message identification
+  - name: SUM04
+    description: No longer used/do not use!!
+  - name: WRK02
+    description: Planning/production plant
+  - name: DTNUM
+    description: Number of material requirements planning table
+  - name: MFXDT
+    description: Manual firming date
+  - name: SUM02
+    description: No longer used/do not use!!
+  - name: PLDIS
+    description: Planning controller (no longer used)
+  - name: BERW1
+    description: Stock Days' Supply Without Receipts
+  - name: RDPRF
+    description: Rounding Profile
+  - name: AUSDT
+    description: Effective-Out Date
+  - name: SHFLG
+    description: Safety time indicator (with or without safety time)
+  - name: SLKZ5
+    description: Selection indicator for exception groups
+  - name: MSGV3
+    description: Message variable 03
+  - name: AUSZ3
+    description: Exception group in the MRP list
+  - name: MFHKZ
+    description: Planning time fence set manually (MFXDT)
+  - name: BSTFX
+    description: Fixed lot size
+  - name: KZPROMO
+    description: 'Indicator: Material in promotion'
+  - name: MSGV1
+    description: Message variable 01
+  - name: BERW2
+    description: First Receipt Days' Supply
+  - name: HOEBE
+    description: Maximum stock level
+  - name: AUSZ6
+    description: Exception group in the MRP list
+  - name: VRKZ1
+    description: Processing indicator 01
+  - name: RWPRO
+    description: Range of coverage profile
+  - name: PLSCN
+    description: Planning Scenario of Long-Term Planning
+- name: BRONZE__TMEA_QUALITY__SAPO_HEADER_MATERIAL_DOCUMENT
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _CAPTUREDATETIME
+    description: Check the _CAPTUREDATETIME column in the BRONZE.TMEA_QUALITY.SAPO_HEADER_MATERIAL_DOCUMENT
+      table to ensure it falls within the last 36-hour interval.
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 72
+  - name: SPE_BUDAT_ZONE
+    description: Time Zone
+  - name: CPUDT
+    description: Day On Which Accounting Document Was Entered
+  - name: BLAUM
+    description: Document type of revaluation document
+  - name: GTS_CUSREF_NO
+    description: Customs Reference Number for Scrapping
+  - name: XABLN
+    description: Goods Receipt/Issue Slip Number
+  - name: BLART
+    description: Document type
+  - name: FLS_RSTO
+    description: Store Return with Inbound and Outbound Delivery
+  - name: SPE_LOGSYS
+    description: Logical System of EWM Material Document
+  - name: TCODE2
+    description: Transaction Code
+  - name: VGART
+    description: Transaction/Event Type
+  - name: MSR_ACTIVE
+    description: Advanced Returns Management Active
+  - name: SPE_MDNUM_EWM
+    description: Number of Material Document in EWM
+  - name: SPE_BUDAT_UHR
+    description: Time of Goods Issue (Local, Relating to a Plant)
+  - name: LE_VBELN
+    description: Delivery
+  - name: XBLNR
+    description: Reference Document Number
+  - name: BFWMS
+    description: Control posting for external WMS
+  - name: USNAM
+    description: User Name
+  - name: MANDT
+    description: Client
+  - name: AWSYS
+    description: Logical System
+  - name: MJAHR
+    description: Material Document Year
+  - name: KNUMV
+    description: Number of the document condition
+  - name: FRBNR
+    description: Number of Bill of Lading at Time of Goods Receipt
+  - name: BKTXT
+    description: Document Header Text
+  - name: MBLNR
+    description: Number of Material Document
+  - name: BUDAT
+    description: Posting Date in the Document
+  - name: AEDAT
+    description: Date of Last Change
+  - name: BLA2D
+    description: Doc. type for additional doc. in purchase account management
+  - name: BLDAT
+    description: Document Date in Document
+  - name: WEVER
+    description: Version for Printing GR/GI Slip
+  - name: FRATH
+    description: Unplanned delivery costs
+  - name: EXNUM
+    description: Number of foreign trade data in MM and SD documents
+  - name: CPUTM
+    description: Time of Entry
+  - name: TCODE
+    description: Not More Closely Defined Area, Possibly Used for Patchlevels
+- name: BRONZE__TMEA_QUALITY__SAPO_INDIVIDUAL_OBJECT_STATUS
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _CAPTUREDATETIME
+    description: Check the _CAPTUREDATETIME column in the BRONZE.TMEA_QUALITY.SAPO_INDIVIDUAL_OBJECT_STATUS
+      table to ensure it falls within the last 36-hour interval.
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 72
+  - name: INACT
+    description: 'Indicator: Status Is Inactive'
+  - name: CHGNR
+    description: Change number
+  - name: OBJNR
+    description: Object number
+  - name: MANDT
+    description: Client
+  - name: STAT
+    description: Object status
+- name: BRONZE__TMEA_QUALITY__SAPO_INSPECTION_LOT_RECORD
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _CAPTUREDATETIME
+    description: Check the _CAPTUREDATETIME column in the BRONZE.TMEA_QUALITY.SAPO_INSPECTION_LOT_RECORD
+      table to ensure it falls within the last 36-hour interval.
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 72
+  - name: XCHPF
+    description: Batch management requirement indicator
+  - name: OBJNR
+    description: Object number
+  - name: PSTYP
+    description: Item category in purchasing document
+  - name: LOSMENGE
+    description: Inspection Lot Quantity
+  - name: LOS_REF
+    description: Inspection Lot Number Which Is Referenced
+  - name: KONTO
+    description: G/L Account Number
+  - name: QPMATLOS
+    description: Allowed Share of Scrap
+  - name: ANLN2
+    description: Asset Subnumber
+  - name: STAT36
+    description: Field Not Used as of 3.0       Field Reserved for SAP
+  - name: ABNUM
+    description: Maintenance Plan Call Number
+  - name: LS_KDAUF
+    description: Sales Order Number
+  - name: PLNAL
+    description: Group Counter
+  - name: LS_VKORG
+    description: Sales Organization
+  - name: SIGNSTRAT_UD
+    description: 'Signature Strategy with Individual Signature: Usage Decision'
+  - name: LMENGELZ
+    description: Sample Quantity for Long-Term Characteristics
+  - name: KZERSTLIEF
+    description: Field Not Used as of 3.0       Field Reserved for SAP
+  - name: LMENGE06
+    description: Quantity Posted to Another Material
+  - name: ENSTEHDAT
+    description: Date of Lot Creation
+  - name: MBLNR
+    description: Number of Material Document
+  - name: SELKUNNR
+    description: Account number of customer
+  - name: AENDERER
+    description: Name of User who Most Recently Changed the Data Record
+  - name: AUFNR_CO
+    description: Order Number for Recording Appraisal Costs
+  - name: SA_AUFNR
+    description: Run schedule header number
+  - name: LAGORTCHRG
+    description: Storage Location
+  - name: ERSTELDAT
+    description: Date on Which the Data Record Was Created
+  - name: BUKRS
+    description: Company Code
+  - name: KSTRG
+    description: Cost Object
+  - name: ZEUGNISBIS
+    description: Valid-To Date for The Batch Certificate
+  - name: KDPOS
+    description: Sales Order Item of Valuated Sales Order Stock
+  - name: STAT11
+    description: GR blocked stock
+  - name: KZVBR
+    description: Consumption posting
+  - name: LGPLA
+    description: Storage Bin
+  - name: AENDERDAT
+    description: Date on Which Data Record Was Changed
+  - name: WARPL
+    description: Maintenance Plan
+  - name: STAT23
+    description: Inspection Lot Approval
+  - name: LMENGEIST
+    description: Actual Lot Quantity
+  - name: SIGNSTRAT_RR
+    description: 'Signature Strategy: Inspection Lot Results Recording'
+  - name: OFFENNLZMK
+    description: Number of Outstanding Short-Term Chars Which Require Conf.
+  - name: STAT09
+    description: Source Inspection
+  - name: STAT21
+    description: Enter Sample Manually
+  - name: KZSKIPLOT
+    description: Lot Skipped
+  - name: GESSTICHPR_EXT
+    description: Sample Size from External System
+  - name: QKZVERF
+    description: Procedure for Calculating Quality Score
+  - name: CHARGNEU
+    description: Batch to Which Goods Are Transferred
+  - name: KNTTP
+    description: Account Assignment Category
+  - name: IMKEY
+    description: Internal Key for Real Estate Object
+  - name: STAT34
+    description: Stock Postings Completed
+  - name: STRAT
+    description: Maintenance strategy
+  - name: SOBKZ
+    description: Special Stock Indicator
+  - name: EBELP
+    description: Item Number of Purchasing Document
+  - name: NPLNR
+    description: Network Number for Account Assignment
+  - name: STAT06
+    description: Record Appraisal Costs in Individual QM Order
+  - name: KZPZADR
+    description: Field Not Used as of 3.0       Field Reserved for SAP
+  - name: STAT20
+    description: Inspection Plan Required
+  - name: AUFNR
+    description: Order Number
+  - name: GUELTIGAB
+    description: Key Date for Selecting Records or Changing Task Lists
+  - name: ZAEHL1
+    description: Internal counter
+  - name: STAT01
+    description: Inspection Lot is Created Automatically
+  - name: WERKVORG
+    description: Plant Where Stock for Inspection Lot Is Held
+  - name: DYNHEAD
+    description: Level at Which Dynamic Modification Parameters Are Defined
+  - name: SIGN_TYPE_RR
+    description: 'Signature Type: Inspection Lot Results Recording'
+  - name: ENTSTEZEIT
+    description: Time of Lot Creation
+  - name: STAT03
+    description: Usage Decision Mmode (UD Origin)
+  - name: GSBER
+    description: Business Area
+  - name: LMENGE02
+    description: Quantity Posted to Scrap
+  - name: LS_LLAND
+    description: Country of Destination
+  - name: STAT50
+    description: Project as Dynamic Modification Criterion
+  - name: STAT47
+    description: Manufacturer as Dynamic Modification Criterion
+  - name: SIGN_TYPE_UD
+    description: 'Signature Type: Inspection Lot Usage Decision'
+  - name: STAT33
+    description: 'Indicator: Multiple Specifications'
+  - name: STAT26
+    description: 'Indicator: Approved batch record required'
+  - name: STAT36
+    description: Digital Signature for Insp. Lot in Results Recording
+  - name: STAT07
+    description: Inspection with Inspection Points
+  - name: LMENGEZER
+    description: Quantity Destroyed During Inspection
+  - name: OBTYP
+    description: Object Category
+  - name: PAOBJNR
+    description: Profitability Segment Number (CO-PA)
+  - name: KOSTL
+    description: Cost Center
+  - name: LVS_STIMG
+    description: Sample in base unit of measure provided by WM
+  - name: ZAEHL
+    description: Internal counter
+  - name: PS_PSP_PNR
+    description: Valuated Sales Order Stock WBS Element
+  - name: STAT39
+    description: Field Not Used as of 3.0       Field Reserved for SAP
+  - name: ERSTELZEIT
+    description: Time of Lot Creation
+  - name: AUFPS
+    description: Item Number of Reservation / Dependent Requirements
+  - name: AUFPL
+    description: Routing number of operations in the order
+  - name: STAT12
+    description: Confirmation Required for Physical-Sample Drawing
+  - name: STAFO
+    description: Update group for statistics update
+  - name: ZKRIZ
+    description: Counter for additional criteria
+  - name: LMENGESCH
+    description: Defective Quantity in Inspected Quantity
+  - name: STAT46
+    description: Vendor as Dynamic Modification Criterion
+  - name: LTEXTKZBB
+    description: Logs Exist for Usage Decision
+  - name: STAT42
+    description: Field Not Used as of 3.0       Field Reserved for SAP
+  - name: SLWBEZ
+    description: Identification for the Inspection Point Field Combination
+  - name: PRUEFLOS
+    description: Inspection Lot Number
+  - name: ANZGEB
+    description: QM - No. of Containers
+  - name: QMATAUTH
+    description: Material Authorization Group for Activities in QM
+  - name: STAT22
+    description: Inspect with Material Specification
+  - name: MANDANT
+    description: Client
+  - name: LMENGEZUB
+    description: Quantity That Must Be Posted
+  - name: EKORG
+    description: Purchasing Organization
+  - name: KONT_PSPNR
+    description: Work Breakdown Structure Element (WBS Element)
+  - name: ZUSTD
+    description: Field Not Used as of 3.0       Field Reserved for SAP
+  - name: STAT40
+    description: Field Not Used as of 3.0       Field Reserved for SAP
+  - name: SELHERST
+    description: Number of Manufacturer
+  - name: STAT10
+    description: Inspection Specifications from Configuration
+  - name: STAT45
+    description: Material as Dynamic Modification Criterion
+  - name: LS_ROUTE
+    description: Route
+  - name: CUOBJ_CH
+    description: Internal object number of the batch classification
+  - name: KOKRS
+    description: Controlling Area
+  - name: PRBNAVERF
+    description: Sample-Drawing Procedure
+  - name: GESSTICHPR
+    description: Sample Size
+  - name: PLNNR
+    description: Key for Task List Group
+  - name: STAT19
+    description: Documentation Required for Inspection Lot
+  - name: LS_KDPOS
+    description: Item number in Sales Order
+  - name: ZEILE
+    description: Item in Material Document
+  - name: STAT14
+    description: Completion of Short-Term Inspection
+  - name: MATNR
+    description: Material Number
+  - name: DYN
+    description: Skips Allowed
+  - name: MATNRNEU
+    description: Material Number to Which the Quantity is Posted
+  - name: STAT32
+    description: Inspection lot for stability study
+  - name: LS_ABRVW
+    description: Delivery Category
+  - name: PRIO_PUNKTE
+    description: Priority Points
+  - name: STAT35
+    description: Usage Decision Has Been Made
+  - name: PRCTR
+    description: Profit Center
+  - name: BUDAT
+    description: Posting Date in the Document
+  - name: KTEXTMAT
+    description: Short Text for Inspection Object
+  - name: STAT13
+    description: Inspection Point Type
+  - name: WAPOS
+    description: Maintenance item
+  - name: VERID
+    description: Production Version
+  - name: MENGU
+    description: Field Not Used as of 3.0       Field Reserved for SAP
+  - name: INSP_DOC_NUMBER
+    description: Inspection Document Number from External System
+  - name: LMENGE04
+    description: Quantity Posted to Blocked Stock
+  - name: SELPPLVERW
+    description: Task list usage
+  - name: REVLV
+    description: Revision Level
+  - name: EINHPROBE_EXT
+    description: Unit of Measure of External Sample
+  - name: LMENGE09
+    description: Other Quantity (2) Posted from Inspection Lot Stock
+  - name: ETENR
+    description: Delivery Schedule Line Counter
+  - name: SELWERK
+    description: Plant
+  - name: PASTRZEIT
+    description: Inspection Start Time
+  - name: STAT05
+    description: 'Account Assignment Key: Inspection Lot'
+  - name: BWART
+    description: Movement type (inventory management)
+  - name: KONT_KDPOS
+    description: Item number in Sales Order
+  - name: EMATNR
+    description: Material number corresponding to manufacturer part number
+  - name: ART
+    description: Inspection Type
+  - name: STAT18
+    description: Control of Inspection Lot Creation (Lot Summary)
+  - name: APLZL
+    description: Internal counter
+  - name: LIFNR
+    description: Vendor's account number
+  - name: SELLIFNR
+    description: Vendor's account number
+  - name: KDAUF
+    description: Sales order number of valuated sales order stock
+  - name: LMENGE03
+    description: Quantity Posted to Sample
+  - name: SELREVLV
+    description: Revision Level
+  - name: KTEXTLOS
+    description: Short Text
+  - name: DABRZ
+    description: Reference date for settlement
+  - name: LS_POSNR
+    description: Delivery Item
+  - name: STAT02
+    description: Partial Lots Exist
+  - name: LGNUM
+    description: Warehouse Number / Warehouse Complex
+  - name: LMENGEPR
+    description: Quantity Actually Inspected
+  - name: VFDAT
+    description: Shelf Life Expiration or Best-Before Date
+  - name: STAT16
+    description: Inspection Specifications from Batch Determination
+  - name: SERNP
+    description: Serial Number Profile
+  - name: ANZSN
+    description: Number of serial numbers
+  - name: ZUSCH
+    description: Field Not Used as of 3.0       Field Reserved for SAP
+  - name: CUOBJ
+    description: Configuration (internal object number)
+  - name: LGTYP
+    description: Storage Type
+  - name: ANLN1
+    description: Main Asset Number
+  - name: STAT48
+    description: Customer as Dynamic Modification Criterion
+  - name: LICHN
+    description: Vendor Batch Number
+  - name: KONT_KDAUF
+    description: Sales Order Number
+  - name: STAT37
+    description: Field Not Used as of 3.0       Field Reserved for SAP
+  - name: HERSTELLER
+    description: Number of Manufacturer
+  - name: BLART
+    description: Document type
+  - name: LS_KUNAG
+    description: Sold-To Party
+  - name: SPRACHE
+    description: Language Key
+  - name: LTEXTKZ
+    description: Long Text Exists For Inspection Lot
+  - name: LMENGE08
+    description: Other Quantity Posted from Inspection Lot Stock
+  - name: DYNREGEL
+    description: Dynamic Modification Rule
+  - name: QINFSTATUS
+    description: QINF Status
+  - name: LVS_STIKZ
+    description: 'Indicator: what has happened to insp.sample (QM) in WM'
+  - name: STAT31
+    description: Trigger Sample Calculation Manually
+  - name: EXTNUM
+    description: External Numbering of Units to be Inspected
+  - name: OFFEN_LZMK
+    description: Number of Outstanding Long-Term Chars Which Require Conf.
+  - name: PAENDTERM
+    description: End Date of the Inspection
+  - name: EIN
+    description: Serial Number Management Possible
+  - name: PLNTY
+    description: Task List Type
+  - name: LS_KDMAT
+    description: Material belonging to the customer
+  - name: ZUSMKZAEHL
+    description: Number of Characteristics Recorded Additionally
+  - name: PASTRTERM
+    description: Inspection Start Date
+  - name: STAT15
+    description: Production Resource/Tool Saved for Insp. Lot
+  - name: PRSTUFE
+    description: Inspection Stage
+  - name: HERKUNFT
+    description: Inspection Lot Origin
+  - name: LOG_SYSTEM
+    description: Logical System
+  - name: STAT49
+    description: Machine as Dynamic Modification Criterion
+  - name: PPLVERW
+    description: Task list usage
+  - name: SELMATNR
+    description: Material Number
+  - name: STAT44
+    description: Time of Dynamic Modification in Inspection Lot
+  - name: ANTEIL
+    description: Share of Scrap in Inspection Lot
+  - name: STAT43
+    description: Field Not Used as of 3.0       Field Reserved for SAP
+  - name: KZPRADR
+    description: Field Not Used as of 3.0       Field Reserved for SAP
+  - name: KZDYNERF
+    description: Dynamic Modification Is Carried Out
+  - name: PRSCHAERFE
+    description: Inspection Severity
+  - name: EBELN
+    description: Purchasing Document Number
+  - name: LAGORTVORG
+    description: Storage Location for Inspection Lot Stock
+  - name: LMENGE05
+    description: Quantity Posted to Reserves
+  - name: STAT29
+    description: Digital Signature for Confirmation of Phys.-Sample Drawing
+  - name: GEBEH
+    description: Lot Container
+  - name: MENGENEINH
+    description: Base Unit of Measure for Inspection Lot Quantity
+  - name: KUNNR
+    description: Customer (Ship-To Party)
+  - name: PRBNAVV
+    description: Version No. of the Sample-Drawing Procedure
+  - name: EINHPROBE
+    description: Base Unit of Measure for the Sample Unit
+  - name: SIGNSTRAT_SM
+    description: 'Signature Strategy w. Ind.Signature: Physical-Sample Drawing'
+  - name: STAT28
+    description: Select Characteristics Manually
+  - name: CHARG
+    description: Batch Number
+  - name: KZERSTMUST
+    description: Field Not Used as of 3.0       Field Reserved for SAP
+  - name: BEARBSTATU
+    description: Field Not Used as of 3.0       Field Reserved for SAP
+  - name: LMENGE01
+    description: Quantity Posted to Unrestricted-Use Stock
+  - name: AENDERZEIT
+    description: Time of Lot Change
+  - name: STPRVER
+    description: Sampling Procedure
+  - name: STAT38
+    description: Field Not Used as of 3.0       Field Reserved for SAP
+  - name: WERK
+    description: Plant
+  - name: ADDON_DUMMY
+    description: Dummy Field for ADDON Structures in QM
+  - name: STAT25
+    description: Digital Signature for Insp. Lot when Usage Decision Made
+  - name: STAT27
+    description: Inspection Lot is an R/2 Inspection Lot
+  - name: ERSTELLER
+    description: Name of User Who Created the Data Record
+  - name: STAT41
+    description: Field Not Used as of 3.0       Field Reserved for SAP
+  - name: SIGN_TYPE_SM
+    description: 'Signature Type: Physical-Sample Drawing'
+  - name: STSMA
+    description: Status Profile
+  - name: LS_VBELN
+    description: Delivery
+  - name: STAT17
+    description: Manufacturer Part No. Processing Active
+  - name: PPKZTLZU
+    description: Partial Lot Assignment in an Inspection During Production
+  - name: LMENGE07
+    description: Quantity Returned to Vendor
+  - name: STAT04
+    description: Data Record Was Changed Using Customer Exit
+  - name: HPZ
+    description: 100% Inspection
+  - name: INSMK
+    description: Quantity Is or Was in Inspection Stock
+  - name: PAENDZEIT
+    description: Inspection End Time
+  - name: RESPONSIBLE
+    description: Responsible
+  - name: MJAHR
+    description: Material Document Year
+  - name: STAT08
+    description: Automatic Usage Decision Planned
+  - name: TRIALID
+    description: Trial Number
+  - name: STAT30
+    description: Origin of Inspection Lot Unit of Measure for LIS Interface
+- name: BRONZE__TMEA_QUALITY__SAPO_INSPECTION_PROCESSING_USAGE_DECISION
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _CAPTUREDATETIME
+    description: Check the _CAPTUREDATETIME column in the BRONZE.TMEA_QUALITY.SAPO_INSPECTION_PROCESSING_USAGE_DECISION
+      table to ensure it falls within the last 36-hour interval.
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 72
+  - name: VWERKS
+    description: Plant
+  - name: LTEXTKZ
+    description: Long Text for Usage Decision
+  - name: ZAEHLER
+    description: Counter for Usage Decision
+  - name: VCODE
+    description: Usage Decision Code
+  - name: VERSIONAM
+    description: Version Number of the Selected Set Record
+  - name: VAENAME
+    description: Person who Changed the Usage Decision
+  - name: PRUEFLOS
+    description: Inspection Lot Number
+  - name: QKENNZAHL
+    description: Quality Score
+  - name: VDATUM
+    description: Date of Code Used for Usage Decision
+  - name: VKATART
+    description: Catalog
+  - name: VBEWERTUNG
+    description: Code Valuation
+  - name: VAUSWAHLMG
+    description: Selected Set of the Usage Decision
+  - name: VCODEGRP
+    description: Code Group of the Usage Decision
+  - name: STAFO
+    description: Update group for statistics update
+  - name: VNAME
+    description: Person who Made the Usage Decision
+  - name: VERSIONCD
+    description: Version Number of the Code Record
+  - name: MANDANT
+    description: Client
+  - name: VEZEITERF
+    description: Time when Usage Decision Was Recorded
+  - name: VFOLGEAKTI
+    description: Follow-Up Action
+  - name: TEILLOS
+    description: Partial lot number
+  - name: DBEWERTUNG
+    description: Dynamic Modif. Valuation According to Worst Case Principle
+  - name: VORGLFNR
+    description: Current Node Number from Order Counter APLZL
+  - name: VEZEITAEN
+    description: Time when Usage Decision Changed
+  - name: VAEDATUM
+    description: Change Date of Usage Decision
+  - name: KZART
+    description: Inspection Lot, Partial Lot, Single Unit, Interval
+- name: BRONZE__TMEA_QUALITY__SAPO_MATERIAL_DESCRIPTIONS
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: MAKTG
+    description: Material Description in Uppercase for Matchcodes
+  - name: MATNR
+    description: Material Number
+  - name: MANDT
+    description: Client
+  - name: MAKTX
+    description: Material Description
+  - name: SPRAS
+    description: Language Key
+  description: Material Descriptions
+- name: BRONZE__TMEA_QUALITY__SAPO_MATERIAL_GROUP_DESCRIPTIONS
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: MANDT
+    description: Client
+  - name: MATKL
+    description: Material Group
+  - name: WGBEZ
+    description: Material Group Description
+  - name: WGBEZ60
+    description: Long text describing the material group
+  - name: SPRAS
+    description: Language Key
+  description: Material Group Descriptions
+- name: BRONZE__TMEA_QUALITY__SAPO_MATERIAL_VALUATION
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _CAPTUREDATETIME
+    description: Check the _CAPTUREDATETIME column in the BRONZE.TMEA_QUALITY.SAPO_MATERIAL_VALUATION
+      table to ensure it falls within the last 36-hour interval.
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 72
+  - name: MATNR
+    description: Material Number
+  - name: VMKUM
+    description: Total valuated stock in previous period
+  - name: LBWST
+    description: Val. Strat. for Current Plan Price, Sales Order/Proj. Stock
+  - name: SALK3
+    description: Value of Total Valuated Stock
+  - name: KALKV
+    description: 'Indicator: standard cost estimate for previous period'
+  - name: MANDT
+    description: Client
+  - name: OIPPINV
+    description: Prepaid Inventory Flag for Material Valuation Type Segment
+  - name: MLAST
+    description: 'Material Price Determination: Control'
+  - name: XLIFO
+    description: LIFO/FIFO-Relevant
+  - name: ZPLD3
+    description: Date from Which Future Planned Price 3 Is Valid
+  - name: BWSPA
+    description: Valuation margin
+  - name: MBRUE
+    description: MBEWH rec. already exists for per. before last of MBEW per.
+  - name: VVSAL
+    description: Value of total valuated stock in period before last
+  - name: HRKFT
+    description: Origin Group as Subdivision of Cost Element
+  - name: KALKZ
+    description: 'Indicator: standard cost estimate for future period'
+  - name: VVMLB
+    description: Total valuated stock in period before last
+  - name: SALKV
+    description: Value based on moving average price (only with price ctrl S)
+  - name: BWVA3
+    description: Valuation Variant for Previous Standard Cost Estimate
+  - name: ZKDAT
+    description: Date as of which the price is valid
+  - name: ABWKZ
+    description: 'Lowest value: devaluation indicator'
+  - name: KALNR
+    description: Cost Estimate Number for Cost Est. w/o Qty Structure
+  - name: BWPH1
+    description: 'Valuation price based on commercial law: level 2'
+  - name: PDATV
+    description: Fiscal Year of Previous Standard Cost Estimate
+  - name: STPRV
+    description: Previous price
+  - name: ABCIW
+    description: Physical inventory indicator for cycle counting
+  - name: MYPOL
+    description: Pool number for LIFO valuation
+  - name: ZPLD2
+    description: Date from Which Future Planned Price 2 Is Valid
+  - name: VMBKL
+    description: Valuation Class in Previous Period
+  - name: BWPS1
+    description: 'Valuation price based on tax law: level 2'
+  - name: PDATL
+    description: Fiscal Year of Current Standard Cost Estimate
+  - name: KALKL
+    description: Standard Cost Estimate for Current Period
+  - name: VJBWS
+    description: 'Valuation price based on tax law: level 3'
+  - name: OWNPR
+    description: Produced in-house
+  - name: KZIWL
+    description: Phys. inventory indicator for  value-only material
+  - name: VERPR
+    description: Moving Average Price/Periodic Unit Price
+  - name: VJSAV
+    description: Value based on moving average price (previous year)
+  - name: OKLAS
+    description: Valuation Class for Special Stock at the Vendor
+  - name: PPERV
+    description: Period for previous standard cost estimate (deactivated)
+  - name: VMVPR
+    description: Price Control Indicator in Previous Period
+  - name: MTORG
+    description: Origin of the material
+  - name: LFMON
+    description: Current period (posting period)
+  - name: VJSAL
+    description: Value of total valuated stock in previous year
+  - name: ZPLP2
+    description: Future Planned Price 2
+  - name: VMSTP
+    description: Standard price in the previous period
+  - name: VJVPR
+    description: Price Control Indicator in Previous Year
+  - name: LPLPX
+    description: Fixed Portion of Current Planned Price
+  - name: BWTAR
+    description: Valuation Type
+  - name: BWTTY
+    description: Valuation Category
+  - name: PPRDL
+    description: Period of Current Standard Cost Estimate
+  - name: XBEWM
+    description: Valuation based on the batch-specific unit of measure
+  - name: SPERW
+    description: Physical Inventory Blocking Indicator
+  - name: EKLAS
+    description: Valuation Class for Sales Order Stock
+  - name: BWVA2
+    description: Valuation Variant for Current Standard Cost Estimate
+  - name: STPRS
+    description: Standard price
+  - name: QKLAS
+    description: Valuation Class for Project Stock
+  - name: EKALR
+    description: Material Is Costed with Quantity Structure
+  - name: MLMAA
+    description: Material ledger activated at material level
+  - name: PEINH
+    description: Price unit
+  - name: VERS3
+    description: Costing Version of Previous Standard Cost Estimate
+  - name: VERS1
+    description: Costing Version of Future Standard Cost Estimate
+  - name: ZPLP1
+    description: Future Planned Price 1
+  - name: PPERZ
+    description: Period for future standard cost estimate (deactivated)
+  - name: KALSC
+    description: Overhead key (deactivated)
+  - name: MTUSE
+    description: Usage of the material
+  - name: VPRSV
+    description: Price control indicator
+  - name: VMVER
+    description: Moving Average Price/Periodic Unit Price in Previous Period
+  - name: VPLPR
+    description: Previous planned price
+  - name: LBKUM
+    description: Total Valuated Stock
+  - name: KOSGR
+    description: Costing Overhead Group
+  - name: PPERL
+    description: Period for current standard cost estimate (deactivated)
+  - name: VKSAL
+    description: Value of Total Valuated Stock at Sales Price
+  - name: BWVA1
+    description: Valuation Variant for Future Standard Cost Estimate
+  - name: PPRDZ
+    description: Period of Future Standard Cost Estimate
+  - name: VMSAL
+    description: Value of total valuated stock in previous period
+  - name: VBWST
+    description: Valuation Strategy for Previous Plan Price, Special Stock
+  - name: LAEPR
+    description: Date of the last price change
+  - name: ZPLPR
+    description: Future planned price
+  - name: PPRDV
+    description: Period of Previous Standard Cost Estimate
+  - name: VMPEI
+    description: Price unit of previous period
+  - name: KALN1
+    description: Cost Estimate Number - Product Costing
+  - name: VPLPX
+    description: Fixed Portion of Previous Planned Price
+  - name: VMSAV
+    description: Value based on moving average price (previous period)
+  - name: ZKPRS
+    description: Future price
+  - name: LVORM
+    description: Deletion flag for all material data of a valuation type
+  - name: PSTAT
+    description: Maintenance status
+  - name: HKMAT
+    description: Material-related origin
+  - name: BWPEI
+    description: Price unit for valuation prices based on tax/commercial law
+  - name: LPLPR
+    description: Current Planned Price
+  - name: WLINL
+    description: Date of Last Posted Count
+  - name: VJPEI
+    description: Price unit of previous year
+  - name: VVJSL
+    description: Value of total valuated stock in year before last
+  - name: VJVER
+    description: Moving Average Price/Periodic Unit Price in Previous Year
+  - name: VJBKL
+    description: Valuation Class in Previous Year
+  - name: VERS2
+    description: Costing Version of Current Standard Cost Estimate
+  - name: VJSTP
+    description: Standard price in previous year
+  - name: FPLPX
+    description: Fixed Portion of Future Planned Price
+  - name: BKLAS
+    description: Valuation Class
+  - name: BWKEY
+    description: Valuation Area
+  - name: VJBWH
+    description: 'Valuation price based on commercial law: level 3'
+  - name: BWPRS
+    description: 'Valuation price based on tax law: level 1'
+  - name: VJKUM
+    description: Total Valuated Stock in Previous Year
+  - name: TIMESTAMP
+    description: UTC Time Stamp in Short Form (YYYYMMDDhhmmss)
+  - name: VVJLB
+    description: Total valuated stock in year before last
+  - name: ZPLP3
+    description: Future Planned Price 3
+  - name: PDATZ
+    description: Fiscal Year of Future Standard Cost Estimate
+  - name: ZPLD1
+    description: Date from Which Future Planned Price 1 Is Valid
+  - name: LFGJA
+    description: Fiscal Year of Current Period
+  - name: FBWST
+    description: Valuation Strategy for Future Planned Price, Special Stock
+  - name: BWPRH
+    description: 'Valuation price based on commercial law: level 1'
+- name: BRONZE__TMEA_QUALITY__SAPO_MRP_CONTROLLERS
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: PRCTR
+    description: Profit Center
+  - name: EKGRP
+    description: Purchasing Group
+  - name: GSBER
+    description: Business Area
+  - name: DSNAM
+    description: Name of MRP controller
+  - name: USRTYP
+    description: Recipient type
+  - name: MANDT
+    description: Client
+  - name: DSTEL
+    description: MRP controller's telephone number
+  - name: USRKEY
+    description: Object ID for recipient
+  - name: MEMPF
+    description: Recipient Name
+  - name: WERKS
+    description: Plant
+  - name: DISPO
+    description: MRP Controller
+- name: BRONZE__TMEA_QUALITY__SAPO_MRP_TABLE
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: SERNR
+    description: BOM explosion number
+  - name: AUSSL
+    description: Exception message key
+  - name: DELET
+    description: Schedule Line Number MRP Element
+  - name: LGORT
+    description: Storage Location
+  - name: DELNR
+    description: MRP element number
+  - name: DAT01
+    description: Delivery/order finish date
+  - name: UMSKZ
+    description: Special G/L Indicator
+  - name: FIX01
+    description: 'Indicator: Fixing of Lot Size in Planned Order'
+  - name: PRPER
+    description: Forecast period
+  - name: POSVR
+    description: Source item number
+  - name: SORT1
+    description: Sort indicator 01
+  - name: OLDSL
+    description: Key of the second exception message
+  - name: FIX02
+    description: 'Indicator: fixing explosion in planned order'
+  - name: BAUGR
+    description: Material number of higher-level assembly
+  - name: DELKZ
+    description: MRP element
+  - name: WEBAZ
+    description: Goods receipt processing time in days
+  - name: AUFVR
+    description: Source number for order
+  - name: MANDT
+    description: Client
+  - name: ABEKZ
+    description: Exception indicator
+  - name: SOBES
+    description: Special procurement type
+  - name: DELPS
+    description: MRP element item
+  - name: EXTNL
+    description: Indicator for External Procurement
+  - name: REVLV
+    description: Revision Level
+  - name: DTPOS
+    description: Item number of MRP list
+  - name: PLART
+    description: Planning type
+  - name: PLAAB
+    description: Material requirements planning segment
+  - name: MNG03
+    description: Shortage Quantity
+  - name: BESKZ
+    description: Procurement Type
+  - name: WRK01
+    description: Planning Plant
+  - name: PLAKZ
+    description: Indicator for planning segment
+  - name: DTNUM
+    description: Number of material requirements planning table
+  - name: VERSB
+    description: Version Number for Independent Requirements
+  - name: BAART
+    description: P.O./Order type
+  - name: MDMNG
+    description: 'MRP: quantity field (stock in transit, receipt qty, ...)'
+  - name: WRK02
+    description: Planning/production plant
+  - name: MNG02
+    description: Variable scrap quantity
+  - name: VRFKZ
+    description: Availability indicator
+  - name: MNG01
+    description: Quantity received or quantity required
+  - name: RDMNG
+    description: Excess stock quantity
+  - name: UMDAT
+    description: Rescheduling date
+  - name: SORT2
+    description: Sort indicator 02
+  - name: PRIO_REQ
+    description: Requirement Priority
+  - name: EINVR
+    description: Source schedule line number
+  - name: DAT03
+    description: Opening date
+  - name: ADINF
+    description: Field for Additional Information
+  - name: VERID
+    description: Production Version
+  - name: DEL12
+    description: MRP element number
+  - name: DAT00
+    description: Receipt/Requirements date
+  - name: PLUMI
+    description: Receipt/issue indicator
+  - name: VSTAT
+    description: Processing Status
+  - name: PERKZ
+    description: Period Indicator
+  - name: MDFST
+    description: 'Production order status: internal ind. for MRP'
+  - name: PRIO_URG
+    description: Requirement Urgency
+  - name: DBSKZ
+    description: Direct procurement indicator
+  - name: RESLO
+    description: Issuing Storage Location for Stock Transport Order
+  - name: DAT02
+    description: Start/release date
+  - name: DELVR
+    description: MRP element
+  - name: PLANR
+    description: Planning segment number
+  - name: TAG00
+    description: Daily shift (sort indicator 0)
+  - name: UKZ01
+    description: 'Indicator: MRP element can be brought forward'
+- name: BRONZE__TMEA_QUALITY__SAPO_PLANT_DATA_FOR_MATERIAL
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _CAPTUREDATETIME
+    description: Check the _CAPTUREDATETIME column in the BRONZE.TMEA_QUALITY.SAPO_PLANT_DATA_FOR_MATERIAL
+      table to ensure it falls within the last 36-hour interval.
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 72
+  - name: UMRSL
+    description: Conversion Group (Oil, Natural Gas,..)
+  - name: STLAL
+    description: Alternative BOM
+  - name: EISBE
+    description: Safety stock
+  - name: AWSLS
+    description: Variance Key
+  - name: FRTME
+    description: Production unit
+  - name: MAX_TROC
+    description: Maximum Target Range of Coverage
+  - name: GLGMG
+    description: Tied Empties Stock
+  - name: SBDKZ
+    description: Dependent requirements ind. for individual and coll. reqmts
+  - name: VKTRW
+    description: Transit value at sales price for value-only material
+  - name: LADGR
+    description: Loading Group
+  - name: UNETO
+    description: Underdelivery tolerance limit
+  - name: CONS_PROCG
+    description: Consignment Control
+  - name: OBJID
+    description: Object ID
+  - name: KZECH
+    description: Determination of batch entry in the production/process order
+  - name: MABST
+    description: Maximum stock level
+  - name: LAGPR
+    description: Storage costs indicator
+  - name: LOSFX
+    description: Ordering costs
+  - name: SERVG
+    description: IS-R service level
+  - name: PSTAT
+    description: Maintenance status
+  - name: SSQSS
+    description: Control Key for Quality Management in Procurement
+  - name: XCHPF
+    description: Batch management requirement indicator
+  - name: FHORI
+    description: Scheduling Margin Key for Floats
+  - name: FFREI
+    description: Release indicator for production orders
+  - name: SFCPF
+    description: Production Scheduling Profile
+  - name: LGFSB
+    description: Default storage location for external procurement
+  - name: TAKZT
+    description: Takt time
+  - name: BEARZ
+    description: Processing time
+  - name: GPNUM
+    description: 'Production statistics: PRODCOM number for foreign trade'
+  - name: PREFE
+    description: Preference indicator in export/import
+  - name: DISLS
+    description: Lot size (materials planning)
+  - name: VKGLG
+    description: Sales value of tied empties stock
+  - name: AUSME
+    description: Unit of issue
+  - name: XMCNG
+    description: Negative stocks allowed in plant
+  - name: GI_PR_TIME
+    description: Goods Issue Processing Time in Days
+  - name: PRCTR
+    description: Profit Center
+  - name: LTINC
+    description: Lot size increment for  Supply Demand Match
+  - name: OTYPE
+    description: Object Type
+  - name: VINT2
+    description: 'Consumption period: forward'
+  - name: BSTMA
+    description: Maximum Lot Size
+  - name: SOBSK
+    description: Special Procurement Type for Costing
+  - name: PREND
+    description: 'Exemption certificate: Issue date of exemption certificate'
+  - name: SHZET
+    description: Safety time (in workdays)
+  - name: INDUS
+    description: Material CFOP category
+  - name: XCHAR
+    description: Batch management indicator (internal)
+  - name: MANDT
+    description: Client
+  - name: PRFRQ
+    description: Interval until next recurring inspection
+  - name: LGRAD
+    description: Service level
+  - name: EXPME
+    description: Unit of measure for commodity code (foreign trade)
+  - name: RESVP
+    description: Period of adjustment for planned independent requirements
+  - name: VBEAZ
+    description: Shipping processing time
+  - name: DISPO
+    description: MRP Controller
+  - name: DISGR
+    description: MRP Group
+  - name: LZEIH
+    description: Unit for maximum storage period
+  - name: UMLMC
+    description: Stock in transfer (plant to plant)
+  - name: FABKZ
+    description: 'Indicator: Item Relevant to JIT Delivery Schedules'
+  - name: MDACH
+    description: 'Action control: planned order processing'
+  - name: KZBED
+    description: Indicator for Requirements Grouping
+  - name: MTVER
+    description: Material Group Export for Foreign Trade
+  - name: KZPRO
+    description: 'Indicator: withdrawal of stock from production bin'
+  - name: LIZYK
+    description: Deactivated
+  - name: EPRIO
+    description: Stock determination group
+  - name: MMSTD
+    description: Date from which the plant-specific material status is valid
+  - name: VKUMC
+    description: Stock transfer sales value (plant to plant) for VO material
+  - name: TRANZ
+    description: Interoperation time
+  - name: QZGTP
+    description: Certificate Type
+  - name: KZKRI
+    description: 'Indicator: Critical part'
+  - name: FVIDK
+    description: Production Version To Be Costed
+  - name: MEGRU
+    description: Unit of Measure Group
+  - name: MIN_TROC
+    description: Minimum Target Range of Coverage
+  - name: AHDIS
+    description: MRP relevancy for dependent requirements
+  - name: COPAM
+    description: Local field name for CO/PA link to SOP
+  - name: ABFAC
+    description: Air Bouyancy Factor
+  - name: DISPR
+    description: 'Material: MRP profile'
+  - name: VBAMG
+    description: Base quantity for capacity planning in shipping
+  - name: VRBWK
+    description: Reference plant for consumption
+  - name: COMPL
+    description: This field is no longer used
+  - name: KZPSP
+    description: Indicator for cross-project material
+  - name: QMATA
+    description: Material Authorization Group for Activities in QM
+  - name: MATNR
+    description: Material Number
+  - name: SHFLG
+    description: Safety time indicator (with or without safety time)
+  - name: KZPPV
+    description: Indicator for inspection plan (deactivated)
+  - name: SERNP
+    description: Serial Number Profile
+  - name: BWTTY
+    description: Valuation Category
+  - name: FXHOR
+    description: Planning time fence
+  - name: STDPD
+    description: Configurable material
+  - name: DPLHO
+    description: Deployment horizon in days
+  - name: ROTATION_DATE
+    description: Strategy for Putaway and Stock Removal
+  - name: LFGJA
+    description: Fiscal Year of Current Period
+  - name: ITARK
+    description: 'Indicator: Military goods'
+  - name: VRBFK
+    description: Multiplier for reference material for consumption
+  - name: HERKR
+    description: Region of Origin of Material (Non-Preferential Origin)
+  - name: VRBDT
+    description: To date of the material to be copied for consumption
+  - name: MULTIPLE_EKGRP
+    description: Purchasing Across Purchasing Group
+  - name: FEVOR
+    description: Production Supervisor
+  - name: KZKUP
+    description: 'Indicator: Material can be co-product'
+  - name: VSPVB
+    description: Proposed Supply Area in Material Master Record
+  - name: SPROZ
+    description: Sample for quality inspection (in %) (deactivated)
+  - name: BWESB
+    description: Valuated Goods Receipt Blocked Stock
+  - name: KZDIE
+    description: 'Indicator: MRP controller is buyer (deactivated)'
+  - name: RGEKZ
+    description: 'Indicator: Backflush'
+  - name: MISKZ
+    description: Mixed MRP indicator
+  - name: STEUC
+    description: Control code for consumption taxes in foreign trade
+  - name: VRMOD
+    description: Consumption mode
+  - name: NKMPR
+    description: Date according to check sampling inspection (deactivated)
+  - name: MAXLS
+    description: Maximum lot size for Supply Demand Match
+  - name: USEQU
+    description: Quota arrangement usage
+  - name: MCRUE
+    description: MARDH rec. already exists for per. before last of MARD per.
+  - name: CASNR
+    description: CAS number for pharmaceutical products in foreign trade
+  - name: DIBER
+    description: 'Indicator: MRP area exists'
+  - name: DPLPU
+    description: 'Indicator: push distribution'
+  - name: KAUTB
+    description: 'Indicator: "automatic purchase order allowed"'
+  - name: BWSCL
+    description: Source of Supply
+  - name: MATGR
+    description: Group of Materials for Transition Matrix
+  - name: BSTMI
+    description: Minimum Lot Size
+  - name: QUAZT
+    description: Quarantine period (deactivated)
+  - name: VINT1
+    description: 'Consumption period: backward'
+  - name: REF_SCHEMA
+    description: Reference Determination Schema
+  - name: MTVFP
+    description: Checking Group for Availability Check
+  - name: AUSSS
+    description: Assembly scrap in percent
+  - name: RUEZT
+    description: Setup and teardown time
+  - name: FIXLS
+    description: Fixed lot size for Supply Demand Match
+  - name: DPLFS
+    description: Fair share rule
+  - name: ALTSL
+    description: Method for Selecting Alternative Bills of Material
+  - name: KAUSF
+    description: Component scrap in percent
+  - name: KZDKZ
+    description: Documentation required indicator
+  - name: UCHKZ
+    description: Indicator for Original Batch Management
+  - name: PRENC
+    description: 'Exemption certificate: Indicator for legal control'
+  - name: WERKS
+    description: Plant
+  - name: STAWN
+    description: Commodity Code/Import Code Number for Foreign Trade
+  - name: VERKZ
+    description: Version Indicator
+  - name: MINBE
+    description: Reorder Point
+  - name: BSTFE
+    description: Fixed lot size
+  - name: OCMPF
+    description: Overall profile for order change management
+  - name: BSTRF
+    description: Rounding value for purchase order quantity
+  - name: EKGRP
+    description: Purchasing Group
+  - name: WSTGH
+    description: Active substance content (deactivated)
+  - name: SCHGT
+    description: 'Indicator: bulk material'
+  - name: AUTRU
+    description: Reset Forecast Model Automatically
+  - name: APLAL
+    description: Group Counter
+  - name: DISMM
+    description: MRP Type
+  - name: QSSYS
+    description: Required QM System for Vendor
+  - name: KZAGL
+    description: 'Indicator: smooth promotion consumption'
+  - name: LOGGR
+    description: Logistics handling group for workload calculation
+  - name: MOGRU
+    description: 'Common Agricultural Policy: CAP products group-Foreign Trade'
+  - name: LVORM
+    description: Flag Material for Deletion at Plant Level
+  - name: PLIFZ
+    description: Planned Delivery Time in Days
+  - name: PERIV
+    description: Fiscal Year Variant
+  - name: UOMGR
+    description: Unit of Mearsure Group (Oil, Natural Gas,...)
+  - name: PLVAR
+    description: Plan Version
+  - name: MAXLZ
+    description: Maximum Storage Period
+  - name: MINLS
+    description: Minimum lot size for Supply Demand Match
+  - name: PLNTY
+    description: Task List Type
+  - name: UEETK
+    description: 'Indicator: Unlimited Overdelivery Allowed'
+  - name: PRENE
+    description: 'Indicator: Vendor declaration exists'
+  - name: DZEIT
+    description: In-house production time
+  - name: LFRHY
+    description: Planning cycle
+  - name: APOKZ
+    description: 'Indicator: Is material relevant for APO'
+  - name: STLAN
+    description: BOM Usage
+  - name: VZUSL
+    description: Surcharge factor for cost in percent
+  - name: NFMAT
+    description: Follow-Up Material
+  - name: RWPRO
+    description: Range of coverage profile
+  - name: RDPRF
+    description: Rounding Profile
+  - name: LOSGR
+    description: Lot Size for Product Costing
+  - name: AUFTL
+    description: Splitting Indicator
+  - name: PRENG
+    description: Validity date of vendor declaration
+  - name: WEBAZ
+    description: Goods receipt processing time in days
+  - name: CCFIX
+    description: CC indicator is fixed
+  - name: MPDAU
+    description: Mean inspection duration (deactivated)
+  - name: PLNNR
+    description: Key for Task List Group
+  - name: HERBL
+    description: State of manufacture
+  - name: BASMG
+    description: Base quantity
+  - name: LGPRO
+    description: Issue Storage Location
+  - name: KZAUS
+    description: Discontinuation indicator
+  - name: VRVEZ
+    description: Shipping setup time
+  - name: AUSDT
+    description: Effective-Out Date
+  - name: BESKZ
+    description: Procurement Type
+  - name: KZKFK
+    description: 'Indicator: take correction factors into account'
+  - name: PRENO
+    description: Exemption certificate number for legal control
+  - name: QMATV
+    description: Inspection Setup Exists for Material/Plant
+  - name: TRAME
+    description: Stock in Transit
+  - name: SFEPR
+    description: Repetitive manufacturing profile
+  - name: INSMK
+    description: Post to Inspection Stock
+  - name: CONVT
+    description: Conversion types for production figures
+  - name: TARGET_STOCK
+    description: Target Stock
+  - name: NCOST
+    description: Do Not Cost
+  - name: MAABC
+    description: ABC Indicator
+  - name: PERKZ
+    description: Period Indicator
+  - name: ATPKZ
+    description: Replacement part
+  - name: MRPPP
+    description: PPC planning calendar
+  - name: PFREI
+    description: 'Indicator: automatic fixing of planned orders'
+  - name: SAUFT
+    description: 'Ind.: Repetitive mfg allowed'
+  - name: MOWNR
+    description: 'CAP: Number of CAP products list'
+  - name: ABCIN
+    description: Physical inventory indicator for cycle counting
+  - name: MFRGR
+    description: Material freight group
+  - name: KORDB
+    description: 'Indicator: Source list requirement'
+  - name: MMSTA
+    description: Plant-Specific Material Status
+  - name: EISLO
+    description: Minimum Safety Stock
+  - name: SOBSL
+    description: Special procurement type
+  - name: GPMKZ
+    description: 'Indicator: Material Included in Rough-Cut Planning'
+  - name: UEETO
+    description: Overdelivery tolerance limit
+  - name: CUOBJ
+    description: Internal object number
+  - name: CUOBV
+    description: Internal object number of configurable material for planning
+  - name: WZEIT
+    description: Total replenishment lead time (in workdays)
+  - name: FPRFM
+    description: Distribution profile of material in plant
+  - name: FXPRU
+    description: Fixed-Price Co-Product
+  - name: STRGR
+    description: Planning strategy group
+  - name: UCMAT
+    description: Reference Material for Original Batches
+  - name: HERKL
+    description: Country of Origin of Material (Non-Preferential Origin)
+  - name: LFMON
+    description: Current period (posting period)
+  - name: SHPRO
+    description: Period Profile for Safety Time
+  - name: VRBMT
+    description: Reference material for consumption
+  description: Plant Data for Material
+- name: BRONZE__TMEA_QUALITY__SAPO_PRIORITY_TEXT
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: ARTPR
+    description: Priority Type
+  - name: MANDT
+    description: Client
+  - name: PRIOK
+    description: Priority
+  - name: PRIOKX
+    description: Priority Text
+  - name: SPRAS
+    description: Language Key
+- name: BRONZE__TMEA_QUALITY__SAPO_PURCHASING_GROUPS
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: TEL_NUMBER
+    description: 'Telephone no.: dialling code+number'
+  - name: TEL_EXTENS
+    description: 'Telephone no.: Extension'
+  - name: TELFX
+    description: Fax number of purchasing (buyer) group
+  - name: EKGRP
+    description: Purchasing Group
+  - name: EKNAM
+    description: Description of purchasing group
+  - name: LDEST
+    description: 'Spool: Output device'
+  - name: EKTEL
+    description: Telephone number of purchasing group (buyer group)
+  - name: SMTP_ADDR
+    description: E-Mail Address
+  - name: MANDT
+    description: Client
+- name: BRONZE__TMEA_QUALITY__SAPO_QUALITY_NOTIFICATION
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _CAPTUREDATETIME
+    description: Check the _CAPTUREDATETIME column in the BRONZE.TMEA_QUALITY.SAPO_QUALITY_NOTIFICATION
+      table to ensure it falls within the last 36-hour interval.
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 72
+  - name: UII
+    description: Unique Item Identifier
+  - name: VERID
+    description: Production Version
+  - name: PRUEFLOS
+    description: Inspection Lot Number
+  - name: ADRNR
+    description: 'Addresses: Address Number'
+  - name: RESULT_COSTS
+    description: Costs Accepted
+  - name: BUNAME
+    description: Author of a Q/PM Notification
+  - name: SHN_FUNCT_LOC
+    description: Functional Location
+  - name: STRUR
+    description: Required Start Time
+  - name: RM_WERKS
+    description: Plant of production version
+  - name: LS_POSNR
+    description: Delivery Item
+  - name: RGMNG
+    description: Return Delivery Quantity
+  - name: LOGSYSTEM
+    description: Logical System
+  - name: MJAHR
+    description: Material Document Year
+  - name: SHN_OBJID
+    description: Object ID of the resource
+  - name: QMART
+    description: Notification Type
+  - name: MGFRD
+    description: Defective Quantity (External)
+  - name: FEART
+    description: Report Type for Defects Recording
+  - name: KUNUM
+    description: Account Number of Customer
+  - name: PHASE
+    description: Notification Processing Phase
+  - name: KZMLA
+    description: Primary language indicator for text segment
+  - name: SA_AUFNR
+    description: Run schedule header number
+  - name: QMKAT
+    description: Catalog Type - Coding
+  - name: VKBUR
+    description: Sales Office
+  - name: MATKL
+    description: Material Group
+  - name: EMATNR
+    description: Material number corresponding to manufacturer part number
+  - name: TSEGTP
+    description: Template
+  - name: FEKNZ
+    description: Error Records Exist
+  - name: SHN_ORIGIN
+    description: Origin or Use of Shift Note or Report
+  - name: REFNUM
+    description: External Reference Number
+  - name: ERZEIT
+    description: Time, at Which Record Was Added
+  - name: LTRMN
+    description: Required End Date
+  - name: FUNKTION
+    description: Key for Function in Action Box
+  - name: KALNR
+    description: Cost Estimate Number for Cost Est. w/o Qty Structure
+  - name: KDMAT
+    description: Material Number Used by Customer
+  - name: RBNR
+    description: Catalog Profile
+  - name: EBELN
+    description: Purchasing Document Number
+  - name: ARTPR
+    description: Priority Type
+  - name: MANDT
+    description: Client
+  - name: BZMNG
+    description: General Reference Quantity
+  - name: STRMN
+    description: Required start date
+  - name: ARBPL
+    description: Object ID of the Work Center
+  - name: ERDAT
+    description: Date on Which Record Was Created
+  - name: QMDAT
+    description: Date of Notification
+  - name: TSEGFL
+    description: Time segment exists
+  - name: VKGRP
+    description: Sales Group
+  - name: PRDHA
+    description: Product Hierarchy
+  - name: LGORTVORG
+    description: Storage Location for Inspection Lot Stock
+  - name: AEZEIT
+    description: Time of Change
+  - name: LIFNUM
+    description: Vendor Account Number
+  - name: KZLOESCH
+    description: Delete Data Record
+  - name: BEDID
+    description: ID of the capacity requirements record
+  - name: PRIOK
+    description: Priority
+  - name: SHN_EQUIPMENT
+    description: Equipment Number
+  - name: PROFIL_ID
+    description: Object ID
+  - name: BSTNK
+    description: Customer Purchase Order Number
+  - name: LTRUR
+    description: Requested End Time
+  - name: QMGRP
+    description: Code Group - Coding
+  - name: HERSTELLER
+    description: Number of Manufacturer
+  - name: QMTXT
+    description: Short Text
+  - name: ESTIMATED_COSTS
+    description: Estimated Costs for a Claim
+  - name: LICHN
+    description: Vendor Batch Number
+  - name: LS_KDPOS
+    description: Item Number of the SD Document
+  - name: TEILEV
+    description: Usage of Parts
+  - name: AEDAT
+    description: Date of Last Change
+  - name: CHANCE
+    description: Chance of Completing a Claim
+  - name: ERNAM
+    description: Name of Person Who Created the Object
+  - name: RKMNG
+    description: Complaint Quantity
+  - name: MBLNR
+    description: Number of Material Document
+  - name: HERKZ
+    description: Origin of Notification
+  - name: CROBJTY
+    description: Object types of the CIM resource
+  - name: QMCOD
+    description: Coding
+  - name: AUFNR
+    description: Order Number
+  - name: REVLV
+    description: Revision Level
+  - name: MGEIN
+    description: Unit of Measure
+  - name: VBELN
+    description: Sales Order Number
+  - name: KZKRI
+    description: 'Indicator: Critical part'
+  - name: OBJNR_REAL
+    description: Object number of real CO account assignment
+  - name: WAERS
+    description: Currency Key
+  - name: HANDLE
+    description: Globally unique identifier (linked to time segment, etc)
+  - name: BKGRP
+    description: Purchasing Group
+  - name: QWRNUM
+    description: Reference Notification Number
+  - name: PNLKN
+    description: Current Node Number from Order Counter APLZL
+  - name: TZONID
+    description: Origin of Time Zone in Notification
+  - name: OBJNR_STAT
+    description: Auxiliary account assignment 1
+  - name: ARBPLWERK
+    description: Plant for Work Center
+  - name: CHARG
+    description: Batch Number
+  - name: SHN_OBJTY
+    description: Object types of the CIM resource
+  - name: QMNUM
+    description: Notification No
+  - name: VKORG
+    description: Sales Organization
+  - name: KALVAR
+    description: Costing Variant for Postprocessing with Unit Costing
+  - name: KZDKZ
+    description: Documentation required indicator
+  - name: IDNLF
+    description: Material Number Used by Vendor
+  - name: RM_MATNR
+    description: Material number of the production version
+  - name: QMNAM
+    description: Name of Person Reporting Notification
+  - name: BSTDK
+    description: Customer Purchase Order Date
+  - name: AUSWIRK
+    description: Key for a Scenario
+  - name: VTWEG
+    description: Distribution Channel
+  - name: MAKNZ
+    description: Task Records Exist
+  - name: BEZDT
+    description: Notification Reference Date
+  - name: PSP_NR
+    description: WBS Element
+  - name: AUTKZ
+    description: Data Record Created with Function 'Create with Copy Model'
+  - name: LS_KDAUF
+    description: Sales Order Number
+  - name: PROFIL_TYP
+    description: Object Type
+  - name: MATNR
+    description: Material Number
+  - name: SPART
+    description: Division
+  - name: CLAIMED_COSTS
+    description: Costs Claimed
+  - name: LGORTCHARG
+    description: Storage Location of Batch
+  - name: AENAM
+    description: Name of person who changed object
+  - name: BEZUR
+    description: Notification Reference Time
+  - name: EKORG
+    description: Purchasing Organization
+  - name: EBELP
+    description: Item Number of Purchasing Document
+  - name: OPPONENT
+    description: Partner Type
+  - name: PRODDAT
+    description: Production Date
+  - name: MZEIT
+    description: Time of Notification
+  - name: BEDZL
+    description: Internal counter
+  - name: SERIALNR
+    description: Serial Number
+  - name: FERTAUFPL
+    description: Plan Number for Operations in Order (Production Order)
+  - name: QMZAB
+    description: Completion Time of Notification
+  - name: INDTX
+    description: Object Long Text Available
+  - name: DEVICEID
+    description: Additional Device Data
+  - name: FERTAUFNR
+    description: Order Number (Production Order)
+  - name: MGEIG
+    description: Defective Quantity (Internal)
+  - name: RKDAT
+    description: Date of Return Delivery
+  - name: RBNRI
+    description: Origin of Notifications Catalog Profile
+  - name: TZONSO
+    description: Time Zone for Notification
+  - name: MBLPO
+    description: Item in Material Document
+  - name: COAUFNR
+    description: Order Number (QM Order)
+  - name: QMDAB
+    description: Date for Notification Completion
+  - name: MAWERK
+    description: Plant for Material
+  - name: OBJNR
+    description: Object Number for Status Management
+  - name: LS_VBELN
+    description: Delivery
+- name: BRONZE__TMEA_QUALITY__SAPO_QUALITY_NOTIFICATION_CAUSES
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _CAPTUREDATETIME
+    description: Check the _CAPTUREDATETIME column in the BRONZE.TMEA_QUALITY.SAPO_QUALITY_NOTIFICATION_CAUSES
+      table to ensure it falls within the last 36-hour interval.
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 72
+  - name: VUGRP
+    description: Code Group - Party Responsible
+  - name: URCOD
+    description: Cause Code
+  - name: BAUTL
+    description: Cause Assembly
+  - name: VUCOD
+    description: Code for Party Responsible
+  - name: URVER
+    description: Version Number
+  - name: URNUM
+    description: Sequential Number for Cause
+  - name: KZMLA
+    description: Primary language indicator for text segment
+  - name: VUKAT
+    description: Catalog Type - Party Responsible
+  - name: ERZEIT
+    description: Time, at Which Record Was Added
+  - name: URGRP
+    description: Code Group - Causes
+  - name: QMNUM
+    description: Notification No
+  - name: ERNAM
+    description: Name of Person Who Created the Object
+  - name: URKAT
+    description: Catalog Type - Causes
+  - name: URMENGE
+    description: Quantity
+  - name: URTXT
+    description: Cause Text
+  - name: FENUM
+    description: Item Number in Item Record
+  - name: QURNUM
+    description: Sort Number for Cause
+  - name: AENAM
+    description: Name of person who changed object
+  - name: PARNR
+    description: Party Responsible for Cause (Partner Number)
+  - name: MANDT
+    description: Client
+  - name: ERDAT
+    description: Date on Which Record Was Created
+  - name: AEDAT
+    description: Date of Last Change
+  - name: PARVW
+    description: Function for Party Responsible
+  - name: INVOLVPERC
+    description: Involvment in Percentage
+  - name: KZLOESCH
+    description: Delete Data Record
+  - name: INDTX
+    description: Object Long Text Available
+  - name: URMGEIN
+    description: Unit of Measure for Item
+  - name: AEZEIT
+    description: Time of Change
+  - name: AUTKZ
+    description: Data Record Created with Function 'Create with Copy Model'
+- name: BRONZE__TMEA_QUALITY__SAPO_QUALITY_NOTIFICATION_ITEMS
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _CAPTUREDATETIME
+    description: Check the _CAPTUREDATETIME column in the BRONZE.TMEA_QUALITY.SAPO_QUALITY_NOTIFICATION_ITEMS
+      table to ensure it falls within the last 36-hour interval.
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 72
+  - name: KZMLA
+    description: Primary language indicator for text segment
+  - name: EBORT
+    description: Installation Point for Subitem
+  - name: FMGEIN
+    description: Unit of Measure for Item
+  - name: QMNUM
+    description: Notification No
+  - name: PRUEFLINR
+    description: Single-Unit Number for the Unit to Be Inspected
+  - name: MATNR
+    description: Material Number
+  - name: FENUMORG
+    description: Number of Original Item to Which Reference Is Made
+  - name: FEART
+    description: Report Type for Defects Recording
+  - name: POSNR
+    description: Sort Number for Item
+  - name: LSTAR
+    description: Activity Type
+  - name: INFNR
+    description: Number of purchasing info record
+  - name: FMGEIG
+    description: Defective Quantity for Item (Internal)
+  - name: OTVER
+    description: Version Number
+  - name: ERDAT
+    description: Date on Which Record Was Created
+  - name: ANZFEHLER
+    description: Number of Defects Found
+  - name: FENUM
+    description: Item Number in Item Record
+  - name: CROBJTY
+    description: Object types of the CIM resource
+  - name: FECOD
+    description: Problem or Damage Code
+  - name: ARBPLWERK
+    description: Plant for Work Center
+  - name: KZLOESCH
+    description: Delete Data Record
+  - name: PROBENR
+    description: Sample Number
+  - name: FEHLBEW
+    description: Defect Valuation
+  - name: WERKS
+    description: Plant
+  - name: FCOAUFNR
+    description: Order Number (CO Order) for Item
+  - name: FETXT
+    description: Notification Item Short Text
+  - name: FEVER
+    description: Version Number
+  - name: PNLKN
+    description: Current Node Number from Order Counter APLZL
+  - name: AEDAT
+    description: Date of Last Change
+  - name: MERKNR
+    description: Inspection Characteristic Number
+  - name: PHYNR
+    description: Physical Sample Number
+  - name: KZORG
+    description: Originating Defect
+  - name: BAUTL
+    description: Assembly
+  - name: AENAM
+    description: Name of person who changed object
+  - name: AUTKZ
+    description: Data Record Created with Function 'Create with Copy Model'
+  - name: HERPOS
+    description: Origin of Item Record
+  - name: PRZNR
+    description: Business Process
+  - name: UNITFLBEW
+    description: Unit for Defect Valuation
+  - name: FEKAT
+    description: Catalog Type - Problems/Defects
+  - name: MANDT
+    description: Client
+  - name: EKORG
+    description: Purchasing Organization
+  - name: AEZEIT
+    description: Time of Change
+  - name: OTGRP
+    description: Code Group - Object Parts
+  - name: WDFEH
+    description: Repetitive Defect
+  - name: MENGE
+    description: Defective Quantity for Item (Internal)
+  - name: OTKAT
+    description: Catalog Type - Object Parts
+  - name: ERZEIT
+    description: Time, at Which Record Was Added
+  - name: KOSTL
+    description: Cost Center
+  - name: INDTX
+    description: Object Long Text Available
+  - name: FEQKLAS
+    description: Defect Class
+  - name: FMGFRD
+    description: Defective Quantity for Item (External)
+  - name: ARBPL
+    description: Object ID of the Work Center
+  - name: OTEIL
+    description: Part of Object
+  - name: TPLNR
+    description: Functional Location
+  - name: ERNAM
+    description: Name of Person Who Created the Object
+  - name: EQUNR
+    description: Equipment Number
+  - name: KZSYSFE
+    description: Systematic Defect
+  - name: FEGRP
+    description: Code Group - Problem
+- name: BRONZE__TMEA_QUALITY__SAPO_QUALITY_NOTIFICATION_TASKS
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: QMNUM
+    description: Notification No
+  - name: ERLNAM
+    description: Person Who Completed the Task
+  - name: KZLOESCH
+    description: Delete Data Record
+  - name: MNCOD
+    description: Task Code
+  - name: FENUM
+    description: Item Number in Item Record
+  - name: MATXT
+    description: Short Text for Task
+  - name: TZONSO
+    description: Time Zone for Notification
+  - name: EFFECTTEXT
+    description: Effect Text
+  - name: EFFECTPERC
+    description: Effect in Percentage
+  - name: MANDT
+    description: Client
+  - name: PETUR
+    description: Planned Finish Time for Task
+  - name: MMENGE
+    description: Quantity
+  - name: QSMNUM
+    description: Sort Number for Task
+  - name: MNKAT
+    description: Catalog Type - Tasks
+  - name: TZONID
+    description: Origin of Time Zone in Notification
+  - name: BAUTL
+    description: Assembly Affected by the Task
+  - name: FOLGEACT
+    description: Follow-Up Action for Task
+  - name: WDVDAT
+    description: Date on Which Task Was Resubmitted
+  - name: AENAM
+    description: Name of person who changed object
+  - name: AEZEIT
+    description: Time of Change
+  - name: ERNAM
+    description: Name of Person Who Created the Object
+  - name: TZONSM
+    description: Time Zone for Task
+  - name: ERDAT
+    description: Date on Which Record Was Created
+  - name: INDTX
+    description: Object Long Text Available
+  - name: AEDAT
+    description: Date of Last Change
+  - name: FUNKTION
+    description: Key for Function in Action Box
+  - name: FOLACTPROT
+    description: Log for Follow-Up Action
+  - name: PSTUR
+    description: Planned Start Time for Task
+  - name: TSEGTP
+    description: Template
+  - name: PETER
+    description: Planned finish date
+  - name: HANDLE
+    description: Globally unique identifier (linked to time segment, etc)
+  - name: ERLZEIT
+    description: Time at Which Task Was Completed
+  - name: URNUM
+    description: Sequential Number for Cause
+  - name: OBJNR
+    description: Object Number for Status Management
+  - name: AUTKZ
+    description: Data Record Created with Function 'Create with Copy Model'
+  - name: ERZEIT
+    description: Time, at Which Record Was Added
+  - name: KZACTIONBOX
+    description: Created Using Action Box
+  - name: TSEGFL
+    description: Time segment exists
+  - name: MANUM
+    description: Sequential Task Number
+  - name: ABC_TEMPL
+    description: Template
+  - name: PARNR
+    description: Person Responsible for Task (Partner Number)
+  - name: MNVER
+    description: Version Number
+  - name: PSTER
+    description: Planned Start Date
+  - name: PARVW
+    description: Function of Person Responsible for Task
+  - name: ERLDAT
+    description: Date on Which the Task Was Completed
+  - name: MMGEIN
+    description: Unit of Measure for Item
+  - name: KZMLA
+    description: Primary language indicator for text segment
+  - name: MNGRP
+    description: Code Group - Tasks
+- name: BRONZE__TMEA_QUALITY__SAPO_QUANTS
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _CAPTUREDATETIME
+    description: Check the _CAPTUREDATETIME column in the BRONZE.TMEA_QUALITY.SAPO_QUANTS
+      table to ensure it falls within the last 36-hour interval.
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 72
+  - name: IDATU
+    description: Date of last inventory of quant
+  - name: ZEUGN
+    description: Certificate Number
+  - name: BTANR
+    description: Document Number of Last Stock Change in Quant
+  - name: QKAPV
+    description: Capacity usage of quant
+  - name: BZEIT
+    description: Time of last movement
+  - name: WENUM
+    description: Goods Receipt Number
+  - name: TBNUM
+    description: Transfer Requirement Number
+  - name: EDATU
+    description: Date of last placement into stock
+  - name: SPGRU
+    description: Blocking reason
+  - name: CHARG
+    description: Batch Number
+  - name: KOBER
+    description: Picking Area
+  - name: BENUM
+    description: Requirement Number
+  - name: SGT_SCAT
+    description: Stock Segment
+  - name: SKZSE
+    description: 'Blocking indicator: current placement into stock (system)'
+  - name: BTAPS
+    description: Item in transfer order of last stock transfer
+  - name: AZEIT
+    description: Time of last stock removal
+  - name: WERKS
+    description: Plant
+  - name: IVPOS
+    description: Item number in inventory document
+  - name: LGTYP
+    description: Storage Type
+  - name: SKZSA
+    description: 'Blocking Indicator: Current Stock Removal (System)'
+  - name: VFDAT
+    description: Shelf Life Expiration or Best-Before Date
+  - name: TRAME
+    description: Open Transfer Quantity
+  - name: LENUM
+    description: Storage Unit Number
+  - name: KZHUQ
+    description: 'Indicator: Quant is on a handling unit'
+  - name: ZDATU
+    description: Date of last addition to existing stock
+  - name: SKZSI
+    description: 'Blocking Indicator: Current Inventory (System)'
+  - name: MANDT
+    description: Client
+  - name: VIRGO
+    description: Quant does not contain GR data
+  - name: MEINS
+    description: Base Unit of Measure
+  - name: BDATU
+    description: Date of last movement
+  - name: MSR_INSP_GUID
+    description: Inspection GUID
+  - name: WEPOS
+    description: Goods receipt item
+  - name: EZEIT
+    description: Time of last placement into stock
+  - name: SKZUE
+    description: 'Blocking indicator: for putaways (user)'
+  - name: AUSME
+    description: Quantity to remove
+  - name: EINME
+    description: Stock for putaway
+  - name: MATNR
+    description: Material Number
+  - name: MGEWI
+    description: Weight of material
+  - name: PLPOS
+    description: Position in storage bin
+  - name: LGPLA
+    description: Storage Bin
+  - name: GESME
+    description: Total Quantity
+  - name: VBELN
+    description: Delivery
+  - name: LETYP
+    description: Storage Unit Type
+  - name: LGORT
+    description: Storage Location
+  - name: WDATU
+    description: Date of Goods Receipt
+  - name: VERME
+    description: Available stock
+  - name: BESTQ
+    description: Stock Category in the Warehouse Management System
+  - name: ADATU
+    description: Date of last stock removal
+  - name: SOBKZ
+    description: Special Stock Indicator
+  - name: BETYP
+    description: Requirement Type
+  - name: QPLOS
+    description: Inspection Lot Number
+  - name: SONUM
+    description: Special Stock Number
+  - name: LQNUM
+    description: Quant
+  - name: IVNUM
+    description: Number of system inventory record
+  - name: POSNR
+    description: Delivery Item
+  - name: SKZUA
+    description: 'Blocking Indicator: For Stock Removals (User)'
+  - name: LGNUM
+    description: Warehouse Number / Warehouse Complex
+  - name: GEWEI
+    description: Weight Unit
+- name: BRONZE__TMEA_QUALITY__SAPO_STORAGE_LOCATION_DATA_FOR_MATERIAL
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _CAPTUREDATETIME
+    description: Check the _CAPTUREDATETIME column in the BRONZE.TMEA_QUALITY.SAPO_STORAGE_LOCATION_DATA_FOR_MATERIAL
+      table to ensure it falls within the last 36-hour interval.
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 72
+  - name: EXPPG
+    description: Preference indicator (deactivated)
+  - name: VMUML
+    description: Stock in Transfer in Previous Period
+  - name: VMINS
+    description: Stock in Quality Inspection in Previous Period
+  - name: LMINB
+    description: Reorder point for storage location MRP
+  - name: VKUML
+    description: Sales value in stock transfer (SLOc to SLoc)
+  - name: LGPBE
+    description: Storage Bin
+  - name: RETME
+    description: Blocked Stock Returns
+  - name: DLINL
+    description: Date of Last Posted Count
+  - name: KZILQ
+    description: Phys. inventory ind. f. stock in qual. insp. in current year
+  - name: VKLAB
+    description: Stock value of a value-only material at sales price
+  - name: KSPEM
+    description: Blocked Consignment Stock
+  - name: EINME
+    description: Total Stock of All Restricted Batches
+  - name: MANDT
+    description: Client
+  - name: LGORT
+    description: Storage Location
+  - name: MATNR
+    description: Material Number
+  - name: LSOBS
+    description: Special procurement type at storage location level
+  - name: MDRUE
+    description: MARDH rec. already exists for per. before last of MARD per.
+  - name: LWMKB
+    description: Picking area for lean WM
+  - name: KZVLQ
+    description: Phys. inventory ind. f. stock in qual. insp. in prev. period
+  - name: KINSM
+    description: Consignment Stock in Quality Inspection
+  - name: LFMON
+    description: Current period (posting period)
+  - name: LFGJA
+    description: Fiscal Year of Current Period
+  - name: VMEIN
+    description: Restricted-Use Stock in Previous Period
+  - name: BSKRF
+    description: Inventory correction factor
+  - name: KZILE
+    description: Physical inventory indicator for restricted-use stock
+  - name: VMSPE
+    description: Blocked stock of previous period
+  - name: FSH_SALLOC_QTY_S
+    description: Allocated Stock Quantity
+  - name: LABST
+    description: Valuated Unrestricted-Use Stock
+  - name: KZVLE
+    description: Physical inventory ind. for restricted-use stock, prev.pd
+  - name: WERKS
+    description: Plant
+  - name: LVORM
+    description: Flag Material for Deletion at Storage Location Level
+  - name: LBSTF
+    description: Replenishment quantity for storage location MRP
+  - name: SPERR
+    description: Physical Inventory Blocking Indicator
+  - name: INSME
+    description: Stock in Quality Inspection
+  - name: KLABS
+    description: Unrestricted-Use Consignment Stock
+  - name: DISKZ
+    description: Storage location MRP indicator
+  - name: UMLME
+    description: Stock in transfer (from one storage location to another)
+  - name: PSTAT
+    description: Maintenance status
+  - name: KEINM
+    description: Restricted-Use Consignment Stock
+  - name: KZVLS
+    description: Phys. inventory indicator for blocked stock in prev. period
+  - name: HERKL
+    description: Country of Origin of Material (Non-Preferential Origin)
+  - name: VMLAB
+    description: Valuated unrestricted-use stock in previous period
+  - name: PRCTL
+    description: Profit Center
+  - name: SPEME
+    description: Blocked Stock
+  - name: VMRET
+    description: Blocked Stock Returns in Previous Period
+  - name: EXVER
+    description: Export indicator (deactivated)
+  - name: KZVLL
+    description: Physical inventory indicator for stock in previous year
+  - name: KZILS
+    description: Physical inventory indicator for blocked stock
+  - name: MDJIN
+    description: Fiscal year of current physical inventory indicator
+  - name: ERSDA
+    description: Created On
+  - name: KZILL
+    description: Physical inventory indicator for whse stock in current year
+  description: Storage Location Data for Material
+- name: BRONZE__TMEA_QUALITY__SAPO_SYSTEM_STATUS_TEXTS
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: TXT30
+    description: Object status
+  - name: SPRAS
+    description: Language Key
+  - name: ISTAT
+    description: System status
+  - name: TXT04
+    description: Individual status of an object (short form)
+  description: System status texts
+- name: BRONZE__TMEA_QUALITY__SAPO_TRANSFER_ORDER_ITEM
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _CAPTUREDATETIME
+    description: Check the _CAPTUREDATETIME column in the BRONZE.TMEA_QUALITY.SAPO_TRANSFER_ORDER_ITEM
+      table to ensure it falls within the last 36-hour interval.
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 72
+  - name: VDIFM
+    description: Difference in source storage bin in stockkeeping unit
+  - name: KZFEH
+    description: 'Indicator: pre-allocated stock'
+  - name: RDIFA
+    description: Return difference quantity in alternative unit
+  - name: VDIFA
+    description: Difference in source storage bin in alternative unit
+  - name: TO_INSP_GUID
+    description: Inspection GUID
+  - name: RLPLA
+    description: Return storage bin
+  - name: VAPPC
+    description: 'Ind.: Pass on source item to APPC interface'
+  - name: VBLCH
+    description: Blocks with mixed batches SOURCE
+  - name: KZBEF
+    description: Indicator Inventory Management active
+  - name: MAKTX
+    description: Material Description
+  - name: TANUM
+    description: Transfer Order Number
+  - name: DMENG
+    description: Quantity of difference posting in stockkeeping unit
+  - name: KZVAS
+    description: Value added service interface
+  - name: NDIFM
+    description: Destination difference quantity in stockkeeping unit
+  - name: RKAPA
+    description: Capacity check return storage type
+  - name: NPIPO
+    description: 'Flag: Do not transfer SU to pick point (for SU block stor.)'
+  - name: PVQUI
+    description: 'Indicator: Material pick has been confirmed'
+  - name: QDATU
+    description: Date of confirmation
+  - name: NXIDV
+    description: External Handling Unit Identification
+  - name: VOLUM
+    description: Volume
+  - name: LELAS
+    description: 'Indicator: print storage unit contents'
+  - name: KBNKZ
+    description: Kanban Indicator
+  - name: NANBR
+    description: 'Indicator: partial pallet quantity exists'
+  - name: WIRME
+    description: Active ingredient unit of measure
+  - name: EZEIT
+    description: Time of Pick Confirmation (First Step)
+  - name: QNAME
+    description: User name
+  - name: VBELN
+    description: Delivery
+  - name: STOFF
+    description: Hazardous material number
+  - name: DLQNR
+    description: Difference quant
+  - name: MBPOS
+    description: Item in Material Document
+  - name: GEWEI
+    description: Weight Unit
+  - name: LETYP
+    description: Storage Unit Type
+  - name: NLENR
+    description: Destination storage unit number
+  - name: NBLCH
+    description: Blocks with mixed batches DEST
+  - name: NKAPA
+    description: Capacity check for destination storage type
+  - name: QZEIT
+    description: Time of confirmation
+  - name: QPLOA
+    description: Inspection Lot on Which the Usage Decision is Based
+  - name: VSUMM
+    description: Level of totals information SOURCE
+  - name: RLTYP
+    description: Return storage type
+  - name: SONUM
+    description: Special Stock Number
+  - name: VFDAT
+    description: Shelf Life Expiration or Best-Before Date
+  - name: VORGA
+    description: Transfer procedure
+  - name: VLQNR
+    description: Quant
+  - name: ALTME
+    description: Alternative Unit of Measure for Stockkeeping Unit
+  - name: TAPOS
+    description: Transfer order item
+  - name: WERKS
+    description: Plant
+  - name: HOMVE
+    description: 'Indicator: stock removal of a total, homogenous storage unit'
+  - name: LDEST
+    description: Name of printer
+  - name: DIFF_INSP_GUID
+    description: Inspection GUID
+  - name: KZSTI
+    description: 'Indicator: transfer of insp.sample'
+  - name: LANUM
+    description: Sequence number
+  - name: KZTRM
+    description: TRM Interface Active
+  - name: IVNUM
+    description: Number of system inventory record
+  - name: KZQUI
+    description: 'Indicator: confirmation required'
+  - name: VLEST
+    description: Status of source storage unit
+  - name: NLQNR
+    description: Quant
+  - name: BRGEW
+    description: Gross weight of transfer order item
+  - name: VLPLA
+    description: Source Storage Bin
+  - name: VKAPA
+    description: Capacity check for source storage type
+  - name: STOAN
+    description: Cancellation req. for TO item (currently only from Kanban)
+  - name: DLPLA
+    description: Difference storage bin
+  - name: KZECH
+    description: 'Indicator: Confirm Batch to PP'
+  - name: ZRSTG
+    description: General Flag
+  - name: PIPAR
+    description: Assignment of TO item to handling unit is required
+  - name: HUPIK
+    description: 'Indicator: source HU suggested as pick HU at confirmation'
+  - name: NDUMM
+    description: 'Indicator: Destination SU is pseudo SU (only HUs)'
+  - name: NULKO
+    description: Status of zero stock check in transfer order item
+  - name: VISTM
+    description: Source actual quantity in stockkeeping unit
+  - name: VSERI
+    description: 'Indicator: Source SU is a HU with serial numbers'
+  - name: VLTYP
+    description: Source Storage Type
+  - name: RETURN_INSP_GUID
+    description: Inspection GUID
+  - name: NISTM
+    description: Destination actual quantity in stockkeeping unit
+  - name: VLENR
+    description: Source storage unit number
+  - name: VOLEH
+    description: Volume Unit
+  - name: UMREN
+    description: Denominator for conversion to base units of measure
+  - name: NAPPC
+    description: 'Indicator: pass on destination item to APPC interface'
+  - name: VISTA
+    description: Source actual quantity in alternative unit of measure
+  - name: FHUTA
+    description: 'Flag: Transfer order item is HU TO item'
+  - name: POSNR
+    description: Item number of the SD document
+  - name: CHARG
+    description: Batch Number
+  - name: PQUIT
+    description: 'Indicator: confirmation complete'
+  - name: EDATU
+    description: Date of Pick Confirmation (First Step)
+  - name: TBPOS
+    description: Transfer Requirement Item
+  - name: DRUCK
+    description: 'Indicator: transfer order item is printed'
+  - name: MANDT
+    description: Client
+  - name: NLPLA
+    description: Destination Storage Bin
+  - name: RLBER
+    description: Return storage area
+  - name: DMENA
+    description: Difference quantity in alternate unit of measure
+  - name: MEINS
+    description: Base Unit of Measure
+  - name: KOBER
+    description: Picking Area
+  - name: SGT_SCAT
+    description: Stock Segment
+  - name: VKAPV
+    description: Capacity usage of transferred material
+  - name: VPPOS
+    description: Position in source storage bin
+  - name: VNEST
+    description: Indicates whether the source storage unit is a nested HU
+  - name: ZEUGN
+    description: Certificate Number
+  - name: SOBKZ
+    description: Special Stock Indicator
+  - name: NOLIS
+    description: 'Flag: Do not update whse controlling during TO creation'
+  - name: NDIFA
+    description: Destination difference qty. in alternative unit
+  - name: KZXDK
+    description: Cross dock interface
+  - name: TOVAS
+    description: General Flag
+  - name: KZNKO
+    description: 'Indicator: Execute Zero Stock Check'
+  - name: RPPOS
+    description: Position in return storage bin
+  - name: RAPPC
+    description: 'Indicator: pass on return item to APPC interface'
+  - name: WEPOS
+    description: Goods receipt item
+  - name: RSOLA
+    description: Return target quantity in alternative unit
+  - name: SOLPO
+    description: Planned proc.time in transfer order item
+  - name: VSOLM
+    description: Source target quantity in stockkeeping unit
+  - name: VHILM
+    description: Packaging Materials
+  - name: MATNR
+    description: Material Number
+  - name: VANBR
+    description: 'Indicator: partial pallet quantity exists'
+  - name: IMREL
+    description: Trigger posting in Inventory Management
+  - name: WENUM
+    description: Goods Receipt Number
+  - name: ZEIEI
+    description: Time unit for performance data
+  - name: VLBER
+    description: Source storage section
+  - name: LGORT
+    description: Storage Location
+  - name: POSTY
+    description: Type of transfer order item
+  - name: QPLOS
+    description: Inspection Lot Number
+  - name: NPLEI
+    description: Dest.stor.bin changeable during confirmation
+  - name: NLEST
+    description: Status of destination storage unit
+  - name: NWIRM
+    description: Transferred ingredient qty
+  - name: KZFME
+    description: 'ID: Leading unit of measure for completing a transaction'
+  - name: WDATU
+    description: Date of Goods Receipt
+  - name: L2SKR
+    description: Relevance for 2-step picking
+  - name: PASSD
+    description: Confirmation Data Transferred To Delivery
+  - name: ENAME
+    description: User Name in Pick Confirmation (First Step)
+  - name: KGVNQ
+    description: 'Indicator: Separate confirmation possible'
+  - name: RSOLM
+    description: Return target quantity in stockkeeping unit
+  - name: RISTA
+    description: Actual return quantity in alternate unit of measure
+  - name: VANZL
+    description: Number of storage units to be transferred from bulk storage
+  - name: PCKPF
+    description: Packing control
+  - name: RLQNR
+    description: Quant
+  - name: NLBER
+    description: Destination storage section
+  - name: LGNUM
+    description: Warehouse Number / Warehouse Complex
+  - name: NSOLM
+    description: Destination target quantity in stockkeeping unit
+  - name: NLTYP
+    description: Destination Storage Type
+  - name: NSOLA
+    description: Destination target quantity in alternative unit
+  - name: NKDYN
+    description: 'Indicator: dynamic storage bin'
+  - name: RISTM
+    description: Actual returned quantity in stockkeeping unit
+  - name: NANZL
+    description: Number of storage units to be transferred to bulk storage
+  - name: NPPOS
+    description: Position in destination storage bin
+  - name: RSPOS
+    description: Item Number of Reservation / Dependent Requirements
+  - name: ABLAD
+    description: Unloading Point
+  - name: DLENR
+    description: Number of storage unit for difference quantities
+  - name: UMREZ
+    description: Numerator for Conversion to Base Units of Measure
+  - name: FROM_INSP_GUID
+    description: Inspection GUID
+  - name: ORPOS
+    description: TO item from which current TO item was generated
+  - name: VKDYN
+    description: 'Indicator: dynamic storage bin'
+  - name: KZSUB
+    description: 'Indicator: pass on TO item to subsystem'
+  - name: DLTYP
+    description: Difference storage type
+  - name: NSUMM
+    description: Level of totals information DEST.
+  - name: BESTQ
+    description: Stock Category in the Warehouse Management System
+  - name: RSART
+    description: Record type
+  - name: VSOLA
+    description: Source target quantity in alternate unit
+  - name: NISTA
+    description: Actual destination quantity in alternative unit
+  - name: KZDIF
+    description: Difference indicator
+  - name: RDIFM
+    description: Return difference quantity in stockkeeping unit
+  - name: WEMPF
+    description: Goods recipient
+  - name: DCNUM
+    description: Cross-Docking Decision Number
+  - name: KZINV
+    description: Inventory indicators
+  - name: QUSUB
+    description: 'Confirmation ind.: Two-step confirmation for external system'
+  - name: VDUMM
+    description: 'Indicator: Source SU is pseudo SU (only HUs)'
+- name: BRONZE__TMEA_QUALITY__SAPO_VENDOR_MASTER
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: QSSYS
+    description: Vendor's QM system
+  - name: FISKU
+    description: Account Number of Master Record of Tax Office Responsible
+  - name: SUBMI_RELEVANT
+    description: 'Cross Docking: Relevant for Collective Numbering'
+  - name: BUBKZ
+    description: Check digit for the international location number
+  - name: STCEG
+    description: VAT Registration Number
+  - name: BBSNR
+    description: International location number (Part 2)
+  - name: ACTSS
+    description: Activity Code for Social Insurance
+  - name: MANDT
+    description: Client
+  - name: TELF2
+    description: Second telephone number
+  - name: NAME1
+    description: Name 1
+  - name: SPERR
+    description: Central posting block
+  - name: PSOFG
+    description: Processor group
+  - name: PSOVN
+    description: First Name
+  - name: PSOTL
+    description: Title
+  - name: TELTX
+    description: Teletex number
+  - name: J_SC_CAPITAL
+    description: Capital Amount
+  - name: ANRED
+    description: Title
+  - name: PODKZB
+    description: Vendor indicator relevant for proof of delivery
+  - name: FITYP
+    description: Tax type
+  - name: LAND1
+    description: Country Key
+  - name: XZEMP
+    description: 'Indicator: Alternative payee in document allowed ?'
+  - name: QSSYSDAT
+    description: Validity date of certification
+  - name: TELBX
+    description: Telebox number
+  - name: XCPDK
+    description: 'Indicator: Is the account a one-time account?'
+  - name: NAME2
+    description: Name 2
+  - name: ERDAT
+    description: Date on which the Record Was Created
+  - name: STAGING_TIME
+    description: Staging Time in Days
+  - name: STENR
+    description: Tax Number at Responsible Tax Authority
+  - name: ESRNR
+    description: ISR subscriber number
+  - name: PROFS
+    description: Profession
+  - name: DTAWS
+    description: Instruction key for data medium exchange
+  - name: UPTIM
+    description: Time of Last Change Confirmation
+  - name: CRC_NUM
+    description: CRC number
+  - name: GBORT
+    description: Place of birth of the person subject to withholding tax
+  - name: PMT_OFFICE
+    description: Payment Office
+  - name: SPERZ
+    description: Payment Block
+  - name: SFRGR
+    description: Forwarding agent freight group
+  - name: WERKR
+    description: 'Indicator: plant level relevant'
+  - name: BAHNS
+    description: Train station
+  - name: UPDAT
+    description: Date on Which the Changes Were Confirmed
+  - name: SORTL
+    description: Sort field
+  - name: DATLT
+    description: Data communication line no.
+  - name: STCD5
+    description: Tax Number 5
+  - name: PLKAL
+    description: Factory calendar key
+  - name: FISKN
+    description: Account number of the master record with fiscal address
+  - name: KUNNR
+    description: Customer Number
+  - name: DUEFL
+    description: Status of Data Transfer into Subsequent Release
+  - name: LFURL
+    description: Uniform resource locator
+  - name: TELF1
+    description: First telephone number
+  - name: J_1KFTBUS
+    description: Type of Business
+  - name: J_1KFTIND
+    description: Type of Industry
+  - name: LIFNR
+    description: Account Number of Vendor or Creditor
+  - name: PSTL2
+    description: P.O. Box Postal Code
+  - name: SCACD
+    description: Standard carrier access code
+  - name: STCDT
+    description: Tax Number Type
+  - name: TRANSPORT_CHAIN
+    description: Transportation Chain
+  - name: STCD4
+    description: Tax Number 4
+  - name: ALC
+    description: Agency Location Code
+  - name: PSOHS
+    description: 'House number: is no longer used from Release 4.6B'
+  - name: NAME4
+    description: Name 4
+  - name: ERNAM
+    description: Name of Person who Created the Object
+  - name: TAXBS
+    description: Tax Base in Percentage
+  - name: TXJCD
+    description: Tax Jurisdiction
+  - name: SPERQ
+    description: Function That Will Be Blocked
+  - name: KTOKK
+    description: Supplier Account Group
+  - name: ADRNR
+    description: Address
+  - name: SPERM
+    description: Centrally imposed purchasing block
+  - name: STKZA
+    description: 'Indicator: Business Partner Subject to Equalization Tax?'
+  - name: CONFS
+    description: Status of Change Authorization (Central)
+  - name: LOEVM
+    description: Central Deletion Flag for Master Record
+  - name: LZONE
+    description: Transportation zone to or from which the goods are delivered
+  - name: MCOD3
+    description: Search term for matchcode search
+  - name: LTSNA
+    description: 'Indicator: vendor sub-range relevant'
+  - name: PFORT
+    description: PO Box city
+  - name: CARRIER_CONF
+    description: Carrier confirmation is expected
+  - name: SPRAS
+    description: Language Key
+  - name: J_1KFREPRE
+    description: Name of Representative
+  - name: XLFZA
+    description: 'Indicator: Alternative payee using account number'
+  - name: STGDL
+    description: 'Shipment: statistics group, transportation service agent'
+  - name: PFACH
+    description: PO Box
+  - name: GBDAT
+    description: Date of birth of the person subject to withholding tax
+  - name: PSTLZ
+    description: Postal Code
+  - name: MCOD1
+    description: Search term for matchcode search
+  - name: STCD2
+    description: Tax Number 2
+  - name: STKZN
+    description: Natural Person
+  - name: BEGRU
+    description: Authorization Group
+  - name: KTOCK
+    description: Reference Account Group for One-Time Account (Vendor)
+  - name: WERKS
+    description: Plant (Own or External)
+  - name: TERM_LI
+    description: Terms of Liability
+  - name: MIN_COMP
+    description: Micro company indicator
+  - name: REGIO
+    description: Region (State, Province, County)
+  - name: PSON3
+    description: Name 3
+  - name: PSOST
+    description: 'Street: No longer used from Release 4.6B'
+  - name: TELFX
+    description: Fax Number
+  - name: BRSCH
+    description: Industry key
+  - name: REVDB
+    description: Last review (external)
+  - name: DLGRP
+    description: Service agent procedure group
+  - name: PSON2
+    description: Name 2
+  - name: LNRZA
+    description: Account Number of the Alternative Payee
+  - name: SEXKZ
+    description: Key for the Sex of the Person Subject to Withholding Tax
+  - name: ORT01
+    description: City
+  - name: BBBNR
+    description: International location number  (part 1)
+  - name: TELX1
+    description: Telex number
+  - name: MCOD2
+    description: Search term for matchcode search
+  - name: REGSS
+    description: Registered for Social Insurance
+  - name: VBUND
+    description: Company ID of trading partner
+  - name: STRAS
+    description: Street and House Number
+  - name: KONZS
+    description: Group key
+  - name: DTAMS
+    description: Report key for data medium exchange
+  - name: ORT02
+    description: District
+  - name: NODEL
+    description: Central deletion block for master record
+  - name: PSON1
+    description: Name 1
+  - name: STKZU
+    description: Liable for VAT
+  - name: IPISP
+    description: Tax Split
+  - name: EMNFR
+    description: External manufacturer code name or number
+  - name: KRAUS
+    description: Credit information number
+  - name: STCD1
+    description: Tax Number 1
+  - name: NAME3
+    description: Name 3
+  - name: PSOIS
+    description: Subledger acct preprocessing procedure
+  - name: STCD3
+    description: Tax Number 3
+  - name: SCHEDULING_TYPE
+    description: Scheduling Procedure
+  - name: J_SC_CURRENCY
+    description: Currency
+  description: Supplier Master (General Section)
+- name: BRONZE__TMEA_QUALITY__SHAREPOINT_ENGINEERING_ACTION_REQUEST
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TMEA_QUALITY__SHAREPOINT_ENGINEERING_ACTION_REQUEST_HIST
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TMEA_QUALITY__SHAREPOINT_SUPPLIER_CORRECTIVE_ACTION_REQUEST
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TMEA_QUALITY__SUPPLIER_SUPPL_ACTION_DESCR
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TMEA_QUALITY__SUPPLIER_SUPPL_BUSINESS_PARTNER
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TMEA_QUALITY__SUPPLIER_SUPPL_CHANGE_REQUEST
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TMEA_QUALITY__SUPPLIER_SUPPL_CHG_REQUEST_APPROVAL
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TMEA_QUALITY__SUPPLIER_SUPPL_CHG_REQUEST_APPROVER
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TMEA_QUALITY__SUPPLIER_SUPPL_CHG_REQUEST_FACTORY
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TMEA_QUALITY__SUPPLIER_SUPPL_CHG_REQUEST_TRACKER
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TMEA_QUALITY__SUPPLIER_SUPPL_FACTORY
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TMEA_QUALITY__SUPPLIER_SUPPL_ROLE_DESCR
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TMEA_QUALITY__SUPPLIER_SUPPL_STATUS_DESCR
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TMEA_QUALITY__SUPPLIER_SUPPL_USER_INFO
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TMEA_QUALITY__WISDOM_MAC_MAIN
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Check the _FILEDATE column in the BRONZE.TMEA_QUALITY.WISDOM_MAC_MAIN
+      table to ensure it falls within the last 36-hour interval.
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 36
+- name: BRONZE__TMEA_QUALITY__WISDOM_SAP_SURB
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Check the _FILEDATE column in the BRONZE.TMEA_QUALITY.WISDOM_SAP_SURB
+      table to ensure it falls within the last 36-hour interval.
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 36
+- name: BRONZE__TMEA_QUALITY__WISDOM_TEA_MAC_LIST
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Check the _FILEDATE column in the BRONZE.TMEA_QUALITY.WISDOM_TEA_MAC_LIST
+      table to ensure it falls within the last 36-hour interval.
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 36
+- name: BRONZE__TMEA_QUALITY__WISDOM_WISDOM_SURB_PROGRESS
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Check the _FILEDATE column in the BRONZE.TMEA_QUALITY.WISDOM_WISDOM_SURB_PROGRESS
+      table to ensure it falls within the last 36-hour interval.
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 36
+- name: BRONZE__TMEA_QUALITY__SHAREPOINT_SUPPLIER_DETAILS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TMEA_QUALITY__SHAREPOINT_SCORECARD_SUPPLIER_GOAL_MAPPING
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TMEA_QUALITY__SAPO_SALES_DOCUMENT_FLOW
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _CAPTUREDATETIME
+    description: Check the _CAPTUREDATETIME column in the BRONZE.TMEA_QUALITY.SAPO_SALES_DOCUMENT_FLOW
+      table to ensure it falls within the last 24-hour interval.
+  - name: POSNN
+    description: Subsequent item of an SD document
+  - name: VBELN
+    description: Subsequent sales and distribution document
+  - name: ERDAT
+    description: Date on Which Record Was Created
+  - name: SOBKZ
+    description: Special Stock Indicator
+  - name: ERZET
+    description: Entry time
+  - name: ABGES
+    description: Guaranteed (factor between 0 and 1)
+  - name: WBSTA
+    description: Goods movement status
+  - name: VBTYP_V
+    description: Document category of preceding SD document
+  - name: VBTYPEXT_N
+    description: Extension of Subsequent SD Document Category
+  - name: MJAHR
+    description: Material Document Year
+  - name: MATNR
+    description: Material Number
+  - name: POSNV
+    description: Preceding item of an SD document
+  - name: BWART
+    description: Movement type (inventory management)
+  - name: VBTYPEXT_V
+    description: Extension of SD document category of preceding document
+  - name: RFMNG_FLO
+    description: Referenced quantity in sales unit (float)
+  - name: PLART
+    description: Planning type
+  - name: FPLTR
+    description: Item for billing plan/invoice plan/payment cards
+  - name: MANDT
+    description: Client
+  - name: GEWEI
+    description: Weight Unit
+  - name: STUFE
+    description: Level of the document flow record
+  - name: VBTYP_N
+    description: Document category of subsequent document
+  - name: SONUM
+    description: Special Stock Number
+  - name: RFMNG_FLT
+    description: Referenced quantity in base unit of measure (float)
+  - name: PLMIN
+    description: Quantity is calculated positively, negatively or not at all
+  - name: BDART
+    description: Requirement type
+  - name: NTGEW
+    description: Net Weight
+  - name: MEINS
+    description: Base Unit of Measure
+  - name: VRKME
+    description: Sales Unit
+  - name: TAQUI
+    description: 'ID: MM-WM transfer order confirmed'
+  - name: FKTYP
+    description: Billing category
+  - name: BRGEW
+    description: Gross weight
+  - name: WAERS
+    description: Statistics currency
+  - name: VBELV
+    description: Preceding sales and distribution document
+  - name: LOGSYS
+    description: Logical System
+  - name: VOLEH
+    description: Volume Unit
+  - name: LGNUM
+    description: Warehouse Number / Warehouse Complex
+  - name: CMETH
+    description: Quantity Conversion Method
+  - name: VOLUM
+    description: Volume
+  - name: FPLNR
+    description: Billing Plan Number / Invoicing Plan Number
+  - name: KZBEF
+    description: Indicator Inventory Management active
+  - name: RFWRT
+    description: Reference value
+  - name: AEDAT
+    description: Date of Last Change
+  - name: RFMNG
+    description: Referenced quantity in base unit of measure
+- name: BRONZE__TMEA_QUALITY__SAPO_READTXT
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _CAPTUREDATETIME
+    description: Check the _CAPTUREDATETIME column in the BRONZE__TMEA_QUALITY__SAPO_READTXT
+      table to ensure it falls within the last 24-hour interval.
+  - name: MANDT
+    description: Client
+  - name: TDOBJECT
+    description: Text object
+  - name: TDNAME
+    description: Text Name
+  - name: TDID
+    description: Text ID
+  - name: TDSPRAS
+    description: Language Key
+  - name: LINE_NUMBER
+    description: Number
+  - name: TDFDATE
+    description: Date created
+  - name: TDFTIME
+    description: Time Created
+  - name: TDLDATE
+    description: Changed On
+  - name: TDLTIME
+    description: Last Changed At
+  - name: TDLINE
+    description: Text Line
+- name: BRONZE__TMEA_QUALITY__SAPO_SHORTAGE_REPORT_DATA_WAREHOUSE
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: SUM05
+    description: Total of planned issues
+  - name: DELB0
+    description: Abbreviation for MRP element
+  - name: DELNR
+    description: MRP element number
+  - name: RSDAT
+    description: Receipt/Requirements date
+  - name: LIFNR
+    description: Account Number of Vendor or Creditor
+  - name: PRTXT
+    description: Text Line
+  - name: RSNUM
+    description: MRP element number
+  - name: AUSLTMRP
+    description: Exception message text
+  - name: INSME
+    description: Stock in Quality Inspection
+  - name: WERKS
+    description: Plant
+  - name: MANDT
+    description: Client
+  - name: MATNR
+    description: Material Number
+  - name: ERR01
+    description: Exception message key
+  - name: EISBE
+    description: Safety stock
+  - name: EINDT
+    description: Item delivery date
+  - name: PARENT_MAT
+    description: Material Number
+  - name: MSTAE
+    description: Cross-Plant Material Status
+  - name: PRIO1
+    description: Exception message priority
+  - name: EINDT_LAST
+    description: Delivery Date of Vendor Confirmation
+  - name: PLIFZ
+    description: Planned Delivery Time in Days
+  - name: BEBST
+    description: Purchase orders
+  - name: WZEIT
+    description: Total replenishment lead time (in workdays)
+  - name: AUSSL
+    description: Exception message key
+  - name: DISPO
+    description: MRP Controller
+  - name: MATNR_LVL
+    description: Material Level
+  - name: DIS_LVL
+    description: Hierarchy Level
+  - name: POSHORT
+    description: Total of planned issues
+  - name: DAT00
+    description: Receipt/Requirements date
+  - name: EINDT_1ST
+    description: Delivery Date of Vendor Confirmation
+  - name: MAKTX
+    description: Material Description
+  - name: REPORT_DATE
+    description: report date
+  - name: VBELN
+    description: Sales and Distribution Document Number
+  - name: DELPS
+    description: MRP element item
+  - name: POPRTXT
+    description: Text Line
+  - name: BESKZ
+    description: Procurement Type
+  - name: SORT
+    description: Sales Order Number + Sort Sequence
+  - name: AUSLTSTK
+    description: Exception message text
+  - name: MNG01
+    description: Quantity received or quantity required
+  - name: RSPOS
+    description: MRP element item
+  - name: EXTRA
+    description: MRP element data
+  - name: LABST
+    description: Valuated Unrestricted-Use Stock
+  - name: BANFB
+    description: Purchase requisitions
+  - name: MMSTA
+    description: Plant-Specific Material Status
+  - name: MD4LI
+    description: Vendor name
+  - name: PARENT_MAKTX
+    description: Material Description
+  - name: PRSHORT
+    description: Total of planned issues
+  - name: MEINS
+    description: Base Unit of Measure
+  - name: DSNAM
+    description: Name of MRP controller
+- name: BRONZE__TMEA_QUALITY__QVICS_NEW_V_PARMANENTMEASURE_PROGRESSES
+  tests:
+  - has_data
+  - recently_run

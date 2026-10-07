@@ -1,0 +1,140 @@
+models:
+- name: BRONZE__TEH_APPLICATIONS__ACTIVEDIRECTORY_USERLIST
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Timestamp of ingestion job start
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 48
+- name: BRONZE__TEH_APPLICATIONS__FILE_FST_EMPLOYEE_GROUP
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_APPLICATIONS__MDM_COMPANY
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_APPLICATIONS__MDM_EMPLOYEE_TYPE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_APPLICATIONS__MDM_MANAGER_EMPLOYEE_GROUP
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_APPLICATIONS__MYSKILLS_KSMN_TABLE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_APPLICATIONS__MYSKILLS_WORKDAYEMPLOYEE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_APPLICATIONS__SAPAPI_MATERIAL_MASTER_3PL
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_APPLICATIONS__SAPAPI_ZCDV_T_CMTU017_MARA
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_APPLICATIONS__SAPAPI_ZCDV_T_CMTU019_MVKE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_APPLICATIONS__SAPAPI_ZCDV_T_CMTU020_KNA1
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Timestamp of ingestion job start
+- name: BRONZE__TEH_APPLICATIONS__SAPAPI_ZCDV_T_CMTU026_MARC
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_APPLICATIONS__SAPAPI_ZCDV_T_CMTU030_KONP
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_APPLICATIONS__SAPAPI_ZCDV_T_CMTU031_A904
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_APPLICATIONS__SAPAPI_ZCDV_T_CMTU032_A901
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_APPLICATIONS__SAPAPI_ZCDV_T_CMTU033_A902
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_APPLICATIONS__SAPAPI_ZCDV_T_CMTU082_A032
+- name: BRONZE__TEH_APPLICATIONS__SAPAPI_ZCDV_T_CMTU083_A114
+- name: BRONZE__TEH_APPLICATIONS__SAPAPI_ZCDV_T_CMTU084_A350
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Timestamp of ingestion job start
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 48
+- name: BRONZE__TEH_APPLICATIONS__SAPAPI_ZCDV_T_CMTU085_A910
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_APPLICATIONS__SAPAPI_ZCDV_T_CMTU086_A919
+- name: BRONZE__TEH_APPLICATIONS__SAPAPI_ZCDV_T_CMTU229_A916
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_APPLICATIONS__SAPH_SAP_US_MMT_EV_MBEW
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_APPLICATIONS__SAPH_SAP_ZZM_EV_KONP
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_APPLICATIONS__SHAREPOINT_ORACLE_DEPARTMENT
+  tests:
+  - has_data
+  - recently_run
+  columns:
+  - name: _FILEDATE
+    description: Timestamp of ingestion job start
+    tests:
+    - dbt_expectations.expect_row_values_to_have_recent_data:
+        datepart: hours
+        interval: 48
+- name: BRONZE__TEH_APPLICATIONS__SHAREPOINT_SERVICE_BUSINESS_UNIT_MAPPING
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_APPLICATIONS__TEACOMMON_DEPARTMENTS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_APPLICATIONS__TEACOMMON_EMPLOYEE
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_APPLICATIONS__TEACOMMON_LOCATIONS
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_APPLICATIONS__TEACOMMON_PRODUCTLINES
+  tests:
+  - has_data
+  - recently_run
+- name: BRONZE__TEH_APPLICATIONS__WORKDAY_WORKERCOMPANYLIST
+  tests:
+  - has_data
+  - recently_run

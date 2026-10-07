@@ -1,0 +1,18 @@
+version: 2
+models:
+- name: PUB__COMMON_WISDOM__TEA_MAC_LIST
+  description: Model Workday TEA_MAC_LIST file.
+- name: PUB__COMMON_WISDOM__ES_TPS_SPS_NTS_US
+  description: Model Workday ES_TPS_SPS_NTS_US file.
+- name: PUB__COMMON_WISDOM__WISDOM_MACHINE_DETAILS
+  description: Model Workday WISDOM_MACHINE_DETAILS file.
+- name: PUB__COMMON_WISDOM__WISDOM_SURB_DELAY
+  description: Model Workday WISDOM_SURB_DELAY file.
+- name: PUB__COMMON_WISDOM__WISDOM_ES_MAC_US
+  description: Landing table for WISDOM_ES_MAC_US file.
+- name: PUB__COMMON_WISDOM__WISDOM_MACHINE_FCNS
+  description: Landing table for WISDOM_MACHINE_FCNS file.
+- name: PUB__COMMON_WISDOM__V_WISDOM_ES_CLAIM_US
+  description: Landing table for WISDOM_ES_CLAIM_US file.
+- name: PUB__COMMON_WISDOM__V_WISDOM_ES_NTS_US
+  description: Landing table for WISDOM_ES_NTS_US file.

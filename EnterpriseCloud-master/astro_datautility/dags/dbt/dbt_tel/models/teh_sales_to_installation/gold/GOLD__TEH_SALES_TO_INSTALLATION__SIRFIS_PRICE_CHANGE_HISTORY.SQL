@@ -1,0 +1,58 @@
+{{ config(
+      materialized='tel_incremental',
+      incremental_strategy='insert_overwrite',
+      alias='SIRFIS_PRICE_CHANGE_HISTORY',
+      unique_key = ['ID', 'EVENT_DATE'],
+      transient=false
+) }}
+
+with source_data AS (
+    SELECT 
+        DISTINCT ID
+        , SNAPSHOT_DATE AS EVENT_DATE
+        , PRICE_ESTIMATE
+    FROM {{ ref('GOLD__TEH_SALES_TO_INSTALLATION__SIMULATED_BOOKING_HISTORY') }}
+),
+
+transform_data AS (
+    SELECT
+         '{{ invocation_id }}' AS _AUDIT_LOG_ID
+        , SHA2('hash_me') as _ROW_HASH
+        , ID
+        , EVENT_DATE
+        , LAG(PRICE_ESTIMATE) OVER (PARTITION BY ID ORDER BY EVENT_DATE) AS PREVIOUS_PRICE_ESTIMATE
+        , PRICE_ESTIMATE
+        -- Price can be empty from the previous day, i.e., no price to compare with
+        , CASE 
+            WHEN LAG(PRICE_ESTIMATE) OVER (PARTITION BY ID ORDER BY EVENT_DATE) IS NULL THEN NULL
+            WHEN LAG(PRICE_ESTIMATE) OVER (PARTITION BY ID ORDER BY EVENT_DATE) = PRICE_ESTIMATE THEN NULL 
+            WHEN LAG(PRICE_ESTIMATE) OVER (PARTITION BY ID ORDER BY EVENT_DATE) <> PRICE_ESTIMATE THEN 1
+            ELSE NULL  
+        END AS IS_PRICE_CHURN
+        , CASE 
+            WHEN PRICE_ESTIMATE - PREVIOUS_PRICE_ESTIMATE < 0 THEN 'DOWN'
+            WHEN PREVIOUS_PRICE_ESTIMATE - PRICE_ESTIMATE = 0 THEN NULL
+            WHEN PRICE_ESTIMATE - PREVIOUS_PRICE_ESTIMATE > 0 THEN 'UP'
+          END AS PRICE_CHANGE_TYPE
+        , CASE 
+            WHEN PRICE_ESTIMATE - PREVIOUS_PRICE_ESTIMATE = 0 THEN NULL
+            ELSE PRICE_ESTIMATE - PREVIOUS_PRICE_ESTIMATE
+          END AS PRICE_CHANGE_AMOUNT       
+    FROM source_data
+)
+
+, type_data AS (
+    SELECT
+          CAST(_AUDIT_LOG_ID AS VARCHAR(128)) AS _AUDIT_LOG_ID
+        , CAST(_ROW_HASH AS VARCHAR(128)) AS _ROW_HASH
+        , ID
+        , CAST(EVENT_DATE AS DATE) AS EVENT_DATE
+         , CAST(PREVIOUS_PRICE_ESTIMATE AS VARCHAR(16777216)) AS PREVIOUS_PRICE_ESTIMATE
+        , CAST(PRICE_ESTIMATE AS VARCHAR(16777216)) AS PRICE_ESTIMATE
+        , CAST(PRICE_CHANGE_TYPE AS VARCHAR(16777216)) AS PRICE_CHANGE_TYPE
+        , CAST(PRICE_CHANGE_AMOUNT AS NUMBER(38, 0)) AS PRICE_CHANGE_AMOUNT
+    FROM transform_data 
+    WHERE IS_PRICE_CHURN = 1    
+)
+
+SELECT * FROM type_data
