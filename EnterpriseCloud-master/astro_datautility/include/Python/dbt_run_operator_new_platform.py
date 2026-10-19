@@ -3,11 +3,13 @@ import json
 from  pathlib import Path
 from airflow.operators.bash import BashOperator
 
+# dbt project folder (under dags/dbt) for each target platform
+DBT_PROJECTS = {"snowflake": "dbt_tel", "databricks": "dbt_tel_databricks"}
 ENV_CONFIG_PATH = r'/usr/local/airflow/include/Configuration/TelTools_Environment.json'
 
-def create_dbt_task(Base_directory: str, model_name: str, task_id: str = None) -> BashOperator:
+def create_dbt_task(Base_directory: str, model_name: str, task_id: str = None, platform: str = "snowflake") -> BashOperator:
     BASE_DIR = Base_directory
-    DBT_PROJECT = os.path.join(BASE_DIR, "dbt", "dbt_tel")
+    DBT_PROJECT = os.path.join(BASE_DIR, "dbt", DBT_PROJECTS[platform])
     DBT_VENV = f"{os.environ['AIRFLOW_HOME']}/dbt_venv/bin/activate"
 
     env_vars = {
@@ -41,9 +43,9 @@ def create_dbt_task(Base_directory: str, model_name: str, task_id: str = None) -
     )
 
 
-def create_dbt_task_test(Base_directory: str, model_name: str, task_id: str = None) -> BashOperator:
+def create_dbt_task_test(Base_directory: str, model_name: str, task_id: str = None, platform: str = "snowflake") -> BashOperator:
     BASE_DIR = Base_directory
-    DBT_PROJECT = os.path.join(BASE_DIR, "dbt", "dbt_tel")
+    DBT_PROJECT = os.path.join(BASE_DIR, "dbt", DBT_PROJECTS[platform])
     DBT_VENV = f"{os.environ['AIRFLOW_HOME']}/dbt_venv/bin/activate"
 
     env_vars = {
